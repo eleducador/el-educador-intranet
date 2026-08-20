@@ -1,6 +1,8 @@
 {
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": ".",
   "cleanUrls": true,
-  "trailingSlash": false,
   "headers": [
     {
       "source": "/(.*)",
@@ -23,9 +25,15 @@
       ]
     }
   ],
-  "rewrites": [
-    { "source": "/assets/logo.png", "destination": "/logo.png" },
-    { "source": "/assets/login_bg_official.jpg", "destination": "/login_bg_official.jpg" },
-    { "source": "/((?!.*\\..*).*)", "destination": "/index.html" }
+  "routes": [
+    { "src": "/bundle.js", "dest": "/bundle.js" },
+    { "src": "/bundle.css", "dest": "/bundle.css" },
+    { "src": "/logo.png", "dest": "/logo.png" },
+    { "src": "/login_bg_official.jpg", "dest": "/login_bg_official.jpg" },
+    { "src": "/db.json", "dest": "/db.json" },
+    { "src": "/assets/logo.png", "dest": "/logo.png" },
+    { "src": "/assets/login_bg_official.jpg", "dest": "/login_bg_official.jpg" },
+    { "src": "/assets/(.*)", "dest": "/$1" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }

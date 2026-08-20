@@ -1,13 +1,5 @@
 {
-  "name": "colegio-el-educador-intranet-vercel",
+  "name": "colegio-el-educador-intranet",
   "version": "5.4.0",
-  "description": "Sistema de Intranet Oficial - I.E.P. El Educador (S.J.L. - UGEL 05) - Vercel Ready",
-  "main": "index.html",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {},
-  "engines": {
-    "node": ">=18.0.0"
-  }
+  "private": true
 }
