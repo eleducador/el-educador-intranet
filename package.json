@@ -1,16 +1,13 @@
-﻿{
-  "name": "colegio-el-educador-intranet",
-  "version": "1.0.0",
-  "description": "Sistema de Intranet y Control QR - I.E.P. El Educador",
-  "main": "server.js",
+{
+  "name": "colegio-el-educador-intranet-vercel",
+  "version": "5.4.0",
+  "description": "Sistema de Intranet Oficial - I.E.P. El Educador (S.J.L. - UGEL 05) - Vercel Ready",
+  "main": "index.html",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node server.js"
   },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.2"
-  },
-  "author": "I.E.P. El Educador",
-  "license": "ISC"
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }
