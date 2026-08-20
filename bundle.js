@@ -10752,9 +10752,9 @@ CREATE TABLE tb_cuadernos_qr (
 
     const isSelected = (g) => {
       if (!selectedList || selectedList.length === 0) return false;
-      const clean = g.toLowerCase().replace(/['°\s]/g, '');
+      const clean = g.toLowerCase().replace(/[^a-z0-9]/gi, '');
       return selectedList.some(s => {
-        const sClean = (typeof s === 'string' ? s : '').toLowerCase().replace(/['°\s]/g, '');
+        const sClean = (typeof s === 'string' ? s : '').toLowerCase().replace(/[^a-z0-9]/gi, '');
         return sClean.includes(clean) || clean.includes(sClean);
       });
     };
