@@ -4610,8 +4610,8 @@ const Components = {
 
   // 1. Dashboard Principal
   renderDashboard(state) {
-    const role = state.currentRole;
-    const user = (state.users && state.users[role]) || (initialData.users && initialData.users[role]) || state.users.admin;
+    const role = state.currentRole || "admin";
+    const user = (state.users && state.users[role]) || (initialData.users && initialData.users[role]) || (state.users && state.users.admin) || { name: "Prof. Alex Lino", roleLabel: "Coordinación & Documentación" };
 
     if (role === "admin") {
       return this.renderAdminDashboard(state, user);
@@ -4626,6 +4626,7 @@ const Components = {
     } else if (role === "estudiante") {
       return this.renderStudentDashboard(state, user);
     }
+    return this.renderAdminDashboard(state, user);
   },
 
   // Dashboard - Coordinación
@@ -9451,6 +9452,9 @@ class IntranetApp {
   }
 
   init() {
+    this.contentArea = document.getElementById("content-area");
+    this.sidebar = document.getElementById("sidebar");
+
     // Suscribirse a cambios en el almacén de datos
     this.store.subscribe(() => {
       this.render();
@@ -10445,8 +10449,10 @@ CREATE TABLE tb_cuadernos_qr (
       `;
     }
 
-    if (this.contentArea) {
-      this.contentArea.innerHTML = html;
+    const content = this.contentArea || document.getElementById("content-area");
+    if (content) {
+      this.contentArea = content;
+      content.innerHTML = html || Components.renderDashboard(state);
     }
     this.updateHeaderUserInfo();
   }
