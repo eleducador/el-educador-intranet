@@ -133,12 +133,12 @@ const initialData = {
           pendingTasksCount: 1,
           avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
           notebooks: [
-            { course: "Matemática", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, márgenes impecables y esquemas en orden." },
-            { course: "Comunicación", teacher: "Miss María Daysi Reyes", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "17 (A)", remarks: "Análisis de textos y caligrafía óptima. Muy buen desarrollo." },
-            { course: "🔬 Ciencia y Tecnología", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "18 (AD)", remarks: "Prácticas experimentales ilustradas y fichas de laboratorio selladas." },
-            { course: "🌎 Ciencias Sociales", teacher: "Prof. Javier Vega", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "16 (A)", remarks: "Mapas históricos y resúmenes de época bien estructurados." },
-            { course: "🇬🇧 Inglés", teacher: "Miss Andrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Vocabulario y ejercicios de gramática avanzados completos." },
-            { course: "💻 EPT (Computación)", teacher: "Prof. Alex Lino", lastDate: "10/08/2026", status: "observado", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> OBSERVADO", score: "13 (B)", remarks: "Falta pegar y desarrollar la ficha de proyecto técnico N° 3. Presentar este viernes." }
+            { course: "Matemática", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, márgenes impecables y esquemas en orden." },
+            { course: "Comunicación", teacher: "Miss María Daysi Reyes", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "17 (A)", remarks: "Análisis de textos y caligrafía óptima. Muy buen desarrollo." },
+            { course: "🔬 Ciencia y Tecnología", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "18 (AD)", remarks: "Prácticas experimentales ilustradas y fichas de laboratorio selladas." },
+            { course: "🌎 Ciencias Sociales", teacher: "Prof. Javier Vega", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "16 (A)", remarks: "Mapas históricos y resúmenes de época bien estructurados." },
+            { course: "🇬🇧 Inglés", teacher: "Miss Andrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Vocabulario y ejercicios de gramática avanzados completos." },
+            { course: "💻 EPT (Computación)", teacher: "Prof. Alex Lino", lastDate: "10/08/2026", status: "observado", statusLabel: "<span class='status-dot-yellow'></span> OBSERVADO", score: "13 (B)", remarks: "Falta pegar y desarrollar la ficha de proyecto técnico N° 3. Presentar este viernes." }
           ]
         },
         {
@@ -155,10 +155,10 @@ const initialData = {
           pendingTasksCount: 0,
           avatar: "https://images.unsplash.com/photo-1543332164-6e82f355badc?w=150&auto=format&fit=crop&q=80",
           notebooks: [
-            { course: "🔢 Lógico Matemático", teacher: "Miss Julisa Arroyo", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "20 (AD)", remarks: "Numeración y sumas perfectas. Excelente coloreado y trazos." },
-            { course: "✏️ Comunicación Integral", teacher: "Miss Julisa Arroyo", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Lectoescritura fluida y caligrafía prolija." },
-            { course: "🌱 Ciencia y Ambiente", teacher: "Miss Maritza", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Fichas de los seres vivos completas y coloreadas." },
-            { course: "🎨 Arte y Cultura", teacher: "Miss Julisa Arroyo", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "20 (AD)", remarks: "Técnicas de dactilopintura y recortado excelentes." }
+            { course: "🔢 Lógico Matemático", teacher: "Miss Julisa Arroyo", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "20 (AD)", remarks: "Numeración y sumas perfectas. Excelente coloreado y trazos." },
+            { course: "✏️ Comunicación Integral", teacher: "Miss Julisa Arroyo", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Lectoescritura fluida y caligrafía prolija." },
+            { course: "🌱 Ciencia y Ambiente", teacher: "Miss Maritza", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Fichas de los seres vivos completas y coloreadas." },
+            { course: "🎨 Arte y Cultura", teacher: "Miss Julisa Arroyo", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "20 (AD)", remarks: "Técnicas de dactilopintura y recortado excelentes." }
           ]
         }
       ],
@@ -3315,7 +3315,7 @@ class IntranetStore {
     const scoreNum = parseFloat(data.score) || 18;
     const status = data.status || (scoreNum >= 15 ? "Al Día" : scoreNum >= 11 ? "Observado" : "No Presentó");
     const stampType = status === "Al Día" ? "stamp-al-dia" : status === "Observado" ? "stamp-observado" : "stamp-no-presento";
-    const stampText = status === "Al Día" ? "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA" : status === "Observado" ? "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> OBSERVADO" : "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> NO PRESENTÓ";
+    const stampText = status === "Al Día" ? "<span class='status-dot-green'></span> REVISADO & AL DÍA" : status === "Observado" ? "<span class='status-dot-yellow'></span> OBSERVADO" : "<span class='status-dot-red'></span> NO PRESENTÓ";
 
     const newReview = {
       id: `REV-2026-${Math.floor(100 + Math.random() * 900)}`,
@@ -4643,7 +4643,7 @@ const Components = {
                 ★ COORDINACIÓN & DOCUMENTACIÓN • I.E.P. "EL EDUCADOR"
               </span>
               <span class="status-badge status-approved" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid #22c55e;">
-                <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> 21 años dejando huellas (S.J.L. - UGEL 05)
+                <span class='status-dot-green'></span> 21 años dejando huellas (S.J.L. - UGEL 05)
               </span>
             </div>
             <h1 class="welcome-title">Bienvenido, <span>${user.name}</span></h1>
@@ -4999,12 +4999,12 @@ const Components = {
       const studentTutor = "Prof. Roberto Silva";
       
       const defaultNotebooks = [
-        { course: "Matemática", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, márgenes impecables y esquemas en orden." },
-        { course: "Comunicación", teacher: "Miss María Daysi Reyes", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "17 (A)", remarks: "Análisis de textos y caligrafía óptima. Muy buen desarrollo." },
-        { course: "🔬 Ciencia y Tecnología", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "18 (AD)", remarks: "Prácticas experimentales ilustradas y fichas de laboratorio selladas." },
-        { course: "🌎 Ciencias Sociales", teacher: "Prof. Javier Vega", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "16 (A)", remarks: "Mapas históricos y resúmenes de época bien estructurados." },
-        { course: "🇬🇧 Inglés", teacher: "Miss Andrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Vocabulario y ejercicios de gramática avanzados completos." },
-        { course: "💻 EPT (Computación)", teacher: "Prof. Alex Lino", lastDate: "10/08/2026", status: "observado", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> OBSERVADO", score: "13 (B)", remarks: "Falta pegar y desarrollar la ficha de proyecto técnico N° 3. Presentar este viernes." }
+        { course: "Matemática", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, márgenes impecables y esquemas en orden." },
+        { course: "Comunicación", teacher: "Miss María Daysi Reyes", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "17 (A)", remarks: "Análisis de textos y caligrafía óptima. Muy buen desarrollo." },
+        { course: "🔬 Ciencia y Tecnología", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "18 (AD)", remarks: "Prácticas experimentales ilustradas y fichas de laboratorio selladas." },
+        { course: "🌎 Ciencias Sociales", teacher: "Prof. Javier Vega", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "16 (A)", remarks: "Mapas históricos y resúmenes de época bien estructurados." },
+        { course: "🇬🇧 Inglés", teacher: "Miss Andrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Vocabulario y ejercicios de gramática avanzados completos." },
+        { course: "💻 EPT (Computación)", teacher: "Prof. Alex Lino", lastDate: "10/08/2026", status: "observado", statusLabel: "<span class='status-dot-yellow'></span> OBSERVADO", score: "13 (B)", remarks: "Falta pegar y desarrollar la ficha de proyecto técnico N° 3. Presentar este viernes." }
       ];
 
       return `
@@ -5584,7 +5584,7 @@ const Components = {
             <div>
               <div style="display: flex; align-items: center; gap: 8px;">
                 <h2 class="card-title" style="font-size: var(--font-size-xl);">🗄️ Motor de Base de Datos y Persistencia - I.E.P. "El Educador"</h2>
-                <span class="status-badge status-approved"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> Motor Activo (db.json)</span>
+                <span class="status-badge status-approved"><span class='status-dot-green'></span> Motor Activo (db.json)</span>
               </div>
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
                 S.J.L. • UGEL 05 • Sincronización multi-dispositivo en tiempo real y copias de seguridad garantizadas.
@@ -5603,7 +5603,7 @@ const Components = {
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6);">
             <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-green-500); background: #f8faf9;">
               <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Estado de Sincronización</span>
-              <div style="font-size: 18px; font-weight: 800; color: var(--color-green-600); margin-top: 2px;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> Multi-Dispositivo OK</div>
+              <div style="font-size: 18px; font-weight: 800; color: var(--color-green-600); margin-top: 2px;"><span class='status-dot-green'></span> Multi-Dispositivo OK</div>
               <span style="font-size: 10px; color: var(--text-muted);">Sincronización en vivo</span>
             </div>
 
@@ -5888,7 +5888,7 @@ const Components = {
                         <!-- Toggle Switch -->
                         <label style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; cursor: pointer; color: ${isEnabled ? '#047857' : '#94a3b8'};">
                           <input type="checkbox" ${isEnabled ? 'checked' : ''} onchange="window.app.toggleNavTab('${targetNavRole}', '${tab.id}', this.checked)" />
-                          <span>${isEnabled ? '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> VISIBLE' : '⚪ OCULTO'}</span>
+                          <span>${isEnabled ? '<span class="status-dot-green"></span> VISIBLE' : '⚪ OCULTO'}</span>
                         </label>
                       </div>
 
@@ -6646,7 +6646,7 @@ const Components = {
                         <td style="text-align:center; font-weight:bold; color:var(--color-navy-900);">${aVal}</td>
                         <td style="text-align:center;">
                           <span class="status-badge ${hasAll ? 'status-approved' : 'status-pending'}">
-                            ${hasAll ? '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> Completo' : '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> En Proceso'}
+                            ${hasAll ? '<span class="status-dot-green"></span> Completo' : '<span class="status-dot-yellow"></span> En Proceso'}
                           </span>
                         </td>
                       </tr>
@@ -8246,7 +8246,7 @@ const Components = {
           <div class="welcome-content">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
               <span class="status-badge status-approved" style="background: #22c55e; color: #0b132b; font-weight: 800;">
-                <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> SISTEMA QR & BIOMÉTRICO EN PUERTA ACTIVO
+                <span class='status-dot-green'></span> SISTEMA QR & BIOMÉTRICO EN PUERTA ACTIVO
               </span>
               <span style="font-size: 11.5px; opacity: 0.9;">Tolerancia Oficial: 07:45 AM • UGEL 05 S.J.L.</span>
             </div>
@@ -8348,19 +8348,19 @@ const Components = {
               </div>
               
               <div class="card" style="padding: 12px; border-left: 4px solid #10b981; background: #ecfdf5;">
-                <span style="font-size: 11px; font-weight: 800; color: #065f46;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> PRESENTES</span>
+                <span style="font-size: 11px; font-weight: 800; color: #065f46;"><span class='status-dot-green'></span> PRESENTES</span>
                 <div style="font-size: 22px; font-weight: 900; color: #047857; margin: 2px 0;">${presentCount} (${attendancePct}%)</div>
                 <span style="font-size: 10px; color: #047857;">A tiempo en portería</span>
               </div>
 
               <div class="card" style="padding: 12px; border-left: 4px solid #f59e0b; background: #fffbeb;">
-                <span style="font-size: 11px; font-weight: 800; color: #92400e;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> TARDANZAS</span>
+                <span style="font-size: 11px; font-weight: 800; color: #92400e;"><span class='status-dot-yellow'></span> TARDANZAS</span>
                 <div style="font-size: 22px; font-weight: 900; color: #b45309; margin: 2px 0;">${lateCount}</div>
                 <span style="font-size: 10px; color: #b45309;">Después de 07:45 am</span>
               </div>
 
               <div class="card" style="padding: 12px; border-left: 4px solid #ef4444; background: #fef2f2;">
-                <span style="font-size: 11px; font-weight: 800; color: #991b1b;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> INASISTENCIAS</span>
+                <span style="font-size: 11px; font-weight: 800; color: #991b1b;"><span class='status-dot-red'></span> INASISTENCIAS</span>
                 <div style="font-size: 22px; font-weight: 900; color: #dc2626; margin: 2px 0;">${absentCount}</div>
                 <span style="font-size: 10px; color: #dc2626;">Sin registro biométrico</span>
               </div>
@@ -8416,13 +8416,13 @@ const Components = {
                         <td>
                           <div style="display: flex; gap: 4px; flex-wrap: wrap;">
                             <button class="btn btn-sm" onclick="window.app.setStudentAttendanceStatus('${r.id}', 'Presente')" style="font-size: 10.5px; padding: 2px 7px; font-weight: 800; background: ${r.status === 'Presente' ? '#10b981' : '#f1f5f9'}; color: ${r.status === 'Presente' ? '#ffffff' : '#334155'}; border: 1px solid ${r.status === 'Presente' ? '#059669' : '#cbd5e1'};">
-                              <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> Presente
+                              <span class='status-dot-green'></span> Presente
                             </button>
                             <button class="btn btn-sm" onclick="window.app.setStudentAttendanceStatus('${r.id}', 'Tardanza')" style="font-size: 10.5px; padding: 2px 7px; font-weight: 800; background: ${r.status === 'Tardanza' ? '#f59e0b' : '#f1f5f9'}; color: ${r.status === 'Tardanza' ? '#ffffff' : '#334155'}; border: 1px solid ${r.status === 'Tardanza' ? '#d97706' : '#cbd5e1'};">
-                              <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> Tardanza
+                              <span class='status-dot-yellow'></span> Tardanza
                             </button>
                             <button class="btn btn-sm" onclick="window.app.setStudentAttendanceStatus('${r.id}', 'Falta')" style="font-size: 10.5px; padding: 2px 7px; font-weight: 800; background: ${r.status === 'Falta' ? '#ef4444' : '#f1f5f9'}; color: ${r.status === 'Falta' ? '#ffffff' : '#334155'}; border: 1px solid ${r.status === 'Falta' ? '#dc2626' : '#cbd5e1'};">
-                              <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> Falta
+                              <span class='status-dot-red'></span> Falta
                             </button>
                             <button class="btn btn-sm" onclick="window.app.setStudentAttendanceStatus('${r.id}', 'Justificada')" style="font-size: 10.5px; padding: 2px 7px; font-weight: 800; background: ${r.status === 'Justificada' ? '#8b5cf6' : '#f1f5f9'}; color: ${r.status === 'Justificada' ? '#ffffff' : '#334155'}; border: 1px solid ${r.status === 'Justificada' ? '#7c3aed' : '#cbd5e1'};">
                               🔵 Justificada
@@ -8515,7 +8515,7 @@ const Components = {
             <div class="card" style="margin-bottom: var(--space-5); border: 1px solid #fde68a;">
               <div class="card-header" style="background: #fffbeb; border-bottom: 1px solid #fef3c7;">
                 <div style="display: flex; align-items: center; gap: 8px;">
-                  <span style="font-size: 18px;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span></span>
+                  <span style="font-size: 18px;"><span class='status-dot-yellow'></span></span>
                   <div>
                     <h3 style="font-size: 14px; font-weight: 900; color: #92400e; margin: 0;">
                       1. Registro Detallado de Tardanzas en Portería (${dayReport.tardinessList.length} casos)
@@ -8581,7 +8581,7 @@ const Components = {
             <div class="card" style="border: 1px solid #fecaca;">
               <div class="card-header" style="background: #fef2f2; border-bottom: 1px solid #fee2e2;">
                 <div style="display: flex; align-items: center; gap: 8px;">
-                  <span style="font-size: 18px;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span></span>
+                  <span style="font-size: 18px;"><span class='status-dot-red'></span></span>
                   <div>
                     <h3 style="font-size: 14px; font-weight: 900; color: #991b1b; margin: 0;">
                       2. Registro de Inasistencias del Día (${dayReport.absenceList.length} casos)
@@ -8619,7 +8619,7 @@ const Components = {
                         <td>${currentGrade.tutor || 'Prof. Roberto Silva'}</td>
                         <td>${a.guardian || 'Apoderado'}</td>
                         <td><code>${a.guardianPhone || '984-123-456'}</code></td>
-                        <td><span class="status-badge status-failed" style="font-weight: 800;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> Inasistencia Injustificada</span></td>
+                        <td><span class="status-badge status-failed" style="font-weight: 800;"><span class='status-dot-red'></span> Inasistencia Injustificada</span></td>
                         <td style="text-align: center;">
                           <div style="display: flex; gap: 4px; justify-content: center;">
                             <button class="btn btn-sm" onclick="window.app.sendAbsenceWhatsApp('${a.studentName}', '${a.guardianPhone || '984-123-456'}', '${a.guardian || 'Apoderado'}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 10.5px; padding: 4px 8px;" title="Notificar Inasistencia por WhatsApp">
@@ -8665,7 +8665,7 @@ const Components = {
                         <span style="font-size: 11px; color: #94a3b8;">Asistencia en Puerta (07:00 - 08:30 AM) • Incidencias durante la jornada</span>
                       </div>
                     </div>
-                    <span id="camera-door-status" class="status-badge status-approved" style="font-size: 10px;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> LISTO</span>
+                    <span id="camera-door-status" class="status-badge status-approved" style="font-size: 10px;"><span class='status-dot-green'></span> LISTO</span>
                   </div>
                 </div>
 
@@ -8695,16 +8695,16 @@ const Components = {
                   </h4>
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                     <button class="btn btn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-042', '07:38 AM')" style="font-size: 11px; text-align: left; padding: 8px;">
-                      <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> <strong>Sofía Méndez</strong><br><span style="font-size: 9.5px; color: #047857;">1er Escaneo: Puntual (07:38 AM)</span>
+                      <span class='status-dot-green'></span> <strong>Sofía Méndez</strong><br><span style="font-size: 9.5px; color: #047857;">1er Escaneo: Puntual (07:38 AM)</span>
                     </button>
                     <button class="btn btn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-011', '08:10 AM')" style="font-size: 11px; text-align: left; padding: 8px;">
-                      <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> <strong>Carlos Benítez</strong><br><span style="font-size: 9.5px; color: #b45309;">1er Escaneo: Tardanza (08:10 AM)</span>
+                      <span class='status-dot-yellow'></span> <strong>Carlos Benítez</strong><br><span style="font-size: 9.5px; color: #b45309;">1er Escaneo: Tardanza (08:10 AM)</span>
                     </button>
                     <button class="btn btn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-055')" style="font-size: 11px; text-align: left; padding: 8px; border: 2px solid #ef4444; background: #fff5f5;">
                       <strong>Gael Cáceres</strong><br><span style="font-size: 9.5px; color: #dc2626; font-weight: bold;">2do Escaneo: Crear Informe</span>
                     </button>
                     <button class="btn btn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-025', '08:45 AM')" style="font-size: 11px; text-align: left; padding: 8px;">
-                      <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> <strong>Mateo Ramos</strong><br><span style="font-size: 9.5px; color: #dc2626;">08:45 AM (Puerta Cerrada / Falta)</span>
+                      <span class='status-dot-red'></span> <strong>Mateo Ramos</strong><br><span style="font-size: 9.5px; color: #dc2626;">08:45 AM (Puerta Cerrada / Falta)</span>
                     </button>
                   </div>
 
@@ -8905,13 +8905,13 @@ const Components = {
                   </div>
                   
                   <div class="card" style="padding: 12px; border-left: 4px solid #f59e0b; background: #fffbeb;">
-                    <span style="font-size: 11px; font-weight: 800; color: #92400e;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> FALTAS LEVES</span>
+                    <span style="font-size: 11px; font-weight: 800; color: #92400e;"><span class='status-dot-yellow'></span> FALTAS LEVES</span>
                     <div style="font-size: 22px; font-weight: 900; color: #b45309; margin: 2px 0;">${leves}</div>
                     <span style="font-size: 10px; color: #b45309;">Uniforme, tardanza aula</span>
                   </div>
 
                   <div class="card" style="padding: 12px; border-left: 4px solid #ef4444; background: #fef2f2;">
-                    <span style="font-size: 11px; font-weight: 800; color: #991b1b;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> FALTAS GRAVES</span>
+                    <span style="font-size: 11px; font-weight: 800; color: #991b1b;"><span class='status-dot-red'></span> FALTAS GRAVES</span>
                     <div style="font-size: 22px; font-weight: 900; color: #dc2626; margin: 2px 0;">${graves}</div>
                     <span style="font-size: 10px; color: #dc2626;">Desobediencia, celulares</span>
                   </div>
@@ -8982,7 +8982,7 @@ const Components = {
                               </td>
                               <td>
                                 <span class="status-badge" style="background: ${badgeColor}; color: white; font-weight: 800; font-size: 10px;">
-                                  ${inc.severity === 'Mérito' ? '★ Mérito' : inc.severity === 'Leve' ? '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> Leve' : inc.severity === 'Grave' ? '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> Grave' : '⛔ Muy Grave'}
+                                  ${inc.severity === 'Mérito' ? '★ Mérito' : inc.severity === 'Leve' ? '<span class="status-dot-yellow"></span> Leve' : inc.severity === 'Grave' ? '<span class="status-dot-red"></span> Grave' : '⛔ Muy Grave'}
                                 </span>
                               </td>
                               <td><strong>${inc.category}</strong></td>
@@ -9099,7 +9099,7 @@ const Components = {
                       <td><code>${h.exitTime || '03:30 PM'}</code></td>
                       <td>
                         <span class="status-badge ${h.status === 'Presente' ? 'status-approved' : h.status === 'Tardanza' ? 'status-pending' : 'status-approved'}" style="font-weight: 800;">
-                          ${h.status === 'Presente' ? '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> Presente a Tiempo' : h.status === 'Tardanza' ? '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> Tardanza' : '🔵 Justificada'}
+                          ${h.status === 'Presente' ? '<span class="status-dot-green"></span> Presente a Tiempo' : h.status === 'Tardanza' ? '<span class="status-dot-yellow"></span> Tardanza' : '🔵 Justificada'}
                         </span>
                       </td>
                       <td>
@@ -9266,7 +9266,7 @@ const Components = {
               </div>
               <div>
                 <span style="font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase;">Estado Actual</span>
-                <div><span class="status-badge status-failed" style="font-weight: bold;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> Bloqueado por Mora</span></div>
+                <div><span class="status-badge status-failed" style="font-weight: bold;"><span class='status-dot-red'></span> Bloqueado por Mora</span></div>
               </div>
             </div>
 
@@ -9329,7 +9329,7 @@ const Components = {
             <div>
               <div style="display: flex; align-items: center; gap: 8px;">
                 <h2 class="card-title" style="font-size: var(--font-size-xl);">Control de Pensiones & Validación Automática de Intranet</h2>
-                <span class="status-badge status-approved"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> Sistema de Pago Online Activo</span>
+                <span class="status-badge status-approved"><span class='status-dot-green'></span> Sistema de Pago Online Activo</span>
               </div>
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
                 I.E.P. "El Educador" • "21 años dejando huellas" (S.J.L. • UGEL 05)
@@ -9383,12 +9383,12 @@ const Components = {
                         <td><strong style="color: ${f.pendingAmount > 0 ? 'var(--color-red-600)' : 'var(--color-green-600)'};">${f.pendingAmount > 0 ? `S/ ${f.pendingAmount.toFixed(2)}` : 'S/ 0.00 (Al Día)'}</strong></td>
                         <td>
                           <span class="status-badge ${f.isAccessLocked ? 'status-failed' : 'status-approved'}" style="font-weight: bold;">
-                            ${f.isAccessLocked ? '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> BLOQUEADO POR MORA' : '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> ACCESO HABILITADO'}
+                            ${f.isAccessLocked ? '<span class="status-dot-red"></span> BLOQUEADO POR MORA' : '<span class="status-dot-green"></span> ACCESO HABILITADO'}
                           </span>
                         </td>
                         <td style="text-align:center; white-space: nowrap;">
                           <button class="btn btn-sm ${f.isAccessLocked ? 'btn-gold' : 'btn-outline'}" onclick="window.app.toggleFamilyLock('${f.familyId}')">
-                            ${f.isAccessLocked ? '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> Desbloquear / Prórroga' : '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> Bloquear Acceso'}
+                            ${f.isAccessLocked ? '<span class="status-dot-green"></span> Desbloquear / Prórroga' : '<span class="status-dot-red"></span> Bloquear Acceso'}
                           </button>
                         </td>
                       </tr>
@@ -9728,7 +9728,7 @@ class IntranetApp {
       ).then(() => {
         this.isCameraActive = true;
         if (statusTag) {
-          statusTag.textContent = "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> CÁMARA ACTIVA";
+          statusTag.textContent = "<span class='status-dot-green'></span> CÁMARA ACTIVA";
           statusTag.className = "status-badge status-approved";
         }
         if (btnStart) btnStart.style.display = "none";
@@ -9876,21 +9876,21 @@ class IntranetApp {
           <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
             <label style="border: 2px solid #10b981; background: #ecfdf5; border-radius: 12px; padding: 10px 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;">
               <input type="radio" name="nb-status-radio" value="Al Día" ${defaultStatus === 'Al Día' ? 'checked' : ''} onchange="document.getElementById('nb-status-val').value = 'Al Día'; document.getElementById('nb-score-input').value = '18';" />
-              <span style="font-size: 16px;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span></span>
+              <span style="font-size: 16px;"><span class='status-dot-green'></span></span>
               <strong style="font-size: 11px; color: #065f46;">AL DÍA</strong>
               <span style="font-size: 9.5px; color: #047857;">Tareas 100%</span>
             </label>
 
             <label style="border: 2px solid #f59e0b; background: #fffbeb; border-radius: 12px; padding: 10px 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;">
               <input type="radio" name="nb-status-radio" value="Observado" ${defaultStatus === 'Observado' ? 'checked' : ''} onchange="document.getElementById('nb-status-val').value = 'Observado'; document.getElementById('nb-score-input').value = '13';" />
-              <span style="font-size: 16px;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span></span>
+              <span style="font-size: 16px;"><span class='status-dot-yellow'></span></span>
               <strong style="font-size: 11px; color: #b45309;">OBSERVADO</strong>
               <span style="font-size: 9.5px; color: #92400e;">Incompleto / Atraso</span>
             </label>
 
             <label style="border: 2px solid #ef4444; background: #fef2f2; border-radius: 12px; padding: 10px 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;">
               <input type="radio" name="nb-status-radio" value="No Presentó" ${defaultStatus === 'No Presentó' ? 'checked' : ''} onchange="document.getElementById('nb-status-val').value = 'No Presentó'; document.getElementById('nb-score-input').value = '05';" />
-              <span style="font-size: 16px;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span></span>
+              <span style="font-size: 16px;"><span class='status-dot-red'></span></span>
               <strong style="font-size: 11px; color: #b91c1c;">NO PRESENTÓ</strong>
               <span style="font-size: 9.5px; color: #dc2626;">Sin entrega</span>
             </label>
@@ -10498,7 +10498,7 @@ CREATE TABLE tb_cuadernos_qr (
 
   toggleNavTab(role, tabId, isChecked) {
     this.store.toggleNavigationTab(role, tabId, isChecked);
-    this.showToast(`Pestaña "${tabId}" ${isChecked ? '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> ACTIVADA' : '⚪ OCULTADA'} para ${role.toUpperCase()}`, isChecked ? "success" : "info");
+    this.showToast(`Pestaña "${tabId}" ${isChecked ? '<span class="status-dot-green"></span> ACTIVADA' : '⚪ OCULTADA'} para ${role.toUpperCase()}`, isChecked ? "success" : "info");
     this.updateHeaderUserInfo();
   }
 
@@ -12660,7 +12660,7 @@ CREATE TABLE tb_cuadernos_qr (
   setStudentAttendanceStatus(recordId, newStatus) {
     const updated = this.store.updateStudentAttendanceStatus(recordId, newStatus);
     if (updated) {
-      const icon = newStatus === 'Presente' ? '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span>' : newStatus === 'Tardanza' ? '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span>' : newStatus === 'Falta' ? '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span>' : '🔵';
+      const icon = newStatus === 'Presente' ? '<span class="status-dot-green"></span>' : newStatus === 'Tardanza' ? '<span class="status-dot-yellow"></span>' : newStatus === 'Falta' ? '<span class="status-dot-red"></span>' : '🔵';
       this.showToast(`${icon} ${updated.studentName} marcado como "${newStatus}"`, "info");
       this.render();
     }
@@ -12761,7 +12761,7 @@ CREATE TABLE tb_cuadernos_qr (
       ).then(() => {
         this.isDoorCamActive = true;
         if (statusTag) {
-          statusTag.textContent = "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> CÁMARA ACTIVA";
+          statusTag.textContent = "<span class='status-dot-green'></span> CÁMARA ACTIVA";
           statusTag.className = "status-badge status-approved";
         }
         if (btnStart) btnStart.style.display = "none";
@@ -12828,7 +12828,7 @@ CREATE TABLE tb_cuadernos_qr (
                 <div style="font-size: 15px; font-weight: 900; color: #991b1b;">${result.student.studentName}</div>
                 <div style="font-size: 12px; font-weight: bold; color: #1e3a8a;">${result.student.grade}</div>
                 <div style="font-size: 10.5px; color: #64748b;">DNI: ${result.student.dni} • Código: ${result.student.studentCode}</div>
-                <div style="font-size: 10.5px; color: #047857; font-weight: bold; margin-top: 2px;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> Ingreso registrado hoy a las ${result.previousScanTime}</div>
+                <div style="font-size: 10.5px; color: #047857; font-weight: bold; margin-top: 2px;"><span class='status-dot-green'></span> Ingreso registrado hoy a las ${result.previousScanTime}</div>
               </div>
             </div>
 
@@ -12879,7 +12879,7 @@ CREATE TABLE tb_cuadernos_qr (
 
           <div style="font-size: 11.5px; color: #475569;">
             ${isDoorClosed ? `
-              <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> <strong>Corte de Asistencia Aplicado:</strong> Notificando inasistencia al apoderado ${result.guardianName} (${result.guardianPhone}).
+              <span class='status-dot-red'></span> <strong>Corte de Asistencia Aplicado:</strong> Notificando inasistencia al apoderado ${result.guardianName} (${result.guardianPhone}).
             ` : isLate ? `
               🔔 <strong>Notificación de Tardanza despachada:</strong> ${result.guardianName} (${result.guardianPhone})
             ` : `
@@ -13055,8 +13055,8 @@ CREATE TABLE tb_cuadernos_qr (
             <div class="form-group" style="margin-bottom: 0;">
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Nivel de Gravedad / Tipo:</label>
               <select name="severity" class="form-control" style="font-weight: bold;" required>
-                <option value="Leve" ${defaultSeverity === 'Leve' ? 'selected' : ''}><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> Falta Leve (Uniforme, tardanza a aula)</option>
-                <option value="Grave" ${defaultSeverity === 'Grave' ? 'selected' : ''}><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> Falta Grave (Desobediencia, uso de celular)</option>
+                <option value="Leve" ${defaultSeverity === 'Leve' ? 'selected' : ''}><span class='status-dot-yellow'></span> Falta Leve (Uniforme, tardanza a aula)</option>
+                <option value="Grave" ${defaultSeverity === 'Grave' ? 'selected' : ''}><span class='status-dot-red'></span> Falta Grave (Desobediencia, uso de celular)</option>
                 <option value="Muy Grave" ${defaultSeverity === 'Muy Grave' ? 'selected' : ''}>⛔ Muy Grave (Agresión, daño material)</option>
                 <option value="Mérito" ${defaultSeverity === 'Mérito' ? 'selected' : ''}>★ Reconocimiento / Mérito Académico</option>
               </select>
@@ -13347,8 +13347,8 @@ CREATE TABLE tb_cuadernos_qr (
         </p>
 
         <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; font-size: 11.5px; text-align: left; max-height: 140px; overflow-y: auto;">
-          ${report.tardinessList.map(t => `<div style="color:#b45309; padding:2px 0;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> <strong>${t.studentName}</strong>: Tardanza ${t.arrivalTime} → Notificando a ${t.guardian} (${t.guardianPhone})</div>`).join('')}
-          ${report.absenceList.map(a => `<div style="color:#dc2626; padding:2px 0;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> <strong>${a.studentName}</strong>: Inasistencia → Notificando a ${a.guardian} (${a.guardianPhone})</div>`).join('')}
+          ${report.tardinessList.map(t => `<div style="color:#b45309; padding:2px 0;"><span class='status-dot-yellow'></span> <strong>${t.studentName}</strong>: Tardanza ${t.arrivalTime} → Notificando a ${t.guardian} (${t.guardianPhone})</div>`).join('')}
+          ${report.absenceList.map(a => `<div style="color:#dc2626; padding:2px 0;"><span class='status-dot-red'></span> <strong>${a.studentName}</strong>: Inasistencia → Notificando a ${a.guardian} (${a.guardianPhone})</div>`).join('')}
         </div>
       </div>
       <div class="modal-footer" style="display: flex; justify-content: space-between;">
@@ -13898,10 +13898,10 @@ CREATE TABLE tb_cuadernos_qr (
           <label class="form-label" style="font-weight: 700; font-size: 11.5px;">Color de la Tarjeta en Horario:</label>
           <select id="sched-create-color" class="form-control" style="font-size: 12px; font-weight: bold;">
             <option value="navy">🔵 Azul Institucional (Matemáticas / Ciencias)</option>
-            <option value="gold"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> Dorado / Amarillo (Comunicación / Letras)</option>
-            <option value="emerald"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> Verde Esmeralda (Ciencia / Biología / EPT)</option>
+            <option value="gold"><span class='status-dot-yellow'></span> Dorado / Amarillo (Comunicación / Letras)</option>
+            <option value="emerald"><span class='status-dot-green'></span> Verde Esmeralda (Ciencia / Biología / EPT)</option>
             <option value="purple">🟣 Morado / Púrpura (Ciencias Sociales / Filosofía)</option>
-            <option value="red"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> Rojo (Cívica / Tutoria)</option>
+            <option value="red"><span class='status-dot-red'></span> Rojo (Cívica / Tutoria)</option>
           </select>
         </div>
       </div>
@@ -13982,10 +13982,10 @@ CREATE TABLE tb_cuadernos_qr (
           <label class="form-label" style="font-weight: 700; font-size: 11.5px;">Color de la Tarjeta:</label>
           <select id="edit-slot-color" class="form-control" style="font-size: 12px; font-weight: bold;">
             <option value="navy" ${slot.color === 'navy' ? 'selected' : ''}>🔵 Azul Institucional</option>
-            <option value="gold" ${slot.color === 'gold' ? 'selected' : ''}><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> Dorado / Amarillo</option>
-            <option value="emerald" ${slot.color === 'emerald' ? 'selected' : ''}><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> Verde Esmeralda</option>
+            <option value="gold" ${slot.color === 'gold' ? 'selected' : ''}><span class='status-dot-yellow'></span> Dorado / Amarillo</option>
+            <option value="emerald" ${slot.color === 'emerald' ? 'selected' : ''}><span class='status-dot-green'></span> Verde Esmeralda</option>
             <option value="purple" ${slot.color === 'purple' ? 'selected' : ''}>🟣 Morado</option>
-            <option value="red" ${slot.color === 'red' ? 'selected' : ''}><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> Rojo</option>
+            <option value="red" ${slot.color === 'red' ? 'selected' : ''}><span class='status-dot-red'></span> Rojo</option>
           </select>
         </div>
       </div>
@@ -14480,12 +14480,12 @@ CREATE TABLE tb_cuadernos_qr (
     const parentName = (this.store.state.users.padre && this.store.state.users.padre.name) || "Dra. Carmen Méndez";
 
     const notebooks = [
-      { course: "Matemática", teacher: "Prof. Roberto Silva", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, márgenes impecables y esquemas en orden." },
-      { course: "Comunicación", teacher: "Miss María Daysi Reyes", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "17 (A)", remarks: "Análisis de textos y caligrafía óptima. Muy buen desarrollo." },
-      { course: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "18 (AD)", remarks: "Prácticas experimentales ilustradas y fichas de laboratorio selladas." },
-      { course: "Ciencias Sociales", teacher: "Prof. Javier Vega", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "16 (A)", remarks: "Mapas históricos y resúmenes de época bien estructurados." },
-      { course: "Inglés", teacher: "Miss Andrea Ramos", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Vocabulario y ejercicios de gramática avanzados completos." },
-      { course: "EPT (Computación)", teacher: "Prof. Alex Lino", statusLabel: "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span> OBSERVADO", score: "13 (B)", remarks: "Falta pegar y desarrollar la ficha de proyecto técnico N° 3. Presentar este viernes." }
+      { course: "Matemática", teacher: "Prof. Roberto Silva", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, márgenes impecables y esquemas en orden." },
+      { course: "Comunicación", teacher: "Miss María Daysi Reyes", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "17 (A)", remarks: "Análisis de textos y caligrafía óptima. Muy buen desarrollo." },
+      { course: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "18 (AD)", remarks: "Prácticas experimentales ilustradas y fichas de laboratorio selladas." },
+      { course: "Ciencias Sociales", teacher: "Prof. Javier Vega", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "16 (A)", remarks: "Mapas históricos y resúmenes de época bien estructurados." },
+      { course: "Inglés", teacher: "Miss Andrea Ramos", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Vocabulario y ejercicios de gramática avanzados completos." },
+      { course: "EPT (Computación)", teacher: "Prof. Alex Lino", statusLabel: "<span class='status-dot-yellow'></span> OBSERVADO", score: "13 (B)", remarks: "Falta pegar y desarrollar la ficha de proyecto técnico N° 3. Presentar este viernes." }
     ];
 
     this.showModal(`
@@ -14739,7 +14739,7 @@ CREATE TABLE tb_cuadernos_qr (
           <div><strong>Monto Cancelado:</strong> S/ ${res.amount.toFixed(2)}</div>
           <div><strong>Medio de Pago:</strong> ${res.method}</div>
           <div><strong>Fecha & Hora:</strong> ${res.date}</div>
-          <div><strong>Estado de Intranet:</strong> <span class="status-badge status-approved" style="background:#22c55e; color:#0b132b; font-weight:800;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> DESBLOQUEADO Y AL DÍA</span></div>
+          <div><strong>Estado de Intranet:</strong> <span class="status-badge status-approved" style="background:#22c55e; color:#0b132b; font-weight:800;"><span class='status-dot-green'></span> DESBLOQUEADO Y AL DÍA</span></div>
         </div>
 
         <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 10px; border-radius: 6px; color: #065f46; font-size: 12px; font-weight: bold;">
@@ -14758,7 +14758,7 @@ CREATE TABLE tb_cuadernos_qr (
   toggleFamilyLock(familyId) {
     const isLocked = this.store.toggleFamilyAccessLock(familyId);
     if (isLocked !== null) {
-      this.showToast(isLocked ? "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle;"></span> Acceso a Intranet BLOQUEADO por mora" : "<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:4px;vertical-align:middle;"></span> Acceso a Intranet DESBLOQUEADO / Prórroga concedida", isLocked ? "danger" : "success");
+      this.showToast(isLocked ? "<span class='status-dot-red'></span> Acceso a Intranet BLOQUEADO por mora" : "<span class='status-dot-green'></span> Acceso a Intranet DESBLOQUEADO / Prórroga concedida", isLocked ? "danger" : "success");
     }
   }
 

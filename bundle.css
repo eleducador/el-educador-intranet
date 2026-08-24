@@ -1957,6 +1957,11 @@ textarea.form-control:focus {
 
 
 
+/* Status dots */
+.status-dot-green { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #22c55e; margin-right: 4px; vertical-align: middle; }
+.status-dot-yellow { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #f59e0b; margin-right: 4px; vertical-align: middle; }
+.status-dot-red { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #ef4444; margin-right: 4px; vertical-align: middle; }
+
 
 /* === print.css === */
 /* ==========================================================================
