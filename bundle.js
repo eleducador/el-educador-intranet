@@ -6190,15 +6190,27 @@ const Components = {
           <div class="section-column">
             <div class="card">
               <div class="card-header"><h3 class="card-title">Supervisión Académica</h3></div>
-              <div style="display:flex; flex-direction:column; gap: var(--space-3);">
-                <button class="btn btn-sm" onclick="window.app.navigate('asistencia'); window.app.setAttendanceSubTab('door-scanner');" style="background: #10b981; color: white; font-weight: 800; padding: 10px; font-size: 13px; text-align: left; display: flex; align-items: center; gap: 8px;">
-                  <span></span>
+              <div style="display:flex; flex-direction:column; gap: 8px;">
+                <button class="btn btn-emerald" onclick="window.app.navigate('asistencia'); window.app.setAttendanceSubTab('door-scanner');" style="text-align: left; justify-content: flex-start;">
+                  <span>📲</span>
                   <span>Registro de Ingreso & Asistencia QR (Portería)</span>
                 </button>
-                <button class="btn btn-navy" onclick="window.app.navigate('cuadernos-qr')">[Cámara] Escáner Cuadernos QR</button>
-                <button class="btn btn-navy" onclick="window.app.navigate('calificaciones')">Registro de Notas Oficiales</button>
-                <button class="btn btn-navy" onclick="window.app.navigate('horarios')">Horarios Escolares</button>
-                <button class="btn btn-navy" onclick="window.app.navigate('silabus')">Sílabus Académicos</button>
+                <button class="btn btn-gold" onclick="window.app.navigate('cuadernos-qr')" style="text-align: left; justify-content: flex-start;">
+                  <span>📷</span>
+                  <span>[Cámara] Escáner Cuadernos QR</span>
+                </button>
+                <button class="btn btn-navy" onclick="window.app.navigate('calificaciones')" style="text-align: left; justify-content: flex-start;">
+                  <span>📊</span>
+                  <span>Registro de Notas Oficiales</span>
+                </button>
+                <button class="btn btn-navy" onclick="window.app.navigate('horarios')" style="text-align: left; justify-content: flex-start;">
+                  <span>📅</span>
+                  <span>Horarios Escolares</span>
+                </button>
+                <button class="btn btn-navy" onclick="window.app.navigate('silabus')" style="text-align: left; justify-content: flex-start;">
+                  <span>📑</span>
+                  <span>Sílabus Académicos</span>
+                </button>
               </div>
             </div>
           </div>
@@ -6238,17 +6250,27 @@ const Components = {
           </div>
         </div>
 
-        <div style="display: flex; gap: var(--space-3); margin-bottom: var(--space-6); flex-wrap: wrap;">
-          <button class="btn btn-sm" onclick="window.app.navigate('asistencia'); window.app.setAttendanceSubTab('door-scanner');" style="background: #10b981; color: white; font-weight: 900; font-size: 13px; padding: 9px 18px; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(16,185,129,0.3);">
-            <span></span>
+        <div style="display: flex; gap: 10px; margin-bottom: var(--space-6); flex-wrap: wrap; align-items: center;">
+          <button class="btn btn-emerald" onclick="window.app.navigate('asistencia'); window.app.setAttendanceSubTab('door-scanner');">
+            <span>📲</span>
             <span>Registro de Ingreso & Asistencia QR</span>
           </button>
-          <button class="btn btn-gold" onclick="window.app.navigate('cuadernos-qr')" style="font-weight: 800;">
-            [Cámara] Abrir Escáner QR de Cuadernos
+          <button class="btn btn-gold" onclick="window.app.navigate('cuadernos-qr')">
+            <span>📷</span>
+            <span>[Cámara] Abrir Escáner QR de Cuadernos</span>
           </button>
-          <button class="btn btn-navy" onclick="window.app.navigate('calificaciones')">✏️ Registrar Notas</button>
-          <button class="btn btn-navy" onclick="window.app.navigate('boleta')" style="border: 1px solid var(--color-yellow-500);">Boleta Oficial MINEDU 2026</button>
-          <button class="btn btn-outline" onclick="window.app.navigate('horarios')">Ver Horario</button>
+          <button class="btn btn-navy" onclick="window.app.navigate('calificaciones')">
+            <span>✏️</span>
+            <span>Registrar Notas</span>
+          </button>
+          <button class="btn btn-navy" onclick="window.app.navigate('boleta')">
+            <span>📄</span>
+            <span>Boleta Oficial MINEDU 2026</span>
+          </button>
+          <button class="btn btn-outline" onclick="window.app.navigate('horarios')">
+            <span>📅</span>
+            <span>Ver Horario</span>
+          </button>
         </div>
 
         <div class="card">

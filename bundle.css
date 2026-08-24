@@ -575,6 +575,181 @@ body {
    Componentes del Sistema - Colegio El Educador (v5 con Pantalla de Login)
    ========================================================================== */
 
+/* ==========================================================================
+   SISTEMA DE BOTONES TEXTURIZADOS & TÁCTILES (ALTO RELIEVE & PROFUNDIDAD)
+   ========================================================================== */
+
+button, .btn {
+  font-family: var(--font-family);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 13.5px;
+  font-weight: 800;
+  line-height: 1.25;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  transition: all 0.16s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Efecto de Brillo/Textura Superior */
+button::after, .btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* Estado Activo / Clic Táctil */
+button:active, .btn:active {
+  transform: translateY(2px) !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Tamaños */
+.btn-sm {
+  padding: 7px 14px !important;
+  font-size: 12px !important;
+  border-radius: 7px !important;
+  gap: 5px !important;
+}
+
+.btn-lg {
+  padding: 13px 26px !important;
+  font-size: 15px !important;
+  border-radius: 11px !important;
+}
+
+.btn-block {
+  display: flex !important;
+  width: 100% !important;
+}
+
+/* 1. Botón Primario: Azul Noche Institucional (Textura Marina Profunda) */
+.btn-navy, button.btn-navy, .btn-primary {
+  background: linear-gradient(180deg, #1e3a8a 0%, #0f172a 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid #0f172a !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 
+              0 3px 0 #020617, 
+              0 6px 14px rgba(15, 23, 42, 0.35) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+.btn-navy:hover, button.btn-navy:hover, .btn-primary:hover {
+  background: linear-gradient(180deg, #2563eb 0%, #1e3a8a 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 
+              0 4px 0 #0f172a, 
+              0 8px 18px rgba(37, 99, 235, 0.4) !important;
+  transform: translateY(-1px);
+}
+
+/* 2. Botón Dorado / Ámbar (Textura de Oro Metálico) */
+.btn-gold, button.btn-gold, .btn-warning {
+  background: linear-gradient(180deg, #f59e0b 0%, #b45309 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid #92400e !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 
+              0 3px 0 #78350f, 
+              0 6px 14px rgba(180, 83, 9, 0.35) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.btn-gold:hover, button.btn-gold:hover, .btn-warning:hover {
+  background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 
+              0 4px 0 #92400e, 
+              0 8px 18px rgba(245, 158, 11, 0.45) !important;
+  transform: translateY(-1px);
+}
+
+/* 3. Botón Esmeralda / Registro de Asistencia / Éxito (Textura Verde Relieve) */
+.btn-emerald, .btn-success, button.btn-success {
+  background: linear-gradient(180deg, #10b981 0%, #047857 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid #065f46 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38), 
+              0 3px 0 #064e3b, 
+              0 6px 14px rgba(4, 120, 87, 0.35) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.btn-emerald:hover, .btn-success:hover, button.btn-success:hover {
+  background: linear-gradient(180deg, #34d399 0%, #059669 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48), 
+              0 4px 0 #065f46, 
+              0 8px 18px rgba(16, 185, 129, 0.45) !important;
+  transform: translateY(-1px);
+}
+
+/* 4. Botón Rojo Institucional / Peligro (Textura Escarlata) */
+.btn-red, .btn-danger, button.btn-danger {
+  background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid #991b1b !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 
+              0 3px 0 #7f1d1d, 
+              0 6px 14px rgba(185, 28, 28, 0.35) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.btn-red:hover, .btn-danger:hover, button.btn-danger:hover {
+  background: linear-gradient(180deg, #f87171 0%, #dc2626 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 
+              0 4px 0 #991b1b, 
+              0 8px 18px rgba(239, 68, 68, 0.45) !important;
+  transform: translateY(-1px);
+}
+
+/* 5. Botón Púrpura / Especial */
+.btn-purple, button.btn-purple {
+  background: linear-gradient(180deg, #8b5cf6 0%, #6d28d9 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid #5b21b6 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 
+              0 3px 0 #4c1d95, 
+              0 6px 14px rgba(109, 40, 217, 0.35) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.btn-purple:hover, button.btn-purple:hover {
+  background: linear-gradient(180deg, #a78bfa 0%, #7c3aed 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 
+              0 4px 0 #5b21b6, 
+              0 8px 18px rgba(139, 92, 246, 0.45) !important;
+  transform: translateY(-1px);
+}
+
+/* 6. Botón Blanco / Outline Perla Tactil (Relieve Sutil) */
+.btn-outline, button.btn-outline, .btn-secondary, button:not([class*="btn-"]) {
+  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%) !important;
+  color: #1e293b !important;
+  border: 1.5px solid #cbd5e1 !important;
+  box-shadow: inset 0 1px 0 #ffffff, 
+              0 2.5px 0 #cbd5e1, 
+              0 4px 10px rgba(0, 0, 0, 0.05) !important;
+}
+.btn-outline:hover, button.btn-outline:hover, .btn-secondary:hover, button:not([class*="btn-"]):hover {
+  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%) !important;
+  border-color: #94a3b8 !important;
+  box-shadow: inset 0 1px 0 #ffffff, 
+              0 3.5px 0 #94a3b8, 
+              0 6px 12px rgba(0, 0, 0, 0.08) !important;
+  color: #0f172a !important;
+  transform: translateY(-1px);
+}
+
 /* --- Tarjetas de Contenido --- */
 .card {
   background-color: var(--bg-surface);
