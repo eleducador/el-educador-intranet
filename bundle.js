@@ -2282,6 +2282,7 @@ class IntranetStore {
   }
 
   saveState() {
+    this.state.updatedAt = Date.now();
     try {
       const serialized = JSON.stringify(this.state);
       localStorage.setItem(this.storageKey, serialized);
@@ -2293,13 +2294,21 @@ class IntranetStore {
     this.notify();
   }
 
+  saveLocalSession() {
+    try {
+      const serialized = JSON.stringify(this.state);
+      localStorage.setItem(this.storageKey, serialized);
+    } catch (e) {}
+    this.notify();
+  }
+
   // =========================================================================
-  // SINCRONIZACIÓN INTELIGENTE CON EL MOTOR DE BASE DE DATOS CENTRAL (db.json)
+  // SINCRONIZACIÓN EN TIEMPO REAL CON FIREBASE GOOGLE CLOUD
   // =========================================================================
   async fetchServerState(silent = false) {
     if (this.isSyncing) return;
     try {
-      // 1. Intentar primero con Firebase Realtime Database (Google Cloud)
+      // 1. Obtener estado de Firebase Realtime Database
       let serverData = null;
       try {
         const fbRes = await fetch(this.firebaseUrl, { cache: 'no-store' });
@@ -2308,7 +2317,7 @@ class IntranetStore {
         }
       } catch(e) {}
 
-      // 2. Fallback al backend secundario si Firebase no respondiera
+      // 2. Fallback secundario si fuera necesario
       if (!serverData) {
         try {
           const apiRes = await fetch(`${this.getApiBaseUrl()}/api/state`, { cache: 'no-store' });
@@ -2322,40 +2331,32 @@ class IntranetStore {
         const currentView = this.state.currentView;
         const prevSig = this.getDataSignature(this.state);
 
-        // Unión inteligente que NUNCA borra datos locales del usuario
-        this.state.notebookReviews = this.mergeCollectionsById(this.state.notebookReviews, serverData.notebookReviews, "id");
-        this.state.attendanceRecords = this.mergeCollectionsById(this.state.attendanceRecords, serverData.attendanceRecords, "id");
-        this.state.behaviorIncidents = this.mergeCollectionsById(this.state.behaviorIncidents, serverData.behaviorIncidents, "id");
-        this.state.enrollments = this.mergeCollectionsById(this.state.enrollments, serverData.enrollments, "studentCode");
-        this.state.systemUsers = this.mergeCollectionsById(this.state.systemUsers, serverData.systemUsers, "code");
-        this.state.weeklyMaterials = this.mergeCollectionsById(this.state.weeklyMaterials, serverData.weeklyMaterials, "id");
-        this.state.courses = this.mergeCollectionsById(this.state.courses, serverData.courses, "id");
-        this.state.payments = this.mergeCollectionsById(this.state.payments, serverData.payments, "id");
-        this.state.tasks = this.mergeCollectionsById(this.state.tasks, serverData.tasks, "id");
-        this.state.announcements = this.mergeCollectionsById(this.state.announcements, serverData.announcements, "id");
-        this.state.syllabi = this.mergeCollectionsById(this.state.syllabi, serverData.syllabi, "id");
+        const localTime = this.state.updatedAt || 0;
+        const serverTime = serverData.updatedAt || 0;
 
-        if (serverData.boletaData) {
-          this.state.boletaData = {
-            ...initialData.boletaData,
-            ...this.state.boletaData,
-            ...serverData.boletaData
-          };
-        }
-
-        if (serverData.academicConfig) {
-          this.state.academicConfig = {
-            ...initialData.academicConfig,
-            ...this.state.academicConfig,
-            ...serverData.academicConfig
-          };
-        }
-
-        if (serverData.schedules) {
-          this.state.schedules = {
-            ...this.state.schedules,
-            ...serverData.schedules
-          };
+        // Si la nube tiene datos más recientes o si este dispositivo recién abre la página:
+        if (serverTime >= localTime || !this.state.updatedAt) {
+          // Reemplazo limpio y exacto (elimina usuarios borrados y agrega usuarios creados)
+          if (serverData.systemUsers) this.state.systemUsers = serverData.systemUsers;
+          if (serverData.enrollments) this.state.enrollments = serverData.enrollments;
+          if (serverData.attendanceRecords) this.state.attendanceRecords = serverData.attendanceRecords;
+          if (serverData.notebookReviews) this.state.notebookReviews = serverData.notebookReviews;
+          if (serverData.behaviorIncidents) this.state.behaviorIncidents = serverData.behaviorIncidents;
+          if (serverData.payments) this.state.payments = serverData.payments;
+          if (serverData.tasks) this.state.tasks = serverData.tasks;
+          if (serverData.announcements) this.state.announcements = serverData.announcements;
+          if (serverData.syllabi) this.state.syllabi = serverData.syllabi;
+          if (serverData.weeklyMaterials) this.state.weeklyMaterials = serverData.weeklyMaterials;
+          if (serverData.courses) this.state.courses = serverData.courses;
+          if (serverData.schedules) this.state.schedules = serverData.schedules;
+          if (serverData.boletaData) this.state.boletaData = serverData.boletaData;
+          if (serverData.academicConfig) this.state.academicConfig = serverData.academicConfig;
+          if (serverData.users) this.state.users = serverData.users;
+          if (serverData.institution) this.state.institution = serverData.institution;
+          this.state.updatedAt = serverTime || Date.now();
+        } else {
+          // Si el cliente local tiene cambios pendientes generados offline, subirlos
+          this.syncToServer();
         }
 
         this.state.isAuthenticated = currentAuth;
@@ -2462,7 +2463,8 @@ class IntranetStore {
           this.state.isAuthenticated = true;
           this.state.currentRole = roleKey;
           this.state.currentView = "dashboard";
-          this.saveState();
+          this.saveLocalSession();
+          this.fetchServerState(true);
           return { success: true, user: user };
         } else {
           return { success: false, error: `Contraseña incorrecta. (Prueba con: ${validPassword})` };
@@ -2492,10 +2494,9 @@ class IntranetStore {
         else if (systemUser.role === "Docente" || systemUser.role === "Profesor") assignedRole = "docente";
 
         // Actualizar datos del usuario activo para que refleje su nombre, correo y rol
-        if (this.state.users[assignedRole]) {
-          this.state.users[assignedRole].name = systemUser.name;
-          this.state.users[assignedRole].email = systemUser.email;
-          if (systemUser.detail) this.state.users[assignedRole].roleLabel = systemUser.detail;
+        if (this.state.users && this.state.users[assignedRole]) {
+          this.state.users[assignedRole].name = systemUser.name || this.state.users[assignedRole].name;
+          this.state.users[assignedRole].email = systemUser.email || this.state.users[assignedRole].email;
           if (systemUser.hasAdminPrivilege !== undefined) {
             this.state.users[assignedRole].hasAdminPrivileges = systemUser.hasAdminPrivilege;
           }
@@ -2504,7 +2505,8 @@ class IntranetStore {
         this.state.isAuthenticated = true;
         this.state.currentRole = assignedRole;
         this.state.currentView = "dashboard";
-        this.saveState();
+        this.saveLocalSession();
+        this.fetchServerState(true);
         return { success: true, user: systemUser };
       } else {
         return { success: false, error: "Contraseña incorrecta." };
@@ -2516,7 +2518,7 @@ class IntranetStore {
 
   logout() {
     this.state.isAuthenticated = false;
-    this.saveState();
+    this.saveLocalSession();
   }
 
   // --- Getters ---
