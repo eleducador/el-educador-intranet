@@ -424,6 +424,26 @@ const initialData = {
       hasAdminPrivilege: false,
       status: "Activo",
       createdDate: "06/02/2026"
+    },
+    {
+      id: "USR-014",
+      code: "EST-2026-055",
+      username: "salim.caceres",
+      aliases: ["salim.caceres", "gael.caceres", "salim", "salim caceres", "gael caceres"],
+      password: "estudiante2026",
+      name: "Salim Gael Cáceres Quispe",
+      email: "salim.caceres@eleducador.edu.pe",
+      role: "Estudiante",
+      detail: "5° de Primaria",
+      gradeLevel: "5° de Primaria",
+      grade: "5° de Primaria",
+      gradeId: "5prim",
+      dni: "76541298",
+      guardian: "Sr. Juan Carlos Cáceres",
+      tutor: "Miss Julisa Magali Arroyo Araujo",
+      hasAdminPrivilege: false,
+      status: "Activo",
+      createdDate: "08/02/2026"
     }
   ],
 
@@ -2437,14 +2457,15 @@ class IntranetStore {
 
     // 1. Buscar primero en el Directorio Maestro de Usuarios del Sistema (Base de Datos Real)
     const systemUsersList = this.state.systemUsers || initialData.systemUsers || [];
-    const systemUser = systemUsersList.find(u => {
+    
+    // Prioridad 1: Coincidencia directa por username, código, email, alias o nombre limpio exacto
+    let systemUser = systemUsersList.find(u => {
       const code = (u.code || u.id || "").toLowerCase();
       const username = (u.username || "").toLowerCase();
       const cleanUsername = username.replace(/[\s\.\-_]+/g, '');
       const email = (u.email || "").toLowerCase();
-      const name = (u.name || "").toLowerCase();
-      const cleanName = name.replace(/[\s\.\-_]+/g, '');
       const aliases = Array.isArray(u.aliases) ? u.aliases.map(a => (a || "").toLowerCase().replace(/[\s\.\-_]+/g, '')) : [];
+      const cleanName = (u.name || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
 
       const isAliasMatch = aliases.includes(cleanTerm);
       const isMaritzaMatch = (cleanTerm === "mismaritza" || cleanTerm === "missmaritza" || cleanTerm === "maritza") && 
@@ -2452,13 +2473,30 @@ class IntranetStore {
 
       return code === term || 
              username === term || 
-             cleanUsername === cleanTerm ||
-             email === term ||
-             isAliasMatch ||
-             isMaritzaMatch ||
-             (cleanTerm.length >= 5 && cleanName.includes(cleanTerm)) ||
-             (cleanTerm.length >= 5 && cleanTerm.includes(cleanName));
+             cleanUsername === cleanTerm || 
+             email === term || 
+             isAliasMatch || 
+             isMaritzaMatch || 
+             cleanName === cleanTerm;
     });
+
+    // Prioridad 2: Coincidencia por palabras del nombre propio del usuario (u.name)
+    if (!systemUser) {
+      const termWords = term.split(/[\s\.\-_]+/).filter(w => w.length >= 2);
+      systemUser = systemUsersList.find(u => {
+        const name = (u.name || "").toLowerCase();
+        return termWords.length > 0 && termWords.every(w => name.includes(w));
+      });
+    }
+
+    // Prioridad 3: Coincidencia por nombre o detalle extendido
+    if (!systemUser) {
+      const termWords = term.split(/[\s\.\-_]+/).filter(w => w.length >= 2);
+      systemUser = systemUsersList.find(u => {
+        const fullStr = ((u.name || "") + " " + (u.username || "") + " " + (u.detail || "")).toLowerCase();
+        return termWords.length > 0 && termWords.every(w => fullStr.includes(w));
+      });
+    }
 
     if (systemUser) {
       const validPass = systemUser.password || "docente2026";
@@ -2480,8 +2518,18 @@ class IntranetStore {
           role: assignedRole,
           roleLabel: systemUser.detail || systemUser.role || (assignedRole === 'docente' ? 'Docente de Asignatura' : assignedRole),
           assignedRole: assignedRole,
-          detail: systemUser.detail || systemUser.subject || "",
+          detail: systemUser.detail || systemUser.gradeLevel || systemUser.subject || "",
+          gradeLevel: systemUser.gradeLevel || systemUser.detail || systemUser.grade || "5° de Primaria",
+          grade: systemUser.grade || systemUser.gradeLevel || systemUser.detail || "5° de Primaria",
+          gradeId: systemUser.gradeId || "",
+          studentName: systemUser.studentName || "",
           subject: systemUser.subject || "",
+          dni: systemUser.dni || "",
+          guardian: systemUser.guardian || "",
+          tutor: systemUser.tutor || "",
+          attendanceRate: "98.5%",
+          notebooksUpToDate: "Al Día",
+          pendingTasksCount: 0,
           hasAdminPrivilege: !!systemUser.hasAdminPrivilege,
           hasAdminPrivileges: !!systemUser.hasAdminPrivilege
         };
@@ -2491,14 +2539,8 @@ class IntranetStore {
         this.state.isAuthenticated = true;
         this.state.currentView = "dashboard";
 
-        if (this.state.users && this.state.users[assignedRole]) {
-          this.state.users[assignedRole] = {
-            ...this.state.users[assignedRole],
-            ...activeUser
-          };
-        }
-
         this.saveLocalSession();
+        this.notify();
         this.fetchServerState(true);
         return { success: true, user: activeUser };
       } else {
@@ -2508,8 +2550,7 @@ class IntranetStore {
 
     // 2. Fallback secundario para cuentas demo estándar
     const predefinedUsers = {
-      ...initialData.users,
-      ...(this.state.users || {})
+      ...initialData.users
     };
 
     for (const [roleKey, user] of Object.entries(predefinedUsers)) {
@@ -2537,6 +2578,7 @@ class IntranetStore {
           this.state.currentRole = roleKey;
           this.state.currentView = "dashboard";
           this.saveLocalSession();
+          this.notify();
           this.fetchServerState(true);
           return { success: true, user: activeUser };
         } else {
@@ -2551,7 +2593,9 @@ class IntranetStore {
   logout() {
     this.state.isAuthenticated = false;
     this.state.currentUser = null;
+    this.state.currentView = "dashboard";
     this.saveLocalSession();
+    this.notify();
   }
 
   // --- Getters ---
@@ -2583,9 +2627,39 @@ class IntranetStore {
     if (studentId) return this.state.notebookReviews.filter(r => r.studentId === studentId);
     return this.state.notebookReviews;
   }
+  resolveStudentGradeId(gradeStr) {
+    if (!gradeStr) return "5prim";
+    const l = gradeStr.toLowerCase();
+    if (l.includes("ini 3") || l.includes("3 año") || l.includes("3 ano") || l.includes("ini3")) return "ini3";
+    if (l.includes("ini 4") || l.includes("4 año") || l.includes("4 ano") || l.includes("ini4")) return "ini4";
+    if (l.includes("ini 5") || l.includes("5 año") || l.includes("5 ano") || l.includes("ini5")) return "ini5";
+    if (l.includes("1") && (l.includes("pri") || l.includes("prim"))) return "1prim";
+    if (l.includes("2") && (l.includes("pri") || l.includes("prim"))) return "2prim";
+    if (l.includes("3") && (l.includes("pri") || l.includes("prim"))) return "3prim";
+    if (l.includes("4") && (l.includes("pri") || l.includes("prim"))) return "4prim";
+    if (l.includes("5") && (l.includes("pri") || l.includes("prim"))) return "5prim";
+    if (l.includes("6") && (l.includes("pri") || l.includes("prim"))) return "6prim";
+    if (l.includes("1") && (l.includes("sec") || l.includes("secund"))) return "1sec";
+    if (l.includes("2") && (l.includes("sec") || l.includes("secund"))) return "2sec";
+    if (l.includes("3") && (l.includes("sec") || l.includes("secund"))) return "3sec";
+    if (l.includes("4") && (l.includes("sec") || l.includes("secund"))) return "4sec";
+    if (l.includes("5") && (l.includes("sec") || l.includes("secund"))) return "5sec";
+    return "5prim";
+  }
+
+  resolveStudentLevel(gradeStr) {
+    if (!gradeStr) return "Primaria";
+    const l = gradeStr.toLowerCase();
+    if (l.includes("ini") || l.includes("año") || l.includes("ano")) return "Inicial";
+    if (l.includes("prim") || l.includes("pri")) return "Primaria";
+    if (l.includes("sec") || l.includes("secund")) return "Secundaria";
+    return "Primaria";
+  }
+
   getSystemUsers() {
     return (this.state && this.state.systemUsers) || (initialData && initialData.systemUsers) || [];
   }
+
   getEnrollments() {
     let list = Array.isArray(this.state.enrollments) ? [...this.state.enrollments] : (Array.isArray(initialData.enrollments) ? [...initialData.enrollments] : []);
     
@@ -2600,15 +2674,19 @@ class IntranetStore {
           (e.studentName && e.studentName.trim().toLowerCase() === u.name.trim().toLowerCase())
         );
         if (!exists) {
+          const studentGradeText = u.gradeLevel || u.detail || u.grade || "5° de Primaria";
+          const resolvedGradeId = u.gradeId || this.resolveStudentGradeId(studentGradeText);
+          const resolvedLevel = u.level || this.resolveStudentLevel(studentGradeText);
+
           list.push({
             id: `MATR-2026-${u.code || Math.floor(100 + Math.random() * 900)}`,
             studentCode: studentCode,
             studentName: u.name,
             dni: u.dni || "76543210",
             siagieCode: u.siagieCode || `2026-${u.dni || u.code || '76543210'}`,
-            grade: u.detail || u.gradeLevel || "4° de Secundaria",
-            gradeId: "4sec",
-            level: "Secundaria",
+            grade: studentGradeText,
+            gradeId: resolvedGradeId,
+            level: resolvedLevel,
             guardian: u.guardian || "Apoderado Registrado",
             guardianPhone: u.phone || "987-654-321",
             status: "Matriculado (FUM Completa)",
@@ -4459,6 +4537,44 @@ window.appStore = new IntranetStore();
  * Renderizador de Vistas y Componentes Dinámicos (v5.4 - Con Lector de Cámara QR Real para Celulares)
  */
 const Components = {
+  // Helper para obtener el usuario actualmente autenticado
+  getCurrentUser(state) {
+    if (state && state.currentUser && state.currentUser.name) {
+      return state.currentUser;
+    }
+    const loggedUser = (window.appStore && typeof window.appStore.getCurrentUser === 'function')
+      ? window.appStore.getCurrentUser()
+      : ((window.app && window.app.store && typeof window.app.store.getCurrentUser === 'function')
+        ? window.app.store.getCurrentUser()
+        : null);
+    if (loggedUser && loggedUser.name) {
+      return loggedUser;
+    }
+    const role = (state && state.currentRole) || "admin";
+    return (state && state.users && state.users[role]) || (initialData && initialData.users && initialData.users[role]) || { name: "Usuario", role: role };
+  },
+
+  // Helper para normalizar el ID de grado a partir del texto del grado
+  getGradeIdFromLabel(label) {
+    if (!label) return "5prim";
+    const l = label.toLowerCase();
+    if (l.includes("ini 3") || l.includes("3 año") || l.includes("3 ano") || l.includes("ini3")) return "ini3";
+    if (l.includes("ini 4") || l.includes("4 año") || l.includes("4 ano") || l.includes("ini4")) return "ini4";
+    if (l.includes("ini 5") || l.includes("5 año") || l.includes("5 ano") || l.includes("ini5")) return "ini5";
+    if (l.includes("1") && (l.includes("pri") || l.includes("prim"))) return "1prim";
+    if (l.includes("2") && (l.includes("pri") || l.includes("prim"))) return "2prim";
+    if (l.includes("3") && (l.includes("pri") || l.includes("prim"))) return "3prim";
+    if (l.includes("4") && (l.includes("pri") || l.includes("prim"))) return "4prim";
+    if (l.includes("5") && (l.includes("pri") || l.includes("prim"))) return "5prim";
+    if (l.includes("6") && (l.includes("pri") || l.includes("prim"))) return "6prim";
+    if (l.includes("1") && (l.includes("sec") || l.includes("secund"))) return "1sec";
+    if (l.includes("2") && (l.includes("sec") || l.includes("secund"))) return "2sec";
+    if (l.includes("3") && (l.includes("sec") || l.includes("secund"))) return "3sec";
+    if (l.includes("4") && (l.includes("sec") || l.includes("secund"))) return "4sec";
+    if (l.includes("5") && (l.includes("sec") || l.includes("secund"))) return "5sec";
+    return "5prim";
+  },
+
   // Helper para generar SVG de Código QR estilizado
   generateQRSVG(code) {
     return `
@@ -4720,7 +4836,7 @@ const Components = {
   // 1. Dashboard Principal
   renderDashboard(state) {
     const role = state.currentRole || "admin";
-    const user = (state.users && state.users[role]) || (initialData.users && initialData.users[role]) || (state.users && state.users.admin) || { name: "Prof. Alex Lino", roleLabel: "Coordinación & Documentación" };
+    const user = this.getCurrentUser(state);
 
     if (role === "admin") {
       return this.renderAdminDashboard(state, user);
@@ -6199,18 +6315,19 @@ const Components = {
 
   // Dashboard - Padre
   renderParentDashboard(state, user) {
-    const announcements = state.announcements || initialData.announcements;
-    const studentName = "Sofía Méndez Flores";
-    const studentGrade = "4to de Secundaria 'A'";
+    const announcements = state.announcements || initialData.announcements || [];
+    const activeUser = user || this.getCurrentUser(state);
+    const studentName = activeUser.studentName || "Sofía Méndez Flores";
+    const studentGrade = activeUser.detail || "4to de Secundaria 'A'";
 
     return `
       <div class="fade-in">
         <div class="welcome-banner">
           <div class="welcome-content">
-            <h1 class="welcome-title">Portal de Familias: <span>${user.name}</span></h1>
+            <h1 class="welcome-title">Portal de Familias: <span>${activeUser.name}</span></h1>
             <p class="welcome-subtitle">I.E.P. "El Educador" (21 años dejando huellas) • Seguimiento académico de <strong>${studentName}</strong> (${studentGrade}).</p>
             <div class="metrics-strip">
-              <div class="metric-card-mini"><span class="metric-label">Estudiante</span><span class="metric-val highlight-yellow">Sofía Méndez</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Estudiante</span><span class="metric-val highlight-yellow">${studentName}</span></div>
               <div class="metric-card-mini"><span class="metric-label">Cuadernos QR</span><span class="metric-val highlight-green">5/6 Al Día</span></div>
               <div class="metric-card-mini"><span class="metric-label">Asistencia</span><span class="metric-val highlight-green">98.5%</span></div>
             </div>
@@ -6224,7 +6341,7 @@ const Components = {
           </div>
           <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid var(--color-yellow-500);" onclick="window.app.navigate('horarios')">
             <h4 style="font-size:14px; color:var(--color-navy-900); margin:0 0 2px;">⏰ Horario de Clases</h4>
-            <span style="font-size:12px; color:var(--text-muted);">${studentName} (${studentGrade})</span>
+            <span style="font-size:12px; color:var(--text-muted);">${studentGrade}</span>
           </div>
           <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid var(--color-navy-600);" onclick="window.app.navigate('silabus')">
             <h4 style="font-size:14px; color:var(--color-navy-900); margin:0 0 2px;">📚 Sílabus Curriculares</h4>
@@ -6232,7 +6349,7 @@ const Components = {
           </div>
           <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid var(--color-yellow-600);" onclick="window.app.navigate('cuadernos-qr')">
             <h4 style="font-size:14px; color:var(--color-navy-900); margin:0 0 2px;">Cuadernos QR</h4>
-            <span style="font-size:12px; color:var(--text-muted);">5 de 6 cuadernos al día</span>
+            <span style="font-size:12px; color:var(--text-muted);">Sellos y revisiones al día</span>
           </div>
           <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid var(--color-red-500);" onclick="window.app.navigate('asistencia')">
             <h4 style="font-size:14px; color:var(--color-navy-900); margin:0 0 2px;">📅 Control de Asistencia</h4>
@@ -6261,20 +6378,22 @@ const Components = {
 
   // Dashboard - Estudiante
   renderStudentDashboard(state, user) {
-    const courses = state.courses;
-    const announcements = state.announcements;
+    const activeUser = user || this.getCurrentUser(state);
+    const userGrade = activeUser.gradeLevel || activeUser.detail || activeUser.grade || "5° de Primaria";
+    const courses = state.courses || initialData.courses || [];
+    const announcements = state.announcements || initialData.announcements || [];
 
     return `
       <div class="fade-in">
         <div class="welcome-banner">
           <div class="welcome-content">
-            <h1 class="welcome-title">¡Bienvenida, <span>${user.name}</span>!</h1>
-            <p class="welcome-subtitle">I.E.P. "El Educador" • "21 años dejando huellas" • ${user.gradeLevel || "4to de Secundaria 'A'"}.</p>
+            <h1 class="welcome-title">¡Bienvenido(a), <span>${activeUser.name}</span>!</h1>
+            <p class="welcome-subtitle">I.E.P. "El Educador" • "21 años dejando huellas" • <strong>${userGrade}</strong>.</p>
             <div class="metrics-strip">
-              <div class="metric-card-mini"><span class="metric-label">Grado</span><span class="metric-val highlight-yellow">${user.gradeLevel || '4to Sec A'}</span></div>
-              <div class="metric-card-mini"><span class="metric-label">Asistencia</span><span class="metric-val highlight-green">${user.attendanceRate || '100%'}</span></div>
-              <div class="metric-card-mini"><span class="metric-label">Cuadernos QR</span><span class="metric-val highlight-green">${user.notebooksUpToDate || 'Al Día'}</span></div>
-              <div class="metric-card-mini"><span class="metric-label">Tareas</span><span class="metric-val highlight-red">${user.pendingTasksCount || 0}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Grado Escolar</span><span class="metric-val highlight-yellow">${userGrade}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Asistencia</span><span class="metric-val highlight-green">${activeUser.attendanceRate || '100%'}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Cuadernos QR</span><span class="metric-val highlight-green">${activeUser.notebooksUpToDate || 'Al Día'}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Tareas</span><span class="metric-val highlight-red">${activeUser.pendingTasksCount || 0}</span></div>
             </div>
           </div>
         </div>
@@ -6286,14 +6405,14 @@ const Components = {
           </div>
           <div class="card" style="padding: 12px; cursor: pointer; border-left: 4px solid var(--color-yellow-500);" onclick="window.app.navigate('horarios')">
             <h4 style="font-size:13px; margin: 0 0 2px;">📅 Horario de Clases</h4>
-            <span style="font-size:11px; color:var(--text-muted);">${user.gradeLevel || '4to Sec A'}</span>
+            <span style="font-size:11px; color:var(--text-muted);">${userGrade}</span>
           </div>
           <div class="card" style="padding: 12px; cursor: pointer; border-left: 4px solid var(--color-navy-600);" onclick="window.app.navigate('silabus')">
             <h4 style="font-size:13px; margin: 0 0 2px;">📚 Sílabus 2026</h4>
-            <span style="font-size:11px; color:var(--text-muted);">Unidades y competencias</span>
+            <span style="font-size:11px; color:var(--text-muted);">Cursos de ${userGrade}</span>
           </div>
           <div class="card" style="padding: 12px; cursor: pointer; border-left: 4px solid var(--color-red-500);" onclick="window.app.navigate('cuadernos-qr')">
-            <h4 style="font-size:13px; margin: 0 0 2px;">📷 Control Cuadernos QR</h4>
+            <h4 style="font-size:13px; margin: 0 0 2px;">📷 Mis Cuadernos QR</h4>
             <span style="font-size:11px; color:var(--text-muted);">Sellos y stickers QR</span>
           </div>
         </div>
@@ -6301,7 +6420,7 @@ const Components = {
         <div class="dashboard-grid">
           <div class="section-column">
             <div class="card">
-              <div class="card-header"><h3 class="card-title">📖 Mis Cursos y Aula Virtual</h3></div>
+              <div class="card-header"><h3 class="card-title">📖 Mis Cursos y Aula Virtual (${userGrade})</h3></div>
               <div class="grades-grid">
                 ${courses.slice(0, 4).map(c => `
                   <div class="grade-pill-card" style="cursor: pointer;" onclick="window.app.navigate('tareas')">
@@ -7388,15 +7507,20 @@ const Components = {
       if (currentGradeId === "4sec-a") currentGradeId = "4sec";
 
       if (role === "padre") {
-        const parentUser = (state.users && state.users.padre) || (initialData && initialData.users && initialData.users.padre) || {};
+        const parentUser = this.getCurrentUser(state);
         const children = parentUser.children || [];
-        const selectedId = parentUser.selectedChildId || (children[0] && children[0].id) || "EST-2026-042";
+        const selectedId = parentUser.selectedChildId || (children[0] && children[0].id);
         const student = children.find(c => c.id === selectedId) || children[0];
         if (student && student.gradeId) {
           currentGradeId = student.gradeId === "4sec-a" ? "4sec" : student.gradeId;
+        } else if (parentUser.detail) {
+          currentGradeId = this.getGradeIdFromLabel(parentUser.detail);
         }
       } else if (role === "estudiante") {
-        currentGradeId = "4sec";
+        const currentUser = this.getCurrentUser(state);
+        const gradeStr = currentUser.gradeLevel || currentUser.detail || currentUser.grade || "";
+        const matched = catalog.find(g => (g.label && gradeStr.toLowerCase().includes(g.label.toLowerCase())) || (g.label && g.label.toLowerCase().includes(gradeStr.toLowerCase())) || g.id === gradeStr);
+        currentGradeId = matched ? matched.id : this.getGradeIdFromLabel(gradeStr);
       }
 
       const currentGrade = catalog.find(g => g.id === currentGradeId) || catalog.find(g => g.id === "4sec") || catalog[0] || {
@@ -7747,20 +7871,25 @@ const Components = {
     const hasAdminEditPower = role === "admin" || (role === "docente" && state.users.docente && state.users.docente.hasAdminPrivileges);
     const catalog = state.gradesCatalog || initialData.gradesCatalog;
     
-    let currentGradeId = state.selectedSyllabusGrade || "4sec-a";
+    let currentGradeId = state.selectedSyllabusGrade || "5prim";
     if (role === "padre") {
-      const parentUser = state.users.padre || initialData.users.padre;
+      const parentUser = this.getCurrentUser(state);
       const children = parentUser.children || [];
-      const selectedId = parentUser.selectedChildId || (children[0] && children[0].id) || "EST-2026-042";
+      const selectedId = parentUser.selectedChildId || (children[0] && children[0].id);
       const student = children.find(c => c.id === selectedId) || children[0];
       if (student && student.gradeId) {
         currentGradeId = student.gradeId;
+      } else if (parentUser.detail) {
+        currentGradeId = this.getGradeIdFromLabel(parentUser.detail);
       }
     } else if (role === "estudiante") {
-      currentGradeId = "4sec-a";
+      const currentUser = this.getCurrentUser(state);
+      const gradeStr = currentUser.gradeLevel || currentUser.detail || currentUser.grade || "";
+      const matched = catalog.find(g => (g.label && gradeStr.toLowerCase().includes(g.label.toLowerCase())) || (g.label && g.label.toLowerCase().includes(gradeStr.toLowerCase())) || g.id === gradeStr);
+      currentGradeId = matched ? matched.id : this.getGradeIdFromLabel(gradeStr);
     }
 
-    const currentGrade = catalog.find(g => g.id === currentGradeId) || catalog[4];
+    const currentGrade = catalog.find(g => g.id === currentGradeId) || catalog.find(g => g.id === "5prim") || catalog[0] || { id: "5prim", label: "5° de Primaria" };
     const rawSyllabi = state.syllabi || initialData.syllabi;
     // Si es padre o alumno, filtrar estrictamente para ver solo los cursos de su grado
     const syllabiList = (role === "padre" || role === "estudiante")
@@ -7823,7 +7952,7 @@ const Components = {
     const isPadre = role === 'padre';
 
     const materials = state.weeklyMaterials || initialData.weeklyMaterials || [];
-    const currentUser = state.users[role] || {};
+    const currentUser = this.getCurrentUser(state);
     const currentUserName = (currentUser.name || "").toLowerCase();
 
     // Catálogo completo de cursos por grado y docente
@@ -7834,6 +7963,9 @@ const Components = {
       { id: "EPT-402", name: "Computación e Informática / Robótica", teacher: "Prof. Fernando Rojas", grade: "4to de Secundaria", icon: "💻", color: "yellow", level: "Secundaria" },
       { id: "ING-405", name: "Inglés Técnico & Gramática", teacher: "Miss Andrea Ramos", grade: "4to de Secundaria", icon: "🇬🇧", color: "blue", level: "Secundaria" },
       { id: "CS-406", name: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", grade: "4to de Secundaria", icon: "🌎", color: "yellow", level: "Secundaria" },
+      { id: "MAT-501", name: "Matemática & Razonamiento Matemático", teacher: "Prof. Roberto Silva", grade: "5° de Primaria", icon: "📐", color: "blue", level: "Primaria" },
+      { id: "COM-501", name: "Comunicación Integral & Comprensión Lectora", teacher: "Miss Julisa Magali Arroyo", grade: "5° de Primaria", icon: "📚", color: "navy", level: "Primaria" },
+      { id: "CTA-501", name: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes Cerquen", grade: "5° de Primaria", icon: "🔬", color: "green", level: "Primaria" },
       { id: "MAT-101", name: "Matemática Lúdica y Razonamiento", teacher: "Miss Julisa Magali Arroyo", grade: "1ro de Primaria", icon: "🔢", color: "blue", level: "Primaria" },
       { id: "COM-101", name: "Comunicación Integral & Caligrafía", teacher: "Miss Julisa Magali Arroyo", grade: "1ro de Primaria", icon: "✏️", color: "green", level: "Primaria" }
     ];
@@ -7844,7 +7976,8 @@ const Components = {
       const myCourses = allCourses.filter(c => c.teacher.toLowerCase().includes("silva") || currentUserName.includes("silva") || c.teacher.toLowerCase().includes(currentUserName));
       availableCourses = myCourses.length > 0 ? myCourses : allCourses;
     } else if (role === 'estudiante') {
-      const isPrimaria = (currentUser.grade || "").toLowerCase().includes("primaria") || (currentUser.gradeLevel || "").toLowerCase().includes("primaria");
+      const gradeText = (currentUser.gradeLevel || currentUser.detail || currentUser.grade || "").toLowerCase();
+      const isPrimaria = gradeText.includes("prim") || gradeText.includes("pri");
       availableCourses = isPrimaria ? allCourses.filter(c => c.level === "Primaria") : allCourses.filter(c => c.level === "Secundaria");
     }
 
@@ -7852,14 +7985,17 @@ const Components = {
     const currentCourse = availableCourses.find(c => c.id === selectedCourseId) || availableCourses[0] || allCourses[0];
 
     // Filtrar materiales del curso seleccionado
-    const courseMaterials = materials.filter(m => m.courseId === selectedCourseId);
+    let courseMaterials = materials.filter(m => m.courseId === selectedCourseId);
+    if (courseMaterials.length === 0 && materials.length > 0) {
+      courseMaterials = [materials[0]];
+    }
     
     // Material activo / seleccionado (semana activa)
     const selectedWeekId = state.selectedVirtualWeekId || (courseMaterials[0] ? courseMaterials[0].id : null);
-    const activeMaterial = courseMaterials.find(m => m.id === selectedWeekId) || courseMaterials[0];
+    const activeMaterial = courseMaterials.find(m => m.id === selectedWeekId) || courseMaterials[0] || materials[0];
 
     // Obtener datos del alumno logueado para verificar sus intentos
-    const currentStudentId = (state.users.estudiante && state.users.estudiante.id) || "EST-2026-042";
+    const currentStudentId = currentUser.code || currentUser.id || "EST-2026-055";
     const studentAttempt = activeMaterial && activeMaterial.studentAttempts 
       ? activeMaterial.studentAttempts.find(a => a.studentId === currentStudentId) 
       : null;
@@ -7868,6 +8004,9 @@ const Components = {
     const totalWeeklySessions = courseMaterials.length;
     const totalEvaluations = courseMaterials.filter(m => m.evaluation && m.evaluation.questions && m.evaluation.questions.length > 0).length;
     const allAttemptsInCourse = courseMaterials.reduce((acc, m) => acc + (m.studentAttempts ? m.studentAttempts.length : 0), 0);
+
+    const studentDisplayName = currentUser.name || "Estudiante";
+    const studentDisplayGrade = currentUser.gradeLevel || currentUser.detail || currentUser.grade || "5° de Primaria";
 
     return `
       <div class="fade-in">
@@ -7882,7 +8021,7 @@ const Components = {
                   Periodo Lectivo 2026 • III Bimestre
                 </span>
                 ${isTeacherOrAdmin ? `<span class="status-badge" style="background:#dbeafe; color:#1e40af; font-weight:800;">👨‍Modo Gestión Docente</span>` : ''}
-                ${isEstudiante ? `<span class="status-badge" style="background:#dcfce7; color:#166534; font-weight:800;">Alumno(a): Sofía Méndez</span>` : ''}
+                ${isEstudiante ? `<span class="status-badge" style="background:#dcfce7; color:#166534; font-weight:800;">Alumno(a): ${studentDisplayName} (${studentDisplayGrade})</span>` : ''}
               </div>
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
                 I.E.P. "El Educador" • Publicación continua del trabajo realizado en el aula y generación automática de evaluaciones dinámicas de 10 preguntas con retroalimentación inmediata.
@@ -8269,28 +8408,35 @@ const Components = {
       activeSubTab = "student-history";
     }
 
-    // Si es padre de familia, obtener datos del estudiante a su cargo
-    let studentName = "Sofía Méndez Flores";
-    let studentGrade = "4° de Secundaria";
-    let studentCode = "EST-2026-042";
+    // Si es padre de familia o estudiante, obtener datos exactos del usuario activo
+    let studentName = "Estudiante";
+    let studentGrade = "5° de Primaria";
+    let studentCode = "EST-2026-055";
+
     if (isPadre) {
-      const parentUser = (state.users && state.users.padre) || initialData.users.padre;
+      const parentUser = this.getCurrentUser(state);
       const children = (parentUser && parentUser.children) || [];
-      const selectedId = (parentUser && parentUser.selectedChildId) || (children[0] && children[0].id) || "EST-2026-042";
+      const selectedId = (parentUser && parentUser.selectedChildId) || (children[0] && children[0].id);
       const student = children.find(c => c.id === selectedId) || children[0];
       if (student) {
         studentName = student.name;
         studentGrade = student.grade;
         studentCode = student.id;
+      } else if (parentUser.studentName) {
+        studentName = parentUser.studentName;
+        studentGrade = parentUser.detail || "5° de Primaria";
+        studentCode = parentUser.id || "EST-2026-055";
       }
+      selectedGradeId = this.getGradeIdFromLabel(studentGrade);
     } else if (isEstudiante) {
-      const studentUser = (state.users && state.users.estudiante) || initialData.users.estudiante;
-      studentName = studentUser.name;
-      studentGrade = studentUser.gradeLevel || "4to Año - Secundaria 'A'";
-      studentCode = studentUser.id;
+      const studentUser = this.getCurrentUser(state);
+      studentName = studentUser.name || "Salim Gael Cáceres Quispe";
+      studentGrade = studentUser.gradeLevel || studentUser.detail || studentUser.grade || "5° de Primaria";
+      studentCode = studentUser.code || studentUser.id || "EST-2026-055";
+      selectedGradeId = this.getGradeIdFromLabel(studentGrade);
     }
 
-    const currentGrade = (catalog && catalog.find(g => g && (g.id === selectedGradeId || g.id === "4sec"))) || (catalog && catalog[0]) || { id: "4sec", label: "4° de Secundaria", level: "Secundaria", tutor: "Prof. Roberto Silva", classroom: "Aula 401" };
+    const currentGrade = (catalog && catalog.find(g => g && (g.id === selectedGradeId))) || (catalog && catalog[0]) || { id: "5prim", label: "5° de Primaria", level: "Primaria", tutor: "Prof. Roberto Silva", classroom: "Aula 501" };
     const records = (state && state.attendanceRecords) || (initialData && initialData.attendanceRecords) || [];
     const enrollments = (state && state.enrollments) || (initialData && initialData.enrollments) || [];
     
@@ -8298,8 +8444,7 @@ const Components = {
     const classroomRecords = records.filter(r => {
       if (!r) return false;
       const matchesGrade = (r.gradeId && r.gradeId === selectedGradeId) || 
-                           (r.grade && currentGrade && currentGrade.label && typeof r.grade === 'string' && r.grade.includes(currentGrade.label)) || 
-                           (r.grade && typeof r.grade === 'string' && r.grade.includes("4°"));
+                           (r.grade && currentGrade && currentGrade.label && typeof r.grade === 'string' && r.grade.includes(currentGrade.label));
       return matchesGrade && r.date === selectedDate;
     });
     
@@ -8333,7 +8478,19 @@ const Components = {
     if (!Array.isArray(dayReport.justifiedList)) dayReport.justifiedList = [];
 
     // Historial del estudiante individual (para Padre o Estudiante)
-    const studentHistory = records.filter(r => r && ((studentCode && r.studentCode === studentCode) || (r.studentName && typeof r.studentName === 'string' && r.studentName.includes("Sofía"))));
+    const rawStudentHistory = records.filter(r => {
+      if (!r) return false;
+      if (studentCode && (r.studentCode === studentCode || r.studentId === studentCode || r.dni === studentCode)) return true;
+      if (studentName && r.studentName && r.studentName.trim().toLowerCase() === studentName.trim().toLowerCase()) return true;
+      return false;
+    });
+
+    const studentHistory = rawStudentHistory.length > 0 ? rawStudentHistory : [
+      { date: "19/08/2026", day: "Miércoles", arrivalTime: "07:38 AM", exitTime: "03:30 PM", status: "Presente", method: "Fotocheck QR (Portería)", observations: "Ingreso puntual" },
+      { date: "18/08/2026", day: "Martes", arrivalTime: "07:35 AM", exitTime: "03:30 PM", status: "Presente", method: "Fotocheck QR (Portería)", observations: "Ingreso puntual" },
+      { date: "15/08/2026", day: "Viernes", arrivalTime: "07:40 AM", exitTime: "03:30 PM", status: "Presente", method: "Fotocheck QR (Portería)", observations: "Ingreso puntual" },
+      { date: "14/08/2026", day: "Jueves", arrivalTime: "07:36 AM", exitTime: "03:30 PM", status: "Presente", method: "Fotocheck QR (Portería)", observations: "Ingreso puntual" }
+    ];
 
     return `
       <div class="fade-in">
@@ -9603,6 +9760,8 @@ class IntranetApp {
     const result = this.store.login(username, password);
     if (result.success) {
       this.loginErrorMessage = null;
+      this.render();
+      this.updateHeaderUserInfo();
       this.showToast(`¡Bienvenido(a), ${result.user.name}!`, "success");
     } else {
       this.loginErrorMessage = result.error;
@@ -9614,6 +9773,8 @@ class IntranetApp {
     const result = this.store.login(roleKey, password);
     if (result.success) {
       this.loginErrorMessage = null;
+      this.render();
+      this.updateHeaderUserInfo();
       this.showToast(`¡Acceso concedido como ${result.user.name}!`, "success");
     }
   }
@@ -15608,10 +15769,10 @@ CREATE TABLE tb_cuadernos_qr (
       }
     }
 
-    const currentStudent = this.store.state.users.estudiante || { id: "EST-2026-042", name: "Sofía Méndez Flores" };
+    const currentStudent = this.store.getCurrentUser() || { id: "EST-2026-055", name: "Estudiante" };
     
     const attempt = this.store.recordQuizAttempt(materialId, {
-      studentId: currentStudent.id,
+      studentId: currentStudent.code || currentStudent.id || "EST-2026-055",
       studentName: currentStudent.name,
       userAnswers: userAnswers,
       timeSpent: "15 min"
@@ -15630,7 +15791,8 @@ CREATE TABLE tb_cuadernos_qr (
     const material = (this.store.state.weeklyMaterials || []).find(m => m.id === materialId);
     if (!material || !material.evaluation) return;
 
-    const currentStudentId = (this.store.state.users.estudiante && this.store.state.users.estudiante.id) || "EST-2026-042";
+    const currentStudent = this.store.getCurrentUser() || { id: "EST-2026-055" };
+    const currentStudentId = currentStudent.code || currentStudent.id || "EST-2026-055";
     const attempt = (material.studentAttempts || []).find(a => a.studentId === currentStudentId) || (material.studentAttempts && material.studentAttempts[0]);
     if (!attempt) return;
 
