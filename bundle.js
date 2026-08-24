@@ -448,14 +448,12 @@ const initialData = {
     ],
     estudiante: [
       { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
-      { id: "calificaciones", label: "Registro de Notas", icon: "grades", enabled: true },
       { id: "horarios", label: "Horario de Clases", icon: "schedule", enabled: true },
       { id: "silabus", label: "Sílabus Curriculares", icon: "syllabus", enabled: true },
       { id: "cuadernos-qr", label: "Control Cuadernos QR", icon: "qr", enabled: true },
       { id: "tareas", label: "Aula Virtual / Quizzes", badge: "10P", icon: "virtual", enabled: true },
       { id: "asistencia", label: "📅 Mi Asistencia & Fotocheck", icon: "attendance", enabled: true },
-      { id: "comunicados", label: "Informes & Circulares", icon: "announcements", enabled: true },
-      { id: "boleta", label: "Boleta Oficial PDF", icon: "boleta", enabled: true }
+      { id: "comunicados", label: "Informes & Circulares", icon: "announcements", enabled: true }
     ],
     padre: [
       { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
@@ -6262,31 +6260,31 @@ const Components = {
         <div class="welcome-banner">
           <div class="welcome-content">
             <h1 class="welcome-title">¡Bienvenida, <span>${user.name}</span>!</h1>
-            <p class="welcome-subtitle">I.E.P. "El Educador" • "21 años dejando huellas" • 4to de Secundaria 'A'.</p>
+            <p class="welcome-subtitle">I.E.P. "El Educador" • "21 años dejando huellas" • ${user.gradeLevel || "4to de Secundaria 'A'"}.</p>
             <div class="metrics-strip">
-              <div class="metric-card-mini"><span class="metric-label">Promedio</span><span class="metric-val highlight-yellow">${user.generalAverage} / 20</span></div>
-              <div class="metric-card-mini"><span class="metric-label">Asistencia</span><span class="metric-val highlight-green">${user.attendanceRate}</span></div>
-              <div class="metric-card-mini"><span class="metric-label">Cuadernos QR</span><span class="metric-val highlight-green">${user.notebooksUpToDate}</span></div>
-              <div class="metric-card-mini"><span class="metric-label">Tareas</span><span class="metric-val highlight-red">${user.pendingTasksCount}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Grado</span><span class="metric-val highlight-yellow">${user.gradeLevel || '4to Sec A'}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Asistencia</span><span class="metric-val highlight-green">${user.attendanceRate || '100%'}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Cuadernos QR</span><span class="metric-val highlight-green">${user.notebooksUpToDate || 'Al Día'}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Tareas</span><span class="metric-val highlight-red">${user.pendingTasksCount || 0}</span></div>
             </div>
           </div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-3); margin-bottom: var(--space-6);">
           <div class="card" style="padding: 12px; cursor: pointer; border-left: 4px solid #10b981; background: #f0fdf4;" onclick="window.app.navigate('asistencia')">
-            <h4 style="font-size:13px; color: #065f46; margin: 0 0 2px;">Mi Asistencia & QR</h4>
+            <h4 style="font-size:13px; color: #065f46; margin: 0 0 2px;">📲 Mi Asistencia & QR</h4>
             <span style="font-size:11px; color:#047857;">Marcaciones y código QR</span>
           </div>
           <div class="card" style="padding: 12px; cursor: pointer; border-left: 4px solid var(--color-yellow-500);" onclick="window.app.navigate('horarios')">
-            <h4 style="font-size:13px; margin: 0 0 2px;">Horario de Clases</h4>
-            <span style="font-size:11px; color:var(--text-muted);">4to Sec 'A'</span>
+            <h4 style="font-size:13px; margin: 0 0 2px;">📅 Horario de Clases</h4>
+            <span style="font-size:11px; color:var(--text-muted);">${user.gradeLevel || '4to Sec A'}</span>
           </div>
           <div class="card" style="padding: 12px; cursor: pointer; border-left: 4px solid var(--color-navy-600);" onclick="window.app.navigate('silabus')">
-            <h4 style="font-size:13px; margin: 0 0 2px;">Sílabus 2026</h4>
+            <h4 style="font-size:13px; margin: 0 0 2px;">📚 Sílabus 2026</h4>
             <span style="font-size:11px; color:var(--text-muted);">Unidades y competencias</span>
           </div>
           <div class="card" style="padding: 12px; cursor: pointer; border-left: 4px solid var(--color-red-500);" onclick="window.app.navigate('cuadernos-qr')">
-            <h4 style="font-size:13px; margin: 0 0 2px;">Control Cuadernos QR</h4>
+            <h4 style="font-size:13px; margin: 0 0 2px;">📷 Control Cuadernos QR</h4>
             <span style="font-size:11px; color:var(--text-muted);">Sellos y stickers QR</span>
           </div>
         </div>
@@ -6294,12 +6292,12 @@ const Components = {
         <div class="dashboard-grid">
           <div class="section-column">
             <div class="card">
-              <div class="card-header"><h3 class="card-title">Calificaciones Destacadas</h3></div>
+              <div class="card-header"><h3 class="card-title">📖 Mis Cursos y Aula Virtual</h3></div>
               <div class="grades-grid">
                 ${courses.slice(0, 4).map(c => `
-                  <div class="grade-pill-card">
-                    <span class="course-name">${c.name}</span>
-                    <span class="course-grade-number ${c.finalGrade >= 18 ? 'grade-high' : 'grade-good'}">${c.finalGrade.toFixed(1)}</span>
+                  <div class="grade-pill-card" style="cursor: pointer;" onclick="window.app.navigate('tareas')">
+                    <span class="course-name" style="font-weight: 800; color: var(--color-navy-900);">${c.name}</span>
+                    <span style="font-size: 11px; color: var(--text-muted);">${c.teacher}</span>
                   </div>
                 `).join('')}
               </div>
@@ -6307,7 +6305,7 @@ const Components = {
           </div>
           <div class="section-column">
             <div class="card">
-              <div class="card-header"><h3 class="card-title">Comunicados Oficiales</h3></div>
+              <div class="card-header"><h3 class="card-title">📢 Comunicados Oficiales</h3></div>
               <div class="announcement-list">
                 ${announcements.map(a => `
                   <div class="announcement-card">
@@ -6324,11 +6322,28 @@ const Components = {
   },
 
   // =========================================================================
-  // PORTAL DOCENTE Y ESTUDIANTE: SISTEMA DE CALIFICACIONES Y LIBRETA DE NOTAS
+  // PORTAL DOCENTE Y APODERADO: SISTEMA DE CALIFICACIONES Y LIBRETA DE NOTAS
   // =========================================================================
   renderGrades(state) {
     const role = state.currentRole;
-    if (role === 'estudiante' || role === 'padre') {
+    if (role === 'estudiante') {
+      return `
+        <div class="fade-in card" style="padding: 50px 20px; text-align: center; max-width: 600px; margin: 40px auto; border-top: 4px solid var(--color-red-600);">
+          <div style="font-size: 48px; margin-bottom: 12px;">🔒</div>
+          <h2 style="font-size: 18px; font-weight: 900; color: var(--color-navy-900); margin-bottom: 8px;">
+            Módulo Reservado para Docentes y Padres de Familia
+          </h2>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
+            El perfil de estudiante no tiene habilitado el acceso al registro de notas ni a la boleta oficial. La entrega de calificaciones oficiales se realiza directamente a los padres de familia y apoderados acreditados.
+          </p>
+          <button class="btn btn-navy" onclick="window.app.navigate('dashboard')" style="font-weight: 800; padding: 10px 24px;">
+            Volver al Inicio
+          </button>
+        </div>
+      `;
+    }
+
+    if (role === 'padre') {
       const user = (state.users && state.users[role]) || (state.users && state.users.estudiante) || {};
       const courses = state.courses || initialData.courses || [];
       const studentName = user.name || "Sofía Méndez Flores";
@@ -6810,6 +6825,24 @@ const Components = {
   // BOLETA OFICIAL IMPRIMIBLE CON FORMATO MINEDU (2 PÁGINAS DINÁMICAS)
   // =========================================================================
   renderPrintableReport(state) {
+    const role = state.currentRole;
+    if (role === 'estudiante') {
+      return `
+        <div class="fade-in card" style="padding: 50px 20px; text-align: center; max-width: 600px; margin: 40px auto; border-top: 4px solid var(--color-red-600);">
+          <div style="font-size: 48px; margin-bottom: 12px;">🔒</div>
+          <h2 style="font-size: 18px; font-weight: 900; color: var(--color-navy-900); margin-bottom: 8px;">
+            Acceso Restringido: Boleta Oficial MINEDU
+          </h2>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
+            La emisión y consulta oficial de la boleta de calificaciones está reservada para personal directivo, docentes y apoderados acreditados.
+          </p>
+          <button class="btn btn-navy" onclick="window.app.navigate('dashboard')" style="font-weight: 800; padding: 10px 24px;">
+            Volver al Inicio
+          </button>
+        </div>
+      `;
+    }
+
     const selectedStudentKey = state.selectedBoletaStudent || "mendez";
     const allBoletas = state.boletaData || initialData.boletaData;
     const student = allBoletas[selectedStudentKey] || allBoletas.mendez;
