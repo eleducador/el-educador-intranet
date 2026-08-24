@@ -5771,9 +5771,6 @@ const Components = {
               <button class="btn btn-navy btn-sm" onclick="window.app.openCreateUserModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px;">
                 <span>➕</span> Crear Nuevo Usuario
               </button>
-              <button class="btn btn-gold btn-sm" onclick="window.app.openCreateEnrollmentModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px;">
-                <span>📝</span> Nueva Matrícula
-              </button>
             </div>
           </div>
 
@@ -6024,9 +6021,6 @@ const Components = {
                   </p>
                 </div>
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                  <button class="btn btn-navy btn-sm" onclick="window.app.openCreateEnrollmentModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px;">
-                    <span>➕</span> + Nueva Matrícula / Ficha FUM
-                  </button>
                   <button class="btn btn-outline btn-sm" onclick="window.print()" style="font-weight: 800;">
                     Imprimir Padrón
                   </button>
@@ -8998,9 +8992,6 @@ const Components = {
                 </div>
 
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                  <button class="btn btn-sm" onclick="window.app.openCreateEnrollmentModal()" style="background: #10b981; color: white; font-weight: 900; font-size: 12px; display: flex; align-items: center; gap: 6px; padding: 7px 14px; box-shadow: 0 2px 8px rgba(16,185,129,0.3);">
-                    <span>➕</span> + Matricular Nuevo Alumno y Generar QR
-                  </button>
                   <button class="btn btn-navy btn-sm" onclick="window.print()" style="font-weight: 800; font-size: 12px;">
                     Imprimir Plancha A4 de Códigos QR
                   </button>
