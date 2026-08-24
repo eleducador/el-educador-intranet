@@ -7804,17 +7804,33 @@ const Components = {
     const isPadre = role === 'padre';
 
     const materials = state.weeklyMaterials || initialData.weeklyMaterials || [];
-    
-    // Lista de cursos disponibles en el aula virtual
-    const availableCourses = [
-      { id: "MAT-401", name: "Matemática Avanzada (Álgebra y Funciones)", teacher: "Prof. Roberto Silva", grade: "4to de Secundaria", icon: "", color: "blue" },
-      { id: "EPT-402", name: "Computación e Informática / Robótica", teacher: "Prof. Fernando Rojas", grade: "4to de Secundaria", icon: "🤖", color: "yellow" },
-      { id: "CTA-403", name: "Ciencia y Tecnología (Física & Química)", teacher: "Miss Leyli Reyes Cerquen", grade: "4to de Secundaria", icon: "🔬", color: "green" },
-      { id: "COM-404", name: "Comunicación & Literatura", teacher: "Miss María Daysi Reyes", grade: "4to de Secundaria", icon: "📚", color: "navy" }
+    const currentUser = state.users[role] || {};
+    const currentUserName = (currentUser.name || "").toLowerCase();
+
+    // Catálogo completo de cursos por grado y docente
+    const allCourses = [
+      { id: "MAT-401", name: "Matemática Avanzada (Álgebra y Geometría)", teacher: "Prof. Roberto Silva", grade: "4to de Secundaria", icon: "📐", color: "blue", level: "Secundaria" },
+      { id: "COM-404", name: "Comunicación & Literatura", teacher: "Miss María Daysi Reyes", grade: "4to de Secundaria", icon: "📚", color: "navy", level: "Secundaria" },
+      { id: "CTA-403", name: "Ciencia y Tecnología (Física & Química)", teacher: "Miss Leyli Reyes Cerquen", grade: "4to de Secundaria", icon: "🔬", color: "green", level: "Secundaria" },
+      { id: "EPT-402", name: "Computación e Informática / Robótica", teacher: "Prof. Fernando Rojas", grade: "4to de Secundaria", icon: "💻", color: "yellow", level: "Secundaria" },
+      { id: "ING-405", name: "Inglés Técnico & Gramática", teacher: "Miss Andrea Ramos", grade: "4to de Secundaria", icon: "🇬🇧", color: "blue", level: "Secundaria" },
+      { id: "CS-406", name: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", grade: "4to de Secundaria", icon: "🌎", color: "yellow", level: "Secundaria" },
+      { id: "MAT-101", name: "Matemática Lúdica y Razonamiento", teacher: "Miss Julisa Magali Arroyo", grade: "1ro de Primaria", icon: "🔢", color: "blue", level: "Primaria" },
+      { id: "COM-101", name: "Comunicación Integral & Caligrafía", teacher: "Miss Julisa Magali Arroyo", grade: "1ro de Primaria", icon: "✏️", color: "green", level: "Primaria" }
     ];
 
-    const selectedCourseId = state.selectedVirtualCourseId || availableCourses[0].id;
-    const currentCourse = availableCourses.find(c => c.id === selectedCourseId) || availableCourses[0];
+    // Filtrar cursos según el perfil del usuario activo
+    let availableCourses = allCourses;
+    if (role === 'docente') {
+      const myCourses = allCourses.filter(c => c.teacher.toLowerCase().includes("silva") || currentUserName.includes("silva") || c.teacher.toLowerCase().includes(currentUserName));
+      availableCourses = myCourses.length > 0 ? myCourses : allCourses;
+    } else if (role === 'estudiante') {
+      const isPrimaria = (currentUser.grade || "").toLowerCase().includes("primaria") || (currentUser.gradeLevel || "").toLowerCase().includes("primaria");
+      availableCourses = isPrimaria ? allCourses.filter(c => c.level === "Primaria") : allCourses.filter(c => c.level === "Secundaria");
+    }
+
+    const selectedCourseId = state.selectedVirtualCourseId || (availableCourses[0] ? availableCourses[0].id : "MAT-401");
+    const currentCourse = availableCourses.find(c => c.id === selectedCourseId) || availableCourses[0] || allCourses[0];
 
     // Filtrar materiales del curso seleccionado
     const courseMaterials = materials.filter(m => m.courseId === selectedCourseId);
@@ -8005,23 +8021,32 @@ const Components = {
                     <span style="font-size: 11px; color: var(--text-muted); font-weight: normal;">${(activeMaterial.attachments || []).length} archivos adjuntos</span>
                   </h4>
                   
-                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
-                    ${(activeMaterial.attachments || []).map(att => `
-                      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); transition: transform 0.2s;" class="hover-shadow">
-                        <div style="font-size: 24px;">${att.icon || ''}</div>
-                        <div style="flex: 1; min-width: 0;">
-                          <div style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                            ${att.name}
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                    ${(activeMaterial.attachments || []).map((att, attIdx) => {
+                      const isPpt = (att.name || '').toLowerCase().endsWith('.ppt') || (att.name || '').toLowerCase().endsWith('.pptx');
+                      const isPdf = (att.name || '').toLowerCase().endsWith('.pdf');
+                      const fileIcon = att.icon || (isPpt ? '📊' : isPdf ? '📕' : '📄');
+                      const badgeLabel = isPpt ? 'Diapositivas PPT' : isPdf ? 'Guía PDF' : 'Documento';
+                      return `
+                        <div style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); transition: transform 0.2s;" class="hover-shadow">
+                          <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
+                            <div style="font-size: 26px;">${fileIcon}</div>
+                            <div style="min-width: 0;">
+                              <div style="font-size: 12.5px; font-weight: 800; color: var(--color-navy-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${att.name}">
+                                ${att.name}
+                              </div>
+                              <div style="font-size: 11px; color: var(--text-muted); display: flex; gap: 6px; align-items: center; margin-top: 2px;">
+                                <span style="background:#f1f5f9; padding: 1px 6px; border-radius: 4px; font-weight: 700; color:#475569;">${badgeLabel}</span>
+                                <span>${att.size || 'Oficial'}</span>
+                              </div>
+                            </div>
                           </div>
-                          <div style="font-size: 10.5px; color: var(--text-muted);">
-                            ${att.size || att.duration || 'Documento Oficial'}
-                          </div>
+                          <button class="btn btn-navy btn-sm" onclick="window.app.downloadMaterialAttachment('${att.name}', '${activeMaterial.id}', ${attIdx})" style="padding: 6px 14px; font-size: 12px; font-weight: 800; border-radius: 16px; white-space: nowrap; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(11,19,43,0.2);" title="Descargar material para estudiar en casa">
+                            <span>⬇️</span> <span>Descargar</span>
+                          </button>
                         </div>
-                        <button class="btn btn-outline btn-sm" onclick="window.app.downloadMaterialAttachment('${att.name}')" style="padding: 4px 8px; font-size: 11px; font-weight: 800;" title="Descargar Material">
-                          ⬇️
-                        </button>
-                      </div>
-                    `).join('')}
+                      `;
+                    }).join('')}
                   </div>
                 </div>
               </div>
@@ -15149,14 +15174,25 @@ CREATE TABLE tb_cuadernos_qr (
     const file = event.target.files && event.target.files[0];
     if (!file) return;
 
-    this.runDocumentAnalysisPipeline({
-      name: file.name,
-      size: (file.size / (1024 * 1024)).toFixed(1) + " MB",
-      type: file.type
-    }, courseId);
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.currentUploadedFileData = e.target.result;
+      this.currentUploadedFileName = file.name;
+      this.currentUploadedFileSize = (file.size / (1024 * 1024)).toFixed(1) + " MB";
+      this.runDocumentAnalysisPipeline({
+        name: file.name,
+        size: this.currentUploadedFileSize,
+        type: file.type,
+        dataUrl: e.target.result
+      }, courseId);
+    };
+    reader.readAsDataURL(file);
   }
 
   loadDemoFileForAnalysis(fileName, courseId) {
+    this.currentUploadedFileData = null;
+    this.currentUploadedFileName = fileName;
+    this.currentUploadedFileSize = "2.9 MB";
     this.runDocumentAnalysisPipeline({
       name: fileName,
       size: "2.9 MB",
@@ -15220,6 +15256,9 @@ CREATE TABLE tb_cuadernos_qr (
     const keyConceptsStr = formData.get("keyConcepts") || "";
     const keyConcepts = keyConceptsStr.split(",").map(c => c.trim()).filter(c => c.length > 0);
 
+    const uploadedName = formData.get("attachmentName") || this.currentUploadedFileName || `Guia_Sesion_Semanal_${formData.get("weekNumber")}.pdf`;
+    const isPptx = uploadedName.toLowerCase().endsWith(".ppt") || uploadedName.toLowerCase().endsWith(".pptx");
+
     const materialData = {
       courseId: formData.get("courseId"),
       courseName: formData.get("courseName"),
@@ -15229,18 +15268,32 @@ CREATE TABLE tb_cuadernos_qr (
       summary: formData.get("summary"),
       keyConcepts: keyConcepts.length > 0 ? keyConcepts : ["Fundamentos Teóricos", "Procedimientos de Cálculo", "Aplicación Práctica"],
       attachments: [
-        { type: "pdf", name: formData.get("attachmentName") || "Guia_Semanal.pdf", size: "2.5 MB", icon: "📕" },
-        { type: "pptx", name: `Diapositivas_Semana_${formData.get("weekNumber")}.pptx`, size: "4.2 MB", icon: "" },
-        { type: "worksheet", name: `Ficha_Practica_Semana_${formData.get("weekNumber")}.pdf`, size: "1.1 MB", icon: "📝" }
+        { 
+          type: isPptx ? "pptx" : "pdf", 
+          name: uploadedName, 
+          size: this.currentUploadedFileSize || "2.8 MB", 
+          icon: isPptx ? "📊" : "📕",
+          fileData: this.currentUploadedFileData || null
+        },
+        { 
+          type: "worksheet", 
+          name: `Ficha_Practica_Semana_${formData.get("weekNumber")}.pdf`, 
+          size: "1.2 MB", 
+          icon: "📝",
+          fileData: null
+        }
       ]
     };
 
     const created = this.store.addWeeklyMaterial(materialData);
     this.store.generateDynamicEvaluation(created.id);
+    this.currentUploadedFileData = null;
+    this.currentUploadedFileName = null;
+    this.currentUploadedFileSize = null;
 
     this.closeModal();
     this.render();
-    this.showToast(`✓ Material de la Semana ${materialData.weekNumber} publicado y evaluación de 10 preguntas generada.`, "success");
+    this.showToast(`✓ Material de la Semana ${materialData.weekNumber} publicado y evaluación activada`, "success");
   }
 
   openEditMaterialModal(materialId) {
@@ -15636,8 +15689,125 @@ CREATE TABLE tb_cuadernos_qr (
     this.showModal(html);
   }
 
-  downloadMaterialAttachment(fileName) {
-    this.showToast(`⬇️ Descargando archivo oficial: ${fileName}`, "success");
+  downloadMaterialAttachment(fileName, materialId, attachmentIdx) {
+    const materials = this.store.state.weeklyMaterials || [];
+    let material = null;
+    let attachment = null;
+
+    if (materialId) {
+      material = materials.find(m => m.id === materialId);
+      if (material && material.attachments && attachmentIdx !== undefined) {
+        attachment = material.attachments[attachmentIdx];
+      }
+    }
+    if (!material) {
+      material = materials.find(m => (m.attachments || []).some(a => a.name === fileName));
+      if (material) {
+        attachment = material.attachments.find(a => a.name === fileName);
+      }
+    }
+
+    // 1. Si el archivo tiene datos adjuntos reales (Data URL o enlace)
+    if (attachment && attachment.fileData) {
+      const a = document.createElement("a");
+      a.href = attachment.fileData;
+      a.download = fileName || attachment.name || "Material_Educativo.pdf";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      this.showToast(`✓ Descargando archivo: ${fileName}`, "success");
+      return;
+    }
+
+    // 2. Generador automático de Documento de Estudio Oficial para el Estudiante (Descarga Real Instantánea)
+    const title = material ? material.title : (fileName || "Guía de Estudio").replace(/\.[^/.]+$/, "");
+    const course = material ? (material.courseName || "Asignatura Oficial") : "I.E.P. El Educador";
+    const week = material ? `Semana ${material.weekNumber}` : "Material Semanal";
+    const sessionDate = material ? (material.sessionDate || "Agosto 2026") : "2026";
+    const summary = material ? material.summary : "Guía didáctica y desarrollo curricular estructurado para el aprendizaje en el hogar.";
+    const concepts = (material && material.keyConcepts && material.keyConcepts.length > 0)
+      ? material.keyConcepts.map(c => `<li><strong>${c}</strong></li>`).join("")
+      : "<li>Fundamentos teóricos y conceptuales</li><li>Procedimientos de cálculo y análisis</li><li>Aplicación práctica y actividades</li>";
+
+    const isPpt = (fileName || "").toLowerCase().endsWith(".ppt") || (fileName || "").toLowerCase().endsWith(".pptx");
+
+    const docContent = `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${title} - I.E.P. El Educador</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; padding: 30px; color: #1e293b; background: #f8fafc; line-height: 1.6; margin: 0; }
+    .container { max-width: 800px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .header { border-bottom: 3px solid #1e3a8a; padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .school-title { font-size: 20px; font-weight: 900; color: #0b132b; margin: 0; }
+    .school-tag { font-size: 11.5px; color: #b45309; font-weight: 800; }
+    .badge { background: #fef3c7; color: #92400e; padding: 5px 14px; border-radius: 16px; font-weight: 800; font-size: 12px; border: 1px solid #fde68a; }
+    .hero-box { background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white; padding: 22px 25px; border-radius: 10px; margin-bottom: 24px; }
+    .hero-box h1 { font-size: 20px; margin: 0 0 8px; font-weight: 900; color: #fde047; }
+    .hero-meta { font-size: 12.5px; opacity: 0.95; }
+    .section-title { font-size: 14px; font-weight: 800; color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin-top: 24px; display: flex; align-items: center; gap: 8px; }
+    .summary-box { background: #f1f5f9; border-left: 4px solid #1e3a8a; padding: 16px 18px; border-radius: 6px; font-size: 13.5px; color: #334155; margin-top: 10px; }
+    ul { padding-left: 22px; margin-top: 10px; }
+    li { margin-bottom: 8px; font-size: 13.5px; }
+    .practice-box { background: #f0fdf4; border: 1.5px dashed #86efac; padding: 18px; border-radius: 8px; margin-top: 12px; font-size: 13px; color: #166534; }
+    .footer { margin-top: 35px; border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 11px; color: #94a3b8; text-align: center; }
+    .btn-print { background: #1e3a8a; color: white; border: none; padding: 8px 18px; border-radius: 20px; font-weight: 800; cursor: pointer; margin-bottom: 20px; }
+    @media print { .btn-print { display: none; } body { padding: 0; background: #fff; } .container { border: none; box-shadow: none; padding: 0; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h2 class="school-title">I.E.P. "EL EDUCADOR" — S.J.L.</h2>
+        <div class="school-tag">21 años dejando huellas • UGEL 05 • Aula Virtual 2026</div>
+      </div>
+      <span class="badge">${week} • ${sessionDate}</span>
+    </div>
+
+    <div class="hero-box">
+      <h1>${title}</h1>
+      <div class="hero-meta"><strong>Asignatura:</strong> ${course} &nbsp;•&nbsp; <strong>Material Oficial de Estudio</strong></div>
+    </div>
+
+    <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar como PDF</button>
+
+    <div class="section-title">📘 1. Resumen del Trabajo Realizado en el Aula</div>
+    <div class="summary-box">${summary}</div>
+
+    <div class="section-title">💡 2. Conceptos Clave y Fundamentos de la Sesión</div>
+    <ul>${concepts}</ul>
+
+    <div class="section-title">📝 3. Guía de Repaso y Ejercicios para el Hogar</div>
+    <div class="practice-box">
+      <p style="margin: 0 0 8px;"><strong>Indicaciones para el Estudiante:</strong></p>
+      <p style="margin: 0 0 6px;">1. Lea con atención el resumen y revise los esquemas desarrollados en clase.</p>
+      <p style="margin: 0 0 6px;">2. Desarrolle en su cuaderno los ejercicios de aplicación práctica del libro de trabajo.</p>
+      <p style="margin: 0;">3. Ingrese al <strong>Aula Virtual</strong> de la Intranet para rendir la Evaluación Dinámica Semanal (10 preguntas) y registrar su puntaje.</p>
+    </div>
+
+    <div class="footer">
+      I.E.P. "El Educador" — Sistema de Intranet Institucional & Aula Virtual • San Juan de Lurigancho • Documento oficial descargado para estudio en casa.
+    </div>
+  </div>
+</body>
+</html>`;
+
+    const blob = new Blob([docContent], { type: "text/html;charset=utf-8" });
+    const blobUrl = URL.createObjectURL(blob);
+    const downloadLink = document.createElement("a");
+    downloadLink.href = blobUrl;
+    const cleanFileName = (fileName || "Material_Sesion.html").replace(/\.[^/.]+$/, "") + (isPpt ? "_Diapositivas.html" : "_Guia_Estudio.html");
+    downloadLink.download = cleanFileName;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+
+    this.showToast(`✓ Descargando material de estudio: ${fileName}`, "success");
   }
 
   showModal(contentHtml) {
