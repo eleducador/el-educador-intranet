@@ -5214,23 +5214,80 @@ const Components = {
     const role = state.currentRole;
     const reviews = state.notebookReviews || initialData.notebookReviews;
 
-    // --- VISTA EXCLUSIVA PARA EL PADRE DE FAMILIA: INFORME OFICIAL DE CUADERNOS ---
-    if (role === "padre") {
-      const parentUser = state.users.padre || initialData.users.padre;
-      const parentName = parentUser.name || "Dra. Carmen Méndez";
-      const studentName = "Sofía Méndez Flores";
-      const studentGrade = "4to de Secundaria";
-      const studentCode = "EST-2026-042";
-      const studentTutor = "Prof. Roberto Silva";
-      
-      const defaultNotebooks = [
-        { course: "Matemática", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, márgenes impecables y esquemas en orden." },
-        { course: "Comunicación", teacher: "Miss María Daysi Reyes", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "17 (A)", remarks: "Análisis de textos y caligrafía óptima. Muy buen desarrollo." },
-        { course: "🔬 Ciencia y Tecnología", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "18 (AD)", remarks: "Prácticas experimentales ilustradas y fichas de laboratorio selladas." },
-        { course: "🌎 Ciencias Sociales", teacher: "Prof. Javier Vega", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "16 (A)", remarks: "Mapas históricos y resúmenes de época bien estructurados." },
-        { course: "🇬🇧 Inglés", teacher: "Miss Andrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Vocabulario y ejercicios de gramática avanzados completos." },
-        { course: "💻 EPT (Computación)", teacher: "Prof. Alex Lino", lastDate: "10/08/2026", status: "observado", statusLabel: "<span class='status-dot-yellow'></span> OBSERVADO", score: "13 (B)", remarks: "Falta pegar y desarrollar la ficha de proyecto técnico N° 3. Presentar este viernes." }
+    // --- VISTA EXCLUSIVA PARA ESTUDIANTES Y PADRES DE FAMILIA: INFORME OFICIAL DE CUADERNOS ---
+    if (role === "estudiante" || role === "padre") {
+      const isEstudiante = role === "estudiante";
+      const isPadre = role === "padre";
+      const currentUser = this.getCurrentUser(state);
+
+      let studentName = "Salim Gael Cáceres Quispe";
+      let studentGrade = "5° de Primaria";
+      let studentCode = "EST-2026-055";
+      let studentTutor = "Miss Julisa Arroyo";
+      let parentName = "Apoderado Registrado";
+
+      if (isEstudiante) {
+        studentName = currentUser.name || "Salim Gael Cáceres Quispe";
+        studentGrade = currentUser.gradeLevel || currentUser.detail || currentUser.grade || "5° de Primaria";
+        studentCode = currentUser.code || currentUser.id || "EST-2026-055";
+        studentTutor = currentUser.tutor || "Miss Julisa Arroyo";
+        parentName = currentUser.guardian || "Apoderado Registrado";
+      } else if (isPadre) {
+        parentName = currentUser.name || "Carmen Rosa Quispe Achulla";
+        const children = (currentUser && currentUser.children) || [];
+        const selectedId = (currentUser && currentUser.selectedChildId) || (children[0] && children[0].id);
+        const student = children.find(c => c.id === selectedId) || children[0];
+        if (student) {
+          studentName = student.name;
+          studentGrade = student.grade;
+          studentCode = student.id;
+          studentTutor = student.tutor || "Miss Julisa Arroyo";
+        } else if (currentUser.studentName) {
+          studentName = currentUser.studentName;
+          studentGrade = currentUser.detail || "5° de Primaria";
+          studentCode = currentUser.id || "EST-2026-055";
+          studentTutor = currentUser.tutor || "Miss Julisa Arroyo";
+        }
+      }
+
+      // Cuadernos según nivel de primaria o secundaria
+      const isPrimaria = studentGrade.toLowerCase().includes("prim") || studentGrade.toLowerCase().includes("pri");
+
+      // Buscar revisiones registradas en tiempo real para este estudiante
+      const studentReviews = reviews.filter(r => 
+        (r.studentCode && r.studentCode === studentCode) ||
+        (r.studentName && r.studentName.toLowerCase().includes(studentName.toLowerCase()))
+      );
+
+      const defaultNotebooks = isPrimaria ? [
+        { course: "Matemática & Razonamiento", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, márgenes impecables y esquemas en orden." },
+        { course: "Comunicación Integral & Lectura", teacher: "Miss Julisa Magali Arroyo", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "18 (AD)", remarks: "Caligrafía prolija y lecturas analizadas con claridad." },
+        { course: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "18 (AD)", remarks: "Fichas de experimentos y dibujos científicos completos." },
+        { course: "Personal Social & Valores", teacher: "Miss Julisa Magali Arroyo", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Resúmenes ordenados y participación constante." },
+        { course: "Inglés Técnico", teacher: "Miss Andrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "17 (A)", remarks: "Ejercicios de vocabulario al día." },
+        { course: "Computación & Informática", teacher: "Prof. Fernando Rojas", lastDate: "10/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "18 (AD)", remarks: "Prácticas de laboratorio técnico en orden." }
+      ] : [
+        { course: "Matemática Avanzada (Álgebra / Geometría)", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, márgenes impecables y esquemas en orden." },
+        { course: "Comunicación & Literatura", teacher: "Miss María Daysi Reyes", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "17 (A)", remarks: "Análisis de textos y caligrafía óptima. Muy buen desarrollo." },
+        { course: "Ciencia y Tecnología (Física / Química)", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "18 (AD)", remarks: "Prácticas experimentales ilustradas y fichas de laboratorio selladas." },
+        { course: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "16 (A)", remarks: "Mapas históricos y resúmenes de época bien estructurados." },
+        { course: "Inglés Institucional", teacher: "Miss Andrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISADO & AL DÍA", score: "19 (AD)", remarks: "Vocabulario y ejercicios de gramática avanzados completos." },
+        { course: "EPT (Computación / Robótica)", teacher: "Prof. Alex Lino", lastDate: "10/08/2026", status: "observado", statusLabel: "<span class='status-dot-yellow'></span> OBSERVADO", score: "13 (B)", remarks: "Falta pegar y desarrollar la ficha de proyecto técnico N° 3. Presentar este viernes." }
       ];
+
+      const displayNotebooks = studentReviews.length > 0 ? studentReviews.map(r => ({
+        course: r.course,
+        teacher: r.teacher || "Profesor Titular",
+        lastDate: r.date,
+        status: r.status === "Observado" ? "observado" : "al_dia",
+        statusLabel: r.status === "Observado" ? "<span class='status-dot-yellow'></span> OBSERVADO" : "<span class='status-dot-green'></span> REVISADO & AL DÍA",
+        score: `${r.score || 18} (${r.score >= 18 ? 'AD' : r.score >= 14 ? 'A' : 'B'})`,
+        remarks: r.teacherRemarks || "Cuaderno en orden."
+      })) : defaultNotebooks;
+
+      const alDiaTotal = displayNotebooks.filter(nb => nb.status === "al_dia").length;
+      const obsTotal = displayNotebooks.filter(nb => nb.status === "observado").length;
+      const pctLogro = Math.round((alDiaTotal / displayNotebooks.length) * 100);
 
       return `
         <div class="fade-in">
@@ -5240,14 +5297,14 @@ const Components = {
 
             <div style="background: var(--bg-surface-subtle); border-radius: 8px; padding: 16px; margin: 16px 0; border: 1px solid var(--border-subtle); display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
               <div>
-                <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Estudiante Matriculada:</span>
+                <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Estudiante:</span>
                 <div style="font-size: 16px; font-weight: 900; color: var(--color-navy-900);">${studentName}</div>
                 <span style="font-size: 12px; color: var(--color-red-600); font-weight: 700;">${studentGrade} • Código: ${studentCode}</span>
               </div>
               <div>
-                <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Apoderada Responsable:</span>
-                <div style="font-size: 14px; font-weight: 700; color: var(--color-navy-900);">${parentName}</div>
-                <span style="font-size: 12px; color: var(--text-muted);">Tutor de Aula: ${studentTutor}</span>
+                <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">${isPadre ? 'Apoderado(a) Responsable:' : 'Tutor y Apoderado:'}</span>
+                <div style="font-size: 14px; font-weight: 700; color: var(--color-navy-900);">${isPadre ? parentName : studentTutor}</div>
+                <span style="font-size: 12px; color: var(--text-muted);">${isPadre ? `Tutor de Aula: ${studentTutor}` : `Apoderado(a): ${parentName}`}</span>
               </div>
               <div style="display: flex; gap: 8px; align-items: center; justify-content: flex-end;">
                 <button class="btn btn-gold btn-sm" onclick="window.app.openPrintParentNotebookReportModal()" style="font-weight: 800; padding: 8px 16px;">
@@ -5260,25 +5317,25 @@ const Components = {
             <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: var(--space-6);">
               <div class="card metric-card" style="border-top: 4px solid #22c55e;">
                 <span class="metric-title">Cuadernos al Día</span>
-                <div class="metric-value highlight-green">5 / 6</div>
-                <span class="metric-trend up" style="font-size: 11px;">83.3% Cumplimiento</span>
+                <div class="metric-value highlight-green">${alDiaTotal} / ${displayNotebooks.length}</div>
+                <span class="metric-trend up" style="font-size: 11px;">${pctLogro}% Cumplimiento</span>
               </div>
               <div class="card metric-card" style="border-top: 4px solid #f59e0b;">
                 <span class="metric-title">Observados / Incompletos</span>
-                <div class="metric-value highlight-yellow">1</div>
-                <span class="metric-trend" style="font-size: 11px; color: var(--color-yellow-600);">EPT (Falta ficha N°3)</span>
+                <div class="metric-value highlight-yellow">${obsTotal}</div>
+                <span class="metric-trend" style="font-size: 11px; color: var(--color-yellow-600);">${obsTotal > 0 ? 'Requieren regularización' : 'Ninguna observación'}</span>
               </div>
               <div class="card metric-card" style="border-top: 4px solid var(--color-navy-600);">
                 <span class="metric-title">Promedio de Cuadernos</span>
-                <div class="metric-value highlight-navy">17.2 / 20</div>
-                <span class="metric-trend up" style="font-size: 11px;">Logro Destacado (AD)</span>
+                <div class="metric-value highlight-navy">${pctLogro >= 85 ? '18.5 (AD)' : '16.0 (A)'}</div>
+                <span class="metric-trend up" style="font-size: 11px;">${pctLogro >= 85 ? 'Logro Destacado (AD)' : 'Logro Esperado (A)'}</span>
               </div>
             </div>
 
             <!-- Detalle por Curso y Sellos Oficiales -->
             <div class="card-header" style="margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border-subtle);">
               <h3 class="card-title" style="font-size: var(--font-size-base);">
-                Detalle de Cuadernos de ${studentName}
+                Detalle de Cuadernos de ${studentName} (${studentGrade})
               </h3>
               <span class="status-badge status-approved">Actualizado al Día</span>
             </div>
@@ -5288,7 +5345,7 @@ const Components = {
                 <thead>
                   <tr>
                     <th>Curso / Asignatura</th>
-                    <th>Docente</th>
+                    <th>Docente Responsable</th>
                     <th>Último Sello QR</th>
                     <th>Estado del Cuaderno</th>
                     <th>Calificación</th>
@@ -5296,7 +5353,7 @@ const Components = {
                   </tr>
                 </thead>
                 <tbody>
-                  ${defaultNotebooks.map(nb => `
+                  ${displayNotebooks.map(nb => `
                     <tr style="${nb.status === 'observado' ? 'background: rgba(245,158,11,0.06);' : ''}">
                       <td><strong>${nb.course}</strong></td>
                       <td>${nb.teacher}</td>
@@ -5312,7 +5369,7 @@ const Components = {
 
             <div style="margin-top: var(--space-4); padding: 12px; background: rgba(30,58,138,0.05); border-radius: 6px; font-size: 11px; color: var(--color-navy-800); display: flex; align-items: center; gap: 8px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-              <span><strong>Nota para el Apoderado:</strong> Los sellos QR son colocados por los docentes en clase tras escanear el sticker físico del cuaderno. Todo cuaderno observado cuenta con 3 días hábiles para regularización.</span>
+              <span><strong>Información Oficial:</strong> Los sellos QR son registrados en tiempo real por el Auxiliar y los Docentes tras escanear el sticker físico adherido al cuaderno. Todo cuaderno observado cuenta con plazo para regularización.</span>
             </div>
 
           </div>
