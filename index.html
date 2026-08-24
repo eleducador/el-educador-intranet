@@ -143,6 +143,12 @@
         </div>
 
         <div class="header-right">
+          <!-- Indicador y Botón de Sincronización en la Nube -->
+          <button class="btn btn-outline btn-sm" onclick="window.appStore.fetchServerState(false); window.app.showToast('✓ Sincronizado en Tiempo Real con la Nube Central', 'success');" style="color: #047857; border-color: #86efac; background: #f0fdf4; font-weight: 800; display: flex; align-items: center; gap: 6px; border-radius: 18px; padding: 6px 12px;" title="Sincronizar ahora con todos los celulares y computadoras">
+            <span class="status-dot-green"></span>
+            <span style="font-size: 11.5px;">Nube Activa</span>
+          </button>
+
           <!-- Botón de Conexión Móvil QR (Multi-Dispositivo) -->
           <button class="btn btn-outline btn-sm" onclick="window.app.openMultiDeviceConnectModal()" style="color: #1e3a8a; border-color: #93c5fd; background: #eff6ff; font-weight: 800; display: flex; align-items: center; gap: 6px; border-radius: 18px; padding: 6px 12px;" title="Conectar Celular / Escanear desde Móvil">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>

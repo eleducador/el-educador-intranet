@@ -2072,11 +2072,34 @@ if (window.initialData && window.initialData.schedules) {
  * Gestor de Estado y Base de Datos Central Sincronizada (v7.0 - Persistencia Blindada Anti-Pérdida)
  */
 class IntranetStore {
+  getApiBaseUrl() {
+    if (typeof window !== "undefined") {
+      const h = window.location.hostname;
+      if (h.includes("onrender.com") || h.includes("localhost") || h === "127.0.0.1") {
+        return window.location.origin;
+      }
+    }
+    return "https://colegio-el-educador-intranet.onrender.com";
+  }
+
+  getDataSignature(st) {
+    if (!st) return "";
+    return [
+      (st.attendanceRecords || []).length,
+      (st.notebookReviews || []).length,
+      (st.behaviorIncidents || []).length,
+      (st.enrollments || []).length,
+      (st.payments || []).length,
+      (st.tasks || []).length,
+      (st.systemUsers || []).length
+    ].join("|");
+  }
+
   constructor() {
     this.storageKey = "colegio_el_educador_state_v2026";
     this.backupKey = "colegio_el_educador_backup_v2026";
     this.listeners = [];
-    this.apiBaseUrl = window.location.origin;
+    this.apiBaseUrl = this.getApiBaseUrl();
     this.isSyncing = false;
     this.lastDataSignature = "";
 
@@ -2107,10 +2130,8 @@ class IntranetStore {
       });
     }
 
-    // 3. Sincronización inicial limpia con el servidor si está en HTTP
-    if (typeof window !== "undefined" && window.location.protocol.startsWith("http")) {
-      this.fetchServerState(true);
-    }
+    // 3. Sincronización inicial con la nube central multi-dispositivo
+    this.fetchServerState(true);
   }
 
   // Fusión inteligente de colecciones por identificador único (prioriza datos locales del usuario)
@@ -2273,13 +2294,15 @@ class IntranetStore {
   async fetchServerState(silent = false) {
     if (this.isSyncing) return;
     try {
-      const response = await fetch(`${this.apiBaseUrl}/api/state`, { cache: 'no-store' });
+      const url = `${this.getApiBaseUrl()}/api/state`;
+      const response = await fetch(url, { cache: 'no-store' });
       if (response.ok) {
         const serverData = await response.json();
-        if (serverData && (serverData.users || serverData.institution || serverData.systemUsers)) {
+        if (serverData && (serverData.users || serverData.institution || serverData.systemUsers || serverData.attendanceRecords)) {
           const currentAuth = this.state.isAuthenticated;
           const currentRole = this.state.currentRole;
           const currentView = this.state.currentView;
+          const prevSig = this.getDataSignature(this.state);
 
           // Unión inteligente que NUNCA borra datos locales del usuario
           this.state.notebookReviews = this.mergeCollectionsById(this.state.notebookReviews, serverData.notebookReviews, "id");
@@ -2321,6 +2344,8 @@ class IntranetStore {
           this.state.currentRole = currentRole;
           this.state.currentView = currentView;
 
+          const newSig = this.getDataSignature(this.state);
+
           // Guardar estado unificado en localStorage y backup
           try {
             const serialized = JSON.stringify(this.state);
@@ -2328,11 +2353,8 @@ class IntranetStore {
             localStorage.setItem(this.backupKey, serialized);
           } catch(e) {}
 
-          // Enviar inmediatamente la base de datos unificada y enriquecida al servidor
-          this.syncToServer();
-
-          // Solo notificar si NO es silencioso (evita parpadeos y reconstrucción de pantalla en segundo plano)
-          if (!silent) {
+          // Si otro dispositivo actualizó los datos o si la petición fue manual: actualizar UI
+          if (!silent || prevSig !== newSig) {
             this.notify();
           }
         }
@@ -2343,11 +2365,11 @@ class IntranetStore {
   }
 
   async syncToServer() {
-    if (typeof window === "undefined" || !window.location.protocol.startsWith("http")) return;
     try {
       this.isSyncing = true;
+      const url = `${this.getApiBaseUrl()}/api/sync`;
       const payload = JSON.stringify(this.state);
-      await fetch(`${this.apiBaseUrl}/api/sync`, {
+      await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: payload
@@ -9641,15 +9663,10 @@ class IntranetApp {
   startRealtimeSync() {
     if (this.syncInterval) clearInterval(this.syncInterval);
     this.syncInterval = setInterval(() => {
-      // NUNCA hacer sondeo en la pantalla de login (evita reinicios de input)
+      // Sincronización multi-dispositivo continua cada 4 segundos
       if (!this.store.isUserAuthenticated()) return;
-      const currentView = this.store.getCurrentView();
-      if (currentView === "cuadernos-qr" || currentView === "asistencia" || currentView === "dashboard") {
-        if (typeof window !== "undefined" && window.location.protocol.startsWith("http")) {
-          this.store.fetchServerState(true);
-        }
-      }
-    }, 5000);
+      this.store.fetchServerState(true);
+    }, 4000);
   }
 
   // =========================================================================
