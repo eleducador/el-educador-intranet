@@ -470,7 +470,7 @@ const initialData = {
     director: [
       { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
       { id: "database", label: "Base de Datos & DB", badge: "DB Online", icon: "database", enabled: true },
-      { id: "usuarios-matriculas", label: "Expedientes & Matrículas", badge: "UGEL 05", icon: "users", enabled: true },
+      { id: "usuarios-matriculas", label: "Gestión de Perfiles & Cuentas", badge: "PERFILES", icon: "users", enabled: true },
       { id: "cuadernos-qr", label: "Supervisión Cuadernos QR", badge: "CÁMARA", icon: "qr", enabled: true },
       { id: "calificaciones", label: "Auditoría de Calificaciones", badge: "Bimestral", icon: "grades", enabled: true },
       { id: "horarios", label: "Horarios Institucionales", icon: "schedule", enabled: true },
@@ -5838,13 +5838,10 @@ const Components = {
           <!-- Pestañas de Navegación del Módulo -->
           <div style="display: flex; gap: 8px; border-bottom: 2px solid #e2e8f0; margin-bottom: 16px; flex-wrap: wrap;">
             <button class="btn ${activeTab === 'users' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserManagementTab('users')" style="font-weight: 800; font-size: 12.5px;">
-              👥 Directorio de Cuentas (${allUsers.length})
+              👥 Directorio de Cuentas & Perfiles (${allUsers.length})
             </button>
             <button class="btn ${activeTab === 'tabs' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserManagementTab('tabs')" style="font-weight: 800; font-size: 12.5px;">
               ⚙️ Editor de Pestañas & Menús por Perfil
-            </button>
-            <button class="btn ${activeTab === 'enrollments' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserManagementTab('enrollments')" style="font-weight: 800; font-size: 12.5px;">
-              📝 Expedientes de Matrícula UGEL 05 (${enrollments.length})
             </button>
           </div>
 
@@ -6042,110 +6039,6 @@ const Components = {
             </div>
           ` : ''}
 
-          <!-- =========================================================================
-               VISTA 3: EXPEDIENTES DE MATRÍCULA Y FICHA ÚNICA (FUM - UGEL 05)
-               ========================================================================= -->
-          ${activeTab === 'enrollments' ? `
-            <div>
-              <div class="card-header" style="margin-bottom: var(--space-3); border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px; flex-wrap: wrap; gap: 10px;">
-                <div>
-                  <div style="display: flex; align-items: center; gap: 8px;">
-                    <h3 class="card-title" style="font-size: var(--font-size-base); margin: 0;">📝 Padrón Oficial de Matrículas & Fichas Únicas (FUM - UGEL 05)</h3>
-                    <span class="status-badge status-approved">${enrollments.length} Expedientes</span>
-                  </div>
-                  <p style="font-size: 12px; color: var(--text-muted); margin: 4px 0 0 0;">
-                    Registro oficial de estudiantes, código SIAGIE, historial de salud y documentos digitales sustentatorios.
-                  </p>
-                </div>
-                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                  <button class="btn btn-outline btn-sm" onclick="window.print()" style="font-weight: 800;">
-                    Imprimir Padrón
-                  </button>
-                </div>
-              </div>
-
-              <div class="table-container">
-                <table class="data-table">
-                  <thead>
-                    <tr>
-                      <th>Código / SIAGIE</th>
-                      <th>Estudiante / Nacimiento</th>
-                      <th>Grado Escolar</th>
-                      <th>Ficha Médica & Salud</th>
-                      <th>Apoderado / Contacto</th>
-                      <th>Requisitos & Trámite</th>
-                      <th style="text-align:center;">Acciones FUM</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    ${enrollments.map(m => {
-                      const docs = m.documents || {};
-                      const docKeys = ['dniStudent', 'dniParent', 'birthCertificate', 'siagieFUM', 'reportCard', 'vaccinationCard'];
-                      const deliveredCount = docKeys.filter(k => docs[k] === true).length;
-                      const isComplete = deliveredCount >= 5;
-
-                      return `
-                        <tr>
-                          <td>
-                            <code>${m.studentCode}</code><br>
-                            <span style="font-size: 10.5px; color: #1e40af; font-weight: 700;">SIAGIE: ${m.siagieCode || m.dni}</span>
-                          </td>
-                          <td>
-                            <strong>${m.studentName}</strong><br>
-                            <span style="font-size: 10.5px; color: #64748b;">DNI: ${m.dni} • ${m.gender || 'Femenino'} • ${m.birthDate || '--'}</span>
-                          </td>
-                          <td>
-                            <span style="font-weight: 800; color: #0b132b;">${m.grade}</span><br>
-                            <span style="font-size: 10px; color: #64748b;">${m.level || 'Secundaria'}</span>
-                          </td>
-                          <td>
-                            <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 2px;">
-                              <span style="font-size: 10.5px; font-weight: 800; background: #eff6ff; color: #1e40af; padding: 1px 5px; border-radius: 4px; border: 1px solid #bfdbfe;">
-                                🩸 ${m.bloodType || 'O+'}
-                              </span>
-                              <span style="font-size: 10.5px; font-weight: 700; background: #ecfdf5; color: #065f46; padding: 1px 5px; border-radius: 4px; border: 1px solid #a7f3d0;">
-                                🏥 ${m.insurance || 'SIS'}
-                              </span>
-                            </div>
-                            <span style="font-size: 10px; color: #b45309;">⚠️ ${m.allergies || 'Sin alergias'}</span>
-                          </td>
-                          <td>
-                            <strong>${m.guardian}</strong><br>
-                            <span style="font-size: 10.5px; color: #64748b;">📞 ${m.guardianPhone || m.emergencyPhone || '987-654-321'}</span>
-                          </td>
-                          <td>
-                            <span class="status-badge ${m.status.includes('Matriculado') ? 'status-approved' : 'status-pending'}" style="font-size: 10.5px;">
-                              ${m.status}
-                            </span><br>
-                            <span style="font-size: 10px; font-weight: 800; color: ${isComplete ? '#047857' : '#b45309'}; display: inline-block; margin-top: 3px;">
-                              📎 ${deliveredCount}/6 Requisitos Digitales
-                            </span>
-                          </td>
-                          <td style="text-align:center; white-space: nowrap;">
-                            <div style="display: flex; gap: 4px; justify-content: center;">
-                              <button class="btn btn-gold btn-sm" onclick="window.app.openStudentQRModal('${m.studentCode}')" title="Generar / Ver Código QR de Asistencia (Sin Foto)" style="font-size: 11px; padding: 4px 8px; font-weight: bold;">
-                                QR
-                              </button>
-                              <button class="btn btn-navy btn-sm" onclick="window.app.openEditEnrollmentFUMModal('${m.id}')" title="Editar Ficha FUM, Salud y Documentos" style="font-size: 11px; padding: 4px 8px;">
-                                ✏️ FUM
-                              </button>
-                              <button class="btn btn-outline btn-sm" onclick="window.app.showOfficialFUMPrintModal('${m.id}')" title="Imprimir Ficha Única Oficial A4" style="font-size: 11px; padding: 4px 8px;">
-                                FUM A4
-                              </button>
-                              <button class="btn btn-outline btn-sm" onclick="window.app.openDocumentsChecklistModal('${m.id}')" title="Ver y Validar Documentos Digitales" style="font-size: 11px; padding: 4px 8px; color: #047857;">
-                                📎 Docs
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      `;
-                    }).join('')}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          ` : ''}
-
         </div>
       </div>
     `;
@@ -6318,9 +6211,9 @@ const Components = {
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6);">
-          <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid #10b981; background: #f0fdf4;" onclick="window.app.showOfficialFUMPrintModal('MATR-2026-001')">
-            <h4 style="font-size:14px; color:#065f46; margin:0 0 2px;">Ficha de Matrícula (FUM)</h4>
-            <span style="font-size:12px; color:#047857;">Expediente SIAGIE y ficha médica oficial 2026</span>
+          <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid #10b981; background: #f0fdf4;" onclick="window.app.navigate('calificaciones')">
+            <h4 style="font-size:14px; color:#065f46; margin:0 0 2px;">📊 Libreta & Calificaciones</h4>
+            <span style="font-size:12px; color:#047857;">Registro bimestral y notas oficiales 2026</span>
           </div>
           <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid var(--color-yellow-500);" onclick="window.app.navigate('horarios')">
             <h4 style="font-size:14px; color:var(--color-navy-900); margin:0 0 2px;">⏰ Horario de Clases</h4>
