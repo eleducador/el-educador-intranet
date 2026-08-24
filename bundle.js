@@ -2223,11 +2223,14 @@ class IntranetStore {
         },
         teachersList: isScheduleUpdated ? parsed.teachersList : initialData.teachersList,
         schedules: isScheduleUpdated ? parsed.schedules : initialData.schedules,
-        gradesCatalog: (parsed.gradesCatalog && parsed.gradesCatalog.length >= 10) ? parsed.gradesCatalog : initialData.gradesCatalog,
         systemUsers: Array.isArray(parsed.systemUsers) ? parsed.systemUsers : initialData.systemUsers,
-        navigationTabsConfig: parsed.navigationTabsConfig || initialData.navigationTabsConfig,
+        navigationTabsConfig: {
+          ...initialData.navigationTabsConfig,
+          ...(parsed.navigationTabsConfig || {}),
+          estudiante: initialData.navigationTabsConfig.estudiante,
+          padre: initialData.navigationTabsConfig.padre
+        },
         usersManagementTab: parsed.usersManagementTab || "users",
-        usersRoleFilter: parsed.usersRoleFilter || "all",
         weeklyMaterials: Array.isArray(parsed.weeklyMaterials) ? parsed.weeklyMaterials : (initialData.weeklyMaterials || []),
         behaviorIncidents: Array.isArray(parsed.behaviorIncidents) ? parsed.behaviorIncidents : (initialData.behaviorIncidents || []),
         attendanceRecords: Array.isArray(parsed.attendanceRecords) ? parsed.attendanceRecords : (initialData.attendanceRecords || []),
@@ -4532,7 +4535,13 @@ const Components = {
       
       return `
         <div class="nav-section-title">${sectionTitle}</div>
-        ${roleTabsConfig.filter(t => t.enabled !== false).map(t => {
+        ${roleTabsConfig.filter(t => {
+          if (t.enabled === false) return false;
+          if ((role === 'estudiante' || role === 'padre' || role === 'auxiliar') && (t.id === 'calificaciones' || t.id === 'boleta' || t.id === 'grades')) {
+            return false;
+          }
+          return true;
+        }).map(t => {
           const iconSvg = iconMap[t.id] || iconMap[t.icon] || iconMap.dashboard;
           const isActive = currentView === t.id;
           const isQR = t.id === 'cuadernos-qr';
