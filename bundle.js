@@ -6209,9 +6209,9 @@ const Components = {
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6);">
-          <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid #10b981; background: #f0fdf4;" onclick="window.app.navigate('calificaciones')">
-            <h4 style="font-size:14px; color:#065f46; margin:0 0 2px;">📊 Libreta & Calificaciones</h4>
-            <span style="font-size:12px; color:#047857;">Registro bimestral y notas oficiales 2026</span>
+          <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid #10b981; background: #f0fdf4;" onclick="window.app.navigate('pagos')">
+            <h4 style="font-size:14px; color:#065f46; margin:0 0 2px;">💳 Pensiones & Pagos</h4>
+            <span style="font-size:12px; color:#047857;">Estado de cuenta y comprobantes al día</span>
           </div>
           <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid var(--color-yellow-500);" onclick="window.app.navigate('horarios')">
             <h4 style="font-size:14px; color:var(--color-navy-900); margin:0 0 2px;">⏰ Horario de Clases</h4>
@@ -6322,128 +6322,23 @@ const Components = {
   },
 
   // =========================================================================
-  // PORTAL DOCENTE Y APODERADO: SISTEMA DE CALIFICACIONES Y LIBRETA DE NOTAS
+  // CONTROL INTERNO: SISTEMA DE CALIFICACIONES (DOCENTES Y DIRECTIVOS)
   // =========================================================================
   renderGrades(state) {
     const role = state.currentRole;
-    if (role === 'estudiante') {
+    if (role === 'estudiante' || role === 'padre' || role === 'auxiliar') {
       return `
         <div class="fade-in card" style="padding: 50px 20px; text-align: center; max-width: 600px; margin: 40px auto; border-top: 4px solid var(--color-red-600);">
           <div style="font-size: 48px; margin-bottom: 12px;">🔒</div>
           <h2 style="font-size: 18px; font-weight: 900; color: var(--color-navy-900); margin-bottom: 8px;">
-            Módulo Reservado para Docentes y Padres de Familia
+            Módulo Exclusivo de Control Interno (Docentes y Dirección)
           </h2>
           <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
-            El perfil de estudiante no tiene habilitado el acceso al registro de notas ni a la boleta oficial. La entrega de calificaciones oficiales se realiza directamente a los padres de familia y apoderados acreditados.
+            El registro de calificaciones es de uso estricto y confidencial del personal docente y directivo de la institución. No está habilitado para estudiantes ni padres de familia.
           </p>
           <button class="btn btn-navy" onclick="window.app.navigate('dashboard')" style="font-weight: 800; padding: 10px 24px;">
             Volver al Inicio
           </button>
-        </div>
-      `;
-    }
-
-    if (role === 'padre') {
-      const user = (state.users && state.users[role]) || (state.users && state.users.estudiante) || {};
-      const courses = state.courses || initialData.courses || [];
-      const studentName = user.name || "Sofía Méndez Flores";
-      const studentGrade = user.grade || user.gradeLevel || user.detail || "4° de Secundaria 'A'";
-
-      return `
-        <div class="fade-in">
-          <!-- Cabecera Personal del Estudiante -->
-          <div class="card" style="margin-bottom: var(--space-6); border-top: 4px solid #1e3a8a;">
-            <div class="card-header" style="flex-wrap: wrap; gap: 14px; background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white; border-radius: 8px 8px 0 0;">
-              <div>
-                <div style="display: flex; align-items: center; gap: 8px;">
-                  <h2 class="card-title" style="font-size: var(--font-size-xl); margin: 0; color: #ffffff;">📊 Mi Libreta y Registro de Calificaciones</h2>
-                  <span class="status-badge" style="background: #fef08a; color: #854d0e; font-weight: 900;">Periodo Lectivo 2026</span>
-                </div>
-                <p style="font-size: var(--font-size-xs); color: #93c5fd; margin-top: 4px;">
-                  Estudiante: <strong>${studentName}</strong> • Grado: <strong>${studentGrade}</strong> • I.E.P. "El Educador"
-                </p>
-              </div>
-              
-              <button class="btn btn-gold" onclick="window.app.navigate('boleta')" style="font-weight: 900; border-radius: 20px; padding: 8px 20px;">
-                📄 Ver Boleta Oficial Completa (MINEDU)
-              </button>
-            </div>
-
-            <!-- Métricas de Rendimiento -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; padding: 18px; background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
-              <div class="card" style="padding: 12px; border-left: 4px solid #10b981; background: white; margin: 0;">
-                <span style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase;">Promedio General</span>
-                <div style="font-size: 22px; font-weight: 900; color: #047857;">18.4 / 20</div>
-                <span style="font-size: 10.5px; color: #10b981; font-weight: bold;">Logro Destacado (AD)</span>
-              </div>
-              <div class="card" style="padding: 12px; border-left: 4px solid #3b82f6; background: white; margin: 0;">
-                <span style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase;">Cursos Aprobados</span>
-                <div style="font-size: 22px; font-weight: 900; color: #1e40af;">${courses.length} / ${courses.length}</div>
-                <span style="font-size: 10.5px; color: #3b82f6; font-weight: bold;">100% de Aprobación</span>
-              </div>
-              <div class="card" style="padding: 12px; border-left: 4px solid #f59e0b; background: white; margin: 0;">
-                <span style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase;">Orden de Mérito</span>
-                <div style="font-size: 22px; font-weight: 900; color: #b45309;">1° Puesto</div>
-                <span style="font-size: 10.5px; color: #b45309; font-weight: bold;">Cuadro de Honor</span>
-              </div>
-              <div class="card" style="padding: 12px; border-left: 4px solid #8b5cf6; background: white; margin: 0;">
-                <span style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase;">Conducta</span>
-                <div style="font-size: 22px; font-weight: 900; color: #6b21a8;">AD (20)</div>
-                <span style="font-size: 10.5px; color: #8b5cf6; font-weight: bold;">Comportamiento Excelente</span>
-              </div>
-            </div>
-
-            <!-- Tabla Detallada de Calificaciones por Curso -->
-            <div style="padding: 20px;">
-              <h3 style="font-size: 15px; font-weight: 900; color: var(--color-navy-900); margin-bottom: 12px;">
-                Detalle de Notas por Asignaturas Oficiales:
-              </h3>
-
-              <div class="table-container">
-                <table class="data-table">
-                  <thead>
-                    <tr style="background: var(--color-navy-900); color: white;">
-                      <th style="width: 35%;">Asignatura / Curso</th>
-                      <th style="width: 25%;">Docente Responsable</th>
-                      <th style="width: 10%; text-align:center;">I BIM</th>
-                      <th style="width: 10%; text-align:center;">II BIM</th>
-                      <th style="width: 10%; text-align:center;">III BIM</th>
-                      <th style="width: 10%; text-align:center; font-weight:900;">PROM.</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    ${courses.map(c => {
-                      const b1 = c.b1 || 18;
-                      const b2 = c.b2 || 19;
-                      const b3 = c.b3 || 18;
-                      const avg = c.finalGrade || ((b1 + b2 + b3) / 3).toFixed(1);
-                      return `
-                        <tr>
-                          <td>
-                            <strong>${c.name}</strong><br>
-                            <span style="font-size: 11px; color: #64748b;">${c.code} • Créditos: ${c.credits || 4}</span>
-                          </td>
-                          <td>
-                            <span style="font-size: 12.5px; font-weight: 700; color: var(--color-navy-900);">${c.teacher}</span>
-                          </td>
-                          <td style="text-align:center;"><span class="badge-grade grade-ad">${b1}</span></td>
-                          <td style="text-align:center;"><span class="badge-grade grade-ad">${b2}</span></td>
-                          <td style="text-align:center;"><span class="badge-grade grade-ad">${b3}</span></td>
-                          <td style="text-align:center;"><strong style="font-size: 14px; color: #047857;">${avg}</strong></td>
-                        </tr>
-                      `;
-                    }).join('')}
-                  </tbody>
-                </table>
-              </div>
-
-              <div style="margin-top: 18px; display: flex; justify-content: flex-end; gap: 10px;">
-                <button class="btn btn-navy" onclick="window.app.navigate('boleta')" style="font-weight: 800; padding: 10px 22px;">
-                  📄 Ver / Imprimir Boleta Oficial de Calificaciones
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
       `;
     }
@@ -6826,15 +6721,15 @@ const Components = {
   // =========================================================================
   renderPrintableReport(state) {
     const role = state.currentRole;
-    if (role === 'estudiante') {
+    if (role === 'estudiante' || role === 'padre' || role === 'auxiliar') {
       return `
         <div class="fade-in card" style="padding: 50px 20px; text-align: center; max-width: 600px; margin: 40px auto; border-top: 4px solid var(--color-red-600);">
           <div style="font-size: 48px; margin-bottom: 12px;">🔒</div>
           <h2 style="font-size: 18px; font-weight: 900; color: var(--color-navy-900); margin-bottom: 8px;">
-            Acceso Restringido: Boleta Oficial MINEDU
+            Módulo Exclusivo de Control Interno (Dirección y Docentes)
           </h2>
           <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
-            La emisión y consulta oficial de la boleta de calificaciones está reservada para personal directivo, docentes y apoderados acreditados.
+            La emisión, firma y consulta de la Boleta Oficial MINEDU está reservada exclusivamente para el control interno directivo y docente. No está disponible para perfiles de estudiantes ni padres de familia.
           </p>
           <button class="btn btn-navy" onclick="window.app.navigate('dashboard')" style="font-weight: 800; padding: 10px 24px;">
             Volver al Inicio
