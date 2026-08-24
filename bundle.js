@@ -2069,9 +2069,13 @@ if (window.initialData && window.initialData.schedules) {
 
 /* === store.js === */
 /**
- * Gestor de Estado y Base de Datos Central Sincronizada (v7.0 - Persistencia Blindada Anti-Pérdida)
+ * Gestor de Estado y Base de Datos Central Sincronizada (v8.0 - Firebase Cloud Realtime Engine)
  */
 class IntranetStore {
+  getFirebaseUrl() {
+    return "https://colegio-el-educador-default-rtdb.firebaseio.com/colegio_educador_db.json";
+  }
+
   getApiBaseUrl() {
     if (typeof window !== "undefined") {
       const h = window.location.hostname;
@@ -2099,6 +2103,7 @@ class IntranetStore {
     this.storageKey = "colegio_el_educador_state_v2026";
     this.backupKey = "colegio_el_educador_backup_v2026";
     this.listeners = [];
+    this.firebaseUrl = this.getFirebaseUrl();
     this.apiBaseUrl = this.getApiBaseUrl();
     this.isSyncing = false;
     this.lastDataSignature = "";
@@ -2294,88 +2299,112 @@ class IntranetStore {
   async fetchServerState(silent = false) {
     if (this.isSyncing) return;
     try {
-      const url = `${this.getApiBaseUrl()}/api/state`;
-      const response = await fetch(url, { cache: 'no-store' });
-      if (response.ok) {
-        const serverData = await response.json();
-        if (serverData && (serverData.users || serverData.institution || serverData.systemUsers || serverData.attendanceRecords)) {
-          const currentAuth = this.state.isAuthenticated;
-          const currentRole = this.state.currentRole;
-          const currentView = this.state.currentView;
-          const prevSig = this.getDataSignature(this.state);
+      // 1. Intentar primero con Firebase Realtime Database (Google Cloud)
+      let serverData = null;
+      try {
+        const fbRes = await fetch(this.firebaseUrl, { cache: 'no-store' });
+        if (fbRes.ok) {
+          serverData = await fbRes.json();
+        }
+      } catch(e) {}
 
-          // Unión inteligente que NUNCA borra datos locales del usuario
-          this.state.notebookReviews = this.mergeCollectionsById(this.state.notebookReviews, serverData.notebookReviews, "id");
-          this.state.attendanceRecords = this.mergeCollectionsById(this.state.attendanceRecords, serverData.attendanceRecords, "id");
-          this.state.behaviorIncidents = this.mergeCollectionsById(this.state.behaviorIncidents, serverData.behaviorIncidents, "id");
-          this.state.enrollments = this.mergeCollectionsById(this.state.enrollments, serverData.enrollments, "studentCode");
-          this.state.systemUsers = this.mergeCollectionsById(this.state.systemUsers, serverData.systemUsers, "code");
-          this.state.weeklyMaterials = this.mergeCollectionsById(this.state.weeklyMaterials, serverData.weeklyMaterials, "id");
-          this.state.courses = this.mergeCollectionsById(this.state.courses, serverData.courses, "id");
-          this.state.payments = this.mergeCollectionsById(this.state.payments, serverData.payments, "id");
-          this.state.tasks = this.mergeCollectionsById(this.state.tasks, serverData.tasks, "id");
-          this.state.announcements = this.mergeCollectionsById(this.state.announcements, serverData.announcements, "id");
-          this.state.syllabi = this.mergeCollectionsById(this.state.syllabi, serverData.syllabi, "id");
+      // 2. Fallback al backend secundario si Firebase no respondiera
+      if (!serverData) {
+        try {
+          const apiRes = await fetch(`${this.getApiBaseUrl()}/api/state`, { cache: 'no-store' });
+          if (apiRes.ok) serverData = await apiRes.json();
+        } catch(e) {}
+      }
 
-          if (serverData.boletaData) {
-            this.state.boletaData = {
-              ...initialData.boletaData,
-              ...this.state.boletaData,
-              ...serverData.boletaData
-            };
-          }
+      if (serverData && (serverData.users || serverData.institution || serverData.systemUsers || serverData.attendanceRecords)) {
+        const currentAuth = this.state.isAuthenticated;
+        const currentRole = this.state.currentRole;
+        const currentView = this.state.currentView;
+        const prevSig = this.getDataSignature(this.state);
 
-          if (serverData.academicConfig) {
-            this.state.academicConfig = {
-              ...initialData.academicConfig,
-              ...this.state.academicConfig,
-              ...serverData.academicConfig
-            };
-          }
+        // Unión inteligente que NUNCA borra datos locales del usuario
+        this.state.notebookReviews = this.mergeCollectionsById(this.state.notebookReviews, serverData.notebookReviews, "id");
+        this.state.attendanceRecords = this.mergeCollectionsById(this.state.attendanceRecords, serverData.attendanceRecords, "id");
+        this.state.behaviorIncidents = this.mergeCollectionsById(this.state.behaviorIncidents, serverData.behaviorIncidents, "id");
+        this.state.enrollments = this.mergeCollectionsById(this.state.enrollments, serverData.enrollments, "studentCode");
+        this.state.systemUsers = this.mergeCollectionsById(this.state.systemUsers, serverData.systemUsers, "code");
+        this.state.weeklyMaterials = this.mergeCollectionsById(this.state.weeklyMaterials, serverData.weeklyMaterials, "id");
+        this.state.courses = this.mergeCollectionsById(this.state.courses, serverData.courses, "id");
+        this.state.payments = this.mergeCollectionsById(this.state.payments, serverData.payments, "id");
+        this.state.tasks = this.mergeCollectionsById(this.state.tasks, serverData.tasks, "id");
+        this.state.announcements = this.mergeCollectionsById(this.state.announcements, serverData.announcements, "id");
+        this.state.syllabi = this.mergeCollectionsById(this.state.syllabi, serverData.syllabi, "id");
 
-          if (serverData.schedules) {
-            this.state.schedules = {
-              ...this.state.schedules,
-              ...serverData.schedules
-            };
-          }
+        if (serverData.boletaData) {
+          this.state.boletaData = {
+            ...initialData.boletaData,
+            ...this.state.boletaData,
+            ...serverData.boletaData
+          };
+        }
 
-          this.state.isAuthenticated = currentAuth;
-          this.state.currentRole = currentRole;
-          this.state.currentView = currentView;
+        if (serverData.academicConfig) {
+          this.state.academicConfig = {
+            ...initialData.academicConfig,
+            ...this.state.academicConfig,
+            ...serverData.academicConfig
+          };
+        }
 
-          const newSig = this.getDataSignature(this.state);
+        if (serverData.schedules) {
+          this.state.schedules = {
+            ...this.state.schedules,
+            ...serverData.schedules
+          };
+        }
 
-          // Guardar estado unificado en localStorage y backup
-          try {
-            const serialized = JSON.stringify(this.state);
-            localStorage.setItem(this.storageKey, serialized);
-            localStorage.setItem(this.backupKey, serialized);
-          } catch(e) {}
+        this.state.isAuthenticated = currentAuth;
+        this.state.currentRole = currentRole;
+        this.state.currentView = currentView;
 
-          // Si otro dispositivo actualizó los datos o si la petición fue manual: actualizar UI
-          if (!silent || prevSig !== newSig) {
-            this.notify();
-          }
+        const newSig = this.getDataSignature(this.state);
+
+        // Guardar estado unificado en localStorage y backup
+        try {
+          const serialized = JSON.stringify(this.state);
+          localStorage.setItem(this.storageKey, serialized);
+          localStorage.setItem(this.backupKey, serialized);
+        } catch(e) {}
+
+        // Si otro dispositivo actualizó los datos o si la petición fue manual: actualizar UI
+        if (!silent || prevSig !== newSig) {
+          this.notify();
         }
       }
     } catch (err) {
-      if (!silent) console.log("Servidor en modo local offline o sin respuesta API", err);
+      if (!silent) console.log("Modo offline o sincronización en espera", err);
     }
   }
 
   async syncToServer() {
     try {
       this.isSyncing = true;
-      const url = `${this.getApiBaseUrl()}/api/sync`;
       const payload = JSON.stringify(this.state);
-      await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: payload
-      });
+
+      // Guardar directamente en Firebase Realtime Database
+      try {
+        await fetch(this.firebaseUrl, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: payload
+        });
+      } catch(e) {}
+
+      // Espejo secundario en backend Render
+      try {
+        await fetch(`${this.getApiBaseUrl()}/api/sync`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: payload
+        });
+      } catch(e) {}
     } catch (err) {
-      console.log("No se pudo sincronizar en vivo con el servidor central", err);
+      console.log("No se pudo sincronizar en vivo con la base de datos", err);
     } finally {
       this.isSyncing = false;
     }
