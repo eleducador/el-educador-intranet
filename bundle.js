@@ -333,6 +333,7 @@ const initialData = {
       id: "USR-008",
       code: "DOC-2026-004",
       username: "miss.maritza",
+      aliases: ["miss.maritza", "mis.maritza", "maritza", "miss maritza", "mis maritza"],
       password: "docente2026",
       name: "Miss Maritza",
       email: "maritza@eleducador.edu.pe",
@@ -2425,12 +2426,86 @@ class IntranetStore {
   // =========================================================================
   // AUTENTICACIÓN Y ROLES
   // =========================================================================
-  login(identifier, password) {
-    const rawTerm = (identifier || "").trim();
-    const term = rawTerm.toLowerCase();
+  login(rawTerm, password) {
+    if (!rawTerm || !password) {
+      return { success: false, error: "Por favor complete todos los campos de acceso." };
+    }
+
+    const term = rawTerm.toLowerCase().trim();
     const cleanTerm = term.replace(/[\s\.\-_]+/g, '');
 
-    // 1. Buscar en perfiles preconfigurados (incluyendo aliases y nombres)
+    // 1. Buscar primero en el Directorio Maestro de Usuarios del Sistema (Base de Datos Real)
+    const systemUsersList = this.state.systemUsers || initialData.systemUsers || [];
+    const systemUser = systemUsersList.find(u => {
+      const code = (u.code || u.id || "").toLowerCase();
+      const username = (u.username || "").toLowerCase();
+      const cleanUsername = username.replace(/[\s\.\-_]+/g, '');
+      const email = (u.email || "").toLowerCase();
+      const name = (u.name || "").toLowerCase();
+      const cleanName = name.replace(/[\s\.\-_]+/g, '');
+      const aliases = Array.isArray(u.aliases) ? u.aliases.map(a => (a || "").toLowerCase().replace(/[\s\.\-_]+/g, '')) : [];
+
+      const isAliasMatch = aliases.includes(cleanTerm);
+      const isMaritzaMatch = (cleanTerm === "mismaritza" || cleanTerm === "missmaritza" || cleanTerm === "maritza") && 
+                             (cleanName.includes("maritza") || cleanUsername.includes("maritza"));
+
+      return code === term || 
+             username === term || 
+             cleanUsername === cleanTerm ||
+             email === term ||
+             isAliasMatch ||
+             isMaritzaMatch ||
+             (cleanTerm.length >= 5 && cleanName.includes(cleanTerm)) ||
+             (cleanTerm.length >= 5 && cleanTerm.includes(cleanName));
+    });
+
+    if (systemUser) {
+      const validPass = systemUser.password || "docente2026";
+      if (password === validPass || password === "auxiliar2026" || password === "docente2026" || password === "educador2026" || password === "admin2026" || password === "estudiante2026" || password === "padre2026" || password === "director2026") {
+        let assignedRole = "docente";
+        if (systemUser.role === "Estudiante" || systemUser.role === "Alumno") assignedRole = "estudiante";
+        else if (systemUser.role === "Apoderado" || systemUser.role === "Padre") assignedRole = "padre";
+        else if (systemUser.role === "Directivo" || systemUser.role === "Administrador") assignedRole = "admin";
+        else if (systemUser.role === "Director") assignedRole = "director";
+        else if (systemUser.role === "Auxiliar" || systemUser.role === "auxiliar") assignedRole = "auxiliar";
+        else if (systemUser.role === "Docente" || systemUser.role === "Profesor") assignedRole = "docente";
+
+        const activeUser = {
+          id: systemUser.id || systemUser.code,
+          code: systemUser.code || systemUser.id,
+          name: systemUser.name,
+          username: systemUser.username || term,
+          email: systemUser.email || `${term}@eleducador.edu.pe`,
+          role: assignedRole,
+          roleLabel: systemUser.detail || systemUser.role || (assignedRole === 'docente' ? 'Docente de Asignatura' : assignedRole),
+          assignedRole: assignedRole,
+          detail: systemUser.detail || systemUser.subject || "",
+          subject: systemUser.subject || "",
+          hasAdminPrivilege: !!systemUser.hasAdminPrivilege,
+          hasAdminPrivileges: !!systemUser.hasAdminPrivilege
+        };
+
+        this.state.currentUser = activeUser;
+        this.state.currentRole = assignedRole;
+        this.state.isAuthenticated = true;
+        this.state.currentView = "dashboard";
+
+        if (this.state.users && this.state.users[assignedRole]) {
+          this.state.users[assignedRole] = {
+            ...this.state.users[assignedRole],
+            ...activeUser
+          };
+        }
+
+        this.saveLocalSession();
+        this.fetchServerState(true);
+        return { success: true, user: activeUser };
+      } else {
+        return { success: false, error: "Contraseña incorrecta." };
+      }
+    }
+
+    // 2. Fallback secundario para cuentas demo estándar
     const predefinedUsers = {
       ...initialData.users,
       ...(this.state.users || {})
@@ -2439,77 +2514,33 @@ class IntranetStore {
     for (const [roleKey, user] of Object.entries(predefinedUsers)) {
       const uName = (user.username || "").toLowerCase();
       const uCleanName = uName.replace(/[\s\.\-_]+/g, '');
-      const uFullName = (user.name || "").toLowerCase();
-      const uCleanFullName = uFullName.replace(/[\s\.\-_]+/g, '');
       const uEmail = (user.email || "").toLowerCase();
-      const uCode = (user.id || "").toLowerCase();
-      const uAliases = Array.isArray(user.aliases) ? user.aliases.map(a => a.toLowerCase().replace(/[\s\.\-_]+/g, '')) : [];
+      const uAliases = Array.isArray(user.aliases) ? user.aliases.map(a => (a || "").toLowerCase().replace(/[\s\.\-_]+/g, '')) : [];
 
       const matches = 
         uName === term ||
         uCleanName === cleanTerm ||
         uEmail === term ||
-        uCode === term ||
-        uFullName === term ||
-        uCleanFullName.includes(cleanTerm) ||
-        cleanTerm.includes(uCleanName) ||
-        uAliases.includes(cleanTerm) ||
-        (roleKey === "docente" && (cleanTerm === "robertosilva" || cleanTerm === "profsilva" || cleanTerm === "silva" || cleanTerm === "docente")) ||
-        (roleKey === "auxiliar" && (cleanTerm === "auxiliar" || cleanTerm === "carlosmedina" || cleanTerm === "puerta"));
+        uAliases.includes(cleanTerm);
 
       if (matches) {
-        const validPassword = user.password || (roleKey === "auxiliar" ? "auxiliar2026" : "docente2026");
+        const validPassword = user.password || (roleKey === "auxiliar" ? "auxiliar2026" : roleKey === "admin" ? "admin2026" : "docente2026");
         if (password === validPassword || password === "auxiliar2026" || password === "docente2026" || password === "educador2026" || password === "admin2026") {
+          const activeUser = {
+            ...user,
+            role: roleKey,
+            roleLabel: user.roleLabel || user.detail || roleKey
+          };
+          this.state.currentUser = activeUser;
           this.state.isAuthenticated = true;
           this.state.currentRole = roleKey;
           this.state.currentView = "dashboard";
           this.saveLocalSession();
           this.fetchServerState(true);
-          return { success: true, user: user };
+          return { success: true, user: activeUser };
         } else {
           return { success: false, error: `Contraseña incorrecta. (Prueba con: ${validPassword})` };
         }
-      }
-    }
-
-    // 2. Buscar en directorio general de usuarios
-    const systemUsersList = this.state.systemUsers || initialData.systemUsers || [];
-    const systemUser = systemUsersList.find(u => {
-      const code = (u.code || "").toLowerCase();
-      const username = (u.username || "").toLowerCase();
-      const email = (u.email || "").toLowerCase();
-      const name = (u.name || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
-      return code === term || username === term || email === term || name.includes(cleanTerm) || cleanTerm.includes(name);
-    });
-
-    if (systemUser) {
-      const validPass = systemUser.password || "docente2026";
-      if (password === validPass || password === "auxiliar2026" || password === "docente2026" || password === "educador2026" || password === "admin2026" || password === "estudiante2026" || password === "padre2026" || password === "director2026") {
-        let assignedRole = "docente";
-        if (systemUser.role === "Estudiante") assignedRole = "estudiante";
-        else if (systemUser.role === "Apoderado" || systemUser.role === "Padre") assignedRole = "padre";
-        else if (systemUser.role === "Directivo" || systemUser.role === "Administrador") assignedRole = "admin";
-        else if (systemUser.role === "Director") assignedRole = "director";
-        else if (systemUser.role === "Auxiliar" || systemUser.role === "auxiliar") assignedRole = "auxiliar";
-        else if (systemUser.role === "Docente" || systemUser.role === "Profesor") assignedRole = "docente";
-
-        // Actualizar datos del usuario activo para que refleje su nombre, correo y rol
-        if (this.state.users && this.state.users[assignedRole]) {
-          this.state.users[assignedRole].name = systemUser.name || this.state.users[assignedRole].name;
-          this.state.users[assignedRole].email = systemUser.email || this.state.users[assignedRole].email;
-          if (systemUser.hasAdminPrivilege !== undefined) {
-            this.state.users[assignedRole].hasAdminPrivileges = systemUser.hasAdminPrivilege;
-          }
-        }
-
-        this.state.isAuthenticated = true;
-        this.state.currentRole = assignedRole;
-        this.state.currentView = "dashboard";
-        this.saveLocalSession();
-        this.fetchServerState(true);
-        return { success: true, user: systemUser };
-      } else {
-        return { success: false, error: "Contraseña incorrecta." };
       }
     }
 
@@ -2518,13 +2549,19 @@ class IntranetStore {
 
   logout() {
     this.state.isAuthenticated = false;
+    this.state.currentUser = null;
     this.saveLocalSession();
   }
 
   // --- Getters ---
   isUserAuthenticated() { return !!this.state.isAuthenticated; }
   getCurrentRole() { return this.state.currentRole; }
-  getCurrentUser() { return this.state.users[this.state.currentRole] || this.state.users.admin; }
+  getCurrentUser() {
+    if (this.state.currentUser && this.state.currentUser.name) {
+      return this.state.currentUser;
+    }
+    return (this.state.users && this.state.users[this.state.currentRole]) || (initialData.users && initialData.users[this.state.currentRole]) || initialData.users.admin;
+  }
   getCurrentView() { return this.state.currentView; }
   getCourses() { return this.state.courses; }
   getTasks() { return this.state.tasks; }
@@ -10520,11 +10557,14 @@ CREATE TABLE tb_cuadernos_qr (
     const nameEl = document.getElementById("header-user-name");
     const roleEl = document.getElementById("header-user-role");
     const avatarEl = document.getElementById("header-user-avatar");
-    const roleSelect = document.getElementById("role-selector");
 
-    if (nameEl) nameEl.textContent = user.name;
-    if (roleEl) roleEl.textContent = user.roleLabel;
-    if (avatarEl) avatarEl.src = user.avatar;
+    if (nameEl) nameEl.textContent = user.name || "Usuario Institucional";
+    if (roleEl) roleEl.textContent = user.roleLabel || user.detail || user.role || "Docente";
+    if (avatarEl) {
+      const cleanName = (user.name || "U").replace(/^(Prof\.|Lic\.|Miss|Dra\.|Ing\.)\s*/i, '').trim();
+      const initial = cleanName.charAt(0).toUpperCase() || "👤";
+      avatarEl.textContent = initial;
+    }
 
     // Renderizar Menú Lateral Dinámico según el Perfil del Usuario
     const sidebarNav = document.querySelector(".sidebar-nav");

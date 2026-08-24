@@ -161,12 +161,14 @@
             <span class="notif-badge">1</span>
           </button>
 
-          <!-- Perfil de Usuario Activo -->
-          <div class="user-profile-chip" onclick="window.app.navigate('dashboard')">
-            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80" alt="Avatar Usuario" class="user-avatar" id="header-user-avatar">
+          <!-- Perfil de Usuario Activo (Sin Foto de Perfil) -->
+          <div class="user-profile-chip" onclick="window.app.navigate('dashboard')" style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+            <div class="user-avatar-badge" id="header-user-avatar" style="width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #1e3a8a 0%, #0b132b 100%); color: #fde047; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 13px; border: 1.5px solid #fde047; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+              👤
+            </div>
             <div class="user-info">
-              <span class="user-name" id="header-user-name">Prof. Alex Lino</span>
-              <span class="user-role-tag" id="header-user-role">Coordinación & Documentación</span>
+              <span class="user-name" id="header-user-name" style="font-weight: 800; font-size: 13px; color: var(--color-navy-900);">Prof. Alex Lino</span>
+              <span class="user-role-tag" id="header-user-role" style="font-size: 11px; color: var(--text-muted); display: block;">Coordinación & Documentación</span>
             </div>
           </div>
 
