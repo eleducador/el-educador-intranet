@@ -16,8 +16,20 @@ class IntranetApp {
     this.contentArea = document.getElementById("content-area");
     this.sidebar = document.getElementById("sidebar");
 
-    // Suscribirse a cambios en el almacén de datos
+    // Suscribirse a cambios en el almacén de datos (con protección contra parpadeo y reinicios de cámara)
     this.store.subscribe(() => {
+      // Si la cámara en vivo de portería o cuadernos está activa, NO destruir el DOM
+      if (this.isDoorCamActive || this.isCameraActive || this.isAgendaModalCamActive) {
+        this.updateLiveFeedCounters();
+        this.updateHeaderUserInfo();
+        return;
+      }
+      // Si el usuario está en la vista de escaneo de portería, actualizar componentes de forma suave sin refrescar
+      if (this.store.state.currentView === "asistencia" && (this.store.state.attendanceActiveSubTab === "door-scanner" || !this.store.state.attendanceActiveSubTab)) {
+        this.updateLiveFeedCounters();
+        this.updateHeaderUserInfo();
+        return;
+      }
       this.render();
       this.updateHeaderUserInfo();
     });
@@ -139,6 +151,173 @@ class IntranetApp {
   }
 
   // =========================================================================
+  // CAMBIO DE CONTRASEÑA DE USUARIO (VISIBLE PARA ADMINISTRADOR)
+  // =========================================================================
+  openChangePasswordModal() {
+    const user = this.store.getCurrentUser();
+    this.showModal(`
+      <div class="modal-header" style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white;">
+        <div>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">🔑 Cambiar Mi Contraseña de Acceso</h3>
+          <span style="font-size: 11px; opacity: 0.9;">Usuario: <strong>${user.name || user.username}</strong> (${user.role || 'Docente'})</span>
+        </div>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+      </div>
+      <form onsubmit="window.app.confirmChangePassword(event)">
+        <div class="modal-body" style="padding: 20px; background: #f8fafc;">
+          
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" style="font-weight: 800; color: #0f172a;">Contraseña Actual *</label>
+            <input type="password" name="currentPassword" class="form-control" placeholder="Ingrese su clave actual" required style="font-weight: bold; font-size: 13px;" />
+            <span style="font-size: 11px; color: #64748b;">(Clave actual activa en el sistema)</span>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" style="font-weight: 800; color: #0f172a;">Nueva Contraseña *</label>
+            <input type="password" name="newPassword" id="new-password-field" class="form-control" placeholder="Mínimo 4 caracteres" minlength="4" required style="font-weight: bold; font-size: 13px;" />
+          </div>
+
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" style="font-weight: 800; color: #0f172a;">Confirmar Nueva Contraseña *</label>
+            <input type="password" name="confirmPassword" id="confirm-password-field" class="form-control" placeholder="Repita la nueva clave" minlength="4" required style="font-weight: bold; font-size: 13px;" />
+          </div>
+
+          <div style="padding: 10px 14px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px; font-size: 11.5px; color: #1e40af;">
+            ℹ️ <strong>Seguridad Institucional:</strong> Por políticas de soporte, la administración institucional podrá visualizar su nueva clave en el directorio general para evitar pérdidas de acceso.
+          </div>
+
+        </div>
+        <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
+          <button type="submit" class="btn btn-navy" style="font-weight: 900;">✓ Actualizar Contraseña</button>
+        </div>
+      </form>
+    `);
+  }
+
+  confirmChangePassword(event) {
+    if (event) event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const currentPass = (formData.get("currentPassword") || "").trim();
+    const newPass = (formData.get("newPassword") || "").trim();
+    const confirmPass = (formData.get("confirmPassword") || "").trim();
+
+    if (newPass !== confirmPass) {
+      alert("Las nuevas contraseñas no coinciden. Por favor verifíquelas.");
+      return;
+    }
+
+    const user = this.store.getCurrentUser();
+    const res = this.store.changeUserPassword(user.code || user.id || user.username, newPass, currentPass);
+
+    if (res.success) {
+      this.closeModal();
+      this.showToast(`✓ Contraseña actualizada exitosamente. Nueva clave: "${newPass}"`, "success");
+      this.render();
+    } else {
+      alert(res.error || "No se pudo actualizar la contraseña. Verifique su clave actual.");
+    }
+  }
+
+  // Matricular Estudiante con Apoderado desde el Portal de Administración
+  openAdminAddStudentWithParentModal() {
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+
+    this.showModal(`
+      <div class="modal-header" style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white;">
+        <div>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">➕ Matricular Estudiante & Crear Cuenta de Apoderado</h3>
+          <span style="font-size: 11px; opacity: 0.9;">I.E.P. "El Educador" • Generación Automática de Cuentas y Accesos</span>
+        </div>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+      </div>
+      <form onsubmit="window.app.confirmAdminAddStudentWithParent(event)">
+        <div class="modal-body" style="padding: 20px; background: #f8fafc;">
+          
+          <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            
+            <div class="form-group" style="grid-column: span 2;">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">1. Nombre y Apellido Completo del Estudiante *</label>
+              <input type="text" name="studentName" class="form-control" placeholder="Ej. Camila Sofía Mendoza Huamán" required style="font-weight: bold; font-size: 13px;" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">2. Grado Escolar a Matricular *</label>
+              <select name="gradeId" class="form-control" required style="font-weight: bold; font-size: 13px; background: #fffbeb; border-color: #f59e0b;">
+                ${catalog.map(g => `
+                  <option value="${g.id}">${g.label} • (Tutor: ${g.tutor || 'Asignado'})</option>
+                `).join('')}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">3. DNI del Estudiante (Opcional)</label>
+              <input type="text" name="dni" class="form-control" placeholder="Ej. 75891234" maxlength="8" style="font-size: 13px;" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">4. Nombre Completo del Padre / Apoderado *</label>
+              <input type="text" name="guardian" class="form-control" placeholder="Ej. Rosa Huamán Prado" required style="font-weight: bold; font-size: 13px;" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">5. Teléfono de Contacto del Apoderado *</label>
+              <input type="tel" name="phone" class="form-control" placeholder="Ej. 987-654-321" required style="font-weight: bold; font-size: 13px;" />
+            </div>
+
+          </div>
+
+          <div style="margin-top: 14px; padding: 12px 14px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px; font-size: 11.5px; color: #1e40af; line-height: 1.4;">
+            ✨ <strong>Sincronización Total de Cuentas:</strong><br>
+            • Se creará el usuario <code>Estudiante</code> (clave por defecto: <code>estudiante2026</code>).<br>
+            • Se creará el usuario <code>Apoderado</code> (clave por defecto: <code>padre2026</code>) vinculado al estudiante.<br>
+            • Ambos aparecerán inmediatamente en la tabla de <strong>Gestión de Usuarios</strong> con contraseñas visibles.
+          </div>
+
+        </div>
+        <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
+          <button type="submit" class="btn btn-gold" style="font-weight: 900;">✓ Matricular y Crear Cuentas</button>
+        </div>
+      </form>
+    `);
+  }
+
+  confirmAdminAddStudentWithParent(event) {
+    if (event) event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const gradeId = formData.get("gradeId") || "4sec";
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+    const cleanG = gradeId.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "4° de Secundaria" };
+
+    const studentData = {
+      studentCode: `EST-2026-${Math.floor(100 + Math.random() * 900)}`,
+      studentName: (formData.get("studentName") || "").trim(),
+      gradeId: gradeId,
+      grade: gradeObj.label,
+      guardian: (formData.get("guardian") || "Padre / Apoderado").trim(),
+      phone: (formData.get("phone") || "987-654-321").trim(),
+      guardianPhone: (formData.get("phone") || "987-654-321").trim(),
+      dni: (formData.get("dni") || "").trim() || `7${Math.floor(1000000 + Math.random() * 9000000)}`
+    };
+
+    if (!studentData.studentName) {
+      alert("Por favor ingrese el nombre del estudiante.");
+      return;
+    }
+
+    this.store.addStudentToGrade(studentData);
+    this.closeModal();
+    this.showToast(`✓ Estudiante "${studentData.studentName}" y cuenta de apoderado "${studentData.guardian}" creados con éxito.`, "success");
+    this.render();
+  }
+
+  // =========================================================================
   // CONEXIÓN MULTI-DISPOSITIVO & ESCANEO SIMULTÁNEO (CELULARES Y PCS)
   // =========================================================================
   openMultiDeviceConnectModal() {
@@ -206,10 +385,34 @@ class IntranetApp {
   startRealtimeSync() {
     if (this.syncInterval) clearInterval(this.syncInterval);
     this.syncInterval = setInterval(() => {
-      // Sincronización multi-dispositivo continua cada 4 segundos
+      // Sincronización multi-dispositivo continua cada 5 segundos
       if (!this.store.isUserAuthenticated()) return;
+      // Pausar sync destructivo si la cámara en vivo o la estación de portería está activa
+      if (this.isDoorCamActive || this.isCameraActive || this.isAgendaModalCamActive) return;
       this.store.fetchServerState(true);
-    }, 4000);
+    }, 5000);
+  }
+
+  // Actualización reactiva suave del feed de ingresos (sin parpadeo ni recarga de pantalla)
+  updateLiveFeedCounters() {
+    const recentContainer = document.getElementById("door-recent-scans-container");
+    if (recentContainer && this.store) {
+      const records = this.store.state.attendanceRecords || [];
+      const recent = records.slice(0, 6);
+      recentContainer.innerHTML = recent.map(r => `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 8px; border-bottom: 1px solid #f1f5f9; animation: fadeIn 0.3s ease;">
+          <div>
+            <strong>${r.studentName}</strong> <span style="font-size: 10px; color: #64748b;">(${r.grade})</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <code>${r.arrivalTime}</code>
+            <span class="status-badge ${r.status === 'Presente' ? 'status-approved' : r.status === 'Tardanza' ? 'status-pending' : 'status-failed'}" style="font-size: 9.5px; padding: 1px 5px;">
+              ${r.status}
+            </span>
+          </div>
+        </div>
+      `).join('') || '<div style="text-align: center; color: #64748b; padding: 10px;">Sin registros recientes</div>';
+    }
   }
 
   // =========================================================================
@@ -3568,9 +3771,8 @@ CREATE TABLE tb_cuadernos_qr (
       this.showToast(`✓ INGRESO PUNTUAL: ${result.student.studentName} (${result.scanTime})`, "success");
     }
 
-    if (!this.isDoorCamActive) {
-      setTimeout(() => this.render(), 600);
-    }
+    // Actualizar suavemente los contadores y feed de ingresos sin parpadeo ni recarga
+    this.updateLiveFeedCounters();
   }
 
   // =========================================================================
@@ -5466,6 +5668,12 @@ CREATE TABLE tb_cuadernos_qr (
     const cleanG = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
     const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { id: gradeId || "4sec", label: "4° de Secundaria", level: "Secundaria" };
 
+    const activeUser = this.store.getCurrentUser();
+    if (!this.store.isTeacherTutorOfGrade(activeUser, gradeId)) {
+      alert(`🔒 Matrícula Restringida: Solo el Tutor(a) asignado (${gradeObj.tutor || 'Tutor Responsable'}) o la Dirección General pueden matricular estudiantes en ${gradeObj.label}.`);
+      return;
+    }
+
     this.showModal(`
       <div class="modal-header" style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white;">
         <div>
@@ -5573,6 +5781,12 @@ CREATE TABLE tb_cuadernos_qr (
     const cleanG = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
     const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "4° de Secundaria", level: "Secundaria" };
 
+    const activeUser = this.store.getCurrentUser();
+    if (!this.store.isTeacherTutorOfGrade(activeUser, gradeId)) {
+      alert(`🔒 Importación Restringida: Solo el Tutor(a) asignado (${gradeObj.tutor || 'Tutor Responsable'}) o la Dirección General pueden importar nóminas a ${gradeObj.label}.`);
+      return;
+    }
+
     this.showModal(`
       <div class="modal-header" style="background: linear-gradient(135deg, #065f46 0%, #0f172a 100%); color: white;">
         <div>
@@ -5638,6 +5852,12 @@ CREATE TABLE tb_cuadernos_qr (
     const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
     const cleanG = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
     const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "4° de Secundaria", level: "Secundaria" };
+
+    const activeUser = this.store.getCurrentUser();
+    if (!this.store.isTeacherTutorOfGrade(activeUser, gradeId)) {
+      alert(`🔒 Importación Restringida: Solo el Tutor(a) asignado (${gradeObj.tutor || 'Tutor Responsable'}) o la Dirección General pueden importar nóminas a ${gradeObj.label}.`);
+      return;
+    }
 
     this.showModal(`
       <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); color: white;">
@@ -6045,9 +6265,48 @@ CREATE TABLE tb_cuadernos_qr (
   }
 
   confirmDeleteStudent(studentId) {
+    const allEnrollments = this.store.getEnrollments();
+    const st = allEnrollments.find(e => e.id === studentId || e.studentCode === studentId || e.dni === studentId);
+    const user = this.store.getCurrentUser();
+    const gradeId = st ? (st.gradeId || this.store.resolveStudentGradeId(st.grade)) : null;
+    if (gradeId && !this.store.isTeacherTutorOfGrade(user, gradeId)) {
+      alert("🔒 Solo el Docente Tutor asignado al aula o la Dirección tienen autorización para retirar estudiantes.");
+      return;
+    }
+
     if (confirm("¿Está seguro de eliminar a este estudiante de la nómina del aula?")) {
       this.store.deleteStudentFromGrade(studentId);
       this.showToast("✓ Estudiante retirado de la nómina.", "info");
+      this.render();
+    }
+  }
+
+  // Eliminar todos los registros de estudiantes del aula activa
+  confirmClearAllClassroomStudents(gradeId) {
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+    const cleanG = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "el aula seleccionada" };
+
+    const activeUser = this.store.getCurrentUser();
+    if (!this.store.isTeacherTutorOfGrade(activeUser, gradeId)) {
+      alert(`🔒 Acción Restringida: Solo el Tutor(a) asignado (${gradeObj.tutor || 'Tutor Responsable'}) o la Dirección General pueden vaciar la nómina de ${gradeObj.label}.`);
+      return;
+    }
+
+    const enrollments = this.store.getEnrollments();
+    const count = enrollments.filter(e => {
+      const egId = (e.gradeId || this.store.resolveStudentGradeId(e.grade) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return egId === cleanG || egId.includes(cleanG) || cleanG.includes(egId);
+    }).length;
+
+    if (count === 0) {
+      this.showToast(`No hay estudiantes registrados en ${gradeObj.label} para eliminar.`, "info");
+      return;
+    }
+
+    if (confirm(`⚠️ ¿Está seguro de eliminar TODOS los (${count}) registros de estudiantes de ${gradeObj.label}?\n\nEsta acción vaciará por completo la nómina del aula seleccionada.`)) {
+      const removed = this.store.clearAllStudentsFromGrade(gradeId);
+      this.showToast(`✓ Se eliminaron todos los registros de estudiantes de ${gradeObj.label} (${removed} alumnos retirados).`, "info");
       this.render();
     }
   }

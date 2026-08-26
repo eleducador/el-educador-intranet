@@ -483,10 +483,12 @@ const initialData = {
       { id: "cuadernos-qr", label: "Control Cuadernos QR", icon: "qr", enabled: true },
       { id: "tareas", label: "Aula Virtual / Quizzes", badge: "10P", icon: "virtual", enabled: true },
       { id: "asistencia", label: "📅 Mi Asistencia & Fotocheck", icon: "attendance", enabled: true },
+      { id: "boleta", label: "📊 Mi Boleta Oficial de Notas", badge: "OFICIAL", icon: "boleta", enabled: true },
       { id: "comunicados", label: "Informes & Circulares", icon: "announcements", enabled: true }
     ],
     padre: [
       { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
+      { id: "boleta", label: "📊 Boleta Oficial de Notas", badge: "OFICIAL", icon: "boleta", enabled: true },
       { id: "agenda-virtual", label: "📖 Agenda Virtual Escolar", badge: "FIRMAS", icon: "agenda", enabled: true },
       { id: "horarios", label: "Horario de Clases", icon: "schedule", enabled: true },
       { id: "silabus", label: "Sílabus Curriculares", icon: "syllabus", enabled: true },
@@ -2670,12 +2672,15 @@ class IntranetStore {
         parsed.teachersList[0].schedule[0] && 
         parsed.teachersList[0].schedule[0].time === "08:00 - 08:50";
 
+      const hasSession = typeof sessionStorage !== "undefined" && Boolean(sessionStorage.getItem("colegio_user_session"));
+      const sessionRole = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("colegio_user_role") : null;
+
       const loadedState = {
         ...initialData,
         ...parsed,
-        isAuthenticated: !!parsed.isAuthenticated,
-        currentRole: parsed.currentRole || "admin",
-        currentView: parsed.currentView || "dashboard",
+        isAuthenticated: hasSession,
+        currentRole: sessionRole || parsed.currentRole || "docente",
+        currentView: hasSession ? (parsed.currentView || "dashboard") : "login",
         selectedScheduleGrade: parsed.selectedScheduleGrade || "4sec",
         selectedSyllabusGrade: parsed.selectedSyllabusGrade || "4sec",
         academicConfig: {
@@ -2736,10 +2741,13 @@ class IntranetStore {
       return loadedState;
     }
 
+    const hasSession = typeof sessionStorage !== "undefined" && Boolean(sessionStorage.getItem("colegio_user_session"));
+    const sessionRole = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("colegio_user_role") : null;
+
     return {
-      isAuthenticated: false,
-      currentRole: "admin",
-      currentView: "dashboard",
+      isAuthenticated: hasSession,
+      currentRole: sessionRole || "docente",
+      currentView: hasSession ? "dashboard" : "login",
       selectedScheduleGrade: "4sec",
       selectedSyllabusGrade: "4sec",
       usersManagementTab: "users",
@@ -2801,8 +2809,8 @@ class IntranetStore {
         const localTime = this.state.updatedAt || 0;
         const serverTime = serverData.updatedAt || 0;
 
-        // Si la nube tiene datos más recientes o si este dispositivo recién abre la página:
-        if (serverTime >= localTime || !this.state.updatedAt) {
+        // Si la nube tiene datos estrictamente más recientes o si este dispositivo recién abre la página:
+        if (serverTime > localTime || !this.state.updatedAt) {
           // Reemplazo limpio y exacto (elimina usuarios borrados y agrega usuarios creados)
           if (serverData.systemUsers) this.state.systemUsers = serverData.systemUsers;
           if (serverData.enrollments) this.state.enrollments = serverData.enrollments;
@@ -2997,6 +3005,11 @@ class IntranetStore {
         this.state.isAuthenticated = true;
         this.state.currentView = "dashboard";
 
+        if (typeof sessionStorage !== "undefined") {
+          sessionStorage.setItem("colegio_user_session", activeUser.username || activeUser.code || term);
+          sessionStorage.setItem("colegio_user_role", assignedRole);
+        }
+
         this.saveLocalSession();
         this.notify();
         this.fetchServerState(true);
@@ -3035,6 +3048,12 @@ class IntranetStore {
           this.state.isAuthenticated = true;
           this.state.currentRole = roleKey;
           this.state.currentView = "dashboard";
+
+          if (typeof sessionStorage !== "undefined") {
+            sessionStorage.setItem("colegio_user_session", roleKey);
+            sessionStorage.setItem("colegio_user_role", roleKey);
+          }
+
           this.saveLocalSession();
           this.notify();
           this.fetchServerState(true);
@@ -3049,9 +3068,13 @@ class IntranetStore {
   }
 
   logout() {
+    if (typeof sessionStorage !== "undefined") {
+      sessionStorage.removeItem("colegio_user_session");
+      sessionStorage.removeItem("colegio_user_role");
+    }
     this.state.isAuthenticated = false;
     this.state.currentUser = null;
-    this.state.currentView = "dashboard";
+    this.state.currentView = "login";
     this.saveLocalSession();
     this.notify();
   }
@@ -3623,6 +3646,31 @@ class IntranetStore {
       tutor: gradeObj.tutor,
       hasAdminPrivilege: false
     });
+
+    // Registrar o actualizar cuenta de Padre / Apoderado en systemUsers
+    const cleanGuardianName = (data.guardian || "Apoderado").trim();
+    if (cleanGuardianName && cleanGuardianName.toLowerCase() !== "apoderado titular" && cleanGuardianName.toLowerCase() !== "sin apoderado") {
+      const cleanGName = cleanGuardianName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
+      const gParts = cleanGName.split(/\s+/).filter(Boolean);
+      const gUsername = gParts.length >= 2 ? `${gParts[0]}.${gParts[gParts.length - 1]}` : `apoderado.${stUsername}`;
+      
+      this.createSystemUser({
+        code: `APO-${studentCode}`,
+        name: cleanGuardianName,
+        email: `${gUsername}@eleducador.edu.pe`,
+        username: gUsername,
+        role: "Apoderado",
+        detail: `Apoderado de ${(data.studentName || data.name || "").trim()} (${gradeObj.label})`,
+        studentName: (data.studentName || data.name || "").trim(),
+        studentCode: studentCode,
+        grade: gradeObj.label,
+        gradeId: gradeId,
+        password: "padre2026",
+        phone: data.guardianPhone || data.phone || "987-654-321",
+        tutor: gradeObj.tutor,
+        hasAdminPrivilege: false
+      });
+    }
 
     // Inicializar boletaData si no existe
     if (!this.state.boletaData) this.state.boletaData = {};
@@ -4248,6 +4296,117 @@ class IntranetStore {
     }
 
     return allCourses.filter(c => this.isTeacherAssignedToCourse(c, user, gradeId));
+  }
+
+  // Verificar si el usuario en sesión es el Tutor Asignado al Grado / Aula
+  isTeacherTutorOfGrade(user, gradeId) {
+    if (!user) return false;
+    const role = (user.role || "").toLowerCase();
+    // Directores y Administradores tienen permisos globales de tutoría y matrícula en todos los grados
+    if (role === "admin" || role === "administrador" || role === "director" || role === "directivo") {
+      return true;
+    }
+
+    const catalog = this.state.gradesCatalog || initialData.gradesCatalog || [];
+    const cleanG = (gradeId || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG);
+    if (!gradeObj) return false;
+
+    const cleanUserName = (user.name || "").toLowerCase().replace(/^(prof\.|lic\.|miss|dr\.|dra\.|ing\.)\s*/i, '').trim();
+    const cleanTutorName = (gradeObj.tutor || "").toLowerCase().replace(/^(prof\.|lic\.|miss|dr\.|dra\.|ing\.)\s*/i, '').trim();
+
+    // 1. Coincidencia por nombre de tutor asignado al aula
+    if (cleanTutorName && cleanUserName) {
+      if (cleanTutorName === cleanUserName || cleanTutorName.includes(cleanUserName) || cleanUserName.includes(cleanTutorName)) {
+        return true;
+      }
+    }
+
+    // 2. Coincidencia por tutorGrade en el perfil del usuario
+    if (user.tutorGrade) {
+      const cleanTutorG = user.tutorGrade.toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (cleanTutorG === cleanG || cleanTutorG.includes(cleanG) || cleanG.includes(cleanTutorG)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  // Cambiar contraseña del usuario (actualiza en activeUser, systemUsers y users)
+  changeUserPassword(userCodeOrIdOrUsername, newPassword, currentPassword = null) {
+    if (!newPassword || newPassword.trim().length < 4) {
+      return { success: false, error: "La nueva contraseña debe tener al menos 4 caracteres." };
+    }
+
+    const cleanNewPass = newPassword.trim();
+    const targetClean = (userCodeOrIdOrUsername || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
+    let updated = false;
+
+    // 1. Actualizar en activeUser / currentUser si coincide
+    if (this.state.currentUser) {
+      this.state.currentUser.password = cleanNewPass;
+      updated = true;
+    }
+
+    // 2. Actualizar en systemUsers
+    if (!this.state.systemUsers) {
+      this.state.systemUsers = JSON.parse(JSON.stringify(initialData.systemUsers || []));
+    }
+    
+    this.state.systemUsers.forEach(u => {
+      const uName = (u.username || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
+      const uCode = (u.code || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
+      const uId = (u.id || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
+      const uFullName = (u.name || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
+      const uAliases = Array.isArray(u.aliases) ? u.aliases.map(a => (a || "").toLowerCase().replace(/[\s\.\-_]+/g, '')) : [];
+
+      const match = 
+        uName === targetClean ||
+        uCode === targetClean ||
+        uId === targetClean ||
+        uAliases.includes(targetClean) ||
+        (targetClean === "docente" && (u.role === "Docente" || uFullName.includes("robertosilva"))) ||
+        (this.state.currentUser && (
+          u.username === this.state.currentUser.username ||
+          u.code === this.state.currentUser.code ||
+          u.code === this.state.currentUser.id ||
+          u.id === this.state.currentUser.id ||
+          u.id === this.state.currentUser.code ||
+          u.name === this.state.currentUser.name
+        ));
+
+      if (match) {
+        u.password = cleanNewPass;
+        updated = true;
+      }
+    });
+
+    // 3. Actualizar en users predefinidos si corresponde
+    if (this.state.users) {
+      for (const [rKey, uObj] of Object.entries(this.state.users)) {
+        const rClean = rKey.toLowerCase().replace(/[\s\.\-_]+/g, '');
+        const uClean = (uObj.username || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
+        if (
+          rClean === targetClean ||
+          uClean === targetClean ||
+          (this.state.currentUser && (
+            uObj.username === this.state.currentUser.username ||
+            uObj.id === this.state.currentUser.id ||
+            uObj.name === this.state.currentUser.name
+          ))
+        ) {
+          uObj.password = cleanNewPass;
+          updated = true;
+        }
+      }
+    }
+
+    this.saveState();
+    this.syncToServer();
+    this.notify();
+
+    return { success: true, newPassword: cleanNewPass };
   }
 
   getStudentAllBoletaStickersData(studentIdOrCode = "EST-2026-042") {
@@ -6151,6 +6310,11 @@ const Components = {
       return name.includes(searchQuery) || dni.includes(searchQuery) || code.includes(searchQuery);
     });
 
+    const activeUser = (state.currentUser && state.currentUser.name) ? state.currentUser : ((state.users && state.users[state.currentRole]) || initialData.users[state.currentRole] || {});
+    const isTutor = (window.appStore && typeof window.appStore.isTeacherTutorOfGrade === 'function') 
+      ? window.appStore.isTeacherTutorOfGrade(activeUser, selectedGrade) 
+      : true;
+
     return `
       <div class="fade-in">
         
@@ -6158,11 +6322,20 @@ const Components = {
         <div class="card" style="margin-bottom: var(--space-6); background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: #ffffff;">
           <div class="card-header" style="border-bottom: 1px solid rgba(255,255,255,0.15); flex-wrap: wrap; gap: 14px;">
             <div>
-              <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                 <h2 class="card-title" style="font-size: var(--font-size-xl); color: #fde047; margin: 0;">
                   📋 Registro Oficial de Estudiantes & Registro Auxiliar
                 </h2>
                 <span class="status-badge" style="background: #22c55e; color: #0b132b; font-weight: 900;">Periodo 2026</span>
+                ${isTutor ? `
+                  <span class="status-badge" style="background: #fef08a; color: #854d0e; font-weight: 900; border: 1px solid #facc15;">
+                    👑 Docente Tutor Responsable del Aula
+                  </span>
+                ` : `
+                  <span class="status-badge" style="background: #f1f5f9; color: #475569; font-weight: 700; border: 1px solid #cbd5e1;">
+                    👁️ Vista Docente de Asignatura
+                  </span>
+                `}
               </div>
               <p style="font-size: 12px; color: rgba(255,255,255,0.85); margin-top: 4px;">
                 I.E.P. "El Educador" • UGEL 05 S.J.L. • Gestión de Nómina, Importación desde Excel y Generación de Registro Auxiliar MINEDU.
@@ -6171,12 +6344,18 @@ const Components = {
 
             <!-- Acciones Principales en Cabecera -->
             <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-              <button class="btn btn-gold btn-sm" onclick="window.app.openAddStudentModal('${selectedGrade}')" style="font-weight: 900; padding: 8px 16px;">
-                ➕ Agregar Estudiante
-              </button>
-              <button class="btn btn-sm" onclick="window.app.openImportStudentsModal('${selectedGrade}')" style="background: #10b981; color: white; font-weight: 900; padding: 8px 16px;">
-                📥 Importar desde Excel
-              </button>
+              ${isTutor ? `
+                <button class="btn btn-gold btn-sm" onclick="window.app.openAddStudentModal('${selectedGrade}')" style="font-weight: 900; padding: 8px 16px;">
+                  ➕ Agregar Estudiante
+                </button>
+                <button class="btn btn-sm" onclick="window.app.openImportStudentsModal('${selectedGrade}')" style="background: #10b981; color: white; font-weight: 900; padding: 8px 16px;">
+                  📥 Importar desde Excel
+                </button>
+              ` : `
+                <div style="font-size: 11.5px; color: #f8fafc; background: rgba(0,0,0,0.3); padding: 6px 12px; border-radius: 6px; border: 1px dashed rgba(255,255,255,0.4);">
+                  🔒 Matrícula restringida: Solo el Tutor(a) <strong>${currentGradeObj.tutor || 'Asignado'}</strong> o Dirección.
+                </div>
+              `}
               <button class="btn btn-sm" onclick="window.app.downloadAuxiliaryRegisterExcel('${selectedGrade}', '${selectedCourse}')" style="background: #0284c7; color: white; font-weight: 900; padding: 8px 16px;">
                 📊 Descargar Registro Auxiliar (.XLS)
               </button>
@@ -6254,15 +6433,21 @@ const Components = {
 
             <!-- Botones Secundarios -->
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              <button class="btn btn-outline btn-sm" onclick="window.app.openPasteFromExcelModal('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px;">
-                📋 Pegar Filas de Excel
-              </button>
-              <button class="btn btn-outline btn-sm" onclick="window.app.downloadExcelTemplate()" style="font-weight: 800; font-size: 11.5px; color: #0284c7; border-color: #38bdf8;">
-                📄 Plantilla Excel
-              </button>
-              <button class="btn btn-sm" onclick="window.app.confirmClearAllClassroomStudents('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px; background: #fee2e2; color: #b91c1c; border: 1px solid #f87171;" title="Eliminar todos los registros de estudiantes de esta aula">
-                🗑️ Eliminar Todos los Registros del Aula
-              </button>
+              ${isTutor ? `
+                <button class="btn btn-outline btn-sm" onclick="window.app.openPasteFromExcelModal('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px;">
+                  📋 Pegar Filas de Excel
+                </button>
+                <button class="btn btn-outline btn-sm" onclick="window.app.downloadExcelTemplate()" style="font-weight: 800; font-size: 11.5px; color: #0284c7; border-color: #38bdf8;">
+                  📄 Plantilla Excel
+                </button>
+                <button class="btn btn-sm" onclick="window.app.confirmClearAllClassroomStudents('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px; background: #fee2e2; color: #b91c1c; border: 1px solid #f87171;" title="Eliminar todos los registros de estudiantes de esta aula">
+                  🗑️ Eliminar Todos los Registros del Aula
+                </button>
+              ` : `
+                <button class="btn btn-outline btn-sm" onclick="window.app.downloadExcelTemplate()" style="font-weight: 800; font-size: 11.5px; color: #0284c7; border-color: #38bdf8;">
+                  📄 Plantilla Excel
+                </button>
+              `}
             </div>
 
           </div>
@@ -6304,14 +6489,20 @@ const Components = {
                       <p style="font-size: 12px; margin-top: 4px; margin-bottom: 16px;">
                         Puede agregar alumnos con el botón "+ Agregar Estudiante" ingresando Nombre, Grado, Apoderado y Teléfono, o importar desde un libro de Excel.
                       </p>
-                      <div style="display: flex; gap: 8px; justify-content: center;">
-                        <button class="btn btn-gold btn-sm" onclick="window.app.openAddStudentModal('${selectedGrade}')" style="font-weight: 800;">
-                          ➕ Agregar Estudiante
-                        </button>
-                        <button class="btn btn-sm" onclick="window.app.openImportStudentsModal('${selectedGrade}')" style="background: #10b981; color: white; font-weight: 800;">
-                          📥 Importar desde Excel
-                        </button>
-                      </div>
+                      ${isTutor ? `
+                        <div style="display: flex; gap: 8px; justify-content: center;">
+                          <button class="btn btn-gold btn-sm" onclick="window.app.openAddStudentModal('${selectedGrade}')" style="font-weight: 800;">
+                            ➕ Agregar Estudiante
+                          </button>
+                          <button class="btn btn-sm" onclick="window.app.openImportStudentsModal('${selectedGrade}')" style="background: #10b981; color: white; font-weight: 800;">
+                            📥 Importar desde Excel
+                          </button>
+                        </div>
+                      ` : `
+                        <div style="font-size: 12px; color: #64748b;">
+                          🔒 La matrícula y gestión de nómina está reservada para el Tutor(a) <strong>${currentGradeObj.tutor || 'Asignado'}</strong> o Dirección.
+                        </div>
+                      `}
                     </td>
                   </tr>
                 ` : classroomStudents.map((st, idx) => `
@@ -6337,12 +6528,14 @@ const Components = {
                         <button class="btn btn-outline btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${st.studentCode || st.dni}')" title="Ver Stickers QR de Cuadernos" style="padding: 4px 7px; font-size: 11px;">
                           ⚡ QR
                         </button>
-                        <button class="btn btn-outline btn-sm" onclick="window.app.openEditStudentModal('${st.id || st.studentCode}')" title="Editar datos del estudiante" style="padding: 4px 7px; font-size: 11px;">
-                          ✏️
-                        </button>
-                        <button class="btn btn-sm" onclick="window.app.confirmDeleteStudent('${st.studentCode || st.id}')" title="Eliminar estudiante" style="padding: 4px 7px; font-size: 11px; background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5;">
-                          🗑️
-                        </button>
+                        ${isTutor ? `
+                          <button class="btn btn-outline btn-sm" onclick="window.app.openEditStudentModal('${st.id || st.studentCode}')" title="Editar datos del estudiante" style="padding: 4px 7px; font-size: 11px;">
+                            ✏️
+                          </button>
+                          <button class="btn btn-sm" onclick="window.app.confirmDeleteStudent('${st.studentCode || st.id}')" title="Eliminar estudiante" style="padding: 4px 7px; font-size: 11px; background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5;">
+                            🗑️
+                          </button>
+                        ` : ''}
                       </div>
                     </td>
                   </tr>
@@ -7811,8 +8004,11 @@ const Components = {
             </div>
 
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              <button class="btn btn-navy btn-sm" onclick="window.app.openCreateUserModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px;">
-                <span>➕</span> Crear Nuevo Usuario
+              <button class="btn btn-gold btn-sm" onclick="window.app.openAdminAddStudentWithParentModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px; padding: 8px 14px;">
+                <span>➕</span> Matricular Estudiante & Apoderado
+              </button>
+              <button class="btn btn-navy btn-sm" onclick="window.app.openCreateUserModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px; padding: 8px 14px;">
+                <span>👤</span> Crear Usuario Manual
               </button>
             </div>
           </div>
@@ -7917,14 +8113,24 @@ const Components = {
                           </td>
                           <td>
                             <div style="display: flex; align-items: center; gap: 6px;">
-                              <code id="pass-field-${u.id}" style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11.5px; color: #0b132b;">${u.password || 'educador2026'}</code>
+                              <code id="pass-field-${u.id}" style="background: #f1f5f9; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 12px; color: #0b132b; border: 1px solid #cbd5e1;">${u.password || 'educador2026'}</code>
                             </div>
                           </td>
                           <td>
-                            <div style="font-size: 12px; line-height: 1.3;">
-                              <strong>${u.detail || (isDocente ? u.subject : isEstudiante ? u.gradeLevel : isApoderado ? u.studentName : '--') || '--'}</strong>
-                              ${u.weeklyHours ? `<br><span style="font-size: 10.5px; color: #64748b;">⏱️ ${u.weeklyHours}</span>` : ''}
-                              ${u.dni ? `<br><span style="font-size: 10.5px; color: #64748b;">🆔 DNI: ${u.dni}</span>` : ''}
+                            <div style="font-size: 12px; line-height: 1.35;">
+                              ${isApoderado ? `
+                                <strong>👨‍👧 ${u.detail || ('Apoderado de ' + (u.studentName || '--'))}</strong>
+                                ${u.studentName ? `<br><span style="font-size: 11px; color: #1e40af; font-weight: 600;">Hijo(a): ${u.studentName}</span>` : ''}
+                                ${u.phone ? `<br><span style="font-size: 11px; color: #16a34a; font-weight: bold;">📞 ${u.phone}</span>` : ''}
+                              ` : isEstudiante ? `
+                                <strong>🎒 ${u.grade || u.detail || u.gradeLevel || '--'}</strong>
+                                ${u.guardian ? `<br><span style="font-size: 11px; color: #64748b;">Apoderado: ${u.guardian}</span>` : ''}
+                                ${u.phone ? `<br><span style="font-size: 11px; color: #16a34a;">📞 ${u.phone}</span>` : ''}
+                              ` : `
+                                <strong>${u.detail || u.subject || '--'}</strong>
+                                ${u.weeklyHours ? `<br><span style="font-size: 10.5px; color: #64748b;">⏱️ ${u.weeklyHours}</span>` : ''}
+                                ${u.dni ? `<br><span style="font-size: 10.5px; color: #64748b;">🆔 DNI: ${u.dni}</span>` : ''}
+                              `}
                             </div>
                           </td>
                           <td>
@@ -8218,6 +8424,10 @@ const Components = {
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6);">
+          <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid #1e3a8a; background: #eff6ff;" onclick="window.app.navigate('boleta')">
+            <h4 style="font-size:14px; color:#1e3a8a; margin:0 0 2px;">📊 Boleta Oficial de Notas</h4>
+            <span style="font-size:12px; color:#2563eb; font-weight: bold;">Formato oficial MINEDU e impresión</span>
+          </div>
           <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid #10b981; background: #f0fdf4;" onclick="window.app.navigate('pagos')">
             <h4 style="font-size:14px; color:#065f46; margin:0 0 2px;">💳 Pensiones & Pagos</h4>
             <span style="font-size:12px; color:#047857;">Estado de cuenta y comprobantes al día</span>
@@ -8282,6 +8492,10 @@ const Components = {
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-3); margin-bottom: var(--space-6);">
+          <div class="card" style="padding: 12px; cursor: pointer; border-left: 4px solid #1e3a8a; background: #eff6ff;" onclick="window.app.navigate('boleta')">
+            <h4 style="font-size:13px; color: #1e3a8a; margin: 0 0 2px;">📊 Mi Boleta Oficial</h4>
+            <span style="font-size:11px; color:#2563eb; font-weight: bold;">Notas y calificaciones MINEDU</span>
+          </div>
           <div class="card" style="padding: 12px; cursor: pointer; border-left: 4px solid #10b981; background: #f0fdf4;" onclick="window.app.navigate('asistencia')">
             <h4 style="font-size:13px; color: #065f46; margin: 0 0 2px;">📲 Mi Asistencia & QR</h4>
             <span style="font-size:11px; color:#047857;">Marcaciones y código QR</span>
@@ -8924,26 +9138,52 @@ const Components = {
   // =========================================================================
   renderPrintableReport(state) {
     const role = state.currentRole;
-    if (role === 'estudiante' || role === 'padre' || role === 'auxiliar') {
-      return `
-        <div class="fade-in card" style="padding: 50px 20px; text-align: center; max-width: 600px; margin: 40px auto; border-top: 4px solid var(--color-red-600);">
-          <div style="font-size: 48px; margin-bottom: 12px;">🔒</div>
-          <h2 style="font-size: 18px; font-weight: 900; color: var(--color-navy-900); margin-bottom: 8px;">
-            Módulo Exclusivo de Control Interno (Dirección y Docentes)
-          </h2>
-          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
-            La emisión, firma y consulta de la Boleta Oficial MINEDU está reservada exclusivamente para el control interno directivo y docente. No está disponible para perfiles de estudiantes ni padres de familia.
-          </p>
-          <button class="btn btn-navy" onclick="window.app.navigate('dashboard')" style="font-weight: 800; padding: 10px 24px;">
-            Volver al Inicio
-          </button>
-        </div>
-      `;
+    const currentUser = (state.currentUser && state.currentUser.name) ? state.currentUser : ((state.users && state.users[role]) || initialData.users[role] || {});
+    const allBoletas = state.boletaData || initialData.boletaData || {};
+    const enrollments = state.enrollments || initialData.enrollments || [];
+
+    let selectedStudentKey = state.selectedBoletaStudent;
+    
+    // Si el usuario es un Padre de Familia: seleccionar automáticamente a su hijo/estudiante
+    if (role === 'padre') {
+      const childName = (currentUser.studentName || currentUser.detail || "").toLowerCase();
+      const childCode = currentUser.studentCode || "";
+      const matched = enrollments.find(e => 
+        (childCode && (e.studentCode === childCode || e.id === childCode)) ||
+        (childName && e.studentName && (childName.includes(e.studentName.toLowerCase()) || e.studentName.toLowerCase().includes(childName)))
+      );
+      if (matched) {
+        selectedStudentKey = matched.studentCode || matched.dni;
+      } else {
+        selectedStudentKey = "mendez";
+      }
+    } else if (role === 'estudiante') {
+      // Si el usuario es Estudiante: seleccionar su propia boleta
+      const sCode = currentUser.code || currentUser.studentCode || currentUser.dni;
+      const matched = enrollments.find(e => e.studentCode === sCode || e.dni === sCode || (currentUser.name && e.studentName && e.studentName.toLowerCase().includes(currentUser.name.toLowerCase())));
+      if (matched) {
+        selectedStudentKey = matched.studentCode || matched.dni;
+      } else {
+        selectedStudentKey = "mendez";
+      }
+    } else if (!selectedStudentKey) {
+      selectedStudentKey = "mendez";
     }
 
-    const selectedStudentKey = state.selectedBoletaStudent || "mendez";
-    const allBoletas = state.boletaData || initialData.boletaData;
-    const student = allBoletas[selectedStudentKey] || allBoletas.mendez;
+    let student = allBoletas[selectedStudentKey] || allBoletas.mendez;
+    if (!student) {
+      const enr = enrollments.find(e => e.studentCode === selectedStudentKey || e.dni === selectedStudentKey || e.id === selectedStudentKey);
+      student = {
+        student: enr ? enr.studentName : "Estudiante Institucional",
+        code: enr ? enr.studentCode : selectedStudentKey,
+        dni: enr ? enr.dni : "75891234",
+        grade: enr ? enr.grade : "4° de Secundaria",
+        grades: {},
+        appreciations: {},
+        attendance: {},
+        parentCriteria: {}
+      };
+    }
     const g = student.grades || {};
     const app = student.appreciations || {};
     const att = student.attendance || {};
@@ -9013,28 +9253,40 @@ const Components = {
 
     const val = (k, b) => (g[k] && g[k][b]) || "";
 
+    const isParentOrStudent = role === 'padre' || role === 'estudiante';
+
     return `
       <div class="fade-in">
         
         <!-- Barra Superior de Control (No Imprimible) -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; background: white; padding: 14px 18px; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 2px 8px rgba(0,0,0,0.05);" class="no-print">
           <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-            <button class="btn btn-outline btn-sm" onclick="window.app.navigate('calificaciones')">← Volver al Registro de Notas</button>
+            <button class="btn btn-outline btn-sm" onclick="window.app.navigate('${isParentOrStudent ? 'dashboard' : 'calificaciones'}')">
+              ← ${isParentOrStudent ? 'Volver al Inicio' : 'Volver al Registro de Notas'}
+            </button>
             
-            <!-- Selector de Alumno -->
-            <div style="display: flex; align-items: center; gap: 6px;">
-              <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Alumno(a):</span>
-              <select class="form-control" style="font-size: 12px; font-weight: bold; width: auto; padding: 4px 10px;" onchange="window.app.changeBoletaStudent(this.value)">
-                <option value="mendez" ${selectedStudentKey === 'mendez' ? 'selected' : ''}>MÉNDEZ FLORES, SOFÍA (4° de Secundaria)</option>
-                <option value="benitez" ${selectedStudentKey === 'benitez' ? 'selected' : ''}>BENÍTEZ RUIZ, CARLOS (4° de Secundaria)</option>
-                <option value="albujar" ${selectedStudentKey === 'albujar' ? 'selected' : ''}>ALBUJAR ZEGARRA, MARINA DEL CARMEN (2° de Secundaria)</option>
-              </select>
-            </div>
+            ${isParentOrStudent ? `
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="status-badge" style="background: #e0e7ff; color: #3730a3; font-weight: 800; font-size: 12px;">
+                  📄 Boleta Oficial de: <strong>${student.student}</strong> (${student.grade || '2026'})
+                </span>
+              </div>
+            ` : `
+              <!-- Selector de Alumno para Docentes y Directivos -->
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Alumno(a):</span>
+                <select class="form-control" style="font-size: 12px; font-weight: bold; width: auto; padding: 4px 10px;" onchange="window.app.changeBoletaStudent(this.value)">
+                  <option value="mendez" ${selectedStudentKey === 'mendez' ? 'selected' : ''}>MÉNDEZ FLORES, SOFÍA (4° de Secundaria)</option>
+                  <option value="benitez" ${selectedStudentKey === 'benitez' ? 'selected' : ''}>BENÍTEZ RUIZ, CARLOS (4° de Secundaria)</option>
+                  <option value="albujar" ${selectedStudentKey === 'albujar' ? 'selected' : ''}>ALBUJAR ZEGARRA, MARINA DEL CARMEN (2° de Secundaria)</option>
+                </select>
+              </div>
+            `}
           </div>
           
           <div style="display: flex; gap: 8px; align-items: center;">
             <button class="btn btn-navy" onclick="window.print()" style="font-weight: 800; font-size: 13px; padding: 9px 20px;">
-              Imprimir Boleta Oficial Completa (PDF / Doble Cara)
+              🖨️ Imprimir Boleta Oficial Completa (PDF / Doble Cara)
             </button>
           </div>
         </div>
@@ -12055,6 +12307,173 @@ class IntranetApp {
         <button class="btn btn-navy" onclick="window.app.closeModal()">Entendido</button>
       </div>
     `);
+  }
+
+  // =========================================================================
+  // CAMBIO DE CONTRASEÑA DE USUARIO (VISIBLE PARA ADMINISTRADOR)
+  // =========================================================================
+  openChangePasswordModal() {
+    const user = this.store.getCurrentUser();
+    this.showModal(`
+      <div class="modal-header" style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white;">
+        <div>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">🔑 Cambiar Mi Contraseña de Acceso</h3>
+          <span style="font-size: 11px; opacity: 0.9;">Usuario: <strong>${user.name || user.username}</strong> (${user.role || 'Docente'})</span>
+        </div>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+      </div>
+      <form onsubmit="window.app.confirmChangePassword(event)">
+        <div class="modal-body" style="padding: 20px; background: #f8fafc;">
+          
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" style="font-weight: 800; color: #0f172a;">Contraseña Actual *</label>
+            <input type="password" name="currentPassword" class="form-control" placeholder="Ingrese su clave actual" required style="font-weight: bold; font-size: 13px;" />
+            <span style="font-size: 11px; color: #64748b;">(Clave actual activa en el sistema)</span>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" style="font-weight: 800; color: #0f172a;">Nueva Contraseña *</label>
+            <input type="password" name="newPassword" id="new-password-field" class="form-control" placeholder="Mínimo 4 caracteres" minlength="4" required style="font-weight: bold; font-size: 13px;" />
+          </div>
+
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" style="font-weight: 800; color: #0f172a;">Confirmar Nueva Contraseña *</label>
+            <input type="password" name="confirmPassword" id="confirm-password-field" class="form-control" placeholder="Repita la nueva clave" minlength="4" required style="font-weight: bold; font-size: 13px;" />
+          </div>
+
+          <div style="padding: 10px 14px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px; font-size: 11.5px; color: #1e40af;">
+            ℹ️ <strong>Seguridad Institucional:</strong> Por políticas de soporte, la administración institucional podrá visualizar su nueva clave en el directorio general para evitar pérdidas de acceso.
+          </div>
+
+        </div>
+        <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
+          <button type="submit" class="btn btn-navy" style="font-weight: 900;">✓ Actualizar Contraseña</button>
+        </div>
+      </form>
+    `);
+  }
+
+  confirmChangePassword(event) {
+    if (event) event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const currentPass = (formData.get("currentPassword") || "").trim();
+    const newPass = (formData.get("newPassword") || "").trim();
+    const confirmPass = (formData.get("confirmPassword") || "").trim();
+
+    if (newPass !== confirmPass) {
+      alert("Las nuevas contraseñas no coinciden. Por favor verifíquelas.");
+      return;
+    }
+
+    const user = this.store.getCurrentUser();
+    const res = this.store.changeUserPassword(user.code || user.id || user.username, newPass, currentPass);
+
+    if (res.success) {
+      this.closeModal();
+      this.showToast(`✓ Contraseña actualizada exitosamente. Nueva clave: "${newPass}"`, "success");
+      this.render();
+    } else {
+      alert(res.error || "No se pudo actualizar la contraseña. Verifique su clave actual.");
+    }
+  }
+
+  // Matricular Estudiante con Apoderado desde el Portal de Administración
+  openAdminAddStudentWithParentModal() {
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+
+    this.showModal(`
+      <div class="modal-header" style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white;">
+        <div>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">➕ Matricular Estudiante & Crear Cuenta de Apoderado</h3>
+          <span style="font-size: 11px; opacity: 0.9;">I.E.P. "El Educador" • Generación Automática de Cuentas y Accesos</span>
+        </div>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+      </div>
+      <form onsubmit="window.app.confirmAdminAddStudentWithParent(event)">
+        <div class="modal-body" style="padding: 20px; background: #f8fafc;">
+          
+          <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            
+            <div class="form-group" style="grid-column: span 2;">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">1. Nombre y Apellido Completo del Estudiante *</label>
+              <input type="text" name="studentName" class="form-control" placeholder="Ej. Camila Sofía Mendoza Huamán" required style="font-weight: bold; font-size: 13px;" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">2. Grado Escolar a Matricular *</label>
+              <select name="gradeId" class="form-control" required style="font-weight: bold; font-size: 13px; background: #fffbeb; border-color: #f59e0b;">
+                ${catalog.map(g => `
+                  <option value="${g.id}">${g.label} • (Tutor: ${g.tutor || 'Asignado'})</option>
+                `).join('')}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">3. DNI del Estudiante (Opcional)</label>
+              <input type="text" name="dni" class="form-control" placeholder="Ej. 75891234" maxlength="8" style="font-size: 13px;" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">4. Nombre Completo del Padre / Apoderado *</label>
+              <input type="text" name="guardian" class="form-control" placeholder="Ej. Rosa Huamán Prado" required style="font-weight: bold; font-size: 13px;" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">5. Teléfono de Contacto del Apoderado *</label>
+              <input type="tel" name="phone" class="form-control" placeholder="Ej. 987-654-321" required style="font-weight: bold; font-size: 13px;" />
+            </div>
+
+          </div>
+
+          <div style="margin-top: 14px; padding: 12px 14px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px; font-size: 11.5px; color: #1e40af; line-height: 1.4;">
+            ✨ <strong>Sincronización Total de Cuentas:</strong><br>
+            • Se creará el usuario <code>Estudiante</code> (clave por defecto: <code>estudiante2026</code>).<br>
+            • Se creará el usuario <code>Apoderado</code> (clave por defecto: <code>padre2026</code>) vinculado al estudiante.<br>
+            • Ambos aparecerán inmediatamente en la tabla de <strong>Gestión de Usuarios</strong> con contraseñas visibles.
+          </div>
+
+        </div>
+        <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
+          <button type="submit" class="btn btn-gold" style="font-weight: 900;">✓ Matricular y Crear Cuentas</button>
+        </div>
+      </form>
+    `);
+  }
+
+  confirmAdminAddStudentWithParent(event) {
+    if (event) event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const gradeId = formData.get("gradeId") || "4sec";
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+    const cleanG = gradeId.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "4° de Secundaria" };
+
+    const studentData = {
+      studentCode: `EST-2026-${Math.floor(100 + Math.random() * 900)}`,
+      studentName: (formData.get("studentName") || "").trim(),
+      gradeId: gradeId,
+      grade: gradeObj.label,
+      guardian: (formData.get("guardian") || "Padre / Apoderado").trim(),
+      phone: (formData.get("phone") || "987-654-321").trim(),
+      guardianPhone: (formData.get("phone") || "987-654-321").trim(),
+      dni: (formData.get("dni") || "").trim() || `7${Math.floor(1000000 + Math.random() * 9000000)}`
+    };
+
+    if (!studentData.studentName) {
+      alert("Por favor ingrese el nombre del estudiante.");
+      return;
+    }
+
+    this.store.addStudentToGrade(studentData);
+    this.closeModal();
+    this.showToast(`✓ Estudiante "${studentData.studentName}" y cuenta de apoderado "${studentData.guardian}" creados con éxito.`, "success");
+    this.render();
   }
 
   // =========================================================================
@@ -17408,6 +17827,12 @@ CREATE TABLE tb_cuadernos_qr (
     const cleanG = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
     const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { id: gradeId || "4sec", label: "4° de Secundaria", level: "Secundaria" };
 
+    const activeUser = this.store.getCurrentUser();
+    if (!this.store.isTeacherTutorOfGrade(activeUser, gradeId)) {
+      alert(`🔒 Matrícula Restringida: Solo el Tutor(a) asignado (${gradeObj.tutor || 'Tutor Responsable'}) o la Dirección General pueden matricular estudiantes en ${gradeObj.label}.`);
+      return;
+    }
+
     this.showModal(`
       <div class="modal-header" style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white;">
         <div>
@@ -17515,6 +17940,12 @@ CREATE TABLE tb_cuadernos_qr (
     const cleanG = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
     const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "4° de Secundaria", level: "Secundaria" };
 
+    const activeUser = this.store.getCurrentUser();
+    if (!this.store.isTeacherTutorOfGrade(activeUser, gradeId)) {
+      alert(`🔒 Importación Restringida: Solo el Tutor(a) asignado (${gradeObj.tutor || 'Tutor Responsable'}) o la Dirección General pueden importar nóminas a ${gradeObj.label}.`);
+      return;
+    }
+
     this.showModal(`
       <div class="modal-header" style="background: linear-gradient(135deg, #065f46 0%, #0f172a 100%); color: white;">
         <div>
@@ -17580,6 +18011,12 @@ CREATE TABLE tb_cuadernos_qr (
     const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
     const cleanG = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
     const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "4° de Secundaria", level: "Secundaria" };
+
+    const activeUser = this.store.getCurrentUser();
+    if (!this.store.isTeacherTutorOfGrade(activeUser, gradeId)) {
+      alert(`🔒 Importación Restringida: Solo el Tutor(a) asignado (${gradeObj.tutor || 'Tutor Responsable'}) o la Dirección General pueden importar nóminas a ${gradeObj.label}.`);
+      return;
+    }
 
     this.showModal(`
       <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); color: white;">
@@ -17987,6 +18424,15 @@ CREATE TABLE tb_cuadernos_qr (
   }
 
   confirmDeleteStudent(studentId) {
+    const allEnrollments = this.store.getEnrollments();
+    const st = allEnrollments.find(e => e.id === studentId || e.studentCode === studentId || e.dni === studentId);
+    const user = this.store.getCurrentUser();
+    const gradeId = st ? (st.gradeId || this.store.resolveStudentGradeId(st.grade)) : null;
+    if (gradeId && !this.store.isTeacherTutorOfGrade(user, gradeId)) {
+      alert("🔒 Solo el Docente Tutor asignado al aula o la Dirección tienen autorización para retirar estudiantes.");
+      return;
+    }
+
     if (confirm("¿Está seguro de eliminar a este estudiante de la nómina del aula?")) {
       this.store.deleteStudentFromGrade(studentId);
       this.showToast("✓ Estudiante retirado de la nómina.", "info");
@@ -17999,6 +18445,12 @@ CREATE TABLE tb_cuadernos_qr (
     const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
     const cleanG = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
     const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "el aula seleccionada" };
+
+    const activeUser = this.store.getCurrentUser();
+    if (!this.store.isTeacherTutorOfGrade(activeUser, gradeId)) {
+      alert(`🔒 Acción Restringida: Solo el Tutor(a) asignado (${gradeObj.tutor || 'Tutor Responsable'}) o la Dirección General pueden vaciar la nómina de ${gradeObj.label}.`);
+      return;
+    }
 
     const enrollments = this.store.getEnrollments();
     const count = enrollments.filter(e => {

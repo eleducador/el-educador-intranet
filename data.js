@@ -482,10 +482,12 @@ const initialData = {
       { id: "cuadernos-qr", label: "Control Cuadernos QR", icon: "qr", enabled: true },
       { id: "tareas", label: "Aula Virtual / Quizzes", badge: "10P", icon: "virtual", enabled: true },
       { id: "asistencia", label: "📅 Mi Asistencia & Fotocheck", icon: "attendance", enabled: true },
+      { id: "boleta", label: "📊 Mi Boleta Oficial de Notas", badge: "OFICIAL", icon: "boleta", enabled: true },
       { id: "comunicados", label: "Informes & Circulares", icon: "announcements", enabled: true }
     ],
     padre: [
       { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
+      { id: "boleta", label: "📊 Boleta Oficial de Notas", badge: "OFICIAL", icon: "boleta", enabled: true },
       { id: "agenda-virtual", label: "📖 Agenda Virtual Escolar", badge: "FIRMAS", icon: "agenda", enabled: true },
       { id: "horarios", label: "Horario de Clases", icon: "schedule", enabled: true },
       { id: "silabus", label: "Sílabus Curriculares", icon: "syllabus", enabled: true },

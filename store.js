@@ -188,12 +188,15 @@ class IntranetStore {
         parsed.teachersList[0].schedule[0] && 
         parsed.teachersList[0].schedule[0].time === "08:00 - 08:50";
 
+      const hasSession = typeof sessionStorage !== "undefined" && Boolean(sessionStorage.getItem("colegio_user_session"));
+      const sessionRole = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("colegio_user_role") : null;
+
       const loadedState = {
         ...initialData,
         ...parsed,
-        isAuthenticated: !!parsed.isAuthenticated,
-        currentRole: parsed.currentRole || "admin",
-        currentView: parsed.currentView || "dashboard",
+        isAuthenticated: hasSession,
+        currentRole: sessionRole || parsed.currentRole || "docente",
+        currentView: hasSession ? (parsed.currentView || "dashboard") : "login",
         selectedScheduleGrade: parsed.selectedScheduleGrade || "4sec",
         selectedSyllabusGrade: parsed.selectedSyllabusGrade || "4sec",
         academicConfig: {
@@ -254,10 +257,13 @@ class IntranetStore {
       return loadedState;
     }
 
+    const hasSession = typeof sessionStorage !== "undefined" && Boolean(sessionStorage.getItem("colegio_user_session"));
+    const sessionRole = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("colegio_user_role") : null;
+
     return {
-      isAuthenticated: false,
-      currentRole: "admin",
-      currentView: "dashboard",
+      isAuthenticated: hasSession,
+      currentRole: sessionRole || "docente",
+      currentView: hasSession ? "dashboard" : "login",
       selectedScheduleGrade: "4sec",
       selectedSyllabusGrade: "4sec",
       usersManagementTab: "users",
@@ -319,8 +325,8 @@ class IntranetStore {
         const localTime = this.state.updatedAt || 0;
         const serverTime = serverData.updatedAt || 0;
 
-        // Si la nube tiene datos más recientes o si este dispositivo recién abre la página:
-        if (serverTime >= localTime || !this.state.updatedAt) {
+        // Si la nube tiene datos estrictamente más recientes o si este dispositivo recién abre la página:
+        if (serverTime > localTime || !this.state.updatedAt) {
           // Reemplazo limpio y exacto (elimina usuarios borrados y agrega usuarios creados)
           if (serverData.systemUsers) this.state.systemUsers = serverData.systemUsers;
           if (serverData.enrollments) this.state.enrollments = serverData.enrollments;
@@ -515,6 +521,11 @@ class IntranetStore {
         this.state.isAuthenticated = true;
         this.state.currentView = "dashboard";
 
+        if (typeof sessionStorage !== "undefined") {
+          sessionStorage.setItem("colegio_user_session", activeUser.username || activeUser.code || term);
+          sessionStorage.setItem("colegio_user_role", assignedRole);
+        }
+
         this.saveLocalSession();
         this.notify();
         this.fetchServerState(true);
@@ -553,6 +564,12 @@ class IntranetStore {
           this.state.isAuthenticated = true;
           this.state.currentRole = roleKey;
           this.state.currentView = "dashboard";
+
+          if (typeof sessionStorage !== "undefined") {
+            sessionStorage.setItem("colegio_user_session", roleKey);
+            sessionStorage.setItem("colegio_user_role", roleKey);
+          }
+
           this.saveLocalSession();
           this.notify();
           this.fetchServerState(true);
@@ -567,9 +584,13 @@ class IntranetStore {
   }
 
   logout() {
+    if (typeof sessionStorage !== "undefined") {
+      sessionStorage.removeItem("colegio_user_session");
+      sessionStorage.removeItem("colegio_user_role");
+    }
     this.state.isAuthenticated = false;
     this.state.currentUser = null;
-    this.state.currentView = "dashboard";
+    this.state.currentView = "login";
     this.saveLocalSession();
     this.notify();
   }
@@ -1142,6 +1163,31 @@ class IntranetStore {
       hasAdminPrivilege: false
     });
 
+    // Registrar o actualizar cuenta de Padre / Apoderado en systemUsers
+    const cleanGuardianName = (data.guardian || "Apoderado").trim();
+    if (cleanGuardianName && cleanGuardianName.toLowerCase() !== "apoderado titular" && cleanGuardianName.toLowerCase() !== "sin apoderado") {
+      const cleanGName = cleanGuardianName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
+      const gParts = cleanGName.split(/\s+/).filter(Boolean);
+      const gUsername = gParts.length >= 2 ? `${gParts[0]}.${gParts[gParts.length - 1]}` : `apoderado.${stUsername}`;
+      
+      this.createSystemUser({
+        code: `APO-${studentCode}`,
+        name: cleanGuardianName,
+        email: `${gUsername}@eleducador.edu.pe`,
+        username: gUsername,
+        role: "Apoderado",
+        detail: `Apoderado de ${(data.studentName || data.name || "").trim()} (${gradeObj.label})`,
+        studentName: (data.studentName || data.name || "").trim(),
+        studentCode: studentCode,
+        grade: gradeObj.label,
+        gradeId: gradeId,
+        password: "padre2026",
+        phone: data.guardianPhone || data.phone || "987-654-321",
+        tutor: gradeObj.tutor,
+        hasAdminPrivilege: false
+      });
+    }
+
     // Inicializar boletaData si no existe
     if (!this.state.boletaData) this.state.boletaData = {};
     if (!this.state.boletaData[studentCode]) {
@@ -1193,6 +1239,35 @@ class IntranetStore {
     this.saveState();
     this.notify();
     return true;
+  }
+
+  // Eliminar todos los estudiantes de un aula / grado específico
+  clearAllStudentsFromGrade(gradeId) {
+    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    const cleanG = (gradeId || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    const toRemove = this.state.enrollments.filter(e => {
+      const egId = (e.gradeId || this.resolveStudentGradeId(e.grade) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return egId === cleanG || egId.includes(cleanG) || cleanG.includes(egId);
+    });
+
+    const removedCodes = new Set(toRemove.map(e => e.studentCode || e.id || e.dni));
+
+    this.state.enrollments = this.state.enrollments.filter(e => {
+      const code = e.studentCode || e.id || e.dni;
+      return !removedCodes.has(code);
+    });
+
+    if (this.state.systemUsers) {
+      this.state.systemUsers = this.state.systemUsers.filter(u => {
+        const uCode = u.code || u.id || u.dni;
+        return !removedCodes.has(uCode);
+      });
+    }
+
+    this.saveState();
+    this.notify();
+    return toRemove.length;
   }
 
   updateScheduleSlot(gradeId, rowIndex, dayKey, slotData) {
@@ -1737,6 +1812,117 @@ class IntranetStore {
     }
 
     return allCourses.filter(c => this.isTeacherAssignedToCourse(c, user, gradeId));
+  }
+
+  // Verificar si el usuario en sesión es el Tutor Asignado al Grado / Aula
+  isTeacherTutorOfGrade(user, gradeId) {
+    if (!user) return false;
+    const role = (user.role || "").toLowerCase();
+    // Directores y Administradores tienen permisos globales de tutoría y matrícula en todos los grados
+    if (role === "admin" || role === "administrador" || role === "director" || role === "directivo") {
+      return true;
+    }
+
+    const catalog = this.state.gradesCatalog || initialData.gradesCatalog || [];
+    const cleanG = (gradeId || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG);
+    if (!gradeObj) return false;
+
+    const cleanUserName = (user.name || "").toLowerCase().replace(/^(prof\.|lic\.|miss|dr\.|dra\.|ing\.)\s*/i, '').trim();
+    const cleanTutorName = (gradeObj.tutor || "").toLowerCase().replace(/^(prof\.|lic\.|miss|dr\.|dra\.|ing\.)\s*/i, '').trim();
+
+    // 1. Coincidencia por nombre de tutor asignado al aula
+    if (cleanTutorName && cleanUserName) {
+      if (cleanTutorName === cleanUserName || cleanTutorName.includes(cleanUserName) || cleanUserName.includes(cleanTutorName)) {
+        return true;
+      }
+    }
+
+    // 2. Coincidencia por tutorGrade en el perfil del usuario
+    if (user.tutorGrade) {
+      const cleanTutorG = user.tutorGrade.toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (cleanTutorG === cleanG || cleanTutorG.includes(cleanG) || cleanG.includes(cleanTutorG)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  // Cambiar contraseña del usuario (actualiza en activeUser, systemUsers y users)
+  changeUserPassword(userCodeOrIdOrUsername, newPassword, currentPassword = null) {
+    if (!newPassword || newPassword.trim().length < 4) {
+      return { success: false, error: "La nueva contraseña debe tener al menos 4 caracteres." };
+    }
+
+    const cleanNewPass = newPassword.trim();
+    const targetClean = (userCodeOrIdOrUsername || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
+    let updated = false;
+
+    // 1. Actualizar en activeUser / currentUser si coincide
+    if (this.state.currentUser) {
+      this.state.currentUser.password = cleanNewPass;
+      updated = true;
+    }
+
+    // 2. Actualizar en systemUsers
+    if (!this.state.systemUsers) {
+      this.state.systemUsers = JSON.parse(JSON.stringify(initialData.systemUsers || []));
+    }
+    
+    this.state.systemUsers.forEach(u => {
+      const uName = (u.username || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
+      const uCode = (u.code || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
+      const uId = (u.id || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
+      const uFullName = (u.name || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
+      const uAliases = Array.isArray(u.aliases) ? u.aliases.map(a => (a || "").toLowerCase().replace(/[\s\.\-_]+/g, '')) : [];
+
+      const match = 
+        uName === targetClean ||
+        uCode === targetClean ||
+        uId === targetClean ||
+        uAliases.includes(targetClean) ||
+        (targetClean === "docente" && (u.role === "Docente" || uFullName.includes("robertosilva"))) ||
+        (this.state.currentUser && (
+          u.username === this.state.currentUser.username ||
+          u.code === this.state.currentUser.code ||
+          u.code === this.state.currentUser.id ||
+          u.id === this.state.currentUser.id ||
+          u.id === this.state.currentUser.code ||
+          u.name === this.state.currentUser.name
+        ));
+
+      if (match) {
+        u.password = cleanNewPass;
+        updated = true;
+      }
+    });
+
+    // 3. Actualizar en users predefinidos si corresponde
+    if (this.state.users) {
+      for (const [rKey, uObj] of Object.entries(this.state.users)) {
+        const rClean = rKey.toLowerCase().replace(/[\s\.\-_]+/g, '');
+        const uClean = (uObj.username || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
+        if (
+          rClean === targetClean ||
+          uClean === targetClean ||
+          (this.state.currentUser && (
+            uObj.username === this.state.currentUser.username ||
+            uObj.id === this.state.currentUser.id ||
+            uObj.name === this.state.currentUser.name
+          ))
+        ) {
+          uObj.password = cleanNewPass;
+          updated = true;
+        }
+      }
+    }
+
+    this.saveState();
+    this.syncToServer();
+    this.notify();
+
+    return { success: true, newPassword: cleanNewPass };
   }
 
   getStudentAllBoletaStickersData(studentIdOrCode = "EST-2026-042") {
