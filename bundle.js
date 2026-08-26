@@ -3677,6 +3677,35 @@ class IntranetStore {
     return true;
   }
 
+  // Eliminar todos los estudiantes de un aula / grado específico
+  clearAllStudentsFromGrade(gradeId) {
+    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    const cleanG = (gradeId || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    const toRemove = this.state.enrollments.filter(e => {
+      const egId = (e.gradeId || this.resolveStudentGradeId(e.grade) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return egId === cleanG || egId.includes(cleanG) || cleanG.includes(egId);
+    });
+
+    const removedCodes = new Set(toRemove.map(e => e.studentCode || e.id || e.dni));
+
+    this.state.enrollments = this.state.enrollments.filter(e => {
+      const code = e.studentCode || e.id || e.dni;
+      return !removedCodes.has(code);
+    });
+
+    if (this.state.systemUsers) {
+      this.state.systemUsers = this.state.systemUsers.filter(u => {
+        const uCode = u.code || u.id || u.dni;
+        return !removedCodes.has(uCode);
+      });
+    }
+
+    this.saveState();
+    this.notify();
+    return toRemove.length;
+  }
+
   updateScheduleSlot(gradeId, rowIndex, dayKey, slotData) {
     const targetGrade = gradeId || this.state.selectedScheduleGrade || "4sec-a";
     if (!this.state.schedules[targetGrade]) {
@@ -6231,6 +6260,9 @@ const Components = {
               <button class="btn btn-outline btn-sm" onclick="window.app.downloadExcelTemplate()" style="font-weight: 800; font-size: 11.5px; color: #0284c7; border-color: #38bdf8;">
                 📄 Plantilla Excel
               </button>
+              <button class="btn btn-sm" onclick="window.app.confirmClearAllClassroomStudents('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px; background: #fee2e2; color: #b91c1c; border: 1px solid #f87171;" title="Eliminar todos los registros de estudiantes de esta aula">
+                🗑️ Eliminar Todos los Registros del Aula
+              </button>
             </div>
 
           </div>
@@ -6242,8 +6274,12 @@ const Components = {
             <div style="font-size: 13px; font-weight: 800; color: var(--color-navy-900);">
               Nómina Oficial de Estudiantes — ${currentGradeObj.label || selectedGrade} (${classroomStudents.length} Alumnos Registrados)
             </div>
-            <div style="font-size: 11.5px; color: #64748b;">
-              * Los alumnos agregados o importados aquí se sincronizan automáticamente en <strong>Registro de Notas</strong>, <strong>Cuadernos QR</strong> y <strong>Asistencias</strong>.
+            <div style="display: flex; gap: 8px; align-items: center;">
+              ${classroomStudents.length > 0 ? `
+                <button class="btn btn-sm" onclick="window.app.confirmClearAllClassroomStudents('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px; background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; padding: 4px 12px;" title="Vaciar la nómina de esta aula">
+                  🗑️ Eliminar Todos los Registros (${classroomStudents.length})
+                </button>
+              ` : ''}
             </div>
           </div>
 
@@ -17919,6 +17955,30 @@ CREATE TABLE tb_cuadernos_qr (
     if (confirm("¿Está seguro de eliminar a este estudiante de la nómina del aula?")) {
       this.store.deleteStudentFromGrade(studentId);
       this.showToast("✓ Estudiante retirado de la nómina.", "info");
+      this.render();
+    }
+  }
+
+  // Eliminar todos los registros de estudiantes del aula activa
+  confirmClearAllClassroomStudents(gradeId) {
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+    const cleanG = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "el aula seleccionada" };
+
+    const enrollments = this.store.getEnrollments();
+    const count = enrollments.filter(e => {
+      const egId = (e.gradeId || this.store.resolveStudentGradeId(e.grade) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return egId === cleanG || egId.includes(cleanG) || cleanG.includes(egId);
+    }).length;
+
+    if (count === 0) {
+      this.showToast(`No hay estudiantes registrados en ${gradeObj.label} para eliminar.`, "info");
+      return;
+    }
+
+    if (confirm(`⚠️ ¿Está seguro de eliminar TODOS los (${count}) registros de estudiantes de ${gradeObj.label}?\n\nEsta acción vaciará por completo la nómina del aula seleccionada.`)) {
+      const removed = this.store.clearAllStudentsFromGrade(gradeId);
+      this.showToast(`✓ Se eliminaron todos los registros de estudiantes de ${gradeObj.label} (${removed} alumnos retirados).`, "info");
       this.render();
     }
   }
