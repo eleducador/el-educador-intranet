@@ -3884,17 +3884,7 @@ class IntranetStore {
     if (!this.state.attendanceRecords) {
       this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
     }
-    const enrollments = this.getEnrollments();
-    const cleanQuery = (qrCodeOrDni || "").trim().toLowerCase();
-
-    // Buscar estudiante por código, DNI, SIAGIE o nombre
-    const matchedEnrollment = enrollments.find(e => 
-      (e.studentCode && e.studentCode.toLowerCase() === cleanQuery) ||
-      (e.dni && e.dni === cleanQuery) ||
-      (e.siagieCode && e.siagieCode.toLowerCase() === cleanQuery) ||
-      (cleanQuery.includes(e.studentCode ? e.studentCode.toLowerCase() : 'xxx')) ||
-      (e.studentName && e.studentName.toLowerCase().includes(cleanQuery))
-    ) || enrollments[0];
+    const matchedEnrollment = this.resolveStudentByQR(qrCodeOrDni) || this.getEnrollments()[0];
 
     const todayDate = "19/08/2026";
     let scanTime = customTime;
@@ -3992,16 +3982,7 @@ class IntranetStore {
     if (!this.state.attendanceRecords) {
       this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
     }
-    const enrollments = this.getEnrollments();
-    const cleanQuery = (qrCodeOrDni || "").trim().toLowerCase();
-
-    const matchedEnrollment = enrollments.find(e => 
-      (e.studentCode && e.studentCode.toLowerCase() === cleanQuery) ||
-      (e.dni && e.dni === cleanQuery) ||
-      (e.siagieCode && e.siagieCode.toLowerCase() === cleanQuery) ||
-      (cleanQuery.includes(e.studentCode ? e.studentCode.toLowerCase() : 'xxx')) ||
-      (e.studentName && e.studentName.toLowerCase().includes(cleanQuery))
-    ) || enrollments[0];
+    const matchedEnrollment = this.resolveStudentByQR(qrCodeOrDni) || this.getEnrollments()[0];
 
     const todayDate = "19/08/2026";
     const existingRecord = this.state.attendanceRecords.find(r => 
@@ -4868,35 +4849,13 @@ const Components = {
     return "5prim";
   },
 
-  // Helper para generar SVG de Código QR estilizado
-  generateQRSVG(code) {
+  // Helper para generar Código QR 100% Escaneable por Cámaras y Lectores
+  generateQRSVG(code, size = 200) {
+    const cleanCode = (code || "EST-2026-055").trim();
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(cleanCode)}&margin=1&format=svg`;
+    const fallbackPng = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(cleanCode)}&margin=1`;
     return `
-      <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100" height="100" fill="white"/>
-        <rect x="10" y="10" width="26" height="26" fill="#0b132b"/>
-        <rect x="15" y="15" width="16" height="16" fill="white"/>
-        <rect x="19" y="19" width="8" height="8" fill="#0b132b"/>
-        <rect x="64" y="10" width="26" height="26" fill="#0b132b"/>
-        <rect x="69" y="15" width="16" height="16" fill="white"/>
-        <rect x="73" y="19" width="8" height="8" fill="#0b132b"/>
-        <rect x="10" y="64" width="26" height="26" fill="#0b132b"/>
-        <rect x="15" y="69" width="16" height="16" fill="white"/>
-        <rect x="19" y="73" width="8" height="8" fill="#0b132b"/>
-        <rect x="42" y="12" width="6" height="6" fill="#dc2626"/>
-        <rect x="50" y="20" width="8" height="6" fill="#0b132b"/>
-        <rect x="42" y="30" width="14" height="6" fill="#f59e0b"/>
-        <rect x="12" y="44" width="6" height="12" fill="#0b132b"/>
-        <rect x="24" y="44" width="8" height="6" fill="#dc2626"/>
-        <rect x="38" y="42" width="24" height="8" fill="#0b132b"/>
-        <rect x="68" y="42" width="10" height="6" fill="#0b132b"/>
-        <rect x="82" y="44" width="8" height="12" fill="#f59e0b"/>
-        <rect x="42" y="56" width="8" height="14" fill="#0b132b"/>
-        <rect x="56" y="56" width="12" height="6" fill="#dc2626"/>
-        <rect x="74" y="56" width="14" height="8" fill="#0b132b"/>
-        <rect x="42" y="76" width="14" height="8" fill="#f59e0b"/>
-        <rect x="62" y="70" width="8" height="18" fill="#0b132b"/>
-        <rect x="76" y="76" width="14" height="14" fill="#0b132b"/>
-      </svg>
+      <img src="${qrUrl}" alt="Código QR ${cleanCode}" style="width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; display: block;" onerror="this.onerror=null; this.src='${fallbackPng}'" />
     `;
   },
 
@@ -9792,12 +9751,25 @@ const Components = {
                     <button class="btn btn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-011', '08:10 AM')" style="font-size: 11px; text-align: left; padding: 8px;">
                       <span class='status-dot-yellow'></span> <strong>Carlos Benítez</strong><br><span style="font-size: 9.5px; color: #b45309;">1er Escaneo: Tardanza (08:10 AM)</span>
                     </button>
-                    <button class="btn btn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-055')" style="font-size: 11px; text-align: left; padding: 8px; border: 2px solid #ef4444; background: #fff5f5;">
-                      <strong>Gael Cáceres</strong><br><span style="font-size: 9.5px; color: #dc2626; font-weight: bold;">2do Escaneo: Crear Informe</span>
+                    <button class="btn btn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-055', '07:35 AM')" style="font-size: 11px; text-align: left; padding: 8px;">
+                      <span class='status-dot-green'></span> <strong>Salim Cáceres</strong><br><span style="font-size: 9.5px; color: #047857;">Ingreso Puntual (07:35 AM)</span>
                     </button>
                     <button class="btn btn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-025', '08:45 AM')" style="font-size: 11px; text-align: left; padding: 8px;">
                       <span class='status-dot-red'></span> <strong>Mateo Ramos</strong><br><span style="font-size: 9.5px; color: #dc2626;">08:45 AM (Puerta Cerrada / Falta)</span>
                     </button>
+                  </div>
+
+                  <!-- Entrada para Pistola Lectora USB o Teclado -->
+                  <div style="background: white; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 10px 14px; margin-top: 14px; text-align: left;">
+                    <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margin-bottom: 4px;">
+                      🔫 O Escanear con Pistola USB / Ingreso Manual:
+                    </label>
+                    <div style="display: flex; gap: 8px;">
+                      <input type="text" id="door-manual-barcode-input" class="form-control" placeholder="Escanear fotocheck o escribir DNI / Cód..." style="font-size: 12px; font-weight: bold;" onkeydown="if(event.key==='Enter'){ window.app.processSmartQRScan(this.value); this.value=''; }" />
+                      <button class="btn btn-navy btn-sm" onclick="const inp=document.getElementById('door-manual-barcode-input'); if(inp && inp.value){ window.app.processSmartQRScan(inp.value); inp.value=''; }" style="font-weight: 800; white-space: nowrap;">
+                        Validar
+                      </button>
+                    </div>
                   </div>
 
                 </div>
@@ -13847,6 +13819,9 @@ CREATE TABLE tb_cuadernos_qr (
     }
 
     try {
+      if (this.doorQrScanner) {
+        try { this.doorQrScanner.stop().catch(() => {}); } catch(e) {}
+      }
       this.doorQrScanner = new Html5Qrcode("qr-door-camera-feed");
       const config = {
         fps: 15,
@@ -13854,31 +13829,37 @@ CREATE TABLE tb_cuadernos_qr (
         aspectRatio: 1.0
       };
 
-      this.doorQrScanner.start(
-        { facingMode: "environment" },
-        config,
-        (decodedText) => {
-          // QR detectado en puerta
-          this.processQRScanFromDoor(decodedText);
-        },
-        () => {}
-      ).then(() => {
-        this.isDoorCamActive = true;
-        if (statusTag) {
-          statusTag.textContent = "<span class='status-dot-green'></span> CÁMARA ACTIVA";
-          statusTag.className = "status-badge status-approved";
-        }
-        if (btnStart) btnStart.style.display = "none";
-        if (btnStop) btnStop.style.display = "inline-block";
-        this.showToast("[Cámara] Cámara de portería activa. Apunte los fotochecks QR al lente.", "info");
-      }).catch((err) => {
-        console.error("Error al acceder a la cámara:", err);
-        if (statusTag) {
-          statusTag.textContent = "Error / Permiso Denegado";
-          statusTag.className = "status-badge status-failed";
-        }
-        this.showToast("No se pudo iniciar la cámara en este dispositivo. Use los botones de simulación rápida.", "warning");
-      });
+      const startWithFallback = (facing) => {
+        return this.doorQrScanner.start(
+          { facingMode: facing },
+          config,
+          (decodedText) => {
+            this.processQRScanFromDoor(decodedText);
+          },
+          () => {}
+        );
+      };
+
+      startWithFallback("environment")
+        .catch(() => startWithFallback("user"))
+        .then(() => {
+          this.isDoorCamActive = true;
+          if (statusTag) {
+            statusTag.innerHTML = "<span class='status-dot-green'></span> CÁMARA ACTIVA";
+            statusTag.className = "status-badge status-approved";
+          }
+          if (btnStart) btnStart.style.display = "none";
+          if (btnStop) btnStop.style.display = "inline-block";
+          this.showToast("📹 Cámara de portería activa. Apunte los fotochecks QR al lente.", "info");
+        })
+        .catch((err) => {
+          console.error("Error al acceder a la cámara:", err);
+          if (statusTag) {
+            statusTag.innerHTML = "Error / Permiso de Cámara";
+            statusTag.className = "status-badge status-failed";
+          }
+          this.showToast("No se pudo abrir la cámara. Puede usar los botones de simulación rápida o ingresar el DNI/Código.", "warning");
+        });
     } catch (e) {
       console.error(e);
       this.showToast("Error al inicializar cámara de portería", "danger");
@@ -13895,7 +13876,7 @@ CREATE TABLE tb_cuadernos_qr (
         const feedContainer = document.getElementById("qr-door-camera-feed");
 
         if (statusTag) {
-          statusTag.textContent = "Cámara Apagada";
+          statusTag.innerHTML = "Cámara Apagada";
           statusTag.className = "status-badge status-pending";
         }
         if (btnStart) btnStart.style.display = "inline-block";
@@ -13940,17 +13921,16 @@ CREATE TABLE tb_cuadernos_qr (
               ⚠️ <strong>LECTURA QR POSTERIOR AL INGRESO:</strong> El estudiante ya se encuentra dentro del colegio. Seleccione la acción correspondiente:
             </div>
 
-              <button class="btn btn-navy btn-sm" onclick="window.app.openStudentVirtualAgendaModal('${result.student.studentCode}')" style="font-weight: 900; font-size: 12px; padding: 8px 14px; background: #1e3a8a; color: white;">
-                📖 Abrir Agenda Virtual & Anotaciones del Estudiante
+            <button class="btn btn-navy btn-sm" onclick="window.app.openStudentVirtualAgendaModal('${result.student.studentCode}')" style="font-weight: 900; font-size: 12px; padding: 8px 14px; background: #1e3a8a; color: white; width: 100%; margin-bottom: 8px;">
+              📖 Abrir Agenda Virtual & Anotaciones del Estudiante
+            </button>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+              <button class="btn btn-red btn-sm" onclick="window.app.openCreateIncidentModal('${result.student.studentCode}', 'Grave')" style="font-weight: 800; font-size: 11px;">
+                ⚠️ Informe de Falta
               </button>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
-                <button class="btn btn-red btn-sm" onclick="window.app.openCreateIncidentModal('${result.student.studentCode}', 'Grave')" style="font-weight: 800; font-size: 11px;">
-                  ⚠️ Informe de Falta
-                </button>
-                <button class="btn btn-gold btn-sm" onclick="window.app.openCreateAgendaNoteModal('${result.student.studentCode}', 'merito')" style="font-weight: 800; font-size: 11px;">
-                  ★ Anotar Mérito
-                </button>
-              </div>
+              <button class="btn btn-gold btn-sm" onclick="window.app.openCreateAgendaNoteModal('${result.student.studentCode}', 'merito')" style="font-weight: 800; font-size: 11px;">
+                ★ Anotar Mérito
+              </button>
             </div>
           </div>
         `;
@@ -13980,7 +13960,7 @@ CREATE TABLE tb_cuadernos_qr (
             ${isDoorClosed ? `⛔ PUERTA CERRADA (08:30 AM) • FALTA REGISTRADA` : isLate ? `⚠️ TARDANZA EN PUERTA (+${result.delayMinutes} MIN)` : `✓ INGRESO PUNTUAL`} • ${result.scanTime}
           </div>
 
-          <div style="font-size: 11.5px; color: #475569;">
+          <div style="font-size: 11.5px; color: #475569; margin-bottom: 10px;">
             ${isDoorClosed ? `
               <span class='status-dot-red'></span> <strong>Corte de Asistencia Aplicado:</strong> Notificando inasistencia al apoderado ${result.guardianName} (${result.guardianPhone}).
             ` : isLate ? `
@@ -13988,6 +13968,15 @@ CREATE TABLE tb_cuadernos_qr (
             ` : `
               🌟 <strong>¡Bienvenido(a) a clase!</strong> Que tengas una excelente jornada escolar.
             `}
+          </div>
+
+          <div style="display: flex; gap: 6px; justify-content: center;">
+            <button class="btn btn-navy btn-sm" onclick="window.app.openStudentVirtualAgendaModal('${result.student.studentCode}')" style="font-size: 11px; font-weight: 800;">
+              📖 Agenda Virtual
+            </button>
+            <button class="btn btn-gold btn-sm" onclick="window.app.openStudentQRModal('${result.student.studentCode}')" style="font-size: 11px; font-weight: 800;">
+              Ver Fotocheck QR
+            </button>
           </div>
         </div>
       `;
@@ -14014,8 +14003,7 @@ CREATE TABLE tb_cuadernos_qr (
   // GENERADOR Y VISOR DE CÓDIGO QR INDIVIDUAL POR ESTUDIANTE (SIN FOTOS)
   // =========================================================================
   openStudentQRModal(studentCode) {
-    const enrollments = this.store.getEnrollments();
-    const st = enrollments.find(e => e.studentCode === studentCode || e.id === studentCode || e.dni === studentCode) || enrollments[0];
+    const st = this.store.resolveStudentByQR(studentCode) || this.store.getEnrollments()[0];
 
     this.showModal(`
       <div class="modal-header" style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white;">
@@ -14067,9 +14055,23 @@ CREATE TABLE tb_cuadernos_qr (
               <strong>CÓD:</strong> <code>${st.studentCode}</code> • <strong>DNI:</strong> <code>${st.dni}</code>
             </div>
 
-            <div style="font-size: 10px; color: #64748b; line-height: 1.3;">
+            <div style="font-size: 10px; color: #64748b; line-height: 1.3; margin-bottom: 12px;">
               Presente este código QR en portería (07:00 a 08:30 AM) para registrar asistencia o ante el auxiliar para incidencias conductuales.
             </div>
+
+            <!-- Botones de Prueba Rápida de Escaneo -->
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; margin-top: 6px;">
+              <div style="font-size: 10.5px; font-weight: bold; color: #1e3a8a; margin-bottom: 6px;">⚡ Probar Marcación QR:</div>
+              <div style="display: flex; gap: 6px; justify-content: center;">
+                <button class="btn btn-gold btn-sm" onclick="window.app.closeModal(); window.app.processSmartQRScan('${st.studentCode}', '07:35 AM')" style="font-size: 10px; font-weight: 800; padding: 4px 8px;">
+                  Puntual (07:35 AM)
+                </button>
+                <button class="btn btn-outline btn-sm" onclick="window.app.closeModal(); window.app.processSmartQRScan('${st.studentCode}', '08:05 AM')" style="font-size: 10px; font-weight: 800; padding: 4px 8px; color: #b45309; border-color: #f59e0b;">
+                  Tardanza (08:05 AM)
+                </button>
+              </div>
+            </div>
+
           </div>
 
           <!-- Pie de Tarjeta -->
@@ -14080,20 +14082,17 @@ CREATE TABLE tb_cuadernos_qr (
 
       </div>
 
-      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
         <button class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
         <div style="display: flex; gap: 6px;">
           <button class="btn btn-navy btn-sm" onclick="window.print()" style="font-weight: 800;">
-            Imprimir Tarjeta / Sticker
+            Imprimir Tarjeta
           </button>
           <button class="btn btn-gold btn-sm" onclick="window.app.downloadStudentQR('${st.studentCode}')" style="font-weight: 800;">
             Descargar QR
           </button>
           <button class="btn btn-gold btn-sm" onclick="window.app.closeModal(); window.app.openStudentVirtualAgendaModal('${st.studentCode}')" style="font-weight: 900; background: #2563eb; color: white;">
             📖 Agenda Virtual
-          </button>
-          <button class="btn btn-outline btn-sm" onclick="window.app.closeModal(); window.app.openCreateIncidentModal('${st.studentCode}')" style="color: #dc2626; border-color: #fca5a5; font-weight: bold;">
-            Informe
           </button>
         </div>
       </div>
