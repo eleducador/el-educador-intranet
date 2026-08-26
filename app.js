@@ -6900,6 +6900,10 @@ CREATE TABLE tb_cuadernos_qr (
   }
 
   openManualPaymentModal() {
+    const families = (this.store && typeof this.store.getFamiliesFinancial === "function") 
+      ? this.store.getFamiliesFinancial() 
+      : (this.store.state.familiesFinancial || []);
+
     this.showModal(`
       <div class="modal-header">
         <h3>Registrar Pago en Caja (Coordinación / Tesorería)</h3>
@@ -6909,9 +6913,9 @@ CREATE TABLE tb_cuadernos_qr (
         <div class="form-group">
           <label class="form-label">Seleccionar Familia / Estudiante:</label>
           <select id="man-family-select" class="form-control">
-            <option value="FAM-2026-108">Dra. Carmen Méndez (Sofía Méndez - 4to Sec A) - S/ 480.00</option>
-            <option value="FAM-2026-044">Sr. Roberto Díaz (Carlos Benítez - 4to Sec A) - S/ 0.00</option>
-            <option value="FAM-2026-092">Sra. Teresa Oropeza (Brini Pocomo - 5 años) - S/ 0.00</option>
+            ${families.map(f => `
+              <option value="${f.familyId}">${f.guardian} (${f.studentName} - ${f.grade}) - ${f.pendingAmount > 0 ? `Deuda: S/ ${f.pendingAmount.toFixed(2)}` : 'S/ 0.00 (Al Día)'}</option>
+            `).join('')}
           </select>
         </div>
 

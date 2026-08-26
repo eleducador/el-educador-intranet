@@ -205,7 +205,33 @@ class IntranetStore {
         },
         teachersList: isScheduleUpdated ? parsed.teachersList : initialData.teachersList,
         schedules: isScheduleUpdated ? parsed.schedules : initialData.schedules,
-        systemUsers: Array.isArray(parsed.systemUsers) ? parsed.systemUsers : initialData.systemUsers,
+        systemUsers: (() => {
+          const rawList = Array.isArray(parsed.systemUsers) && parsed.systemUsers.length > 0 ? parsed.systemUsers : initialData.systemUsers;
+          const seen = new Set();
+          const deduped = [];
+          
+          // Primero pasar los de initialData si no están
+          const fullList = [...rawList];
+          (initialData.systemUsers || []).forEach(initU => {
+            const exists = fullList.some(u => 
+              (initU.code && u.code === initU.code) || 
+              (initU.username && u.username === initU.username) || 
+              (initU.role === u.role && initU.name.trim().toLowerCase() === u.name.trim().toLowerCase())
+            );
+            if (!exists) {
+              fullList.push(initU);
+            }
+          });
+
+          fullList.forEach(u => {
+            const key = `${u.role}_${(u.code || u.username || u.name).toLowerCase().replace(/[\s\.\-_]+/g, '')}`;
+            if (!seen.has(key)) {
+              seen.add(key);
+              deduped.push(u);
+            }
+          });
+          return deduped;
+        })(),
         navigationTabsConfig: {
           ...initialData.navigationTabsConfig,
           ...(parsed.navigationTabsConfig || {}),
@@ -654,7 +680,68 @@ class IntranetStore {
   }
 
   getSystemUsers() {
-    return (this.state && this.state.systemUsers) || (initialData && initialData.systemUsers) || [];
+    let users = (this.state && this.state.systemUsers && this.state.systemUsers.length > 0) 
+      ? this.state.systemUsers 
+      : (initialData && initialData.systemUsers ? [...initialData.systemUsers] : []);
+    
+    // 1. Asegurar que los apoderados y estudiantes de initialData estén presentes
+    (initialData.systemUsers || []).forEach(initU => {
+      const exists = users.some(u => 
+        (initU.code && u.code === initU.code) || 
+        (initU.username && u.username === initU.username) || 
+        (initU.role === u.role && initU.name.trim().toLowerCase() === u.name.trim().toLowerCase())
+      );
+      if (!exists) {
+        users.push(initU);
+      }
+    });
+
+    // 2. Sincronizar automáticamente cualquier apoderado registrado en enrollments que no tenga cuenta de systemUsers
+    const enrollments = Array.isArray(this.state.enrollments) && this.state.enrollments.length > 0 ? this.state.enrollments : (initialData.enrollments || []);
+    enrollments.forEach(enr => {
+      if (enr.guardian && enr.guardian !== "Apoderado" && enr.guardian !== "Apoderado Registrado") {
+        const guardianName = enr.guardian.trim();
+        const exists = users.some(u => 
+          (u.role === "Apoderado" || u.role === "Padre") && 
+          (u.name.toLowerCase().trim() === guardianName.toLowerCase() || (u.studentName && enr.studentName && u.studentName.toLowerCase().trim() === enr.studentName.toLowerCase().trim()))
+        );
+
+        if (!exists) {
+          const cleanUser = guardianName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/^(sr\.|sra\.|don|doña|dr\.|dra\.)\s*/i, '').replace(/\s+/g, '.');
+          const cleanNum = (enr.studentCode || enr.id || '100').replace(/\D/g, '') || Math.floor(100 + Math.random() * 900);
+          users.push({
+            id: `USR-FAM-${cleanNum}`,
+            code: `FAM-2026-${String(cleanNum).padStart(3, '0').slice(-3)}`,
+            username: cleanUser || `apoderado.${cleanNum}`,
+            password: "padre2026",
+            name: guardianName,
+            email: `${cleanUser || 'apoderado'}@eleducador.edu.pe`,
+            role: "Apoderado",
+            detail: `Apoderado(a) de ${enr.studentName} (${enr.grade})`,
+            dni: enr.guardianDni || enr.dni || "",
+            phone: enr.guardianPhone || enr.phone || "987-654-321",
+            studentName: enr.studentName,
+            hasAdminPrivilege: false,
+            status: "Activo",
+            createdDate: new Date().toLocaleDateString("es-PE")
+          });
+        }
+      }
+    });
+
+    // 3. Deduplicar por rol + (código o username o nombre)
+    const seen = new Set();
+    const deduped = [];
+    users.forEach(u => {
+      const key = `${u.role}_${(u.code || u.username || u.name).toLowerCase().replace(/[\s\.\-_]+/g, '')}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        deduped.push(u);
+      }
+    });
+
+    this.state.systemUsers = deduped;
+    return deduped;
   }
 
   getEnrollments() {
@@ -828,6 +915,26 @@ class IntranetStore {
     };
 
     if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
+
+    // Verificar si ya existe un usuario con el mismo código, username o (rol y nombre)
+    const existingIndex = this.state.systemUsers.findIndex(u => 
+      (userData.code && u.code === userData.code) ||
+      (cleanUser && u.username === cleanUser) ||
+      (u.role === role && u.name.trim().toLowerCase() === (userData.name || "").trim().toLowerCase())
+    );
+
+    if (existingIndex !== -1) {
+      this.state.systemUsers[existingIndex] = {
+        ...this.state.systemUsers[existingIndex],
+        ...newUser,
+        id: this.state.systemUsers[existingIndex].id,
+        password: userData.password || this.state.systemUsers[existingIndex].password || newUser.password
+      };
+      this.saveState();
+      this.notify();
+      return this.state.systemUsers[existingIndex];
+    }
+
     this.state.systemUsers.unshift(newUser);
 
     // Si es docente con carga horaria o asignación, agregarlo también a teachersList
@@ -2224,22 +2331,134 @@ class IntranetStore {
     };
   }
 
+  // Obtener nómina unificada de familias y estado financiero en tiempo real
+  getFamiliesFinancial() {
+    if (!this.state.familiesFinancial) {
+      this.state.familiesFinancial = JSON.parse(JSON.stringify(initialData.familiesFinancial || []));
+    }
+
+    const familyMap = new Map();
+
+    // 1. Cargar las familias existentes
+    this.state.familiesFinancial.forEach(f => {
+      if (f && (f.familyId || f.studentCode || f.guardian)) {
+        const key = (f.familyId || f.studentCode || f.guardian).toLowerCase().trim();
+        familyMap.set(key, { ...f });
+      }
+    });
+
+    // 2. Sincronizar automáticamente con todas las matrículas oficiales
+    const enrollments = this.getEnrollments();
+    enrollments.forEach(enr => {
+      const studentCode = enr.studentCode || enr.id || "EST-2026-000";
+      const cleanNum = studentCode.replace(/\D/g, '') || Math.floor(100 + Math.random() * 900);
+      const generatedFamId = `FAM-2026-${String(cleanNum).padStart(3, '0').slice(-3)}`;
+      
+      const matchKey = (generatedFamId || studentCode || enr.guardian).toLowerCase().trim();
+      const existing = familyMap.get(matchKey) || Array.from(familyMap.values()).find(f => 
+        (f.studentName && enr.studentName && f.studentName.trim().toLowerCase() === enr.studentName.trim().toLowerCase()) ||
+        (f.studentCode && f.studentCode === studentCode) ||
+        (f.guardian && enr.guardian && f.guardian.trim().toLowerCase() === enr.guardian.trim().toLowerCase())
+      );
+
+      if (!existing) {
+        const newFam = {
+          familyId: generatedFamId,
+          guardian: enr.guardian || "Apoderado Registrado",
+          studentName: enr.studentName,
+          studentCode: studentCode,
+          grade: enr.grade || "4to Sec 'A'",
+          pensionStatus: "al_dia",
+          pendingAmount: 0.00,
+          pendingConcept: "--",
+          dueDate: "--",
+          isAccessLocked: false,
+          lastPaymentDate: "15/08/2026",
+          guardianPhone: enr.guardianPhone || "987-654-321"
+        };
+        familyMap.set(generatedFamId.toLowerCase(), newFam);
+        this.state.familiesFinancial.push(newFam);
+      }
+    });
+
+    // 3. Sincronizar con usuarios de rol Apoderado en systemUsers
+    const systemUsers = this.getSystemUsers();
+    systemUsers.forEach(u => {
+      if (u.role === "Apoderado" || u.role === "Padre") {
+        const famId = u.code && u.code.startsWith("FAM-") ? u.code : `FAM-2026-${(u.id || '').replace(/\D/g, '').padStart(3, '0').slice(-3)}`;
+        const existing = Array.from(familyMap.values()).find(f => 
+          (f.guardian && u.name && f.guardian.trim().toLowerCase() === u.name.trim().toLowerCase()) ||
+          (f.studentName && u.studentName && f.studentName.trim().toLowerCase() === u.studentName.trim().toLowerCase()) ||
+          (f.familyId === famId)
+        );
+
+        if (!existing) {
+          const newFam = {
+            familyId: famId,
+            guardian: u.name,
+            studentName: u.studentName || "Estudiante",
+            studentCode: u.code || "EST-2026-000",
+            grade: u.detail || "4to Sec 'A'",
+            pensionStatus: "al_dia",
+            pendingAmount: 0.00,
+            pendingConcept: "--",
+            dueDate: "--",
+            isAccessLocked: false,
+            lastPaymentDate: "15/08/2026",
+            guardianPhone: u.phone || "987-654-321"
+          };
+          familyMap.set(famId.toLowerCase(), newFam);
+          this.state.familiesFinancial.push(newFam);
+        }
+      }
+    });
+
+    return Array.from(familyMap.values());
+  }
+
   toggleFamilyAccessLock(familyId) {
-    if (!this.state.familiesFinancial) return null;
-    const fam = this.state.familiesFinancial.find(f => f.familyId === familyId);
+    if (!this.state.familiesFinancial) {
+      this.state.familiesFinancial = JSON.parse(JSON.stringify(initialData.familiesFinancial || []));
+    }
+    
+    // Buscar en familiesFinancial
+    let fam = this.state.familiesFinancial.find(f => f.familyId === familyId);
+    if (!fam) {
+      const allFamilies = this.getFamiliesFinancial();
+      fam = allFamilies.find(f => f.familyId === familyId);
+    }
+
     if (fam) {
       fam.isAccessLocked = !fam.isAccessLocked;
       fam.pensionStatus = fam.isAccessLocked ? "bloqueado_deuda" : "al_dia";
 
-      if (familyId === "FAM-2026-108") {
-        this.state.users.padre.isAccessLocked = fam.isAccessLocked;
-        this.state.users.padre.pensionStatus = fam.isAccessLocked ? "Bloqueado por Mora" : "Al Día";
-        this.state.users.estudiante.isAccessLocked = fam.isAccessLocked;
-        this.state.users.estudiante.paymentsUpToDate = !fam.isAccessLocked;
-        this.state.users.estudiante.pensionStatus = fam.isAccessLocked ? "Bloqueado por Mora" : "Al Día";
+      // Sincronizar con usuarios del sistema
+      if (this.state.systemUsers) {
+        this.state.systemUsers.forEach(u => {
+          if (
+            (u.code === familyId || u.id === familyId) ||
+            (u.name && fam.guardian && u.name.trim().toLowerCase() === fam.guardian.trim().toLowerCase()) ||
+            (u.studentName && fam.studentName && u.studentName.trim().toLowerCase() === fam.studentName.trim().toLowerCase())
+          ) {
+            u.isAccessLocked = fam.isAccessLocked;
+          }
+        });
+      }
+
+      if (familyId === "FAM-2026-108" || (fam.guardian && fam.guardian.includes("Carmen Méndez"))) {
+        if (this.state.users.padre) {
+          this.state.users.padre.isAccessLocked = fam.isAccessLocked;
+          this.state.users.padre.pensionStatus = fam.isAccessLocked ? "Bloqueado por Mora" : "Al Día";
+        }
+        if (this.state.users.estudiante) {
+          this.state.users.estudiante.isAccessLocked = fam.isAccessLocked;
+          this.state.users.estudiante.paymentsUpToDate = !fam.isAccessLocked;
+          this.state.users.estudiante.pensionStatus = fam.isAccessLocked ? "Bloqueado por Mora" : "Al Día";
+        }
       }
 
       this.saveState();
+      this.notify();
       return fam.isAccessLocked;
     }
     return null;

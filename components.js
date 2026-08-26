@@ -6292,7 +6292,9 @@ const Components = {
   // Pagos y Panel de Tesorería
   renderPayments(state) {
     const isCoordination = state.currentRole === "admin" || state.currentRole === "director";
-    const families = state.familiesFinancial || initialData.familiesFinancial;
+    const families = (window.appStore && typeof window.appStore.getFamiliesFinancial === "function")
+      ? window.appStore.getFamiliesFinancial()
+      : (state.familiesFinancial || initialData.familiesFinancial || []);
     const collected = (state.institution && state.institution.economicReport) ? state.institution.economicReport.collectedAmount : 25130.00;
 
     return `
