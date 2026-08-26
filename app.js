@@ -5435,6 +5435,17 @@ CREATE TABLE tb_cuadernos_qr (
   changeStudentRegistryGrade(gradeId) {
     this.store.state.selectedStudentRegistryGrade = gradeId;
     this.store.state.selectedGradingGrade = gradeId;
+
+    const teacherCourses = (this.store && typeof this.store.getTeacherCoursesForGrade === "function")
+      ? this.store.getTeacherCoursesForGrade(gradeId)
+      : [];
+
+    if (teacherCourses.length > 0) {
+      this.store.state.selectedStudentRegistryCourse = teacherCourses[0].name;
+    } else {
+      this.store.state.selectedStudentRegistryCourse = "";
+    }
+
     this.store.saveState();
     this.render();
   }
@@ -5453,65 +5464,73 @@ CREATE TABLE tb_cuadernos_qr (
   openAddStudentModal(gradeId) {
     const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
     const cleanG = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
-    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "4° de Secundaria", level: "Secundaria" };
-    const autoCode = `EST-2026-${Math.floor(100 + Math.random() * 900)}`;
+    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { id: gradeId || "4sec", label: "4° de Secundaria", level: "Secundaria" };
 
     this.showModal(`
       <div class="modal-header" style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white;">
         <div>
-          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">➕ Agregar Nuevo Estudiante a la Nómina</h3>
-          <span style="font-size: 11px; opacity: 0.9;">Aula destino: <strong>${gradeObj.label}</strong> • Periodo Académico 2026</span>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">➕ Agregar Estudiante</h3>
+          <span style="font-size: 11px; opacity: 0.9;">I.E.P. "El Educador" • Registro en la Nómina Oficial 2026</span>
         </div>
         <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
       </div>
       <form onsubmit="window.app.confirmAddStudent(event)">
         <div class="modal-body" style="padding: 20px; background: #f8fafc;">
-          <input type="hidden" name="gradeId" value="${gradeId}" />
-          <input type="hidden" name="grade" value="${gradeObj.label}" />
           
           <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
             
-            <div class="form-group">
-              <label class="form-label" style="font-weight: 800; color: #0f172a;">DNI del Estudiante *</label>
-              <input type="text" name="dni" class="form-control" placeholder="8 dígitos (ej. 75891234)" pattern="[0-9]{8}" maxlength="8" required style="font-weight: bold;" />
-              <span style="font-size: 10.5px; color: #64748b;">Requerido para SIAGIE y boletas oficiales</span>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" style="font-weight: 800; color: #0f172a;">Código de Estudiante</label>
-              <input type="text" name="studentCode" class="form-control" value="${autoCode}" required style="font-family: monospace; font-weight: bold; background: #f1f5f9;" />
+            <div class="form-group" style="grid-column: span 2;">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">1. Nombre y Apellido del Estudiante *</label>
+              <input type="text" name="studentName" class="form-control" placeholder="Ej. Mendoza Huamán, Camila Sofía" required style="font-weight: bold; font-size: 13px;" />
             </div>
 
             <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label" style="font-weight: 800; color: #0f172a;">Apellidos y Nombres Completos *</label>
-              <input type="text" name="studentName" class="form-control" placeholder="Ej. Mendoza Huamán, Camila Sofía" required style="font-weight: bold;" />
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">2. Grado Escolar *</label>
+              <select name="gradeId" class="form-control" style="font-weight: bold; font-size: 13px;" onchange="const l = this.options[this.selectedIndex].text; document.getElementById('add-student-grade-label').value = l;">
+                <optgroup label="--- NIVEL INICIAL ---">
+                  <option value="ini-3" ${cleanG === 'ini3' || cleanG === 'ini-3' ? 'selected' : ''}>Inicial 3 Años</option>
+                  <option value="ini-4" ${cleanG === 'ini4' || cleanG === 'ini-4' ? 'selected' : ''}>Inicial 4 Años</option>
+                  <option value="ini-5" ${cleanG === 'ini5' || cleanG === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
+                </optgroup>
+                <optgroup label="--- NIVEL PRIMARIA ---">
+                  <option value="1prim" ${cleanG === '1prim' ? 'selected' : ''}>1° de Primaria</option>
+                  <option value="2prim" ${cleanG === '2prim' ? 'selected' : ''}>2° de Primaria</option>
+                  <option value="3prim" ${cleanG === '3prim' ? 'selected' : ''}>3° de Primaria</option>
+                  <option value="4prim" ${cleanG === '4prim' ? 'selected' : ''}>4° de Primaria</option>
+                  <option value="5prim" ${cleanG === '5prim' ? 'selected' : ''}>5° de Primaria</option>
+                  <option value="6prim" ${cleanG === '6prim' ? 'selected' : ''}>6° de Primaria</option>
+                </optgroup>
+                <optgroup label="--- NIVEL SECUNDARIA ---">
+                  <option value="1sec" ${cleanG === '1sec' ? 'selected' : ''}>1° de Secundaria</option>
+                  <option value="2sec" ${cleanG === '2sec' ? 'selected' : ''}>2° de Secundaria</option>
+                  <option value="3sec" ${cleanG === '3sec' ? 'selected' : ''}>3° de Secundaria</option>
+                  <option value="4sec" ${cleanG === '4sec' ? 'selected' : ''}>4° de Secundaria</option>
+                  <option value="5sec" ${cleanG === '5sec' ? 'selected' : ''}>5° de Secundaria</option>
+                </optgroup>
+              </select>
+              <input type="hidden" id="add-student-grade-label" name="grade" value="${gradeObj.label || '4° de Secundaria'}" />
             </div>
 
             <div class="form-group">
-              <label class="form-label" style="font-weight: 800; color: #0f172a;">Nombre del Padre / Apoderado</label>
-              <input type="text" name="guardian" class="form-control" placeholder="Ej. Sra. Rosa Huamán" />
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">3. Nombre del Padre y/o Apoderado *</label>
+              <input type="text" name="guardian" class="form-control" placeholder="Ej. Rosa Huamán Prado" required style="font-weight: bold; font-size: 13px;" />
             </div>
 
             <div class="form-group">
-              <label class="form-label" style="font-weight: 800; color: #0f172a;">Teléfono / WhatsApp de Contacto</label>
-              <input type="tel" name="phone" class="form-control" placeholder="Ej. 987-654-321" />
-            </div>
-
-            <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label" style="font-weight: 800; color: #0f172a;">Dirección de Domicilio</label>
-              <input type="text" name="address" class="form-control" placeholder="Ej. Av. Próceres de la Independencia 1420 - SJL" />
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">4. Teléfono del Apoderado *</label>
+              <input type="tel" name="phone" class="form-control" placeholder="Ej. 987-654-321" required style="font-weight: bold; font-size: 13px;" />
             </div>
 
           </div>
 
           <div style="margin-top: 14px; padding: 10px 14px; background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 4px; font-size: 11.5px; color: #065f46;">
-            💡 <strong>Sincronización Automática:</strong> Al guardar, el estudiante se agregará al Registro Auxiliar, podrá ser calificado en <strong>Registro de Notas</strong>, tendrá su credencial institucional generada y stickers QR de cuadernos listos.
+            💡 <strong>Sincronización Automática:</strong> Al guardar, el estudiante se agregará a la nómina, se habilitará en <strong>Registro de Notas</strong> y se generarán sus códigos QR de cuadernos y asistencia.
           </div>
 
         </div>
-        <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
+        <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-end; gap: 10px;">
           <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
-          <button type="submit" class="btn btn-gold" style="font-weight: 900;">✓ Matricular y Guardar Estudiante</button>
+          <button type="submit" class="btn btn-gold" style="font-weight: 900;">✓ Guardar Estudiante</button>
         </div>
       </form>
     `);
@@ -5522,26 +5541,30 @@ CREATE TABLE tb_cuadernos_qr (
     const form = event.target;
     const formData = new FormData(form);
 
+    const gradeId = formData.get("gradeId") || "4sec";
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+    const cleanG = gradeId.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "4° de Secundaria" };
+
     const studentData = {
-      dni: (formData.get("dni") || "").trim(),
-      studentCode: (formData.get("studentCode") || "").trim(),
+      studentCode: `EST-2026-${Math.floor(100 + Math.random() * 900)}`,
       studentName: (formData.get("studentName") || "").trim(),
-      gradeId: formData.get("gradeId"),
-      grade: formData.get("grade"),
-      guardian: (formData.get("guardian") || "Apoderado Titular").trim(),
+      gradeId: gradeId,
+      grade: formData.get("grade") || gradeObj.label,
+      guardian: (formData.get("guardian") || "Padre / Apoderado").trim(),
       phone: (formData.get("phone") || "987-654-321").trim(),
       guardianPhone: (formData.get("phone") || "987-654-321").trim(),
-      address: (formData.get("address") || "San Juan de Lurigancho").trim()
+      dni: `7${Math.floor(1000000 + Math.random() * 9000000)}`
     };
 
     if (!studentData.studentName) {
-      alert("Por favor ingrese los nombres y apellidos del estudiante.");
+      alert("Por favor ingrese el nombre y apellido del estudiante.");
       return;
     }
 
     this.store.addStudentToGrade(studentData);
     this.closeModal();
-    this.showToast(`✓ Estudiante "${studentData.studentName}" matriculado y registrado exitosamente en la nómina.`, "success");
+    this.showToast(`✓ Estudiante "${studentData.studentName}" agregado exitosamente a la nómina.`, "success");
     this.render();
   }
 
@@ -5627,10 +5650,10 @@ CREATE TABLE tb_cuadernos_qr (
       <div class="modal-body" style="padding: 20px; background: #f8fafc;">
         
         <p style="font-size: 12px; color: #475569; margin-top: 0; margin-bottom: 10px;">
-          Puede copiar columnas con: <strong>DNI</strong>, <strong>Apellidos y Nombres</strong>, <strong>Apoderado</strong>, <strong>Teléfono</strong> (o simplemente la lista de nombres y DNIs).
+          Puede copiar columnas con: <strong>Nombre y Apellido</strong>, <strong>Padre o Apoderado</strong>, <strong>Teléfono del Apoderado</strong>.
         </p>
 
-        <textarea id="pasted-excel-text" class="form-control" rows="8" placeholder="Ejemplo:&#10;74891230&#9;Méndez Flores, Sofía&#9;Carmen Méndez&#9;987654321&#10;75129034&#9;Benítez Díaz, Carlos&#9;Roberto Díaz&#9;984123456" style="font-family: monospace; font-size: 12px; background: white; white-space: pre;" oninput="window.app.handleProcessPastedExcel('${gradeId}')"></textarea>
+        <textarea id="pasted-excel-text" class="form-control" rows="8" placeholder="Ejemplo:&#10;Méndez Flores, Sofía&#9;Carmen Méndez&#9;987654321&#10;Benítez Díaz, Carlos&#9;Roberto Díaz&#9;984123456&#10;Ramos Quispe, Mateo&#9;Lucía Quispe&#9;981234567" style="font-family: monospace; font-size: 12px; background: white; white-space: pre;" oninput="window.app.handleProcessPastedExcel('${gradeId}')"></textarea>
 
         <div style="margin-top: 14px;">
           <div style="font-size: 12px; font-weight: 800; color: #1e293b; margin-bottom: 8px;">
@@ -5714,7 +5737,7 @@ CREATE TABLE tb_cuadernos_qr (
         parsedStudents.push({
           dni: dni || `7${Math.floor(1000000 + Math.random() * 9000000)}`,
           studentName: name,
-          guardian: guardian || "Apoderado Titular",
+          guardian: guardian || "Padre / Apoderado",
           guardianPhone: phone || "987-654-321",
           phone: phone || "987-654-321"
         });
@@ -5736,18 +5759,18 @@ CREATE TABLE tb_cuadernos_qr (
             <thead>
               <tr style="background: #f1f5f9; color: #334155;">
                 <th style="width: 8%; text-align: center;">N°</th>
-                <th style="width: 22%;">DNI</th>
-                <th style="width: 45%;">Apellidos y Nombres</th>
-                <th style="width: 25%;">Apoderado / Teléfono</th>
+                <th style="width: 44%;">Nombre y Apellido del Estudiante</th>
+                <th style="width: 26%;">Padre / Apoderado</th>
+                <th style="width: 22%;">Teléfono Apoderado</th>
               </tr>
             </thead>
             <tbody>
               ${parsedStudents.map((st, i) => `
                 <tr>
                   <td style="text-align: center; font-weight: bold;">${i + 1}</td>
-                  <td><strong>${st.dni}</strong></td>
                   <td style="font-weight: 800; color: #0b132b;">${st.studentName}</td>
-                  <td>${st.guardian} • <span style="color: #16a34a;">${st.phone}</span></td>
+                  <td>${st.guardian}</td>
+                  <td><span style="color: #16a34a; font-weight: bold;">📞 ${st.phone}</span></td>
                 </tr>
               `).join('')}
             </tbody>
@@ -5837,8 +5860,7 @@ CREATE TABLE tb_cuadernos_qr (
           <!-- Encabezados de Columnas de Competencias -->
           <tr>
             <th rowspan="2" class="col-header" style="width: 40px;">N°</th>
-            <th rowspan="2" class="col-header" style="width: 90px;">DNI / CÓDIGO</th>
-            <th rowspan="2" class="col-header" style="width: 250px;">APELLIDOS Y NOMBRES</th>
+            <th rowspan="2" class="col-header" style="width: 280px;">APELLIDOS Y NOMBRES</th>
             <th colspan="2" class="col-header">I BIMESTRE</th>
             <th colspan="2" class="col-header">II BIMESTRE</th>
             <th colspan="2" class="col-header">III BIMESTRE</th>
@@ -5860,7 +5882,7 @@ CREATE TABLE tb_cuadernos_qr (
           <!-- Filas de Estudiantes -->
           ${students.length === 0 ? `
             <tr>
-              <td colspan="15" style="text-align: center; padding: 20px; font-weight: bold; color: #64748b;">
+              <td colspan="14" style="text-align: center; padding: 20px; font-weight: bold; color: #64748b;">
                 No hay estudiantes registrados en este grado.
               </td>
             </tr>
@@ -5879,7 +5901,6 @@ CREATE TABLE tb_cuadernos_qr (
             return `
               <tr>
                 <td class="cell-data">${idx + 1}</td>
-                <td class="cell-data" style="mso-number-format:'\\@';">${st.dni || st.studentCode}</td>
                 <td class="cell-name">${st.studentName}</td>
                 <td class="cell-data">${b1}</td>
                 <td class="cell-grade">${b1}</td>
@@ -5897,9 +5918,9 @@ CREATE TABLE tb_cuadernos_qr (
             `;
           }).join('')}
 
-          <tr><td colspan="15" style="height: 15px; background-color: #ffffff;"></td></tr>
+          <tr><td colspan="14" style="height: 15px; background-color: #ffffff;"></td></tr>
           <tr>
-            <td colspan="5" style="text-align: center; height: 60px; vertical-align: bottom; font-weight: bold;">
+            <td colspan="4" style="text-align: center; height: 60px; vertical-align: bottom; font-weight: bold;">
               ________________________________<br>Firma del Docente Responsable
             </td>
             <td colspan="5" style="text-align: center; height: 60px; vertical-align: bottom; font-weight: bold;">
@@ -5929,11 +5950,11 @@ CREATE TABLE tb_cuadernos_qr (
   }
 
   downloadExcelTemplate() {
-    const csvContent = "DNI,Apellidos y Nombres,Grado,Nombre_Apoderado,Telefono_Contacto\n" +
-      "74891230,Méndez Flores Sofía,4° de Secundaria,Dra. Carmen Méndez,987654321\n" +
-      "75129034,Benítez Díaz Carlos,4° de Secundaria,Sr. Roberto Díaz,984123456\n" +
-      "76891209,Ramos Quispe Mateo,1° de Primaria,Sra. Lucía Quispe,981234567\n" +
-      "78912344,Mendoza Huamán Camila Sofía,1° de Primaria,Sra. Rosa Huamán,976543210\n";
+    const csvContent = "Nombre y Apellido,Grado,Nombre_Padre_o_Apoderado,Telefono_Apoderado\n" +
+      "Méndez Flores Sofía,4° de Secundaria,Dra. Carmen Méndez,987654321\n" +
+      "Benítez Díaz Carlos,4° de Secundaria,Sr. Roberto Díaz,984123456\n" +
+      "Ramos Quispe Mateo,1° de Primaria,Sra. Lucía Quispe,981234567\n" +
+      "Mendoza Huamán Camila Sofía,1° de Primaria,Sra. Rosa Huamán,976543210\n";
 
     const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
@@ -5957,7 +5978,7 @@ CREATE TABLE tb_cuadernos_qr (
       <div class="modal-header" style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white;">
         <div>
           <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">✏️ Editar Datos del Estudiante</h3>
-          <span style="font-size: 11px; opacity: 0.9;">Código: <strong>${st.studentCode}</strong></span>
+          <span style="font-size: 11px; opacity: 0.9;">Código: <strong>${st.studentCode}</strong> • Grado: ${st.grade}</span>
         </div>
         <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
       </div>
@@ -5965,26 +5986,22 @@ CREATE TABLE tb_cuadernos_qr (
         <div class="modal-body" style="padding: 20px; background: #f8fafc;">
           
           <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-            <div class="form-group">
-              <label class="form-label" style="font-weight: 800;">DNI</label>
-              <input type="text" name="dni" class="form-control" value="${st.dni || ''}" required />
-            </div>
-            <div class="form-group">
-              <label class="form-label" style="font-weight: 800;">Código Modular</label>
-              <input type="text" name="studentCode" class="form-control" value="${st.studentCode || ''}" readonly style="background: #f1f5f9;" />
-            </div>
+            
             <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label" style="font-weight: 800;">Apellidos y Nombres Completos</label>
-              <input type="text" name="studentName" class="form-control" value="${st.studentName || ''}" required />
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">1. Nombre y Apellido del Estudiante *</label>
+              <input type="text" name="studentName" class="form-control" value="${st.studentName || ''}" required style="font-weight: bold; font-size: 13px;" />
             </div>
+
             <div class="form-group">
-              <label class="form-label" style="font-weight: 800;">Apoderado</label>
-              <input type="text" name="guardian" class="form-control" value="${st.guardian || ''}" />
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">2. Nombre del Padre y/o Apoderado *</label>
+              <input type="text" name="guardian" class="form-control" value="${st.guardian || ''}" required style="font-weight: bold; font-size: 13px;" />
             </div>
+
             <div class="form-group">
-              <label class="form-label" style="font-weight: 800;">Teléfono de Contacto</label>
-              <input type="tel" name="phone" class="form-control" value="${st.guardianPhone || st.emergencyPhone || ''}" />
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">3. Teléfono del Apoderado *</label>
+              <input type="tel" name="phone" class="form-control" value="${st.guardianPhone || st.emergencyPhone || st.phone || ''}" required style="font-weight: bold; font-size: 13px;" />
             </div>
+
           </div>
 
         </div>
@@ -6002,11 +6019,11 @@ CREATE TABLE tb_cuadernos_qr (
     const formData = new FormData(form);
 
     const updatedData = {
-      dni: (formData.get("dni") || "").trim(),
       studentName: (formData.get("studentName") || "").trim(),
       guardian: (formData.get("guardian") || "").trim(),
       guardianPhone: (formData.get("phone") || "").trim(),
-      emergencyPhone: (formData.get("phone") || "").trim()
+      emergencyPhone: (formData.get("phone") || "").trim(),
+      phone: (formData.get("phone") || "").trim()
     };
 
     const allEnrollments = this.store.getEnrollments();
@@ -6017,7 +6034,6 @@ CREATE TABLE tb_cuadernos_qr (
       const u = (this.store.state.systemUsers || []).find(u => u.code === st.studentCode || u.dni === st.dni);
       if (u) {
         u.name = updatedData.studentName;
-        u.dni = updatedData.dni;
         u.guardian = updatedData.guardian;
       }
 
@@ -6040,10 +6056,12 @@ CREATE TABLE tb_cuadernos_qr (
   changeGradingGrade(gradeId) {
     this.store.state.selectedGradingGrade = gradeId;
     
-    // Adaptar automáticamente el catálogo de cursos al nuevo grado
-    const courses = (this.store && typeof this.store.getStudentBoletaCoursesCatalog === "function")
-      ? this.store.getStudentBoletaCoursesCatalog(gradeId)
-      : [];
+    // Adaptar automáticamente el catálogo de cursos del docente al nuevo grado
+    const courses = (this.store && typeof this.store.getTeacherCoursesForGrade === "function")
+      ? this.store.getTeacherCoursesForGrade(gradeId)
+      : ((this.store && typeof this.store.getStudentBoletaCoursesCatalog === "function")
+        ? this.store.getStudentBoletaCoursesCatalog(gradeId)
+        : []);
 
     const keyMap = {
       "Aritmética": "aritmetica",
@@ -6104,6 +6122,8 @@ CREATE TABLE tb_cuadernos_qr (
         const firstKey = keyMap[courses[0].name] || courses[0].id.toLowerCase().replace(/[^a-z0-9]/g, '_');
         this.store.state.selectedGradingSubject = firstKey;
       }
+    } else {
+      this.store.state.selectedGradingSubject = "";
     }
 
     // Ajustar estudiante por defecto para la pestaña de tutoría

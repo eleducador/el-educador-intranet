@@ -527,14 +527,22 @@ const Components = {
       return gid === cleanSelectedGrade || gid.includes(cleanSelectedGrade) || cleanSelectedGrade.includes(gid);
     }) || { id: selectedGrade, label: "4° de Secundaria", level: "Secundaria", tutor: "Prof. Roberto Silva" };
 
+    const currentUser = (window.appStore && typeof window.appStore.getCurrentUser === "function") ? window.appStore.getCurrentUser() : null;
+    const isDocente = role === 'docente';
+
     // Cursos del grado
-    const boletaCourses = (window.appStore && typeof window.appStore.getStudentBoletaCoursesCatalog === "function")
+    const allBoletaCourses = (window.appStore && typeof window.appStore.getStudentBoletaCoursesCatalog === "function")
       ? window.appStore.getStudentBoletaCoursesCatalog(selectedGrade)
       : [];
 
-    let selectedCourse = state.selectedStudentRegistryCourse || (boletaCourses[0] ? boletaCourses[0].name : "Aritmética");
-    if (!boletaCourses.some(c => c.name === selectedCourse)) {
-      selectedCourse = boletaCourses[0] ? boletaCourses[0].name : "Aritmética";
+    // Si es docente, filtrar ESTRICTAMENTE a solo sus cursos asignados
+    const boletaCourses = (isDocente && currentUser && window.appStore && typeof window.appStore.isTeacherAssignedToCourse === "function")
+      ? allBoletaCourses.filter(c => window.appStore.isTeacherAssignedToCourse(c, currentUser, selectedGrade))
+      : allBoletaCourses;
+
+    let selectedCourse = state.selectedStudentRegistryCourse;
+    if (!selectedCourse || !boletaCourses.some(c => c.name === selectedCourse)) {
+      selectedCourse = boletaCourses.length > 0 ? boletaCourses[0].name : (allBoletaCourses[0] ? allBoletaCourses[0].name : "Aritmética");
     }
 
     // Estudiantes del aula
@@ -640,7 +648,9 @@ const Components = {
               <div style="display: flex; align-items: center; gap: 8px;">
                 <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">📚 Asignatura:</span>
                 <select class="form-control" style="font-weight: bold; width: auto; font-size: 12.5px; min-width: 220px;" onchange="window.app.changeStudentRegistryCourse(this.value)">
-                  ${boletaCourses.map(c => `
+                  ${boletaCourses.length === 0 ? `
+                    <option value="" disabled selected>(No tienes asignaturas a cargo en ${currentGradeObj.label})</option>
+                  ` : boletaCourses.map(c => `
                     <option value="${c.name}" ${c.name === selectedCourse ? 'selected' : ''}>
                       ${c.icon || '📖'} ${c.name} • (${c.teacher})
                     </option>
@@ -683,29 +693,28 @@ const Components = {
               <thead>
                 <tr style="background: var(--color-navy-900); color: white;">
                   <th style="width: 5%; text-align: center;">N°</th>
-                  <th style="width: 12%;">Código / DNI</th>
-                  <th style="width: 28%;">Apellidos y Nombres</th>
-                  <th style="width: 14%;">Grado y Sección</th>
-                  <th style="width: 20%;">Apoderado & Contacto</th>
-                  <th style="width: 10%; text-align: center;">Estado</th>
-                  <th style="width: 11%; text-align: center;">Acciones</th>
+                  <th style="width: 32%;">Nombre y Apellido</th>
+                  <th style="width: 15%;">Grado Escolar</th>
+                  <th style="width: 20%;">Padre y/o Apoderado</th>
+                  <th style="width: 16%;">Teléfono Apoderado</th>
+                  <th style="width: 12%; text-align: center;">Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 ${classroomStudents.length === 0 ? `
                   <tr>
-                    <td colspan="7" style="text-align: center; padding: 40px 20px; color: #64748b;">
+                    <td colspan="6" style="text-align: center; padding: 40px 20px; color: #64748b;">
                       <div style="font-size: 32px; margin-bottom: 8px;">📂</div>
                       <div style="font-size: 14px; font-weight: 800; color: #1e293b;">No hay estudiantes registrados en ${currentGradeObj.label || selectedGrade}.</div>
                       <p style="font-size: 12px; margin-top: 4px; margin-bottom: 16px;">
-                        Puede agregar alumnos individualmente con el botón "+ Agregar Estudiante" o importar la lista completa desde un libro de Excel.
+                        Puede agregar alumnos con el botón "+ Agregar Estudiante" ingresando Nombre, Grado, Apoderado y Teléfono, o importar desde un libro de Excel.
                       </p>
                       <div style="display: flex; gap: 8px; justify-content: center;">
                         <button class="btn btn-gold btn-sm" onclick="window.app.openAddStudentModal('${selectedGrade}')" style="font-weight: 800;">
-                          ➕ Agregar Primer Estudiante
+                          ➕ Agregar Estudiante
                         </button>
                         <button class="btn btn-sm" onclick="window.app.openImportStudentsModal('${selectedGrade}')" style="background: #10b981; color: white; font-weight: 800;">
-                          📥 Importar Excel / Registro Auxiliar
+                          📥 Importar desde Excel
                         </button>
                       </div>
                     </td>
@@ -714,36 +723,29 @@ const Components = {
                   <tr>
                     <td style="text-align: center; font-weight: bold; color: #64748b;">${idx + 1}</td>
                     <td>
-                      <div><strong style="color: var(--color-navy-900); font-family: monospace;">${st.dni || 'Sin DNI'}</strong></div>
-                      <div style="font-size: 10.5px; color: #64748b;">${st.studentCode}</div>
+                      <div style="font-weight: 900; color: #0b132b; font-size: 13.5px;">${st.studentName}</div>
+                      <div style="font-size: 10.5px; color: #64748b;">Código: ${st.studentCode || st.id}</div>
                     </td>
                     <td>
-                      <div style="font-weight: 900; color: #0b132b; font-size: 13px;">${st.studentName}</div>
-                      <div style="font-size: 10.5px; color: #0284c7;">SIAGIE: ${st.siagieCode || st.dni || '2026'}</div>
-                    </td>
-                    <td>
-                      <span class="status-badge" style="background: #e0f2fe; color: #0369a1; font-weight: 800; font-size: 11px;">
+                      <span class="status-badge" style="background: #e0f2fe; color: #0369a1; font-weight: 800; font-size: 11.5px;">
                         ${st.grade || currentGradeObj.label}
                       </span>
                     </td>
                     <td>
-                      <div style="font-size: 12px; font-weight: 700; color: #334155;">${st.guardian || 'Apoderado no registrado'}</div>
-                      <div style="font-size: 11px; color: #16a34a; font-weight: 700;">📞 ${st.guardianPhone || st.emergencyPhone || 'Sin teléfono'}</div>
+                      <div style="font-size: 12.5px; font-weight: 700; color: #1e293b;">${st.guardian || 'Padre / Apoderado no registrado'}</div>
                     </td>
-                    <td style="text-align: center;">
-                      <span class="status-badge status-approved" style="font-size: 10.5px;">
-                        <span class="status-dot-green"></span> Al Día
-                      </span>
+                    <td>
+                      <div style="font-size: 12px; color: #16a34a; font-weight: 800;">📞 ${st.guardianPhone || st.emergencyPhone || st.phone || 'Sin teléfono'}</div>
                     </td>
                     <td style="text-align: center;">
                       <div style="display: flex; gap: 4px; justify-content: center;">
-                        <button class="btn btn-outline btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${st.studentCode || st.dni}')" title="Ver Stickers QR de Cuadernos" style="padding: 3px 6px; font-size: 11px;">
+                        <button class="btn btn-outline btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${st.studentCode || st.dni}')" title="Ver Stickers QR de Cuadernos" style="padding: 4px 7px; font-size: 11px;">
                           ⚡ QR
                         </button>
-                        <button class="btn btn-outline btn-sm" onclick="window.app.openEditStudentModal('${st.id || st.studentCode}')" title="Editar datos del estudiante" style="padding: 3px 6px; font-size: 11px;">
+                        <button class="btn btn-outline btn-sm" onclick="window.app.openEditStudentModal('${st.id || st.studentCode}')" title="Editar datos del estudiante" style="padding: 4px 7px; font-size: 11px;">
                           ✏️
                         </button>
-                        <button class="btn btn-sm" onclick="window.app.confirmDeleteStudent('${st.studentCode || st.id}')" title="Eliminar estudiante" style="padding: 3px 6px; font-size: 11px; background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5;">
+                        <button class="btn btn-sm" onclick="window.app.confirmDeleteStudent('${st.studentCode || st.id}')" title="Eliminar estudiante" style="padding: 4px 7px; font-size: 11px; background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5;">
                           🗑️
                         </button>
                       </div>
@@ -2850,17 +2852,17 @@ const Components = {
     const currentUser = (window.appStore && typeof window.appStore.getCurrentUser === "function") ? window.appStore.getCurrentUser() : null;
     const isDocente = role === 'docente';
 
+    // Si es docente, filtrar ESTRICTAMENTE a solo sus cursos asignados
+    const visibleSubjects = (isDocente && currentUser && window.appStore && typeof window.appStore.isTeacherAssignedToCourse === "function")
+      ? subjectDirectory.filter(s => window.appStore.isTeacherAssignedToCourse(s, currentUser, selectedGradingGrade))
+      : subjectDirectory;
+
     let selectedSubjectKey = state.selectedGradingSubject;
-    if (!selectedSubjectKey || !subjectDirectory.some(s => s.key === selectedSubjectKey)) {
-      if (isDocente && currentUser) {
-        const myCourse = subjectDirectory.find(s => s.teacher && s.teacher.toLowerCase().includes((currentUser.name || "").toLowerCase()));
-        selectedSubjectKey = myCourse ? myCourse.key : (subjectDirectory[0] ? subjectDirectory[0].key : "aritmetica");
-      } else {
-        selectedSubjectKey = subjectDirectory[0] ? subjectDirectory[0].key : "aritmetica";
-      }
+    if (!selectedSubjectKey || !visibleSubjects.some(s => s.key === selectedSubjectKey)) {
+      selectedSubjectKey = visibleSubjects.length > 0 ? visibleSubjects[0].key : (subjectDirectory[0] ? subjectDirectory[0].key : "aritmetica");
     }
 
-    const currentSubject = subjectDirectory.find(s => s.key === selectedSubjectKey) || subjectDirectory[0] || { name: "Aritmética", teacher: "Prof. Roberto Silva", area: "Matemática", key: "aritmetica" };
+    const currentSubject = visibleSubjects.find(s => s.key === selectedSubjectKey) || visibleSubjects[0] || subjectDirectory.find(s => s.key === selectedSubjectKey) || subjectDirectory[0];
 
     // Filtrar única y estrictamente los estudiantes matriculados en el grado seleccionado
     const allEnrollments = (window.appStore && typeof window.appStore.getEnrollments === "function")
@@ -2973,11 +2975,12 @@ const Components = {
                 <div style="display: flex; align-items: center; gap: 8px;">
                   <span style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); white-space: nowrap;">📚 Asignatura / Curso:</span>
                   <select class="form-control" style="font-weight: bold; width: auto; font-size: 13px; min-width: 260px;" onchange="window.app.changeSelectedGradingSubject(this.value)">
-                    ${subjectDirectory.map(s => {
-                      const isMyCourse = isDocente && currentUser && s.teacher && s.teacher.toLowerCase().includes((currentUser.name || "").toLowerCase());
+                    ${visibleSubjects.length === 0 ? `
+                      <option value="" disabled selected>(No tienes cursos asignados en ${currentGradeObj.label})</option>
+                    ` : visibleSubjects.map(s => {
                       return `
                         <option value="${s.key}" ${s.key === selectedSubjectKey ? 'selected' : ''}>
-                          ${s.icon} ${s.name} • (${s.teacher})${isMyCourse ? ' ★ (Mi Curso)' : ''}
+                          ${s.icon} ${s.name} • (${s.teacher})${isDocente ? ' ★ (Mi Curso)' : ''}
                         </option>
                       `;
                     }).join('')}

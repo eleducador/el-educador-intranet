@@ -482,6 +482,8 @@ class IntranetStore {
           roleLabel: systemUser.detail || systemUser.role || (assignedRole === 'docente' ? 'Docente de Asignatura' : assignedRole),
           assignedRole: assignedRole,
           detail: systemUser.detail || systemUser.gradeLevel || systemUser.subject || "",
+          assignedCourses: Array.isArray(systemUser.assignedCourses) ? systemUser.assignedCourses : (Array.isArray(systemUser.courses) ? systemUser.courses : (systemUser.subject ? systemUser.subject.split(/,\s*/) : [])),
+          assignedGrades: Array.isArray(systemUser.assignedGrades) ? systemUser.assignedGrades : (systemUser.assignedGrades ? [systemUser.assignedGrades] : []),
           gradeLevel: systemUser.gradeLevel || systemUser.detail || systemUser.grade || "5° de Primaria",
           grade: systemUser.grade || systemUser.gradeLevel || systemUser.detail || "5° de Primaria",
           gradeId: systemUser.gradeId || "",
@@ -496,6 +498,17 @@ class IntranetStore {
           hasAdminPrivilege: !!systemUser.hasAdminPrivilege,
           hasAdminPrivileges: !!systemUser.hasAdminPrivilege
         };
+
+        if (assignedRole === "docente") {
+          const ag = activeUser.assignedGrades;
+          if (ag && ag.length > 0) {
+            const firstGradeId = this.resolveStudentGradeId(ag[0]) || ag[0];
+            if (firstGradeId) {
+              this.state.selectedGradingGrade = firstGradeId;
+              this.state.selectedStudentRegistryGrade = firstGradeId;
+            }
+          }
+        }
 
         this.state.currentUser = activeUser;
         this.state.currentRole = assignedRole;
@@ -1520,6 +1533,17 @@ class IntranetStore {
 
     // 3. Buscar coincidencia exacta o por curso asignado en profesores registrados
     for (const t of teachers) {
+      // Si el docente tiene grados específicos asignados, verificar que coincida con este grado
+      if (t.assignedGrades && Array.isArray(t.assignedGrades) && t.assignedGrades.length > 0) {
+        const gradeMatches = t.assignedGrades.some(g => {
+          const cleanAg = (typeof g === 'string' ? g : '').toLowerCase().replace(/[^a-z0-9]/g, '');
+          return cleanAg === cleanGrade || cleanAg.includes(cleanGrade) || cleanGrade.includes(cleanAg);
+        });
+        if (!gradeMatches) {
+          continue;
+        }
+      }
+
       const assigned = (t.assignedCourses || []).map(c => (typeof c === 'string' ? c : '').toLowerCase().trim());
       
       // Coincidencia directa de curso
@@ -1629,6 +1653,90 @@ class IntranetStore {
 
   getNotebookSubjectsCatalog(gradeId = "4sec") {
     return this.getStudentBoletaCoursesCatalog(gradeId);
+  }
+
+  // Comprobar si un curso está asignado al docente actualmente en sesión
+  isTeacherAssignedToCourse(courseObjOrName, user = null, gradeId = "") {
+    if (!user) user = this.getCurrentUser();
+    if (!user) return false;
+
+    const role = (user.role || "").toLowerCase();
+    // Directores y Administradores tienen acceso global a todos los cursos
+    if (role === "admin" || role === "administrador" || role === "director" || role === "directivo") {
+      return true;
+    }
+
+    const courseName = typeof courseObjOrName === "string" ? courseObjOrName : (courseObjOrName.name || courseObjOrName.course || "");
+    const courseTeacher = (typeof courseObjOrName === "object" && courseObjOrName.teacher) ? courseObjOrName.teacher : this.getTeacherForCourse(courseName, gradeId);
+
+    const cleanUserName = (user.name || "").toLowerCase().replace(/^(prof\.|lic\.|miss|dr\.|dra\.|ing\.)\s*/i, '').trim();
+    const cleanTeacher = (courseTeacher || "").toLowerCase().replace(/^(prof\.|lic\.|miss|dr\.|dra\.|ing\.)\s*/i, '').trim();
+
+    // 1. Coincidencia directa por nombre del docente resuelto en el curso
+    if (cleanTeacher && !cleanTeacher.includes("por asignar") && !cleanTeacher.includes("docente por asignar")) {
+      if (cleanTeacher === cleanUserName || cleanTeacher.includes(cleanUserName) || cleanUserName.includes(cleanTeacher)) {
+        return true;
+      }
+    }
+
+    // 2. Coincidencia directa por assignedCourses o courses en el perfil del usuario
+    const assignedCourses = Array.isArray(user.assignedCourses) 
+      ? user.assignedCourses 
+      : (Array.isArray(user.courses) ? user.courses : (user.subject ? user.subject.split(/,\s*/) : []));
+
+    const cleanCourseName = courseName.toLowerCase().trim();
+
+    for (const c of assignedCourses) {
+      const cleanAssigned = (typeof c === 'string' ? c : '').toLowerCase().trim();
+      if (!cleanAssigned) continue;
+      
+      // Coincidencia exacta o por subcadena
+      if (cleanCourseName === cleanAssigned || cleanCourseName.includes(cleanAssigned) || cleanAssigned.includes(cleanCourseName)) {
+        return true;
+      }
+
+      // Si es Nivel Inicial y el curso pertenece al catálogo de Inicial
+      if (cleanAssigned.includes("inicial") && (gradeId.includes("ini") || cleanCourseName.includes("temprana") || cleanCourseName.includes("grafomotricidad") || cleanCourseName.includes("psicomotricidad") || cleanCourseName.includes("cuentos infantiles") || cleanCourseName.includes("mini-manualidades"))) {
+        return true;
+      }
+
+      // Mapeo semántico de áreas
+      if (cleanAssigned.includes("comunicación") || cleanAssigned.includes("comunicacion")) {
+        if (cleanCourseName.includes("lenguaje") || cleanCourseName.includes("literatura") || cleanCourseName.includes("plan lector") || cleanCourseName.includes("raz. verbal") || cleanCourseName.includes("razonamiento verbal") || cleanCourseName.includes("comunicación") || cleanCourseName.includes("comunicacion")) {
+          return true;
+        }
+      }
+      if (cleanAssigned.includes("matemática") || cleanAssigned.includes("matematica")) {
+        if (cleanCourseName.includes("aritmética") || cleanCourseName.includes("aritmetica") || cleanCourseName.includes("álgebra") || cleanCourseName.includes("algebra") || cleanCourseName.includes("geometría") || cleanCourseName.includes("geometria") || cleanCourseName.includes("trigonometría") || cleanCourseName.includes("trigonometria") || cleanCourseName.includes("raz. matem") || cleanCourseName.includes("razonamiento matem") || cleanCourseName.includes("matemática")) {
+          return true;
+        }
+      }
+      if (cleanAssigned.includes("ciencia") || cleanAssigned.includes("cta")) {
+        if (cleanCourseName.includes("ciencia") || cleanCourseName.includes("biología") || cleanCourseName.includes("biologia") || cleanCourseName.includes("física") || cleanCourseName.includes("fisica") || cleanCourseName.includes("química") || cleanCourseName.includes("quimica") || cleanCourseName.includes("ambiente")) {
+          return true;
+        }
+      }
+      if (cleanAssigned.includes("computación") || cleanAssigned.includes("computacion") || cleanAssigned.includes("ept") || cleanAssigned.includes("robótica") || cleanAssigned.includes("robotica")) {
+        if (cleanCourseName.includes("computación") || cleanCourseName.includes("computacion") || cleanCourseName.includes("informática") || cleanCourseName.includes("informatica") || cleanCourseName.includes("robótica") || cleanCourseName.includes("robotica") || cleanCourseName.includes("ept") || cleanCourseName.includes("gestión") || cleanCourseName.includes("gestion")) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  getTeacherCoursesForGrade(gradeId = "4sec", user = null) {
+    if (!user) user = this.getCurrentUser();
+    const allCourses = this.getStudentBoletaCoursesCatalog(gradeId);
+    
+    if (!user) return allCourses;
+    const role = (user.role || "").toLowerCase();
+    if (role === "admin" || role === "administrador" || role === "director" || role === "directivo") {
+      return allCourses;
+    }
+
+    return allCourses.filter(c => this.isTeacherAssignedToCourse(c, user, gradeId));
   }
 
   getStudentAllBoletaStickersData(studentIdOrCode = "EST-2026-042") {
