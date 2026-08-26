@@ -464,6 +464,7 @@ const initialData = {
     ],
     docente: [
       { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
+      { id: "registro-estudiantes", label: "Registro de Estudiantes", badge: "Excel", icon: "users", enabled: true },
       { id: "agenda-virtual", label: "📖 Agenda Virtual & Anotaciones", badge: "AGENDA", icon: "agenda", enabled: true },
       { id: "cuadernos-qr", label: "Lector de Cuadernos QR", badge: "CÁMARA", icon: "qr", enabled: true },
       { id: "calificaciones", label: "Registro de Notas", badge: "Bimestral", icon: "grades", enabled: true },
@@ -497,6 +498,7 @@ const initialData = {
     ],
     director: [
       { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
+      { id: "registro-estudiantes", label: "Registro de Estudiantes", badge: "Excel", icon: "users", enabled: true },
       { id: "agenda-virtual", label: "📖 Agenda Virtual Institucional", badge: "AGENDA", icon: "agenda", enabled: true },
       { id: "database", label: "Base de Datos & DB", badge: "DB Online", icon: "database", enabled: true },
       { id: "usuarios-matriculas", label: "Gestión de Perfiles & Cuentas", badge: "PERFILES", icon: "users", enabled: true },
@@ -3528,6 +3530,140 @@ class IntranetStore {
     return null;
   }
 
+  // =========================================================================
+  // REGISTRO DE ESTUDIANTES, NÓMINA OFICIAL E IMPORTACIÓN MASIVA DESDE EXCEL
+  // =========================================================================
+  addStudentToGrade(data) {
+    const studentCode = data.studentCode || `EST-2026-${Math.floor(100 + Math.random() * 900)}`;
+    const gradeId = data.gradeId || this.resolveStudentGradeId(data.grade) || "4sec";
+    
+    const catalog = this.state.gradesCatalog || initialData.gradesCatalog || [];
+    const cleanG = gradeId.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: data.grade || "4° de Secundaria", level: "Secundaria", tutor: "Prof. Roberto Silva" };
+
+    const newEnrollment = {
+      id: data.id || `MATR-2026-${Math.floor(100 + Math.random() * 900)}`,
+      studentCode: studentCode,
+      studentName: (data.studentName || data.name || "").trim(),
+      dni: (data.dni || "").trim() || "Pendiente",
+      siagieCode: data.siagieCode || `2026-${data.dni || Math.floor(10000000 + Math.random() * 90000000)}`,
+      birthDate: data.birthDate || "14/05/2012",
+      gender: data.gender || "Masculino",
+      address: data.address || "San Juan de Lurigancho",
+      district: data.district || "San Juan de Lurigancho",
+      bloodType: data.bloodType || "O+",
+      insurance: data.insurance || "EsSalud / SIS",
+      allergies: data.allergies || "Sin alergias conocidas",
+      medicalCondition: data.medicalCondition || "Apto para actividades escolares",
+      emergencyContact: data.emergencyContact || data.guardian || "Apoderado",
+      emergencyPhone: data.emergencyPhone || data.guardianPhone || data.phone || "987-654-321",
+      level: gradeObj.level || "Secundaria",
+      grade: gradeObj.label || data.grade || "4° de Secundaria",
+      gradeId: gradeId,
+      tutor: gradeObj.tutor || "Docente Titular",
+      guardian: data.guardian || "Apoderado Titular",
+      guardianDni: data.guardianDni || "41982301",
+      guardianPhone: data.guardianPhone || data.phone || "987-654-321",
+      guardianEmail: data.guardianEmail || `${(data.studentName || 'estudiante').toLowerCase().replace(/\s+/g, '.')}@gmail.com`,
+      enrollmentDate: data.enrollmentDate || new Date().toLocaleDateString("es-PE"),
+      feeStatus: data.feeStatus || "Pagado (S/ 520.00)",
+      status: "Matriculado (Nómina Oficial)",
+      certificateNo: `CONST-MAT-2026-${Math.floor(100 + Math.random() * 900)}`,
+      documents: data.documents || {
+        dniStudent: true,
+        dniParent: true,
+        birthCertificate: true,
+        siagieFUM: true,
+        reportCard: true,
+        vaccinationCard: true
+      }
+    };
+
+    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    
+    // Si ya existe por DNI o código, actualizarlo
+    const existingIdx = this.state.enrollments.findIndex(e => (data.dni && e.dni === data.dni) || (e.studentCode === studentCode));
+    if (existingIdx >= 0) {
+      this.state.enrollments[existingIdx] = Object.assign(this.state.enrollments[existingIdx], newEnrollment);
+    } else {
+      this.state.enrollments.push(newEnrollment);
+    }
+
+    // Registrar o actualizar en systemUsers
+    const cleanStName = (data.studentName || data.name || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
+    const stParts = cleanStName.split(/\s+/).filter(Boolean);
+    const stUsername = stParts.length >= 2 ? `${stParts[0]}.${stParts[stParts.length - 1]}` : (stParts[0] || `estudiante.${Date.now().toString().slice(-4)}`);
+    
+    this.createSystemUser({
+      code: studentCode,
+      name: (data.studentName || data.name || "").trim(),
+      email: `${stUsername}@eleducador.edu.pe`,
+      username: stUsername,
+      role: "Estudiante",
+      detail: gradeObj.label,
+      gradeLevel: gradeObj.label,
+      grade: gradeObj.label,
+      gradeId: gradeId,
+      password: "estudiante2026",
+      dni: data.dni,
+      guardian: data.guardian,
+      tutor: gradeObj.tutor,
+      hasAdminPrivilege: false
+    });
+
+    // Inicializar boletaData si no existe
+    if (!this.state.boletaData) this.state.boletaData = {};
+    if (!this.state.boletaData[studentCode]) {
+      this.state.boletaData[studentCode] = {
+        student: (data.studentName || data.name || "").trim(),
+        code: studentCode,
+        dni: data.dni,
+        grade: gradeObj.label,
+        grades: {},
+        appreciations: {},
+        attendance: {},
+        parentCriteria: {}
+      };
+    }
+
+    this.saveState();
+    this.notify();
+    return newEnrollment;
+  }
+
+  bulkImportStudentsToGrade(gradeId, studentsList) {
+    if (!Array.isArray(studentsList) || studentsList.length === 0) return 0;
+    let addedCount = 0;
+    
+    studentsList.forEach(st => {
+      if (st && (st.name || st.studentName)) {
+        this.addStudentToGrade({
+          ...st,
+          studentName: st.name || st.studentName,
+          gradeId: gradeId
+        });
+        addedCount++;
+      }
+    });
+
+    this.saveState();
+    this.notify();
+    return addedCount;
+  }
+
+  deleteStudentFromGrade(studentIdOrCode) {
+    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    this.state.enrollments = this.state.enrollments.filter(e => e.id !== studentIdOrCode && e.studentCode !== studentIdOrCode && e.dni !== studentIdOrCode);
+    
+    if (this.state.systemUsers) {
+      this.state.systemUsers = this.state.systemUsers.filter(u => u.code !== studentIdOrCode && u.id !== studentIdOrCode && u.dni !== studentIdOrCode);
+    }
+
+    this.saveState();
+    this.notify();
+    return true;
+  }
+
   updateScheduleSlot(gradeId, rowIndex, dayKey, slotData) {
     const targetGrade = gradeId || this.state.selectedScheduleGrade || "4sec-a";
     if (!this.state.schedules[targetGrade]) {
@@ -5392,6 +5528,7 @@ const Components = {
       pagos: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>`,
       agenda: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path><path d="M14 6l2 2 4-4"></path></svg>`,
       "agenda-virtual": `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path><path d="M14 6l2 2 4-4"></path></svg>`,
+      "registro-estudiantes": `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
       boleta: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>`
     };
 
@@ -5422,13 +5559,14 @@ const Components = {
           const isActive = currentView === t.id;
           const isQR = t.id === 'cuadernos-qr';
           const isBoleta = t.id === 'boleta';
-          const customStyle = isQR ? 'background: rgba(245,158,11,0.12); border: 1px dashed rgba(245,158,11,0.4); color: #fde047; font-weight: bold;' : isBoleta ? 'background: rgba(245,158,11,0.08); border: 1px dashed rgba(245,158,11,0.3);' : '';
+          const isExcel = t.id === 'registro-estudiantes';
+          const customStyle = isQR ? 'background: rgba(245,158,11,0.12); border: 1px dashed rgba(245,158,11,0.4); color: #fde047; font-weight: bold;' : isExcel ? 'background: rgba(16,185,129,0.12); border: 1px dashed rgba(16,185,129,0.4); color: #6ee7b7; font-weight: bold;' : isBoleta ? 'background: rgba(245,158,11,0.08); border: 1px dashed rgba(245,158,11,0.3);' : '';
           
           return `
             <a class="nav-item ${isActive ? 'active' : ''}" data-view="${t.id}" id="nav-${t.id}" onclick="window.app.navigate('${t.id}')" style="${customStyle}; cursor: pointer;">
               ${iconSvg}
               <span>${t.label}</span>
-              ${t.badge ? `<span class="nav-badge ${isQR ? 'badge-yellow' : isBoleta ? 'badge-yellow' : 'badge-red'}">${t.badge}</span>` : ''}
+              ${t.badge ? `<span class="nav-badge ${isQR ? 'badge-yellow' : isExcel ? 'badge-yellow' : isBoleta ? 'badge-yellow' : 'badge-red'}">${t.badge}</span>` : ''}
             </a>
           `;
         }).join('')}
@@ -5457,6 +5595,12 @@ const Components = {
       </a>
 
       <div class="nav-section-title">Gestión Académica</div>
+
+      <a class="nav-item ${currentView === 'registro-estudiantes' ? 'active' : ''}" data-view="registro-estudiantes" id="nav-registro-estudiantes" onclick="window.app.navigate('registro-estudiantes')" style="background: rgba(16,185,129,0.12); border: 1px dashed rgba(16,185,129,0.4); color: #6ee7b7; font-weight: bold; cursor: pointer;">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <span>Registro de Estudiantes</span>
+        <span class="nav-badge badge-yellow" style="background:#10b981; color:#0b132b; font-weight:900;">EXCEL</span>
+      </a>
 
       <a class="nav-item ${currentView === 'cuadernos-qr' ? 'active' : ''}" data-view="cuadernos-qr" id="nav-cuadernos-qr" style="background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.4); color: #fde047; font-weight: bold;">
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
@@ -5813,6 +5957,269 @@ const Components = {
             </table>
           </div>
         </div>
+      </div>
+    `;
+  },
+
+  // =========================================================================
+  // GESTIÓN DE AULA: REGISTRO DE ESTUDIANTES & REGISTRO AUXILIAR (EXCEL)
+  // =========================================================================
+  renderStudentRegistry(state) {
+    const role = state.currentRole || 'admin';
+    const selectedGrade = state.selectedStudentRegistryGrade || state.selectedGradingGrade || "4sec";
+    const cleanSelectedGrade = selectedGrade.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    const gradesCatalog = (state.gradesCatalog && state.gradesCatalog.length > 0)
+      ? state.gradesCatalog
+      : ((initialData && initialData.gradesCatalog) || []);
+
+    const currentGradeObj = gradesCatalog.find(g => {
+      const gid = (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return gid === cleanSelectedGrade || gid.includes(cleanSelectedGrade) || cleanSelectedGrade.includes(gid);
+    }) || { id: selectedGrade, label: "4° de Secundaria", level: "Secundaria", tutor: "Prof. Roberto Silva" };
+
+    // Cursos del grado
+    const boletaCourses = (window.appStore && typeof window.appStore.getStudentBoletaCoursesCatalog === "function")
+      ? window.appStore.getStudentBoletaCoursesCatalog(selectedGrade)
+      : [];
+
+    let selectedCourse = state.selectedStudentRegistryCourse || (boletaCourses[0] ? boletaCourses[0].name : "Aritmética");
+    if (!boletaCourses.some(c => c.name === selectedCourse)) {
+      selectedCourse = boletaCourses[0] ? boletaCourses[0].name : "Aritmética";
+    }
+
+    // Estudiantes del aula
+    const allEnrollments = (window.appStore && typeof window.appStore.getEnrollments === "function")
+      ? window.appStore.getEnrollments()
+      : [];
+
+    const searchQuery = (state.studentRegistrySearchQuery || "").toLowerCase().trim();
+
+    const classroomStudents = allEnrollments.filter(e => {
+      const egId = (e.gradeId || (window.appStore && window.appStore.resolveStudentGradeId(e.grade)) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return egId === cleanSelectedGrade || egId.includes(cleanSelectedGrade) || cleanSelectedGrade.includes(egId);
+    }).filter(e => {
+      if (!searchQuery) return true;
+      const name = (e.studentName || "").toLowerCase();
+      const dni = (e.dni || "").toLowerCase();
+      const code = (e.studentCode || "").toLowerCase();
+      return name.includes(searchQuery) || dni.includes(searchQuery) || code.includes(searchQuery);
+    });
+
+    return `
+      <div class="fade-in">
+        
+        <!-- Cabecera Institucional -->
+        <div class="card" style="margin-bottom: var(--space-6); background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: #ffffff;">
+          <div class="card-header" style="border-bottom: 1px solid rgba(255,255,255,0.15); flex-wrap: wrap; gap: 14px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <h2 class="card-title" style="font-size: var(--font-size-xl); color: #fde047; margin: 0;">
+                  📋 Registro Oficial de Estudiantes & Registro Auxiliar
+                </h2>
+                <span class="status-badge" style="background: #22c55e; color: #0b132b; font-weight: 900;">Periodo 2026</span>
+              </div>
+              <p style="font-size: 12px; color: rgba(255,255,255,0.85); margin-top: 4px;">
+                I.E.P. "El Educador" • UGEL 05 S.J.L. • Gestión de Nómina, Importación desde Excel y Generación de Registro Auxiliar MINEDU.
+              </p>
+            </div>
+
+            <!-- Acciones Principales en Cabecera -->
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+              <button class="btn btn-gold btn-sm" onclick="window.app.openAddStudentModal('${selectedGrade}')" style="font-weight: 900; padding: 8px 16px;">
+                ➕ Agregar Estudiante
+              </button>
+              <button class="btn btn-sm" onclick="window.app.openImportStudentsModal('${selectedGrade}')" style="background: #10b981; color: white; font-weight: 900; padding: 8px 16px;">
+                📥 Importar desde Excel
+              </button>
+              <button class="btn btn-sm" onclick="window.app.downloadAuxiliaryRegisterExcel('${selectedGrade}', '${selectedCourse}')" style="background: #0284c7; color: white; font-weight: 900; padding: 8px 16px;">
+                📊 Descargar Registro Auxiliar (.XLS)
+              </button>
+            </div>
+          </div>
+
+          <!-- Métricas Rápidas del Aula -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; padding: 14px 20px; background: rgba(0,0,0,0.15);">
+            <div style="border-left: 3px solid #38bdf8; padding-left: 10px;">
+              <div style="font-size: 11px; opacity: 0.8; text-transform: uppercase; font-weight: 700;">Aula / Grado Activo</div>
+              <div style="font-size: 16px; font-weight: 900; color: #f8fafc;">${currentGradeObj.label || selectedGrade}</div>
+            </div>
+            <div style="border-left: 3px solid #4ade80; padding-left: 10px;">
+              <div style="font-size: 11px; opacity: 0.8; text-transform: uppercase; font-weight: 700;">Estudiantes Matriculados</div>
+              <div style="font-size: 16px; font-weight: 900; color: #4ade80;">${classroomStudents.length} Alumnos</div>
+            </div>
+            <div style="border-left: 3px solid #facc15; padding-left: 10px;">
+              <div style="font-size: 11px; opacity: 0.8; text-transform: uppercase; font-weight: 700;">Tutor(a) Responsable</div>
+              <div style="font-size: 14px; font-weight: 800; color: #fde047;">${currentGradeObj.tutor || 'Prof. Roberto Silva'}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra de Control, Filtrado y Búsqueda -->
+        <div class="card" style="margin-bottom: var(--space-4); padding: 16px; background: #ffffff;">
+          <div style="display: flex; gap: 14px; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+            
+            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; flex: 1;">
+              <!-- 1. Selector de Grado -->
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">🏫 Grado:</span>
+                <select class="form-control" style="font-weight: bold; width: auto; font-size: 12.5px; min-width: 200px; background: #fffbeb; border-color: #f59e0b;" onchange="window.app.changeStudentRegistryGrade(this.value)">
+                  <optgroup label="--- NIVEL INICIAL ---">
+                    <option value="ini-3" ${cleanSelectedGrade === 'ini3' || cleanSelectedGrade === 'ini-3' ? 'selected' : ''}>Inicial 3 Años</option>
+                    <option value="ini-4" ${cleanSelectedGrade === 'ini4' || cleanSelectedGrade === 'ini-4' ? 'selected' : ''}>Inicial 4 Años</option>
+                    <option value="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
+                  </optgroup>
+                  <optgroup label="--- NIVEL PRIMARIA ---">
+                    <option value="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1° de Primaria</option>
+                    <option value="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2° de Primaria</option>
+                    <option value="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3° de Primaria</option>
+                    <option value="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4° de Primaria</option>
+                    <option value="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5° de Primaria</option>
+                    <option value="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6° de Primaria</option>
+                  </optgroup>
+                  <optgroup label="--- NIVEL SECUNDARIA ---">
+                    <option value="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1° de Secundaria</option>
+                    <option value="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2° de Secundaria</option>
+                    <option value="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3° de Secundaria</option>
+                    <option value="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4° de Secundaria</option>
+                    <option value="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5° de Secundaria</option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <!-- 2. Selector de Curso para el Registro Auxiliar -->
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">📚 Asignatura:</span>
+                <select class="form-control" style="font-weight: bold; width: auto; font-size: 12.5px; min-width: 220px;" onchange="window.app.changeStudentRegistryCourse(this.value)">
+                  ${boletaCourses.map(c => `
+                    <option value="${c.name}" ${c.name === selectedCourse ? 'selected' : ''}>
+                      ${c.icon || '📖'} ${c.name} • (${c.teacher})
+                    </option>
+                  `).join('')}
+                </select>
+              </div>
+
+              <!-- 3. Buscador en Tiempo Real -->
+              <div style="position: relative; min-width: 220px;">
+                <input type="text" class="form-control" placeholder="🔍 Buscar por nombre o DNI..." value="${state.studentRegistrySearchQuery || ''}" oninput="window.app.filterStudentRegistry(this.value)" style="font-size: 12px;" />
+              </div>
+            </div>
+
+            <!-- Botones Secundarios -->
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="btn btn-outline btn-sm" onclick="window.app.openPasteFromExcelModal('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px;">
+                📋 Pegar Filas de Excel
+              </button>
+              <button class="btn btn-outline btn-sm" onclick="window.app.downloadExcelTemplate()" style="font-weight: 800; font-size: 11.5px; color: #0284c7; border-color: #38bdf8;">
+                📄 Plantilla Excel
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Tabla Principal de Estudiantes -->
+        <div class="card" style="margin-bottom: var(--space-6);">
+          <div class="card-header" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <div style="font-size: 13px; font-weight: 800; color: var(--color-navy-900);">
+              Nómina Oficial de Estudiantes — ${currentGradeObj.label || selectedGrade} (${classroomStudents.length} Alumnos Registrados)
+            </div>
+            <div style="font-size: 11.5px; color: #64748b;">
+              * Los alumnos agregados o importados aquí se sincronizan automáticamente en <strong>Registro de Notas</strong>, <strong>Cuadernos QR</strong> y <strong>Asistencias</strong>.
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr style="background: var(--color-navy-900); color: white;">
+                  <th style="width: 5%; text-align: center;">N°</th>
+                  <th style="width: 12%;">Código / DNI</th>
+                  <th style="width: 28%;">Apellidos y Nombres</th>
+                  <th style="width: 14%;">Grado y Sección</th>
+                  <th style="width: 20%;">Apoderado & Contacto</th>
+                  <th style="width: 10%; text-align: center;">Estado</th>
+                  <th style="width: 11%; text-align: center;">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${classroomStudents.length === 0 ? `
+                  <tr>
+                    <td colspan="7" style="text-align: center; padding: 40px 20px; color: #64748b;">
+                      <div style="font-size: 32px; margin-bottom: 8px;">📂</div>
+                      <div style="font-size: 14px; font-weight: 800; color: #1e293b;">No hay estudiantes registrados en ${currentGradeObj.label || selectedGrade}.</div>
+                      <p style="font-size: 12px; margin-top: 4px; margin-bottom: 16px;">
+                        Puede agregar alumnos individualmente con el botón "+ Agregar Estudiante" o importar la lista completa desde un libro de Excel.
+                      </p>
+                      <div style="display: flex; gap: 8px; justify-content: center;">
+                        <button class="btn btn-gold btn-sm" onclick="window.app.openAddStudentModal('${selectedGrade}')" style="font-weight: 800;">
+                          ➕ Agregar Primer Estudiante
+                        </button>
+                        <button class="btn btn-sm" onclick="window.app.openImportStudentsModal('${selectedGrade}')" style="background: #10b981; color: white; font-weight: 800;">
+                          📥 Importar Excel / Registro Auxiliar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ` : classroomStudents.map((st, idx) => `
+                  <tr>
+                    <td style="text-align: center; font-weight: bold; color: #64748b;">${idx + 1}</td>
+                    <td>
+                      <div><strong style="color: var(--color-navy-900); font-family: monospace;">${st.dni || 'Sin DNI'}</strong></div>
+                      <div style="font-size: 10.5px; color: #64748b;">${st.studentCode}</div>
+                    </td>
+                    <td>
+                      <div style="font-weight: 900; color: #0b132b; font-size: 13px;">${st.studentName}</div>
+                      <div style="font-size: 10.5px; color: #0284c7;">SIAGIE: ${st.siagieCode || st.dni || '2026'}</div>
+                    </td>
+                    <td>
+                      <span class="status-badge" style="background: #e0f2fe; color: #0369a1; font-weight: 800; font-size: 11px;">
+                        ${st.grade || currentGradeObj.label}
+                      </span>
+                    </td>
+                    <td>
+                      <div style="font-size: 12px; font-weight: 700; color: #334155;">${st.guardian || 'Apoderado no registrado'}</div>
+                      <div style="font-size: 11px; color: #16a34a; font-weight: 700;">📞 ${st.guardianPhone || st.emergencyPhone || 'Sin teléfono'}</div>
+                    </td>
+                    <td style="text-align: center;">
+                      <span class="status-badge status-approved" style="font-size: 10.5px;">
+                        <span class="status-dot-green"></span> Al Día
+                      </span>
+                    </td>
+                    <td style="text-align: center;">
+                      <div style="display: flex; gap: 4px; justify-content: center;">
+                        <button class="btn btn-outline btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${st.studentCode || st.dni}')" title="Ver Stickers QR de Cuadernos" style="padding: 3px 6px; font-size: 11px;">
+                          ⚡ QR
+                        </button>
+                        <button class="btn btn-outline btn-sm" onclick="window.app.openEditStudentModal('${st.id || st.studentCode}')" title="Editar datos del estudiante" style="padding: 3px 6px; font-size: 11px;">
+                          ✏️
+                        </button>
+                        <button class="btn btn-sm" onclick="window.app.confirmDeleteStudent('${st.studentCode || st.id}')" title="Eliminar estudiante" style="padding: 3px 6px; font-size: 11px; background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5;">
+                          🗑️
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+
+          <div style="padding: 14px 18px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div style="font-size: 12px; color: #475569;">
+              Total de estudiantes en nómina: <strong>${classroomStudents.length}</strong> • I.E.P. "El Educador" S.J.L.
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline btn-sm" onclick="window.print()" style="font-weight: 800;">
+                🖨️ Imprimir Nómina
+              </button>
+              <button class="btn btn-navy btn-sm" onclick="window.app.downloadAuxiliaryRegisterExcel('${selectedGrade}', '${selectedCourse}')" style="font-weight: 800;">
+                📊 Descargar Registro Auxiliar (Excel)
+              </button>
+            </div>
+          </div>
+        </div>
+
       </div>
     `;
   },
@@ -12353,6 +12760,9 @@ CREATE TABLE tb_cuadernos_qr (
         case "usuarios-matriculas":
           html = Components.renderUserAndEnrollmentManagement(state);
           break;
+        case "registro-estudiantes":
+          html = Components.renderStudentRegistry(state);
+          break;
         case "horarios":
           html = Components.renderSchedules(state);
           break;
@@ -16777,6 +17187,613 @@ CREATE TABLE tb_cuadernos_qr (
     this.store.state.activeGradesTab = tab;
     this.store.saveState();
     this.render();
+  }
+
+  // =========================================================================
+  // MÓDULO REGISTRO DE ESTUDIANTES, NÓMINA OFICIAL & REGISTRO AUXILIAR (EXCEL)
+  // =========================================================================
+  changeStudentRegistryGrade(gradeId) {
+    this.store.state.selectedStudentRegistryGrade = gradeId;
+    this.store.state.selectedGradingGrade = gradeId;
+    this.store.saveState();
+    this.render();
+  }
+
+  changeStudentRegistryCourse(courseName) {
+    this.store.state.selectedStudentRegistryCourse = courseName;
+    this.store.saveState();
+    this.render();
+  }
+
+  filterStudentRegistry(query) {
+    this.store.state.studentRegistrySearchQuery = query;
+    this.render();
+  }
+
+  openAddStudentModal(gradeId) {
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+    const cleanG = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "4° de Secundaria", level: "Secundaria" };
+    const autoCode = `EST-2026-${Math.floor(100 + Math.random() * 900)}`;
+
+    this.showModal(`
+      <div class="modal-header" style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white;">
+        <div>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">➕ Agregar Nuevo Estudiante a la Nómina</h3>
+          <span style="font-size: 11px; opacity: 0.9;">Aula destino: <strong>${gradeObj.label}</strong> • Periodo Académico 2026</span>
+        </div>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+      </div>
+      <form onsubmit="window.app.confirmAddStudent(event)">
+        <div class="modal-body" style="padding: 20px; background: #f8fafc;">
+          <input type="hidden" name="gradeId" value="${gradeId}" />
+          <input type="hidden" name="grade" value="${gradeObj.label}" />
+          
+          <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">DNI del Estudiante *</label>
+              <input type="text" name="dni" class="form-control" placeholder="8 dígitos (ej. 75891234)" pattern="[0-9]{8}" maxlength="8" required style="font-weight: bold;" />
+              <span style="font-size: 10.5px; color: #64748b;">Requerido para SIAGIE y boletas oficiales</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">Código de Estudiante</label>
+              <input type="text" name="studentCode" class="form-control" value="${autoCode}" required style="font-family: monospace; font-weight: bold; background: #f1f5f9;" />
+            </div>
+
+            <div class="form-group" style="grid-column: span 2;">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">Apellidos y Nombres Completos *</label>
+              <input type="text" name="studentName" class="form-control" placeholder="Ej. Mendoza Huamán, Camila Sofía" required style="font-weight: bold;" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">Nombre del Padre / Apoderado</label>
+              <input type="text" name="guardian" class="form-control" placeholder="Ej. Sra. Rosa Huamán" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">Teléfono / WhatsApp de Contacto</label>
+              <input type="tel" name="phone" class="form-control" placeholder="Ej. 987-654-321" />
+            </div>
+
+            <div class="form-group" style="grid-column: span 2;">
+              <label class="form-label" style="font-weight: 800; color: #0f172a;">Dirección de Domicilio</label>
+              <input type="text" name="address" class="form-control" placeholder="Ej. Av. Próceres de la Independencia 1420 - SJL" />
+            </div>
+
+          </div>
+
+          <div style="margin-top: 14px; padding: 10px 14px; background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 4px; font-size: 11.5px; color: #065f46;">
+            💡 <strong>Sincronización Automática:</strong> Al guardar, el estudiante se agregará al Registro Auxiliar, podrá ser calificado en <strong>Registro de Notas</strong>, tendrá su credencial institucional generada y stickers QR de cuadernos listos.
+          </div>
+
+        </div>
+        <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
+          <button type="submit" class="btn btn-gold" style="font-weight: 900;">✓ Matricular y Guardar Estudiante</button>
+        </div>
+      </form>
+    `);
+  }
+
+  confirmAddStudent(event) {
+    if (event) event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const studentData = {
+      dni: (formData.get("dni") || "").trim(),
+      studentCode: (formData.get("studentCode") || "").trim(),
+      studentName: (formData.get("studentName") || "").trim(),
+      gradeId: formData.get("gradeId"),
+      grade: formData.get("grade"),
+      guardian: (formData.get("guardian") || "Apoderado Titular").trim(),
+      phone: (formData.get("phone") || "987-654-321").trim(),
+      guardianPhone: (formData.get("phone") || "987-654-321").trim(),
+      address: (formData.get("address") || "San Juan de Lurigancho").trim()
+    };
+
+    if (!studentData.studentName) {
+      alert("Por favor ingrese los nombres y apellidos del estudiante.");
+      return;
+    }
+
+    this.store.addStudentToGrade(studentData);
+    this.closeModal();
+    this.showToast(`✓ Estudiante "${studentData.studentName}" matriculado y registrado exitosamente en la nómina.`, "success");
+    this.render();
+  }
+
+  openImportStudentsModal(gradeId) {
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+    const cleanG = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "4° de Secundaria", level: "Secundaria" };
+
+    this.showModal(`
+      <div class="modal-header" style="background: linear-gradient(135deg, #065f46 0%, #0f172a 100%); color: white;">
+        <div>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #4ade80;">📥 Importar Nómina de Estudiantes desde Excel</h3>
+          <span style="font-size: 11px; opacity: 0.9;">Aula destino: <strong>${gradeObj.label}</strong> • (.XLSX, .XLS, .CSV o Archivos de Registro Auxiliar)</span>
+        </div>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+      </div>
+      <div class="modal-body" style="padding: 20px; background: #f8fafc;">
+        
+        <!-- Zona de Carga de Archivos -->
+        <div style="border: 2px dashed #10b981; background: #ecfdf5; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 16px; cursor: pointer;" onclick="document.getElementById('excel-file-input').click()">
+          <div style="font-size: 38px; margin-bottom: 8px;">📊</div>
+          <h4 style="margin: 0 0 6px 0; color: #065f46; font-weight: 800;">Haga clic aquí para seleccionar el archivo Excel o arrástrelo</h4>
+          <p style="margin: 0; font-size: 12px; color: #047857;">Formatos soportados: <strong>.XLSX, .XLS, .CSV, .TSV</strong> (Libros de Registro Auxiliar, Nóminas SIAGIE o Listas del Docente)</p>
+          <input type="file" id="excel-file-input" accept=".xlsx,.xls,.csv,.tsv,.txt" style="display: none;" onchange="window.app.handleExcelFileSelect(event, '${gradeId}')" />
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 800; color: #1e293b;">
+            Vista Previa de Estudiantes Detectados:
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline btn-sm" onclick="window.app.downloadExcelTemplate()" style="font-size: 11px; font-weight: 800;">
+              📄 Descargar Formato Modelo
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="window.app.openPasteFromExcelModal('${gradeId}')" style="font-size: 11px; font-weight: 800;">
+              📋 O Pegar Texto
+            </button>
+          </div>
+        </div>
+
+        <!-- Contenedor de Vista Previa -->
+        <div id="excel-import-preview-container" style="max-height: 240px; overflow-y: auto; background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px;">
+          <div style="text-align: center; padding: 24px; color: #64748b; font-size: 12px;">
+            Seleccione un archivo Excel para previsualizar los estudiantes antes de importar.
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+        <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button type="button" id="btn-confirm-import" class="btn btn-emerald" style="font-weight: 900; display: none;" onclick="window.app.executeBulkImportFromPreview('${gradeId}')">
+          ✓ Confirmar e Importar a ${gradeObj.label}
+        </button>
+      </div>
+    `);
+  }
+
+  handleExcelFileSelect(event, gradeId) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const content = e.target.result;
+      this.parseAndPreviewExcelContent(content, gradeId);
+    };
+    reader.readAsText(file, "UTF-8");
+  }
+
+  openPasteFromExcelModal(gradeId) {
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+    const cleanG = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "4° de Secundaria", level: "Secundaria" };
+
+    this.showModal(`
+      <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); color: white;">
+        <div>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">📋 Pegar Filas Directamente desde Excel</h3>
+          <span style="font-size: 11px; opacity: 0.9;">Copie las celdas en su Excel (Ctrl+C) y péguelas aquí (Ctrl+V)</span>
+        </div>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+      </div>
+      <div class="modal-body" style="padding: 20px; background: #f8fafc;">
+        
+        <p style="font-size: 12px; color: #475569; margin-top: 0; margin-bottom: 10px;">
+          Puede copiar columnas con: <strong>DNI</strong>, <strong>Apellidos y Nombres</strong>, <strong>Apoderado</strong>, <strong>Teléfono</strong> (o simplemente la lista de nombres y DNIs).
+        </p>
+
+        <textarea id="pasted-excel-text" class="form-control" rows="8" placeholder="Ejemplo:&#10;74891230&#9;Méndez Flores, Sofía&#9;Carmen Méndez&#9;987654321&#10;75129034&#9;Benítez Díaz, Carlos&#9;Roberto Díaz&#9;984123456" style="font-family: monospace; font-size: 12px; background: white; white-space: pre;" oninput="window.app.handleProcessPastedExcel('${gradeId}')"></textarea>
+
+        <div style="margin-top: 14px;">
+          <div style="font-size: 12px; font-weight: 800; color: #1e293b; margin-bottom: 8px;">
+            Alumnos Detectados:
+          </div>
+          <div id="excel-import-preview-container" style="max-height: 180px; overflow-y: auto; background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px;">
+            <div style="text-align: center; padding: 16px; color: #64748b; font-size: 12px;">
+              Pegue las filas de Excel en la caja superior para procesarlas.
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+        <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button type="button" id="btn-confirm-import" class="btn btn-emerald" style="font-weight: 900; display: none;" onclick="window.app.executeBulkImportFromPreview('${gradeId}')">
+          ✓ Importar Alumnos al Aula
+        </button>
+      </div>
+    `);
+  }
+
+  handleProcessPastedExcel(gradeId) {
+    const textarea = document.getElementById("pasted-excel-text");
+    if (!textarea) return;
+    this.parseAndPreviewExcelContent(textarea.value, gradeId);
+  }
+
+  parseAndPreviewExcelContent(rawText, gradeId) {
+    if (!rawText || !rawText.trim()) return;
+
+    const lines = rawText.split(/\r?\n/).filter(l => l.trim().length > 0);
+    const parsedStudents = [];
+
+    lines.forEach((line, idx) => {
+      let cols = [];
+      if (line.includes("\t")) {
+        cols = line.split("\t");
+      } else if (line.includes(";")) {
+        cols = line.split(";");
+      } else if (line.includes("|")) {
+        cols = line.split("|");
+      } else if (line.includes(",")) {
+        cols = line.split(",");
+      } else {
+        cols = [line];
+      }
+
+      cols = cols.map(c => c.trim().replace(/^["']|["']$/g, ''));
+
+      const firstCol = cols[0].toLowerCase();
+      if (firstCol === "n°" || firstCol === "dni" || firstCol === "codigo" || firstCol === "código" || firstCol === "apellidos" || firstCol === "nombre" || firstCol === "estudiante") {
+        return;
+      }
+
+      let dni = "";
+      let name = "";
+      let guardian = "";
+      let phone = "";
+
+      cols.forEach(c => {
+        const clean = c.replace(/[^0-9]/g, '');
+        if (clean.length === 8 && !dni) {
+          dni = clean;
+        } else if (clean.length === 9 && !phone && (clean.startsWith("9") || clean.startsWith("0"))) {
+          phone = clean;
+        } else if (c.length > 3 && !/[0-9]{5,}/.test(c)) {
+          if (!name) {
+            name = c.replace(/^\d+[\.\-\)]\s*/, '').trim();
+          } else if (!guardian) {
+            guardian = c;
+          }
+        }
+      });
+
+      if (!name && cols.length > 0) {
+        name = cols.find(c => c.length > 2 && isNaN(c)) || `Estudiante ${idx + 1}`;
+      }
+
+      if (name) {
+        parsedStudents.push({
+          dni: dni || `7${Math.floor(1000000 + Math.random() * 9000000)}`,
+          studentName: name,
+          guardian: guardian || "Apoderado Titular",
+          guardianPhone: phone || "987-654-321",
+          phone: phone || "987-654-321"
+        });
+      }
+    });
+
+    this.currentParsedStudents = parsedStudents;
+
+    const container = document.getElementById("excel-import-preview-container");
+    const btnConfirm = document.getElementById("btn-confirm-import");
+
+    if (container) {
+      if (parsedStudents.length === 0) {
+        container.innerHTML = `<div style="text-align: center; padding: 16px; color: #dc2626; font-size: 12px;">No se pudieron detectar filas válidas. Verifique el formato.</div>`;
+        if (btnConfirm) btnConfirm.style.display = "none";
+      } else {
+        container.innerHTML = `
+          <table class="data-table" style="font-size: 11.5px; width: 100%;">
+            <thead>
+              <tr style="background: #f1f5f9; color: #334155;">
+                <th style="width: 8%; text-align: center;">N°</th>
+                <th style="width: 22%;">DNI</th>
+                <th style="width: 45%;">Apellidos y Nombres</th>
+                <th style="width: 25%;">Apoderado / Teléfono</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${parsedStudents.map((st, i) => `
+                <tr>
+                  <td style="text-align: center; font-weight: bold;">${i + 1}</td>
+                  <td><strong>${st.dni}</strong></td>
+                  <td style="font-weight: 800; color: #0b132b;">${st.studentName}</td>
+                  <td>${st.guardian} • <span style="color: #16a34a;">${st.phone}</span></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+        if (btnConfirm) {
+          btnConfirm.style.display = "inline-block";
+          btnConfirm.textContent = `✓ Confirmar e Importar ${parsedStudents.length} Alumnos`;
+        }
+      }
+    }
+  }
+
+  executeBulkImportFromPreview(gradeId) {
+    if (!this.currentParsedStudents || this.currentParsedStudents.length === 0) {
+      alert("No hay estudiantes para importar.");
+      return;
+    }
+
+    const count = this.store.bulkImportStudentsToGrade(gradeId, this.currentParsedStudents);
+    this.closeModal();
+    this.showToast(`✓ Se importaron ${count} estudiantes exitosamente a la nómina del aula.`, "success");
+    this.render();
+  }
+
+  downloadAuxiliaryRegisterExcel(gradeId, courseName) {
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+    const cleanG = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "4° de Secundaria", level: "Secundaria", tutor: "Prof. Roberto Silva" };
+
+    const boletaCourses = this.store.getStudentBoletaCoursesCatalog(gradeId);
+    const targetCourse = boletaCourses.find(c => c.name === courseName) || boletaCourses[0] || { name: courseName || "Aritmética", teacher: "Prof. Roberto Silva" };
+
+    const allEnrollments = this.store.getEnrollments();
+    const students = allEnrollments.filter(e => {
+      const egId = (e.gradeId || this.store.resolveStudentGradeId(e.grade) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return egId === cleanG || egId.includes(cleanG) || cleanG.includes(egId);
+    });
+
+    const boletaData = this.store.state.boletaData || {};
+
+    let htmlTable = `
+      <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>Registro Auxiliar 2026</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+        <style>
+          body { font-family: Calibri, Arial, sans-serif; font-size: 11pt; }
+          .header-main { background-color: #0b132b; color: #ffffff; font-size: 14pt; font-weight: bold; text-align: center; height: 35px; }
+          .header-sub { background-color: #1e3a8a; color: #ffffff; font-size: 11pt; font-weight: bold; text-align: center; height: 25px; }
+          .info-label { font-weight: bold; background-color: #f1f5f9; }
+          .info-val { font-weight: bold; color: #0b132b; }
+          .col-header { background-color: #0f172a; color: #ffffff; font-weight: bold; text-align: center; border: 1px solid #000; }
+          .col-sub { background-color: #334155; color: #ffffff; font-weight: bold; text-align: center; font-size: 9pt; border: 1px solid #000; }
+          .cell-data { border: 1px solid #cbd5e1; text-align: center; }
+          .cell-name { border: 1px solid #cbd5e1; text-align: left; font-weight: bold; }
+          .cell-grade { border: 1px solid #cbd5e1; text-align: center; font-weight: bold; color: #0369a1; }
+          .cell-final { border: 1px solid #000000; text-align: center; font-weight: bold; background-color: #fef08a; color: #854d0e; }
+        </style>
+      </head>
+      <body>
+        <table border="1" cellpadding="4" cellspacing="0">
+          <tr>
+            <td colspan="15" class="header-main">I.E.P. "EL EDUCADOR" — REGISTRO AUXILIAR OFICIAL DE EVALUACIÓN Y ASISTENCIA</td>
+          </tr>
+          <tr>
+            <td colspan="15" class="header-sub">DIRECCIÓN DE GESTIÓN PEDAGÓGICA • UGEL 05 SAN JUAN DE LURIGANCHO • AÑO ACADÉMICO 2026</td>
+          </tr>
+          <tr>
+            <td colspan="2" class="info-label">NIVEL / GRADO:</td>
+            <td colspan="3" class="info-val">${gradeObj.label}</td>
+            <td colspan="2" class="info-label">ASIGNATURA:</td>
+            <td colspan="4" class="info-val">${targetCourse.name}</td>
+            <td colspan="2" class="info-label">DOCENTE:</td>
+            <td colspan="2" class="info-val">${targetCourse.teacher}</td>
+          </tr>
+          <tr>
+            <td colspan="2" class="info-label">TUTOR(A):</td>
+            <td colspan="3" class="info-val">${gradeObj.tutor || 'Prof. Roberto Silva'}</td>
+            <td colspan="2" class="info-label">FECHA DE EMISIÓN:</td>
+            <td colspan="4" class="info-val">${new Date().toLocaleDateString("es-PE")}</td>
+            <td colspan="2" class="info-label">ESTUDIANTES:</td>
+            <td colspan="2" class="info-val">${students.length} Alumnos</td>
+          </tr>
+          <tr><td colspan="15" style="height: 10px; background-color: #ffffff;"></td></tr>
+
+          <!-- Encabezados de Columnas de Competencias -->
+          <tr>
+            <th rowspan="2" class="col-header" style="width: 40px;">N°</th>
+            <th rowspan="2" class="col-header" style="width: 90px;">DNI / CÓDIGO</th>
+            <th rowspan="2" class="col-header" style="width: 250px;">APELLIDOS Y NOMBRES</th>
+            <th colspan="2" class="col-header">I BIMESTRE</th>
+            <th colspan="2" class="col-header">II BIMESTRE</th>
+            <th colspan="2" class="col-header">III BIMESTRE</th>
+            <th colspan="2" class="col-header">IV BIMESTRE</th>
+            <th colspan="2" class="col-header" style="background-color: #854d0e;">LOGRO FINAL</th>
+            <th colspan="2" class="col-header" style="background-color: #166534;">ASISTENCIA</th>
+          </tr>
+          <tr>
+            <th class="col-sub">C1</th><th class="col-sub">PROM</th>
+            <th class="col-sub">C1</th><th class="col-sub">PROM</th>
+            <th class="col-sub">C1</th><th class="col-sub">PROM</th>
+            <th class="col-sub">C1</th><th class="col-sub">PROM</th>
+            <th class="col-sub" style="background-color: #ca8a04;">PROM</th>
+            <th class="col-sub" style="background-color: #ca8a04;">ESCALA</th>
+            <th class="col-sub" style="background-color: #15803d;">ASIST</th>
+            <th class="col-sub" style="background-color: #15803d;">TARD</th>
+          </tr>
+
+          <!-- Filas de Estudiantes -->
+          ${students.length === 0 ? `
+            <tr>
+              <td colspan="15" style="text-align: center; padding: 20px; font-weight: bold; color: #64748b;">
+                No hay estudiantes registrados en este grado.
+              </td>
+            </tr>
+          ` : students.map((st, idx) => {
+            const sKey = st.studentCode || st.dni;
+            const bRecord = boletaData[sKey] || {};
+            const subjectKey = (targetCourse.key || targetCourse.name.toLowerCase().replace(/[^a-z0-9]/g, ''));
+            const sGrade = (bRecord.grades && (bRecord.grades[subjectKey] || bRecord.grades[targetCourse.name])) || {};
+            
+            const b1 = sGrade.b1 || "AD";
+            const b2 = sGrade.b2 || "A";
+            const b3 = sGrade.b3 || "";
+            const b4 = sGrade.b4 || "";
+            const finalScale = b1 || "AD";
+
+            return `
+              <tr>
+                <td class="cell-data">${idx + 1}</td>
+                <td class="cell-data" style="mso-number-format:'\\@';">${st.dni || st.studentCode}</td>
+                <td class="cell-name">${st.studentName}</td>
+                <td class="cell-data">${b1}</td>
+                <td class="cell-grade">${b1}</td>
+                <td class="cell-data">${b2}</td>
+                <td class="cell-grade">${b2}</td>
+                <td class="cell-data">${b3}</td>
+                <td class="cell-grade">${b3}</td>
+                <td class="cell-data">${b4}</td>
+                <td class="cell-grade">${b4}</td>
+                <td class="cell-final">18</td>
+                <td class="cell-final">${finalScale}</td>
+                <td class="cell-data" style="color: #16a34a; font-weight: bold;">100%</td>
+                <td class="cell-data">0</td>
+              </tr>
+            `;
+          }).join('')}
+
+          <tr><td colspan="15" style="height: 15px; background-color: #ffffff;"></td></tr>
+          <tr>
+            <td colspan="5" style="text-align: center; height: 60px; vertical-align: bottom; font-weight: bold;">
+              ________________________________<br>Firma del Docente Responsable
+            </td>
+            <td colspan="5" style="text-align: center; height: 60px; vertical-align: bottom; font-weight: bold;">
+              ________________________________<br>V° B° Coordinación Pedagógica
+            </td>
+            <td colspan="5" style="text-align: center; height: 60px; vertical-align: bottom; font-weight: bold;">
+              ________________________________<br>V° B° Dirección General
+            </td>
+          </tr>
+        </table>
+      </body>
+      </html>
+    `;
+
+    const blob = new Blob([htmlTable], { type: "application/vnd.ms-excel;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    const cleanFileName = `Registro_Auxiliar_${gradeObj.label.replace(/[^a-zA-Z0-9]/g, '_')}_${targetCourse.name.replace(/[^a-zA-Z0-9]/g, '_')}_2026.xls`;
+    link.href = url;
+    link.download = cleanFileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    this.showToast(`✓ Registro Auxiliar descargado exitosamente: "${cleanFileName}"`, "success");
+  }
+
+  downloadExcelTemplate() {
+    const csvContent = "DNI,Apellidos y Nombres,Grado,Nombre_Apoderado,Telefono_Contacto\n" +
+      "74891230,Méndez Flores Sofía,4° de Secundaria,Dra. Carmen Méndez,987654321\n" +
+      "75129034,Benítez Díaz Carlos,4° de Secundaria,Sr. Roberto Díaz,984123456\n" +
+      "76891209,Ramos Quispe Mateo,1° de Primaria,Sra. Lucía Quispe,981234567\n" +
+      "78912344,Mendoza Huamán Camila Sofía,1° de Primaria,Sra. Rosa Huamán,976543210\n";
+
+    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "Plantilla_Importacion_Estudiantes_ElEducador.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    this.showToast("✓ Plantilla modelo descargada: Plantilla_Importacion_Estudiantes_ElEducador.csv", "info");
+  }
+
+  openEditStudentModal(studentId) {
+    const allEnrollments = this.store.getEnrollments();
+    const st = allEnrollments.find(e => e.id === studentId || e.studentCode === studentId || e.dni === studentId);
+    if (!st) return;
+
+    this.showModal(`
+      <div class="modal-header" style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white;">
+        <div>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">✏️ Editar Datos del Estudiante</h3>
+          <span style="font-size: 11px; opacity: 0.9;">Código: <strong>${st.studentCode}</strong></span>
+        </div>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+      </div>
+      <form onsubmit="window.app.confirmEditStudent(event, '${st.id || st.studentCode}')">
+        <div class="modal-body" style="padding: 20px; background: #f8fafc;">
+          
+          <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800;">DNI</label>
+              <input type="text" name="dni" class="form-control" value="${st.dni || ''}" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800;">Código Modular</label>
+              <input type="text" name="studentCode" class="form-control" value="${st.studentCode || ''}" readonly style="background: #f1f5f9;" />
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+              <label class="form-label" style="font-weight: 800;">Apellidos y Nombres Completos</label>
+              <input type="text" name="studentName" class="form-control" value="${st.studentName || ''}" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800;">Apoderado</label>
+              <input type="text" name="guardian" class="form-control" value="${st.guardian || ''}" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-weight: 800;">Teléfono de Contacto</label>
+              <input type="tel" name="phone" class="form-control" value="${st.guardianPhone || st.emergencyPhone || ''}" />
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
+          <button type="submit" class="btn btn-navy" style="font-weight: 900;">✓ Guardar Cambios</button>
+        </div>
+      </form>
+    `);
+  }
+
+  confirmEditStudent(event, studentId) {
+    if (event) event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const updatedData = {
+      dni: (formData.get("dni") || "").trim(),
+      studentName: (formData.get("studentName") || "").trim(),
+      guardian: (formData.get("guardian") || "").trim(),
+      guardianPhone: (formData.get("phone") || "").trim(),
+      emergencyPhone: (formData.get("phone") || "").trim()
+    };
+
+    const allEnrollments = this.store.getEnrollments();
+    const st = allEnrollments.find(e => e.id === studentId || e.studentCode === studentId);
+    if (st) {
+      Object.assign(st, updatedData);
+      
+      const u = (this.store.state.systemUsers || []).find(u => u.code === st.studentCode || u.dni === st.dni);
+      if (u) {
+        u.name = updatedData.studentName;
+        u.dni = updatedData.dni;
+        u.guardian = updatedData.guardian;
+      }
+
+      this.store.saveState();
+      this.closeModal();
+      this.showToast("✓ Datos del estudiante actualizados correctamente.", "success");
+      this.render();
+    }
+  }
+
+  confirmDeleteStudent(studentId) {
+    if (confirm("¿Está seguro de eliminar a este estudiante de la nómina del aula?")) {
+      this.store.deleteStudentFromGrade(studentId);
+      this.showToast("✓ Estudiante retirado de la nómina.", "info");
+      this.render();
+    }
   }
 
   // Cambiar Grado Seleccionado en el Registro de Calificaciones

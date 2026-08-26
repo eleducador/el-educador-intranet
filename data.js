@@ -463,6 +463,7 @@ const initialData = {
     ],
     docente: [
       { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
+      { id: "registro-estudiantes", label: "Registro de Estudiantes", badge: "Excel", icon: "users", enabled: true },
       { id: "agenda-virtual", label: "📖 Agenda Virtual & Anotaciones", badge: "AGENDA", icon: "agenda", enabled: true },
       { id: "cuadernos-qr", label: "Lector de Cuadernos QR", badge: "CÁMARA", icon: "qr", enabled: true },
       { id: "calificaciones", label: "Registro de Notas", badge: "Bimestral", icon: "grades", enabled: true },
@@ -496,6 +497,7 @@ const initialData = {
     ],
     director: [
       { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
+      { id: "registro-estudiantes", label: "Registro de Estudiantes", badge: "Excel", icon: "users", enabled: true },
       { id: "agenda-virtual", label: "📖 Agenda Virtual Institucional", badge: "AGENDA", icon: "agenda", enabled: true },
       { id: "database", label: "Base de Datos & DB", badge: "DB Online", icon: "database", enabled: true },
       { id: "usuarios-matriculas", label: "Gestión de Perfiles & Cuentas", badge: "PERFILES", icon: "users", enabled: true },

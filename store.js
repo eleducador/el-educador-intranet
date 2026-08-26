@@ -1048,6 +1048,140 @@ class IntranetStore {
     return null;
   }
 
+  // =========================================================================
+  // REGISTRO DE ESTUDIANTES, NÓMINA OFICIAL E IMPORTACIÓN MASIVA DESDE EXCEL
+  // =========================================================================
+  addStudentToGrade(data) {
+    const studentCode = data.studentCode || `EST-2026-${Math.floor(100 + Math.random() * 900)}`;
+    const gradeId = data.gradeId || this.resolveStudentGradeId(data.grade) || "4sec";
+    
+    const catalog = this.state.gradesCatalog || initialData.gradesCatalog || [];
+    const cleanG = gradeId.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: data.grade || "4° de Secundaria", level: "Secundaria", tutor: "Prof. Roberto Silva" };
+
+    const newEnrollment = {
+      id: data.id || `MATR-2026-${Math.floor(100 + Math.random() * 900)}`,
+      studentCode: studentCode,
+      studentName: (data.studentName || data.name || "").trim(),
+      dni: (data.dni || "").trim() || "Pendiente",
+      siagieCode: data.siagieCode || `2026-${data.dni || Math.floor(10000000 + Math.random() * 90000000)}`,
+      birthDate: data.birthDate || "14/05/2012",
+      gender: data.gender || "Masculino",
+      address: data.address || "San Juan de Lurigancho",
+      district: data.district || "San Juan de Lurigancho",
+      bloodType: data.bloodType || "O+",
+      insurance: data.insurance || "EsSalud / SIS",
+      allergies: data.allergies || "Sin alergias conocidas",
+      medicalCondition: data.medicalCondition || "Apto para actividades escolares",
+      emergencyContact: data.emergencyContact || data.guardian || "Apoderado",
+      emergencyPhone: data.emergencyPhone || data.guardianPhone || data.phone || "987-654-321",
+      level: gradeObj.level || "Secundaria",
+      grade: gradeObj.label || data.grade || "4° de Secundaria",
+      gradeId: gradeId,
+      tutor: gradeObj.tutor || "Docente Titular",
+      guardian: data.guardian || "Apoderado Titular",
+      guardianDni: data.guardianDni || "41982301",
+      guardianPhone: data.guardianPhone || data.phone || "987-654-321",
+      guardianEmail: data.guardianEmail || `${(data.studentName || 'estudiante').toLowerCase().replace(/\s+/g, '.')}@gmail.com`,
+      enrollmentDate: data.enrollmentDate || new Date().toLocaleDateString("es-PE"),
+      feeStatus: data.feeStatus || "Pagado (S/ 520.00)",
+      status: "Matriculado (Nómina Oficial)",
+      certificateNo: `CONST-MAT-2026-${Math.floor(100 + Math.random() * 900)}`,
+      documents: data.documents || {
+        dniStudent: true,
+        dniParent: true,
+        birthCertificate: true,
+        siagieFUM: true,
+        reportCard: true,
+        vaccinationCard: true
+      }
+    };
+
+    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    
+    // Si ya existe por DNI o código, actualizarlo
+    const existingIdx = this.state.enrollments.findIndex(e => (data.dni && e.dni === data.dni) || (e.studentCode === studentCode));
+    if (existingIdx >= 0) {
+      this.state.enrollments[existingIdx] = Object.assign(this.state.enrollments[existingIdx], newEnrollment);
+    } else {
+      this.state.enrollments.push(newEnrollment);
+    }
+
+    // Registrar o actualizar en systemUsers
+    const cleanStName = (data.studentName || data.name || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
+    const stParts = cleanStName.split(/\s+/).filter(Boolean);
+    const stUsername = stParts.length >= 2 ? `${stParts[0]}.${stParts[stParts.length - 1]}` : (stParts[0] || `estudiante.${Date.now().toString().slice(-4)}`);
+    
+    this.createSystemUser({
+      code: studentCode,
+      name: (data.studentName || data.name || "").trim(),
+      email: `${stUsername}@eleducador.edu.pe`,
+      username: stUsername,
+      role: "Estudiante",
+      detail: gradeObj.label,
+      gradeLevel: gradeObj.label,
+      grade: gradeObj.label,
+      gradeId: gradeId,
+      password: "estudiante2026",
+      dni: data.dni,
+      guardian: data.guardian,
+      tutor: gradeObj.tutor,
+      hasAdminPrivilege: false
+    });
+
+    // Inicializar boletaData si no existe
+    if (!this.state.boletaData) this.state.boletaData = {};
+    if (!this.state.boletaData[studentCode]) {
+      this.state.boletaData[studentCode] = {
+        student: (data.studentName || data.name || "").trim(),
+        code: studentCode,
+        dni: data.dni,
+        grade: gradeObj.label,
+        grades: {},
+        appreciations: {},
+        attendance: {},
+        parentCriteria: {}
+      };
+    }
+
+    this.saveState();
+    this.notify();
+    return newEnrollment;
+  }
+
+  bulkImportStudentsToGrade(gradeId, studentsList) {
+    if (!Array.isArray(studentsList) || studentsList.length === 0) return 0;
+    let addedCount = 0;
+    
+    studentsList.forEach(st => {
+      if (st && (st.name || st.studentName)) {
+        this.addStudentToGrade({
+          ...st,
+          studentName: st.name || st.studentName,
+          gradeId: gradeId
+        });
+        addedCount++;
+      }
+    });
+
+    this.saveState();
+    this.notify();
+    return addedCount;
+  }
+
+  deleteStudentFromGrade(studentIdOrCode) {
+    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    this.state.enrollments = this.state.enrollments.filter(e => e.id !== studentIdOrCode && e.studentCode !== studentIdOrCode && e.dni !== studentIdOrCode);
+    
+    if (this.state.systemUsers) {
+      this.state.systemUsers = this.state.systemUsers.filter(u => u.code !== studentIdOrCode && u.id !== studentIdOrCode && u.dni !== studentIdOrCode);
+    }
+
+    this.saveState();
+    this.notify();
+    return true;
+  }
+
   updateScheduleSlot(gradeId, rowIndex, dayKey, slotData) {
     const targetGrade = gradeId || this.state.selectedScheduleGrade || "4sec-a";
     if (!this.state.schedules[targetGrade]) {

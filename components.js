@@ -77,6 +77,7 @@ const Components = {
       pagos: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>`,
       agenda: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path><path d="M14 6l2 2 4-4"></path></svg>`,
       "agenda-virtual": `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path><path d="M14 6l2 2 4-4"></path></svg>`,
+      "registro-estudiantes": `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
       boleta: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>`
     };
 
@@ -107,13 +108,14 @@ const Components = {
           const isActive = currentView === t.id;
           const isQR = t.id === 'cuadernos-qr';
           const isBoleta = t.id === 'boleta';
-          const customStyle = isQR ? 'background: rgba(245,158,11,0.12); border: 1px dashed rgba(245,158,11,0.4); color: #fde047; font-weight: bold;' : isBoleta ? 'background: rgba(245,158,11,0.08); border: 1px dashed rgba(245,158,11,0.3);' : '';
+          const isExcel = t.id === 'registro-estudiantes';
+          const customStyle = isQR ? 'background: rgba(245,158,11,0.12); border: 1px dashed rgba(245,158,11,0.4); color: #fde047; font-weight: bold;' : isExcel ? 'background: rgba(16,185,129,0.12); border: 1px dashed rgba(16,185,129,0.4); color: #6ee7b7; font-weight: bold;' : isBoleta ? 'background: rgba(245,158,11,0.08); border: 1px dashed rgba(245,158,11,0.3);' : '';
           
           return `
             <a class="nav-item ${isActive ? 'active' : ''}" data-view="${t.id}" id="nav-${t.id}" onclick="window.app.navigate('${t.id}')" style="${customStyle}; cursor: pointer;">
               ${iconSvg}
               <span>${t.label}</span>
-              ${t.badge ? `<span class="nav-badge ${isQR ? 'badge-yellow' : isBoleta ? 'badge-yellow' : 'badge-red'}">${t.badge}</span>` : ''}
+              ${t.badge ? `<span class="nav-badge ${isQR ? 'badge-yellow' : isExcel ? 'badge-yellow' : isBoleta ? 'badge-yellow' : 'badge-red'}">${t.badge}</span>` : ''}
             </a>
           `;
         }).join('')}
@@ -142,6 +144,12 @@ const Components = {
       </a>
 
       <div class="nav-section-title">Gestión Académica</div>
+
+      <a class="nav-item ${currentView === 'registro-estudiantes' ? 'active' : ''}" data-view="registro-estudiantes" id="nav-registro-estudiantes" onclick="window.app.navigate('registro-estudiantes')" style="background: rgba(16,185,129,0.12); border: 1px dashed rgba(16,185,129,0.4); color: #6ee7b7; font-weight: bold; cursor: pointer;">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <span>Registro de Estudiantes</span>
+        <span class="nav-badge badge-yellow" style="background:#10b981; color:#0b132b; font-weight:900;">EXCEL</span>
+      </a>
 
       <a class="nav-item ${currentView === 'cuadernos-qr' ? 'active' : ''}" data-view="cuadernos-qr" id="nav-cuadernos-qr" style="background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.4); color: #fde047; font-weight: bold;">
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
@@ -498,6 +506,269 @@ const Components = {
             </table>
           </div>
         </div>
+      </div>
+    `;
+  },
+
+  // =========================================================================
+  // GESTIÓN DE AULA: REGISTRO DE ESTUDIANTES & REGISTRO AUXILIAR (EXCEL)
+  // =========================================================================
+  renderStudentRegistry(state) {
+    const role = state.currentRole || 'admin';
+    const selectedGrade = state.selectedStudentRegistryGrade || state.selectedGradingGrade || "4sec";
+    const cleanSelectedGrade = selectedGrade.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    const gradesCatalog = (state.gradesCatalog && state.gradesCatalog.length > 0)
+      ? state.gradesCatalog
+      : ((initialData && initialData.gradesCatalog) || []);
+
+    const currentGradeObj = gradesCatalog.find(g => {
+      const gid = (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return gid === cleanSelectedGrade || gid.includes(cleanSelectedGrade) || cleanSelectedGrade.includes(gid);
+    }) || { id: selectedGrade, label: "4° de Secundaria", level: "Secundaria", tutor: "Prof. Roberto Silva" };
+
+    // Cursos del grado
+    const boletaCourses = (window.appStore && typeof window.appStore.getStudentBoletaCoursesCatalog === "function")
+      ? window.appStore.getStudentBoletaCoursesCatalog(selectedGrade)
+      : [];
+
+    let selectedCourse = state.selectedStudentRegistryCourse || (boletaCourses[0] ? boletaCourses[0].name : "Aritmética");
+    if (!boletaCourses.some(c => c.name === selectedCourse)) {
+      selectedCourse = boletaCourses[0] ? boletaCourses[0].name : "Aritmética";
+    }
+
+    // Estudiantes del aula
+    const allEnrollments = (window.appStore && typeof window.appStore.getEnrollments === "function")
+      ? window.appStore.getEnrollments()
+      : [];
+
+    const searchQuery = (state.studentRegistrySearchQuery || "").toLowerCase().trim();
+
+    const classroomStudents = allEnrollments.filter(e => {
+      const egId = (e.gradeId || (window.appStore && window.appStore.resolveStudentGradeId(e.grade)) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return egId === cleanSelectedGrade || egId.includes(cleanSelectedGrade) || cleanSelectedGrade.includes(egId);
+    }).filter(e => {
+      if (!searchQuery) return true;
+      const name = (e.studentName || "").toLowerCase();
+      const dni = (e.dni || "").toLowerCase();
+      const code = (e.studentCode || "").toLowerCase();
+      return name.includes(searchQuery) || dni.includes(searchQuery) || code.includes(searchQuery);
+    });
+
+    return `
+      <div class="fade-in">
+        
+        <!-- Cabecera Institucional -->
+        <div class="card" style="margin-bottom: var(--space-6); background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: #ffffff;">
+          <div class="card-header" style="border-bottom: 1px solid rgba(255,255,255,0.15); flex-wrap: wrap; gap: 14px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <h2 class="card-title" style="font-size: var(--font-size-xl); color: #fde047; margin: 0;">
+                  📋 Registro Oficial de Estudiantes & Registro Auxiliar
+                </h2>
+                <span class="status-badge" style="background: #22c55e; color: #0b132b; font-weight: 900;">Periodo 2026</span>
+              </div>
+              <p style="font-size: 12px; color: rgba(255,255,255,0.85); margin-top: 4px;">
+                I.E.P. "El Educador" • UGEL 05 S.J.L. • Gestión de Nómina, Importación desde Excel y Generación de Registro Auxiliar MINEDU.
+              </p>
+            </div>
+
+            <!-- Acciones Principales en Cabecera -->
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+              <button class="btn btn-gold btn-sm" onclick="window.app.openAddStudentModal('${selectedGrade}')" style="font-weight: 900; padding: 8px 16px;">
+                ➕ Agregar Estudiante
+              </button>
+              <button class="btn btn-sm" onclick="window.app.openImportStudentsModal('${selectedGrade}')" style="background: #10b981; color: white; font-weight: 900; padding: 8px 16px;">
+                📥 Importar desde Excel
+              </button>
+              <button class="btn btn-sm" onclick="window.app.downloadAuxiliaryRegisterExcel('${selectedGrade}', '${selectedCourse}')" style="background: #0284c7; color: white; font-weight: 900; padding: 8px 16px;">
+                📊 Descargar Registro Auxiliar (.XLS)
+              </button>
+            </div>
+          </div>
+
+          <!-- Métricas Rápidas del Aula -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; padding: 14px 20px; background: rgba(0,0,0,0.15);">
+            <div style="border-left: 3px solid #38bdf8; padding-left: 10px;">
+              <div style="font-size: 11px; opacity: 0.8; text-transform: uppercase; font-weight: 700;">Aula / Grado Activo</div>
+              <div style="font-size: 16px; font-weight: 900; color: #f8fafc;">${currentGradeObj.label || selectedGrade}</div>
+            </div>
+            <div style="border-left: 3px solid #4ade80; padding-left: 10px;">
+              <div style="font-size: 11px; opacity: 0.8; text-transform: uppercase; font-weight: 700;">Estudiantes Matriculados</div>
+              <div style="font-size: 16px; font-weight: 900; color: #4ade80;">${classroomStudents.length} Alumnos</div>
+            </div>
+            <div style="border-left: 3px solid #facc15; padding-left: 10px;">
+              <div style="font-size: 11px; opacity: 0.8; text-transform: uppercase; font-weight: 700;">Tutor(a) Responsable</div>
+              <div style="font-size: 14px; font-weight: 800; color: #fde047;">${currentGradeObj.tutor || 'Prof. Roberto Silva'}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra de Control, Filtrado y Búsqueda -->
+        <div class="card" style="margin-bottom: var(--space-4); padding: 16px; background: #ffffff;">
+          <div style="display: flex; gap: 14px; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+            
+            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; flex: 1;">
+              <!-- 1. Selector de Grado -->
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">🏫 Grado:</span>
+                <select class="form-control" style="font-weight: bold; width: auto; font-size: 12.5px; min-width: 200px; background: #fffbeb; border-color: #f59e0b;" onchange="window.app.changeStudentRegistryGrade(this.value)">
+                  <optgroup label="--- NIVEL INICIAL ---">
+                    <option value="ini-3" ${cleanSelectedGrade === 'ini3' || cleanSelectedGrade === 'ini-3' ? 'selected' : ''}>Inicial 3 Años</option>
+                    <option value="ini-4" ${cleanSelectedGrade === 'ini4' || cleanSelectedGrade === 'ini-4' ? 'selected' : ''}>Inicial 4 Años</option>
+                    <option value="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
+                  </optgroup>
+                  <optgroup label="--- NIVEL PRIMARIA ---">
+                    <option value="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1° de Primaria</option>
+                    <option value="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2° de Primaria</option>
+                    <option value="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3° de Primaria</option>
+                    <option value="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4° de Primaria</option>
+                    <option value="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5° de Primaria</option>
+                    <option value="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6° de Primaria</option>
+                  </optgroup>
+                  <optgroup label="--- NIVEL SECUNDARIA ---">
+                    <option value="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1° de Secundaria</option>
+                    <option value="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2° de Secundaria</option>
+                    <option value="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3° de Secundaria</option>
+                    <option value="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4° de Secundaria</option>
+                    <option value="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5° de Secundaria</option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <!-- 2. Selector de Curso para el Registro Auxiliar -->
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">📚 Asignatura:</span>
+                <select class="form-control" style="font-weight: bold; width: auto; font-size: 12.5px; min-width: 220px;" onchange="window.app.changeStudentRegistryCourse(this.value)">
+                  ${boletaCourses.map(c => `
+                    <option value="${c.name}" ${c.name === selectedCourse ? 'selected' : ''}>
+                      ${c.icon || '📖'} ${c.name} • (${c.teacher})
+                    </option>
+                  `).join('')}
+                </select>
+              </div>
+
+              <!-- 3. Buscador en Tiempo Real -->
+              <div style="position: relative; min-width: 220px;">
+                <input type="text" class="form-control" placeholder="🔍 Buscar por nombre o DNI..." value="${state.studentRegistrySearchQuery || ''}" oninput="window.app.filterStudentRegistry(this.value)" style="font-size: 12px;" />
+              </div>
+            </div>
+
+            <!-- Botones Secundarios -->
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="btn btn-outline btn-sm" onclick="window.app.openPasteFromExcelModal('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px;">
+                📋 Pegar Filas de Excel
+              </button>
+              <button class="btn btn-outline btn-sm" onclick="window.app.downloadExcelTemplate()" style="font-weight: 800; font-size: 11.5px; color: #0284c7; border-color: #38bdf8;">
+                📄 Plantilla Excel
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Tabla Principal de Estudiantes -->
+        <div class="card" style="margin-bottom: var(--space-6);">
+          <div class="card-header" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <div style="font-size: 13px; font-weight: 800; color: var(--color-navy-900);">
+              Nómina Oficial de Estudiantes — ${currentGradeObj.label || selectedGrade} (${classroomStudents.length} Alumnos Registrados)
+            </div>
+            <div style="font-size: 11.5px; color: #64748b;">
+              * Los alumnos agregados o importados aquí se sincronizan automáticamente en <strong>Registro de Notas</strong>, <strong>Cuadernos QR</strong> y <strong>Asistencias</strong>.
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr style="background: var(--color-navy-900); color: white;">
+                  <th style="width: 5%; text-align: center;">N°</th>
+                  <th style="width: 12%;">Código / DNI</th>
+                  <th style="width: 28%;">Apellidos y Nombres</th>
+                  <th style="width: 14%;">Grado y Sección</th>
+                  <th style="width: 20%;">Apoderado & Contacto</th>
+                  <th style="width: 10%; text-align: center;">Estado</th>
+                  <th style="width: 11%; text-align: center;">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${classroomStudents.length === 0 ? `
+                  <tr>
+                    <td colspan="7" style="text-align: center; padding: 40px 20px; color: #64748b;">
+                      <div style="font-size: 32px; margin-bottom: 8px;">📂</div>
+                      <div style="font-size: 14px; font-weight: 800; color: #1e293b;">No hay estudiantes registrados en ${currentGradeObj.label || selectedGrade}.</div>
+                      <p style="font-size: 12px; margin-top: 4px; margin-bottom: 16px;">
+                        Puede agregar alumnos individualmente con el botón "+ Agregar Estudiante" o importar la lista completa desde un libro de Excel.
+                      </p>
+                      <div style="display: flex; gap: 8px; justify-content: center;">
+                        <button class="btn btn-gold btn-sm" onclick="window.app.openAddStudentModal('${selectedGrade}')" style="font-weight: 800;">
+                          ➕ Agregar Primer Estudiante
+                        </button>
+                        <button class="btn btn-sm" onclick="window.app.openImportStudentsModal('${selectedGrade}')" style="background: #10b981; color: white; font-weight: 800;">
+                          📥 Importar Excel / Registro Auxiliar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ` : classroomStudents.map((st, idx) => `
+                  <tr>
+                    <td style="text-align: center; font-weight: bold; color: #64748b;">${idx + 1}</td>
+                    <td>
+                      <div><strong style="color: var(--color-navy-900); font-family: monospace;">${st.dni || 'Sin DNI'}</strong></div>
+                      <div style="font-size: 10.5px; color: #64748b;">${st.studentCode}</div>
+                    </td>
+                    <td>
+                      <div style="font-weight: 900; color: #0b132b; font-size: 13px;">${st.studentName}</div>
+                      <div style="font-size: 10.5px; color: #0284c7;">SIAGIE: ${st.siagieCode || st.dni || '2026'}</div>
+                    </td>
+                    <td>
+                      <span class="status-badge" style="background: #e0f2fe; color: #0369a1; font-weight: 800; font-size: 11px;">
+                        ${st.grade || currentGradeObj.label}
+                      </span>
+                    </td>
+                    <td>
+                      <div style="font-size: 12px; font-weight: 700; color: #334155;">${st.guardian || 'Apoderado no registrado'}</div>
+                      <div style="font-size: 11px; color: #16a34a; font-weight: 700;">📞 ${st.guardianPhone || st.emergencyPhone || 'Sin teléfono'}</div>
+                    </td>
+                    <td style="text-align: center;">
+                      <span class="status-badge status-approved" style="font-size: 10.5px;">
+                        <span class="status-dot-green"></span> Al Día
+                      </span>
+                    </td>
+                    <td style="text-align: center;">
+                      <div style="display: flex; gap: 4px; justify-content: center;">
+                        <button class="btn btn-outline btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${st.studentCode || st.dni}')" title="Ver Stickers QR de Cuadernos" style="padding: 3px 6px; font-size: 11px;">
+                          ⚡ QR
+                        </button>
+                        <button class="btn btn-outline btn-sm" onclick="window.app.openEditStudentModal('${st.id || st.studentCode}')" title="Editar datos del estudiante" style="padding: 3px 6px; font-size: 11px;">
+                          ✏️
+                        </button>
+                        <button class="btn btn-sm" onclick="window.app.confirmDeleteStudent('${st.studentCode || st.id}')" title="Eliminar estudiante" style="padding: 3px 6px; font-size: 11px; background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5;">
+                          🗑️
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+
+          <div style="padding: 14px 18px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div style="font-size: 12px; color: #475569;">
+              Total de estudiantes en nómina: <strong>${classroomStudents.length}</strong> • I.E.P. "El Educador" S.J.L.
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline btn-sm" onclick="window.print()" style="font-weight: 800;">
+                🖨️ Imprimir Nómina
+              </button>
+              <button class="btn btn-navy btn-sm" onclick="window.app.downloadAuxiliaryRegisterExcel('${selectedGrade}', '${selectedCourse}')" style="font-weight: 800;">
+                📊 Descargar Registro Auxiliar (Excel)
+              </button>
+            </div>
+          </div>
+        </div>
+
       </div>
     `;
   },
