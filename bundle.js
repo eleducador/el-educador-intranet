@@ -11078,7 +11078,7 @@ const Components = {
                   <div class="card-header" style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">
                     <strong style="font-size: 12px; color: #1e3a8a;">⏱️ Últimos Alumnos validados por QR:</strong>
                   </div>
-                  <div style="max-height: 180px; overflow-y: auto; font-size: 11.5px; padding: 6px;">
+                  <div id="door-recent-scans-container" style="max-height: 180px; overflow-y: auto; font-size: 11.5px; padding: 6px;">
                     ${classroomRecords.slice(0, 5).map(r => `
                       <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 8px; border-bottom: 1px solid #f1f5f9;">
                         <div>
@@ -11923,8 +11923,20 @@ class IntranetApp {
     this.contentArea = document.getElementById("content-area");
     this.sidebar = document.getElementById("sidebar");
 
-    // Suscribirse a cambios en el almacén de datos
+    // Suscribirse a cambios en el almacén de datos (con protección contra parpadeo y reinicios de cámara)
     this.store.subscribe(() => {
+      // Si la cámara en vivo de portería o cuadernos está activa, NO destruir el DOM
+      if (this.isDoorCamActive || this.isCameraActive || this.isAgendaModalCamActive) {
+        this.updateLiveFeedCounters();
+        this.updateHeaderUserInfo();
+        return;
+      }
+      // Si el usuario está en la vista de escaneo de portería, actualizar componentes de forma suave sin refrescar
+      if (this.store.state.currentView === "asistencia" && (this.store.state.attendanceActiveSubTab === "door-scanner" || !this.store.state.attendanceActiveSubTab)) {
+        this.updateLiveFeedCounters();
+        this.updateHeaderUserInfo();
+        return;
+      }
       this.render();
       this.updateHeaderUserInfo();
     });
@@ -12113,10 +12125,34 @@ class IntranetApp {
   startRealtimeSync() {
     if (this.syncInterval) clearInterval(this.syncInterval);
     this.syncInterval = setInterval(() => {
-      // Sincronización multi-dispositivo continua cada 4 segundos
+      // Sincronización multi-dispositivo continua cada 5 segundos
       if (!this.store.isUserAuthenticated()) return;
+      // Pausar sync destructivo si la cámara en vivo o la estación de portería está activa
+      if (this.isDoorCamActive || this.isCameraActive || this.isAgendaModalCamActive) return;
       this.store.fetchServerState(true);
-    }, 4000);
+    }, 5000);
+  }
+
+  // Actualización reactiva suave del feed de ingresos (sin parpadeo ni recarga de pantalla)
+  updateLiveFeedCounters() {
+    const recentContainer = document.getElementById("door-recent-scans-container");
+    if (recentContainer && this.store) {
+      const records = this.store.state.attendanceRecords || [];
+      const recent = records.slice(0, 6);
+      recentContainer.innerHTML = recent.map(r => `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 8px; border-bottom: 1px solid #f1f5f9; animation: fadeIn 0.3s ease;">
+          <div>
+            <strong>${r.studentName}</strong> <span style="font-size: 10px; color: #64748b;">(${r.grade})</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <code>${r.arrivalTime}</code>
+            <span class="status-badge ${r.status === 'Presente' ? 'status-approved' : r.status === 'Tardanza' ? 'status-pending' : 'status-failed'}" style="font-size: 9.5px; padding: 1px 5px;">
+              ${r.status}
+            </span>
+          </div>
+        </div>
+      `).join('') || '<div style="text-align: center; color: #64748b; padding: 10px;">Sin registros recientes</div>';
+    }
   }
 
   // =========================================================================
@@ -15475,9 +15511,8 @@ CREATE TABLE tb_cuadernos_qr (
       this.showToast(`✓ INGRESO PUNTUAL: ${result.student.studentName} (${result.scanTime})`, "success");
     }
 
-    if (!this.isDoorCamActive) {
-      setTimeout(() => this.render(), 600);
-    }
+    // Actualizar suavemente los contadores y feed de ingresos sin parpadeo ni recarga
+    this.updateLiveFeedCounters();
   }
 
   // =========================================================================
