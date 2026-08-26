@@ -13894,6 +13894,45 @@ CREATE TABLE tb_cuadernos_qr (
     }
   }
 
+  processQRScanFromDoor(qrCodeOrDni, customTime = null) {
+    if (!qrCodeOrDni) return;
+    const cleanPayload = String(qrCodeOrDni).trim();
+    const now = Date.now();
+
+    // 1. Candado activo: ignorar ráfagas de fotogramas mientras se procesa la lectura
+    if (this.isScanProcessing) {
+      return;
+    }
+
+    // 2. Anti-repetición: Si es el MISMO código QR dentro de 4 segundos, ignorar silenciosamente
+    if (this.lastScannedPayload === cleanPayload && (now - (this.lastScannedTimestamp || 0)) < 4000) {
+      return;
+    }
+
+    // Activar candado de lectura
+    this.isScanProcessing = true;
+    this.lastScannedPayload = cleanPayload;
+    this.lastScannedTimestamp = now;
+
+    // Actualizar indicador visual
+    const statusTag = document.getElementById("camera-door-status");
+    if (statusTag) {
+      statusTag.innerHTML = "<span style='color:#fde047; font-weight:900;'>⚡ LEYENDO QR...</span>";
+      statusTag.className = "status-badge status-pending";
+    }
+
+    this.processSmartQRScan(cleanPayload, customTime);
+
+    // Liberar candado después de 1.8 segundos para permitir escanear al siguiente alumno
+    setTimeout(() => {
+      this.isScanProcessing = false;
+      if (statusTag && this.isDoorCamActive) {
+        statusTag.innerHTML = "<span class='status-dot-green'></span> LISTO PARA EL SIGUIENTE QR";
+        statusTag.className = "status-badge status-approved";
+      }
+    }, 1800);
+  }
+
   processSmartQRScan(qrCodeOrDni, customTime = null) {
     this.playScanBeep();
     if (navigator.vibrate) navigator.vibrate(120);
@@ -13993,10 +14032,6 @@ CREATE TABLE tb_cuadernos_qr (
     if (!this.isDoorCamActive) {
       setTimeout(() => this.render(), 600);
     }
-  }
-
-  processQRScanFromDoor(qrCodeOrDni, customTime = null) {
-    this.processSmartQRScan(qrCodeOrDni, customTime);
   }
 
   // =========================================================================
@@ -14831,9 +14866,16 @@ CREATE TABLE tb_cuadernos_qr (
   }
 
   processAgendaQRScan(qrPayload) {
+    if (this.isAgendaScanProcessing) return;
+    this.isAgendaScanProcessing = true;
+
     this.playScanBeep();
     const student = this.store.resolveStudentByQR(qrPayload);
     this.closeAgendaScannerModal();
+
+    setTimeout(() => {
+      this.isAgendaScanProcessing = false;
+    }, 1200);
 
     if (student) {
       this.showToast(`✓ Fotocheck QR detectado: ${student.studentName}`, "success");
