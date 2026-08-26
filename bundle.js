@@ -263,6 +263,7 @@ const initialData = {
       email: "roberto.silva@eleducador.edu.pe",
       role: "Docente",
       detail: "Matemática Avanzada (Secundaria)",
+      assignedCourses: ["Aritmética", "Álgebra", "Geometría", "Trigonometría", "Razonamiento Matemático", "Matemática Avanzada"],
       assignedGrades: ["3ro Sec", "4to Sec", "5to Sec"],
       weeklyHours: "24 hrs",
       hasAdminPrivilege: true,
@@ -270,7 +271,7 @@ const initialData = {
       createdDate: "10/01/2026"
     },
     {
-      id: "USR-004",
+      id: "USR-004-COMP",
       code: "DOC-2026-008",
       username: "fernando.rojas",
       password: "docente2026",
@@ -278,6 +279,7 @@ const initialData = {
       email: "fernando.rojas@eleducador.edu.pe",
       role: "Docente",
       detail: "Computación & Robótica",
+      assignedCourses: ["Computación & Robótica", "Gestión Empresarial & Emprendimiento", "Educación para el Trabajo (EPT)"],
       assignedGrades: ["1ro Sec", "2do Sec", "3ro Sec", "4to Sec", "5to Sec"],
       weeklyHours: "22 hrs",
       hasAdminPrivilege: true,
@@ -293,6 +295,7 @@ const initialData = {
       email: "leyli.reyes@eleducador.edu.pe",
       role: "Docente",
       detail: "Ciencia y Tecnología (Física & Química)",
+      assignedCourses: ["Biología & Anatomía", "Física Elemental", "Química Inorgánica", "Ciencia y Tecnología"],
       assignedGrades: ["3ro Sec", "4to Sec", "5to Sec"],
       weeklyHours: "20 hrs",
       hasAdminPrivilege: true,
@@ -308,6 +311,7 @@ const initialData = {
       email: "maria.reyes@eleducador.edu.pe",
       role: "Docente",
       detail: "Comunicación & Literatura",
+      assignedCourses: ["Lenguaje y Gramática", "Literatura Universal", "Razonamiento Verbal", "Comunicación Integral"],
       assignedGrades: ["1ro Sec", "2do Sec", "4to Sec"],
       weeklyHours: "18 hrs",
       hasAdminPrivilege: false,
@@ -322,8 +326,9 @@ const initialData = {
       name: "Miss Julisa Magali Arroyo Araujo",
       email: "julisa.arroyo@eleducador.edu.pe",
       role: "Docente",
-      detail: "Nivel Primaria",
-      assignedGrades: ["1ro Prim", "2do Prim", "3ro Prim"],
+      detail: "Nivel Primaria & DPCC",
+      assignedCourses: ["Educación Cívica (DPCC)", "Psicología", "Personal Social & Cívica", "Comunicación Integral", "Tutoría & Convivencia Escolar"],
+      assignedGrades: ["1ro Prim", "2do Prim", "3ro Prim", "4to Sec"],
       weeklyHours: "28 hrs",
       hasAdminPrivilege: true,
       status: "Activo",
@@ -339,6 +344,7 @@ const initialData = {
       email: "maritza@eleducador.edu.pe",
       role: "Docente",
       detail: "Nivel Inicial (3, 4 y 5 años)",
+      assignedCourses: ["Nivel Inicial (3, 4 y 5 años)"],
       assignedGrades: ["Inicial 3 años", "Inicial 4 años", "Inicial 5 años"],
       weeklyHours: "30 hrs",
       hasAdminPrivilege: false,
@@ -2976,6 +2982,12 @@ class IntranetStore {
     const autoCode = userData.code || `${defaultCodePrefix}-2026-${Math.floor(100 + Math.random() * 900)}`;
     const cleanUser = userData.username || userData.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '.');
 
+    const assignedCoursesList = Array.isArray(userData.assignedCourses) 
+      ? userData.assignedCourses 
+      : (Array.isArray(userData.courses) 
+        ? userData.courses 
+        : (userData.subject ? userData.subject.split(/,\s*/) : []));
+
     const newUser = {
       id: `USR-${Math.floor(100 + Math.random() * 900)}`,
       code: autoCode,
@@ -2984,9 +2996,12 @@ class IntranetStore {
       name: userData.name,
       email: userData.email || `${cleanUser}@eleducador.edu.pe`,
       role: role,
-      detail: userData.detail || (role === "Docente" ? (userData.subject || "Docente de Asignatura") : role === "Estudiante" ? userData.gradeLevel : role === "Apoderado" ? `Apoderado de ${userData.studentName || 'Estudiante'}` : "Coordinación Institucional"),
+      detail: userData.detail || (role === "Docente" ? (assignedCoursesList.join(', ') || "Docente de Asignatura") : role === "Estudiante" ? userData.gradeLevel : role === "Apoderado" ? `Apoderado de ${userData.studentName || 'Estudiante'}` : "Coordinación Institucional"),
       dni: userData.dni || "",
       phone: userData.phone || "",
+      subject: userData.subject || assignedCoursesList.join(', '),
+      courses: assignedCoursesList,
+      assignedCourses: assignedCoursesList,
       assignedGrades: userData.assignedGrades || [],
       weeklyHours: userData.weeklyHours || (role === "Docente" ? "24 hrs" : ""),
       studentName: userData.studentName || "",
@@ -3000,18 +3015,18 @@ class IntranetStore {
     if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
     this.state.systemUsers.unshift(newUser);
 
-    // Si es docente con carga horaria o asignación, agregarlo también a teachersList si no existe
-    if (role === "Docente") {
+    // Si es docente con carga horaria o asignación, agregarlo también a teachersList
+    if (role === "Docente" || role === "Profesor") {
       if (!this.state.teachersList) this.state.teachersList = [...initialData.teachersList];
       const existsInList = this.state.teachersList.some(t => t.id === newUser.code || t.name === newUser.name);
       if (!existsInList) {
         this.state.teachersList.push({
           id: newUser.code,
           name: newUser.name,
-          subject: userData.subject || "Asignatura Asignada",
+          subject: newUser.subject || assignedCoursesList.join(', '),
           department: "Coordinación Pedagógica",
           weeklyHours: parseInt(userData.weeklyHours) || 24,
-          courses: [userData.subject || "Asignatura"],
+          courses: assignedCoursesList.length > 0 ? assignedCoursesList : ["Asignatura"],
           assignedGrades: userData.assignedGrades && userData.assignedGrades.length > 0 ? userData.assignedGrades : ["4to de Secundaria"],
           classrooms: ["Aula 204 - Pabellón A"]
         });
@@ -3058,13 +3073,45 @@ class IntranetStore {
 
   updateSystemUser(userId, updatedData) {
     if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
-    const index = this.state.systemUsers.findIndex(u => u.id === userId);
+    const index = this.state.systemUsers.findIndex(u => u.id === userId || u.code === userId);
     if (index !== -1) {
       this.state.systemUsers[index] = {
         ...this.state.systemUsers[index],
         ...updatedData
       };
+
+      const user = this.state.systemUsers[index];
+      if (user.role === "Docente" || user.role === "Profesor") {
+        if (!this.state.teachersList) this.state.teachersList = [...initialData.teachersList];
+        const tIndex = this.state.teachersList.findIndex(t => t.id === user.code || t.id === user.id || t.name.toLowerCase().trim() === user.name.toLowerCase().trim());
+        const tCourses = Array.isArray(user.assignedCourses) && user.assignedCourses.length > 0 
+          ? user.assignedCourses 
+          : (Array.isArray(user.courses) ? user.courses : (user.subject ? user.subject.split(/,\s*/) : ["Matemática"]));
+
+        if (tIndex !== -1) {
+          this.state.teachersList[tIndex] = {
+            ...this.state.teachersList[tIndex],
+            name: user.name,
+            subject: user.subject || tCourses.join(', '),
+            courses: tCourses,
+            assignedGrades: user.assignedGrades || this.state.teachersList[tIndex].assignedGrades
+          };
+        } else {
+          this.state.teachersList.push({
+            id: user.code || user.id,
+            name: user.name,
+            subject: user.subject || tCourses.join(', '),
+            department: "Coordinación Pedagógica",
+            weeklyHours: parseInt(user.weeklyHours) || 24,
+            courses: tCourses,
+            assignedGrades: user.assignedGrades || ["4to de Secundaria"],
+            classrooms: ["Aula 204 - Pabellón A"]
+          });
+        }
+      }
+
       this.saveState();
+      this.notify();
       return this.state.systemUsers[index];
     }
     return null;
@@ -3454,60 +3501,193 @@ class IntranetStore {
     this.saveState();
   }
 
+  getRegisteredTeachers() {
+    const sysUsers = (this.state && this.state.systemUsers) || (initialData && initialData.systemUsers) || [];
+    const teachersFromUsers = sysUsers.filter(u => u.role === 'Docente' || u.role === 'Profesor' || u.role === 'Directivo');
+    const teachersList = (this.state && this.state.teachersList) || (initialData && initialData.teachersList) || [];
+    
+    // Unir sin duplicados por nombre
+    const map = new Map();
+    teachersFromUsers.forEach(u => {
+      const key = (u.name || "").trim().toLowerCase();
+      if (key) {
+        map.set(key, {
+          id: u.id || u.code,
+          code: u.code || u.id,
+          name: u.name,
+          role: u.role,
+          assignedCourses: Array.isArray(u.assignedCourses) ? u.assignedCourses : (Array.isArray(u.courses) ? u.courses : (u.subject ? u.subject.split(/,\s*/) : [])),
+          assignedGrades: Array.isArray(u.assignedGrades) ? u.assignedGrades : (u.assignedGrades ? [u.assignedGrades] : []),
+          isTutor: !!u.isTutor,
+          tutoringGrade: u.tutoringGrade || null
+        });
+      }
+    });
+
+    teachersList.forEach(t => {
+      const key = (t.name || "").trim().toLowerCase();
+      if (key && !map.has(key)) {
+        map.set(key, {
+          id: t.id,
+          code: t.id,
+          name: t.name,
+          role: "Docente",
+          assignedCourses: Array.isArray(t.courses) ? t.courses : (t.subject ? t.subject.split(/,\s*/) : []),
+          assignedGrades: Array.isArray(t.assignedGrades) ? t.assignedGrades : [],
+          isTutor: !!t.isTutor,
+          tutoringGrade: t.tutoringGrade || null
+        });
+      }
+    });
+
+    return Array.from(map.values());
+  }
+
+  getTeacherForCourse(courseName = "", gradeId = "4sec") {
+    const teachers = this.getRegisteredTeachers();
+    if (!courseName) return "(Docente por asignar)";
+    
+    const cleanCourse = courseName.toLowerCase().trim();
+    const cleanGrade = (gradeId || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    // 1. Caso especial: Tutoría / Conducta
+    if (cleanCourse.includes("conducta") || cleanCourse.includes("tutor")) {
+      const tutor = teachers.find(t => {
+        if (!t.isTutor && !t.tutoringGrade) return false;
+        const tg = (t.tutoringGrade || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+        return tg.includes(cleanGrade) || cleanGrade.includes(tg);
+      });
+      if (tutor) return `${tutor.name} (Tutor)`;
+
+      const grades = (this.state && this.state.gradesCatalog) || (initialData && initialData.gradesCatalog) || [];
+      const gradeObj = grades.find(g => {
+        const gid = (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+        return gid === cleanGrade || gid.includes(cleanGrade);
+      });
+      if (gradeObj && gradeObj.tutor) {
+        const regTutor = teachers.find(t => t.name.toLowerCase().includes(gradeObj.tutor.toLowerCase()) || gradeObj.tutor.toLowerCase().includes(t.name.toLowerCase()));
+        if (regTutor) return `${regTutor.name} (Tutor)`;
+      }
+    }
+
+    // 2. Mapeo semántico de palabras clave para cursos relacionados
+    const keywords = [cleanCourse];
+    if (cleanCourse.includes("aritm") || cleanCourse.includes("álgeb") || cleanCourse.includes("algeb") || cleanCourse.includes("geom") || cleanCourse.includes("trig") || cleanCourse.includes("raz. mat") || cleanCourse.includes("razonamiento mat")) {
+      keywords.push("matemática", "matematica", "matemática avanzada");
+    }
+    if (cleanCourse.includes("lengu") || cleanCourse.includes("liter") || cleanCourse.includes("plan lector") || cleanCourse.includes("raz. verb") || cleanCourse.includes("razonamiento verb")) {
+      keywords.push("comunicación", "comunicacion", "lenguaje", "literatura");
+    }
+    if (cleanCourse.includes("biolog") || cleanCourse.includes("físic") || cleanCourse.includes("fisic") || cleanCourse.includes("quím") || cleanCourse.includes("quim") || cleanCourse.includes("ciencia")) {
+      keywords.push("ciencia y tecnología", "ciencia", "cta");
+    }
+    if (cleanCourse.includes("historia") || cleanCourse.includes("geograf") || cleanCourse.includes("filosof") || cleanCourse.includes("econom")) {
+      keywords.push("ciencias sociales", "sociales", "historia");
+    }
+    if (cleanCourse.includes("cívic") || cleanCourse.includes("civic") || cleanCourse.includes("psicol") || cleanCourse.includes("dpcc")) {
+      keywords.push("dpcc", "desarrollo personal", "cívica", "civica", "personal social");
+    }
+    if (cleanCourse.includes("comput") || cleanCourse.includes("robót") || cleanCourse.includes("robot") || cleanCourse.includes("ept") || cleanCourse.includes("gestión") || cleanCourse.includes("gestion")) {
+      keywords.push("computación", "computacion", "ept", "educación para el trabajo");
+    }
+    if (cleanCourse.includes("inglés") || cleanCourse.includes("ingles")) {
+      keywords.push("inglés", "ingles", "idiomas");
+    }
+    if (cleanCourse.includes("arte") || cleanCourse.includes("cultura")) {
+      keywords.push("arte", "arte y cultura");
+    }
+    if (cleanCourse.includes("relig") || cleanCourse.includes("valores")) {
+      keywords.push("religión", "religion", "educación religiosa");
+    }
+    if (cleanCourse.includes("física & dep") || cleanCourse.includes("educación física") || cleanCourse.includes("educacion fisica") || cleanCourse.includes("deporte")) {
+      keywords.push("educación física", "educacion fisica", "deportes");
+    }
+
+    // 3. Buscar coincidencia exacta o por curso asignado en profesores registrados
+    for (const t of teachers) {
+      const assigned = (t.assignedCourses || []).map(c => (typeof c === 'string' ? c : '').toLowerCase().trim());
+      
+      // Coincidencia directa de curso
+      const directMatch = assigned.some(c => c === cleanCourse || cleanCourse.includes(c) || c.includes(cleanCourse));
+      if (directMatch) {
+        return t.name;
+      }
+
+      // Coincidencia por palabra clave del área
+      const keywordMatch = assigned.some(c => keywords.some(k => c.includes(k) || k.includes(c)));
+      if (keywordMatch) {
+        return t.name;
+      }
+    }
+
+    // 4. Si ningún profesor registrado tiene asignado este curso
+    return "(Docente por asignar)";
+  }
+
   getStudentBoletaCoursesCatalog(gradeId = "4sec") {
     const isPrimaria = String(gradeId).toLowerCase().includes("prim") || String(gradeId).toLowerCase().includes("pri");
 
     if (isPrimaria) {
-      return [
-        { id: "MAT", name: "Matemática & Aritmética", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "🔢" },
-        { id: "ALG", name: "Álgebra Elemental", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📐" },
-        { id: "GEOM", name: "Geometría Práctica", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📏" },
-        { id: "RM", name: "Razonamiento Matemático", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "🧮" },
-        { id: "COM", name: "Comunicación Integral", teacher: "Miss Julisa Magali Arroyo", area: "Comunicación", icon: "📖" },
-        { id: "LENG", name: "Lenguaje & Caligrafía", teacher: "Miss Julisa Magali Arroyo", area: "Comunicación", icon: "✍️" },
-        { id: "PL", name: "Plan Lector & Literatura", teacher: "Miss Julisa Magali Arroyo", area: "Comunicación", icon: "📚" },
-        { id: "RV", name: "Razonamiento Verbal", teacher: "Miss Julisa Magali Arroyo", area: "Comunicación", icon: "✏️" },
-        { id: "CTA", name: "Ciencia y Tecnología", teacher: "Miss Leyli Graciela Reyes", area: "Ciencia y Tecnología", icon: "🔬" },
-        { id: "BIO", name: "Biología & Anatomía", teacher: "Miss Leyli Graciela Reyes", area: "Ciencia y Tecnología", icon: "🧬" },
-        { id: "PS", name: "Personal Social & Cívica", teacher: "Miss Julisa Magali Arroyo", area: "Personal Social", icon: "🏛️" },
-        { id: "HP", name: "Historia del Perú", teacher: "Prof. Javier Vega", area: "Personal Social", icon: "🇵🇪" },
-        { id: "GEO", name: "Geografía del Perú", teacher: "Prof. Javier Vega", area: "Personal Social", icon: "🌎" },
-        { id: "COMP", name: "Computación & Informática", teacher: "Prof. Fernando Rojas", area: "EPT / Tecnología", icon: "💻" },
-        { id: "ING", name: "Inglés Institucional", teacher: "Miss Andrea Ramos", area: "Idiomas", icon: "🇬🇧" },
-        { id: "ARTE", name: "Arte y Cultura", teacher: "Miss Claudia Mendoza", area: "Arte", icon: "🎨" },
-        { id: "REL", name: "Educación Religiosa & Valores", teacher: "Prof. Manuel Soto", area: "Valores", icon: "🕊️" },
-        { id: "EDFIS", name: "Educación Física & Deporte", teacher: "Prof. Dante Morales", area: "Deporte", icon: "⚽" },
-        { id: "TUT", name: "Tutoría & Convivencia Escolar", teacher: "Miss Julisa Magali Arroyo", area: "Tutoría", icon: "★" }
+      const primaryCourses = [
+        { id: "MAT", name: "Matemática & Aritmética", area: "Matemática", icon: "🔢" },
+        { id: "ALG", name: "Álgebra Elemental", area: "Matemática", icon: "📐" },
+        { id: "GEOM", name: "Geometría Práctica", area: "Matemática", icon: "📏" },
+        { id: "RM", name: "Razonamiento Matemático", area: "Matemática", icon: "🧮" },
+        { id: "COM", name: "Comunicación Integral", area: "Comunicación", icon: "📖" },
+        { id: "LENG", name: "Lenguaje & Caligrafía", area: "Comunicación", icon: "✍️" },
+        { id: "PL", name: "Plan Lector & Literatura", area: "Comunicación", icon: "📚" },
+        { id: "RV", name: "Razonamiento Verbal", area: "Comunicación", icon: "✏️" },
+        { id: "CTA", name: "Ciencia y Tecnología", area: "Ciencia y Tecnología", icon: "🔬" },
+        { id: "BIO", name: "Biología & Anatomía", area: "Ciencia y Tecnología", icon: "🧬" },
+        { id: "PS", name: "Personal Social & Cívica", area: "Personal Social", icon: "🏛️" },
+        { id: "HP", name: "Historia del Perú", area: "Personal Social", icon: "🇵🇪" },
+        { id: "GEO", name: "Geografía del Perú", area: "Personal Social", icon: "🌎" },
+        { id: "COMP", name: "Computación & Informática", area: "EPT / Tecnología", icon: "💻" },
+        { id: "ING", name: "Inglés Institucional", area: "Idiomas", icon: "🇬🇧" },
+        { id: "ARTE", name: "Arte y Cultura", area: "Arte", icon: "🎨" },
+        { id: "REL", name: "Educación Religiosa & Valores", area: "Valores", icon: "🕊️" },
+        { id: "EDFIS", name: "Educación Física & Deporte", area: "Deporte", icon: "⚽" },
+        { id: "TUT", name: "Tutoría & Convivencia Escolar", area: "Tutoría", icon: "★" }
       ];
+
+      return primaryCourses.map(c => ({
+        ...c,
+        teacher: this.getTeacherForCourse(c.name, gradeId)
+      }));
     }
 
-    // Secundaria: Cursos Oficiales de la Boleta de Notas
-    return [
-      { id: "ARIT", name: "Aritmética", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "🔢" },
-      { id: "ALG", name: "Álgebra", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📐" },
-      { id: "GEOM", name: "Geometría", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📏" },
-      { id: "TRIG", name: "Trigonometría", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📈" },
-      { id: "RM", name: "Razonamiento Matemático", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "🧮" },
-      { id: "LENG", name: "Lenguaje y Gramática", teacher: "Miss María Daysi Reyes Milla", area: "Comunicación", icon: "✍️" },
-      { id: "LIT", name: "Literatura Universal", teacher: "Miss María Daysi Reyes Milla", area: "Comunicación", icon: "📚" },
-      { id: "RV", name: "Razonamiento Verbal", teacher: "Miss María Daysi Reyes Milla", area: "Comunicación", icon: "✏️" },
-      { id: "BIO", name: "Biología & Anatomía", teacher: "Miss Leyli Graciela Reyes Cerquen", area: "Ciencia y Tecnología", icon: "🧬" },
-      { id: "FIS", name: "Física Elemental", teacher: "Miss Leyli Graciela Reyes Cerquen", area: "Ciencia y Tecnología", icon: "⚡" },
-      { id: "QUIM", name: "Química Inorgánica", teacher: "Miss Leyli Graciela Reyes Cerquen", area: "Ciencia y Tecnología", icon: "🧪" },
-      { id: "HP", name: "Historia del Perú", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "🇵🇪" },
-      { id: "HU", name: "Historia Universal", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "📜" },
-      { id: "GEO", name: "Geografía & Economía", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "🌎" },
-      { id: "FILO", name: "Filosofía", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "🏛️" },
-      { id: "CIV", name: "Educación Cívica (DPCC)", teacher: "Miss Julisa Magali Arroyo Araujo", area: "DPCC", icon: "⚖️" },
-      { id: "PSIC", name: "Psicología", teacher: "Miss Julisa Magali Arroyo Araujo", area: "DPCC", icon: "🧠" },
-      { id: "COMP", name: "Computación & Robótica", teacher: "Prof. Fernando Rojas", area: "EPT", icon: "💻" },
-      { id: "GEST", name: "Gestión Empresarial & Emprendimiento", teacher: "Prof. Fernando Rojas", area: "EPT", icon: "💼" },
-      { id: "ING", name: "Inglés Institucional (B2/C1)", teacher: "Miss Andrea Ramos", area: "Idiomas", icon: "🇬🇧" },
-      { id: "ARTE", name: "Arte y Cultura", teacher: "Miss Claudia Mendoza", area: "Arte", icon: "🎨" },
-      { id: "REL", name: "Educación Religiosa (Valores y Lid.)", teacher: "Prof. Manuel Soto", area: "Valores", icon: "🕊️" },
-      { id: "EDFIS", name: "Educación Física & Deporte", teacher: "Prof. Dante Morales", area: "Deporte", icon: "⚽" },
-      { id: "COND", name: "Conducta y Disciplina", teacher: "Prof. Roberto Silva (Tutor)", area: "Tutoría", icon: "★" }
+    // Secundaria: 24 Cursos Oficiales de la Boleta de Notas
+    const secondaryCourses = [
+      { id: "ARIT", name: "Aritmética", area: "Matemática", icon: "🔢" },
+      { id: "ALG", name: "Álgebra", area: "Matemática", icon: "📐" },
+      { id: "GEOM", name: "Geometría", area: "Matemática", icon: "📏" },
+      { id: "TRIG", name: "Trigonometría", area: "Matemática", icon: "📈" },
+      { id: "RM", name: "Razonamiento Matemático", area: "Matemática", icon: "🧮" },
+      { id: "LENG", name: "Lenguaje y Gramática", area: "Comunicación", icon: "✍️" },
+      { id: "LIT", name: "Literatura Universal", area: "Comunicación", icon: "📚" },
+      { id: "RV", name: "Razonamiento Verbal", area: "Comunicación", icon: "✏️" },
+      { id: "BIO", name: "Biología & Anatomía", area: "Ciencia y Tecnología", icon: "🧬" },
+      { id: "FIS", name: "Física Elemental", area: "Ciencia y Tecnología", icon: "⚡" },
+      { id: "QUIM", name: "Química Inorgánica", area: "Ciencia y Tecnología", icon: "🧪" },
+      { id: "HP", name: "Historia del Perú", area: "Ciencias Sociales", icon: "🇵🇪" },
+      { id: "HU", name: "Historia Universal", area: "Ciencias Sociales", icon: "📜" },
+      { id: "GEO", name: "Geografía & Economía", area: "Ciencias Sociales", icon: "🌎" },
+      { id: "FILO", name: "Filosofía", area: "Ciencias Sociales", icon: "🏛️" },
+      { id: "CIV", name: "Educación Cívica (DPCC)", area: "DPCC", icon: "⚖️" },
+      { id: "PSIC", name: "Psicología", area: "DPCC", icon: "🧠" },
+      { id: "COMP", name: "Computación & Robótica", area: "EPT", icon: "💻" },
+      { id: "GEST", name: "Gestión Empresarial & Emprendimiento", area: "EPT", icon: "💼" },
+      { id: "ING", name: "Inglés Institucional (B2/C1)", area: "Idiomas", icon: "🇬🇧" },
+      { id: "ARTE", name: "Arte y Cultura", area: "Arte", icon: "🎨" },
+      { id: "REL", name: "Educación Religiosa (Valores y Lid.)", area: "Valores", icon: "🕊️" },
+      { id: "EDFIS", name: "Educación Física & Deporte", area: "Deporte", icon: "⚽" },
+      { id: "COND", name: "Conducta y Disciplina", area: "Tutoría", icon: "★" }
     ];
+
+    return secondaryCourses.map(c => ({
+      ...c,
+      teacher: this.getTeacherForCourse(c.name, gradeId)
+    }));
   }
 
   getNotebookSubjectsCatalog(gradeId = "4sec") {
@@ -7339,37 +7519,75 @@ const Components = {
     }
 
     const activeTab = state.activeGradesTab || "subject";
-    const selectedSubjectKey = state.selectedGradingSubject || "computacion";
     const selectedStudentKey = state.selectedBoletaStudent || "mendez";
     const allBoletas = state.boletaData || initialData.boletaData;
     
-    // Lista oficial de asignaturas y sus docentes responsables
-    const subjectDirectory = [
-      { key: "computacion", name: "Computación (EPT)", area: "Educación para el Trabajo", teacher: "Prof. Alex Lino", icon: "💻" },
-      { key: "gestion_empresarial", name: "Gestión Empresarial", area: "Educación para el Trabajo", teacher: "Prof. Alex Lino", icon: "" },
-      { key: "algebra", name: "Álgebra", area: "Matemática", teacher: "Prof. Roberto Silva", icon: "" },
-      { key: "aritmetica", name: "Aritmética", area: "Matemática", teacher: "Prof. Roberto Silva", icon: "🔢" },
-      { key: "geometria", name: "Geometría", area: "Matemática", teacher: "Prof. Roberto Silva", icon: "📏" },
-      { key: "trigonometria", name: "Trigonometría", area: "Matemática", teacher: "Prof. Roberto Silva", icon: "" },
-      { key: "raz_matematico", name: "Razonamiento Matemático", area: "Matemática", teacher: "Prof. Roberto Silva", icon: "🧮" },
-      { key: "lenguaje", name: "Lenguaje", area: "Comunicación", teacher: "Miss María Daysi Reyes", icon: "" },
-      { key: "literatura", name: "Literatura", area: "Comunicación", teacher: "Miss María Daysi Reyes", icon: "📚" },
-      { key: "raz_verbal", name: "Razonamiento Verbal", area: "Comunicación", teacher: "Miss María Daysi Reyes", icon: "✏️" },
-      { key: "biologia", name: "Biología", area: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes", icon: "🧬" },
-      { key: "fisica", name: "Física", area: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes", icon: "⚡" },
-      { key: "quimica", name: "Química", area: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes", icon: "🧪" },
-      { key: "geografia", name: "Geografía", area: "Ciencias Sociales", teacher: "Prof. Javier Vega", icon: "🌍" },
-      { key: "filosofia", name: "Filosofía", area: "Ciencias Sociales", teacher: "Prof. Javier Vega", icon: "" },
-      { key: "historia_peru", name: "Historia del Perú", area: "Ciencias Sociales", teacher: "Prof. Javier Vega", icon: "🏛️" },
-      { key: "historia_universal", name: "Historia Universal", area: "Ciencias Sociales", teacher: "Prof. Javier Vega", icon: "📜" },
-      { key: "civica", name: "Cívica", area: "DPCC", teacher: "Miss Julisa Arroyo", icon: "⚖️" },
-      { key: "psicologia", name: "Psicología", area: "DPCC", teacher: "Miss Julisa Arroyo", icon: "🧠" },
-      { key: "arte_cultura", name: "Arte y Cultura", area: "Otras Áreas", teacher: "Miss Carmen Vidal", icon: "🎨" },
-      { key: "religion", name: "Educación Religiosa (Valores y Lid.)", area: "Otras Áreas", teacher: "Miss Carmen Vidal", icon: "🕊️" },
-      { key: "educ_fisica", name: "Educación Física", area: "Otras Áreas", teacher: "Prof. Marco Soto", icon: "⚽" },
-      { key: "ingles", name: "Inglés Avanzado", area: "Otras Áreas", teacher: "Miss Andrea Ramos", icon: "🇬🇧" },
-      { key: "conducta", name: "Conducta y Disciplina", area: "Tutoría", teacher: "Prof. Roberto Silva (Tutor)", icon: "★" }
-    ];
+    // Lista oficial y dinámica de asignaturas y sus docentes reales en la Base de Datos
+    const boletaCourses = (window.appStore && typeof window.appStore.getStudentBoletaCoursesCatalog === "function")
+      ? window.appStore.getStudentBoletaCoursesCatalog("4sec")
+      : [];
+
+    const keyMap = {
+      "Aritmética": "aritmetica",
+      "Álgebra": "algebra",
+      "Geometría": "geometria",
+      "Trigonometría": "trigonometria",
+      "Razonamiento Matemático": "raz_matematico",
+      "Lenguaje y Gramática": "lenguaje",
+      "Lenguaje": "lenguaje",
+      "Literatura Universal": "literatura",
+      "Literatura": "literatura",
+      "Razonamiento Verbal": "raz_verbal",
+      "Biología & Anatomía": "biologia",
+      "Biología": "biologia",
+      "Física Elemental": "fisica",
+      "Física": "fisica",
+      "Química Inorgánica": "quimica",
+      "Química": "quimica",
+      "Historia del Perú": "historia_peru",
+      "Historia Universal": "historia_universal",
+      "Geografía & Economía": "geografia",
+      "Geografía": "geografia",
+      "Filosofía": "filosofia",
+      "Educación Cívica (DPCC)": "civica",
+      "Cívica": "civica",
+      "Psicología": "psicologia",
+      "Computación & Robótica": "computacion",
+      "Computación (EPT)": "computacion",
+      "Gestión Empresarial & Emprendimiento": "gestion_empresarial",
+      "Gestión Empresarial": "gestion_empresarial",
+      "Inglés Institucional (B2/C1)": "ingles",
+      "Inglés Avanzado": "ingles",
+      "Arte y Cultura": "arte_cultura",
+      "Educación Religiosa (Valores y Lid.)": "religion",
+      "Educación Física & Deporte": "educ_fisica",
+      "Conducta y Disciplina": "conducta"
+    };
+
+    const subjectDirectory = boletaCourses.map(c => {
+      const key = keyMap[c.name] || c.id.toLowerCase().replace(/[^a-z0-9]/g, '_');
+      return {
+        key: key,
+        id: c.id,
+        name: c.name,
+        area: c.area,
+        teacher: c.teacher || "(Docente por asignar)",
+        icon: c.icon || "📚"
+      };
+    });
+
+    const currentUser = (window.appStore && typeof window.appStore.getCurrentUser === "function") ? window.appStore.getCurrentUser() : null;
+    const isDocente = role === 'docente';
+
+    let selectedSubjectKey = state.selectedGradingSubject;
+    if (!selectedSubjectKey || !subjectDirectory.some(s => s.key === selectedSubjectKey)) {
+      if (isDocente && currentUser) {
+        const myCourse = subjectDirectory.find(s => s.teacher && s.teacher.toLowerCase().includes((currentUser.name || "").toLowerCase()));
+        selectedSubjectKey = myCourse ? myCourse.key : (subjectDirectory[0] ? subjectDirectory[0].key : "aritmetica");
+      } else {
+        selectedSubjectKey = subjectDirectory[0] ? subjectDirectory[0].key : "aritmetica";
+      }
+    }
 
     // Directorio de alumnos del aula (4to Sec 'A')
     const classroomStudents = [
@@ -7378,7 +7596,7 @@ const Components = {
       { key: "albujar", name: "ALBUJAR ZEGARRA, MARINA DEL CARMEN", dni: "74891289", code: "EST-2026-089" }
     ];
 
-    const currentSubject = subjectDirectory.find(s => s.key === selectedSubjectKey) || subjectDirectory[0];
+    const currentSubject = subjectDirectory.find(s => s.key === selectedSubjectKey) || subjectDirectory[0] || { name: "Aritmética", teacher: "Prof. Roberto Silva", area: "Matemática", key: "aritmetica" };
     const tutorStudentData = allBoletas[selectedStudentKey] || allBoletas.mendez;
     const tutorApp = tutorStudentData.appreciations || {};
     const tutorAtt = tutorStudentData.attendance || {};
@@ -7430,11 +7648,14 @@ const Components = {
               <div style="display: flex; align-items: center; gap: 10px;">
                 <span style="font-size: 13px; font-weight: 800; color: var(--color-navy-900);">Asignatura a Calificar:</span>
                 <select class="form-control" style="font-weight: bold; width: auto; font-size: 13px; min-width: 260px;" onchange="window.app.changeSelectedGradingSubject(this.value)">
-                  ${subjectDirectory.map(s => `
-                    <option value="${s.key}" ${s.key === selectedSubjectKey ? 'selected' : ''}>
-                      ${s.icon} ${s.name} • (${s.teacher})
-                    </option>
-                  `).join('')}
+                  ${subjectDirectory.map(s => {
+                    const isMyCourse = isDocente && currentUser && s.teacher && s.teacher.toLowerCase().includes((currentUser.name || "").toLowerCase());
+                    return `
+                      <option value="${s.key}" ${s.key === selectedSubjectKey ? 'selected' : ''}>
+                        ${s.icon} ${s.name} • (${s.teacher})${isMyCourse ? ' ★ (Mi Curso)' : ''}
+                      </option>
+                    `;
+                  }).join('')}
                 </select>
               </div>
 
@@ -15656,29 +15877,16 @@ CREATE TABLE tb_cuadernos_qr (
   // =========================================================================
 
   getTeachersSelectOptions(selectedTeacherName = "") {
-    const systemDocentes = (this.store.state.systemUsers || [])
-      .filter(u => u.role === "Docente" || u.role === "Profesor")
-      .map(u => ({ name: u.name, subject: u.subject || u.detail || "Docente" }));
+    const teachers = (this.store && typeof this.store.getRegisteredTeachers === "function")
+      ? this.store.getRegisteredTeachers()
+      : ((this.store.state.systemUsers || []).filter(u => u.role === "Docente" || u.role === "Profesor"));
 
-    const defaultTeachers = [
-      { name: "Prof. Fernando Rojas", subject: "Computación & Robótica" },
-      { name: "Miss Leyli Graciela Reyes Cerquen", subject: "Ciencia y Tecnología" },
-      { name: "Miss María Daysi Reyes Milla", subject: "Comunicación & Literatura" },
-      { name: "Prof. Roberto Silva", subject: "Matemática (Álgebra / Trigonometría)" },
-      { name: "Miss Julisa Magali Arroyo Araujo", subject: "Nivel Primaria" },
-      { name: "Miss Maritza", subject: "Nivel Inicial" }
-    ];
-
-    const merged = [...systemDocentes];
-    defaultTeachers.forEach(dt => {
-      if (!merged.some(m => m.name.toLowerCase() === dt.name.toLowerCase())) {
-        merged.push(dt);
-      }
-    });
-
-    return merged.map(t => {
+    return teachers.map(t => {
       const isSelected = selectedTeacherName && selectedTeacherName.toLowerCase().includes(t.name.toLowerCase());
-      return `<option value="${t.name}" ${isSelected ? 'selected' : ''}>${t.name} (${t.subject})</option>`;
+      const coursesLabel = Array.isArray(t.assignedCourses) && t.assignedCourses.length > 0
+        ? t.assignedCourses.slice(0, 2).join(', ')
+        : (t.subject || "Docente");
+      return `<option value="${t.name}" ${isSelected ? 'selected' : ''}>${t.name} (${coursesLabel})</option>`;
     }).join('');
   }
 

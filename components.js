@@ -2487,37 +2487,75 @@ const Components = {
     }
 
     const activeTab = state.activeGradesTab || "subject";
-    const selectedSubjectKey = state.selectedGradingSubject || "computacion";
     const selectedStudentKey = state.selectedBoletaStudent || "mendez";
     const allBoletas = state.boletaData || initialData.boletaData;
     
-    // Lista oficial de asignaturas y sus docentes responsables
-    const subjectDirectory = [
-      { key: "computacion", name: "Computación (EPT)", area: "Educación para el Trabajo", teacher: "Prof. Alex Lino", icon: "💻" },
-      { key: "gestion_empresarial", name: "Gestión Empresarial", area: "Educación para el Trabajo", teacher: "Prof. Alex Lino", icon: "" },
-      { key: "algebra", name: "Álgebra", area: "Matemática", teacher: "Prof. Roberto Silva", icon: "" },
-      { key: "aritmetica", name: "Aritmética", area: "Matemática", teacher: "Prof. Roberto Silva", icon: "🔢" },
-      { key: "geometria", name: "Geometría", area: "Matemática", teacher: "Prof. Roberto Silva", icon: "📏" },
-      { key: "trigonometria", name: "Trigonometría", area: "Matemática", teacher: "Prof. Roberto Silva", icon: "" },
-      { key: "raz_matematico", name: "Razonamiento Matemático", area: "Matemática", teacher: "Prof. Roberto Silva", icon: "🧮" },
-      { key: "lenguaje", name: "Lenguaje", area: "Comunicación", teacher: "Miss María Daysi Reyes", icon: "" },
-      { key: "literatura", name: "Literatura", area: "Comunicación", teacher: "Miss María Daysi Reyes", icon: "📚" },
-      { key: "raz_verbal", name: "Razonamiento Verbal", area: "Comunicación", teacher: "Miss María Daysi Reyes", icon: "✏️" },
-      { key: "biologia", name: "Biología", area: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes", icon: "🧬" },
-      { key: "fisica", name: "Física", area: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes", icon: "⚡" },
-      { key: "quimica", name: "Química", area: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes", icon: "🧪" },
-      { key: "geografia", name: "Geografía", area: "Ciencias Sociales", teacher: "Prof. Javier Vega", icon: "🌍" },
-      { key: "filosofia", name: "Filosofía", area: "Ciencias Sociales", teacher: "Prof. Javier Vega", icon: "" },
-      { key: "historia_peru", name: "Historia del Perú", area: "Ciencias Sociales", teacher: "Prof. Javier Vega", icon: "🏛️" },
-      { key: "historia_universal", name: "Historia Universal", area: "Ciencias Sociales", teacher: "Prof. Javier Vega", icon: "📜" },
-      { key: "civica", name: "Cívica", area: "DPCC", teacher: "Miss Julisa Arroyo", icon: "⚖️" },
-      { key: "psicologia", name: "Psicología", area: "DPCC", teacher: "Miss Julisa Arroyo", icon: "🧠" },
-      { key: "arte_cultura", name: "Arte y Cultura", area: "Otras Áreas", teacher: "Miss Carmen Vidal", icon: "🎨" },
-      { key: "religion", name: "Educación Religiosa (Valores y Lid.)", area: "Otras Áreas", teacher: "Miss Carmen Vidal", icon: "🕊️" },
-      { key: "educ_fisica", name: "Educación Física", area: "Otras Áreas", teacher: "Prof. Marco Soto", icon: "⚽" },
-      { key: "ingles", name: "Inglés Avanzado", area: "Otras Áreas", teacher: "Miss Andrea Ramos", icon: "🇬🇧" },
-      { key: "conducta", name: "Conducta y Disciplina", area: "Tutoría", teacher: "Prof. Roberto Silva (Tutor)", icon: "★" }
-    ];
+    // Lista oficial y dinámica de asignaturas y sus docentes reales en la Base de Datos
+    const boletaCourses = (window.appStore && typeof window.appStore.getStudentBoletaCoursesCatalog === "function")
+      ? window.appStore.getStudentBoletaCoursesCatalog("4sec")
+      : [];
+
+    const keyMap = {
+      "Aritmética": "aritmetica",
+      "Álgebra": "algebra",
+      "Geometría": "geometria",
+      "Trigonometría": "trigonometria",
+      "Razonamiento Matemático": "raz_matematico",
+      "Lenguaje y Gramática": "lenguaje",
+      "Lenguaje": "lenguaje",
+      "Literatura Universal": "literatura",
+      "Literatura": "literatura",
+      "Razonamiento Verbal": "raz_verbal",
+      "Biología & Anatomía": "biologia",
+      "Biología": "biologia",
+      "Física Elemental": "fisica",
+      "Física": "fisica",
+      "Química Inorgánica": "quimica",
+      "Química": "quimica",
+      "Historia del Perú": "historia_peru",
+      "Historia Universal": "historia_universal",
+      "Geografía & Economía": "geografia",
+      "Geografía": "geografia",
+      "Filosofía": "filosofia",
+      "Educación Cívica (DPCC)": "civica",
+      "Cívica": "civica",
+      "Psicología": "psicologia",
+      "Computación & Robótica": "computacion",
+      "Computación (EPT)": "computacion",
+      "Gestión Empresarial & Emprendimiento": "gestion_empresarial",
+      "Gestión Empresarial": "gestion_empresarial",
+      "Inglés Institucional (B2/C1)": "ingles",
+      "Inglés Avanzado": "ingles",
+      "Arte y Cultura": "arte_cultura",
+      "Educación Religiosa (Valores y Lid.)": "religion",
+      "Educación Física & Deporte": "educ_fisica",
+      "Conducta y Disciplina": "conducta"
+    };
+
+    const subjectDirectory = boletaCourses.map(c => {
+      const key = keyMap[c.name] || c.id.toLowerCase().replace(/[^a-z0-9]/g, '_');
+      return {
+        key: key,
+        id: c.id,
+        name: c.name,
+        area: c.area,
+        teacher: c.teacher || "(Docente por asignar)",
+        icon: c.icon || "📚"
+      };
+    });
+
+    const currentUser = (window.appStore && typeof window.appStore.getCurrentUser === "function") ? window.appStore.getCurrentUser() : null;
+    const isDocente = role === 'docente';
+
+    let selectedSubjectKey = state.selectedGradingSubject;
+    if (!selectedSubjectKey || !subjectDirectory.some(s => s.key === selectedSubjectKey)) {
+      if (isDocente && currentUser) {
+        const myCourse = subjectDirectory.find(s => s.teacher && s.teacher.toLowerCase().includes((currentUser.name || "").toLowerCase()));
+        selectedSubjectKey = myCourse ? myCourse.key : (subjectDirectory[0] ? subjectDirectory[0].key : "aritmetica");
+      } else {
+        selectedSubjectKey = subjectDirectory[0] ? subjectDirectory[0].key : "aritmetica";
+      }
+    }
 
     // Directorio de alumnos del aula (4to Sec 'A')
     const classroomStudents = [
@@ -2526,7 +2564,7 @@ const Components = {
       { key: "albujar", name: "ALBUJAR ZEGARRA, MARINA DEL CARMEN", dni: "74891289", code: "EST-2026-089" }
     ];
 
-    const currentSubject = subjectDirectory.find(s => s.key === selectedSubjectKey) || subjectDirectory[0];
+    const currentSubject = subjectDirectory.find(s => s.key === selectedSubjectKey) || subjectDirectory[0] || { name: "Aritmética", teacher: "Prof. Roberto Silva", area: "Matemática", key: "aritmetica" };
     const tutorStudentData = allBoletas[selectedStudentKey] || allBoletas.mendez;
     const tutorApp = tutorStudentData.appreciations || {};
     const tutorAtt = tutorStudentData.attendance || {};
@@ -2578,11 +2616,14 @@ const Components = {
               <div style="display: flex; align-items: center; gap: 10px;">
                 <span style="font-size: 13px; font-weight: 800; color: var(--color-navy-900);">Asignatura a Calificar:</span>
                 <select class="form-control" style="font-weight: bold; width: auto; font-size: 13px; min-width: 260px;" onchange="window.app.changeSelectedGradingSubject(this.value)">
-                  ${subjectDirectory.map(s => `
-                    <option value="${s.key}" ${s.key === selectedSubjectKey ? 'selected' : ''}>
-                      ${s.icon} ${s.name} • (${s.teacher})
-                    </option>
-                  `).join('')}
+                  ${subjectDirectory.map(s => {
+                    const isMyCourse = isDocente && currentUser && s.teacher && s.teacher.toLowerCase().includes((currentUser.name || "").toLowerCase());
+                    return `
+                      <option value="${s.key}" ${s.key === selectedSubjectKey ? 'selected' : ''}>
+                        ${s.icon} ${s.name} • (${s.teacher})${isMyCourse ? ' ★ (Mi Curso)' : ''}
+                      </option>
+                    `;
+                  }).join('')}
                 </select>
               </div>
 

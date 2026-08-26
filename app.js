@@ -4957,29 +4957,16 @@ CREATE TABLE tb_cuadernos_qr (
   // =========================================================================
 
   getTeachersSelectOptions(selectedTeacherName = "") {
-    const systemDocentes = (this.store.state.systemUsers || [])
-      .filter(u => u.role === "Docente" || u.role === "Profesor")
-      .map(u => ({ name: u.name, subject: u.subject || u.detail || "Docente" }));
+    const teachers = (this.store && typeof this.store.getRegisteredTeachers === "function")
+      ? this.store.getRegisteredTeachers()
+      : ((this.store.state.systemUsers || []).filter(u => u.role === "Docente" || u.role === "Profesor"));
 
-    const defaultTeachers = [
-      { name: "Prof. Fernando Rojas", subject: "Computación & Robótica" },
-      { name: "Miss Leyli Graciela Reyes Cerquen", subject: "Ciencia y Tecnología" },
-      { name: "Miss María Daysi Reyes Milla", subject: "Comunicación & Literatura" },
-      { name: "Prof. Roberto Silva", subject: "Matemática (Álgebra / Trigonometría)" },
-      { name: "Miss Julisa Magali Arroyo Araujo", subject: "Nivel Primaria" },
-      { name: "Miss Maritza", subject: "Nivel Inicial" }
-    ];
-
-    const merged = [...systemDocentes];
-    defaultTeachers.forEach(dt => {
-      if (!merged.some(m => m.name.toLowerCase() === dt.name.toLowerCase())) {
-        merged.push(dt);
-      }
-    });
-
-    return merged.map(t => {
+    return teachers.map(t => {
       const isSelected = selectedTeacherName && selectedTeacherName.toLowerCase().includes(t.name.toLowerCase());
-      return `<option value="${t.name}" ${isSelected ? 'selected' : ''}>${t.name} (${t.subject})</option>`;
+      const coursesLabel = Array.isArray(t.assignedCourses) && t.assignedCourses.length > 0
+        ? t.assignedCourses.slice(0, 2).join(', ')
+        : (t.subject || "Docente");
+      return `<option value="${t.name}" ${isSelected ? 'selected' : ''}>${t.name} (${coursesLabel})</option>`;
     }).join('');
   }
 
