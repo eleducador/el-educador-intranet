@@ -659,6 +659,267 @@ const initialData = {
       }
     },
     {
+      id: "MATR-2026-010",
+      studentCode: "EST-2026-025",
+      studentName: "Mateo Ramos Quispe",
+      dni: "76891209",
+      siagieCode: "2026-76891209",
+      birthDate: "14/02/2019",
+      gender: "Masculino",
+      address: "Jr. Las Violetas 230",
+      district: "San Juan de Lurigancho",
+      bloodType: "O+",
+      insurance: "EsSalud",
+      allergies: "Sin alergias",
+      medicalCondition: "Ninguna",
+      emergencyContact: "Sra. Andrea Ramos",
+      emergencyPhone: "984-123-999",
+      level: "Primaria",
+      grade: "1° de Primaria",
+      gradeId: "1prim",
+      guardian: "Sra. Andrea Ramos",
+      guardianDni: "43901234",
+      guardianPhone: "984-123-999",
+      guardianEmail: "andrea.ramos@gmail.com",
+      enrollmentDate: "12/02/2026",
+      feeStatus: "Pagado",
+      status: "Matriculado (FUM Completa)",
+      certificateNo: "CONST-MAT-2026-025",
+      documents: { dniStudent: true, dniParent: true, birthCertificate: true, siagieFUM: true, reportCard: true, vaccinationCard: true }
+    },
+    {
+      id: "MATR-2026-011",
+      studentCode: "EST-2026-026",
+      studentName: "Camila Sofía Mendoza Huamán",
+      dni: "76891210",
+      siagieCode: "2026-76891210",
+      birthDate: "28/05/2019",
+      gender: "Femenino",
+      address: "Av. Las Flores 450",
+      district: "San Juan de Lurigancho",
+      bloodType: "A+",
+      insurance: "SIS",
+      allergies: "Sin alergias",
+      medicalCondition: "Ninguna",
+      emergencyContact: "Sr. Pedro Mendoza",
+      emergencyPhone: "987-111-222",
+      level: "Primaria",
+      grade: "1° de Primaria",
+      gradeId: "1prim",
+      guardian: "Sr. Pedro Mendoza",
+      guardianDni: "44901235",
+      guardianPhone: "987-111-222",
+      guardianEmail: "pedro.mendoza@gmail.com",
+      enrollmentDate: "10/02/2026",
+      feeStatus: "Pagado",
+      status: "Matriculado",
+      certificateNo: "CONST-MAT-2026-026",
+      documents: { dniStudent: true, dniParent: true, birthCertificate: true, siagieFUM: true, reportCard: true, vaccinationCard: true }
+    },
+    {
+      id: "MATR-2026-012",
+      studentCode: "EST-2026-027",
+      studentName: "Valentina Morales Chávez",
+      dni: "76891211",
+      siagieCode: "2026-76891211",
+      birthDate: "15/09/2018",
+      gender: "Femenino",
+      address: "Jr. Los Pinos 112",
+      district: "San Juan de Lurigancho",
+      bloodType: "O+",
+      insurance: "EsSalud",
+      allergies: "Sin alergias",
+      medicalCondition: "Ninguna",
+      emergencyContact: "Sra. Patricia Chávez",
+      emergencyPhone: "976-555-444",
+      level: "Primaria",
+      grade: "2° de Primaria",
+      gradeId: "2prim",
+      guardian: "Sra. Patricia Chávez",
+      guardianDni: "45901236",
+      guardianPhone: "976-555-444",
+      guardianEmail: "patricia.chavez@gmail.com",
+      enrollmentDate: "11/02/2026",
+      feeStatus: "Pagado",
+      status: "Matriculado",
+      certificateNo: "CONST-MAT-2026-027",
+      documents: { dniStudent: true, dniParent: true, birthCertificate: true, siagieFUM: true, reportCard: true, vaccinationCard: true }
+    },
+    {
+      id: "MATR-2026-013",
+      studentCode: "EST-2026-028",
+      studentName: "Sebastián Castro Mendoza",
+      dni: "76891212",
+      siagieCode: "2026-76891212",
+      birthDate: "03/11/2017",
+      gender: "Masculino",
+      address: "Av. Canto Rey 780",
+      district: "San Juan de Lurigancho",
+      bloodType: "B+",
+      insurance: "SIS",
+      allergies: "Sin alergias",
+      medicalCondition: "Ninguna",
+      emergencyContact: "Sr. Mario Castro",
+      emergencyPhone: "982-333-777",
+      level: "Primaria",
+      grade: "3° de Primaria",
+      gradeId: "3prim",
+      guardian: "Sr. Mario Castro",
+      guardianDni: "46901237",
+      guardianPhone: "982-333-777",
+      guardianEmail: "mario.castro@gmail.com",
+      enrollmentDate: "14/02/2026",
+      feeStatus: "Pagado",
+      status: "Matriculado",
+      certificateNo: "CONST-MAT-2026-028",
+      documents: { dniStudent: true, dniParent: true, birthCertificate: true, siagieFUM: true, reportCard: true, vaccinationCard: true }
+    },
+    {
+      id: "MATR-2026-014",
+      studentCode: "EST-2026-029",
+      studentName: "Luciana Flores Pinedo",
+      dni: "76891213",
+      siagieCode: "2026-76891213",
+      birthDate: "20/04/2016",
+      gender: "Femenino",
+      address: "Jr. Los Jazmines 340",
+      district: "San Juan de Lurigancho",
+      bloodType: "O+",
+      insurance: "EsSalud",
+      allergies: "Sin alergias",
+      medicalCondition: "Ninguna",
+      emergencyContact: "Sra. Silvia Pinedo",
+      emergencyPhone: "965-888-222",
+      level: "Primaria",
+      grade: "4° de Primaria",
+      gradeId: "4prim",
+      guardian: "Sra. Silvia Pinedo",
+      guardianDni: "47901238",
+      guardianPhone: "965-888-222",
+      guardianEmail: "silvia.pinedo@gmail.com",
+      enrollmentDate: "15/02/2026",
+      feeStatus: "Pagado",
+      status: "Matriculado",
+      certificateNo: "CONST-MAT-2026-029",
+      documents: { dniStudent: true, dniParent: true, birthCertificate: true, siagieFUM: true, reportCard: true, vaccinationCard: true }
+    },
+    {
+      id: "MATR-2026-015",
+      studentCode: "EST-2026-055-PRI",
+      studentName: "Salim Gael Cáceres Quispe",
+      dni: "76541298",
+      siagieCode: "2026-76541298-PRI",
+      birthDate: "11/07/2015",
+      gender: "Masculino",
+      address: "Av. Las Flores de Primavera 1120",
+      district: "San Juan de Lurigancho",
+      bloodType: "O+",
+      insurance: "EsSalud",
+      allergies: "Sin alergias",
+      medicalCondition: "Ninguna",
+      emergencyContact: "Sr. Juan Carlos Cáceres",
+      emergencyPhone: "984-777-888",
+      level: "Primaria",
+      grade: "5° de Primaria",
+      gradeId: "5prim",
+      guardian: "Sr. Juan Carlos Cáceres",
+      guardianDni: "41298374",
+      guardianPhone: "984-777-888",
+      guardianEmail: "juan.caceres@gmail.com",
+      enrollmentDate: "08/02/2026",
+      feeStatus: "Pagado",
+      status: "Matriculado (FUM Completa)",
+      certificateNo: "CONST-MAT-2026-055P",
+      documents: { dniStudent: true, dniParent: true, birthCertificate: true, siagieFUM: true, reportCard: true, vaccinationCard: true }
+    },
+    {
+      id: "MATR-2026-016",
+      studentCode: "EST-2026-030",
+      studentName: "Joaquín Vargas Romero",
+      dni: "76891214",
+      siagieCode: "2026-76891214",
+      birthDate: "09/08/2014",
+      gender: "Masculino",
+      address: "Av. Wiese 1560",
+      district: "San Juan de Lurigancho",
+      bloodType: "O+",
+      insurance: "SIS",
+      allergies: "Sin alergias",
+      medicalCondition: "Ninguna",
+      emergencyContact: "Sr. Raúl Vargas",
+      emergencyPhone: "971-444-111",
+      level: "Primaria",
+      grade: "6° de Primaria",
+      gradeId: "6prim",
+      guardian: "Sr. Raúl Vargas",
+      guardianDni: "48901239",
+      guardianPhone: "971-444-111",
+      guardianEmail: "raul.vargas@gmail.com",
+      enrollmentDate: "09/02/2026",
+      feeStatus: "Pagado",
+      status: "Matriculado",
+      certificateNo: "CONST-MAT-2026-030",
+      documents: { dniStudent: true, dniParent: true, birthCertificate: true, siagieFUM: true, reportCard: true, vaccinationCard: true }
+    },
+    {
+      id: "MATR-2026-017",
+      studentCode: "EST-2026-031",
+      studentName: "Adriana Paredes Ramos",
+      dni: "76891215",
+      siagieCode: "2026-76891215",
+      birthDate: "21/01/2013",
+      gender: "Femenino",
+      address: "Jr. Los Álamos 890",
+      district: "San Juan de Lurigancho",
+      bloodType: "A+",
+      insurance: "EsSalud",
+      allergies: "Sin alergias",
+      medicalCondition: "Ninguna",
+      emergencyContact: "Sra. Elena Ramos",
+      emergencyPhone: "983-666-555",
+      level: "Secundaria",
+      grade: "1° de Secundaria",
+      gradeId: "1sec",
+      guardian: "Sra. Elena Ramos",
+      guardianDni: "49901240",
+      guardianPhone: "983-666-555",
+      guardianEmail: "elena.ramos@gmail.com",
+      enrollmentDate: "13/02/2026",
+      feeStatus: "Pagado",
+      status: "Matriculado",
+      certificateNo: "CONST-MAT-2026-031",
+      documents: { dniStudent: true, dniParent: true, birthCertificate: true, siagieFUM: true, reportCard: true, vaccinationCard: true }
+    },
+    {
+      id: "MATR-2026-018",
+      studentCode: "EST-2026-032",
+      studentName: "Diego Alonso Fernández Ríos",
+      dni: "76891216",
+      siagieCode: "2026-76891216",
+      birthDate: "17/10/2011",
+      gender: "Masculino",
+      address: "Av. Próceres 890",
+      district: "San Juan de Lurigancho",
+      bloodType: "O+",
+      insurance: "EsSalud",
+      allergies: "Sin alergias",
+      medicalCondition: "Ninguna",
+      emergencyContact: "Sr. Carlos Fernández",
+      emergencyPhone: "964-222-333",
+      level: "Secundaria",
+      grade: "3° de Secundaria",
+      gradeId: "3sec",
+      guardian: "Sr. Carlos Fernández",
+      guardianDni: "50901241",
+      guardianPhone: "964-222-333",
+      guardianEmail: "carlos.fernandez@gmail.com",
+      enrollmentDate: "10/02/2026",
+      feeStatus: "Pagado",
+      status: "Matriculado",
+      certificateNo: "CONST-MAT-2026-032",
+      documents: { dniStudent: true, dniParent: true, birthCertificate: true, siagieFUM: true, reportCard: true, vaccinationCard: true }
+    },
+    {
       id: "MATR-2026-004",
       studentCode: "EST-2026-PEND-01",
       studentName: "Brini Yuneyli Pocomo Oropeza",
@@ -710,8 +971,8 @@ const initialData = {
       medicalCondition: "Ninguna",
       emergencyContact: "Familia Díaz Chirre",
       emergencyPhone: "991-234-876",
-      level: "Secundaria (Egresada)",
-      grade: "Certificado de Estudios",
+      level: "Secundaria",
+      grade: "5° de Secundaria",
       gradeId: "5sec",
       guardian: "Familia Díaz Chirre",
       guardianDni: "40192834",
@@ -3625,7 +3886,29 @@ class IntranetStore {
   }
 
   getStudentBoletaCoursesCatalog(gradeId = "4sec") {
-    const isPrimaria = String(gradeId).toLowerCase().includes("prim") || String(gradeId).toLowerCase().includes("pri");
+    const cleanG = String(gradeId || "").toLowerCase();
+    const isInicial = cleanG.includes("ini") || cleanG.includes("3a") || cleanG.includes("4a") || cleanG.includes("5a") || cleanG.includes("kinder");
+    const isPrimaria = !isInicial && (cleanG.includes("prim") || cleanG.includes("pri"));
+
+    if (isInicial) {
+      const inicialCourses = [
+        { id: "MAT", name: "Matemática Temprana & Lógica", area: "Matemática", icon: "🔢" },
+        { id: "COM", name: "Comunicación & Grafomotricidad", area: "Comunicación", icon: "📖" },
+        { id: "PL", name: "Plan Lector / Cuentos Infantiles", area: "Comunicación", icon: "📚" },
+        { id: "CTA", name: "Ciencia y Ambiente / Exploración", area: "Ciencia y Tecnología", icon: "🔬" },
+        { id: "PS", name: "Personal Social & Convivencia", area: "Personal Social", icon: "🏛️" },
+        { id: "PSICO", name: "Psicomotricidad & Juego", area: "Desarrollo Corporal", icon: "⚽" },
+        { id: "ING", name: "Inglés Inicial (Vocabulario)", area: "Idiomas", icon: "🇬🇧" },
+        { id: "ARTE", name: "Arte, Música y Mini-Manualidades", area: "Arte", icon: "🎨" },
+        { id: "REL", name: "Educación en Valores & Religión", area: "Valores", icon: "🕊️" },
+        { id: "HAB", name: "Hábitos, Disciplina y Tutoría", area: "Tutoría", icon: "★" }
+      ];
+
+      return inicialCourses.map(c => ({
+        ...c,
+        teacher: this.getTeacherForCourse(c.name, gradeId)
+      }));
+    }
 
     if (isPrimaria) {
       const primaryCourses = [
@@ -7519,12 +7802,22 @@ const Components = {
     }
 
     const activeTab = state.activeGradesTab || "subject";
-    const selectedStudentKey = state.selectedBoletaStudent || "mendez";
-    const allBoletas = state.boletaData || initialData.boletaData;
-    
-    // Lista oficial y dinámica de asignaturas y sus docentes reales en la Base de Datos
+    const allBoletas = state.boletaData || initialData.boletaData || {};
+    const selectedGradingGrade = state.selectedGradingGrade || "4sec";
+    const cleanSelectedGrade = selectedGradingGrade.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    const gradesCatalog = (state.gradesCatalog && state.gradesCatalog.length > 0)
+      ? state.gradesCatalog
+      : ((initialData && initialData.gradesCatalog) || []);
+
+    const currentGradeObj = gradesCatalog.find(g => {
+      const gid = (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return gid === cleanSelectedGrade || gid.includes(cleanSelectedGrade) || cleanSelectedGrade.includes(gid);
+    }) || { id: selectedGradingGrade, label: "4° de Secundaria", level: "Secundaria", tutor: "Prof. Roberto Silva" };
+
+    // Lista oficial y dinámica de asignaturas y sus docentes reales en la Base de Datos según el grado seleccionado
     const boletaCourses = (window.appStore && typeof window.appStore.getStudentBoletaCoursesCatalog === "function")
-      ? window.appStore.getStudentBoletaCoursesCatalog("4sec")
+      ? window.appStore.getStudentBoletaCoursesCatalog(selectedGradingGrade)
       : [];
 
     const keyMap = {
@@ -7561,7 +7854,29 @@ const Components = {
       "Arte y Cultura": "arte_cultura",
       "Educación Religiosa (Valores y Lid.)": "religion",
       "Educación Física & Deporte": "educ_fisica",
-      "Conducta y Disciplina": "conducta"
+      "Conducta y Disciplina": "conducta",
+      "Matemática & Aritmética": "aritmetica",
+      "Álgebra Elemental": "algebra",
+      "Geometría Práctica": "geometria",
+      "Comunicación Integral": "lenguaje",
+      "Lenguaje & Caligrafía": "lenguaje",
+      "Plan Lector & Literatura": "literatura",
+      "Ciencia y Tecnología": "biologia",
+      "Personal Social & Cívica": "civica",
+      "Computación & Informática": "computacion",
+      "Inglés Institucional": "ingles",
+      "Educación Religiosa & Valores": "religion",
+      "Tutoría & Convivencia Escolar": "conducta",
+      "Matemática Temprana & Lógica": "aritmetica",
+      "Comunicación & Grafomotricidad": "lenguaje",
+      "Plan Lector / Cuentos Infantiles": "literatura",
+      "Ciencia y Ambiente / Exploración": "biologia",
+      "Personal Social & Convivencia": "civica",
+      "Psicomotricidad & Juego": "educ_fisica",
+      "Inglés Inicial (Vocabulario)": "ingles",
+      "Arte, Música y Mini-Manualidades": "arte_cultura",
+      "Educación en Valores & Religión": "religion",
+      "Hábitos, Disciplina y Tutoría": "conducta"
     };
 
     const subjectDirectory = boletaCourses.map(c => {
@@ -7589,15 +7904,39 @@ const Components = {
       }
     }
 
-    // Directorio de alumnos del aula (4to Sec 'A')
-    const classroomStudents = [
-      { key: "mendez", name: "MÉNDEZ FLORES, SOFÍA", dni: "74891230", code: "EST-2026-042" },
-      { key: "benitez", name: "BENÍTEZ RUIZ, CARLOS", dni: "74891255", code: "EST-2026-011" },
-      { key: "albujar", name: "ALBUJAR ZEGARRA, MARINA DEL CARMEN", dni: "74891289", code: "EST-2026-089" }
-    ];
-
     const currentSubject = subjectDirectory.find(s => s.key === selectedSubjectKey) || subjectDirectory[0] || { name: "Aritmética", teacher: "Prof. Roberto Silva", area: "Matemática", key: "aritmetica" };
-    const tutorStudentData = allBoletas[selectedStudentKey] || allBoletas.mendez;
+
+    // Filtrar única y estrictamente los estudiantes matriculados en el grado seleccionado
+    const allEnrollments = (window.appStore && typeof window.appStore.getEnrollments === "function")
+      ? window.appStore.getEnrollments()
+      : [];
+
+    const classroomStudents = allEnrollments.filter(e => {
+      const egId = (e.gradeId || (window.appStore && window.appStore.resolveStudentGradeId(e.grade)) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return egId === cleanSelectedGrade || egId.includes(cleanSelectedGrade) || cleanSelectedGrade.includes(egId);
+    }).map(e => {
+      let key = e.studentCode || e.dni || e.id;
+      const nameLow = (e.studentName || "").toLowerCase();
+      if (nameLow.includes("mendez") || nameLow.includes("méndez")) key = "mendez";
+      else if (nameLow.includes("benitez") || nameLow.includes("benítez")) key = "benitez";
+      else if (nameLow.includes("albujar") || nameLow.includes("albújar")) key = "albujar";
+
+      return {
+        key: key,
+        studentCode: e.studentCode || e.dni,
+        name: e.studentName,
+        dni: e.dni,
+        grade: e.grade || currentGradeObj.label,
+        gradeId: e.gradeId || selectedGradingGrade
+      };
+    });
+
+    let selectedStudentKey = state.selectedBoletaStudent;
+    if (!selectedStudentKey || !classroomStudents.some(s => s.key === selectedStudentKey)) {
+      selectedStudentKey = classroomStudents.length > 0 ? classroomStudents[0].key : "mendez";
+    }
+
+    const tutorStudentData = allBoletas[selectedStudentKey] || (classroomStudents.find(s => s.key === selectedStudentKey) ? { name: classroomStudents.find(s => s.key === selectedStudentKey).name } : allBoletas.mendez) || {};
     const tutorApp = tutorStudentData.appreciations || {};
     const tutorAtt = tutorStudentData.attendance || {};
     const tutorPc = tutorStudentData.parentCriteria || {};
@@ -7614,7 +7953,7 @@ const Components = {
                 <span class="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-700);">Periodo Lectivo 2026</span>
               </div>
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
-                I.E.P. "El Educador" • Cada docente ingresa sus cursos y el Tutor evalúa asistencias, apreciaciones y padres de familia para la boleta oficial.
+                I.E.P. "El Educador" • Selección y registro filtrado por <strong>Grado Escolar</strong> y <strong>Curso</strong>.
               </p>
             </div>
             
@@ -7626,7 +7965,7 @@ const Components = {
           <!-- Selector de Pestañas / Modalidades -->
           <div style="display: flex; border-top: 1px solid var(--border-subtle); background: var(--bg-surface-subtle); padding: 6px 12px; gap: 8px; flex-wrap: wrap;">
             <button class="btn btn-sm ${activeTab === 'subject' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesActiveTab('subject')" style="font-weight: 800;">
-              👨‍1. Carga por Docente de Curso
+              👨‍1. Carga por Docente de Curso (Grado & Asignatura)
             </button>
             <button class="btn btn-sm ${activeTab === 'tutor' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesActiveTab('tutor')" style="font-weight: 800;">
               2. Módulo de Tutoría (Asistencia, Apreciaciones y Familias)
@@ -7644,26 +7983,59 @@ const Components = {
           <div class="card" style="margin-bottom: var(--space-6);">
             <div class="card-header" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap; gap: 14px;">
               
-              <!-- Selector de Asignatura -->
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 13px; font-weight: 800; color: var(--color-navy-900);">Asignatura a Calificar:</span>
-                <select class="form-control" style="font-weight: bold; width: auto; font-size: 13px; min-width: 260px;" onchange="window.app.changeSelectedGradingSubject(this.value)">
-                  ${subjectDirectory.map(s => {
-                    const isMyCourse = isDocente && currentUser && s.teacher && s.teacher.toLowerCase().includes((currentUser.name || "").toLowerCase());
-                    return `
-                      <option value="${s.key}" ${s.key === selectedSubjectKey ? 'selected' : ''}>
-                        ${s.icon} ${s.name} • (${s.teacher})${isMyCourse ? ' ★ (Mi Curso)' : ''}
-                      </option>
-                    `;
-                  }).join('')}
-                </select>
+              <!-- Selectores de Grado y Asignatura -->
+              <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                
+                <!-- 1. Selector de Grado Escolar -->
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); white-space: nowrap;">🏫 Grado Escolar:</span>
+                  <select class="form-control" style="font-weight: bold; width: auto; font-size: 13px; min-width: 220px; background: #fffbeb; border-color: #f59e0b;" onchange="window.app.changeGradingGrade(this.value)">
+                    <optgroup label="--- NIVEL INICIAL ---">
+                      <option value="ini-3" ${cleanSelectedGrade === 'ini3' || cleanSelectedGrade === 'ini-3' ? 'selected' : ''}>Inicial 3 Años</option>
+                      <option value="ini-4" ${cleanSelectedGrade === 'ini4' || cleanSelectedGrade === 'ini-4' ? 'selected' : ''}>Inicial 4 Años</option>
+                      <option value="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
+                    </optgroup>
+                    <optgroup label="--- NIVEL PRIMARIA ---">
+                      <option value="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1° de Primaria (1er Grado)</option>
+                      <option value="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2° de Primaria (2do Grado)</option>
+                      <option value="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3° de Primaria (3er Grado)</option>
+                      <option value="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4° de Primaria (4to Grado)</option>
+                      <option value="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5° de Primaria (5to Grado)</option>
+                      <option value="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6° de Primaria (6to Grado)</option>
+                    </optgroup>
+                    <optgroup label="--- NIVEL SECUNDARIA ---">
+                      <option value="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1° de Secundaria (1er Año)</option>
+                      <option value="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2° de Secundaria (2do Año)</option>
+                      <option value="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3° de Secundaria (3er Año)</option>
+                      <option value="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4° de Secundaria (4to Año)</option>
+                      <option value="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5° de Secundaria (5to Año)</option>
+                    </optgroup>
+                  </select>
+                </div>
+
+                <!-- 2. Selector de Asignatura / Curso -->
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); white-space: nowrap;">📚 Asignatura / Curso:</span>
+                  <select class="form-control" style="font-weight: bold; width: auto; font-size: 13px; min-width: 260px;" onchange="window.app.changeSelectedGradingSubject(this.value)">
+                    ${subjectDirectory.map(s => {
+                      const isMyCourse = isDocente && currentUser && s.teacher && s.teacher.toLowerCase().includes((currentUser.name || "").toLowerCase());
+                      return `
+                        <option value="${s.key}" ${s.key === selectedSubjectKey ? 'selected' : ''}>
+                          ${s.icon} ${s.name} • (${s.teacher})${isMyCourse ? ' ★ (Mi Curso)' : ''}
+                        </option>
+                      `;
+                    }).join('')}
+                  </select>
+                </div>
+
               </div>
 
-              <!-- Info del Curso & Aula -->
-              <div style="font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 14px;">
+              <!-- Info del Curso & Aula Seleccionada -->
+              <div style="font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 4px;">
+                <span><strong>Grado:</strong> <span style="color: var(--color-navy-900); font-weight: bold;">${currentGradeObj.label || selectedGradingGrade}</span></span>
                 <span><strong>Docente Responsable:</strong> <span style="color: var(--color-navy-900); font-weight: bold;">${currentSubject.teacher}</span></span>
                 <span><strong>Área Curricular:</strong> ${currentSubject.area}</span>
-                <span><strong>Grado:</strong> 4to de Secundaria</span>
+                <span class="status-badge status-primary" style="font-size: 11px;">👥 ${classroomStudents.length} Alumno(s) en este Grado</span>
               </div>
 
             </div>
@@ -7671,7 +8043,7 @@ const Components = {
             <!-- Formulario de Calificaciones para los Alumnos del Aula en este Curso -->
             <form onsubmit="window.app.handleSaveSubjectGrades(event, '${selectedSubjectKey}')" style="padding: 16px;">
               <div style="margin-bottom: 12px; font-size: 12px; color: #475569;">
-                Ingrese las calificaciones para los estudiantes del aula en la materia <strong>${currentSubject.name}</strong>. Acepta letras (<strong>AD, A, B, C</strong>) o números (<strong>0-20</strong>).
+                Mostrando únicamente estudiantes matriculados en <strong>${currentGradeObj.label || selectedGradingGrade}</strong> para la materia <strong>${currentSubject.name}</strong>. Acepta letras (<strong>AD, A, B, C</strong>) o números (<strong>0-20</strong>).
               </div>
 
               <div class="table-container">
@@ -7679,7 +8051,7 @@ const Components = {
                   <thead>
                     <tr style="background: var(--color-navy-900); color: white;">
                       <th style="width: 15%;">Código / DNI</th>
-                      <th style="width: 35%;">Apellidos y Nombres</th>
+                      <th style="width: 35%;">Apellidos y Nombres (Solo ${currentGradeObj.label || selectedGradingGrade})</th>
                       <th style="width: 12%; text-align:center;">I BIM</th>
                       <th style="width: 12%; text-align:center;">II BIM</th>
                       <th style="width: 12%; text-align:center;">III BIM</th>
@@ -7687,12 +8059,20 @@ const Components = {
                     </tr>
                   </thead>
                   <tbody>
-                    ${classroomStudents.map(st => {
-                      const studentBoleta = allBoletas[st.key] || {};
+                    ${classroomStudents.length === 0 ? `
+                      <tr>
+                        <td colspan="6" style="text-align: center; padding: 36px 16px; color: #64748b; font-size: 13px;">
+                          <div style="font-size: 28px; margin-bottom: 6px;">📂</div>
+                          <strong>No hay estudiantes matriculados en ${currentGradeObj.label || selectedGradingGrade}.</strong><br>
+                          <span style="font-size: 11.5px; opacity: 0.85;">Puede registrar estudiantes en la pestaña "Gestión de Perfiles & Cuentas" o cambiar de grado arriba.</span>
+                        </td>
+                      </tr>
+                    ` : classroomStudents.map(st => {
+                      const studentBoleta = allBoletas[st.key] || allBoletas[st.studentCode] || {};
                       const studentGrades = (studentBoleta.grades && studentBoleta.grades[selectedSubjectKey]) || { b1: "", b2: "", b3: "", b4: "" };
                       return `
                         <tr>
-                          <td><code>${st.dni}</code></td>
+                          <td><code>${st.dni || st.studentCode}</code></td>
                           <td><strong>${st.name}</strong></td>
                           <td style="text-align:center;">
                             <input type="text" class="form-control" name="grade_${st.key}_b1" value="${studentGrades.b1 || ''}" placeholder="-" style="width: 65px; text-align:center; font-weight:bold; text-transform:uppercase; margin: 0 auto;" maxlength="4" />
@@ -7713,11 +8093,13 @@ const Components = {
                 </table>
               </div>
 
-              <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 16px;">
-                <button type="submit" class="btn btn-navy" style="font-weight: 800; padding: 10px 22px;">
-                  💾 Guardar Notas de ${currentSubject.name} (${currentSubject.teacher})
-                </button>
-              </div>
+              ${classroomStudents.length > 0 ? `
+                <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 16px;">
+                  <button type="submit" class="btn btn-navy" style="font-weight: 800; padding: 10px 22px;">
+                    💾 Guardar Notas de ${currentSubject.name} (${currentGradeObj.label || selectedGradingGrade})
+                  </button>
+                </div>
+              ` : ''}
             </form>
           </div>
         ` : ''}
@@ -7731,21 +8113,47 @@ const Components = {
               <div>
                 <h3 class="card-title" style="color: #1e3a8a;">Módulo de Tutoría y Convivencia Escolar</h3>
                 <p style="font-size: 12px; color: #1e40af; margin-top: 2px;">
-                  <strong>Tutor a Cargo:</strong> Prof. Roberto Silva • <strong>Aula:</strong> 4to de Secundaria
+                  <strong>Tutor a Cargo:</strong> ${currentGradeObj.tutor || 'Docente Tutor'} • <strong>Aula:</strong> ${currentGradeObj.label || selectedGradingGrade}
                 </p>
               </div>
 
-              <!-- Selector de Alumno a Evaluar por el Tutor y Botón de Stickers -->
-              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                <span style="font-size: 12px; font-weight: 800; color: #1e3a8a;">Estudiante:</span>
-                <select class="form-control" style="font-weight: bold; width: auto; font-size: 12px;" onchange="window.app.changeBoletaStudent(this.value)">
-                  <option value="mendez" ${selectedStudentKey === 'mendez' ? 'selected' : ''}>MÉNDEZ FLORES, SOFÍA</option>
-                  <option value="benitez" ${selectedStudentKey === 'benitez' ? 'selected' : ''}>BENÍTEZ RUIZ, CARLOS</option>
-                  <option value="albujar" ${selectedStudentKey === 'albujar' ? 'selected' : ''}>ALBUJAR ZEGARRA, MARINA DEL CARMEN</option>
-                </select>
-                <button type="button" class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${tutorStudentData.code || tutorStudentData.id || 'EST-2026-042'}')" style="font-weight: 900; font-size: 11.5px; padding: 6px 14px; border-radius: 16px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #0b132b;">
-                  ⚡ Stickers QR de Boleta
-                </button>
+              <!-- Selectores de Grado y Estudiante -->
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="font-size: 12px; font-weight: 800; color: #1e3a8a;">Grado:</span>
+                  <select class="form-control" style="font-weight: bold; width: auto; font-size: 12px;" onchange="window.app.changeGradingGrade(this.value)">
+                    <option value="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
+                    <option value="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1° de Primaria</option>
+                    <option value="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2° de Primaria</option>
+                    <option value="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3° de Primaria</option>
+                    <option value="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4° de Primaria</option>
+                    <option value="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5° de Primaria</option>
+                    <option value="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6° de Primaria</option>
+                    <option value="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1° de Secundaria</option>
+                    <option value="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2° de Secundaria</option>
+                    <option value="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3° de Secundaria</option>
+                    <option value="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4° de Secundaria</option>
+                    <option value="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5° de Secundaria</option>
+                  </select>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="font-size: 12px; font-weight: 800; color: #1e3a8a;">Estudiante:</span>
+                  <select class="form-control" style="font-weight: bold; width: auto; font-size: 12px; min-width: 200px;" onchange="window.app.changeBoletaStudent(this.value)">
+                    ${classroomStudents.length === 0 ? `
+                      <option value="">Sin estudiantes en este grado</option>
+                    ` : classroomStudents.map(st => `
+                      <option value="${st.key}" ${selectedStudentKey === st.key ? 'selected' : ''}>${st.name}</option>
+                    `).join('')}
+                  </select>
+                </div>
+
+                ${classroomStudents.length > 0 ? `
+                  <button type="button" class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${tutorStudentData.code || tutorStudentData.id || selectedStudentKey}')" style="font-weight: 900; font-size: 11.5px; padding: 6px 14px; border-radius: 16px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #0b132b;">
+                    ⚡ Stickers QR de Boleta
+                  </button>
+                ` : ''}
               </div>
             </div>
 
@@ -7856,11 +8264,13 @@ const Components = {
                 </div>
               </div>
 
-              <div style="display: flex; justify-content: flex-end; gap: 12px;">
-                <button type="submit" class="btn btn-red" style="font-weight: 800; padding: 12px 24px;">
-                  💾 Guardar Evaluación de Tutoría de ${tutorStudentData.name}
-                </button>
-              </div>
+              ${classroomStudents.length > 0 ? `
+                <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                  <button type="submit" class="btn btn-red" style="font-weight: 800; padding: 12px 24px;">
+                    💾 Guardar Evaluación de Tutoría de ${tutorStudentData.name || 'Estudiante'}
+                  </button>
+                </div>
+              ` : ''}
 
             </form>
           </div>
@@ -7871,12 +8281,31 @@ const Components = {
                MODO 3: SÁBANA GENERAL Y ESTADO DE AVANCE DE DOCENTES
                ===================================================================== -->
           <div class="card" style="margin-bottom: var(--space-6);">
-            <div class="card-header">
+            <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
               <div>
-                <h3 class="card-title">Sábana Consolidada de Calificaciones - 4to Sec 'A'</h3>
+                <h3 class="card-title">Sábana Consolidada de Calificaciones - ${currentGradeObj.label || selectedGradingGrade}</h3>
                 <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
-                  Consolidado automático con las notas subidas por cada docente de área y las evaluaciones del tutor.
+                  Consolidado automático de calificaciones de los estudiantes matriculados en <strong>${currentGradeObj.label || selectedGradingGrade}</strong>.
                 </p>
+              </div>
+
+              <!-- Selector de Grado para Sábana -->
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Grado:</span>
+                <select class="form-control" style="font-weight: bold; width: auto; font-size: 12px;" onchange="window.app.changeGradingGrade(this.value)">
+                  <option value="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
+                  <option value="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1° de Primaria</option>
+                  <option value="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2° de Primaria</option>
+                  <option value="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3° de Primaria</option>
+                  <option value="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4° de Primaria</option>
+                  <option value="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5° de Primaria</option>
+                  <option value="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6° de Primaria</option>
+                  <option value="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1° de Secundaria</option>
+                  <option value="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2° de Secundaria</option>
+                  <option value="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3° de Secundaria</option>
+                  <option value="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4° de Secundaria</option>
+                  <option value="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5° de Secundaria</option>
+                </select>
               </div>
             </div>
 
@@ -7886,28 +8315,32 @@ const Components = {
                   <tr style="background: var(--color-navy-900); color: white;">
                     <th>Asignatura</th>
                     <th>Docente Responsable</th>
-                    <th style="text-align:center;">Sofía Méndez</th>
-                    <th style="text-align:center;">Carlos Benítez</th>
-                    <th style="text-align:center;">Marina Albujar</th>
+                    ${classroomStudents.map(st => `
+                      <th style="text-align:center; font-size: 11px;">${st.name.split(',')[0]}</th>
+                    `).join('')}
                     <th style="text-align:center;">Estado</th>
                   </tr>
                 </thead>
                 <tbody>
-                  ${subjectDirectory.map(s => {
-                    const mVal = (allBoletas.mendez?.grades && allBoletas.mendez.grades[s.key]?.b1) || "--";
-                    const bVal = (allBoletas.benitez?.grades && allBoletas.benitez.grades[s.key]?.b1) || "--";
-                    const aVal = (allBoletas.albujar?.grades && allBoletas.albujar.grades[s.key]?.b1) || "--";
-                    const hasAll = mVal !== "--" && bVal !== "--";
+                  ${classroomStudents.length === 0 ? `
+                    <tr>
+                      <td colspan="4" style="text-align: center; padding: 24px; color: #64748b;">
+                        No hay estudiantes matriculados en este grado.
+                      </td>
+                    </tr>
+                  ` : subjectDirectory.map(s => {
                     return `
                       <tr>
                         <td><strong>${s.icon} ${s.name}</strong></td>
                         <td style="font-size: 12px;">${s.teacher}</td>
-                        <td style="text-align:center; font-weight:bold; color:var(--color-navy-900);">${mVal}</td>
-                        <td style="text-align:center; font-weight:bold; color:var(--color-navy-900);">${bVal}</td>
-                        <td style="text-align:center; font-weight:bold; color:var(--color-navy-900);">${aVal}</td>
+                        ${classroomStudents.map(st => {
+                          const stBoleta = allBoletas[st.key] || allBoletas[st.studentCode] || {};
+                          const grVal = (stBoleta.grades && stBoleta.grades[s.key]?.b1) || "--";
+                          return `<td style="text-align:center; font-weight:bold; color:var(--color-navy-900);">${grVal}</td>`;
+                        }).join('')}
                         <td style="text-align:center;">
-                          <span class="status-badge ${hasAll ? 'status-approved' : 'status-pending'}">
-                            ${hasAll ? '<span class="status-dot-green"></span> Completo' : '<span class="status-dot-yellow"></span> En Proceso'}
+                          <span class="status-badge status-approved">
+                            <span class="status-dot-green"></span> Registrado
                           </span>
                         </td>
                       </tr>
@@ -7919,7 +8352,7 @@ const Components = {
 
             <div style="padding: 16px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
               <span style="font-size: 13px; font-weight: 700; color: #1e293b;">
-                El sistema ya tiene consolidadas todas las notas para la emisión oficial.
+                Consolidado oficial de ${currentGradeObj.label || selectedGradingGrade}.
               </span>
               <button class="btn btn-navy" onclick="window.app.navigate('boleta')" style="font-weight: 800;">
                 Generar Boleta Oficial MINEDU (PDF)
@@ -16342,6 +16775,97 @@ CREATE TABLE tb_cuadernos_qr (
   // Cambiar pestaña del Módulo de Calificaciones
   setGradesActiveTab(tab) {
     this.store.state.activeGradesTab = tab;
+    this.store.saveState();
+    this.render();
+  }
+
+  // Cambiar Grado Seleccionado en el Registro de Calificaciones
+  changeGradingGrade(gradeId) {
+    this.store.state.selectedGradingGrade = gradeId;
+    
+    // Adaptar automáticamente el catálogo de cursos al nuevo grado
+    const courses = (this.store && typeof this.store.getStudentBoletaCoursesCatalog === "function")
+      ? this.store.getStudentBoletaCoursesCatalog(gradeId)
+      : [];
+
+    const keyMap = {
+      "Aritmética": "aritmetica",
+      "Álgebra": "algebra",
+      "Geometría": "geometria",
+      "Trigonometría": "trigonometria",
+      "Razonamiento Matemático": "raz_matematico",
+      "Lenguaje y Gramática": "lenguaje",
+      "Lenguaje": "lenguaje",
+      "Literatura Universal": "literatura",
+      "Literatura": "literatura",
+      "Razonamiento Verbal": "raz_verbal",
+      "Biología & Anatomía": "biologia",
+      "Biología": "biologia",
+      "Física Elemental": "fisica",
+      "Física": "fisica",
+      "Química Inorgánica": "quimica",
+      "Química": "quimica",
+      "Historia del Perú": "historia_peru",
+      "Historia Universal": "historia_universal",
+      "Geografía & Economía": "geografia",
+      "Geografía": "geografia",
+      "Filosofía": "filosofia",
+      "Educación Cívica (DPCC)": "civica",
+      "Cívica": "civica",
+      "Psicología": "psicologia",
+      "Computación & Robótica": "computacion",
+      "Computación (EPT)": "computacion",
+      "Gestión Empresarial & Emprendimiento": "gestion_empresarial",
+      "Gestión Empresarial": "gestion_empresarial",
+      "Inglés Institucional (B2/C1)": "ingles",
+      "Inglés Avanzado": "ingles",
+      "Arte y Cultura": "arte_cultura",
+      "Educación Religiosa (Valores y Lid.)": "religion",
+      "Educación Física & Deporte": "educ_fisica",
+      "Conducta y Disciplina": "conducta",
+      "Matemática & Aritmética": "aritmetica",
+      "Álgebra Elemental": "algebra",
+      "Geometría Práctica": "geometria",
+      "Comunicación Integral": "lenguaje",
+      "Lenguaje & Caligrafía": "lenguaje",
+      "Plan Lector & Literatura": "literatura",
+      "Ciencia y Tecnología": "biologia",
+      "Personal Social & Cívica": "civica",
+      "Computación & Informática": "computacion",
+      "Inglés Institucional": "ingles",
+      "Educación Religiosa & Valores": "religion",
+      "Tutoría & Convivencia Escolar": "conducta"
+    };
+
+    if (courses && courses.length > 0) {
+      const currentSub = this.store.state.selectedGradingSubject;
+      const exists = courses.some(c => {
+        const k = keyMap[c.name] || c.id.toLowerCase().replace(/[^a-z0-9]/g, '_');
+        return k === currentSub;
+      });
+      if (!exists) {
+        const firstKey = keyMap[courses[0].name] || courses[0].id.toLowerCase().replace(/[^a-z0-9]/g, '_');
+        this.store.state.selectedGradingSubject = firstKey;
+      }
+    }
+
+    // Ajustar estudiante por defecto para la pestaña de tutoría
+    const enrollments = this.store.getEnrollments();
+    const cleanG = gradeId.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeStudents = enrollments.filter(e => {
+      const egId = (e.gradeId || this.store.resolveStudentGradeId(e.grade) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return egId === cleanG || egId.includes(cleanG) || cleanG.includes(egId);
+    });
+
+    if (gradeStudents.length > 0) {
+      let sKey = gradeStudents[0].studentCode || gradeStudents[0].dni;
+      const nameLow = (gradeStudents[0].studentName || "").toLowerCase();
+      if (nameLow.includes("mendez") || nameLow.includes("méndez")) sKey = "mendez";
+      else if (nameLow.includes("benitez") || nameLow.includes("benítez")) sKey = "benitez";
+      else if (nameLow.includes("albujar") || nameLow.includes("albújar")) sKey = "albujar";
+      this.store.state.selectedBoletaStudent = sKey;
+    }
+
     this.store.saveState();
     this.render();
   }

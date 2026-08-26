@@ -5426,6 +5426,97 @@ CREATE TABLE tb_cuadernos_qr (
     this.render();
   }
 
+  // Cambiar Grado Seleccionado en el Registro de Calificaciones
+  changeGradingGrade(gradeId) {
+    this.store.state.selectedGradingGrade = gradeId;
+    
+    // Adaptar automáticamente el catálogo de cursos al nuevo grado
+    const courses = (this.store && typeof this.store.getStudentBoletaCoursesCatalog === "function")
+      ? this.store.getStudentBoletaCoursesCatalog(gradeId)
+      : [];
+
+    const keyMap = {
+      "Aritmética": "aritmetica",
+      "Álgebra": "algebra",
+      "Geometría": "geometria",
+      "Trigonometría": "trigonometria",
+      "Razonamiento Matemático": "raz_matematico",
+      "Lenguaje y Gramática": "lenguaje",
+      "Lenguaje": "lenguaje",
+      "Literatura Universal": "literatura",
+      "Literatura": "literatura",
+      "Razonamiento Verbal": "raz_verbal",
+      "Biología & Anatomía": "biologia",
+      "Biología": "biologia",
+      "Física Elemental": "fisica",
+      "Física": "fisica",
+      "Química Inorgánica": "quimica",
+      "Química": "quimica",
+      "Historia del Perú": "historia_peru",
+      "Historia Universal": "historia_universal",
+      "Geografía & Economía": "geografia",
+      "Geografía": "geografia",
+      "Filosofía": "filosofia",
+      "Educación Cívica (DPCC)": "civica",
+      "Cívica": "civica",
+      "Psicología": "psicologia",
+      "Computación & Robótica": "computacion",
+      "Computación (EPT)": "computacion",
+      "Gestión Empresarial & Emprendimiento": "gestion_empresarial",
+      "Gestión Empresarial": "gestion_empresarial",
+      "Inglés Institucional (B2/C1)": "ingles",
+      "Inglés Avanzado": "ingles",
+      "Arte y Cultura": "arte_cultura",
+      "Educación Religiosa (Valores y Lid.)": "religion",
+      "Educación Física & Deporte": "educ_fisica",
+      "Conducta y Disciplina": "conducta",
+      "Matemática & Aritmética": "aritmetica",
+      "Álgebra Elemental": "algebra",
+      "Geometría Práctica": "geometria",
+      "Comunicación Integral": "lenguaje",
+      "Lenguaje & Caligrafía": "lenguaje",
+      "Plan Lector & Literatura": "literatura",
+      "Ciencia y Tecnología": "biologia",
+      "Personal Social & Cívica": "civica",
+      "Computación & Informática": "computacion",
+      "Inglés Institucional": "ingles",
+      "Educación Religiosa & Valores": "religion",
+      "Tutoría & Convivencia Escolar": "conducta"
+    };
+
+    if (courses && courses.length > 0) {
+      const currentSub = this.store.state.selectedGradingSubject;
+      const exists = courses.some(c => {
+        const k = keyMap[c.name] || c.id.toLowerCase().replace(/[^a-z0-9]/g, '_');
+        return k === currentSub;
+      });
+      if (!exists) {
+        const firstKey = keyMap[courses[0].name] || courses[0].id.toLowerCase().replace(/[^a-z0-9]/g, '_');
+        this.store.state.selectedGradingSubject = firstKey;
+      }
+    }
+
+    // Ajustar estudiante por defecto para la pestaña de tutoría
+    const enrollments = this.store.getEnrollments();
+    const cleanG = gradeId.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const gradeStudents = enrollments.filter(e => {
+      const egId = (e.gradeId || this.store.resolveStudentGradeId(e.grade) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return egId === cleanG || egId.includes(cleanG) || cleanG.includes(egId);
+    });
+
+    if (gradeStudents.length > 0) {
+      let sKey = gradeStudents[0].studentCode || gradeStudents[0].dni;
+      const nameLow = (gradeStudents[0].studentName || "").toLowerCase();
+      if (nameLow.includes("mendez") || nameLow.includes("méndez")) sKey = "mendez";
+      else if (nameLow.includes("benitez") || nameLow.includes("benítez")) sKey = "benitez";
+      else if (nameLow.includes("albujar") || nameLow.includes("albújar")) sKey = "albujar";
+      this.store.state.selectedBoletaStudent = sKey;
+    }
+
+    this.store.saveState();
+    this.render();
+  }
+
   // Cambiar Asignatura Activa para Calificar (Docente de Área)
   changeSelectedGradingSubject(subjectKey) {
     this.store.state.selectedGradingSubject = subjectKey;

@@ -2487,12 +2487,22 @@ const Components = {
     }
 
     const activeTab = state.activeGradesTab || "subject";
-    const selectedStudentKey = state.selectedBoletaStudent || "mendez";
-    const allBoletas = state.boletaData || initialData.boletaData;
-    
-    // Lista oficial y dinámica de asignaturas y sus docentes reales en la Base de Datos
+    const allBoletas = state.boletaData || initialData.boletaData || {};
+    const selectedGradingGrade = state.selectedGradingGrade || "4sec";
+    const cleanSelectedGrade = selectedGradingGrade.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    const gradesCatalog = (state.gradesCatalog && state.gradesCatalog.length > 0)
+      ? state.gradesCatalog
+      : ((initialData && initialData.gradesCatalog) || []);
+
+    const currentGradeObj = gradesCatalog.find(g => {
+      const gid = (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return gid === cleanSelectedGrade || gid.includes(cleanSelectedGrade) || cleanSelectedGrade.includes(gid);
+    }) || { id: selectedGradingGrade, label: "4° de Secundaria", level: "Secundaria", tutor: "Prof. Roberto Silva" };
+
+    // Lista oficial y dinámica de asignaturas y sus docentes reales en la Base de Datos según el grado seleccionado
     const boletaCourses = (window.appStore && typeof window.appStore.getStudentBoletaCoursesCatalog === "function")
-      ? window.appStore.getStudentBoletaCoursesCatalog("4sec")
+      ? window.appStore.getStudentBoletaCoursesCatalog(selectedGradingGrade)
       : [];
 
     const keyMap = {
@@ -2529,7 +2539,29 @@ const Components = {
       "Arte y Cultura": "arte_cultura",
       "Educación Religiosa (Valores y Lid.)": "religion",
       "Educación Física & Deporte": "educ_fisica",
-      "Conducta y Disciplina": "conducta"
+      "Conducta y Disciplina": "conducta",
+      "Matemática & Aritmética": "aritmetica",
+      "Álgebra Elemental": "algebra",
+      "Geometría Práctica": "geometria",
+      "Comunicación Integral": "lenguaje",
+      "Lenguaje & Caligrafía": "lenguaje",
+      "Plan Lector & Literatura": "literatura",
+      "Ciencia y Tecnología": "biologia",
+      "Personal Social & Cívica": "civica",
+      "Computación & Informática": "computacion",
+      "Inglés Institucional": "ingles",
+      "Educación Religiosa & Valores": "religion",
+      "Tutoría & Convivencia Escolar": "conducta",
+      "Matemática Temprana & Lógica": "aritmetica",
+      "Comunicación & Grafomotricidad": "lenguaje",
+      "Plan Lector / Cuentos Infantiles": "literatura",
+      "Ciencia y Ambiente / Exploración": "biologia",
+      "Personal Social & Convivencia": "civica",
+      "Psicomotricidad & Juego": "educ_fisica",
+      "Inglés Inicial (Vocabulario)": "ingles",
+      "Arte, Música y Mini-Manualidades": "arte_cultura",
+      "Educación en Valores & Religión": "religion",
+      "Hábitos, Disciplina y Tutoría": "conducta"
     };
 
     const subjectDirectory = boletaCourses.map(c => {
@@ -2557,15 +2589,39 @@ const Components = {
       }
     }
 
-    // Directorio de alumnos del aula (4to Sec 'A')
-    const classroomStudents = [
-      { key: "mendez", name: "MÉNDEZ FLORES, SOFÍA", dni: "74891230", code: "EST-2026-042" },
-      { key: "benitez", name: "BENÍTEZ RUIZ, CARLOS", dni: "74891255", code: "EST-2026-011" },
-      { key: "albujar", name: "ALBUJAR ZEGARRA, MARINA DEL CARMEN", dni: "74891289", code: "EST-2026-089" }
-    ];
-
     const currentSubject = subjectDirectory.find(s => s.key === selectedSubjectKey) || subjectDirectory[0] || { name: "Aritmética", teacher: "Prof. Roberto Silva", area: "Matemática", key: "aritmetica" };
-    const tutorStudentData = allBoletas[selectedStudentKey] || allBoletas.mendez;
+
+    // Filtrar única y estrictamente los estudiantes matriculados en el grado seleccionado
+    const allEnrollments = (window.appStore && typeof window.appStore.getEnrollments === "function")
+      ? window.appStore.getEnrollments()
+      : [];
+
+    const classroomStudents = allEnrollments.filter(e => {
+      const egId = (e.gradeId || (window.appStore && window.appStore.resolveStudentGradeId(e.grade)) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return egId === cleanSelectedGrade || egId.includes(cleanSelectedGrade) || cleanSelectedGrade.includes(egId);
+    }).map(e => {
+      let key = e.studentCode || e.dni || e.id;
+      const nameLow = (e.studentName || "").toLowerCase();
+      if (nameLow.includes("mendez") || nameLow.includes("méndez")) key = "mendez";
+      else if (nameLow.includes("benitez") || nameLow.includes("benítez")) key = "benitez";
+      else if (nameLow.includes("albujar") || nameLow.includes("albújar")) key = "albujar";
+
+      return {
+        key: key,
+        studentCode: e.studentCode || e.dni,
+        name: e.studentName,
+        dni: e.dni,
+        grade: e.grade || currentGradeObj.label,
+        gradeId: e.gradeId || selectedGradingGrade
+      };
+    });
+
+    let selectedStudentKey = state.selectedBoletaStudent;
+    if (!selectedStudentKey || !classroomStudents.some(s => s.key === selectedStudentKey)) {
+      selectedStudentKey = classroomStudents.length > 0 ? classroomStudents[0].key : "mendez";
+    }
+
+    const tutorStudentData = allBoletas[selectedStudentKey] || (classroomStudents.find(s => s.key === selectedStudentKey) ? { name: classroomStudents.find(s => s.key === selectedStudentKey).name } : allBoletas.mendez) || {};
     const tutorApp = tutorStudentData.appreciations || {};
     const tutorAtt = tutorStudentData.attendance || {};
     const tutorPc = tutorStudentData.parentCriteria || {};
@@ -2582,7 +2638,7 @@ const Components = {
                 <span class="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-700);">Periodo Lectivo 2026</span>
               </div>
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
-                I.E.P. "El Educador" • Cada docente ingresa sus cursos y el Tutor evalúa asistencias, apreciaciones y padres de familia para la boleta oficial.
+                I.E.P. "El Educador" • Selección y registro filtrado por <strong>Grado Escolar</strong> y <strong>Curso</strong>.
               </p>
             </div>
             
@@ -2594,7 +2650,7 @@ const Components = {
           <!-- Selector de Pestañas / Modalidades -->
           <div style="display: flex; border-top: 1px solid var(--border-subtle); background: var(--bg-surface-subtle); padding: 6px 12px; gap: 8px; flex-wrap: wrap;">
             <button class="btn btn-sm ${activeTab === 'subject' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesActiveTab('subject')" style="font-weight: 800;">
-              👨‍1. Carga por Docente de Curso
+              👨‍1. Carga por Docente de Curso (Grado & Asignatura)
             </button>
             <button class="btn btn-sm ${activeTab === 'tutor' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesActiveTab('tutor')" style="font-weight: 800;">
               2. Módulo de Tutoría (Asistencia, Apreciaciones y Familias)
@@ -2612,26 +2668,59 @@ const Components = {
           <div class="card" style="margin-bottom: var(--space-6);">
             <div class="card-header" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap; gap: 14px;">
               
-              <!-- Selector de Asignatura -->
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 13px; font-weight: 800; color: var(--color-navy-900);">Asignatura a Calificar:</span>
-                <select class="form-control" style="font-weight: bold; width: auto; font-size: 13px; min-width: 260px;" onchange="window.app.changeSelectedGradingSubject(this.value)">
-                  ${subjectDirectory.map(s => {
-                    const isMyCourse = isDocente && currentUser && s.teacher && s.teacher.toLowerCase().includes((currentUser.name || "").toLowerCase());
-                    return `
-                      <option value="${s.key}" ${s.key === selectedSubjectKey ? 'selected' : ''}>
-                        ${s.icon} ${s.name} • (${s.teacher})${isMyCourse ? ' ★ (Mi Curso)' : ''}
-                      </option>
-                    `;
-                  }).join('')}
-                </select>
+              <!-- Selectores de Grado y Asignatura -->
+              <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                
+                <!-- 1. Selector de Grado Escolar -->
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); white-space: nowrap;">🏫 Grado Escolar:</span>
+                  <select class="form-control" style="font-weight: bold; width: auto; font-size: 13px; min-width: 220px; background: #fffbeb; border-color: #f59e0b;" onchange="window.app.changeGradingGrade(this.value)">
+                    <optgroup label="--- NIVEL INICIAL ---">
+                      <option value="ini-3" ${cleanSelectedGrade === 'ini3' || cleanSelectedGrade === 'ini-3' ? 'selected' : ''}>Inicial 3 Años</option>
+                      <option value="ini-4" ${cleanSelectedGrade === 'ini4' || cleanSelectedGrade === 'ini-4' ? 'selected' : ''}>Inicial 4 Años</option>
+                      <option value="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
+                    </optgroup>
+                    <optgroup label="--- NIVEL PRIMARIA ---">
+                      <option value="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1° de Primaria (1er Grado)</option>
+                      <option value="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2° de Primaria (2do Grado)</option>
+                      <option value="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3° de Primaria (3er Grado)</option>
+                      <option value="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4° de Primaria (4to Grado)</option>
+                      <option value="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5° de Primaria (5to Grado)</option>
+                      <option value="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6° de Primaria (6to Grado)</option>
+                    </optgroup>
+                    <optgroup label="--- NIVEL SECUNDARIA ---">
+                      <option value="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1° de Secundaria (1er Año)</option>
+                      <option value="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2° de Secundaria (2do Año)</option>
+                      <option value="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3° de Secundaria (3er Año)</option>
+                      <option value="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4° de Secundaria (4to Año)</option>
+                      <option value="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5° de Secundaria (5to Año)</option>
+                    </optgroup>
+                  </select>
+                </div>
+
+                <!-- 2. Selector de Asignatura / Curso -->
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); white-space: nowrap;">📚 Asignatura / Curso:</span>
+                  <select class="form-control" style="font-weight: bold; width: auto; font-size: 13px; min-width: 260px;" onchange="window.app.changeSelectedGradingSubject(this.value)">
+                    ${subjectDirectory.map(s => {
+                      const isMyCourse = isDocente && currentUser && s.teacher && s.teacher.toLowerCase().includes((currentUser.name || "").toLowerCase());
+                      return `
+                        <option value="${s.key}" ${s.key === selectedSubjectKey ? 'selected' : ''}>
+                          ${s.icon} ${s.name} • (${s.teacher})${isMyCourse ? ' ★ (Mi Curso)' : ''}
+                        </option>
+                      `;
+                    }).join('')}
+                  </select>
+                </div>
+
               </div>
 
-              <!-- Info del Curso & Aula -->
-              <div style="font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 14px;">
+              <!-- Info del Curso & Aula Seleccionada -->
+              <div style="font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 4px;">
+                <span><strong>Grado:</strong> <span style="color: var(--color-navy-900); font-weight: bold;">${currentGradeObj.label || selectedGradingGrade}</span></span>
                 <span><strong>Docente Responsable:</strong> <span style="color: var(--color-navy-900); font-weight: bold;">${currentSubject.teacher}</span></span>
                 <span><strong>Área Curricular:</strong> ${currentSubject.area}</span>
-                <span><strong>Grado:</strong> 4to de Secundaria</span>
+                <span class="status-badge status-primary" style="font-size: 11px;">👥 ${classroomStudents.length} Alumno(s) en este Grado</span>
               </div>
 
             </div>
@@ -2639,7 +2728,7 @@ const Components = {
             <!-- Formulario de Calificaciones para los Alumnos del Aula en este Curso -->
             <form onsubmit="window.app.handleSaveSubjectGrades(event, '${selectedSubjectKey}')" style="padding: 16px;">
               <div style="margin-bottom: 12px; font-size: 12px; color: #475569;">
-                Ingrese las calificaciones para los estudiantes del aula en la materia <strong>${currentSubject.name}</strong>. Acepta letras (<strong>AD, A, B, C</strong>) o números (<strong>0-20</strong>).
+                Mostrando únicamente estudiantes matriculados en <strong>${currentGradeObj.label || selectedGradingGrade}</strong> para la materia <strong>${currentSubject.name}</strong>. Acepta letras (<strong>AD, A, B, C</strong>) o números (<strong>0-20</strong>).
               </div>
 
               <div class="table-container">
@@ -2647,7 +2736,7 @@ const Components = {
                   <thead>
                     <tr style="background: var(--color-navy-900); color: white;">
                       <th style="width: 15%;">Código / DNI</th>
-                      <th style="width: 35%;">Apellidos y Nombres</th>
+                      <th style="width: 35%;">Apellidos y Nombres (Solo ${currentGradeObj.label || selectedGradingGrade})</th>
                       <th style="width: 12%; text-align:center;">I BIM</th>
                       <th style="width: 12%; text-align:center;">II BIM</th>
                       <th style="width: 12%; text-align:center;">III BIM</th>
@@ -2655,12 +2744,20 @@ const Components = {
                     </tr>
                   </thead>
                   <tbody>
-                    ${classroomStudents.map(st => {
-                      const studentBoleta = allBoletas[st.key] || {};
+                    ${classroomStudents.length === 0 ? `
+                      <tr>
+                        <td colspan="6" style="text-align: center; padding: 36px 16px; color: #64748b; font-size: 13px;">
+                          <div style="font-size: 28px; margin-bottom: 6px;">📂</div>
+                          <strong>No hay estudiantes matriculados en ${currentGradeObj.label || selectedGradingGrade}.</strong><br>
+                          <span style="font-size: 11.5px; opacity: 0.85;">Puede registrar estudiantes en la pestaña "Gestión de Perfiles & Cuentas" o cambiar de grado arriba.</span>
+                        </td>
+                      </tr>
+                    ` : classroomStudents.map(st => {
+                      const studentBoleta = allBoletas[st.key] || allBoletas[st.studentCode] || {};
                       const studentGrades = (studentBoleta.grades && studentBoleta.grades[selectedSubjectKey]) || { b1: "", b2: "", b3: "", b4: "" };
                       return `
                         <tr>
-                          <td><code>${st.dni}</code></td>
+                          <td><code>${st.dni || st.studentCode}</code></td>
                           <td><strong>${st.name}</strong></td>
                           <td style="text-align:center;">
                             <input type="text" class="form-control" name="grade_${st.key}_b1" value="${studentGrades.b1 || ''}" placeholder="-" style="width: 65px; text-align:center; font-weight:bold; text-transform:uppercase; margin: 0 auto;" maxlength="4" />
@@ -2681,11 +2778,13 @@ const Components = {
                 </table>
               </div>
 
-              <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 16px;">
-                <button type="submit" class="btn btn-navy" style="font-weight: 800; padding: 10px 22px;">
-                  💾 Guardar Notas de ${currentSubject.name} (${currentSubject.teacher})
-                </button>
-              </div>
+              ${classroomStudents.length > 0 ? `
+                <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 16px;">
+                  <button type="submit" class="btn btn-navy" style="font-weight: 800; padding: 10px 22px;">
+                    💾 Guardar Notas de ${currentSubject.name} (${currentGradeObj.label || selectedGradingGrade})
+                  </button>
+                </div>
+              ` : ''}
             </form>
           </div>
         ` : ''}
@@ -2699,21 +2798,47 @@ const Components = {
               <div>
                 <h3 class="card-title" style="color: #1e3a8a;">Módulo de Tutoría y Convivencia Escolar</h3>
                 <p style="font-size: 12px; color: #1e40af; margin-top: 2px;">
-                  <strong>Tutor a Cargo:</strong> Prof. Roberto Silva • <strong>Aula:</strong> 4to de Secundaria
+                  <strong>Tutor a Cargo:</strong> ${currentGradeObj.tutor || 'Docente Tutor'} • <strong>Aula:</strong> ${currentGradeObj.label || selectedGradingGrade}
                 </p>
               </div>
 
-              <!-- Selector de Alumno a Evaluar por el Tutor y Botón de Stickers -->
-              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                <span style="font-size: 12px; font-weight: 800; color: #1e3a8a;">Estudiante:</span>
-                <select class="form-control" style="font-weight: bold; width: auto; font-size: 12px;" onchange="window.app.changeBoletaStudent(this.value)">
-                  <option value="mendez" ${selectedStudentKey === 'mendez' ? 'selected' : ''}>MÉNDEZ FLORES, SOFÍA</option>
-                  <option value="benitez" ${selectedStudentKey === 'benitez' ? 'selected' : ''}>BENÍTEZ RUIZ, CARLOS</option>
-                  <option value="albujar" ${selectedStudentKey === 'albujar' ? 'selected' : ''}>ALBUJAR ZEGARRA, MARINA DEL CARMEN</option>
-                </select>
-                <button type="button" class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${tutorStudentData.code || tutorStudentData.id || 'EST-2026-042'}')" style="font-weight: 900; font-size: 11.5px; padding: 6px 14px; border-radius: 16px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #0b132b;">
-                  ⚡ Stickers QR de Boleta
-                </button>
+              <!-- Selectores de Grado y Estudiante -->
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="font-size: 12px; font-weight: 800; color: #1e3a8a;">Grado:</span>
+                  <select class="form-control" style="font-weight: bold; width: auto; font-size: 12px;" onchange="window.app.changeGradingGrade(this.value)">
+                    <option value="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
+                    <option value="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1° de Primaria</option>
+                    <option value="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2° de Primaria</option>
+                    <option value="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3° de Primaria</option>
+                    <option value="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4° de Primaria</option>
+                    <option value="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5° de Primaria</option>
+                    <option value="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6° de Primaria</option>
+                    <option value="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1° de Secundaria</option>
+                    <option value="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2° de Secundaria</option>
+                    <option value="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3° de Secundaria</option>
+                    <option value="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4° de Secundaria</option>
+                    <option value="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5° de Secundaria</option>
+                  </select>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="font-size: 12px; font-weight: 800; color: #1e3a8a;">Estudiante:</span>
+                  <select class="form-control" style="font-weight: bold; width: auto; font-size: 12px; min-width: 200px;" onchange="window.app.changeBoletaStudent(this.value)">
+                    ${classroomStudents.length === 0 ? `
+                      <option value="">Sin estudiantes en este grado</option>
+                    ` : classroomStudents.map(st => `
+                      <option value="${st.key}" ${selectedStudentKey === st.key ? 'selected' : ''}>${st.name}</option>
+                    `).join('')}
+                  </select>
+                </div>
+
+                ${classroomStudents.length > 0 ? `
+                  <button type="button" class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${tutorStudentData.code || tutorStudentData.id || selectedStudentKey}')" style="font-weight: 900; font-size: 11.5px; padding: 6px 14px; border-radius: 16px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #0b132b;">
+                    ⚡ Stickers QR de Boleta
+                  </button>
+                ` : ''}
               </div>
             </div>
 
@@ -2824,11 +2949,13 @@ const Components = {
                 </div>
               </div>
 
-              <div style="display: flex; justify-content: flex-end; gap: 12px;">
-                <button type="submit" class="btn btn-red" style="font-weight: 800; padding: 12px 24px;">
-                  💾 Guardar Evaluación de Tutoría de ${tutorStudentData.name}
-                </button>
-              </div>
+              ${classroomStudents.length > 0 ? `
+                <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                  <button type="submit" class="btn btn-red" style="font-weight: 800; padding: 12px 24px;">
+                    💾 Guardar Evaluación de Tutoría de ${tutorStudentData.name || 'Estudiante'}
+                  </button>
+                </div>
+              ` : ''}
 
             </form>
           </div>
@@ -2839,12 +2966,31 @@ const Components = {
                MODO 3: SÁBANA GENERAL Y ESTADO DE AVANCE DE DOCENTES
                ===================================================================== -->
           <div class="card" style="margin-bottom: var(--space-6);">
-            <div class="card-header">
+            <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
               <div>
-                <h3 class="card-title">Sábana Consolidada de Calificaciones - 4to Sec 'A'</h3>
+                <h3 class="card-title">Sábana Consolidada de Calificaciones - ${currentGradeObj.label || selectedGradingGrade}</h3>
                 <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
-                  Consolidado automático con las notas subidas por cada docente de área y las evaluaciones del tutor.
+                  Consolidado automático de calificaciones de los estudiantes matriculados en <strong>${currentGradeObj.label || selectedGradingGrade}</strong>.
                 </p>
+              </div>
+
+              <!-- Selector de Grado para Sábana -->
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Grado:</span>
+                <select class="form-control" style="font-weight: bold; width: auto; font-size: 12px;" onchange="window.app.changeGradingGrade(this.value)">
+                  <option value="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
+                  <option value="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1° de Primaria</option>
+                  <option value="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2° de Primaria</option>
+                  <option value="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3° de Primaria</option>
+                  <option value="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4° de Primaria</option>
+                  <option value="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5° de Primaria</option>
+                  <option value="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6° de Primaria</option>
+                  <option value="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1° de Secundaria</option>
+                  <option value="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2° de Secundaria</option>
+                  <option value="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3° de Secundaria</option>
+                  <option value="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4° de Secundaria</option>
+                  <option value="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5° de Secundaria</option>
+                </select>
               </div>
             </div>
 
@@ -2854,28 +3000,32 @@ const Components = {
                   <tr style="background: var(--color-navy-900); color: white;">
                     <th>Asignatura</th>
                     <th>Docente Responsable</th>
-                    <th style="text-align:center;">Sofía Méndez</th>
-                    <th style="text-align:center;">Carlos Benítez</th>
-                    <th style="text-align:center;">Marina Albujar</th>
+                    ${classroomStudents.map(st => `
+                      <th style="text-align:center; font-size: 11px;">${st.name.split(',')[0]}</th>
+                    `).join('')}
                     <th style="text-align:center;">Estado</th>
                   </tr>
                 </thead>
                 <tbody>
-                  ${subjectDirectory.map(s => {
-                    const mVal = (allBoletas.mendez?.grades && allBoletas.mendez.grades[s.key]?.b1) || "--";
-                    const bVal = (allBoletas.benitez?.grades && allBoletas.benitez.grades[s.key]?.b1) || "--";
-                    const aVal = (allBoletas.albujar?.grades && allBoletas.albujar.grades[s.key]?.b1) || "--";
-                    const hasAll = mVal !== "--" && bVal !== "--";
+                  ${classroomStudents.length === 0 ? `
+                    <tr>
+                      <td colspan="4" style="text-align: center; padding: 24px; color: #64748b;">
+                        No hay estudiantes matriculados en este grado.
+                      </td>
+                    </tr>
+                  ` : subjectDirectory.map(s => {
                     return `
                       <tr>
                         <td><strong>${s.icon} ${s.name}</strong></td>
                         <td style="font-size: 12px;">${s.teacher}</td>
-                        <td style="text-align:center; font-weight:bold; color:var(--color-navy-900);">${mVal}</td>
-                        <td style="text-align:center; font-weight:bold; color:var(--color-navy-900);">${bVal}</td>
-                        <td style="text-align:center; font-weight:bold; color:var(--color-navy-900);">${aVal}</td>
+                        ${classroomStudents.map(st => {
+                          const stBoleta = allBoletas[st.key] || allBoletas[st.studentCode] || {};
+                          const grVal = (stBoleta.grades && stBoleta.grades[s.key]?.b1) || "--";
+                          return `<td style="text-align:center; font-weight:bold; color:var(--color-navy-900);">${grVal}</td>`;
+                        }).join('')}
                         <td style="text-align:center;">
-                          <span class="status-badge ${hasAll ? 'status-approved' : 'status-pending'}">
-                            ${hasAll ? '<span class="status-dot-green"></span> Completo' : '<span class="status-dot-yellow"></span> En Proceso'}
+                          <span class="status-badge status-approved">
+                            <span class="status-dot-green"></span> Registrado
                           </span>
                         </td>
                       </tr>
@@ -2887,7 +3037,7 @@ const Components = {
 
             <div style="padding: 16px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
               <span style="font-size: 13px; font-weight: 700; color: #1e293b;">
-                El sistema ya tiene consolidadas todas las notas para la emisión oficial.
+                Consolidado oficial de ${currentGradeObj.label || selectedGradingGrade}.
               </span>
               <button class="btn btn-navy" onclick="window.app.navigate('boleta')" style="font-weight: 800;">
                 Generar Boleta Oficial MINEDU (PDF)

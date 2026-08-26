@@ -1406,7 +1406,29 @@ class IntranetStore {
   }
 
   getStudentBoletaCoursesCatalog(gradeId = "4sec") {
-    const isPrimaria = String(gradeId).toLowerCase().includes("prim") || String(gradeId).toLowerCase().includes("pri");
+    const cleanG = String(gradeId || "").toLowerCase();
+    const isInicial = cleanG.includes("ini") || cleanG.includes("3a") || cleanG.includes("4a") || cleanG.includes("5a") || cleanG.includes("kinder");
+    const isPrimaria = !isInicial && (cleanG.includes("prim") || cleanG.includes("pri"));
+
+    if (isInicial) {
+      const inicialCourses = [
+        { id: "MAT", name: "Matemática Temprana & Lógica", area: "Matemática", icon: "🔢" },
+        { id: "COM", name: "Comunicación & Grafomotricidad", area: "Comunicación", icon: "📖" },
+        { id: "PL", name: "Plan Lector / Cuentos Infantiles", area: "Comunicación", icon: "📚" },
+        { id: "CTA", name: "Ciencia y Ambiente / Exploración", area: "Ciencia y Tecnología", icon: "🔬" },
+        { id: "PS", name: "Personal Social & Convivencia", area: "Personal Social", icon: "🏛️" },
+        { id: "PSICO", name: "Psicomotricidad & Juego", area: "Desarrollo Corporal", icon: "⚽" },
+        { id: "ING", name: "Inglés Inicial (Vocabulario)", area: "Idiomas", icon: "🇬🇧" },
+        { id: "ARTE", name: "Arte, Música y Mini-Manualidades", area: "Arte", icon: "🎨" },
+        { id: "REL", name: "Educación en Valores & Religión", area: "Valores", icon: "🕊️" },
+        { id: "HAB", name: "Hábitos, Disciplina y Tutoría", area: "Tutoría", icon: "★" }
+      ];
+
+      return inicialCourses.map(c => ({
+        ...c,
+        teacher: this.getTeacherForCourse(c.name, gradeId)
+      }));
+    }
 
     if (isPrimaria) {
       const primaryCourses = [
