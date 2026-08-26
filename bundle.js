@@ -1,3 +1,4 @@
+/* === data.js === */
 /**
  * Datos Iniciales del Sistema - Institución Educativa Privada "EL EDUCADOR" (S.J.L.)
  * "21 años dejando huellas" • UGEL 05
@@ -2209,6 +2210,7 @@ if (window.initialData && window.initialData.schedules) {
 }
 
 ;
+/* === store.js === */
 /**
  * Gestor de Estado y Base de Datos Central Sincronizada (v8.0 - Firebase Cloud Realtime Engine)
  */
@@ -3452,44 +3454,64 @@ class IntranetStore {
     this.saveState();
   }
 
-  getNotebookSubjectsCatalog(gradeId = "4sec") {
+  getStudentBoletaCoursesCatalog(gradeId = "4sec") {
+    const isPrimaria = String(gradeId).toLowerCase().includes("prim") || String(gradeId).toLowerCase().includes("pri");
+
+    if (isPrimaria) {
+      return [
+        { id: "MAT", name: "Matemática & Aritmética", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "🔢" },
+        { id: "ALG", name: "Álgebra Elemental", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📐" },
+        { id: "GEOM", name: "Geometría Práctica", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📏" },
+        { id: "RM", name: "Razonamiento Matemático", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "🧮" },
+        { id: "COM", name: "Comunicación Integral", teacher: "Miss Julisa Magali Arroyo", area: "Comunicación", icon: "📖" },
+        { id: "LENG", name: "Lenguaje & Caligrafía", teacher: "Miss Julisa Magali Arroyo", area: "Comunicación", icon: "✍️" },
+        { id: "PL", name: "Plan Lector & Literatura", teacher: "Miss Julisa Magali Arroyo", area: "Comunicación", icon: "📚" },
+        { id: "RV", name: "Razonamiento Verbal", teacher: "Miss Julisa Magali Arroyo", area: "Comunicación", icon: "✏️" },
+        { id: "CTA", name: "Ciencia y Tecnología", teacher: "Miss Leyli Graciela Reyes", area: "Ciencia y Tecnología", icon: "🔬" },
+        { id: "BIO", name: "Biología & Anatomía", teacher: "Miss Leyli Graciela Reyes", area: "Ciencia y Tecnología", icon: "🧬" },
+        { id: "PS", name: "Personal Social & Cívica", teacher: "Miss Julisa Magali Arroyo", area: "Personal Social", icon: "🏛️" },
+        { id: "HP", name: "Historia del Perú", teacher: "Prof. Javier Vega", area: "Personal Social", icon: "🇵🇪" },
+        { id: "GEO", name: "Geografía del Perú", teacher: "Prof. Javier Vega", area: "Personal Social", icon: "🌎" },
+        { id: "COMP", name: "Computación & Informática", teacher: "Prof. Fernando Rojas", area: "EPT / Tecnología", icon: "💻" },
+        { id: "ING", name: "Inglés Institucional", teacher: "Miss Andrea Ramos", area: "Idiomas", icon: "🇬🇧" },
+        { id: "ARTE", name: "Arte y Cultura", teacher: "Miss Claudia Mendoza", area: "Arte", icon: "🎨" },
+        { id: "REL", name: "Educación Religiosa & Valores", teacher: "Prof. Manuel Soto", area: "Valores", icon: "🕊️" },
+        { id: "EDFIS", name: "Educación Física & Deporte", teacher: "Prof. Dante Morales", area: "Deporte", icon: "⚽" },
+        { id: "TUT", name: "Tutoría & Convivencia Escolar", teacher: "Miss Julisa Magali Arroyo", area: "Tutoría", icon: "★" }
+      ];
+    }
+
+    // Secundaria: Cursos Oficiales de la Boleta de Notas
     return [
-      { id: "MAT", name: "Matemática Avanzada (Álgebra / Geometría)", teacher: "Prof. Roberto Silva", area: "Matemática" },
-      { id: "COM", name: "Comunicación & Literatura", teacher: "Miss María Daysi Reyes Milla", area: "Comunicación" },
-      { id: "CTA", name: "Ciencia y Tecnología (Física / Química)", teacher: "Miss Leyli Graciela Reyes Cerquen", area: "Ciencias" },
-      { id: "SOC", name: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", area: "Sociales" },
-      { id: "ING", name: "Inglés Institucional (B2/C1)", teacher: "Miss Andrea Ramos", area: "Idiomas" },
-      { id: "EPT", name: "EPT (Computación & Robótica)", teacher: "Prof. Fernando Rojas", area: "Tecnología" },
-      { id: "DPCC", name: "Desarrollo Personal, Ciudadanía y Cívica", teacher: "Miss Julisa Magali Arroyo Araujo", area: "Personal" },
-      { id: "ARTE", name: "Arte y Cultura", teacher: "Miss Claudia Mendoza", area: "Arte" }
+      { id: "ARIT", name: "Aritmética", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "🔢" },
+      { id: "ALG", name: "Álgebra", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📐" },
+      { id: "GEOM", name: "Geometría", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📏" },
+      { id: "TRIG", name: "Trigonometría", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📈" },
+      { id: "RM", name: "Razonamiento Matemático", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "🧮" },
+      { id: "LENG", name: "Lenguaje y Gramática", teacher: "Miss María Daysi Reyes Milla", area: "Comunicación", icon: "✍️" },
+      { id: "LIT", name: "Literatura Universal", teacher: "Miss María Daysi Reyes Milla", area: "Comunicación", icon: "📚" },
+      { id: "RV", name: "Razonamiento Verbal", teacher: "Miss María Daysi Reyes Milla", area: "Comunicación", icon: "✏️" },
+      { id: "BIO", name: "Biología & Anatomía", teacher: "Miss Leyli Graciela Reyes Cerquen", area: "Ciencia y Tecnología", icon: "🧬" },
+      { id: "FIS", name: "Física Elemental", teacher: "Miss Leyli Graciela Reyes Cerquen", area: "Ciencia y Tecnología", icon: "⚡" },
+      { id: "QUIM", name: "Química Inorgánica", teacher: "Miss Leyli Graciela Reyes Cerquen", area: "Ciencia y Tecnología", icon: "🧪" },
+      { id: "HP", name: "Historia del Perú", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "🇵🇪" },
+      { id: "HU", name: "Historia Universal", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "📜" },
+      { id: "GEO", name: "Geografía & Economía", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "🌎" },
+      { id: "FILO", name: "Filosofía", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "🏛️" },
+      { id: "CIV", name: "Educación Cívica (DPCC)", teacher: "Miss Julisa Magali Arroyo Araujo", area: "DPCC", icon: "⚖️" },
+      { id: "PSIC", name: "Psicología", teacher: "Miss Julisa Magali Arroyo Araujo", area: "DPCC", icon: "🧠" },
+      { id: "COMP", name: "Computación & Robótica", teacher: "Prof. Fernando Rojas", area: "EPT", icon: "💻" },
+      { id: "GEST", name: "Gestión Empresarial & Emprendimiento", teacher: "Prof. Fernando Rojas", area: "EPT", icon: "💼" },
+      { id: "ING", name: "Inglés Institucional (B2/C1)", teacher: "Miss Andrea Ramos", area: "Idiomas", icon: "🇬🇧" },
+      { id: "ARTE", name: "Arte y Cultura", teacher: "Miss Claudia Mendoza", area: "Arte", icon: "🎨" },
+      { id: "REL", name: "Educación Religiosa (Valores y Lid.)", teacher: "Prof. Manuel Soto", area: "Valores", icon: "🕊️" },
+      { id: "EDFIS", name: "Educación Física & Deporte", teacher: "Prof. Dante Morales", area: "Deporte", icon: "⚽" },
+      { id: "COND", name: "Conducta y Disciplina", teacher: "Prof. Roberto Silva (Tutor)", area: "Tutoría", icon: "★" }
     ];
   }
 
-  getStudentBoletaCoursesCatalog(gradeId = "4sec") {
-    return [
-      { id: "ARIT", name: "Aritmética", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "" },
-      { id: "ALG", name: "Álgebra", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "" },
-      { id: "GEOM", name: "Geometría", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "" },
-      { id: "TRIG", name: "Trigonometría", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "" },
-      { id: "RM", name: "Razonamiento Matemático", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "" },
-      { id: "LENG", name: "Lenguaje y Gramática", teacher: "Miss María Daysi Reyes Milla", area: "Comunicación", icon: "" },
-      { id: "LIT", name: "Literatura Universal", teacher: "Miss María Daysi Reyes Milla", area: "Comunicación", icon: "" },
-      { id: "RV", name: "Razonamiento Verbal", teacher: "Miss María Daysi Reyes Milla", area: "Comunicación", icon: "" },
-      { id: "BIO", name: "Biología & Anatomía", teacher: "Miss Leyli Graciela Reyes Cerquen", area: "Ciencia y Tecnología", icon: "🔬" },
-      { id: "FIS", name: "Física Elemental", teacher: "Miss Leyli Graciela Reyes Cerquen", area: "Ciencia y Tecnología", icon: "🔬" },
-      { id: "QUIM", name: "Química Inorgánica", teacher: "Miss Leyli Graciela Reyes Cerquen", area: "Ciencia y Tecnología", icon: "🔬" },
-      { id: "HP", name: "Historia del Perú", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "🌎" },
-      { id: "HU", name: "Historia Universal", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "🌎" },
-      { id: "GEO", name: "Geografía & Economía", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "🌎" },
-      { id: "CIV", name: "Educación Cívica & DPCC", teacher: "Miss Julisa Magali Arroyo Araujo", area: "Personal Social", icon: "⚖️" },
-      { id: "PSIC", name: "Psicología & Filosofía", teacher: "Prof. Manuel Soto", area: "Personal Social", icon: "🧠" },
-      { id: "COMP", name: "Computación & Robótica", teacher: "Prof. Fernando Rojas", area: "EPT", icon: "💻" },
-      { id: "GEST", name: "Gestión Empresarial & Emprendimiento", teacher: "Prof. Fernando Rojas", area: "EPT", icon: "" },
-      { id: "ING", name: "Inglés Institucional (B2/C1)", teacher: "Miss Andrea Ramos", area: "Idiomas", icon: "🇬🇧" },
-      { id: "ARTE", name: "Arte y Cultura", teacher: "Miss Claudia Mendoza", area: "Arte", icon: "🎨" },
-      { id: "REL", name: "Educación Religiosa", teacher: "Prof. Manuel Soto", area: "Valores", icon: "🕊️" },
-      { id: "EDFIS", name: "Educación Física & Deporte", teacher: "Prof. Dante Morales", area: "Deporte", icon: "⚽" }
-    ];
+  getNotebookSubjectsCatalog(gradeId = "4sec") {
+    return this.getStudentBoletaCoursesCatalog(gradeId);
   }
 
   getStudentAllBoletaStickersData(studentIdOrCode = "EST-2026-042") {
@@ -3516,13 +3538,14 @@ class IntranetStore {
         qrPayload: pipePayload,
         studentName: student.studentName,
         studentCode: student.studentCode || student.dni,
+        dni: student.dni,
         grade: student.grade || "4° de Secundaria",
         gradeId: student.gradeId || "4sec",
         course: c.name,
         courseId: c.id,
         teacher: c.teacher,
         area: c.area,
-        icon: c.icon
+        icon: c.icon || "📚"
       });
     });
 
@@ -3533,9 +3556,20 @@ class IntranetStore {
     };
   }
 
-  getNotebookStickersData(gradeId = "4sec", filterStudentId = "all") {
-    const enrollments = this.getEnrollments().filter(e => !gradeId || e.gradeId === gradeId || gradeId === "all");
-    const subjects = this.getNotebookSubjectsCatalog(gradeId);
+  getNotebookStickersData(gradeId = "4sec", filterStudentId = "all", filterCourse = "all") {
+    const allEnrollments = this.getEnrollments();
+    const cleanGradeId = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    let enrollments = allEnrollments.filter(e => {
+      if (!gradeId || gradeId === "all") return true;
+      const egId = (e.gradeId || this.resolveStudentGradeId(e.grade) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return egId === cleanGradeId || egId.includes(cleanGradeId) || cleanGradeId.includes(egId);
+    });
+
+    if (enrollments.length === 0 && allEnrollments.length > 0) {
+      enrollments = allEnrollments.slice(0, 3);
+    }
+
     const stickers = [];
 
     const studentsToProcess = (filterStudentId && filterStudentId !== "all") 
@@ -3543,7 +3577,13 @@ class IntranetStore {
       : enrollments;
 
     studentsToProcess.forEach(st => {
-      subjects.forEach(sb => {
+      // Usar el catálogo de cursos específico del grado del estudiante
+      const studentSubjects = this.getStudentBoletaCoursesCatalog(st.gradeId || gradeId);
+      const filteredSubjects = (filterCourse && filterCourse !== "all")
+        ? studentSubjects.filter(sb => sb.id === filterCourse || sb.name === filterCourse || sb.name.toLowerCase().includes(filterCourse.toLowerCase()))
+        : studentSubjects;
+
+      filteredSubjects.forEach(sb => {
         // Código formateado estandarizado: QR-NB|CodigoAlumno|NombreAlumno|Grado|Curso|Docente
         const rawCode = `QR-NB-${st.studentCode || st.dni}-${sb.id}`;
         const pipePayload = `QR-NB|${st.studentCode || st.dni}|${st.studentName}|${st.grade || '4° de Secundaria'}|${sb.name}|${sb.teacher}`;
@@ -3553,12 +3593,14 @@ class IntranetStore {
           qrPayload: pipePayload,
           studentName: st.studentName,
           studentCode: st.studentCode || st.dni,
+          dni: st.dni,
           grade: st.grade || "4° de Secundaria",
           gradeId: st.gradeId || "4sec",
           course: sb.name,
           courseId: sb.id,
           teacher: sb.teacher,
-          area: sb.area
+          area: sb.area,
+          icon: sb.icon || "📚"
         });
       });
     });
@@ -4807,6 +4849,7 @@ class IntranetStore {
 window.appStore = new IntranetStore();
 
 ;
+/* === components.js === */
 /**
  * Renderizador de Vistas y Componentes Dinámicos (v5.4 - Con Lector de Cámara QR Real para Celulares)
  */
@@ -6131,8 +6174,11 @@ const Components = {
       : (state.enrollments || initialData.enrollments);
 
     const catalogGrades = state.gradesCatalog || initialData.gradesCatalog;
+    const boletaCoursesCatalog = (window.appStore && typeof window.appStore.getStudentBoletaCoursesCatalog === "function")
+      ? window.appStore.getStudentBoletaCoursesCatalog(selectedGrade)
+      : [];
     const stickersData = (window.appStore && typeof window.appStore.getNotebookStickersData === "function")
-      ? window.appStore.getNotebookStickersData(selectedGrade, selectedStudentId)
+      ? window.appStore.getNotebookStickersData(selectedGrade, selectedStudentId, selectedCourseFilter)
       : [];
 
     // Filtrar revisiones para el reporte
@@ -6372,17 +6418,17 @@ const Components = {
               </div>
 
               <!-- Filtros para la Generación de Stickers y Selección de Formato -->
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; background: #ffffff; padding: 12px; border-radius: 10px; border: 1px solid #cbd5e1;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; background: #ffffff; padding: 12px; border-radius: 10px; border: 1px solid #cbd5e1;">
                 <div class="form-group" style="margin:0;">
-                  <label class="form-label" style="font-size: 11px;">1. Seleccionar Grado Escolar:</label>
-                  <select id="sticker-grade-select" class="form-control" onchange="window.app.onNotebookGradeFilterChange(this.value)" style="font-size: 12.5px;">
+                  <label class="form-label" style="font-size: 11px; font-weight: 700; color: #1e3a8a;">1. Grado Escolar:</label>
+                  <select id="sticker-grade-select" class="form-control" onchange="window.app.onNotebookGradeFilterChange(this.value)" style="font-size: 12px; font-weight: bold;">
                     ${catalogGrades.map(g => `<option value="${g.id}" ${selectedGrade === g.id ? 'selected' : ''}>${g.label} (${g.level})</option>`).join('')}
                   </select>
                 </div>
 
                 <div class="form-group" style="margin:0;">
-                  <label class="form-label" style="font-size: 11px;">2. Filtrar por Estudiante Específico:</label>
-                  <select id="sticker-student-select" class="form-control" onchange="window.app.onNotebookStudentFilterChange(this.value)" style="font-size: 12.5px;">
+                  <label class="form-label" style="font-size: 11px; font-weight: 700; color: #1e3a8a;">2. Filtrar por Estudiante:</label>
+                  <select id="sticker-student-select" class="form-control" onchange="window.app.onNotebookStudentFilterChange(this.value)" style="font-size: 12px; font-weight: bold;">
                     <option value="all">-- Todos los Alumnos del Grado --</option>
                     ${enrollments.filter(e => e.gradeId === selectedGrade || !selectedGrade).map(e => `
                       <option value="${e.studentCode || e.dni}" ${selectedStudentId === (e.studentCode || e.dni) ? 'selected' : ''}>
@@ -6393,8 +6439,20 @@ const Components = {
                 </div>
 
                 <div class="form-group" style="margin:0;">
-                  <label class="form-label" style="font-size: 11px; font-weight: 700; color: #1e3a8a;">3. Distribución por Hoja A4:</label>
-                  <select id="sticker-layout-select" class="form-control" style="font-size: 12.5px; font-weight: 800; background: #eff6ff; border: 1.5px solid #3b82f6; color: #1e3a8a;">
+                  <label class="form-label" style="font-size: 11px; font-weight: 700; color: #1e3a8a;">3. Curso de Boleta Oficial:</label>
+                  <select id="sticker-course-select" class="form-control" onchange="window.app.onNotebookCourseFilterChange(this.value)" style="font-size: 12px; font-weight: bold;">
+                    <option value="all">-- Todos los Cursos de Boleta (${boletaCoursesCatalog.length}) --</option>
+                    ${boletaCoursesCatalog.map(c => `
+                      <option value="${c.id}" ${selectedCourseFilter === c.id ? 'selected' : ''}>
+                        ${c.icon || '📚'} ${c.name} (${c.teacher})
+                      </option>
+                    `).join('')}
+                  </select>
+                </div>
+
+                <div class="form-group" style="margin:0;">
+                  <label class="form-label" style="font-size: 11px; font-weight: 700; color: #1e3a8a;">4. Distribución por Hoja A4:</label>
+                  <select id="sticker-layout-select" class="form-control" style="font-size: 12px; font-weight: 800; background: #eff6ff; border: 1.5px solid #3b82f6; color: #1e3a8a;">
                     <option value="3x5" selected>3 × 5 (15 QR por Hoja)</option>
                     <option value="3x4">3 × 4 (12 QR por Hoja)</option>
                   </select>
@@ -6402,33 +6460,45 @@ const Components = {
               </div>
             </div>
 
-            <!-- Grilla de Stickers de Cuadernos -->
+            <!-- Grilla de Stickers de Cuadernos (Cursos Oficiales de Boleta) -->
             <div id="printable-stickers-sheet" class="qr-sticker-sheet" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
               ${stickersData.map(st => {
-                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(st.qrPayload)}`;
                 const safePayload = st.qrPayload.replace(/'/g, "\\'");
                 return `
                   <div class="qr-notebook-sticker" style="border: 2px solid #0f172a; border-radius: 10px; padding: 12px; background: #ffffff; display: flex; gap: 12px; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: relative; border-left: 6px solid #f59e0b;">
-                    <div style="flex-shrink: 0; text-align: center;">
-                      <img src="${qrUrl}" alt="QR Cuaderno" style="width: 75px; height: 75px; display: block; border: 1px solid #cbd5e1; border-radius: 6px; padding: 2px;" />
-                      <span style="font-size: 8.5px; font-weight: 800; color: #475569; display: block; margin-top: 2px;"><code>${st.qrCode}</code></span>
+                    <div style="flex-shrink: 0; text-align: center; width: 75px;">
+                      <div style="width: 75px; height: 75px; border: 1px solid #cbd5e1; border-radius: 6px; padding: 2px; background: white; margin: 0 auto;">
+                        ${Components.generateQRSVG(st.qrPayload, 140)}
+                      </div>
+                      <span style="font-size: 8px; font-weight: 800; color: #475569; display: block; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><code>${st.qrCode}</code></span>
                     </div>
-                    <div style="flex: 1; display: flex; flex-direction: column; gap: 2px;">
-                      <span style="font-size: 8.5px; font-weight: 900; color: #dc2626; letter-spacing: 0.05em; text-transform: uppercase;">
-                        ★ I.E.P. EL EDUCADOR • SJL
-                      </span>
-                      <strong style="font-size: 13px; color: #0f172a; line-height: 1.2;">
-                        ${st.course}
+                    <div style="flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 8.5px; font-weight: 900; color: #dc2626; letter-spacing: 0.05em; text-transform: uppercase;">
+                          ★ I.E.P. EL EDUCADOR • SJL
+                        </span>
+                        <span class="status-badge" style="font-size: 8px; padding: 1px 4px; font-weight: 800; background: #eff6ff; color: #1e40af;">
+                          ${st.area || 'Oficial'}
+                        </span>
+                      </div>
+                      <strong style="font-size: 13px; color: #0f172a; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${st.course}">
+                        ${st.icon || '📚'} ${st.course}
                       </strong>
-                      <div style="font-size: 11px; font-weight: 700; color: #1e3a8a; margin-top: 2px;">
+                      <div style="font-size: 11px; font-weight: 800; color: #1e3a8a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                         ${st.studentName}
                       </div>
                       <div style="font-size: 10px; color: #475569;">
-                        ${st.grade} • Código: ${st.studentCode}
+                        ${st.grade} • Código: <code>${st.studentCode}</code>
                       </div>
-                      <div style="margin-top: 6px;">
-                        <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('${safePayload}')" style="font-size: 10px; padding: 3px 8px; border-radius: 12px; font-weight: 800;">
+                      <div style="font-size: 9.5px; color: #047857; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        ${st.teacher}
+                      </div>
+                      <div style="margin-top: 6px; display: flex; gap: 4px;">
+                        <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('${safePayload}')" style="font-size: 9.5px; padding: 2px 7px; border-radius: 12px; font-weight: 800;">
                           [Cámara] Probar Escaneo
+                        </button>
+                        <button class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${st.studentCode}')" style="font-size: 9.5px; padding: 2px 7px; border-radius: 12px; font-weight: 800;">
+                          Plancha Alumno
                         </button>
                       </div>
                     </div>
@@ -9827,93 +9897,222 @@ const Components = {
                SUB-PESTAÑA 4: PLANCHA DE FOTOCHECKS QR ESTUDIANTILES
                ===================================================================== -->
           <!-- =====================================================================
-               SUB-PESTAÑA 4: GENERADOR DE CÓDIGOS QR ESTUDIANTILES (SIN FOTOS)
+               SUB-PESTAÑA 4: PLANCHAS DE CÓDIGOS QR (POR CURSO Y BOLETA OFICIAL)
                ===================================================================== -->
           ${activeSubTab === 'id-cards' ? `
-            
-            <div class="card" style="margin-bottom: var(--space-4); background: #f8fafc; border: 1px solid #cbd5e1;">
-              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 14px;">
-                <div>
-                  <div style="display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 24px;"></span>
+            ${(() => {
+              const qrSheetMode = state.attendanceQRSheetMode || 'stickers';
+              const qrSheetGrade = state.selectedAttendanceQRGrade || '4sec';
+              const qrSheetStudent = state.selectedAttendanceQRStudent || 'all';
+              const qrSheetCourse = state.selectedAttendanceQRCourse || 'all';
+              const qrSheetLayout = state.selectedAttendanceQRLayout || '3x5';
+
+              const boletaCourses = (window.appStore && typeof window.appStore.getStudentBoletaCoursesCatalog === 'function')
+                ? window.appStore.getStudentBoletaCoursesCatalog(qrSheetGrade)
+                : [];
+
+              const stickersList = (window.appStore && typeof window.appStore.getNotebookStickersData === 'function')
+                ? window.appStore.getNotebookStickersData(qrSheetGrade, qrSheetStudent, qrSheetCourse)
+                : [];
+
+              const activeEnrollments = enrollments.filter(e => {
+                if (!qrSheetGrade || qrSheetGrade === 'all') return true;
+                const egId = (e.gradeId || (window.appStore && window.appStore.resolveStudentGradeId(e.grade)) || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+                const cleanG = (qrSheetGrade || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+                return egId === cleanG || egId.includes(cleanG) || cleanG.includes(egId);
+              });
+
+              return `
+                <div class="card" style="margin-bottom: var(--space-4); background: #f8fafc; border: 1px solid #cbd5e1;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 14px;">
                     <div>
-                      <h3 style="font-size: 16px; font-weight: 900; color: #0b132b; margin: 0;">
-                        Generador de Códigos QR Estudiantiles (Solo Código QR, Nombres y Grado)
-                      </h3>
-                      <span style="font-size: 11.5px; color: #64748b;">
-                        Plancha oficial de credenciales y stickers QR listos para imprimir y recortar. <strong>Sin fotos</strong>, optimizado para lectura rápida en portería.
-                      </span>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 24px;">🏷️</span>
+                        <div>
+                          <h3 style="font-size: 16px; font-weight: 900; color: #0b132b; margin: 0;">
+                            Planchas Oficiales de Códigos QR por Curso & Boleta de Notas
+                          </h3>
+                          <span style="font-size: 11.5px; color: #64748b;">
+                            Generación de <strong>un código QR por curso oficial</strong> de la boleta de calificaciones para pegar en los cuadernos del estudiante o credencial de asistencia.
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                      <!-- Selector de Modo de Plancha -->
+                      <div style="display: flex; background: #e2e8f0; border-radius: 20px; padding: 2px;">
+                        <button class="btn btn-sm ${qrSheetMode === 'stickers' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setAttendanceQRSheetMode('stickers')" style="border-radius: 18px; font-size: 11px; font-weight: 800; padding: 4px 12px; border: none;">
+                          📚 Stickers QR por Curso (Cuadernos)
+                        </button>
+                        <button class="btn btn-sm ${qrSheetMode === 'cards' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setAttendanceQRSheetMode('cards')" style="border-radius: 18px; font-size: 11px; font-weight: 800; padding: 4px 12px; border: none;">
+                          🪪 Fotocheck Asistencia (Portería)
+                        </button>
+                      </div>
+
+                      ${qrSheetMode === 'stickers' ? `
+                        <button class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${qrSheetStudent !== 'all' ? qrSheetStudent : 'EST-2026-042'}')" style="font-weight: 900; padding: 7px 16px; border-radius: 20px; font-size: 11.5px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #0b132b;">
+                          ⚡ Plancha Completa Alumno
+                        </button>
+                        <button class="btn btn-navy btn-sm" onclick="window.app.printNotebookStickerSheet('attendance-printable-stickers-sheet', '${qrSheetLayout}')" style="font-weight: 800; font-size: 11.5px; padding: 7px 14px; border-radius: 20px;">
+                          🖨️ Imprimir Plancha A4 (${stickersList.length} QR)
+                        </button>
+                      ` : `
+                        <button class="btn btn-navy btn-sm" onclick="window.print()" style="font-weight: 800; font-size: 11.5px; padding: 7px 14px; border-radius: 20px;">
+                          🖨️ Imprimir Fotochecks A4
+                        </button>
+                      `}
                     </div>
                   </div>
+
+                  ${qrSheetMode === 'stickers' ? `
+                    <!-- Filtros Dinámicos para Planchas de Stickers QR por Curso -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; background: #ffffff; padding: 12px 14px; border-top: 1px solid #e2e8f0;">
+                      <div>
+                        <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margin-bottom: 2px;">1. Grado Escolar:</label>
+                        <select class="form-control" onchange="window.app.onAttendanceStickerGradeChange(this.value)" style="font-size: 12px; font-weight: bold;">
+                          ${catalog.map(g => `<option value="${g.id}" ${g.id === qrSheetGrade ? 'selected' : ''}>${g.label} (${g.level})</option>`).join('')}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margin-bottom: 2px;">2. Estudiante:</label>
+                        <select class="form-control" onchange="window.app.onAttendanceStickerStudentChange(this.value)" style="font-size: 12px; font-weight: bold;">
+                          <option value="all">-- Todos los Alumnos del Grado (${activeEnrollments.length}) --</option>
+                          ${activeEnrollments.map(e => `
+                            <option value="${e.studentCode || e.dni}" ${qrSheetStudent === (e.studentCode || e.dni) ? 'selected' : ''}>
+                              ${e.studentName} (${e.studentCode || e.dni})
+                            </option>
+                          `).join('')}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margin-bottom: 2px;">3. Curso de Boleta Oficial:</label>
+                        <select class="form-control" onchange="window.app.onAttendanceStickerCourseChange(this.value)" style="font-size: 12px; font-weight: bold;">
+                          <option value="all">-- Todos los Cursos de Boleta (${boletaCourses.length}) --</option>
+                          ${boletaCourses.map(c => `
+                            <option value="${c.id}" ${qrSheetCourse === c.id ? 'selected' : ''}>
+                              ${c.icon || '📚'} ${c.name} (${c.teacher})
+                            </option>
+                          `).join('')}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margin-bottom: 2px;">4. Formato Hoja A4:</label>
+                        <select id="attendance-sticker-layout-select" class="form-control" style="font-size: 12px; font-weight: 800; background: #eff6ff; border: 1.5px solid #3b82f6; color: #1e3a8a;">
+                          <option value="3x5" ${qrSheetLayout === '3x5' ? 'selected' : ''}>3 × 5 (15 QR por Hoja A4)</option>
+                          <option value="3x4" ${qrSheetLayout === '3x4' ? 'selected' : ''}>3 × 4 (12 QR por Hoja A4)</option>
+                        </select>
+                      </div>
+                    </div>
+                  ` : ''}
                 </div>
 
-                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                  <button class="btn btn-navy btn-sm" onclick="window.print()" style="font-weight: 800; font-size: 12px;">
-                    Imprimir Plancha A4 de Códigos QR
-                  </button>
-                  <button class="btn btn-gold btn-sm" onclick="window.app.downloadAllQRSheets()" style="font-weight: 800; font-size: 12px;">
-                    Descargar Plancha QR
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- GRID DE TARJETAS / STICKERS QR (SIN FOTOS) -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 20px;">
-              ${enrollments.map(st => `
-                <div class="card" style="border: 2px solid #1e3a8a; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.06); background: #ffffff; text-align: center;">
-                  
-                  <!-- Cabecera de la Tarjeta QR -->
-                  <div style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white; padding: 8px 12px; display: flex; align-items: center; justify-content: center; gap: 6px; border-bottom: 3px solid #f59e0b;">
-                    <img src="logo.png" onerror="this.src='assets/logo.png'" alt="Escudo" style="width: 22px; height: 22px; object-fit: contain;" />
-                    <div style="text-align: center;">
-                      <div style="font-size: 10px; font-weight: 900; letter-spacing: 0.05em; color: #fde047;">I.E.P. "EL EDUCADOR"</div>
-                      <div style="font-size: 8px; opacity: 0.9;">CONTROL DE ASISTENCIA QR 2026</div>
-                    </div>
+                ${qrSheetMode === 'stickers' ? `
+                  <!-- =========================================================
+                       GRILLA DE STICKERS QR POR CURSO DE LA BOLETA DE NOTAS
+                       ========================================================= -->
+                  <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 12px; color: #475569; font-weight: 700;">
+                      Mostrando <strong>${stickersList.length} stickers adhesivos</strong> correspondientes a los cursos de la Boleta Oficial de Notas:
+                    </span>
+                    <span class="status-badge status-approved" style="font-size: 10.5px; font-weight: 800;">
+                      100% Escaneable con Celular o Lector
+                    </span>
                   </div>
 
-                  <!-- Cuerpo de la Tarjeta QR: Código QR Grande + Nombres Completos + Grado -->
-                  <div style="padding: 16px 12px;">
-                    
-                    <!-- Código QR Grande en Alta Resolución -->
-                    <div style="width: 140px; height: 140px; margin: 0 auto 12px; border: 2px solid #0b132b; border-radius: 8px; padding: 6px; background: white; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
-                      ${Components.generateQRSVG(st.studentCode)}
-                    </div>
-
-                    <!-- Nombres y Apellidos Completos en Mayúsculas y Negrita -->
-                    <div style="font-size: 13.5px; font-weight: 900; color: #0b132b; text-transform: uppercase; line-height: 1.25; margin-bottom: 4px;">
-                      ${st.studentName}
-                    </div>
-
-                    <!-- Grado y Nivel -->
-                    <div style="font-size: 12px; font-weight: 800; color: #1e40af; margin-bottom: 6px;">
-                      ${st.grade}
-                    </div>
-
-                    <!-- Código y DNI -->
-                    <div style="font-size: 10.5px; color: #475569; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px 8px; display: inline-block;">
-                      <strong>CÓD:</strong> <code>${st.studentCode}</code> • <strong>DNI:</strong> <code>${st.dni}</code>
-                    </div>
-
+                  <div id="attendance-printable-stickers-sheet" class="qr-sticker-sheet" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 24px;">
+                    ${stickersList.map(st => {
+                      const safePayload = st.qrPayload.replace(/'/g, "\\'");
+                      return `
+                        <div class="qr-notebook-sticker" style="border: 2px solid #0f172a; border-radius: 10px; padding: 12px; background: #ffffff; display: flex; gap: 12px; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: relative; border-left: 6px solid #f59e0b;">
+                          <div style="flex-shrink: 0; text-align: center; width: 75px;">
+                            <div style="width: 75px; height: 75px; border: 1px solid #cbd5e1; border-radius: 6px; padding: 2px; background: white; margin: 0 auto;">
+                              ${Components.generateQRSVG(st.qrPayload, 140)}
+                            </div>
+                            <span style="font-size: 8px; font-weight: 800; color: #475569; display: block; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><code>${st.qrCode}</code></span>
+                          </div>
+                          <div style="flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                              <span style="font-size: 8.5px; font-weight: 900; color: #dc2626; letter-spacing: 0.05em; text-transform: uppercase;">
+                                ★ I.E.P. EL EDUCADOR • SJL
+                              </span>
+                              <span class="status-badge" style="font-size: 8px; padding: 1px 4px; font-weight: 800; background: #eff6ff; color: #1e40af;">
+                                ${st.area || 'Oficial'}
+                              </span>
+                            </div>
+                            <strong style="font-size: 13px; color: #0f172a; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${st.course}">
+                              ${st.icon || '📚'} ${st.course}
+                            </strong>
+                            <div style="font-size: 11px; font-weight: 800; color: #1e3a8a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                              ${st.studentName}
+                            </div>
+                            <div style="font-size: 10px; color: #475569;">
+                              ${st.grade} • Cód: <code>${st.studentCode}</code>
+                            </div>
+                            <div style="font-size: 9.5px; color: #047857; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                              ${st.teacher}
+                            </div>
+                            <div style="margin-top: 6px; display: flex; gap: 4px;">
+                              <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('${safePayload}')" style="font-size: 9.5px; padding: 2px 7px; border-radius: 12px; font-weight: 800;">
+                                [Cámara] Probar
+                              </button>
+                              <button class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${st.studentCode}')" style="font-size: 9.5px; padding: 2px 7px; border-radius: 12px; font-weight: 800;">
+                                Plancha Alumno
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      `;
+                    }).join('')}
                   </div>
-
-                  <!-- Pie de Tarjeta con Botones de Acción -->
-                  <div style="background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; gap: 6px;">
-                    <button class="btn btn-navy btn-sm" onclick="window.app.openStudentQRModal('${st.studentCode}')" style="font-size: 11px; font-weight: bold; padding: 4px 10px; flex: 1;" title="Ver Tarjeta QR Individual en Grande">
-                      Ver QR
-                    </button>
-                    <button class="btn btn-gold btn-sm" onclick="window.app.downloadStudentQR('${st.studentCode}')" style="font-size: 11px; font-weight: bold; padding: 4px 8px;" title="Descargar Código QR">
-                      Guardar
-                    </button>
-                    <button class="btn btn-outline btn-sm" onclick="window.app.openCreateIncidentModal('${st.studentCode}')" style="font-size: 11px; font-weight: bold; padding: 4px 8px; color: #dc2626; border-color: #fca5a5;" title="Registrar Incidencia Conductual">
-                      Informe
-                    </button>
+                ` : `
+                  <!-- =========================================================
+                       GRILLA DE FOTOCHECKS QR DE INGRESO EN PUERTA (SIN FOTOS)
+                       ========================================================= -->
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 20px;">
+                    ${enrollments.map(st => `
+                      <div class="card" style="border: 2px solid #1e3a8a; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.06); background: #ffffff; text-align: center;">
+                        <div style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white; padding: 8px 12px; display: flex; align-items: center; justify-content: center; gap: 6px; border-bottom: 3px solid #f59e0b;">
+                          <img src="logo.png" onerror="this.src='assets/logo.png'" alt="Escudo" style="width: 22px; height: 22px; object-fit: contain;" />
+                          <div style="text-align: center;">
+                            <div style="font-size: 10px; font-weight: 900; letter-spacing: 0.05em; color: #fde047;">I.E.P. "EL EDUCADOR"</div>
+                            <div style="font-size: 8px; opacity: 0.9;">CONTROL DE ASISTENCIA QR 2026</div>
+                          </div>
+                        </div>
+                        <div style="padding: 16px 12px;">
+                          <div style="width: 140px; height: 140px; margin: 0 auto 12px; border: 2px solid #0b132b; border-radius: 8px; padding: 6px; background: white; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+                            ${Components.generateQRSVG(st.studentCode)}
+                          </div>
+                          <div style="font-size: 13.5px; font-weight: 900; color: #0b132b; text-transform: uppercase; line-height: 1.25; margin-bottom: 4px;">
+                            ${st.studentName}
+                          </div>
+                          <div style="font-size: 12px; font-weight: 800; color: #1e40af; margin-bottom: 6px;">
+                            ${st.grade}
+                          </div>
+                          <div style="font-size: 10.5px; color: #475569; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px 8px; display: inline-block;">
+                            <strong>CÓD:</strong> <code>${st.studentCode}</code> • <strong>DNI:</strong> <code>${st.dni}</code>
+                          </div>
+                        </div>
+                        <div style="background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; gap: 6px;">
+                          <button class="btn btn-navy btn-sm" onclick="window.app.openStudentQRModal('${st.studentCode}')" style="font-size: 11px; font-weight: bold; padding: 4px 10px; flex: 1;">
+                            Ver QR
+                          </button>
+                          <button class="btn btn-gold btn-sm" onclick="window.app.downloadStudentQR('${st.studentCode}')" style="font-size: 11px; font-weight: bold; padding: 4px 8px;">
+                            Guardar
+                          </button>
+                          <button class="btn btn-outline btn-sm" onclick="window.app.openCreateIncidentModal('${st.studentCode}')" style="font-size: 11px; font-weight: bold; padding: 4px 8px; color: #dc2626; border-color: #fca5a5;">
+                            Informe
+                          </button>
+                        </div>
+                      </div>
+                    `).join('')}
                   </div>
-
-                </div>
-              `).join('')}
-            </div>
-
+                `}
+              `;
+            })()}
           ` : ''}
 
           <!-- =====================================================================
@@ -10497,6 +10696,7 @@ const Components = {
 
 
 ;
+/* === app.js === */
 /**
  * Controlador Principal y Aplicación - I.E.P. "EL EDUCADOR" S.J.L. (v5.4 con Lector de Cámara QR Real)
  * "21 años dejando huellas" • UGEL 05
@@ -11094,6 +11294,32 @@ class IntranetApp {
     window.print();
   }
 
+  setAttendanceQRSheetMode(mode) {
+    this.store.state.attendanceQRSheetMode = mode;
+    this.store.saveState();
+    this.render();
+  }
+
+  onAttendanceStickerGradeChange(gradeId) {
+    this.store.state.selectedAttendanceQRGrade = gradeId;
+    this.store.state.selectedAttendanceQRStudent = "all";
+    this.store.state.selectedAttendanceQRCourse = "all";
+    this.store.saveState();
+    this.render();
+  }
+
+  onAttendanceStickerStudentChange(studentId) {
+    this.store.state.selectedAttendanceQRStudent = studentId;
+    this.store.saveState();
+    this.render();
+  }
+
+  onAttendanceStickerCourseChange(courseId) {
+    this.store.state.selectedAttendanceQRCourse = courseId;
+    this.store.saveState();
+    this.render();
+  }
+
   openStudentFullBoletaStickersModal(studentIdOrCode = "EST-2026-042") {
     const enrollments = this.store.getEnrollments();
     const data = this.store.getStudentAllBoletaStickersData(studentIdOrCode);
@@ -11164,18 +11390,24 @@ class IntranetApp {
         <!-- Grilla de Stickers de Todos los Cursos de la Boleta -->
         <div id="modal-boleta-stickers-grid" class="qr-sticker-sheet" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 12px;">
           ${stickers.map(st => {
-            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(st.qrPayload)}`;
             const safePayload = st.qrPayload.replace(/'/g, "\\'");
             return `
               <div class="qr-notebook-sticker" style="border: 2px solid #0f172a; border-radius: 10px; padding: 10px 12px; background: #ffffff; display: flex; gap: 10px; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); position: relative; border-left: 5px solid #f59e0b;">
-                <div style="flex-shrink: 0; text-align: center;">
-                  <img src="${qrUrl}" alt="QR" style="width: 68px; height: 68px; display: block; border: 1px solid #cbd5e1; border-radius: 6px; padding: 2px;" />
-                  <span style="font-size: 8px; font-weight: 800; color: #475569; display: block; margin-top: 2px;"><code>${st.qrCode}</code></span>
+                <div style="flex-shrink: 0; text-align: center; width: 68px;">
+                  <div style="width: 68px; height: 68px; border: 1px solid #cbd5e1; border-radius: 6px; padding: 2px; background: white; margin: 0 auto;">
+                    ${Components.generateQRSVG(st.qrPayload, 140)}
+                  </div>
+                  <span style="font-size: 8px; font-weight: 800; color: #475569; display: block; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><code>${st.qrCode}</code></span>
                 </div>
                 <div style="flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0;">
-                  <span style="font-size: 8px; font-weight: 900; color: #dc2626; letter-spacing: 0.05em; text-transform: uppercase;">
-                    ★ I.E.P. EL EDUCADOR • SJL
-                  </span>
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 8px; font-weight: 900; color: #dc2626; letter-spacing: 0.05em; text-transform: uppercase;">
+                      ★ I.E.P. EL EDUCADOR • SJL
+                    </span>
+                    <span class="status-badge" style="font-size: 7.5px; padding: 1px 4px; font-weight: 800; background: #eff6ff; color: #1e40af;">
+                      ${st.area || 'Oficial'}
+                    </span>
+                  </div>
                   <strong style="font-size: 12px; color: #0f172a; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${st.course}">
                     ${st.icon || '📚'} ${st.course}
                   </strong>
@@ -11183,7 +11415,10 @@ class IntranetApp {
                     ${st.studentName}
                   </div>
                   <div style="font-size: 9.5px; color: #64748b;">
-                    ${st.grade} • ${st.area}
+                    ${st.grade} • Cód: <code>${st.studentCode}</code>
+                  </div>
+                  <div style="font-size: 9px; color: #047857; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    ${st.teacher}
                   </div>
                   <div style="margin-top: 4px;">
                     <button class="btn btn-outline btn-sm" onclick="window.app.closeModal(); setTimeout(() => window.app.simulateQRScan('${safePayload}'), 150);" style="font-size: 9.5px; padding: 2px 6px; border-radius: 10px; font-weight: 800;">
@@ -11199,7 +11434,7 @@ class IntranetApp {
       </div>
       <div class="modal-footer" style="display: flex; justify-content: space-between;">
         <span style="font-size: 12px; color: var(--text-muted);">
-          Total: <strong>${stickers.length} stickers</strong> listos para pegar en carátulas.
+          Total: <strong>${stickers.length} stickers</strong> correspondientes a la Boleta Oficial de Notas.
         </span>
         <div style="display: flex; gap: 8px;">
           <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>

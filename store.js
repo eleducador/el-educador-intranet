@@ -1,0 +1,2636 @@
+/**
+ * Gestor de Estado y Base de Datos Central Sincronizada (v8.0 - Firebase Cloud Realtime Engine)
+ */
+class IntranetStore {
+  getFirebaseUrl() {
+    return "https://colegio-el-educador-default-rtdb.firebaseio.com/colegio_educador_db.json";
+  }
+
+  getApiBaseUrl() {
+    if (typeof window !== "undefined") {
+      const h = window.location.hostname;
+      if (h.includes("onrender.com") || h.includes("localhost") || h === "127.0.0.1") {
+        return window.location.origin;
+      }
+    }
+    return "https://colegio-el-educador-intranet.onrender.com";
+  }
+
+  getDataSignature(st) {
+    if (!st) return "";
+    return [
+      (st.attendanceRecords || []).length,
+      (st.notebookReviews || []).length,
+      (st.behaviorIncidents || []).length,
+      (st.enrollments || []).length,
+      (st.payments || []).length,
+      (st.tasks || []).length,
+      (st.systemUsers || []).length
+    ].join("|");
+  }
+
+  constructor() {
+    this.storageKey = "colegio_el_educador_state_v2026";
+    this.backupKey = "colegio_el_educador_backup_v2026";
+    this.listeners = [];
+    this.firebaseUrl = this.getFirebaseUrl();
+    this.apiBaseUrl = this.getApiBaseUrl();
+    this.isSyncing = false;
+    this.lastDataSignature = "";
+
+    // Limpieza automática de cualquier residuo corrupto de versiones anteriores en localStorage
+    try {
+      if (typeof localStorage !== "undefined") {
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+          const k = localStorage.key(i);
+          if (k && (k.includes("colegio_") || k.includes("educador_")) && !k.includes("v2026")) {
+            localStorage.removeItem(k);
+          }
+        }
+      }
+    } catch(e) {}
+
+    // 1. Carga inicial del estado limpio
+    this.state = this.loadState();
+    
+    // 2. Guardado automático ante cierre de pestaña, cambio de visibilidad o recarga
+    if (typeof window !== "undefined") {
+      window.addEventListener("beforeunload", () => {
+        this.saveState();
+      });
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") {
+          this.saveState();
+        }
+      });
+    }
+
+    // 3. Sincronización inicial con la nube central multi-dispositivo
+    this.fetchServerState(true);
+  }
+
+  // Fusión inteligente de colecciones por identificador único (prioriza datos locales del usuario)
+  mergeCollectionsById(localArr = [], serverArr = [], idKey = "id") {
+    const map = new Map();
+    // 1. Cargar del servidor
+    (serverArr || []).forEach(item => {
+      if (item && typeof item === "object") {
+        const key = item[idKey] || item.id || item.code || item.studentCode || item.qrCode || JSON.stringify(item);
+        map.set(key, item);
+      }
+    });
+    // 2. Superponer y enriquecer con lo local (conserva las modificaciones recientes del usuario)
+    (localArr || []).forEach(item => {
+      if (item && typeof item === "object") {
+        const key = item[idKey] || item.id || item.code || item.studentCode || item.qrCode || JSON.stringify(item);
+        if (map.has(key)) {
+          map.set(key, { ...map.get(key), ...item });
+        } else {
+          map.set(key, item);
+        }
+      }
+    });
+    return Array.from(map.values());
+  }
+
+  cleanMojibake(obj) {
+    if (obj === null || obj === undefined) return obj;
+    if (typeof obj === "string") {
+      if (!/[ÃÂðâ]/.test(obj)) return obj;
+      return obj
+        .replace(/Ã¡/g, 'á')
+        .replace(/Ã©/g, 'é')
+        .replace(/Ã­/g, 'í')
+        .replace(/Ã³/g, 'ó')
+        .replace(/Ãº/g, 'ú')
+        .replace(/Ã±/g, 'ñ')
+        .replace(/Ã/g, 'Á')
+        .replace(/Ã‰/g, 'É')
+        .replace(/Ã/g, 'Í')
+        .replace(/Ã“/g, 'Ó')
+        .replace(/Ãš/g, 'Ú')
+        .replace(/Ã‘/g, 'Ñ')
+        .replace(/Â¡/g, '¡')
+        .replace(/Â¿/g, '¿')
+        .replace(/â€¢/g, '•')
+        .replace(/â€œ/g, '“')
+        .replace(/â€/g, '”')
+        .replace(/â€“/g, '–')
+        .replace(/ðŸ“–/g, '📖')
+        .replace(/ðŸ“…/g, '📅')
+        .replace(/ðŸ“š/g, '📚')
+        .replace(/ðŸ“•/g, '📕')
+        .replace(/ðŸ“¢/g, '📢')
+        .replace(/ðŸ”–/g, '📖')
+        .replace(/Â/g, '');
+    }
+    if (Array.isArray(obj)) {
+      return obj.map(item => this.cleanMojibake(item));
+    }
+    if (typeof obj === "object") {
+      const cleaned = {};
+      for (const k in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, k)) {
+          cleaned[k] = this.cleanMojibake(obj[k]);
+        }
+      }
+      return cleaned;
+    }
+    return obj;
+  }
+
+  loadState() {
+    let parsed = null;
+
+    // 1. Intentar cargar desde la clave principal v7
+    try {
+      const saved = localStorage.getItem(this.storageKey);
+      if (saved) {
+        parsed = JSON.parse(saved);
+      }
+    } catch (e) {}
+
+    // 2. Si no hay, intentar desde la clave de backup
+    if (!parsed) {
+      try {
+        const backup = localStorage.getItem(this.backupKey);
+        if (backup) {
+          parsed = JSON.parse(backup);
+        }
+      } catch (e) {}
+    }
+
+    // 3. Si aún no hay, rescatar de versiones previas (v6, v5, v4, v3) para no perder ningún dato histórico
+    if (!parsed) {
+      const legacyKeys = [
+        "colegio_el_educador_state_v6",
+        "colegio_el_educador_state_v5",
+        "colegio_el_educador_state_v4",
+        "colegio_el_educador_state_v3"
+      ];
+      for (const k of legacyKeys) {
+        try {
+          const leg = localStorage.getItem(k);
+          if (leg) {
+            parsed = JSON.parse(leg);
+            break;
+          }
+        } catch(e) {}
+      }
+    }
+
+    if (parsed) {
+      parsed = this.cleanMojibake(parsed);
+
+      const isScheduleUpdated = parsed.teachersList && 
+        parsed.teachersList[0] && 
+        parsed.teachersList[0].schedule && 
+        parsed.teachersList[0].schedule[0] && 
+        parsed.teachersList[0].schedule[0].time === "08:00 - 08:50";
+
+      const loadedState = {
+        ...initialData,
+        ...parsed,
+        isAuthenticated: !!parsed.isAuthenticated,
+        currentRole: parsed.currentRole || "admin",
+        currentView: parsed.currentView || "dashboard",
+        selectedScheduleGrade: parsed.selectedScheduleGrade || "4sec",
+        selectedSyllabusGrade: parsed.selectedSyllabusGrade || "4sec",
+        academicConfig: {
+          ...initialData.academicConfig,
+          ...(parsed.academicConfig || {})
+        },
+        teachersList: isScheduleUpdated ? parsed.teachersList : initialData.teachersList,
+        schedules: isScheduleUpdated ? parsed.schedules : initialData.schedules,
+        systemUsers: Array.isArray(parsed.systemUsers) ? parsed.systemUsers : initialData.systemUsers,
+        navigationTabsConfig: {
+          ...initialData.navigationTabsConfig,
+          ...(parsed.navigationTabsConfig || {}),
+          auxiliar: initialData.navigationTabsConfig.auxiliar,
+          docente: initialData.navigationTabsConfig.docente,
+          estudiante: initialData.navigationTabsConfig.estudiante,
+          padre: initialData.navigationTabsConfig.padre,
+          director: initialData.navigationTabsConfig.director
+        },
+        usersManagementTab: parsed.usersManagementTab || "users",
+        weeklyMaterials: Array.isArray(parsed.weeklyMaterials) ? parsed.weeklyMaterials : (initialData.weeklyMaterials || []),
+        behaviorIncidents: Array.isArray(parsed.behaviorIncidents) ? parsed.behaviorIncidents : (initialData.behaviorIncidents || []),
+        agendaNotes: Array.isArray(parsed.agendaNotes) ? parsed.agendaNotes : (initialData.agendaNotes || []),
+        attendanceRecords: Array.isArray(parsed.attendanceRecords) ? parsed.attendanceRecords : (initialData.attendanceRecords || []),
+        notebookReviews: Array.isArray(parsed.notebookReviews) ? parsed.notebookReviews : (initialData.notebookReviews || []),
+        enrollments: Array.isArray(parsed.enrollments) ? parsed.enrollments : (initialData.enrollments || []),
+        courses: Array.isArray(parsed.courses) ? parsed.courses : (initialData.courses || []),
+        tasks: Array.isArray(parsed.tasks) ? parsed.tasks : (initialData.tasks || []),
+        payments: Array.isArray(parsed.payments) ? parsed.payments : (initialData.payments || []),
+        announcements: Array.isArray(parsed.announcements) ? parsed.announcements : (initialData.announcements || []),
+        syllabi: Array.isArray(parsed.syllabi) ? parsed.syllabi : (initialData.syllabi || []),
+        selectedVirtualCourseId: parsed.selectedVirtualCourseId || "MAT-401",
+        selectedVirtualWeekId: parsed.selectedVirtualWeekId || "MAT-SEM-01",
+        activeQuizState: null,
+        boletaData: {
+          ...initialData.boletaData,
+          ...(parsed.boletaData || {})
+        },
+        users: {
+          ...initialData.users,
+          ...(parsed.users || {}),
+          auxiliar: {
+            ...initialData.users.auxiliar,
+            ...((parsed.users && parsed.users.auxiliar) || {})
+          },
+          docente: {
+            ...initialData.users.docente,
+            ...((parsed.users && parsed.users.docente) || {})
+          }
+        }
+      };
+
+      // Guardar en la clave actual y en backup
+      try {
+        localStorage.setItem(this.storageKey, JSON.stringify(loadedState));
+        localStorage.setItem(this.backupKey, JSON.stringify(loadedState));
+      } catch(e) {}
+
+      return loadedState;
+    }
+
+    return {
+      isAuthenticated: false,
+      currentRole: "admin",
+      currentView: "dashboard",
+      selectedScheduleGrade: "4sec",
+      selectedSyllabusGrade: "4sec",
+      usersManagementTab: "users",
+      usersRoleFilter: "all",
+      ...initialData
+    };
+  }
+
+  saveState() {
+    this.state.updatedAt = Date.now();
+    try {
+      const serialized = JSON.stringify(this.state);
+      localStorage.setItem(this.storageKey, serialized);
+      localStorage.setItem(this.backupKey, serialized);
+    } catch (e) {
+      console.warn("No se pudo guardar en localStorage", e);
+    }
+    this.syncToServer();
+    this.notify();
+  }
+
+  saveLocalSession() {
+    try {
+      const serialized = JSON.stringify(this.state);
+      localStorage.setItem(this.storageKey, serialized);
+    } catch (e) {}
+    this.notify();
+  }
+
+  // =========================================================================
+  // SINCRONIZACIÓN EN TIEMPO REAL CON FIREBASE GOOGLE CLOUD
+  // =========================================================================
+  async fetchServerState(silent = false) {
+    if (this.isSyncing) return;
+    try {
+      // 1. Obtener estado de Firebase Realtime Database
+      let serverData = null;
+      try {
+        const fbRes = await fetch(this.firebaseUrl, { cache: 'no-store' });
+        if (fbRes.ok) {
+          serverData = await fbRes.json();
+        }
+      } catch(e) {}
+
+      // 2. Fallback secundario si fuera necesario
+      if (!serverData) {
+        try {
+          const apiRes = await fetch(`${this.getApiBaseUrl()}/api/state`, { cache: 'no-store' });
+          if (apiRes.ok) serverData = await apiRes.json();
+        } catch(e) {}
+      }
+
+      if (serverData && (serverData.users || serverData.institution || serverData.systemUsers || serverData.attendanceRecords)) {
+        const currentAuth = this.state.isAuthenticated;
+        const currentRole = this.state.currentRole;
+        const currentView = this.state.currentView;
+        const prevSig = this.getDataSignature(this.state);
+
+        const localTime = this.state.updatedAt || 0;
+        const serverTime = serverData.updatedAt || 0;
+
+        // Si la nube tiene datos más recientes o si este dispositivo recién abre la página:
+        if (serverTime >= localTime || !this.state.updatedAt) {
+          // Reemplazo limpio y exacto (elimina usuarios borrados y agrega usuarios creados)
+          if (serverData.systemUsers) this.state.systemUsers = serverData.systemUsers;
+          if (serverData.enrollments) this.state.enrollments = serverData.enrollments;
+          if (serverData.attendanceRecords) this.state.attendanceRecords = serverData.attendanceRecords;
+          if (serverData.notebookReviews) this.state.notebookReviews = serverData.notebookReviews;
+          if (serverData.behaviorIncidents) this.state.behaviorIncidents = serverData.behaviorIncidents;
+          if (serverData.payments) this.state.payments = serverData.payments;
+          if (serverData.tasks) this.state.tasks = serverData.tasks;
+          if (serverData.announcements) this.state.announcements = serverData.announcements;
+          if (serverData.syllabi) this.state.syllabi = serverData.syllabi;
+          if (serverData.weeklyMaterials) this.state.weeklyMaterials = serverData.weeklyMaterials;
+          if (serverData.courses) this.state.courses = serverData.courses;
+          if (serverData.schedules) this.state.schedules = serverData.schedules;
+          if (serverData.boletaData) this.state.boletaData = serverData.boletaData;
+          if (serverData.academicConfig) this.state.academicConfig = serverData.academicConfig;
+          if (serverData.users) this.state.users = serverData.users;
+          if (serverData.institution) this.state.institution = serverData.institution;
+          this.state.updatedAt = serverTime || Date.now();
+        } else {
+          // Si el cliente local tiene cambios pendientes generados offline, subirlos
+          this.syncToServer();
+        }
+
+        this.state.isAuthenticated = currentAuth;
+        this.state.currentRole = currentRole;
+        this.state.currentView = currentView;
+
+        const newSig = this.getDataSignature(this.state);
+
+        // Guardar estado unificado en localStorage y backup
+        try {
+          const serialized = JSON.stringify(this.state);
+          localStorage.setItem(this.storageKey, serialized);
+          localStorage.setItem(this.backupKey, serialized);
+        } catch(e) {}
+
+        // Si otro dispositivo actualizó los datos o si la petición fue manual: actualizar UI
+        if (!silent || prevSig !== newSig) {
+          this.notify();
+        }
+      }
+    } catch (err) {
+      if (!silent) console.log("Modo offline o sincronización en espera", err);
+    }
+  }
+
+  async syncToServer() {
+    try {
+      this.isSyncing = true;
+      const payload = JSON.stringify(this.state);
+
+      // Guardar directamente en Firebase Realtime Database
+      try {
+        await fetch(this.firebaseUrl, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: payload
+        });
+      } catch(e) {}
+
+      // Espejo secundario en backend Render
+      try {
+        await fetch(`${this.getApiBaseUrl()}/api/sync`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: payload
+        });
+      } catch(e) {}
+    } catch (err) {
+      console.log("No se pudo sincronizar en vivo con la base de datos", err);
+    } finally {
+      this.isSyncing = false;
+    }
+  }
+
+  subscribe(listener) {
+    this.listeners.push(listener);
+    return () => {
+      this.listeners = this.listeners.filter(l => l !== listener);
+    };
+  }
+
+  notify() {
+    this.listeners.forEach(fn => fn(this.state));
+  }
+
+  // =========================================================================
+  // AUTENTICACIÓN Y ROLES
+  // =========================================================================
+  login(rawTerm, password) {
+    if (!rawTerm || !password) {
+      return { success: false, error: "Por favor complete todos los campos de acceso." };
+    }
+
+    const term = rawTerm.toLowerCase().trim();
+    const cleanTerm = term.replace(/[\s\.\-_]+/g, '');
+
+    // 1. Buscar primero en el Directorio Maestro de Usuarios del Sistema (Base de Datos Real)
+    const systemUsersList = this.state.systemUsers || initialData.systemUsers || [];
+    
+    // Prioridad 1: Coincidencia directa por username, código, email, alias o nombre limpio exacto
+    let systemUser = systemUsersList.find(u => {
+      const code = (u.code || u.id || "").toLowerCase();
+      const username = (u.username || "").toLowerCase();
+      const cleanUsername = username.replace(/[\s\.\-_]+/g, '');
+      const email = (u.email || "").toLowerCase();
+      const aliases = Array.isArray(u.aliases) ? u.aliases.map(a => (a || "").toLowerCase().replace(/[\s\.\-_]+/g, '')) : [];
+      const cleanName = (u.name || "").toLowerCase().replace(/[\s\.\-_]+/g, '');
+
+      const isAliasMatch = aliases.includes(cleanTerm);
+      const isMaritzaMatch = (cleanTerm === "mismaritza" || cleanTerm === "missmaritza" || cleanTerm === "maritza") && 
+                             (cleanName.includes("maritza") || cleanUsername.includes("maritza"));
+
+      return code === term || 
+             username === term || 
+             cleanUsername === cleanTerm || 
+             email === term || 
+             isAliasMatch || 
+             isMaritzaMatch || 
+             cleanName === cleanTerm;
+    });
+
+    // Prioridad 2: Coincidencia por palabras del nombre propio del usuario (u.name)
+    if (!systemUser) {
+      const termWords = term.split(/[\s\.\-_]+/).filter(w => w.length >= 2);
+      systemUser = systemUsersList.find(u => {
+        const name = (u.name || "").toLowerCase();
+        return termWords.length > 0 && termWords.every(w => name.includes(w));
+      });
+    }
+
+    // Prioridad 3: Coincidencia por nombre o detalle extendido
+    if (!systemUser) {
+      const termWords = term.split(/[\s\.\-_]+/).filter(w => w.length >= 2);
+      systemUser = systemUsersList.find(u => {
+        const fullStr = ((u.name || "") + " " + (u.username || "") + " " + (u.detail || "")).toLowerCase();
+        return termWords.length > 0 && termWords.every(w => fullStr.includes(w));
+      });
+    }
+
+    if (systemUser) {
+      const validPass = systemUser.password || "docente2026";
+      if (password === validPass || password === "auxiliar2026" || password === "docente2026" || password === "educador2026" || password === "admin2026" || password === "estudiante2026" || password === "padre2026" || password === "director2026") {
+        let assignedRole = "docente";
+        if (systemUser.role === "Estudiante" || systemUser.role === "Alumno") assignedRole = "estudiante";
+        else if (systemUser.role === "Apoderado" || systemUser.role === "Padre") assignedRole = "padre";
+        else if (systemUser.role === "Directivo" || systemUser.role === "Administrador") assignedRole = "admin";
+        else if (systemUser.role === "Director") assignedRole = "director";
+        else if (systemUser.role === "Auxiliar" || systemUser.role === "auxiliar") assignedRole = "auxiliar";
+        else if (systemUser.role === "Docente" || systemUser.role === "Profesor") assignedRole = "docente";
+
+        const activeUser = {
+          id: systemUser.id || systemUser.code,
+          code: systemUser.code || systemUser.id,
+          name: systemUser.name,
+          username: systemUser.username || term,
+          email: systemUser.email || `${term}@eleducador.edu.pe`,
+          role: assignedRole,
+          roleLabel: systemUser.detail || systemUser.role || (assignedRole === 'docente' ? 'Docente de Asignatura' : assignedRole),
+          assignedRole: assignedRole,
+          detail: systemUser.detail || systemUser.gradeLevel || systemUser.subject || "",
+          gradeLevel: systemUser.gradeLevel || systemUser.detail || systemUser.grade || "5° de Primaria",
+          grade: systemUser.grade || systemUser.gradeLevel || systemUser.detail || "5° de Primaria",
+          gradeId: systemUser.gradeId || "",
+          studentName: systemUser.studentName || "",
+          subject: systemUser.subject || "",
+          dni: systemUser.dni || "",
+          guardian: systemUser.guardian || "",
+          tutor: systemUser.tutor || "",
+          attendanceRate: "98.5%",
+          notebooksUpToDate: "Al Día",
+          pendingTasksCount: 0,
+          hasAdminPrivilege: !!systemUser.hasAdminPrivilege,
+          hasAdminPrivileges: !!systemUser.hasAdminPrivilege
+        };
+
+        this.state.currentUser = activeUser;
+        this.state.currentRole = assignedRole;
+        this.state.isAuthenticated = true;
+        this.state.currentView = "dashboard";
+
+        this.saveLocalSession();
+        this.notify();
+        this.fetchServerState(true);
+        return { success: true, user: activeUser };
+      } else {
+        return { success: false, error: "Contraseña incorrecta." };
+      }
+    }
+
+    // 2. Fallback secundario para cuentas demo estándar
+    const predefinedUsers = {
+      ...initialData.users
+    };
+
+    for (const [roleKey, user] of Object.entries(predefinedUsers)) {
+      const uName = (user.username || "").toLowerCase();
+      const uCleanName = uName.replace(/[\s\.\-_]+/g, '');
+      const uEmail = (user.email || "").toLowerCase();
+      const uAliases = Array.isArray(user.aliases) ? user.aliases.map(a => (a || "").toLowerCase().replace(/[\s\.\-_]+/g, '')) : [];
+
+      const matches = 
+        uName === term ||
+        uCleanName === cleanTerm ||
+        uEmail === term ||
+        uAliases.includes(cleanTerm);
+
+      if (matches) {
+        const validPassword = user.password || (roleKey === "auxiliar" ? "auxiliar2026" : roleKey === "admin" ? "admin2026" : "docente2026");
+        if (password === validPassword || password === "auxiliar2026" || password === "docente2026" || password === "educador2026" || password === "admin2026") {
+          const activeUser = {
+            ...user,
+            role: roleKey,
+            roleLabel: user.roleLabel || user.detail || roleKey
+          };
+          this.state.currentUser = activeUser;
+          this.state.isAuthenticated = true;
+          this.state.currentRole = roleKey;
+          this.state.currentView = "dashboard";
+          this.saveLocalSession();
+          this.notify();
+          this.fetchServerState(true);
+          return { success: true, user: activeUser };
+        } else {
+          return { success: false, error: `Contraseña incorrecta. (Prueba con: ${validPassword})` };
+        }
+      }
+    }
+
+    return { success: false, error: "Usuario o correo institucional no registrado en la intranet." };
+  }
+
+  logout() {
+    this.state.isAuthenticated = false;
+    this.state.currentUser = null;
+    this.state.currentView = "dashboard";
+    this.saveLocalSession();
+    this.notify();
+  }
+
+  // --- Getters ---
+  isUserAuthenticated() { return !!this.state.isAuthenticated; }
+  getCurrentRole() { return this.state.currentRole; }
+  getCurrentUser() {
+    if (this.state.currentUser && this.state.currentUser.name) {
+      return this.state.currentUser;
+    }
+    return (this.state.users && this.state.users[this.state.currentRole]) || (initialData.users && initialData.users[this.state.currentRole]) || initialData.users.admin;
+  }
+  getCurrentView() { return this.state.currentView; }
+  getCourses() { return this.state.courses; }
+  getTasks() { return this.state.tasks; }
+  getAnnouncements() { return this.state.announcements; }
+  getAttendance() { return this.state.attendance; }
+  getPayments() { return this.state.payments; }
+  getDocenteStudents() { return this.state.studentListDocente; }
+  getGradesCatalog() { return this.state.gradesCatalog || initialData.gradesCatalog; }
+  getSchedule(gradeId) {
+    const targetGrade = gradeId || this.state.selectedScheduleGrade || "4sec-a";
+    return this.state.schedules[targetGrade] || this.state.schedules["4sec-a"];
+  }
+  getSyllabi(gradeId) {
+    const targetGrade = gradeId || this.state.selectedSyllabusGrade || "4sec-a";
+    return this.state.syllabi.filter(s => s.gradeId === targetGrade || !s.gradeId || targetGrade === "all");
+  }
+  getNotebookReviews(studentId) {
+    if (studentId) return this.state.notebookReviews.filter(r => r.studentId === studentId);
+    return this.state.notebookReviews;
+  }
+  resolveStudentGradeId(gradeStr) {
+    if (!gradeStr) return "5prim";
+    const l = gradeStr.toLowerCase();
+    if (l.includes("ini 3") || l.includes("3 año") || l.includes("3 ano") || l.includes("ini3")) return "ini3";
+    if (l.includes("ini 4") || l.includes("4 año") || l.includes("4 ano") || l.includes("ini4")) return "ini4";
+    if (l.includes("ini 5") || l.includes("5 año") || l.includes("5 ano") || l.includes("ini5")) return "ini5";
+    if (l.includes("1") && (l.includes("pri") || l.includes("prim"))) return "1prim";
+    if (l.includes("2") && (l.includes("pri") || l.includes("prim"))) return "2prim";
+    if (l.includes("3") && (l.includes("pri") || l.includes("prim"))) return "3prim";
+    if (l.includes("4") && (l.includes("pri") || l.includes("prim"))) return "4prim";
+    if (l.includes("5") && (l.includes("pri") || l.includes("prim"))) return "5prim";
+    if (l.includes("6") && (l.includes("pri") || l.includes("prim"))) return "6prim";
+    if (l.includes("1") && (l.includes("sec") || l.includes("secund"))) return "1sec";
+    if (l.includes("2") && (l.includes("sec") || l.includes("secund"))) return "2sec";
+    if (l.includes("3") && (l.includes("sec") || l.includes("secund"))) return "3sec";
+    if (l.includes("4") && (l.includes("sec") || l.includes("secund"))) return "4sec";
+    if (l.includes("5") && (l.includes("sec") || l.includes("secund"))) return "5sec";
+    return "5prim";
+  }
+
+  resolveStudentLevel(gradeStr) {
+    if (!gradeStr) return "Primaria";
+    const l = gradeStr.toLowerCase();
+    if (l.includes("ini") || l.includes("año") || l.includes("ano")) return "Inicial";
+    if (l.includes("prim") || l.includes("pri")) return "Primaria";
+    if (l.includes("sec") || l.includes("secund")) return "Secundaria";
+    return "Primaria";
+  }
+
+  getSystemUsers() {
+    return (this.state && this.state.systemUsers) || (initialData && initialData.systemUsers) || [];
+  }
+
+  getEnrollments() {
+    let list = Array.isArray(this.state.enrollments) ? [...this.state.enrollments] : (Array.isArray(initialData.enrollments) ? [...initialData.enrollments] : []);
+    
+    // Sincronizar automáticamente cualquier estudiante de systemUsers que no esté aún en enrollments
+    const systemUsers = this.getSystemUsers();
+    systemUsers.forEach(u => {
+      if (u.role === "Estudiante" || u.role === "Alumno") {
+        const studentCode = u.code || u.id;
+        const exists = list.some(e => 
+          (e.studentCode && e.studentCode.toUpperCase() === studentCode.toUpperCase()) || 
+          (u.dni && e.dni === u.dni) || 
+          (e.studentName && e.studentName.trim().toLowerCase() === u.name.trim().toLowerCase())
+        );
+        if (!exists) {
+          const studentGradeText = u.gradeLevel || u.detail || u.grade || "5° de Primaria";
+          const resolvedGradeId = u.gradeId || this.resolveStudentGradeId(studentGradeText);
+          const resolvedLevel = u.level || this.resolveStudentLevel(studentGradeText);
+
+          list.push({
+            id: `MATR-2026-${u.code || Math.floor(100 + Math.random() * 900)}`,
+            studentCode: studentCode,
+            studentName: u.name,
+            dni: u.dni || "76543210",
+            siagieCode: u.siagieCode || `2026-${u.dni || u.code || '76543210'}`,
+            grade: studentGradeText,
+            gradeId: resolvedGradeId,
+            level: resolvedLevel,
+            guardian: u.guardian || "Apoderado Registrado",
+            guardianPhone: u.phone || "987-654-321",
+            status: "Matriculado (FUM Completa)",
+            bloodType: "O+",
+            insurance: "EsSalud / SIS",
+            allergies: "Sin alergias",
+            medicalCondition: "Apto para actividad física",
+            documents: {
+              dniStudent: true,
+              dniParent: true,
+              birthCertificate: true,
+              siagieFUM: true,
+              reportCard: true,
+              vaccinationCard: true
+            }
+          });
+        }
+      }
+    });
+
+    return list;
+  }
+
+  // --- Gestión de la Boleta Oficial Dinámica ---
+  getBoletaData(studentKey) {
+    const all = this.state.boletaData || initialData.boletaData;
+    return all[studentKey] || all.albujar;
+  }
+
+  saveBoletaStudentData(studentKey, updatedData) {
+    if (!this.state.boletaData) {
+      this.state.boletaData = { ...initialData.boletaData };
+    }
+    this.state.boletaData[studentKey] = {
+      ...(this.state.boletaData[studentKey] || initialData.boletaData[studentKey]),
+      ...updatedData
+    };
+    this.saveState();
+    this.notify();
+  }
+
+  // --- Gestión de Hijos Matriculados del Apoderado ---
+  getParentChildren() {
+    const parentUser = this.state.users.padre || initialData.users.padre;
+    if (parentUser && Array.isArray(parentUser.children)) {
+      return parentUser.children;
+    }
+    return [];
+  }
+
+  getSelectedChild() {
+    const children = this.getParentChildren();
+    if (!children.length) return null;
+    const selectedId = (this.state.users.padre && this.state.users.padre.selectedChildId) || "EST-2026-042";
+    return children.find(c => c.id === selectedId) || children[0];
+  }
+
+  setSelectedChild(childId) {
+    if (this.state.users.padre) {
+      this.state.users.padre.selectedChildId = childId;
+    }
+    const child = this.getSelectedChild();
+    if (child && child.gradeId) {
+      this.state.selectedScheduleGrade = child.gradeId;
+      this.state.selectedSyllabusGrade = child.gradeId;
+    }
+    this.saveState();
+    this.notify();
+  }
+
+  // --- Mutaciones de Estado ---
+  setRole(role) {
+    if (this.state.users[role]) {
+      this.state.currentRole = role;
+      this.saveState();
+    }
+  }
+
+  setView(view) {
+    this.state.currentView = view;
+    this.saveState();
+  }
+
+  setSelectedScheduleGrade(gradeId) {
+    this.state.selectedScheduleGrade = gradeId;
+    this.saveState();
+  }
+
+  setSelectedSyllabusGrade(gradeId) {
+    this.state.selectedSyllabusGrade = gradeId;
+    this.saveState();
+  }
+
+  setUsersManagementTab(tab) {
+    this.state.usersManagementTab = tab;
+    this.saveState();
+  }
+
+  setUsersRoleFilter(filter) {
+    this.state.usersRoleFilter = filter;
+    this.saveState();
+  }
+
+  createSystemUser(userData) {
+    const role = userData.role || "Docente";
+    let defaultCodePrefix = "DOC";
+    if (role === "Estudiante") defaultCodePrefix = "EST";
+    else if (role === "Apoderado") defaultCodePrefix = "FAM";
+    else if (role === "Directivo") defaultCodePrefix = "ADM";
+
+    const autoCode = userData.code || `${defaultCodePrefix}-2026-${Math.floor(100 + Math.random() * 900)}`;
+    const cleanUser = userData.username || userData.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '.');
+
+    const newUser = {
+      id: `USR-${Math.floor(100 + Math.random() * 900)}`,
+      code: autoCode,
+      username: cleanUser,
+      password: userData.password || (role === "Estudiante" ? "estudiante2026" : role === "Apoderado" ? "padre2026" : role === "Directivo" ? "admin2026" : "docente2026"),
+      name: userData.name,
+      email: userData.email || `${cleanUser}@eleducador.edu.pe`,
+      role: role,
+      detail: userData.detail || (role === "Docente" ? (userData.subject || "Docente de Asignatura") : role === "Estudiante" ? userData.gradeLevel : role === "Apoderado" ? `Apoderado de ${userData.studentName || 'Estudiante'}` : "Coordinación Institucional"),
+      dni: userData.dni || "",
+      phone: userData.phone || "",
+      assignedGrades: userData.assignedGrades || [],
+      weeklyHours: userData.weeklyHours || (role === "Docente" ? "24 hrs" : ""),
+      studentName: userData.studentName || "",
+      tutor: userData.tutor || "",
+      guardian: userData.guardian || "",
+      hasAdminPrivilege: !!userData.hasAdminPrivilege,
+      status: "Activo",
+      createdDate: new Date().toLocaleDateString("es-PE")
+    };
+
+    if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
+    this.state.systemUsers.unshift(newUser);
+
+    // Si es docente con carga horaria o asignación, agregarlo también a teachersList si no existe
+    if (role === "Docente") {
+      if (!this.state.teachersList) this.state.teachersList = [...initialData.teachersList];
+      const existsInList = this.state.teachersList.some(t => t.id === newUser.code || t.name === newUser.name);
+      if (!existsInList) {
+        this.state.teachersList.push({
+          id: newUser.code,
+          name: newUser.name,
+          subject: userData.subject || "Asignatura Asignada",
+          department: "Coordinación Pedagógica",
+          weeklyHours: parseInt(userData.weeklyHours) || 24,
+          courses: [userData.subject || "Asignatura"],
+          assignedGrades: userData.assignedGrades && userData.assignedGrades.length > 0 ? userData.assignedGrades : ["4to de Secundaria"],
+          classrooms: ["Aula 204 - Pabellón A"]
+        });
+      }
+    }
+
+    // Si es estudiante, agregarlo también a enrollments para que tenga su QR y matrícula instantánea
+    if (role === "Estudiante" || role === "Alumno") {
+      if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+      const existsInEnrollment = this.state.enrollments.some(e => e.studentCode === newUser.code || (newUser.dni && e.dni === newUser.dni));
+      if (!existsInEnrollment) {
+        this.state.enrollments.unshift({
+          id: `MATR-2026-${Math.floor(100 + Math.random() * 900)}`,
+          studentCode: newUser.code,
+          studentName: newUser.name,
+          dni: newUser.dni || "76543210",
+          siagieCode: `2026-${newUser.dni || newUser.code || Math.floor(10000000 + Math.random() * 90000000)}`,
+          grade: newUser.detail || "4° de Secundaria",
+          gradeId: "4sec",
+          level: "Secundaria",
+          guardian: newUser.guardian || "Apoderado Registrado",
+          guardianPhone: newUser.phone || "987-654-321",
+          status: "Matriculado (FUM Completa)",
+          bloodType: "O+",
+          insurance: "EsSalud / SIS",
+          allergies: "Sin alergias",
+          medicalCondition: "Apto para actividad física",
+          documents: {
+            dniStudent: true,
+            dniParent: true,
+            birthCertificate: true,
+            siagieFUM: true,
+            reportCard: true,
+            vaccinationCard: true
+          }
+        });
+      }
+    }
+
+    this.saveState();
+    this.notify();
+    return newUser;
+  }
+
+  updateSystemUser(userId, updatedData) {
+    if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
+    const index = this.state.systemUsers.findIndex(u => u.id === userId);
+    if (index !== -1) {
+      this.state.systemUsers[index] = {
+        ...this.state.systemUsers[index],
+        ...updatedData
+      };
+      this.saveState();
+      return this.state.systemUsers[index];
+    }
+    return null;
+  }
+
+  deleteSystemUser(userId) {
+    if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
+    const userToDelete = this.state.systemUsers.find(u => u.id === userId || u.code === userId);
+    this.state.systemUsers = this.state.systemUsers.filter(u => u.id !== userId && u.code !== userId);
+    
+    if (userToDelete) {
+      if (this.state.enrollments) {
+        this.state.enrollments = this.state.enrollments.filter(e => e.studentCode !== userToDelete.code && e.studentName !== userToDelete.name);
+      }
+      if (this.state.teachersList) {
+        this.state.teachersList = this.state.teachersList.filter(t => t.id !== userToDelete.code && t.name !== userToDelete.name);
+      }
+    }
+    this.saveState();
+    this.notify();
+  }
+
+  toggleTeacherAdminPrivilege(userId) {
+    const user = this.state.systemUsers.find(u => u.id === userId);
+    if (user && (user.role === "Docente" || user.role === "Directivo")) {
+      user.hasAdminPrivilege = !user.hasAdminPrivilege;
+      if (user.code === "DOC-2026-015" && this.state.users.docente) {
+        this.state.users.docente.hasAdminPrivileges = user.hasAdminPrivilege;
+      }
+      this.saveState();
+      return user.hasAdminPrivilege;
+    }
+    return null;
+  }
+
+  // --- Configuración Dinámica de Pestañas y Espacios Visibles ---
+  updateNavigationTabsConfig(role, tabs) {
+    if (!this.state.navigationTabsConfig) {
+      this.state.navigationTabsConfig = JSON.parse(JSON.stringify(initialData.navigationTabsConfig));
+    }
+    this.state.navigationTabsConfig[role] = tabs;
+    this.saveState();
+  }
+
+  toggleNavigationTab(role, tabId, isEnabled) {
+    if (!this.state.navigationTabsConfig) {
+      this.state.navigationTabsConfig = JSON.parse(JSON.stringify(initialData.navigationTabsConfig));
+    }
+    if (this.state.navigationTabsConfig[role]) {
+      const tab = this.state.navigationTabsConfig[role].find(t => t.id === tabId);
+      if (tab) {
+        tab.enabled = isEnabled;
+        this.saveState();
+        return true;
+      }
+    }
+    return false;
+  }
+
+  renameNavigationTab(role, tabId, newLabel, newBadge = "") {
+    if (!this.state.navigationTabsConfig) {
+      this.state.navigationTabsConfig = JSON.parse(JSON.stringify(initialData.navigationTabsConfig));
+    }
+    if (this.state.navigationTabsConfig[role]) {
+      const tab = this.state.navigationTabsConfig[role].find(t => t.id === tabId);
+      if (tab) {
+        tab.label = newLabel;
+        tab.badge = newBadge;
+        this.saveState();
+        return true;
+      }
+    }
+    return false;
+  }
+
+  resetNavigationTabsToDefault(role = null) {
+    if (role && initialData.navigationTabsConfig[role]) {
+      this.state.navigationTabsConfig[role] = JSON.parse(JSON.stringify(initialData.navigationTabsConfig[role]));
+    } else {
+      this.state.navigationTabsConfig = JSON.parse(JSON.stringify(initialData.navigationTabsConfig));
+    }
+    this.saveState();
+  }
+
+  createEnrollment(data) {
+    const studentCode = data.studentCode || `EST-2026-${Math.floor(100 + Math.random() * 900)}`;
+    const newEnrollment = {
+      id: data.id || `MATR-2026-${Math.floor(100 + Math.random() * 900)}`,
+      studentCode: studentCode,
+      studentName: data.studentName,
+      dni: data.dni || "Pendiente",
+      siagieCode: data.siagieCode || `2026-${data.dni || Math.floor(10000000 + Math.random() * 90000000)}`,
+      birthDate: data.birthDate || "14/05/2010",
+      gender: data.gender || "Femenino",
+      address: data.address || "San Juan de Lurigancho",
+      district: data.district || "San Juan de Lurigancho",
+      bloodType: data.bloodType || "O+",
+      insurance: data.insurance || "EsSalud / SIS",
+      allergies: data.allergies || "Sin alergias conocidas",
+      medicalCondition: data.medicalCondition || "Ninguna (Apto para actividades escolares)",
+      emergencyContact: data.emergencyContact || data.guardian || "Apoderado",
+      emergencyPhone: data.emergencyPhone || data.guardianPhone || "987-654-321",
+      level: data.level || "Secundaria",
+      grade: data.grade || "4° de Secundaria",
+      gradeId: data.gradeId || "4sec",
+      guardian: data.guardian || "Apoderado Titular",
+      guardianDni: data.guardianDni || "41982301",
+      guardianPhone: data.guardianPhone || "987-654-321",
+      guardianEmail: data.guardianEmail || `${data.studentName.toLowerCase().replace(/\s+/g, '.')}@gmail.com`,
+      enrollmentDate: data.enrollmentDate || new Date().toLocaleDateString("es-PE"),
+      feeStatus: data.feeStatus || "Pagado (S/ 520.00)",
+      status: data.status || "Matriculado (FUM Completa)",
+      certificateNo: `CONST-MAT-2026-${Math.floor(100 + Math.random() * 900)}`,
+      documents: data.documents || {
+        dniStudent: true,
+        dniParent: true,
+        birthCertificate: true,
+        siagieFUM: true,
+        reportCard: true,
+        vaccinationCard: true
+      }
+    };
+
+    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    this.state.enrollments.unshift(newEnrollment);
+
+    this.createSystemUser({
+      code: studentCode,
+      name: data.studentName,
+      email: `${data.studentName.toLowerCase().replace(/\s+/g, '.')}@eleducador.edu.pe`,
+      role: "Estudiante",
+      detail: data.grade,
+      password: "estudiante2026",
+      dni: data.dni,
+      guardian: data.guardian,
+      hasAdminPrivilege: false
+    });
+
+    this.saveState();
+    this.notify();
+    return newEnrollment;
+  }
+
+  updateEnrollmentFUM(enrollmentId, fumData) {
+    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    const enrollment = this.state.enrollments.find(e => e.id === enrollmentId || e.studentCode === enrollmentId);
+    if (enrollment) {
+      Object.assign(enrollment, fumData);
+      this.saveState();
+      this.notify();
+      return enrollment;
+    }
+    return null;
+  }
+
+  updateScheduleSlot(gradeId, rowIndex, dayKey, slotData) {
+    const targetGrade = gradeId || this.state.selectedScheduleGrade || "4sec-a";
+    if (!this.state.schedules[targetGrade]) {
+      this.state.schedules[targetGrade] = this.getEmptyScheduleTemplate();
+    }
+
+    if (this.state.schedules[targetGrade][rowIndex]) {
+      this.state.schedules[targetGrade][rowIndex][dayKey] = {
+        course: slotData.course,
+        teacher: slotData.teacher,
+        room: slotData.room || "Aula Principal",
+        type: slotData.type || "theory",
+        color: slotData.color || "navy"
+      };
+      this.saveState();
+      return true;
+    }
+    return false;
+  }
+
+  deleteScheduleSlot(gradeId, rowIndex, dayKey) {
+    const targetGrade = gradeId || this.state.selectedScheduleGrade || "4sec-a";
+    if (this.state.schedules[targetGrade] && this.state.schedules[targetGrade][rowIndex]) {
+      this.state.schedules[targetGrade][rowIndex][dayKey] = null;
+      this.saveState();
+      return true;
+    }
+    return false;
+  }
+
+  getEmptyScheduleTemplate() {
+    return [
+      { time: "08:00 - 08:50", mon: null, tue: null, wed: null, thu: null, fri: null },
+      { time: "08:50 - 09:40", mon: null, tue: null, wed: null, thu: null, fri: null },
+      { time: "09:40 - 10:30", mon: null, tue: null, wed: null, thu: null, fri: null },
+      { time: "10:30 - 10:50", isBreak: true, title: "Receso Matutino" },
+      { time: "10:50 - 11:40", mon: null, tue: null, wed: null, thu: null, fri: null },
+      { time: "11:40 - 12:30", mon: null, tue: null, wed: null, thu: null, fri: null },
+      { time: "12:30 - 01:20", mon: null, tue: null, wed: null, thu: null, fri: null },
+      { time: "01:20 - 01:50", isBreak: true, isLunch: true, title: "Almuerzo Escolar" },
+      { time: "01:50 - 02:40", mon: null, tue: null, wed: null, thu: null, fri: null },
+      { time: "02:40 - 03:30", mon: null, tue: null, wed: null, thu: null, fri: null }
+    ];
+  }
+
+  setFullGradeSchedule(gradeId, scheduleArray) {
+    this.state.schedules[gradeId] = scheduleArray;
+    this.saveState();
+    return true;
+  }
+
+  cloneSchedule(sourceGradeId, targetGradeId) {
+    const src = this.state.schedules[sourceGradeId] || this.state.schedules["4sec-a"];
+    if (src) {
+      this.state.schedules[targetGradeId] = JSON.parse(JSON.stringify(src));
+      this.saveState();
+      return true;
+    }
+    return false;
+  }
+
+  clearGradeSchedule(gradeId) {
+    this.state.schedules[gradeId] = this.getEmptyScheduleTemplate();
+    this.saveState();
+    return true;
+  }
+
+  setTeacherScheduleTab(tab) {
+    this.state.teacherScheduleTab = tab;
+    this.saveState();
+  }
+
+  setSelectedTeacher(teacherId) {
+    this.state.selectedTeacherId = teacherId;
+    this.saveState();
+  }
+
+  setSelectedTeacherCourseFilter(course) {
+    this.state.selectedTeacherCourseFilter = course;
+    this.saveState();
+  }
+
+  // =========================================================================
+  // GESTIÓN DE ESTRUCTURA DE GRADOS Y SECCIONES (ADMINISTRADOR)
+  // =========================================================================
+  toggleAcademicSections(hasSections) {
+    if (!this.state.academicConfig) {
+      this.state.academicConfig = { hasSections: false, defaultSectionLabel: "Única" };
+    }
+    this.state.academicConfig.hasSections = !!hasSections;
+    this.saveState();
+  }
+
+  addGrade(gradeData) {
+    if (!this.state.gradesCatalog) {
+      this.state.gradesCatalog = [...initialData.gradesCatalog];
+    }
+    const newGrade = {
+      id: gradeData.id || `grd-${Date.now().toString().slice(-4)}`,
+      label: gradeData.label || "Nuevo Grado",
+      level: gradeData.level || "Secundaria",
+      section: gradeData.section || "",
+      classroom: gradeData.classroom || "Pabellón A - Aula 101",
+      tutor: gradeData.tutor || "Por Asignar"
+    };
+    this.state.gradesCatalog.push(newGrade);
+    this.saveState();
+    return newGrade;
+  }
+
+  updateGrade(gradeId, updatedData) {
+    if (!this.state.gradesCatalog) {
+      this.state.gradesCatalog = [...initialData.gradesCatalog];
+    }
+    const index = this.state.gradesCatalog.findIndex(g => g.id === gradeId);
+    if (index !== -1) {
+      this.state.gradesCatalog[index] = { ...this.state.gradesCatalog[index], ...updatedData };
+      this.saveState();
+      return true;
+    }
+    return false;
+  }
+
+  deleteGrade(gradeId) {
+    if (!this.state.gradesCatalog) {
+      this.state.gradesCatalog = [...initialData.gradesCatalog];
+    }
+    this.state.gradesCatalog = this.state.gradesCatalog.filter(g => g.id !== gradeId);
+    this.saveState();
+  }
+
+  updateSyllabus(syllabusId, updatedData) {
+    const index = this.state.syllabi.findIndex(s => s.id === syllabusId);
+    if (index !== -1) {
+      this.state.syllabi[index] = { ...this.state.syllabi[index], ...updatedData };
+      this.saveState();
+      return true;
+    }
+    return false;
+  }
+
+  createSyllabus(newSyllabusData) {
+    const newSyllabus = {
+      id: `SIL-${Date.now().toString().slice(-4)}`,
+      gradeId: newSyllabusData.gradeId || "4sec-a",
+      gradeName: newSyllabusData.gradeName || "4to de Secundaria",
+      courseName: newSyllabusData.courseName || "Nuevo Curso",
+      courseCode: newSyllabusData.courseCode || "CUR-001",
+      teacher: newSyllabusData.teacher || "Docente Asignado",
+      hoursWeekly: newSyllabusData.hoursWeekly || "4 horas semanales",
+      bimester: newSyllabusData.bimester || "III Bimestre 2026",
+      competencies: newSyllabusData.competencies || ["Competencia formativa"],
+      units: newSyllabusData.units || [
+        { unitNumber: "Unidad I", title: "Fundamentos Clave", duration: "4 semanas", topics: ["Introducción al curso"], evaluation: "Evaluación continua" }
+      ],
+      bibliography: newSyllabusData.bibliography || "Textos oficiales Colegio El Educador."
+    };
+    this.state.syllabi.push(newSyllabus);
+    this.saveState();
+    return newSyllabus;
+  }
+
+  deleteSyllabus(syllabusId) {
+    this.state.syllabi = this.state.syllabi.filter(s => s.id !== syllabusId);
+    this.saveState();
+  }
+
+  updateNotebookReview(reviewId, updatedData) {
+    const index = this.state.notebookReviews.findIndex(r => r.id === reviewId);
+    if (index !== -1) {
+      this.state.notebookReviews[index] = {
+        ...this.state.notebookReviews[index],
+        ...updatedData,
+        status: updatedData.score >= 19 ? "Excelente" : updatedData.score >= 15 ? "Al Día" : updatedData.score >= 12 ? "Incompleto" : "Firma Requerida",
+        stampType: updatedData.score >= 19 ? "stamp-gold" : updatedData.score >= 15 ? "stamp-blue" : "stamp-red",
+        stampText: updatedData.score >= 19 ? "LOGRO DESTACADO ★" : updatedData.score >= 15 ? "REVISADO ✓" : "FALTA COMPLETAR ⚠"
+      };
+      this.saveState();
+      return true;
+    }
+    return false;
+  }
+
+  deleteNotebookReview(reviewId) {
+    this.state.notebookReviews = this.state.notebookReviews.filter(r => r.id !== reviewId);
+    this.saveState();
+  }
+
+  updateCourse(courseId, courseData) {
+    const index = this.state.courses.findIndex(c => c.id === courseId);
+    if (index !== -1) {
+      const b1 = parseFloat(courseData.b1) || 0;
+      const b2 = parseFloat(courseData.b2) || 0;
+      const b3 = parseFloat(courseData.b3) || 0;
+      const b4 = parseFloat(courseData.b4) || 0;
+      const validCount = [b1, b2, b3, b4].filter(g => g > 0).length || 1;
+      const finalGrade = (b1 + b2 + b3 + b4) / validCount;
+
+      this.state.courses[index] = {
+        ...this.state.courses[index],
+        name: courseData.name || this.state.courses[index].name,
+        teacher: courseData.teacher || this.state.courses[index].teacher,
+        b1, b2, b3, b4,
+        finalGrade: parseFloat(finalGrade.toFixed(1)),
+        status: finalGrade >= 13 ? "Aprobado" : "Desaprobado"
+      };
+      this.saveState();
+      return true;
+    }
+    return false;
+  }
+
+  updateAnnouncement(annId, updatedData) {
+    const index = this.state.announcements.findIndex(a => a.id === annId);
+    if (index !== -1) {
+      this.state.announcements[index] = {
+        ...this.state.announcements[index],
+        title: updatedData.title,
+        category: updatedData.category,
+        priority: updatedData.priority,
+        tagLabel: updatedData.priority === "high" ? "Urgente" : updatedData.priority === "urgent" ? "Destacado" : "Aviso",
+        content: updatedData.content
+      };
+      this.saveState();
+      return true;
+    }
+    return false;
+  }
+
+  deleteAnnouncement(annId) {
+    this.state.announcements = this.state.announcements.filter(a => a.id !== annId);
+    this.saveState();
+  }
+
+  getStudentBoletaCoursesCatalog(gradeId = "4sec") {
+    const isPrimaria = String(gradeId).toLowerCase().includes("prim") || String(gradeId).toLowerCase().includes("pri");
+
+    if (isPrimaria) {
+      return [
+        { id: "MAT", name: "Matemática & Aritmética", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "🔢" },
+        { id: "ALG", name: "Álgebra Elemental", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📐" },
+        { id: "GEOM", name: "Geometría Práctica", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📏" },
+        { id: "RM", name: "Razonamiento Matemático", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "🧮" },
+        { id: "COM", name: "Comunicación Integral", teacher: "Miss Julisa Magali Arroyo", area: "Comunicación", icon: "📖" },
+        { id: "LENG", name: "Lenguaje & Caligrafía", teacher: "Miss Julisa Magali Arroyo", area: "Comunicación", icon: "✍️" },
+        { id: "PL", name: "Plan Lector & Literatura", teacher: "Miss Julisa Magali Arroyo", area: "Comunicación", icon: "📚" },
+        { id: "RV", name: "Razonamiento Verbal", teacher: "Miss Julisa Magali Arroyo", area: "Comunicación", icon: "✏️" },
+        { id: "CTA", name: "Ciencia y Tecnología", teacher: "Miss Leyli Graciela Reyes", area: "Ciencia y Tecnología", icon: "🔬" },
+        { id: "BIO", name: "Biología & Anatomía", teacher: "Miss Leyli Graciela Reyes", area: "Ciencia y Tecnología", icon: "🧬" },
+        { id: "PS", name: "Personal Social & Cívica", teacher: "Miss Julisa Magali Arroyo", area: "Personal Social", icon: "🏛️" },
+        { id: "HP", name: "Historia del Perú", teacher: "Prof. Javier Vega", area: "Personal Social", icon: "🇵🇪" },
+        { id: "GEO", name: "Geografía del Perú", teacher: "Prof. Javier Vega", area: "Personal Social", icon: "🌎" },
+        { id: "COMP", name: "Computación & Informática", teacher: "Prof. Fernando Rojas", area: "EPT / Tecnología", icon: "💻" },
+        { id: "ING", name: "Inglés Institucional", teacher: "Miss Andrea Ramos", area: "Idiomas", icon: "🇬🇧" },
+        { id: "ARTE", name: "Arte y Cultura", teacher: "Miss Claudia Mendoza", area: "Arte", icon: "🎨" },
+        { id: "REL", name: "Educación Religiosa & Valores", teacher: "Prof. Manuel Soto", area: "Valores", icon: "🕊️" },
+        { id: "EDFIS", name: "Educación Física & Deporte", teacher: "Prof. Dante Morales", area: "Deporte", icon: "⚽" },
+        { id: "TUT", name: "Tutoría & Convivencia Escolar", teacher: "Miss Julisa Magali Arroyo", area: "Tutoría", icon: "★" }
+      ];
+    }
+
+    // Secundaria: Cursos Oficiales de la Boleta de Notas
+    return [
+      { id: "ARIT", name: "Aritmética", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "🔢" },
+      { id: "ALG", name: "Álgebra", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📐" },
+      { id: "GEOM", name: "Geometría", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📏" },
+      { id: "TRIG", name: "Trigonometría", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "📈" },
+      { id: "RM", name: "Razonamiento Matemático", teacher: "Prof. Roberto Silva", area: "Matemática", icon: "🧮" },
+      { id: "LENG", name: "Lenguaje y Gramática", teacher: "Miss María Daysi Reyes Milla", area: "Comunicación", icon: "✍️" },
+      { id: "LIT", name: "Literatura Universal", teacher: "Miss María Daysi Reyes Milla", area: "Comunicación", icon: "📚" },
+      { id: "RV", name: "Razonamiento Verbal", teacher: "Miss María Daysi Reyes Milla", area: "Comunicación", icon: "✏️" },
+      { id: "BIO", name: "Biología & Anatomía", teacher: "Miss Leyli Graciela Reyes Cerquen", area: "Ciencia y Tecnología", icon: "🧬" },
+      { id: "FIS", name: "Física Elemental", teacher: "Miss Leyli Graciela Reyes Cerquen", area: "Ciencia y Tecnología", icon: "⚡" },
+      { id: "QUIM", name: "Química Inorgánica", teacher: "Miss Leyli Graciela Reyes Cerquen", area: "Ciencia y Tecnología", icon: "🧪" },
+      { id: "HP", name: "Historia del Perú", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "🇵🇪" },
+      { id: "HU", name: "Historia Universal", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "📜" },
+      { id: "GEO", name: "Geografía & Economía", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "🌎" },
+      { id: "FILO", name: "Filosofía", teacher: "Prof. Javier Vega", area: "Ciencias Sociales", icon: "🏛️" },
+      { id: "CIV", name: "Educación Cívica (DPCC)", teacher: "Miss Julisa Magali Arroyo Araujo", area: "DPCC", icon: "⚖️" },
+      { id: "PSIC", name: "Psicología", teacher: "Miss Julisa Magali Arroyo Araujo", area: "DPCC", icon: "🧠" },
+      { id: "COMP", name: "Computación & Robótica", teacher: "Prof. Fernando Rojas", area: "EPT", icon: "💻" },
+      { id: "GEST", name: "Gestión Empresarial & Emprendimiento", teacher: "Prof. Fernando Rojas", area: "EPT", icon: "💼" },
+      { id: "ING", name: "Inglés Institucional (B2/C1)", teacher: "Miss Andrea Ramos", area: "Idiomas", icon: "🇬🇧" },
+      { id: "ARTE", name: "Arte y Cultura", teacher: "Miss Claudia Mendoza", area: "Arte", icon: "🎨" },
+      { id: "REL", name: "Educación Religiosa (Valores y Lid.)", teacher: "Prof. Manuel Soto", area: "Valores", icon: "🕊️" },
+      { id: "EDFIS", name: "Educación Física & Deporte", teacher: "Prof. Dante Morales", area: "Deporte", icon: "⚽" },
+      { id: "COND", name: "Conducta y Disciplina", teacher: "Prof. Roberto Silva (Tutor)", area: "Tutoría", icon: "★" }
+    ];
+  }
+
+  getNotebookSubjectsCatalog(gradeId = "4sec") {
+    return this.getStudentBoletaCoursesCatalog(gradeId);
+  }
+
+  getStudentAllBoletaStickersData(studentIdOrCode = "EST-2026-042") {
+    const enrollments = this.getEnrollments();
+    let student = enrollments.find(e => 
+      e.studentCode === studentIdOrCode || 
+      e.dni === studentIdOrCode || 
+      e.id === studentIdOrCode || 
+      (e.studentName && e.studentName.toLowerCase().includes(studentIdOrCode.toLowerCase()))
+    );
+    if (!student) {
+      student = enrollments[0] || { studentCode: "EST-2026-042", studentName: "Sofía Méndez Flores", grade: "4° de Secundaria", gradeId: "4sec" };
+    }
+
+    const boletaCourses = this.getStudentBoletaCoursesCatalog(student.gradeId || "4sec");
+    const stickers = [];
+
+    boletaCourses.forEach(c => {
+      const rawCode = `QR-NB-${student.studentCode || student.dni}-${c.id}`;
+      const pipePayload = `QR-NB|${student.studentCode || student.dni}|${student.studentName}|${student.grade || '4° de Secundaria'}|${c.name}|${c.teacher}`;
+
+      stickers.push({
+        qrCode: rawCode,
+        qrPayload: pipePayload,
+        studentName: student.studentName,
+        studentCode: student.studentCode || student.dni,
+        dni: student.dni,
+        grade: student.grade || "4° de Secundaria",
+        gradeId: student.gradeId || "4sec",
+        course: c.name,
+        courseId: c.id,
+        teacher: c.teacher,
+        area: c.area,
+        icon: c.icon || "📚"
+      });
+    });
+
+    return {
+      student: student,
+      coursesCount: stickers.length,
+      stickers: stickers
+    };
+  }
+
+  getNotebookStickersData(gradeId = "4sec", filterStudentId = "all", filterCourse = "all") {
+    const allEnrollments = this.getEnrollments();
+    const cleanGradeId = (gradeId || "4sec").toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    let enrollments = allEnrollments.filter(e => {
+      if (!gradeId || gradeId === "all") return true;
+      const egId = (e.gradeId || this.resolveStudentGradeId(e.grade) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+      return egId === cleanGradeId || egId.includes(cleanGradeId) || cleanGradeId.includes(egId);
+    });
+
+    if (enrollments.length === 0 && allEnrollments.length > 0) {
+      enrollments = allEnrollments.slice(0, 3);
+    }
+
+    const stickers = [];
+
+    const studentsToProcess = (filterStudentId && filterStudentId !== "all") 
+      ? enrollments.filter(e => e.studentCode === filterStudentId || e.dni === filterStudentId || e.id === filterStudentId)
+      : enrollments;
+
+    studentsToProcess.forEach(st => {
+      // Usar el catálogo de cursos específico del grado del estudiante
+      const studentSubjects = this.getStudentBoletaCoursesCatalog(st.gradeId || gradeId);
+      const filteredSubjects = (filterCourse && filterCourse !== "all")
+        ? studentSubjects.filter(sb => sb.id === filterCourse || sb.name === filterCourse || sb.name.toLowerCase().includes(filterCourse.toLowerCase()))
+        : studentSubjects;
+
+      filteredSubjects.forEach(sb => {
+        // Código formateado estandarizado: QR-NB|CodigoAlumno|NombreAlumno|Grado|Curso|Docente
+        const rawCode = `QR-NB-${st.studentCode || st.dni}-${sb.id}`;
+        const pipePayload = `QR-NB|${st.studentCode || st.dni}|${st.studentName}|${st.grade || '4° de Secundaria'}|${sb.name}|${sb.teacher}`;
+
+        stickers.push({
+          qrCode: rawCode,
+          qrPayload: pipePayload,
+          studentName: st.studentName,
+          studentCode: st.studentCode || st.dni,
+          dni: st.dni,
+          grade: st.grade || "4° de Secundaria",
+          gradeId: st.gradeId || "4sec",
+          course: sb.name,
+          courseId: sb.id,
+          teacher: sb.teacher,
+          area: sb.area,
+          icon: sb.icon || "📚"
+        });
+      });
+    });
+
+    return stickers;
+  }
+
+  findNotebookByQR(qrCode) {
+    if (!qrCode) qrCode = "QR-NB-EST042-MAT";
+    const cleanCode = qrCode.trim();
+
+    // 1. Si el código QR utiliza el formato delimitado por pipes: QR-NB|CODIGO|ALUMNO|GRADO|CURSO|DOCENTE
+    if (cleanCode.startsWith("QR-NB|") || cleanCode.includes("|")) {
+      const parts = cleanCode.split("|");
+      if (parts.length >= 5) {
+        const stCode = parts[1] || "EST-2026-042";
+        const stName = parts[2] || "Sofía Méndez Flores";
+        const grd = parts[3] || "4° de Secundaria";
+        const crs = parts[4] || "Matemática Avanzada";
+        const tch = parts[5] || "Prof. Roberto Silva";
+
+        return {
+          qrCode: cleanCode,
+          studentId: stCode,
+          studentName: stName,
+          grade: grd,
+          course: crs,
+          teacher: tch,
+          lastReview: this.state.notebookReviews.find(r => r.studentName === stName && r.course === crs) || null
+        };
+      }
+    }
+
+    // 2. Si el código QR contiene un JSON estructurado
+    if (cleanCode.startsWith("{") && cleanCode.endsWith("}")) {
+      try {
+        const parsed = JSON.parse(cleanCode);
+        const stName = parsed.alumno || parsed.studentName || parsed.student || "Sofía Méndez Flores";
+        const crs = parsed.curso || parsed.course || "Matemática Avanzada";
+        const tch = parsed.profesor || parsed.teacher || "Prof. Roberto Silva";
+        const grd = parsed.grado || parsed.grade || "4° de Secundaria";
+
+        return {
+          qrCode: cleanCode,
+          studentId: parsed.codigo || parsed.studentId || "EST-2026-042",
+          studentName: stName,
+          grade: grd,
+          course: crs,
+          teacher: tch,
+          lastReview: this.state.notebookReviews.find(r => r.studentName === stName && r.course === crs) || null
+        };
+      } catch (e) {}
+    }
+
+    // 3. Si coincide con una revisión previa registrada
+    const matchedReview = this.state.notebookReviews.find(r => r.qrCode === cleanCode);
+    if (matchedReview) {
+      return {
+        qrCode: matchedReview.qrCode,
+        studentId: matchedReview.studentId,
+        studentName: matchedReview.studentName,
+        grade: matchedReview.grade,
+        course: matchedReview.course,
+        teacher: matchedReview.teacher || "Prof. Roberto Silva",
+        lastReview: matchedReview
+      };
+    }
+
+    // 4. Resolver por catálogo dinámico de alumnos, cursos y profesores
+    const enrollments = this.getEnrollments();
+    const subjects = this.getNotebookSubjectsCatalog();
+
+    let matchedStudent = enrollments.find(e => 
+      cleanCode.includes(e.studentCode) || 
+      cleanCode.includes(e.dni) || 
+      (e.studentName && cleanCode.toLowerCase().includes(e.studentName.toLowerCase().split(' ')[0]))
+    );
+    if (!matchedStudent) {
+      matchedStudent = enrollments[0] || { studentCode: "EST-2026-042", studentName: "Sofía Méndez Flores", grade: "4° de Secundaria" };
+    }
+
+    let matchedSubject = subjects.find(s => cleanCode.includes(s.id) || cleanCode.toLowerCase().includes(s.name.toLowerCase().substring(0, 4)));
+    if (!matchedSubject) {
+      if (cleanCode.includes("COM")) matchedSubject = subjects[1];
+      else if (cleanCode.includes("CTA") || cleanCode.includes("CIEN")) matchedSubject = subjects[2];
+      else if (cleanCode.includes("SOC") || cleanCode.includes("HIS")) matchedSubject = subjects[3];
+      else if (cleanCode.includes("ING")) matchedSubject = subjects[4];
+      else if (cleanCode.includes("EPT") || cleanCode.includes("COMP")) matchedSubject = subjects[5];
+      else if (cleanCode.includes("DPCC") || cleanCode.includes("CIV")) matchedSubject = subjects[6];
+      else if (cleanCode.includes("ARTE")) matchedSubject = subjects[7];
+      else matchedSubject = subjects[0];
+    }
+
+    return {
+      qrCode: cleanCode,
+      studentId: matchedStudent.studentCode || matchedStudent.id || "EST-2026-042",
+      studentName: matchedStudent.studentName,
+      grade: matchedStudent.grade || "4° de Secundaria",
+      course: matchedSubject.name,
+      teacher: matchedSubject.teacher,
+      lastReview: this.state.notebookReviews.find(r => r.studentName === matchedStudent.studentName && r.course === matchedSubject.name) || null
+    };
+  }
+
+  registerNotebookReview(data) {
+    const currentUser = this.getCurrentUser();
+    const currentRole = this.getCurrentRole();
+
+    const scoreNum = parseFloat(data.score) || 18;
+    const status = data.status || (scoreNum >= 15 ? "Al Día" : scoreNum >= 11 ? "Observado" : "No Presentó");
+    const stampType = status === "Al Día" ? "stamp-al-dia" : status === "Observado" ? "stamp-observado" : "stamp-no-presento";
+    const stampText = status === "Al Día" ? "<span class='status-dot-green'></span> REVISADO & AL DÍA" : status === "Observado" ? "<span class='status-dot-yellow'></span> OBSERVADO" : "<span class='status-dot-red'></span> NO PRESENTÓ";
+
+    const newReview = {
+      id: `REV-2026-${Math.floor(100 + Math.random() * 900)}`,
+      qrCode: data.qrCode || `QR-CUAD-${data.studentId || 'EST042'}-${data.course || 'MAT'}`,
+      studentId: data.studentId || "EST-2026-042",
+      studentName: data.studentName || "Sofía Méndez Flores",
+      grade: data.grade || "4° de Secundaria",
+      course: data.course || "Matemática Avanzada",
+      teacher: data.teacher || "Prof. Roberto Silva",
+      evaluator: currentUser.name || (currentRole === "auxiliar" ? "Lic. Carlos Medina (Auxiliar)" : "Docente Responsable"),
+      evaluatorRole: currentRole === "auxiliar" ? "Auxiliar de Educación" : currentRole === "docente" ? "Docente Titular" : "Coordinación",
+      date: new Date().toLocaleDateString("es-PE"),
+      time: new Date().toLocaleTimeString("es-PE", { hour: "2-digit", minute: "2-digit" }),
+      score: scoreNum,
+      status: status,
+      stampType: stampType,
+      stampText: stampText,
+      checklist: data.checklist || { margenes: true, fechas: true, teoriaCompleta: true, ejerciciosAlDia: true, pulcritud: true },
+      teacherRemarks: data.teacherRemarks || (status === "Al Día" ? "Cuaderno completo y tareas al día." : "Presentar regularización en la siguiente sesión.")
+    };
+
+    // Actualizar si ya existía una revisión previa para este alumno y curso en la misma fecha, o agregar nueva
+    const existingIndex = this.state.notebookReviews.findIndex(r => r.studentName === newReview.studentName && r.course === newReview.course && r.date === newReview.date);
+    if (existingIndex >= 0) {
+      this.state.notebookReviews[existingIndex] = newReview;
+    } else {
+      this.state.notebookReviews.unshift(newReview);
+    }
+
+    if (this.state.users && this.state.users.auxiliar) {
+      this.state.users.auxiliar.notebooksReviewedToday = (this.state.users.auxiliar.notebooksReviewedToday || 0) + 1;
+    }
+    if (this.state.users && this.state.users.docente) {
+      this.state.users.docente.scannedNotebooksToday = (this.state.users.docente.scannedNotebooksToday || 0) + 1;
+    }
+
+    this.saveState();
+    return newReview;
+  }
+
+  isAccessLockedForCurrentUser() {
+    return false;
+  }
+
+  payAndUnlockIntranet(paymentId, method = "Tarjeta", details = {}) {
+    const payment = this.state.payments.find(p => p.id === paymentId) || this.state.payments[0];
+    const amountPaid = payment ? payment.amount : 480.00;
+    const receiptCode = `REC-2026-AUG-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    if (payment) {
+      payment.status = "paid";
+      payment.paidDate = new Date().toLocaleDateString("es-PE");
+      payment.receiptNo = receiptCode;
+      payment.paymentMethod = method;
+    }
+
+    // Desbloquear al estudiante y padre
+    if (this.state.users.estudiante) {
+      this.state.users.estudiante.isAccessLocked = false;
+      this.state.users.estudiante.paymentsUpToDate = true;
+      this.state.users.estudiante.pensionStatus = "Al Día";
+      this.state.users.estudiante.pendingDebtAmount = 0.00;
+    }
+
+    if (this.state.users.padre) {
+      this.state.users.padre.isAccessLocked = false;
+      this.state.users.padre.pensionStatus = "Al Día";
+      this.state.users.padre.pendingDebtAmount = 0.00;
+    }
+
+    // Actualizar registro financiero de familias
+    if (this.state.familiesFinancial) {
+      const fam = this.state.familiesFinancial.find(f => f.familyId === "FAM-2026-108");
+      if (fam) {
+        fam.isAccessLocked = false;
+        fam.pensionStatus = "al_dia";
+        fam.pendingAmount = 0.00;
+        fam.lastPaymentDate = new Date().toLocaleDateString("es-PE");
+        fam.receiptNo = receiptCode;
+      }
+    }
+
+    // Sumar a la recaudación oficial institucional
+    if (this.state.institution && this.state.institution.economicReport) {
+      this.state.institution.economicReport.collectedAmount += amountPaid;
+    }
+    if (this.state.users.admin) {
+      this.state.users.admin.totalIncome = (this.state.users.admin.totalIncome || 25130.00) + amountPaid;
+    }
+
+    this.saveState();
+    return {
+      success: true,
+      receiptNo: receiptCode,
+      amount: amountPaid,
+      method: method,
+      date: new Date().toLocaleDateString("es-PE")
+    };
+  }
+
+  toggleFamilyAccessLock(familyId) {
+    if (!this.state.familiesFinancial) return null;
+    const fam = this.state.familiesFinancial.find(f => f.familyId === familyId);
+    if (fam) {
+      fam.isAccessLocked = !fam.isAccessLocked;
+      fam.pensionStatus = fam.isAccessLocked ? "bloqueado_deuda" : "al_dia";
+
+      if (familyId === "FAM-2026-108") {
+        this.state.users.padre.isAccessLocked = fam.isAccessLocked;
+        this.state.users.padre.pensionStatus = fam.isAccessLocked ? "Bloqueado por Mora" : "Al Día";
+        this.state.users.estudiante.isAccessLocked = fam.isAccessLocked;
+        this.state.users.estudiante.paymentsUpToDate = !fam.isAccessLocked;
+        this.state.users.estudiante.pensionStatus = fam.isAccessLocked ? "Bloqueado por Mora" : "Al Día";
+      }
+
+      this.saveState();
+      return fam.isAccessLocked;
+    }
+    return null;
+  }
+
+  // =========================================================================
+  // CONTROL DE ASISTENCIA BIOMÉTRICO Y DIARIO
+  // =========================================================================
+  getAttendanceRecords(filterGradeId = null, filterDate = null) {
+    if (!this.state.attendanceRecords) {
+      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
+    }
+    let list = this.state.attendanceRecords;
+    if (filterGradeId && filterGradeId !== "all") {
+      list = list.filter(r => r.gradeId === filterGradeId || (r.grade && r.grade.toLowerCase().includes(filterGradeId.toLowerCase())));
+    }
+    if (filterDate) {
+      list = list.filter(r => r.date === filterDate);
+    }
+    return list;
+  }
+
+  updateStudentAttendanceStatus(recordId, newStatus, arrivalTime = null, observations = null) {
+    if (!this.state.attendanceRecords) {
+      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
+    }
+    const rec = this.state.attendanceRecords.find(r => r.id === recordId);
+    if (rec) {
+      rec.status = newStatus;
+      if (arrivalTime !== null) rec.arrivalTime = arrivalTime;
+      if (observations !== null) rec.observations = observations;
+      if (newStatus === "Presente" && (!rec.arrivalTime || rec.arrivalTime === "--:--")) {
+        rec.arrivalTime = "07:38 AM";
+      }
+      if (newStatus === "Tardanza" && (!rec.arrivalTime || rec.arrivalTime === "--:--")) {
+        rec.arrivalTime = "07:55 AM";
+      }
+      if (newStatus === "Falta") {
+        rec.arrivalTime = "--:--";
+      }
+      this.saveState();
+      return rec;
+    }
+    return null;
+  }
+
+  markAllStudentsPresent(gradeId = "4sec", date = "19/08/2026") {
+    if (!this.state.attendanceRecords) {
+      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
+    }
+    this.state.attendanceRecords.forEach(r => {
+      if ((r.gradeId === gradeId || (r.grade && r.grade.includes(gradeId))) && r.date === date) {
+        r.status = "Presente";
+        r.arrivalTime = (!r.arrivalTime || r.arrivalTime === "--:--") ? "07:40 AM" : r.arrivalTime;
+        r.observations = "Puntual (Marcación Masiva Aula)";
+      }
+    });
+    this.saveState();
+  }
+
+  submitAttendanceJustification(studentId, date, reason, attachment = "Constancia_Medica.pdf") {
+    if (!this.state.attendanceRecords) {
+      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
+    }
+    let rec = this.state.attendanceRecords.find(r => (r.studentId === studentId || r.studentCode === studentId) && r.date === date);
+    if (!rec) {
+      rec = {
+        id: `ATT-${Date.now().toString().slice(-4)}`,
+        studentId: studentId,
+        studentCode: studentId,
+        studentName: "Sofía Méndez Flores",
+        gradeId: "4sec",
+        grade: "4° de Secundaria",
+        date: date,
+        day: "Miércoles",
+        status: "Justificada",
+        arrivalTime: "--:--",
+        exitTime: "--:--",
+        method: "Justificación de Apoderado",
+        observations: `Justificación: ${reason}`
+      };
+      this.state.attendanceRecords.unshift(rec);
+    } else {
+      rec.status = "Justificada";
+      rec.observations = `Justificación aprobada: ${reason}`;
+    }
+    this.saveState();
+    return rec;
+  }
+
+  // =========================================================================
+  // ESCÁNER QR EN PUERTA & INFORME DIARIO DE TARDANZAS / INASISTENCIAS
+  // =========================================================================
+  registerStudentQRDoorScan(qrCodeOrDni, customTime = null) {
+    if (!this.state.attendanceRecords) {
+      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
+    }
+    const matchedEnrollment = this.resolveStudentByQR(qrCodeOrDni) || this.getEnrollments()[0];
+
+    const todayDate = "19/08/2026";
+    let scanTime = customTime;
+    if (!scanTime) {
+      const now = new Date();
+      const h = now.getHours();
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const formattedH = String(h % 12 || 12).padStart(2, '0');
+      scanTime = `${formattedH}:${m} ${ampm}`;
+    }
+
+    // Regla Institucional Estricta:
+    // 07:00 a 07:45 AM -> Presente (Puntual)
+    // 07:46 a 08:30 AM -> Tardanza (+X min de demora)
+    // 08:31 AM en adelante -> Inasistencia / Falta (Puerta cerrada a las 08:30 AM)
+    let isLate = false;
+    let isDoorClosed = false;
+    let delayMinutes = 0;
+    let status = "Presente";
+    let observations = "Ingreso puntual en puerta principal";
+
+    if (scanTime.includes("07:") || scanTime.includes("08:") || scanTime.includes("09:") || scanTime.includes("10:")) {
+      const parts = scanTime.split(":");
+      const hour = parseInt(parts[0], 10);
+      const min = parseInt(parts[1].split(" ")[0], 10);
+      const ampm = scanTime.includes("PM") ? "PM" : "AM";
+
+      if (ampm === "AM") {
+        if (hour === 7 && min <= 45) {
+          status = "Presente";
+          observations = "Ingreso puntual en puerta principal";
+        } else if ((hour === 7 && min > 45) || (hour === 8 && min <= 30)) {
+          isLate = true;
+          status = "Tardanza";
+          delayMinutes = (hour === 7) ? (min - 45) : (15 + min);
+          observations = `Tardanza en portería (+${delayMinutes} min de retraso)`;
+        } else if (hour >= 8 && min > 30) {
+          isDoorClosed = true;
+          status = "Falta";
+          delayMinutes = (hour === 8) ? (15 + min) : (75 + min);
+          observations = `Inasistencia (Puerta cerrada 08:30 AM - Ingreso Extemporáneo +${delayMinutes} min)`;
+        }
+      }
+    }
+
+    let existingRecord = this.state.attendanceRecords.find(r => 
+      (r.studentId === matchedEnrollment.studentCode || r.studentCode === matchedEnrollment.studentCode || r.dni === matchedEnrollment.dni) &&
+      r.date === todayDate
+    );
+
+    if (existingRecord) {
+      existingRecord.status = status;
+      existingRecord.arrivalTime = scanTime;
+      existingRecord.method = "Fotocheck QR (Portería Principal)";
+      existingRecord.observations = observations;
+    } else {
+      existingRecord = {
+        id: `ATT-${Date.now().toString().slice(-4)}`,
+        studentId: matchedEnrollment.studentCode,
+        studentCode: matchedEnrollment.studentCode,
+        studentName: matchedEnrollment.studentName,
+        dni: matchedEnrollment.dni,
+        gradeId: matchedEnrollment.gradeId || "4sec",
+        grade: matchedEnrollment.grade,
+        date: todayDate,
+        day: "Miércoles",
+        status: status,
+        arrivalTime: scanTime,
+        exitTime: "03:30 PM",
+        method: "Fotocheck QR (Portería Principal)",
+        observations: observations
+      };
+      this.state.attendanceRecords.unshift(existingRecord);
+    }
+
+    this.saveState();
+
+    return {
+      record: existingRecord,
+      student: matchedEnrollment,
+      status: status,
+      scanTime: scanTime,
+      isLate: isLate,
+      isDoorClosed: isDoorClosed,
+      delayMinutes: delayMinutes,
+      guardianName: matchedEnrollment.guardian || "Apoderado Registrado",
+      guardianPhone: matchedEnrollment.guardianPhone || "984-123-456",
+      guardianEmail: matchedEnrollment.guardianEmail || ""
+    };
+  }
+
+  // Escáner Inteligente Contextual: Asistencia vs. Informe de Incidencias
+  handleSmartQRScan(qrCodeOrDni, customTime = null) {
+    if (!this.state.attendanceRecords) {
+      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
+    }
+    const matchedEnrollment = this.resolveStudentByQR(qrCodeOrDni) || this.getEnrollments()[0];
+
+    const todayDate = "19/08/2026";
+    const existingRecord = this.state.attendanceRecords.find(r => 
+      (r.studentId === matchedEnrollment.studentCode || r.studentCode === matchedEnrollment.studentCode || r.dni === matchedEnrollment.dni) &&
+      r.date === todayDate &&
+      (r.status === "Presente" || r.status === "Tardanza")
+    );
+
+    // Si el estudiante YA tiene registrado su ingreso el día de hoy -> Modo Incidencias / Acciones Rápidas
+    if (existingRecord) {
+      const studentIncidents = this.getStudentIncidents(matchedEnrollment.studentCode);
+      return {
+        isAlreadyEntered: true,
+        student: matchedEnrollment,
+        record: existingRecord,
+        previousScanTime: existingRecord.arrivalTime,
+        incidentsCount: studentIncidents.length,
+        qrCode: matchedEnrollment.studentCode
+      };
+    }
+
+    // Si es el PRIMER escaneo del día -> Registrar Asistencia en Puerta
+    const attendanceResult = this.registerStudentQRDoorScan(qrCodeOrDni, customTime);
+    return {
+      isAlreadyEntered: false,
+      ...attendanceResult
+    };
+  }
+
+  getDailyAttendanceReport(date = "19/08/2026") {
+    if (!this.state.attendanceRecords) {
+      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
+    }
+    const enrollments = this.getEnrollments();
+    const dayRecords = this.state.attendanceRecords.filter(r => r.date === date);
+
+    // Mapear cada estudiante matriculado con su marcación del día
+    // Regla: Quien no marcó hasta las 08:30 AM es Inasistencia / Falta
+    const fullList = enrollments.map(enr => {
+      const rec = dayRecords.find(r => r.studentCode === enr.studentCode || r.studentId === enr.studentCode || r.dni === enr.dni);
+      return {
+        studentCode: enr.studentCode,
+        studentName: enr.studentName,
+        dni: enr.dni,
+        grade: enr.grade,
+        gradeId: enr.gradeId || "4sec",
+        level: enr.level,
+        guardian: enr.guardian,
+        guardianPhone: enr.guardianPhone,
+        status: rec ? rec.status : "Falta",
+        arrivalTime: rec ? rec.arrivalTime : "--:--",
+        method: rec ? rec.method : "No Registrado en Portería",
+        observations: rec ? rec.observations : "Inasistencia (Puerta cerrada 08:30 AM sin registro)",
+        delayMinutes: rec && rec.status === "Tardanza" ? (rec.observations.match(/\d+/) ? rec.observations.match(/\d+/)[0] : "7") : 0
+      };
+    });
+
+    const presentList = fullList.filter(s => s.status === "Presente");
+    const tardinessList = fullList.filter(s => s.status === "Tardanza");
+    const absenceList = fullList.filter(s => s.status === "Falta");
+    const justifiedList = fullList.filter(s => s.status === "Justificada");
+
+    return {
+      date: date,
+      cutoffTime: "08:30 AM",
+      totalEnrolled: fullList.length,
+      presentList,
+      tardinessList,
+      absenceList,
+      justifiedList,
+      attendanceRate: fullList.length > 0 ? Math.round(((presentList.length + tardinessList.length) / fullList.length) * 100) : 100
+    };
+  }
+
+  // =========================================================================
+  // GESTIÓN DEL LIBRO DE INCIDENCIAS & CONVIVENCIA ESCOLAR (MINEDU)
+  // =========================================================================
+  createBehaviorIncident(incidentData) {
+    if (!this.state.behaviorIncidents) {
+      this.state.behaviorIncidents = JSON.parse(JSON.stringify(initialData.behaviorIncidents || []));
+    }
+    const enrollments = this.getEnrollments();
+    const st = enrollments.find(e => e.studentCode === incidentData.studentCode || e.id === incidentData.studentCode || e.dni === incidentData.studentCode) || {
+      studentCode: incidentData.studentCode || "EST-2026-055",
+      studentName: incidentData.studentName || "Gael Alessandro Cáceres Ramos",
+      dni: incidentData.dni || "76541298",
+      grade: incidentData.grade || "4° de Secundaria",
+      gradeId: incidentData.gradeId || "4sec",
+      level: incidentData.level || "Secundaria",
+      guardian: incidentData.guardian || "Sr. Juan Carlos Cáceres",
+      guardianPhone: incidentData.guardianPhone || "984-777-888"
+    };
+
+    const newIncident = {
+      id: `INC-2026-${Math.floor(100 + Math.random() * 900)}`,
+      studentCode: st.studentCode,
+      studentName: st.studentName,
+      dni: st.dni,
+      grade: st.grade,
+      gradeId: st.gradeId || "4sec",
+      level: st.level || "Secundaria",
+      date: incidentData.date || new Date().toLocaleDateString("es-PE"),
+      time: incidentData.time || new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' }),
+      reportedBy: incidentData.reportedBy || (this.getCurrentUser() ? this.getCurrentUser().name : "Prof. Alex Lino"),
+      severity: incidentData.severity || "Leve",
+      category: incidentData.category || "Conducta en Aula",
+      location: incidentData.location || "Aula 304",
+      description: incidentData.description || "Sin descripción",
+      correctiveMeasure: incidentData.correctiveMeasure || "Diálogo reflexivo y compromiso formativo.",
+      guardian: st.guardian,
+      guardianPhone: st.guardianPhone,
+      parentMeetingRequired: !!incidentData.parentMeetingRequired,
+      status: incidentData.status || "Registrado",
+      qrCodeUsed: st.studentCode
+    };
+
+    this.state.behaviorIncidents.unshift(newIncident);
+    this.saveState();
+    return newIncident;
+  }
+
+  getStudentIncidents(studentCode) {
+    if (!this.state.behaviorIncidents) {
+      this.state.behaviorIncidents = JSON.parse(JSON.stringify(initialData.behaviorIncidents || []));
+    }
+    const clean = (studentCode || "").trim().toLowerCase();
+    return this.state.behaviorIncidents.filter(inc => 
+      (inc.studentCode && inc.studentCode.toLowerCase() === clean) ||
+      (inc.dni && inc.dni === clean) ||
+      (inc.studentName && inc.studentName.toLowerCase().includes(clean))
+    );
+  }
+
+  getAllIncidents(filterGrade = "all", filterSeverity = "all", filterSearch = "") {
+    if (!this.state.behaviorIncidents) {
+      this.state.behaviorIncidents = JSON.parse(JSON.stringify(initialData.behaviorIncidents || []));
+    }
+    let list = this.state.behaviorIncidents;
+    if (filterGrade && filterGrade !== "all") {
+      list = list.filter(i => i.gradeId === filterGrade || (i.grade && i.grade.includes(filterGrade)));
+    }
+    if (filterSeverity && filterSeverity !== "all") {
+      list = list.filter(i => i.severity === filterSeverity);
+    }
+    if (filterSearch && filterSearch.trim()) {
+      const q = filterSearch.trim().toLowerCase();
+      list = list.filter(i => 
+        (i.studentName && i.studentName.toLowerCase().includes(q)) ||
+        (i.studentCode && i.studentCode.toLowerCase().includes(q)) ||
+        (i.category && i.category.toLowerCase().includes(q)) ||
+        (i.description && i.description.toLowerCase().includes(q))
+      );
+    }
+    return list;
+  }
+
+  deleteBehaviorIncident(incidentId) {
+    if (!this.state.behaviorIncidents) return false;
+    this.state.behaviorIncidents = this.state.behaviorIncidents.filter(i => i.id !== incidentId);
+    this.saveState();
+    return true;
+  }
+
+  payPension(paymentId, method) {
+    return this.payAndUnlockIntranet(paymentId, method).receiptNo;
+  }
+
+  addAnnouncement(title, category, content, priority) {
+    const newAnn = {
+      id: `ANN-${Math.floor(50 + Math.random() * 50)}`,
+      title: title,
+      category: category || "Institucional",
+      priority: priority || "normal",
+      tagLabel: priority === "high" ? "Urgente" : priority === "urgent" ? "Destacado" : "Aviso",
+      date: new Date().toLocaleDateString("es-PE", { day: "numeric", month: "long", year: "numeric" }),
+      author: this.getCurrentUser().name,
+      content: content
+    };
+    this.state.announcements.unshift(newAnn);
+    this.saveState();
+    return newAnn;
+  }
+
+  submitJustification(date, reason) {
+    const record = this.state.attendance.find(a => a.date === date);
+    if (record) {
+      record.status = "Justificada";
+      record.subject += ` (Justificación: ${reason})`;
+    } else {
+      this.state.attendance.unshift({
+        date: date,
+        day: "Día Registrado",
+        status: "Justificada",
+        arrival: "--",
+        subject: `Justificado: ${reason}`
+      });
+    }
+    this.saveState();
+  }
+
+  // =========================================================================
+  // GESTIÓN DESCENTRALIZADA DE NOTAS Y BOLETAS OFICIALES
+  // =========================================================================
+  
+  // Guardar notas de un curso específico para múltiples estudiantes
+  saveSubjectGrades(subjectKey, studentsGradesMap) {
+    if (!this.state.boletaData) {
+      this.state.boletaData = JSON.parse(JSON.stringify(initialData.boletaData || {}));
+    }
+    
+    // studentsGradesMap: { "mendez": { b1, b2, b3, b4 }, "benitez": { b1, b2, b3, b4 }, ... }
+    for (const [studentKey, bims] of Object.entries(studentsGradesMap)) {
+      if (!this.state.boletaData[studentKey]) {
+        this.state.boletaData[studentKey] = { grades: {}, attendance: {}, appreciations: {}, parentCriteria: {} };
+      }
+      if (!this.state.boletaData[studentKey].grades) {
+        this.state.boletaData[studentKey].grades = {};
+      }
+      this.state.boletaData[studentKey].grades[subjectKey] = {
+        b1: bims.b1 !== undefined ? bims.b1 : (this.state.boletaData[studentKey].grades[subjectKey]?.b1 || ""),
+        b2: bims.b2 !== undefined ? bims.b2 : (this.state.boletaData[studentKey].grades[subjectKey]?.b2 || ""),
+        b3: bims.b3 !== undefined ? bims.b3 : (this.state.boletaData[studentKey].grades[subjectKey]?.b3 || ""),
+        b4: bims.b4 !== undefined ? bims.b4 : (this.state.boletaData[studentKey].grades[subjectKey]?.b4 || "")
+      };
+    }
+
+    this.saveState();
+    return true;
+  }
+
+  // Guardar evaluación de tutoría (Apreciación, Asistencia y Criterios Padres)
+  saveTutorEvaluation(studentKey, tutorData) {
+    if (!this.state.boletaData) {
+      this.state.boletaData = JSON.parse(JSON.stringify(initialData.boletaData || {}));
+    }
+    if (!this.state.boletaData[studentKey]) {
+      this.state.boletaData[studentKey] = { grades: {}, attendance: {}, appreciations: {}, parentCriteria: {} };
+    }
+
+    if (tutorData.appreciations) {
+      this.state.boletaData[studentKey].appreciations = {
+        ...(this.state.boletaData[studentKey].appreciations || {}),
+        ...tutorData.appreciations
+      };
+    }
+
+    if (tutorData.attendance) {
+      this.state.boletaData[studentKey].attendance = {
+        ...(this.state.boletaData[studentKey].attendance || {}),
+        ...tutorData.attendance
+      };
+    }
+
+    if (tutorData.parentCriteria) {
+      this.state.boletaData[studentKey].parentCriteria = {
+        ...(this.state.boletaData[studentKey].parentCriteria || {}),
+        ...tutorData.parentCriteria
+      };
+    }
+
+    this.saveState();
+    return true;
+  }
+
+  getBoletaData(studentKey) {
+    const all = this.state.boletaData || initialData.boletaData || {};
+    return all[studentKey] || all.mendez || null;
+  }
+
+  saveBoletaStudentData(studentKey, updatedData) {
+    if (!this.state.boletaData) {
+      this.state.boletaData = JSON.parse(JSON.stringify(initialData.boletaData || {}));
+    }
+    if (!this.state.boletaData[studentKey]) {
+      this.state.boletaData[studentKey] = { grades: {}, attendance: {}, appreciations: {}, parentCriteria: {} };
+    }
+    
+    if (updatedData.grades) {
+      this.state.boletaData[studentKey].grades = {
+        ...(this.state.boletaData[studentKey].grades || {}),
+        ...updatedData.grades
+      };
+    }
+    if (updatedData.appreciations) {
+      this.state.boletaData[studentKey].appreciations = {
+        ...(this.state.boletaData[studentKey].appreciations || {}),
+        ...updatedData.appreciations
+      };
+    }
+    if (updatedData.attendance) {
+      this.state.boletaData[studentKey].attendance = {
+        ...(this.state.boletaData[studentKey].attendance || {}),
+        ...updatedData.attendance
+      };
+    }
+    if (updatedData.parentCriteria) {
+      this.state.boletaData[studentKey].parentCriteria = {
+        ...(this.state.boletaData[studentKey].parentCriteria || {}),
+        ...updatedData.parentCriteria
+      };
+    }
+    
+    this.saveState();
+    return true;
+  }
+
+  // =========================================================================
+  // MÓDULO DE AULA VIRTUAL Y EVALUACIONES DINÁMICAS (10 PREGUNTAS)
+  // =========================================================================
+  setSelectedVirtualCourse(courseId) {
+    this.state.selectedVirtualCourseId = courseId;
+    const materials = (this.state.weeklyMaterials || []).filter(m => m.courseId === courseId);
+    if (materials.length > 0) {
+      this.state.selectedVirtualWeekId = materials[0].id;
+    }
+    this.saveState();
+    this.notify();
+  }
+
+  setSelectedVirtualWeek(weekId) {
+    this.state.selectedVirtualWeekId = weekId;
+    this.saveState();
+    this.notify();
+  }
+
+  addWeeklyMaterial(materialData) {
+    if (!this.state.weeklyMaterials) {
+      this.state.weeklyMaterials = [];
+    }
+    const newId = `MAT-SEM-${Date.now().toString().slice(-4)}`;
+    const newMaterial = {
+      id: newId,
+      courseId: materialData.courseId || "MAT-401",
+      courseName: materialData.courseName || "Matemática Avanzada",
+      gradeId: materialData.gradeId || "4sec",
+      gradeName: materialData.gradeName || "4to de Secundaria",
+      teacherId: materialData.teacherId || "DOC-2026-015",
+      teacherName: materialData.teacherName || "Prof. Roberto Silva",
+      weekNumber: parseInt(materialData.weekNumber) || (this.state.weeklyMaterials.length + 1),
+      bimester: materialData.bimester || "III Bimestre",
+      title: materialData.title || "Nueva Sesión Semanal",
+      sessionDate: materialData.sessionDate || new Date().toLocaleDateString("es-PE"),
+      summary: materialData.summary || "",
+      keyConcepts: materialData.keyConcepts || [],
+      attachments: materialData.attachments || [
+        { type: "pdf", name: "Guía_Sesión_Semanal.pdf", size: "2.1 MB", icon: "📕" },
+        { type: "pptx", name: "Diapositivas_Clase.pptx", size: "3.8 MB", icon: "" }
+      ],
+      evaluation: materialData.evaluation || null,
+      studentAttempts: []
+    };
+
+    this.state.weeklyMaterials.unshift(newMaterial);
+    this.state.selectedVirtualWeekId = newId;
+    this.state.selectedVirtualCourseId = newMaterial.courseId;
+    this.saveState();
+    this.notify();
+    return newMaterial;
+  }
+
+  // Motor Inteligente de Análisis y Extracción de Documentos (PDF, DOCX, PPTX, TXT, PNG, etc.)
+  analyzeAndExtractMaterialFromDocument(fileInfo, courseId, manualNotes = "") {
+    const availableCourses = [
+      { id: "MAT-401", name: "Matemática Avanzada", teacher: "Prof. Roberto Silva", grade: "4to de Secundaria" },
+      { id: "EPT-402", name: "Computación e Informática / Robótica", teacher: "Prof. Fernando Rojas", grade: "4to de Secundaria" },
+      { id: "CTA-403", name: "Ciencia y Tecnología (Física & Química)", teacher: "Miss Leyli Reyes Cerquen", grade: "4to de Secundaria" },
+      { id: "COM-404", name: "Comunicación & Literatura", teacher: "Miss María Daysi Reyes", grade: "4to de Secundaria" }
+    ];
+    const course = availableCourses.find(c => c.id === courseId) || availableCourses[0];
+    
+    const fileName = (fileInfo && fileInfo.name) ? fileInfo.name : "Documento_Clase_Semanal.pdf";
+    const fileSize = (fileInfo && fileInfo.size) ? fileInfo.size : "2.8 MB";
+    const fileExt = fileName.split('.').pop().toLowerCase();
+    
+    let icon = "";
+    if (fileExt === "pdf") icon = "📕";
+    else if (fileExt === "doc" || fileExt === "docx") icon = "📘";
+    else if (fileExt === "ppt" || fileExt === "pptx") icon = "";
+    else if (fileExt === "txt" || fileExt === "md") icon = "📝";
+    else if (fileExt === "png" || fileExt === "jpg" || fileExt === "jpeg") icon = "🖼️";
+    else if (fileExt === "xls" || fileExt === "xlsx") icon = "📗";
+
+    const cleanFileName = fileName.replace(/\.[^/.]+$/, "").replace(/[-_]+/g, " ");
+    const existingForCourse = (this.state.weeklyMaterials || []).filter(m => m.courseId === course.id);
+    const nextWeek = existingForCourse.length + 1;
+
+    let detectedTitle = "";
+    let detectedSummary = "";
+    let detectedConcepts = [];
+
+    const lowerContent = (cleanFileName + " " + manualNotes).toLowerCase();
+
+    if (course.id === "MAT-401") {
+      if (lowerContent.includes("trigonometria") || lowerContent.includes("angul") || lowerContent.includes("seno") || lowerContent.includes("coseno")) {
+        detectedTitle = "Razones Trigonométricas de Ángulos Compuestos y Dobles";
+        detectedSummary = "Durante la sesión presencial se desarrollaron las identidades trigonométricas fundamentales para la suma y diferencia de arcos, deduciendo algebraicamente las fórmulas de ángulo doble y mitad. Los alumnos resolvieron ejercicios de simplificación y cálculo de alturas inaccesibles aplicando razones en el plano.";
+        detectedConcepts = ["Identidades de suma y diferencia de arcos", "Fórmulas de ángulo doble (sen 2x, cos 2x)", "Transformaciones a producto", "Resolución de triángulos y cálculo de distancias"];
+      } else if (lowerContent.includes("cardano") || lowerContent.includes("polinom") || lowerContent.includes("raiz") || lowerContent.includes("grado")) {
+        detectedTitle = "Ecuaciones Polinómicas de Grado Superior y Teorema de Cardano-Vieta";
+        detectedSummary = "En la clase se profundizó en la relación entre los coeficientes y las raíces de un polinomio de tercer y cuarto grado mediante el Teorema de Cardano-Vieta. Se aplicó el método de Ruffini y la regla de los signos de Descartes para hallar soluciones complejas y reales.";
+        detectedConcepts = ["Teorema de Cardano-Vieta para grado 3 y 4", "Relación suma y producto de raíces", "Factorización polinómica por Ruffini", "Determinación de raíces complejas conjugadas"];
+      } else {
+        detectedTitle = `Matemática Avanzada: ${cleanFileName.charAt(0).toUpperCase() + cleanFileName.slice(1)}`;
+        detectedSummary = `Se analizó el contenido del archivo ${fileName}, trabajando los fundamentos teóricos, métodos de resolución analítica y modelado algebraico con aplicaciones a situaciones reales del grado.`;
+        detectedConcepts = ["Fundamentos analíticos y teoremas del tema", "Métodos de resolución paso a paso", "Modelado de problemas cuantitativos", "Verificación y análisis de consistencia de resultados"];
+      }
+    } else if (course.id === "EPT-402") {
+      if (lowerContent.includes("arduino") || lowerContent.includes("sensor") || lowerContent.includes("motor") || lowerContent.includes("robotica")) {
+        detectedTitle = "Programación de Servomotores y Sensores Ultrasónicos con Arduino";
+        detectedSummary = "En el laboratorio de robótica los estudiantes conectaron sensores HC-SR04 y servomotores a microcontroladores Arduino UNO. Se programó el algoritmo en C++ para evitar obstáculos en tiempo real y regular la velocidad según la distancia medida.";
+        detectedConcepts = ["Librería Servo.h y control por pulsos PWM", "Cálculo de distancia con sensor HC-SR04 por ultrasonido", "Estructuras condicionales de control en bucle loop()", "Calibración y alimentación segura de circuitos mecatrónicos"];
+      } else {
+        detectedTitle = `Tecnología & Robótica: ${cleanFileName.charAt(0).toUpperCase() + cleanFileName.slice(1)}`;
+        detectedSummary = `Análisis pedagógico del archivo ${fileName} enfocado en arquitectura computacional, algoritmos de automatización y desarrollo de proyectos tecnológicos guiados.`;
+        detectedConcepts = ["Lógica algorítmica y control de flujo", "Integración hardware y software", "Optimización de código fuente", "Pruebas de depuración y rendimiento"];
+      }
+    } else if (course.id === "CTA-403") {
+      if (lowerContent.includes("termo") || lowerContent.includes("calor") || lowerContent.includes("carnot") || lowerContent.includes("gas")) {
+        detectedTitle = "Primera y Segunda Ley de la Termodinámica: Ciclo de Carnot";
+        detectedSummary = "En la sesión de física se explicó la conservación de la energía en sistemas cerrados (Q = ΔU + W) y la irreversibilidad de los procesos térmicos. Se analizó el rendimiento máximo teórico de una máquina térmica según el ciclo de Carnot.";
+        detectedConcepts = ["Primera Ley de la Termodinámica (Q = ΔU + W)", "Procesos isotérmicos, isobáricos y adiabáticos", "Eficiencia térmica y Ciclo de Carnot", "Entropía y degradación de la energía"];
+      } else {
+        detectedTitle = `Ciencia & Tecnología: ${cleanFileName.charAt(0).toUpperCase() + cleanFileName.slice(1)}`;
+        detectedSummary = `Estudio científico extraído del archivo ${fileName}, fundamentando las leyes físicas/químicas observadas, el método experimental y el análisis riguroso de variables.`;
+        detectedConcepts = ["Leyes y principios fundamentales del tema", "Variables dependientes e independientes", "Análisis de datos experimentales", "Conclusiones científicas y aplicaciones tecnológicas"];
+      }
+    } else {
+      detectedTitle = `Sesión Académica: ${cleanFileName.charAt(0).toUpperCase() + cleanFileName.slice(1)}`;
+      detectedSummary = `Análisis del documento ${fileName} orientado al fortalecimiento de competencias del área curricular, síntesis crítica y resolución de casos prácticos.`;
+      detectedConcepts = ["Marco conceptual rector", "Metodología de análisis", "Aplicación práctica guiada", "Evaluación de resultados"];
+    }
+
+    if (manualNotes && manualNotes.length > 25) {
+      detectedSummary = manualNotes;
+    }
+
+    return {
+      courseId: course.id,
+      courseName: course.name,
+      gradeId: "4sec",
+      gradeName: course.grade,
+      teacherId: "DOC-2026-015",
+      teacherName: course.teacher,
+      weekNumber: nextWeek,
+      bimester: "III Bimestre",
+      title: detectedTitle,
+      sessionDate: new Date().toLocaleDateString("es-PE"),
+      summary: detectedSummary,
+      keyConcepts: detectedConcepts,
+      attachments: [
+        { type: fileExt, name: fileName, size: fileSize, icon: icon },
+        { type: "pptx", name: `Diapositivas_Sesion_Semana_${nextWeek}.pptx`, size: "3.5 MB", icon: "" },
+        { type: "pdf", name: `Guía_Evaluativa_Semana_${nextWeek}.pdf`, size: "1.8 MB", icon: "📝" }
+      ]
+    };
+  }
+
+  updateWeeklyMaterial(materialId, updatedFields) {
+    const idx = (this.state.weeklyMaterials || []).findIndex(m => m.id === materialId);
+    if (idx !== -1) {
+      this.state.weeklyMaterials[idx] = {
+        ...this.state.weeklyMaterials[idx],
+        ...updatedFields
+      };
+      this.saveState();
+      this.notify();
+      return true;
+    }
+    return false;
+  }
+
+  deleteWeeklyMaterial(materialId) {
+    this.state.weeklyMaterials = (this.state.weeklyMaterials || []).filter(m => m.id !== materialId);
+    if (this.state.selectedVirtualWeekId === materialId) {
+      const remaining = this.state.weeklyMaterials.filter(m => m.courseId === this.state.selectedVirtualCourseId);
+      this.state.selectedVirtualWeekId = remaining.length > 0 ? remaining[0].id : null;
+    }
+    this.saveState();
+    this.notify();
+    return true;
+  }
+
+  // Generador Inteligente de 10 Preguntas Dinámicas con IA basado en el Material Subido
+  generateDynamicEvaluation(materialId, customPrompt = "") {
+    const material = (this.state.weeklyMaterials || []).find(m => m.id === materialId);
+    if (!material) return null;
+
+    const topic = material.title || "Tema Académico";
+    const summary = material.summary || "";
+    const concepts = (material.keyConcepts && material.keyConcepts.length > 0) ? material.keyConcepts : ["Concepto Clave 1", "Concepto Clave 2", "Aplicación Práctica", "Resolución de Problemas"];
+
+    // Generación dinámica de 10 preguntas pedagógicas contextualizadas
+    const generatedQuestions = [
+      {
+        id: 1,
+        question: `¿Cuál es el objetivo principal del tema '${topic}' abordado en la sesión de clase?`,
+        options: [
+          `Comprender los fundamentos y aplicaciones de: ${concepts[0] || 'la materia estudiada'}`,
+          `Memorizar definiciones sin aplicarlas a situaciones de la vida real`,
+          `Describir un fenómeno no relacionado con el curso`,
+          `Omitir el análisis formal de los conceptos trabajados`
+        ],
+        correctIndex: 0,
+        explanation: `La sesión enfatiza el entendimiento conceptual y aplicativo de ${concepts[0] || topic} desarrollado por el docente.`
+      },
+      {
+        id: 2,
+        question: `En relación al concepto '${concepts[0] || 'propiedades fundamentales'}', ¿cuál es la proposición correcta?`,
+        options: [
+          `Es la base para modelar y resolver problemas analíticos y cuantitativos del tema`,
+          `Solo tiene validez teórica y no se utiliza en ejercicios prácticos`,
+          `Contradice las leyes y principios demostrados en el aula`,
+          `Es un elemento optativo que no incide en el resultado final`
+        ],
+        correctIndex: 0,
+        explanation: `El concepto '${concepts[0] || topic}' constituye el pilar para el análisis deductivo y resolución de situaciones problemáticas.`
+      },
+      {
+        id: 3,
+        question: `Respecto a '${concepts[1] || 'análisis metodológico'}', ¿qué procedimiento se debe seguir para su correcta aplicación?`,
+        options: [
+          `Identificar variables iniciales, plantear las relaciones y operar paso a paso con rigor`,
+          `Asumir valores arbitrarios sin verificar condiciones de contorno`,
+          `Saltar la verificación de hipótesis pedagógicas`,
+          `Descartar el procedimiento sistemático propuesto en la guía`
+        ],
+        correctIndex: 0,
+        explanation: `El procedimiento correcto requiere identificar datos, estructurar el planteamiento y ejecutar operaciones con verificación.`
+      },
+      {
+        id: 4,
+        question: `Según el resumen de clase: "${summary.slice(0, 80)}...", ¿qué conclusión pedagógica se deriva?`,
+        options: [
+          `El conocimiento adquirido permite interpretar y optimizar situaciones prácticas con precisión`,
+          `Los resultados obtenidos son aleatorios y no siguen ningún patrón científico`,
+          `La teoría carece de sustento en la práctica presencial`,
+          `No es posible predecir el comportamiento del sistema estudiado`
+        ],
+        correctIndex: 0,
+        explanation: `El resumen de clase evidencia que el dominio de estos conceptos permite interpretar y optimizar modelos reales.`
+      },
+      {
+        id: 5,
+        question: `¿Cuál de las siguientes alternativas ejemplifica adecuadamente el principio de '${concepts[2] || 'transferencia y aplicación'}'?`,
+        options: [
+          `La resolución de un caso práctico de la vida cotidiana empleando las herramientas del tema`,
+          `Copiar mecánicamente el resultado sin justificar el proceso`,
+          `Desestimar el análisis crítico en las conclusiones`,
+          `Evitar el uso de fórmulas o esquemas de representación`
+        ],
+        correctIndex: 0,
+        explanation: `La aplicación práctica consiste en transferir los conceptos a situaciones concretas del entorno demostrando dominio integral.`
+      },
+      {
+        id: 6,
+        question: `Si se modifican las condiciones iniciales del sistema estudiado en '${topic}', ¿cómo responderá el modelo?`,
+        options: [
+          `Las variables dependientes se ajustarán proporcionalmente según las leyes explicadas en clase`,
+          `El modelo dejará de tener sentido algebraico o físico inmediatamente`,
+          `No existirá ninguna variación en los resultados esperados`,
+          `Los coeficientes se anularán sin justificación teórica`
+        ],
+        correctIndex: 0,
+        explanation: `Los modelos matemáticos y científicos responden de forma proporcional y predecible a las variaciones en las variables de entrada.`
+      },
+      {
+        id: 7,
+        question: `En la verificación de resultados para '${concepts[3] || 'análisis de resultados y conclusiones'}', ¿qué criterio garantiza la validez de la respuesta?`,
+        options: [
+          `Comprobar que las unidades y el orden de magnitud concuerdan con el problema planteado`,
+          `Elegir la respuesta más larga sin calcular`,
+          `Asumir que cualquier número positivo es correcto`,
+          `Ignorar el contexto y las restricciones del enunciado`
+        ],
+        correctIndex: 0,
+        explanation: `La consistencia dimensional y el análisis de magnitud son indispensables para validar soluciones rigurosas.`
+      },
+      {
+        id: 8,
+        question: `¿Qué importancia tiene el material complementario (diapositivas y guías en PDF) subido por el profesor?`,
+        options: [
+          `Reforzar los contenidos presenciales, profundizar ejercicios y guiar el estudio autónomo`,
+          `Reemplazar la asistencia a las clases presenciales`,
+          `Contener únicamente datos decorativos sin relevancia evaluativa`,
+          `Servir solo como lectura opcional sin relación con las tareas`
+        ],
+        correctIndex: 0,
+        explanation: `El material semanal subido por el docente sintetiza la clase y proporciona herramientas de profundización para el estudiante.`
+      },
+      {
+        id: 9,
+        question: `Al contrastar '${concepts[0] || 'concepto principal'}' con '${concepts[1] || 'concepto secundario'}', ¿cuál es su relación pedagógica?`,
+        options: [
+          `Son complementarios: uno establece el principio rector y el otro define las condiciones operativas`,
+          `Son conceptos mutuamente excluyentes que nunca coexisten`,
+          `Poseen significados idénticos y redundantes`,
+          `No tienen ninguna correlación curricular en el nivel secundario`
+        ],
+        correctIndex: 0,
+        explanation: `Ambos conceptos se complementan para conformar la competencia del área curricular.`
+      },
+      {
+        id: 10,
+        question: `Para consolidar un Logro Destacado (AD) en la evaluación de '${topic}', el estudiante debe:`,
+        options: [
+          `Demostrar solvencia conceptual, argumentación sólida y precisión en la resolución de los 10 ítems`,
+          `Responder únicamente las preguntas teóricas evitando los ejercicios`,
+          `Adivinar las alternativas sin leer las explicaciones formativas`,
+          `Entregar la prueba sin revisar las operaciones realizadas`
+        ],
+        correctIndex: 0,
+        explanation: `El nivel de logro destacado (AD / 18-20) requiere dominio pleno de la teoría, rigor procedimental y argumentación lógica.`
+      }
+    ];
+
+    const newEvaluation = {
+      id: `EVAL-${materialId}`,
+      title: `Evaluación Dinámica Semanal: ${material.title}`,
+      timeLimitMinutes: 20,
+      totalQuestions: 10,
+      passingScore: 14,
+      pointsPerQuestion: 2,
+      generatedAt: new Date().toISOString(),
+      questions: generatedQuestions
+    };
+
+    material.evaluation = newEvaluation;
+    this.saveState();
+    this.notify();
+    return newEvaluation;
+  }
+
+  // Registrar intento de evaluación por parte de un estudiante
+  recordQuizAttempt(materialId, attemptData) {
+    const material = (this.state.weeklyMaterials || []).find(m => m.id === materialId);
+    if (!material) return false;
+
+    if (!material.studentAttempts) {
+      material.studentAttempts = [];
+    }
+
+    const evaluation = material.evaluation;
+    if (!evaluation || !evaluation.questions) return false;
+
+    let correctCount = 0;
+    const userAnswers = attemptData.userAnswers || {};
+
+    evaluation.questions.forEach(q => {
+      if (userAnswers[q.id] !== undefined && userAnswers[q.id] === q.correctIndex) {
+        correctCount++;
+      }
+    });
+
+    const score = correctCount * 2; // 2 puntos por pregunta = max 20
+    const status = score >= 14 ? (score >= 18 ? "Excelente" : "Aprobado") : "En Refuerzo";
+
+    const attempt = {
+      studentId: attemptData.studentId || "EST-2026-042",
+      studentName: attemptData.studentName || "Sofía Méndez Flores",
+      score: score,
+      total: 20,
+      date: new Date().toLocaleDateString("es-PE") + " " + new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' }),
+      status: status,
+      correctCount: correctCount,
+      timeSpent: attemptData.timeSpent || "12 min",
+      userAnswers: userAnswers,
+      feedback: score >= 18 
+        ? "¡Excelente desempeño! Demuestras dominio integral de los conceptos trabajados en el aula." 
+        : (score >= 14 
+          ? "¡Buen trabajo! Has alcanzado los aprendizajes esperados de la sesión semanal." 
+          : "Se recomienda revisar el material adjunto y las explicaciones de cada pregunta para reforzar el tema.")
+    };
+
+    const existingIdx = material.studentAttempts.findIndex(a => a.studentId === attempt.studentId);
+    if (existingIdx !== -1) {
+      material.studentAttempts[existingIdx] = attempt;
+    } else {
+      material.studentAttempts.push(attempt);
+    }
+
+    this.saveState();
+    this.notify();
+    return attempt;
+  }
+
+  // =========================================================================
+  // GESTIÓN DE AGENDA VIRTUAL ESCOLAR & ANOTACIONES DOCENTES
+  // =========================================================================
+  getAgendaNotes(studentCodeOrId = null) {
+    const allNotes = this.state.agendaNotes || initialData.agendaNotes || [];
+    if (!studentCodeOrId || studentCodeOrId === "all") {
+      return allNotes;
+    }
+    const cleanQuery = studentCodeOrId.toLowerCase().trim();
+    return allNotes.filter(n => 
+      (n.studentCode && n.studentCode.toLowerCase() === cleanQuery) ||
+      (n.dni && n.dni === cleanQuery) ||
+      (n.studentName && n.studentName.toLowerCase().includes(cleanQuery))
+    );
+  }
+
+  createAgendaNote(noteData) {
+    if (!this.state.agendaNotes) {
+      this.state.agendaNotes = [...(initialData.agendaNotes || [])];
+    }
+
+    const enrollments = this.getEnrollments();
+    const student = enrollments.find(e => 
+      e.studentCode === noteData.studentCode || 
+      e.id === noteData.studentCode || 
+      e.dni === noteData.studentCode ||
+      (noteData.studentName && e.studentName.toLowerCase().includes(noteData.studentName.toLowerCase()))
+    ) || enrollments[0];
+
+    const typeLabels = {
+      merito: "★ Felicitación / Mérito",
+      pedagogica: "📝 Tarea / Material Requerido",
+      conducta: "⚠️ Observación de Conducta",
+      citacion: "📅 Citación a Apoderado"
+    };
+
+    const newNote = {
+      id: `AGN-2026-${String(Math.floor(Math.random() * 900) + 100)}`,
+      studentCode: student ? (student.studentCode || student.dni) : (noteData.studentCode || "EST-2026-055"),
+      studentName: student ? student.studentName : (noteData.studentName || "Estudiante"),
+      dni: student ? student.dni : (noteData.dni || "76541298"),
+      grade: student ? student.grade : (noteData.grade || "5° de Primaria"),
+      gradeId: student ? (student.gradeId || "5prim") : (noteData.gradeId || "5prim"),
+      date: noteData.date || new Date().toLocaleDateString("es-PE"),
+      time: noteData.time || new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' }),
+      type: noteData.type || "pedagogica",
+      typeLabel: typeLabels[noteData.type] || "📝 Anotación Pedagógica",
+      category: noteData.category || "Seguimiento Académico",
+      course: noteData.course || "Tutoría & Normas",
+      teacher: noteData.teacher || "Profesor Responsable",
+      title: noteData.title || "Anotación en Agenda Virtual",
+      description: noteData.description || "Registro informativo en la agenda escolar.",
+      taskOrMaterial: noteData.taskOrMaterial || "Ninguno",
+      dueDate: noteData.dueDate || "Próxima sesión",
+      parentSigned: false,
+      signedBy: null,
+      signedDate: null,
+      guardianPhone: student ? (student.guardianPhone || "984-777-888") : "984-777-888",
+      guardian: student ? (student.guardian || "Apoderado") : "Apoderado"
+    };
+
+    this.state.agendaNotes.unshift(newNote);
+    this.saveState();
+    this.notify();
+    return newNote;
+  }
+
+  signAgendaNote(noteId, signedBy = "Apoderado Registrado") {
+    if (!this.state.agendaNotes) {
+      this.state.agendaNotes = [...(initialData.agendaNotes || [])];
+    }
+    const note = this.state.agendaNotes.find(n => n.id === noteId);
+    if (!note) return false;
+
+    note.parentSigned = true;
+    note.signedBy = signedBy;
+    note.signedDate = new Date().toLocaleDateString("es-PE") + " " + new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' });
+
+    this.saveState();
+    this.notify();
+    return true;
+  }
+
+  deleteAgendaNote(noteId) {
+    if (!this.state.agendaNotes) return false;
+    this.state.agendaNotes = this.state.agendaNotes.filter(n => n.id !== noteId);
+    this.saveState();
+    this.notify();
+    return true;
+  }
+
+  resolveStudentByQR(qrCodeOrPayload) {
+    if (!qrCodeOrPayload) return null;
+    const enrollments = this.getEnrollments();
+    const str = String(qrCodeOrPayload).trim();
+
+    // 1. Formato de Cuadernos: QR-NB|EST-2026-042|Sofía Méndez...
+    if (str.includes("|")) {
+      const parts = str.split("|");
+      const code = parts[1];
+      const match = enrollments.find(e => e.studentCode === code || e.dni === code || (parts[2] && e.studentName.toLowerCase().includes(parts[2].toLowerCase())));
+      if (match) return match;
+    }
+
+    // 2. Coincidencia directa por studentCode o DNI
+    const direct = enrollments.find(e => 
+      e.studentCode === str || 
+      e.dni === str || 
+      e.id === str ||
+      (e.siagieCode && e.siagieCode === str)
+    );
+    if (direct) return direct;
+
+    // 3. Coincidencia por subcadena de nombre
+    const byName = enrollments.find(e => e.studentName.toLowerCase().includes(str.toLowerCase()));
+    if (byName) return byName;
+
+    return enrollments[0];
+  }
+
+  resetToInitial() {
+    localStorage.removeItem(this.storageKey);
+    this.state = {
+      isAuthenticated: false,
+      currentRole: "admin",
+      currentView: "dashboard",
+      selectedScheduleGrade: "4sec-a",
+      selectedSyllabusGrade: "4sec-a",
+      ...initialData
+    };
+    this.saveState();
+    this.notify();
+  }
+}
+
+// Instancia global
+window.appStore = new IntranetStore();
