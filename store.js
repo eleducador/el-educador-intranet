@@ -353,9 +353,27 @@ class IntranetStore {
 
         // Si la nube tiene datos estrictamente más recientes o si este dispositivo recién abre la página:
         if (serverTime > localTime || !this.state.updatedAt) {
-          // Reemplazo limpio y exacto (elimina usuarios borrados y agrega usuarios creados)
-          if (serverData.systemUsers) this.state.systemUsers = serverData.systemUsers;
-          if (serverData.enrollments) this.state.enrollments = serverData.enrollments;
+          if (serverData.deletedUsersNode) {
+            this.state.deletedUsersNode = { ...this.state.deletedUsersNode, ...serverData.deletedUsersNode };
+          }
+          if (serverData.systemUsers) {
+            if (this.state.deletedUsersNode) {
+              serverData.systemUsers.forEach(su => {
+                if (this.state.deletedUsersNode[su.id] || this.state.deletedUsersNode[su.code]) {
+                  su._deleted = true;
+                }
+              });
+            }
+            this.state.systemUsers = serverData.systemUsers;
+          }
+          if (serverData.enrollments) {
+            if (this.state.deletedUsersNode) {
+              serverData.enrollments.forEach(e => {
+                if (this.state.deletedUsersNode[e.studentCode] || this.state.deletedUsersNode[e.studentName]) e._deleted = true;
+              });
+            }
+            this.state.enrollments = serverData.enrollments;
+          }
           if (serverData.attendanceRecords) this.state.attendanceRecords = serverData.attendanceRecords;
           if (serverData.notebookReviews) this.state.notebookReviews = serverData.notebookReviews;
           if (serverData.behaviorIncidents) this.state.behaviorIncidents = serverData.behaviorIncidents;
@@ -370,6 +388,22 @@ class IntranetStore {
           if (serverData.academicConfig) this.state.academicConfig = serverData.academicConfig;
           if (serverData.users) this.state.users = serverData.users;
           if (serverData.institution) this.state.institution = serverData.institution;
+          if (serverData.teachersList) {
+            if (this.state.deletedUsersNode) {
+              serverData.teachersList.forEach(t => {
+                if (this.state.deletedUsersNode[t.id] || this.state.deletedUsersNode[t.name]) t._deleted = true;
+              });
+            }
+            this.state.teachersList = serverData.teachersList;
+          }
+          if (serverData.familiesFinancial) {
+            if (this.state.deletedUsersNode) {
+              serverData.familiesFinancial.forEach(f => {
+                if (this.state.deletedUsersNode[f.familyId] || this.state.deletedUsersNode[f.guardian] || this.state.deletedUsersNode[f.studentCode]) f._deleted = true;
+              });
+            }
+            this.state.familiesFinancial = serverData.familiesFinancial;
+          }
           this.state.updatedAt = serverTime || Date.now();
         } else {
           // Si el cliente local tiene cambios pendientes generados offline, subirlos
@@ -1062,6 +1096,10 @@ class IntranetStore {
     const userToDelete = this.state.systemUsers.find(u => u.id === userId || u.code === userId);
     
     if (userToDelete) {
+      if (!this.state.deletedUsersNode) this.state.deletedUsersNode = {};
+      this.state.deletedUsersNode[userId] = true;
+      if (userToDelete.code) this.state.deletedUsersNode[userToDelete.code] = true;
+      if (userToDelete.name) this.state.deletedUsersNode[userToDelete.name] = true;
       userToDelete._deleted = true;
       if (this.state.enrollments) {
         this.state.enrollments.forEach(e => {
