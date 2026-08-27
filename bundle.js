@@ -12625,7 +12625,6 @@ const Components = {
     const families = (window.appStore && typeof window.appStore.getFamiliesFinancial === "function")
       ? window.appStore.getFamiliesFinancial()
       : (state.familiesFinancial || initialData.familiesFinancial || []);
-    const collected = (state.institution && state.institution.economicReport) ? state.institution.economicReport.collectedAmount : 25130.00;
 
     return `
       <div class="fade-in">
@@ -12647,14 +12646,8 @@ const Components = {
             ` : ''}
           </div>
 
-          <!-- Métricas de Recaudación -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6);">
-            <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-green-500); background: #f8faf9;">
-              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Recaudación Acumulada Agosto</span>
-              <div style="font-size: 22px; font-weight: 900; color: var(--color-green-600); margin-top: 2px;">S/ ${collected.toFixed(2)}</div>
-              <span style="font-size: 10px; color: var(--text-muted);">Meta mensual: S/ 24,000.00</span>
-            </div>
-
+          <!-- Métricas de Validación -->
+          <div style="margin-bottom: var(--space-6);">
             <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-navy-700); background: var(--bg-surface-subtle);">
               <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Validación Automática</span>
               <div style="font-size: 18px; font-weight: 800; color: var(--color-navy-900); margin-top: 2px;">Habilitada ⚡</div>
@@ -12675,7 +12668,7 @@ const Components = {
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>Código</th><th>Apoderado / Familia</th><th>Estudiante</th><th>Grado</th><th>Monto Deuda</th><th>Acceso a Intranet</th><th style="text-align:center;">Acciones de Control</th>
+                      <th>Código</th><th>Apoderado / Familia</th><th>Estudiante</th><th>Grado</th><th>Acceso a Intranet</th><th style="text-align:center;">Acciones de Control</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -12685,7 +12678,6 @@ const Components = {
                         <td><strong>${f.guardian}</strong></td>
                         <td>${f.studentName}</td>
                         <td>${f.grade}</td>
-                        <td><strong style="color: ${f.pendingAmount > 0 ? 'var(--color-red-600)' : 'var(--color-green-600)'};">${f.pendingAmount > 0 ? `S/ ${f.pendingAmount.toFixed(2)}` : 'S/ 0.00 (Al Día)'}</strong></td>
                         <td>
                           <span class="status-badge ${f.isAccessLocked ? 'status-failed' : 'status-approved'}" style="font-weight: bold;">
                             ${f.isAccessLocked ? '<span class="status-dot-red"></span> BLOQUEADO POR MORA' : '<span class="status-dot-green"></span> ACCESO HABILITADO'}
@@ -12705,37 +12697,38 @@ const Components = {
                 </table>
               </div>
             </div>
-          ` : ''}
-
-          <!-- Lista de Pagos del Usuario -->
-          <div class="card-header" style="margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
-            <h3 class="card-title" style="font-size: var(--font-size-base);">
-              Cronograma de Cuotas y Recibos Oficiales
-            </h3>
-          </div>
-
-          ${state.payments.map(p => `
-            <div class="payment-card ${p.status}">
-              <div>
-                <h4 style="margin-bottom: 2px;">${p.concept}</h4>
-                <span style="font-size:12px; color:var(--text-muted);">Vencimiento: ${p.dueDate} ${p.paidDate ? `• Cancelado: ${p.paidDate}` : ''}</span>
-              </div>
-              <div style="display:flex; align-items:center; gap:var(--space-4); flex-wrap: wrap;">
-                <span class="payment-amount" style="color: ${p.status === 'paid' ? 'var(--color-green-600)' : 'var(--color-red-600)'};">
-                  S/ ${p.amount.toFixed(2)}
-                </span>
-                ${p.status === 'paid' ? `
-                  <button class="btn btn-outline btn-sm" onclick="window.app.showReceiptModal('${p.id}')">
-                    Ver Recibo (${p.receiptNo || 'REC-2026'})
-                  </button>
-                ` : `
-                  <button class="btn btn-red btn-sm" onclick="window.app.openPayModal('${p.id}', ${p.amount}, '${p.concept}')" style="font-weight: 800;">
-                    Pagar y Validar Intranet
-                  </button>
-                `}
-              </div>
+          ` : `
+            <!-- Lista de Pagos del Apoderado / Estudiante -->
+            <div class="card-header" style="margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+              <h3 class="card-title" style="font-size: var(--font-size-base);">
+                Cronograma de Cuotas y Recibos Oficiales
+              </h3>
             </div>
-          `).join('')}
+
+            ${(state.payments || []).map(p => `
+              <div class="payment-card ${p.status}">
+                <div>
+                  <h4 style="margin-bottom: 2px;">${p.concept}</h4>
+                  <span style="font-size:12px; color:var(--text-muted);">Vencimiento: ${p.dueDate} ${p.paidDate ? `• Cancelado: ${p.paidDate}` : ''}</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:var(--space-4); flex-wrap: wrap;">
+                  <span class="payment-amount" style="color: ${p.status === 'paid' ? 'var(--color-green-600)' : 'var(--color-red-600)'};">
+                    S/ ${p.amount.toFixed(2)}
+                  </span>
+                  ${p.status === 'paid' ? `
+                    <button class="btn btn-outline btn-sm" onclick="window.app.showReceiptModal('${p.id}')">
+                      Ver Recibo (${p.receiptNo || 'REC-2026'})
+                    </button>
+                  ` : `
+                    <button class="btn btn-red btn-sm" onclick="window.app.openPayModal('${p.id}', ${p.amount}, '${p.concept}')" style="font-weight: 800;">
+                      Pagar y Validar Intranet
+                    </button>
+                  `}
+                </div>
+              </div>
+            `).join('')}
+          `}
+        </div>
         </div>
       </div>
     `;
