@@ -183,18 +183,20 @@ class IntranetStore {
     // 1. Cargar del servidor
     (serverArr || []).forEach(item => {
       if (item && typeof item === "object") {
-        const key = item[idKey] || item.id || item.code || item.studentCode || item.qrCode || JSON.stringify(item);
-        map.set(key, item);
+        const rawKey = item[idKey] || item.id || item.code || item.studentCode || item.username || item.qrCode || item.familyId || JSON.stringify(item);
+        const normKey = String(rawKey).toLowerCase().replace(/[\s\.\-_]+/g, '');
+        map.set(normKey, item);
       }
     });
-    // 2. Superponer y enriquecer con lo local (conserva las modificaciones recientes del usuario)
+    // 2. Superponer y enriquecer con lo local (conserva las creaciones y modificaciones recientes del usuario)
     (localArr || []).forEach(item => {
       if (item && typeof item === "object") {
-        const key = item[idKey] || item.id || item.code || item.studentCode || item.qrCode || JSON.stringify(item);
-        if (map.has(key)) {
-          map.set(key, { ...map.get(key), ...item });
+        const rawKey = item[idKey] || item.id || item.code || item.studentCode || item.username || item.qrCode || item.familyId || JSON.stringify(item);
+        const normKey = String(rawKey).toLowerCase().replace(/[\s\.\-_]+/g, '');
+        if (map.has(normKey)) {
+          map.set(normKey, { ...map.get(normKey), ...item });
         } else {
-          map.set(key, item);
+          map.set(normKey, item);
         }
       }
     });
@@ -586,13 +588,13 @@ class IntranetStore {
         teachersList: (isScheduleUpdated ? parsed.teachersList : initialData.teachersList).filter(t => !this.isDeleted(t.id) && !this.isDeleted(t.name)),
         schedules: isScheduleUpdated ? parsed.schedules : initialData.schedules,
         systemUsers: (() => {
-          const rawList = this.mergeCollectionsById(initialData.systemUsers || [], parsed.systemUsers || [], "username");
+          const rawList = this.mergeCollectionsById(parsed.systemUsers || [], initialData.systemUsers || [], "username");
           const seen = new Set();
           const deduped = [];
           
           rawList.forEach(u => {
             if (!this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name)) {
-              const key = (u.username || u.code || u.name).toLowerCase().replace(/[\s\.\-_]+/g, '');
+              const key = `${u.role}_${(u.code || u.username || u.name).toLowerCase().replace(/[\s\.\-_]+/g, '')}`;
               if (!seen.has(key)) {
                 seen.add(key);
                 deduped.push(u);
@@ -769,42 +771,73 @@ class IntranetStore {
         const prevSig = this.getDataSignature(this.state);
 
         const localTime = this.state.updatedAt || 0;
-        const serverTime = (serverData && serverData.updatedAt) ? serverData.updatedAt : Date.now();
+        const serverTime = (serverData && typeof serverData.updatedAt === "number") ? serverData.updatedAt : 0;
 
         // Si el servidor trae deletedIds, fusionarlos estrictamente
         if (serverData.deletedIds && Array.isArray(serverData.deletedIds)) {
           this.registerDeleted(...serverData.deletedIds);
         }
 
-        // Si la nube tiene datos más recientes o si este dispositivo recién inicia sesión:
-        if (serverTime > localTime || !this.state.updatedAt) {
-          // Reemplazo limpio y exacto aplicando filtro de eliminados permanente y preservando usuarios del sistema
-          if (serverData.systemUsers) {
-            const serverUsers = serverData.systemUsers.filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
-            this.state.systemUsers = this.mergeCollectionsById(initialData.systemUsers || [], serverUsers, "username");
-          }
-          if (serverData.enrollments) this.state.enrollments = serverData.enrollments.filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian));
-          if (serverData.familiesFinancial) this.state.familiesFinancial = serverData.familiesFinancial.filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode));
-          if (serverData.attendanceRecords) this.state.attendanceRecords = serverData.attendanceRecords.filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName));
-          if (serverData.notebookReviews) this.state.notebookReviews = serverData.notebookReviews.filter(r => !this.isDeleted(r.studentId) && !this.isDeleted(r.studentName));
-          if (serverData.behaviorIncidents) this.state.behaviorIncidents = serverData.behaviorIncidents.filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName));
-          if (serverData.agendaNotes) this.state.agendaNotes = serverData.agendaNotes.filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName));
-          if (serverData.payments) this.state.payments = serverData.payments.filter(p => !this.isDeleted(p.id) && !this.isDeleted(p.studentCode) && !this.isDeleted(p.studentName));
-          if (serverData.monthlyCarteles) this.state.monthlyCarteles = serverData.monthlyCarteles;
-          if (serverData.tasks) this.state.tasks = serverData.tasks;
-          if (serverData.announcements) this.state.announcements = serverData.announcements;
-          if (serverData.syllabi) this.state.syllabi = serverData.syllabi;
-          if (serverData.weeklyMaterials) this.state.weeklyMaterials = serverData.weeklyMaterials;
-          if (serverData.courses) this.state.courses = serverData.courses;
-          if (serverData.schedules) this.state.schedules = serverData.schedules;
-          if (serverData.boletaData) this.state.boletaData = serverData.boletaData;
-          if (serverData.academicConfig) this.state.academicConfig = serverData.academicConfig;
-          if (serverData.users) this.state.users = serverData.users;
-          if (serverData.teachersList) this.state.teachersList = serverData.teachersList;
-          if (serverData.institution) this.state.institution = serverData.institution;
+        // Fusión limpia y exacta preservando creaciones locales y en la nube
+        if (serverData.systemUsers && Array.isArray(serverData.systemUsers)) {
+          const serverUsers = serverData.systemUsers.filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
+          const currentLocal = this.state.systemUsers || [];
+          const merged = this.mergeCollectionsById(currentLocal, serverUsers, "username");
+          this.state.systemUsers = this.mergeCollectionsById(merged, initialData.systemUsers || [], "username");
+        }
+
+        if (serverData.enrollments && Array.isArray(serverData.enrollments)) {
+          const cleanServer = serverData.enrollments.filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian));
+          this.state.enrollments = this.mergeCollectionsById(this.state.enrollments || [], cleanServer, "id");
+        }
+
+        if (serverData.familiesFinancial && Array.isArray(serverData.familiesFinancial)) {
+          const cleanFam = serverData.familiesFinancial.filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode));
+          this.state.familiesFinancial = this.mergeCollectionsById(this.state.familiesFinancial || [], cleanFam, "familyId");
+        }
+
+        if (serverData.attendanceRecords && Array.isArray(serverData.attendanceRecords)) {
+          const cleanAtt = serverData.attendanceRecords.filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName));
+          this.state.attendanceRecords = this.mergeCollectionsById(this.state.attendanceRecords || [], cleanAtt, "id");
+        }
+
+        if (serverData.notebookReviews && Array.isArray(serverData.notebookReviews)) {
+          const cleanRev = serverData.notebookReviews.filter(r => !this.isDeleted(r.studentId) && !this.isDeleted(r.studentName));
+          this.state.notebookReviews = this.mergeCollectionsById(this.state.notebookReviews || [], cleanRev, "id");
+        }
+
+        if (serverData.behaviorIncidents && Array.isArray(serverData.behaviorIncidents)) {
+          const cleanInc = serverData.behaviorIncidents.filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName));
+          this.state.behaviorIncidents = this.mergeCollectionsById(this.state.behaviorIncidents || [], cleanInc, "id");
+        }
+
+        if (serverData.agendaNotes && Array.isArray(serverData.agendaNotes)) {
+          const cleanNotes = serverData.agendaNotes.filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName));
+          this.state.agendaNotes = this.mergeCollectionsById(this.state.agendaNotes || [], cleanNotes, "id");
+        }
+
+        if (serverData.payments && Array.isArray(serverData.payments)) {
+          const cleanPay = serverData.payments.filter(p => !this.isDeleted(p.id) && !this.isDeleted(p.studentCode) && !this.isDeleted(p.studentName));
+          this.state.payments = this.mergeCollectionsById(this.state.payments || [], cleanPay, "id");
+        }
+
+        if (serverData.monthlyCarteles) this.state.monthlyCarteles = { ...(this.state.monthlyCarteles || {}), ...serverData.monthlyCarteles };
+        if (serverData.tasks && Array.isArray(serverData.tasks)) this.state.tasks = this.mergeCollectionsById(this.state.tasks || [], serverData.tasks, "id");
+        if (serverData.announcements && Array.isArray(serverData.announcements)) this.state.announcements = this.mergeCollectionsById(this.state.announcements || [], serverData.announcements, "id");
+        if (serverData.syllabi && Array.isArray(serverData.syllabi)) this.state.syllabi = this.mergeCollectionsById(this.state.syllabi || [], serverData.syllabi, "id");
+        if (serverData.weeklyMaterials && Array.isArray(serverData.weeklyMaterials)) this.state.weeklyMaterials = this.mergeCollectionsById(this.state.weeklyMaterials || [], serverData.weeklyMaterials, "id");
+        if (serverData.courses && Array.isArray(serverData.courses)) this.state.courses = this.mergeCollectionsById(this.state.courses || [], serverData.courses, "id");
+        if (serverData.schedules) this.state.schedules = serverData.schedules;
+        if (serverData.boletaData) this.state.boletaData = { ...(this.state.boletaData || {}), ...serverData.boletaData };
+        if (serverData.academicConfig) this.state.academicConfig = { ...this.state.academicConfig, ...serverData.academicConfig };
+        if (serverData.users) this.state.users = { ...(this.state.users || {}), ...serverData.users };
+        if (serverData.teachersList && Array.isArray(serverData.teachersList)) this.state.teachersList = this.mergeCollectionsById(this.state.teachersList || [], serverData.teachersList, "id");
+        if (serverData.institution) this.state.institution = serverData.institution;
+
+        if (serverTime > localTime) {
           this.state.updatedAt = serverTime;
         } else if (localTime > serverTime) {
-          // Si el cliente local tiene cambios pendientes generados offline, subirlos directamente a Firebase
+          // Si el cliente local tiene creaciones o cambios más recientes, enviarlos a Firebase
           this.syncToServer();
         }
 
