@@ -1809,13 +1809,17 @@ class IntranetStore {
   getDataSignature(st) {
     if (!st) return "";
     return [
+      st.updatedAt || 0,
       (st.attendanceRecords || []).length,
       (st.notebookReviews || []).length,
       (st.behaviorIncidents || []).length,
       (st.enrollments || []).length,
+      (st.familiesFinancial || []).length,
       (st.payments || []).length,
       (st.tasks || []).length,
-      (st.systemUsers || []).length
+      (st.systemUsers || []).length,
+      (st.systemUsers || []).map(u => (u.id || '') + ':' + (u.username || '') + ':' + (u.role || '') + ':' + (u.hasAdminPrivilege ? '1' : '0')).join(','),
+      (st.enrollments || []).map(e => (e.id || '') + ':' + (e.studentCode || '')).join(',')
     ].join("|");
   }
 
@@ -1877,8 +1881,43 @@ class IntranetStore {
       });
     }
 
-    // 5. Sincronización inicial con la nube central multi-dispositivo
+    // 5. Conexión Stream SSE en Tiempo Real Nativo con Firebase Realtime Database
+    this.setupRealtimeListener();
+
+    // 6. Sincronización inicial con la nube central multi-dispositivo
     this.fetchServerState(true);
+  }
+
+  setupRealtimeListener() {
+    if (typeof window === "undefined" || typeof EventSource === "undefined") return;
+    try {
+      if (this.eventSource) {
+        try { this.eventSource.close(); } catch(e) {}
+      }
+      this.eventSource = new EventSource(this.firebaseUrl);
+      this.eventSource.addEventListener("put", (e) => {
+        try {
+          const parsed = JSON.parse(e.data);
+          if (parsed && parsed.data) {
+            if (parsed.path === "/" && typeof parsed.data === "object") {
+              this.applyServerState(parsed.data, true);
+            } else {
+              this.fetchServerState(true);
+            }
+          }
+        } catch(err) {
+          this.fetchServerState(true);
+        }
+      });
+      this.eventSource.addEventListener("patch", () => {
+        this.fetchServerState(true);
+      });
+      this.eventSource.onerror = () => {
+        // El polling continuo cada 2.5s garantiza la sincronización si la red interrumpe el socket SSE
+      };
+    } catch(e) {
+      console.warn("EventSource SSE no iniciado, respaldando con polling:", e);
+    }
   }
 
   // Manejo de sincronización instantánea entre pestañas / ventanas en el mismo equipo
@@ -2549,10 +2588,92 @@ class IntranetStore {
   // =========================================================================
   // SINCRONIZACIÓN EN TIEMPO REAL CON FIREBASE GOOGLE CLOUD (100% EXCLUSIVO)
   // =========================================================================
+  applyServerState(serverData, silent = false) {
+    if (!serverData || typeof serverData !== "object") return;
+    if (!(serverData.users || serverData.institution || serverData.systemUsers || serverData.attendanceRecords || serverData.enrollments)) return;
+
+    const currentAuth = this.state.isAuthenticated;
+    const currentRole = this.state.currentRole;
+    const currentView = this.state.currentView;
+    const currentUser = this.state.currentUser;
+    const prevSig = this.getDataSignature(this.state);
+
+    const localTime = this.state.updatedAt || 0;
+    const serverTime = (typeof serverData.updatedAt === "number") ? serverData.updatedAt : 0;
+
+    // 1. Si el servidor trae deletedIds, fusionarlos estrictamente
+    if (serverData.deletedIds && Array.isArray(serverData.deletedIds)) {
+      this.registerDeleted(...serverData.deletedIds);
+    }
+
+    // 2. Si el servidor tiene datos más recientes o no teníamos updatedAt:
+    if (serverTime > localTime || !this.state.updatedAt) {
+      if (serverData.systemUsers && Array.isArray(serverData.systemUsers)) {
+        const cleanServer = serverData.systemUsers.filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
+        this.state.systemUsers = this.mergeCollectionsById(initialData.systemUsers || [], cleanServer, "username");
+      }
+      if (serverData.enrollments && Array.isArray(serverData.enrollments)) {
+        this.state.enrollments = serverData.enrollments.filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian));
+      }
+      if (serverData.familiesFinancial && Array.isArray(serverData.familiesFinancial)) {
+        this.state.familiesFinancial = serverData.familiesFinancial.filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode));
+      }
+      if (serverData.attendanceRecords && Array.isArray(serverData.attendanceRecords)) {
+        this.state.attendanceRecords = serverData.attendanceRecords.filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName));
+      }
+      if (serverData.notebookReviews && Array.isArray(serverData.notebookReviews)) {
+        this.state.notebookReviews = serverData.notebookReviews.filter(r => !this.isDeleted(r.studentId) && !this.isDeleted(r.studentName));
+      }
+      if (serverData.behaviorIncidents && Array.isArray(serverData.behaviorIncidents)) {
+        this.state.behaviorIncidents = serverData.behaviorIncidents.filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName));
+      }
+      if (serverData.agendaNotes && Array.isArray(serverData.agendaNotes)) {
+        this.state.agendaNotes = serverData.agendaNotes.filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName));
+      }
+      if (serverData.payments && Array.isArray(serverData.payments)) {
+        this.state.payments = serverData.payments.filter(p => !this.isDeleted(p.id) && !this.isDeleted(p.studentCode) && !this.isDeleted(p.studentName));
+      }
+      if (serverData.monthlyCarteles) this.state.monthlyCarteles = serverData.monthlyCarteles;
+      if (serverData.tasks && Array.isArray(serverData.tasks)) this.state.tasks = serverData.tasks;
+      if (serverData.announcements && Array.isArray(serverData.announcements)) this.state.announcements = serverData.announcements;
+      if (serverData.syllabi && Array.isArray(serverData.syllabi)) this.state.syllabi = serverData.syllabi;
+      if (serverData.weeklyMaterials && Array.isArray(serverData.weeklyMaterials)) this.state.weeklyMaterials = serverData.weeklyMaterials;
+      if (serverData.courses && Array.isArray(serverData.courses)) this.state.courses = serverData.courses;
+      if (serverData.schedules) this.state.schedules = serverData.schedules;
+      if (serverData.boletaData) this.state.boletaData = serverData.boletaData;
+      if (serverData.academicConfig) this.state.academicConfig = serverData.academicConfig;
+      if (serverData.users) this.state.users = serverData.users;
+      if (serverData.teachersList && Array.isArray(serverData.teachersList)) this.state.teachersList = serverData.teachersList;
+      if (serverData.institution) this.state.institution = serverData.institution;
+      this.state.updatedAt = serverTime;
+    } else if (localTime > serverTime) {
+      // Si el cliente local tiene creaciones o cambios más recientes, enviarlos a Firebase
+      this.syncToServer();
+    }
+
+    this.state.isAuthenticated = currentAuth;
+    this.state.currentRole = currentRole;
+    this.state.currentView = currentView;
+    this.state.currentUser = currentUser;
+
+    const newSig = this.getDataSignature(this.state);
+
+    // Guardar estado unificado en localStorage y backup
+    try {
+      const serialized = JSON.stringify(this.state);
+      localStorage.setItem(this.storageKey, serialized);
+      localStorage.setItem(this.backupKey, serialized);
+    } catch(e) {}
+
+    // Si otro dispositivo actualizó los datos o si la petición fue manual: actualizar UI
+    if (!silent || prevSig !== newSig) {
+      this.notify();
+    }
+  }
+
   async fetchServerState(silent = false) {
     if (this.isSyncing) return;
     try {
-      // 1. Obtener estado EXCLUSIVAMENTE desde Firebase Realtime Database
       let serverData = null;
       try {
         const fbRes = await fetch(this.firebaseUrl, { cache: 'no-store' });
@@ -2563,102 +2684,8 @@ class IntranetStore {
         if (!silent) console.warn("Modo offline o esperando conexión con Firebase Database:", e);
       }
 
-      if (serverData && (serverData.users || serverData.institution || serverData.systemUsers || serverData.attendanceRecords || serverData.enrollments)) {
-        const currentAuth = this.state.isAuthenticated;
-        const currentRole = this.state.currentRole;
-        const currentView = this.state.currentView;
-        const currentUser = this.state.currentUser;
-        const prevSig = this.getDataSignature(this.state);
-
-        const localTime = this.state.updatedAt || 0;
-        const serverTime = (serverData && typeof serverData.updatedAt === "number") ? serverData.updatedAt : 0;
-
-        // Si el servidor trae deletedIds, fusionarlos estrictamente
-        if (serverData.deletedIds && Array.isArray(serverData.deletedIds)) {
-          this.registerDeleted(...serverData.deletedIds);
-        }
-
-        // Fusión limpia y exacta preservando creaciones locales y en la nube
-        if (serverData.systemUsers && Array.isArray(serverData.systemUsers)) {
-          const serverUsers = serverData.systemUsers.filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
-          const currentLocal = this.state.systemUsers || [];
-          const merged = this.mergeCollectionsById(currentLocal, serverUsers, "username");
-          this.state.systemUsers = this.mergeCollectionsById(merged, initialData.systemUsers || [], "username");
-        }
-
-        if (serverData.enrollments && Array.isArray(serverData.enrollments)) {
-          const cleanServer = serverData.enrollments.filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian));
-          this.state.enrollments = this.mergeCollectionsById(this.state.enrollments || [], cleanServer, "id");
-        }
-
-        if (serverData.familiesFinancial && Array.isArray(serverData.familiesFinancial)) {
-          const cleanFam = serverData.familiesFinancial.filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode));
-          this.state.familiesFinancial = this.mergeCollectionsById(this.state.familiesFinancial || [], cleanFam, "familyId");
-        }
-
-        if (serverData.attendanceRecords && Array.isArray(serverData.attendanceRecords)) {
-          const cleanAtt = serverData.attendanceRecords.filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName));
-          this.state.attendanceRecords = this.mergeCollectionsById(this.state.attendanceRecords || [], cleanAtt, "id");
-        }
-
-        if (serverData.notebookReviews && Array.isArray(serverData.notebookReviews)) {
-          const cleanRev = serverData.notebookReviews.filter(r => !this.isDeleted(r.studentId) && !this.isDeleted(r.studentName));
-          this.state.notebookReviews = this.mergeCollectionsById(this.state.notebookReviews || [], cleanRev, "id");
-        }
-
-        if (serverData.behaviorIncidents && Array.isArray(serverData.behaviorIncidents)) {
-          const cleanInc = serverData.behaviorIncidents.filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName));
-          this.state.behaviorIncidents = this.mergeCollectionsById(this.state.behaviorIncidents || [], cleanInc, "id");
-        }
-
-        if (serverData.agendaNotes && Array.isArray(serverData.agendaNotes)) {
-          const cleanNotes = serverData.agendaNotes.filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName));
-          this.state.agendaNotes = this.mergeCollectionsById(this.state.agendaNotes || [], cleanNotes, "id");
-        }
-
-        if (serverData.payments && Array.isArray(serverData.payments)) {
-          const cleanPay = serverData.payments.filter(p => !this.isDeleted(p.id) && !this.isDeleted(p.studentCode) && !this.isDeleted(p.studentName));
-          this.state.payments = this.mergeCollectionsById(this.state.payments || [], cleanPay, "id");
-        }
-
-        if (serverData.monthlyCarteles) this.state.monthlyCarteles = { ...(this.state.monthlyCarteles || {}), ...serverData.monthlyCarteles };
-        if (serverData.tasks && Array.isArray(serverData.tasks)) this.state.tasks = this.mergeCollectionsById(this.state.tasks || [], serverData.tasks, "id");
-        if (serverData.announcements && Array.isArray(serverData.announcements)) this.state.announcements = this.mergeCollectionsById(this.state.announcements || [], serverData.announcements, "id");
-        if (serverData.syllabi && Array.isArray(serverData.syllabi)) this.state.syllabi = this.mergeCollectionsById(this.state.syllabi || [], serverData.syllabi, "id");
-        if (serverData.weeklyMaterials && Array.isArray(serverData.weeklyMaterials)) this.state.weeklyMaterials = this.mergeCollectionsById(this.state.weeklyMaterials || [], serverData.weeklyMaterials, "id");
-        if (serverData.courses && Array.isArray(serverData.courses)) this.state.courses = this.mergeCollectionsById(this.state.courses || [], serverData.courses, "id");
-        if (serverData.schedules) this.state.schedules = serverData.schedules;
-        if (serverData.boletaData) this.state.boletaData = { ...(this.state.boletaData || {}), ...serverData.boletaData };
-        if (serverData.academicConfig) this.state.academicConfig = { ...this.state.academicConfig, ...serverData.academicConfig };
-        if (serverData.users) this.state.users = { ...(this.state.users || {}), ...serverData.users };
-        if (serverData.teachersList && Array.isArray(serverData.teachersList)) this.state.teachersList = this.mergeCollectionsById(this.state.teachersList || [], serverData.teachersList, "id");
-        if (serverData.institution) this.state.institution = serverData.institution;
-
-        if (serverTime > localTime) {
-          this.state.updatedAt = serverTime;
-        } else if (localTime > serverTime) {
-          // Si el cliente local tiene creaciones o cambios más recientes, enviarlos a Firebase
-          this.syncToServer();
-        }
-
-        this.state.isAuthenticated = currentAuth;
-        this.state.currentRole = currentRole;
-        this.state.currentView = currentView;
-        this.state.currentUser = currentUser;
-
-        const newSig = this.getDataSignature(this.state);
-
-        // Guardar estado unificado en localStorage y backup
-        try {
-          const serialized = JSON.stringify(this.state);
-          localStorage.setItem(this.storageKey, serialized);
-          localStorage.setItem(this.backupKey, serialized);
-        } catch(e) {}
-
-        // Si otro dispositivo actualizó los datos o si la petición fue manual: actualizar UI
-        if (!silent || prevSig !== newSig) {
-          this.notify();
-        }
+      if (serverData) {
+        this.applyServerState(serverData, silent);
       }
     } catch (err) {
       if (!silent) console.log("Modo offline o sincronización Firebase en espera", err);
@@ -13098,12 +13125,12 @@ class IntranetApp {
   startRealtimeSync() {
     if (this.syncInterval) clearInterval(this.syncInterval);
     this.syncInterval = setInterval(() => {
-      // Sincronización multi-dispositivo en tiempo real cada 3.5 segundos
+      // Sincronización multi-dispositivo en tiempo real cada 2.5 segundos
       if (!this.store || !this.store.isUserAuthenticated()) return;
       // Pausar re-renderizado si la cámara en vivo de portería está activa
       if (this.isDoorCamActive || this.isCameraActive || this.isAgendaModalCamActive) return;
       this.store.fetchServerState(true);
-    }, 3500);
+    }, 2500);
   }
 
   // Actualización reactiva suave del feed de ingresos (sin parpadeo ni recarga de pantalla)

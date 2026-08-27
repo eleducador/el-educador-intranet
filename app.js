@@ -385,12 +385,12 @@ class IntranetApp {
   startRealtimeSync() {
     if (this.syncInterval) clearInterval(this.syncInterval);
     this.syncInterval = setInterval(() => {
-      // Sincronización multi-dispositivo en tiempo real cada 3.5 segundos
+      // Sincronización multi-dispositivo en tiempo real cada 2.5 segundos
       if (!this.store || !this.store.isUserAuthenticated()) return;
       // Pausar re-renderizado si la cámara en vivo de portería está activa
       if (this.isDoorCamActive || this.isCameraActive || this.isAgendaModalCamActive) return;
       this.store.fetchServerState(true);
-    }, 3500);
+    }, 2500);
   }
 
   // Actualización reactiva suave del feed de ingresos (sin parpadeo ni recarga de pantalla)
