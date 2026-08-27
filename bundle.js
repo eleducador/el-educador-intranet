@@ -2724,6 +2724,13 @@ class IntranetStore {
     return deletedList.includes(norm) || deletedList.includes(raw);
   }
 
+  unRegisterDeleted(...items) {
+    if (!this.state.deletedIds || !Array.isArray(this.state.deletedIds)) return;
+    const toRemove = items.filter(Boolean).map(it => this.normalizeKey(it));
+    const toRemoveRaw = items.filter(Boolean).map(it => String(it).trim().toLowerCase());
+    this.state.deletedIds = this.state.deletedIds.filter(id => !toRemove.includes(id) && !toRemoveRaw.includes(id));
+  }
+
   // Eliminación Total en Cascada (Borrado integral de Estudiante, Apoderado, Matrícula, Nómina y Pensiones)
   cascadeDelete(identifier) {
     if (!identifier) return false;
@@ -3534,20 +3541,137 @@ class IntranetStore {
     return list;
   }
 
-  // --- Gestión de la Boleta Oficial Dinámica ---
-  getBoletaData(studentKey) {
-    const all = this.state.boletaData || initialData.boletaData;
-    return all[studentKey] || all.albujar;
+  // --- Gestión de la Boleta Oficial Dinámica Vinculada al Registro General ---
+  getBoletaData(studentKey, fallbackStudentObj = null) {
+    const enrollments = this.getEnrollments();
+    
+    // Buscar estudiante real en la nómina general
+    let enr = null;
+    if (studentKey) {
+      const cleanKey = String(studentKey).toLowerCase().trim();
+      enr = enrollments.find(e => 
+        (e.studentCode && e.studentCode.toLowerCase() === cleanKey) ||
+        (e.id && e.id.toLowerCase() === cleanKey) ||
+        (e.dni && e.dni === cleanKey) ||
+        (e.studentName && e.studentName.toLowerCase().trim() === cleanKey) ||
+        (cleanKey.length >= 3 && e.studentName && e.studentName.toLowerCase().includes(cleanKey))
+      );
+    }
+    if (!enr && fallbackStudentObj) {
+      enr = fallbackStudentObj;
+    }
+    if (!enr && enrollments.length > 0) {
+      enr = enrollments[0];
+    }
+
+    if (!enr) {
+      return {
+        student: "Sin Estudiantes Registrados",
+        name: "Sin Estudiantes Registrados",
+        code: "--",
+        dni: "--",
+        grade: "Secundaria",
+        gradeLevel: "Secundaria",
+        level: "SECUNDARIA",
+        section: "A",
+        siagieCode: "--",
+        grades: {},
+        appreciations: {
+          b1: "No hay registros de apreciación.",
+          b2: "",
+          b3: "",
+          b4: ""
+        },
+        attendance: {},
+        parentCriteria: {}
+      };
+    }
+
+    const sCode = enr.studentCode || enr.id || enr.dni;
+    const all = this.state.boletaData || initialData.boletaData || {};
+
+    let bData = all[sCode] || all[enr.studentName] || (studentKey ? all[studentKey] : null);
+
+    if (!bData) {
+      const initialSample = all.mendez || all.albujar || {};
+      bData = {
+        id: sCode,
+        code: sCode,
+        student: enr.studentName,
+        name: enr.studentName,
+        dni: enr.dni || "75891234",
+        grade: enr.grade || "4° de Secundaria",
+        gradeLevel: enr.grade || "4° de Secundaria",
+        level: (enr.level || "Secundaria").toUpperCase(),
+        section: "A",
+        siagieCode: enr.siagieCode || `2026-${enr.dni || sCode}`,
+        guardian: enr.guardian || "Apoderado",
+        grades: (initialSample.grades) ? JSON.parse(JSON.stringify(initialSample.grades)) : {},
+        appreciations: {
+          b1: `Felicitaciones a ${enr.studentName} por su rendimiento y constante dedicación en sus actividades escolares.`,
+          b2: `Demuestra responsabilidad y compromiso en el aula. Se recomienda continuar participando activamente.`,
+          b3: "",
+          b4: ""
+        },
+        attendance: {
+          b1: { unexcusedAbsences: "-", excusedAbsences: "-", tardiness: "-" },
+          b2: { unexcusedAbsences: "-", excusedAbsences: "-", tardiness: "-" },
+          b3: { unexcusedAbsences: "-", excusedAbsences: "-", tardiness: "-" },
+          b4: { unexcusedAbsences: "-", excusedAbsences: "-", tardiness: "-" }
+        },
+        parentCriteria: {
+          q1: true, q2: true, q3: true, q4: true, q5: true,
+          q6: true, q7: true, q8: true, q9: true, q10: true
+        }
+      };
+
+      if (!this.state.boletaData) this.state.boletaData = {};
+      this.state.boletaData[sCode] = bData;
+    } else {
+      bData.student = enr.studentName;
+      bData.name = enr.studentName;
+      bData.grade = enr.grade || bData.grade;
+      bData.gradeLevel = enr.grade || bData.gradeLevel;
+      bData.dni = enr.dni || bData.dni;
+      bData.siagieCode = enr.siagieCode || bData.siagieCode;
+    }
+
+    return bData;
   }
 
   saveBoletaStudentData(studentKey, updatedData) {
     if (!this.state.boletaData) {
-      this.state.boletaData = { ...initialData.boletaData };
+      this.state.boletaData = JSON.parse(JSON.stringify(initialData.boletaData || {}));
     }
-    this.state.boletaData[studentKey] = {
-      ...(this.state.boletaData[studentKey] || initialData.boletaData[studentKey]),
-      ...updatedData
-    };
+    if (!this.state.boletaData[studentKey]) {
+      this.state.boletaData[studentKey] = { grades: {}, attendance: {}, appreciations: {}, parentCriteria: {} };
+    }
+    
+    if (updatedData.grades) {
+      this.state.boletaData[studentKey].grades = {
+        ...(this.state.boletaData[studentKey].grades || {}),
+        ...updatedData.grades
+      };
+    }
+    if (updatedData.appreciations) {
+      this.state.boletaData[studentKey].appreciations = {
+        ...(this.state.boletaData[studentKey].appreciations || {}),
+        ...updatedData.appreciations
+      };
+    }
+    if (updatedData.attendance) {
+      this.state.boletaData[studentKey].attendance = {
+        ...(this.state.boletaData[studentKey].attendance || {}),
+        ...updatedData.attendance
+      };
+    }
+    if (updatedData.parentCriteria) {
+      this.state.boletaData[studentKey].parentCriteria = {
+        ...(this.state.boletaData[studentKey].parentCriteria || {}),
+        ...updatedData.parentCriteria
+      };
+    }
+    
     this.saveState();
     this.notify();
   }
@@ -3653,6 +3777,8 @@ class IntranetStore {
       status: "Activo",
       createdDate: new Date().toLocaleDateString("es-PE")
     };
+
+    this.unRegisterDeleted(newUser.id, newUser.code, newUser.username, newUser.name, newUser.dni, newUser.studentName, newUser.guardian);
 
     if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
 
@@ -3885,6 +4011,7 @@ class IntranetStore {
     };
 
     if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    this.unRegisterDeleted(newEnrollment.id, newEnrollment.studentCode, newEnrollment.studentName, newEnrollment.dni, newEnrollment.guardian);
     this.state.enrollments.unshift(newEnrollment);
 
     this.createSystemUser({
@@ -3967,6 +4094,8 @@ class IntranetStore {
 
     if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
     
+    this.unRegisterDeleted(newEnrollment.id, newEnrollment.studentCode, newEnrollment.studentName, newEnrollment.dni, newEnrollment.guardian);
+
     // Si ya existe por DNI o código, actualizarlo
     const existingIdx = this.state.enrollments.findIndex(e => (data.dni && e.dni === data.dni) || (e.studentCode === studentCode));
     if (existingIdx >= 0) {
@@ -5646,48 +5775,6 @@ class IntranetStore {
       };
     }
 
-    this.saveState();
-    return true;
-  }
-
-  getBoletaData(studentKey) {
-    const all = this.state.boletaData || initialData.boletaData || {};
-    return all[studentKey] || all.mendez || null;
-  }
-
-  saveBoletaStudentData(studentKey, updatedData) {
-    if (!this.state.boletaData) {
-      this.state.boletaData = JSON.parse(JSON.stringify(initialData.boletaData || {}));
-    }
-    if (!this.state.boletaData[studentKey]) {
-      this.state.boletaData[studentKey] = { grades: {}, attendance: {}, appreciations: {}, parentCriteria: {} };
-    }
-    
-    if (updatedData.grades) {
-      this.state.boletaData[studentKey].grades = {
-        ...(this.state.boletaData[studentKey].grades || {}),
-        ...updatedData.grades
-      };
-    }
-    if (updatedData.appreciations) {
-      this.state.boletaData[studentKey].appreciations = {
-        ...(this.state.boletaData[studentKey].appreciations || {}),
-        ...updatedData.appreciations
-      };
-    }
-    if (updatedData.attendance) {
-      this.state.boletaData[studentKey].attendance = {
-        ...(this.state.boletaData[studentKey].attendance || {}),
-        ...updatedData.attendance
-      };
-    }
-    if (updatedData.parentCriteria) {
-      this.state.boletaData[studentKey].parentCriteria = {
-        ...(this.state.boletaData[studentKey].parentCriteria || {}),
-        ...updatedData.parentCriteria
-      };
-    }
-    
     this.saveState();
     return true;
   }
@@ -9148,15 +9235,9 @@ const Components = {
       const egId = (e.gradeId || (window.appStore && window.appStore.resolveStudentGradeId(e.grade)) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
       return egId === cleanSelectedGrade || egId.includes(cleanSelectedGrade) || cleanSelectedGrade.includes(egId);
     }).map(e => {
-      let key = e.studentCode || e.dni || e.id;
-      const nameLow = (e.studentName || "").toLowerCase();
-      if (nameLow.includes("mendez") || nameLow.includes("méndez")) key = "mendez";
-      else if (nameLow.includes("benitez") || nameLow.includes("benítez")) key = "benitez";
-      else if (nameLow.includes("albujar") || nameLow.includes("albújar")) key = "albujar";
-
       return {
-        key: key,
-        studentCode: e.studentCode || e.dni,
+        key: e.studentCode || e.id || e.dni,
+        studentCode: e.studentCode || e.dni || e.id,
         name: e.studentName,
         dni: e.dni,
         grade: e.grade || currentGradeObj.label,
@@ -9166,10 +9247,13 @@ const Components = {
 
     let selectedStudentKey = state.selectedBoletaStudent;
     if (!selectedStudentKey || !classroomStudents.some(s => s.key === selectedStudentKey)) {
-      selectedStudentKey = classroomStudents.length > 0 ? classroomStudents[0].key : "mendez";
+      selectedStudentKey = classroomStudents.length > 0 ? classroomStudents[0].key : "";
     }
 
-    const tutorStudentData = allBoletas[selectedStudentKey] || (classroomStudents.find(s => s.key === selectedStudentKey) ? { name: classroomStudents.find(s => s.key === selectedStudentKey).name } : allBoletas.mendez) || {};
+    const currentTutorStudent = classroomStudents.find(s => s.key === selectedStudentKey) || (classroomStudents.length > 0 ? classroomStudents[0] : null);
+    const tutorStudentData = (window.appStore && typeof window.appStore.getBoletaData === "function")
+      ? window.appStore.getBoletaData(selectedStudentKey, currentTutorStudent)
+      : { name: currentTutorStudent ? currentTutorStudent.name : "", appreciations: {}, attendance: {}, parentCriteria: {} };
     const tutorApp = tutorStudentData.appreciations || {};
     const tutorAtt = tutorStudentData.attendance || {};
     const tutorPc = tutorStudentData.parentCriteria || {};
@@ -9605,8 +9689,9 @@ const Components = {
   renderPrintableReport(state) {
     const role = state.currentRole;
     const currentUser = (state.currentUser && state.currentUser.name) ? state.currentUser : ((state.users && state.users[role]) || initialData.users[role] || {});
-    const allBoletas = state.boletaData || initialData.boletaData || {};
-    const enrollments = state.enrollments || initialData.enrollments || [];
+    const enrollments = (window.appStore && typeof window.appStore.getEnrollments === "function") 
+      ? window.appStore.getEnrollments() 
+      : (state.enrollments || []);
 
     let selectedStudentKey = state.selectedBoletaStudent;
     
@@ -9619,37 +9704,54 @@ const Components = {
         (childName && e.studentName && (childName.includes(e.studentName.toLowerCase()) || e.studentName.toLowerCase().includes(childName)))
       );
       if (matched) {
-        selectedStudentKey = matched.studentCode || matched.dni;
-      } else {
-        selectedStudentKey = "mendez";
+        selectedStudentKey = matched.studentCode || matched.id || matched.dni;
+      } else if (enrollments.length > 0) {
+        selectedStudentKey = enrollments[0].studentCode || enrollments[0].id || enrollments[0].dni;
       }
     } else if (role === 'estudiante') {
       // Si el usuario es Estudiante: seleccionar su propia boleta
       const sCode = currentUser.code || currentUser.studentCode || currentUser.dni;
       const matched = enrollments.find(e => e.studentCode === sCode || e.dni === sCode || (currentUser.name && e.studentName && e.studentName.toLowerCase().includes(currentUser.name.toLowerCase())));
       if (matched) {
-        selectedStudentKey = matched.studentCode || matched.dni;
-      } else {
-        selectedStudentKey = "mendez";
+        selectedStudentKey = matched.studentCode || matched.id || matched.dni;
+      } else if (enrollments.length > 0) {
+        selectedStudentKey = enrollments[0].studentCode || enrollments[0].id || enrollments[0].dni;
       }
-    } else if (!selectedStudentKey) {
-      selectedStudentKey = "mendez";
+    } else {
+      // Para Docentes y Directivos: si el alumno seleccionado no existe en enrollments, seleccionar el primer alumno de la nómina
+      const existsInEnrollments = enrollments.some(e => 
+        e.studentCode === selectedStudentKey || 
+        e.id === selectedStudentKey || 
+        e.dni === selectedStudentKey ||
+        (e.studentName && e.studentName.toLowerCase().trim() === (selectedStudentKey || "").toLowerCase().trim())
+      );
+      if (!existsInEnrollments && enrollments.length > 0) {
+        selectedStudentKey = enrollments[0].studentCode || enrollments[0].id || enrollments[0].dni;
+        state.selectedBoletaStudent = selectedStudentKey;
+      }
     }
 
-    let student = allBoletas[selectedStudentKey] || allBoletas.mendez;
-    if (!student) {
-      const enr = enrollments.find(e => e.studentCode === selectedStudentKey || e.dni === selectedStudentKey || e.id === selectedStudentKey);
-      student = {
-        student: enr ? enr.studentName : "Estudiante Institucional",
-        code: enr ? enr.studentCode : selectedStudentKey,
-        dni: enr ? enr.dni : "75891234",
-        grade: enr ? enr.grade : "4° de Secundaria",
-        grades: {},
-        appreciations: {},
-        attendance: {},
-        parentCriteria: {}
-      };
-    }
+    const currentEnrollment = enrollments.find(e => 
+      e.studentCode === selectedStudentKey || 
+      e.id === selectedStudentKey || 
+      e.dni === selectedStudentKey ||
+      (e.studentName && e.studentName.toLowerCase().trim() === (selectedStudentKey || "").toLowerCase().trim())
+    ) || (enrollments.length > 0 ? enrollments[0] : null);
+
+    const student = (window.appStore && typeof window.appStore.getBoletaData === "function")
+      ? window.appStore.getBoletaData(selectedStudentKey, currentEnrollment)
+      : {
+          student: currentEnrollment ? currentEnrollment.studentName : "Estudiante Registrado",
+          name: currentEnrollment ? currentEnrollment.studentName : "Estudiante Registrado",
+          code: currentEnrollment ? currentEnrollment.studentCode : "--",
+          dni: currentEnrollment ? currentEnrollment.dni : "--",
+          grade: currentEnrollment ? currentEnrollment.grade : "Secundaria",
+          grades: {},
+          appreciations: {},
+          attendance: {},
+          parentCriteria: {}
+        };
+
     const g = student.grades || {};
     const app = student.appreciations || {};
     const att = student.attendance || {};
@@ -9734,17 +9836,19 @@ const Components = {
             ${isParentOrStudent ? `
               <div style="display: flex; align-items: center; gap: 6px;">
                 <span class="status-badge" style="background: #e0e7ff; color: #3730a3; font-weight: 800; font-size: 12px;">
-                  📄 Boleta Oficial de: <strong>${student.student}</strong> (${student.grade || '2026'})
+                  📄 Boleta Oficial de: <strong>${student.student || student.name}</strong> (${student.grade || '2026'})
                 </span>
               </div>
             ` : `
-              <!-- Selector de Alumno para Docentes y Directivos -->
+              <!-- Selector de Alumno para Docentes y Directivos (Vinculado Estrictamente a la Nómina Oficial de Estudiantes) -->
               <div style="display: flex; align-items: center; gap: 6px;">
                 <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Alumno(a):</span>
-                <select class="form-control" style="font-size: 12px; font-weight: bold; width: auto; padding: 4px 10px;" onchange="window.app.changeBoletaStudent(this.value)">
-                  <option value="mendez" ${selectedStudentKey === 'mendez' ? 'selected' : ''}>MÉNDEZ FLORES, SOFÍA (4° de Secundaria)</option>
-                  <option value="benitez" ${selectedStudentKey === 'benitez' ? 'selected' : ''}>BENÍTEZ RUIZ, CARLOS (4° de Secundaria)</option>
-                  <option value="albujar" ${selectedStudentKey === 'albujar' ? 'selected' : ''}>ALBUJAR ZEGARRA, MARINA DEL CARMEN (2° de Secundaria)</option>
+                <select class="form-control" style="font-size: 12px; font-weight: bold; min-width: 280px; padding: 4px 10px;" onchange="window.app.changeBoletaStudent(this.value)">
+                  ${enrollments.length > 0 ? enrollments.map(e => {
+                    const sVal = e.studentCode || e.id || e.dni;
+                    const isSel = (currentEnrollment && (currentEnrollment.studentCode === e.studentCode || currentEnrollment.id === e.id || currentEnrollment.dni === e.dni)) ? 'selected' : '';
+                    return `<option value="${sVal}" ${isSel}>${(e.studentName || 'Estudiante').toUpperCase()} (${e.grade || 'Nivel Escolar'})</option>`;
+                  }).join('') : '<option value="">No hay estudiantes registrados en la nómina</option>'}
                 </select>
               </div>
             `}
@@ -10069,15 +10173,15 @@ const Components = {
                 
                 <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;">
                   <span style="font-weight: 900; font-size: 8.2pt;">APELLIDOS Y NOMBRES:</span> 
-                  <strong style="text-transform: uppercase; font-size: 8.8pt; color: #000000;">${student.name}</strong>
+                  <strong style="text-transform: uppercase; font-size: 8.8pt; color: #000000;">${student.name || student.student}</strong>
                 </div>
                 
                 <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
                   <div>
-                    <span style="font-weight: 900; font-size: 8.2pt;">GRADO:</span> <strong>${student.grade}</strong>
+                    <span style="font-weight: 900; font-size: 8.2pt;">GRADO:</span> <strong>${student.grade || (currentEnrollment && currentEnrollment.grade) || '4° de Secundaria'}</strong>
                   </div>
                   <div>
-                    <span style="font-weight: 900; font-size: 8.2pt;">NIVEL:</span> <strong>${student.level}</strong>
+                    <span style="font-weight: 900; font-size: 8.2pt;">NIVEL:</span> <strong>${student.level || (currentEnrollment && currentEnrollment.level) || 'SECUNDARIA'}</strong>
                   </div>
                 </div>
 
@@ -10087,7 +10191,7 @@ const Components = {
 
                 <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                   <span style="font-weight: 900; font-size: 8.2pt;">TUTOR (A):</span> 
-                  <strong style="color: #000000;">${student.tutor}</strong>
+                  <strong style="color: #000000;">${student.tutor || (currentEnrollment && currentEnrollment.tutor) || 'Prof. Roberto Silva'}</strong>
                 </div>
 
               </div>
@@ -19042,11 +19146,7 @@ CREATE TABLE tb_cuadernos_qr (
     });
 
     if (gradeStudents.length > 0) {
-      let sKey = gradeStudents[0].studentCode || gradeStudents[0].dni;
-      const nameLow = (gradeStudents[0].studentName || "").toLowerCase();
-      if (nameLow.includes("mendez") || nameLow.includes("méndez")) sKey = "mendez";
-      else if (nameLow.includes("benitez") || nameLow.includes("benítez")) sKey = "benitez";
-      else if (nameLow.includes("albujar") || nameLow.includes("albújar")) sKey = "albujar";
+      let sKey = gradeStudents[0].studentCode || gradeStudents[0].id || gradeStudents[0].dni;
       this.store.state.selectedBoletaStudent = sKey;
     }
 
@@ -19157,9 +19257,8 @@ CREATE TABLE tb_cuadernos_qr (
       parentCriteria
     });
 
-    const allBoletas = this.store.state.boletaData || initialData.boletaData;
-    const student = allBoletas[studentKey] || allBoletas.mendez;
-    this.showToast(`✓ Evaluación de Tutoría de ${student.name} guardada exitosamente.`, "success");
+    const student = this.store.getBoletaData(studentKey);
+    this.showToast(`✓ Evaluación de Tutoría de ${student.student || student.name} guardada exitosamente.`, "success");
     this.render();
   }
 
@@ -19169,8 +19268,7 @@ CREATE TABLE tb_cuadernos_qr (
     const form = e.target;
     const formData = new FormData(form);
     
-    const allBoletas = this.store.state.boletaData || initialData.boletaData;
-    const currentStudent = allBoletas[studentKey] || allBoletas.mendez;
+    const currentStudent = this.store.getBoletaData(studentKey);
     const updatedGrades = { ...(currentStudent.grades || {}) };
     
     // Normalizador de notas literales y vigesimales
