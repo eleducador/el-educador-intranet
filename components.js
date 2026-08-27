@@ -131,6 +131,12 @@ const Components = {
         <span>Inicio / Resumen</span>
       </a>
 
+      <a class="nav-item ${currentView === 'database' ? 'active' : ''}" data-view="database" id="nav-database" style="background: rgba(34,197,94,0.12); border: 1px dashed rgba(34,197,94,0.3); color: #86efac;">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+        <span>Base de Datos & DB</span>
+        <span class="nav-badge badge-yellow" style="background:#22c55e; color:#0b132b;">DB Online</span>
+      </a>
+
       <a class="nav-item ${currentView === 'usuarios-matriculas' ? 'active' : ''}" data-view="usuarios-matriculas" id="nav-usuarios-matriculas" style="background: rgba(220,38,38,0.12); border: 1px dashed rgba(220,38,38,0.3); color: #fca5a5;">
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
         <span>Cuentas, Perfiles & Pestañas</span>
@@ -303,8 +309,8 @@ const Components = {
 
   // Dashboard - Coordinación
   renderAdminDashboard(state, user) {
-    const usersCount = (state.systemUsers || initialData.systemUsers || []).filter(u => !u._deleted).length;
-    const enrollmentsCount = (state.enrollments || initialData.enrollments || []).filter(e => !e._deleted).length;
+    const usersCount = (state.systemUsers || initialData.systemUsers).length;
+    const enrollmentsCount = (state.enrollments || initialData.enrollments).length;
 
     return `
       <div class="fade-in">
@@ -482,7 +488,7 @@ const Components = {
             <table class="data-table">
               <thead><tr><th>Código</th><th>Docente / Personal</th><th>Nivel / Asignatura</th><th>Renta 4ta Cat.</th><th>Privilegio Edición</th><th>Acción</th></tr></thead>
               <tbody>
-                ${(state.systemUsers || initialData.systemUsers || []).filter(u => u.role === 'Docente' && !u._deleted).map(u => `
+                ${(state.systemUsers || initialData.systemUsers).filter(u => u.role === 'Docente').map(u => `
                   <tr>
                     <td><code>${u.code}</code></td>
                     <td><strong>${u.name}</strong><br><span style="font-size:11px; color:var(--text-muted);">${u.email}</span></td>
@@ -2119,8 +2125,8 @@ const Components = {
 
   // Base de Datos
   renderDatabaseManagement(state) {
-    const usersCount = (state.systemUsers || initialData.systemUsers || []).filter(u => !u._deleted).length;
-    const enrollmentsCount = (state.enrollments || initialData.enrollments || []).filter(e => !e._deleted).length;
+    const usersCount = (state.systemUsers || initialData.systemUsers).length;
+    const enrollmentsCount = (state.enrollments || initialData.enrollments).length;
     const reviewsCount = (state.notebookReviews || initialData.notebookReviews).length;
     const coursesCount = (state.courses || initialData.courses).length;
     const announcementsCount = (state.announcements || initialData.announcements).length;
@@ -2205,8 +2211,8 @@ const Components = {
       `;
     }
 
-    const allUsers = (state.systemUsers || initialData.systemUsers || []).filter(u => !u._deleted);
-    const enrollments = (state.enrollments || initialData.enrollments || []).filter(e => !e._deleted);
+    const allUsers = state.systemUsers || initialData.systemUsers || [];
+    const enrollments = state.enrollments || initialData.enrollments || [];
     const activeTab = state.usersManagementTab || "users";
     const roleFilter = state.usersRoleFilter || "all";
     const navConfigs = state.navigationTabsConfig || initialData.navigationTabsConfig || {};
@@ -3891,7 +3897,7 @@ const Components = {
       : (JSON.parse(JSON.stringify((initialData && initialData.teachersList) || [])));
 
     const systemDocentes = ((state.systemUsers && Array.isArray(state.systemUsers)) ? state.systemUsers : ((initialData && initialData.systemUsers) || []))
-      .filter(u => (u.role === 'Docente' || u.role === 'Profesor') && !u._deleted);
+      .filter(u => u.role === 'Docente' || u.role === 'Profesor');
 
     systemDocentes.forEach(doc => {
       let existing = rawTeachers.find(t => t.id === doc.id || t.name.toLowerCase().trim() === doc.name.toLowerCase().trim());
@@ -4049,7 +4055,7 @@ const Components = {
       let selectedTeacherId = state.selectedTeacherId;
       if (!selectedTeacherId || !teachersList.some(t => t.id === selectedTeacherId)) {
         if (role === "docente") {
-          const userDoc = (state.users && state.users.docente) || (state.systemUsers || []).find(u => (u.username === "docente" || u.role === "Docente") && !u._deleted);
+          const userDoc = (state.users && state.users.docente) || (state.systemUsers || []).find(u => u.username === "docente" || u.role === "Docente");
           const match = userDoc && teachersList.find(t => t.name.toLowerCase().includes(userDoc.name.toLowerCase()) || userDoc.name.toLowerCase().includes(t.name.toLowerCase()));
           selectedTeacherId = match ? match.id : teachersList[0].id;
         } else {
@@ -6358,6 +6364,9 @@ const Components = {
                         <td style="text-align:center; white-space: nowrap;">
                           <button class="btn btn-sm ${f.isAccessLocked ? 'btn-gold' : 'btn-outline'}" onclick="window.app.toggleFamilyLock('${f.familyId}')">
                             ${f.isAccessLocked ? '<span class="status-dot-green"></span> Desbloquear / Prórroga' : '<span class="status-dot-red"></span> Bloquear Acceso'}
+                          </button>
+                          <button class="btn btn-red btn-sm" onclick="window.app.confirmDeleteFamily('${f.familyId}')" title="Eliminar registro de familia y accesos vinculados" style="margin-left: 4px; padding: 4px 8px;">
+                            🗑️
                           </button>
                         </td>
                       </tr>

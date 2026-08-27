@@ -2614,9 +2614,26 @@ CREATE TABLE tb_cuadernos_qr (
     }
     const user = (this.store.state.systemUsers || []).find(u => u.id === userId || u.code === userId);
     const name = user ? user.name : "este usuario";
-    if (confirm(`¿Está seguro de eliminar a "${name}" de la base de datos?`)) {
+    const role = user ? user.role : "usuario";
+    if (confirm(`¿Está seguro de eliminar a "${name}" (${role}) de la base de datos?\n\nEsta acción eliminará de forma definitiva al usuario, a sus familiares/estudiantes vinculados, nómina de aula y registro en pensiones.`)) {
       this.store.deleteSystemUser(userId);
-      this.showToast(`✓ Usuario "${name}" eliminado de la base de datos`, "info");
+      this.showToast(`✓ Usuario "${name}" y todos sus registros vinculados fueron eliminados por completo.`, "info");
+      this.render();
+    }
+  }
+
+  confirmDeleteFamily(familyId) {
+    const currentRole = this.store.getCurrentRole();
+    if (currentRole !== "admin" && currentRole !== "director") {
+      this.showToast("⚠️ Solo el Administrador o Directivo pueden eliminar registros de familias.", "danger");
+      return;
+    }
+    const families = this.store.getFamiliesFinancial();
+    const fam = families.find(f => f.familyId === familyId);
+    const famName = fam ? `${fam.guardian} (Estudiante: ${fam.studentName})` : familyId;
+    if (confirm(`¿Está seguro de eliminar a la familia "${famName}"?\n\nEsta acción borrará de todos los módulos: la cuenta del apoderado, el estudiante, la matrícula y su registro de pensiones.`)) {
+      this.store.deleteFamily(familyId);
+      this.showToast(`✓ Familia "${famName}" y todos sus registros vinculados fueron eliminados por completo.`, "info");
       this.render();
     }
   }
@@ -6274,9 +6291,10 @@ CREATE TABLE tb_cuadernos_qr (
       return;
     }
 
-    if (confirm("¿Está seguro de eliminar a este estudiante de la nómina del aula?")) {
+    const stName = st ? st.studentName : "este estudiante";
+    if (confirm(`¿Está seguro de eliminar a "${stName}" de la institución?\n\nEsta acción borrará en cascada al estudiante, la cuenta del apoderado, sus asistencias y su registro en la pestaña de pensiones.`)) {
       this.store.deleteStudentFromGrade(studentId);
-      this.showToast("✓ Estudiante retirado de la nómina.", "info");
+      this.showToast(`✓ Estudiante "${stName}" y todos sus registros vinculados eliminados por completo.`, "info");
       this.render();
     }
   }
