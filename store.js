@@ -1141,8 +1141,12 @@ class IntranetStore {
         }
       };
 
-      // Marcar al usuario principal
-      markAsDeleted(userToDelete);
+      // Marcar al usuario principal y todos sus perfiles duplicados (mismo nombre o código)
+      this.state.systemUsers.forEach(u => {
+        if (u.id === userToDelete.id || u.code === userToDelete.code || u.name === userToDelete.name) {
+          markAsDeleted(u);
+        }
+      });
 
       // Buscar si es Padre, eliminar a su(s) hijo(s)
       if (userToDelete.role === "padre" || userToDelete.role === "Padre" || userToDelete.role === "Apoderado" || userToDelete.role === "apoderado") {
