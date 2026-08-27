@@ -166,11 +166,19 @@ class IntranetStore {
   // Comprobar si un identificador fue eliminado
   isDeleted(identifier) {
     if (!identifier) return false;
+    const raw = String(identifier).trim().toLowerCase();
+    if (["pendiente", "--", "sin dni", "apoderado", "apoderado titular", "sin apoderado", "padre", "madre", "null", "undefined", ""].includes(raw)) return false;
     const deletedList = (this.state && Array.isArray(this.state.deletedIds)) ? this.state.deletedIds : [];
     if (deletedList.length === 0) return false;
-    const raw = String(identifier).trim().toLowerCase();
     const norm = this.normalizeKey(identifier);
     return deletedList.includes(norm) || deletedList.includes(raw);
+  }
+
+  unRegisterDeleted(...items) {
+    if (!this.state.deletedIds || !Array.isArray(this.state.deletedIds)) return;
+    const toRemove = items.filter(Boolean).map(it => this.normalizeKey(it));
+    const toRemoveRaw = items.filter(Boolean).map(it => String(it).trim().toLowerCase());
+    this.state.deletedIds = this.state.deletedIds.filter(id => !toRemove.includes(id) && !toRemoveRaw.includes(id));
   }
 
   // Eliminación Total en Cascada (Borrado integral de Estudiante, Apoderado, Matrícula, Nómina y Pensiones)
@@ -224,6 +232,9 @@ class IntranetStore {
     const allDnis = new Set();
     const allUsernames = new Set();
 
+    const isValidDni = (d) => d && typeof d === 'string' && d.trim().length >= 6 && !["pendiente", "--", "sin dni", "null", "undefined"].includes(d.trim().toLowerCase());
+    const isValidGuardian = (g) => g && typeof g === 'string' && g.trim().length >= 4 && !["apoderado", "apoderado titular", "sin apoderado", "padre", "madre", "--"].includes(g.trim().toLowerCase());
+
     allUserIds.add(identifier);
 
     matchedUsers.forEach(u => {
@@ -232,16 +243,16 @@ class IntranetStore {
       if (u.username) allUsernames.add(u.username);
       if (u.name) {
         if (u.role === "Estudiante" || u.role === "Alumno") allStudentNames.add(u.name);
-        else if (u.role === "Apoderado" || u.role === "Padre") allGuardianNames.add(u.name);
+        else if ((u.role === "Apoderado" || u.role === "Padre") && isValidGuardian(u.name)) allGuardianNames.add(u.name);
         allUserIds.add(u.name);
       }
       if (u.studentName) allStudentNames.add(u.studentName);
-      if (u.guardian) allGuardianNames.add(u.guardian);
-      if (u.dni) allDnis.add(u.dni);
+      if (isValidGuardian(u.guardian)) allGuardianNames.add(u.guardian);
+      if (isValidDni(u.dni)) allDnis.add(u.dni);
       if (Array.isArray(u.linkedStudents)) {
         u.linkedStudents.forEach(ls => {
           if (ls.name) allStudentNames.add(ls.name);
-          if (ls.dni) allDnis.add(ls.dni);
+          if (isValidDni(ls.dni)) allDnis.add(ls.dni);
           if (ls.username) allUsernames.add(ls.username);
         });
       }
@@ -251,26 +262,26 @@ class IntranetStore {
       if (e.id) allUserIds.add(e.id);
       if (e.studentCode) allStudentCodes.add(e.studentCode);
       if (e.studentName) allStudentNames.add(e.studentName);
-      if (e.dni) allDnis.add(e.dni);
-      if (e.guardian) allGuardianNames.add(e.guardian);
-      if (e.guardianDni) allDnis.add(e.guardianDni);
+      if (isValidDni(e.dni)) allDnis.add(e.dni);
+      if (isValidGuardian(e.guardian)) allGuardianNames.add(e.guardian);
+      if (isValidDni(e.guardianDni)) allDnis.add(e.guardianDni);
     });
 
     matchedFamilies.forEach(f => {
       if (f.familyId) allFamilyIds.add(f.familyId);
-      if (f.guardian) allGuardianNames.add(f.guardian);
+      if (isValidGuardian(f.guardian)) allGuardianNames.add(f.guardian);
       if (f.studentName) allStudentNames.add(f.studentName);
       if (f.studentCode) allStudentCodes.add(f.studentCode);
     });
 
     // Expandir búsqueda secundaria
     enrollments.forEach(e => {
-      if (allStudentNames.has(e.studentName) || allStudentCodes.has(e.studentCode) || (e.dni && allDnis.has(e.dni))) {
-        if (e.guardian) allGuardianNames.add(e.guardian);
+      if (allStudentNames.has(e.studentName) || allStudentCodes.has(e.studentCode) || (isValidDni(e.dni) && allDnis.has(e.dni))) {
+        if (isValidGuardian(e.guardian)) allGuardianNames.add(e.guardian);
         if (e.studentCode) allStudentCodes.add(e.studentCode);
         if (e.studentName) allStudentNames.add(e.studentName);
       }
-      if (allGuardianNames.has(e.guardian)) {
+      if (isValidGuardian(e.guardian) && allGuardianNames.has(e.guardian)) {
         if (e.studentName) allStudentNames.add(e.studentName);
         if (e.studentCode) allStudentCodes.add(e.studentCode);
       }
@@ -966,37 +977,199 @@ class IntranetStore {
   }
 
   getEnrollments() {
-    let list = (this.state && Array.isArray(this.state.enrollments) && this.state.enrollments.length > 0) 
-      ? this.state.enrollments 
+    let list = (this.state && Array.isArray(this.state.enrollments)) 
+      ? [...this.state.enrollments] 
       : (initialData && initialData.enrollments ? [...initialData.enrollments] : []);
     
+    // Integrar automáticamente estudiantes registrados en systemUsers
+    const sysStudents = ((this.state && this.state.systemUsers) || (initialData && initialData.systemUsers) || [])
+      .filter(u => (u.role === 'Estudiante' || u.role === 'Alumno') && !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.name) && !this.isDeleted(u.dni));
+    
+    sysStudents.forEach(st => {
+      const sCode = st.code || st.id;
+      const exists = list.some(e => 
+        (e.studentCode && e.studentCode === sCode) || 
+        (st.dni && e.dni && e.dni === st.dni) || 
+        (st.name && e.studentName && e.studentName.toLowerCase().trim() === st.name.toLowerCase().trim())
+      );
+      if (!exists) {
+        const gradeLabel = st.detail || st.gradeLevel || st.grade || "3° de Primaria";
+        const gradeId = st.gradeId || this.resolveStudentGradeId(gradeLabel);
+        list.push({
+          id: `MATR-2026-${Math.floor(100 + Math.random() * 900)}`,
+          studentCode: sCode,
+          studentName: st.name,
+          dni: st.dni || "79128301",
+          siagieCode: `2026-${st.dni || sCode}`,
+          birthDate: "15/06/2015",
+          gender: "Masculino",
+          address: "San Juan de Lurigancho",
+          district: "San Juan de Lurigancho",
+          bloodType: "O+",
+          insurance: "EsSalud Escolar",
+          allergies: "Ninguna",
+          medicalCondition: "Apto",
+          emergencyContact: st.guardian || "Apoderado",
+          emergencyPhone: st.phone || "955-112-233",
+          level: (gradeLabel.toLowerCase().includes("prim") ? "Primaria" : "Secundaria"),
+          grade: gradeLabel,
+          gradeId: gradeId,
+          tutor: st.tutor || "Docente Titular",
+          guardian: st.guardian || "Apoderado",
+          guardianDni: "41982301",
+          guardianPhone: st.phone || "955-112-233",
+          guardianEmail: `${st.name.toLowerCase().replace(/\s+/g, '.')}@gmail.com`,
+          enrollmentDate: st.createdDate || new Date().toLocaleDateString("es-PE"),
+          feeStatus: "Pagado",
+          status: "Matriculado (Nómina Oficial)"
+        });
+      }
+    });
+
     // Filtrar estrictamente cualquier matrícula en la lista de eliminados permanentes
     list = list.filter(e => 
       !this.isDeleted(e.id) && 
       !this.isDeleted(e.studentCode) && 
       !this.isDeleted(e.studentName) && 
-      !this.isDeleted(e.dni) && 
-      !this.isDeleted(e.guardian)
+      (e.dni && e.dni !== "Pendiente" ? !this.isDeleted(e.dni) : true) && 
+      (e.guardian && e.guardian !== "Apoderado" ? !this.isDeleted(e.guardian) : true)
     );
 
     this.state.enrollments = list;
     return list;
   }
 
-  // --- Gestión de la Boleta Oficial Dinámica ---
-  getBoletaData(studentKey) {
-    const all = this.state.boletaData || initialData.boletaData;
-    return all[studentKey] || all.albujar;
+  // --- Gestión de la Boleta Oficial Dinámica Vinculada al Registro General ---
+  getBoletaData(studentKey, fallbackStudentObj = null) {
+    const enrollments = this.getEnrollments();
+    
+    // Buscar estudiante real en la nómina general
+    let enr = null;
+    if (studentKey) {
+      const cleanKey = String(studentKey).toLowerCase().trim();
+      enr = enrollments.find(e => 
+        (e.studentCode && e.studentCode.toLowerCase() === cleanKey) ||
+        (e.id && e.id.toLowerCase() === cleanKey) ||
+        (e.dni && e.dni === cleanKey) ||
+        (e.studentName && e.studentName.toLowerCase().trim() === cleanKey) ||
+        (cleanKey.length >= 3 && e.studentName && e.studentName.toLowerCase().includes(cleanKey))
+      );
+    }
+    if (!enr && fallbackStudentObj) {
+      enr = fallbackStudentObj;
+    }
+    if (!enr && enrollments.length > 0) {
+      enr = enrollments[0];
+    }
+
+    if (!enr) {
+      return {
+        student: "Sin Estudiantes Registrados",
+        name: "Sin Estudiantes Registrados",
+        code: "--",
+        dni: "--",
+        grade: "Secundaria",
+        gradeLevel: "Secundaria",
+        level: "SECUNDARIA",
+        section: "A",
+        siagieCode: "--",
+        grades: {},
+        appreciations: {
+          b1: "No hay registros de apreciación.",
+          b2: "",
+          b3: "",
+          b4: ""
+        },
+        attendance: {},
+        parentCriteria: {}
+      };
+    }
+
+    const sCode = enr.studentCode || enr.id || enr.dni;
+    const all = this.state.boletaData || initialData.boletaData || {};
+
+    let bData = all[sCode] || all[enr.studentName] || (studentKey ? all[studentKey] : null);
+
+    if (!bData) {
+      const initialSample = all.mendez || all.albujar || {};
+      bData = {
+        id: sCode,
+        code: sCode,
+        student: enr.studentName,
+        name: enr.studentName,
+        dni: enr.dni || "75891234",
+        grade: enr.grade || "4° de Secundaria",
+        gradeLevel: enr.grade || "4° de Secundaria",
+        level: (enr.level || "Secundaria").toUpperCase(),
+        section: "A",
+        siagieCode: enr.siagieCode || `2026-${enr.dni || sCode}`,
+        guardian: enr.guardian || "Apoderado",
+        grades: (initialSample.grades) ? JSON.parse(JSON.stringify(initialSample.grades)) : {},
+        appreciations: {
+          b1: `Felicitaciones a ${enr.studentName} por su rendimiento y constante dedicación en sus actividades escolares.`,
+          b2: `Demuestra responsabilidad y compromiso en el aula. Se recomienda continuar participando activamente.`,
+          b3: "",
+          b4: ""
+        },
+        attendance: {
+          b1: { unexcusedAbsences: "-", excusedAbsences: "-", tardiness: "-" },
+          b2: { unexcusedAbsences: "-", excusedAbsences: "-", tardiness: "-" },
+          b3: { unexcusedAbsences: "-", excusedAbsences: "-", tardiness: "-" },
+          b4: { unexcusedAbsences: "-", excusedAbsences: "-", tardiness: "-" }
+        },
+        parentCriteria: {
+          q1: true, q2: true, q3: true, q4: true, q5: true,
+          q6: true, q7: true, q8: true, q9: true, q10: true
+        }
+      };
+
+      if (!this.state.boletaData) this.state.boletaData = {};
+      this.state.boletaData[sCode] = bData;
+    } else {
+      bData.student = enr.studentName;
+      bData.name = enr.studentName;
+      bData.grade = enr.grade || bData.grade;
+      bData.gradeLevel = enr.grade || bData.gradeLevel;
+      bData.dni = enr.dni || bData.dni;
+      bData.siagieCode = enr.siagieCode || bData.siagieCode;
+    }
+
+    return bData;
   }
 
   saveBoletaStudentData(studentKey, updatedData) {
     if (!this.state.boletaData) {
-      this.state.boletaData = { ...initialData.boletaData };
+      this.state.boletaData = JSON.parse(JSON.stringify(initialData.boletaData || {}));
     }
-    this.state.boletaData[studentKey] = {
-      ...(this.state.boletaData[studentKey] || initialData.boletaData[studentKey]),
-      ...updatedData
-    };
+    if (!this.state.boletaData[studentKey]) {
+      this.state.boletaData[studentKey] = { grades: {}, attendance: {}, appreciations: {}, parentCriteria: {} };
+    }
+    
+    if (updatedData.grades) {
+      this.state.boletaData[studentKey].grades = {
+        ...(this.state.boletaData[studentKey].grades || {}),
+        ...updatedData.grades
+      };
+    }
+    if (updatedData.appreciations) {
+      this.state.boletaData[studentKey].appreciations = {
+        ...(this.state.boletaData[studentKey].appreciations || {}),
+        ...updatedData.appreciations
+      };
+    }
+    if (updatedData.attendance) {
+      this.state.boletaData[studentKey].attendance = {
+        ...(this.state.boletaData[studentKey].attendance || {}),
+        ...updatedData.attendance
+      };
+    }
+    if (updatedData.parentCriteria) {
+      this.state.boletaData[studentKey].parentCriteria = {
+        ...(this.state.boletaData[studentKey].parentCriteria || {}),
+        ...updatedData.parentCriteria
+      };
+    }
+    
     this.saveState();
     this.notify();
   }
@@ -1102,6 +1275,8 @@ class IntranetStore {
       status: "Activo",
       createdDate: new Date().toLocaleDateString("es-PE")
     };
+
+    this.unRegisterDeleted(newUser.id, newUser.code, newUser.username, newUser.name, newUser.dni, newUser.studentName, newUser.guardian);
 
     if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
 
@@ -1334,6 +1509,7 @@ class IntranetStore {
     };
 
     if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    this.unRegisterDeleted(newEnrollment.id, newEnrollment.studentCode, newEnrollment.studentName, newEnrollment.dni, newEnrollment.guardian);
     this.state.enrollments.unshift(newEnrollment);
 
     this.createSystemUser({
@@ -1416,6 +1592,35 @@ class IntranetStore {
 
     if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
     
+    // Registrar o actualizar en systemUsers
+    const cleanStName = (data.studentName || data.name || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
+    const stParts = cleanStName.split(/\s+/).filter(Boolean);
+    const stUsername = stParts.length >= 2 ? `${stParts[0]}.${stParts[stParts.length - 1]}` : (stParts[0] || `estudiante.${Date.now().toString().slice(-4)}`);
+
+    // Registrar o actualizar cuenta de Padre / Apoderado en systemUsers
+    const cleanGuardianName = (data.guardian || "Apoderado").trim();
+    let gUsername = `apoderado.${stUsername}`;
+    if (cleanGuardianName && cleanGuardianName.toLowerCase() !== "apoderado titular" && cleanGuardianName.toLowerCase() !== "sin apoderado") {
+      const cleanGName = cleanGuardianName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
+      const gParts = cleanGName.split(/\s+/).filter(Boolean);
+      gUsername = gParts.length >= 2 ? `${gParts[0]}.${gParts[gParts.length - 1]}` : `apoderado.${stUsername}`;
+    }
+
+    this.unRegisterDeleted(
+      newEnrollment.id, 
+      newEnrollment.studentCode, 
+      newEnrollment.studentName, 
+      newEnrollment.dni, 
+      newEnrollment.guardian,
+      data.studentName,
+      data.name,
+      data.guardian,
+      stUsername,
+      `APO-${studentCode}`,
+      `FAM-${studentCode}`,
+      gUsername
+    );
+
     // Si ya existe por DNI o código, actualizarlo
     const existingIdx = this.state.enrollments.findIndex(e => (data.dni && e.dni === data.dni) || (e.studentCode === studentCode));
     if (existingIdx >= 0) {
@@ -1424,11 +1629,6 @@ class IntranetStore {
       this.state.enrollments.push(newEnrollment);
     }
 
-    // Registrar o actualizar en systemUsers
-    const cleanStName = (data.studentName || data.name || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
-    const stParts = cleanStName.split(/\s+/).filter(Boolean);
-    const stUsername = stParts.length >= 2 ? `${stParts[0]}.${stParts[stParts.length - 1]}` : (stParts[0] || `estudiante.${Date.now().toString().slice(-4)}`);
-    
     this.createSystemUser({
       code: studentCode,
       name: (data.studentName || data.name || "").trim(),
@@ -1446,13 +1646,7 @@ class IntranetStore {
       hasAdminPrivilege: false
     });
 
-    // Registrar o actualizar cuenta de Padre / Apoderado en systemUsers
-    const cleanGuardianName = (data.guardian || "Apoderado").trim();
     if (cleanGuardianName && cleanGuardianName.toLowerCase() !== "apoderado titular" && cleanGuardianName.toLowerCase() !== "sin apoderado") {
-      const cleanGName = cleanGuardianName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
-      const gParts = cleanGName.split(/\s+/).filter(Boolean);
-      const gUsername = gParts.length >= 2 ? `${gParts[0]}.${gParts[gParts.length - 1]}` : `apoderado.${stUsername}`;
-      
       this.createSystemUser({
         code: `APO-${studentCode}`,
         name: cleanGuardianName,
@@ -3099,48 +3293,6 @@ class IntranetStore {
     return true;
   }
 
-  getBoletaData(studentKey) {
-    const all = this.state.boletaData || initialData.boletaData || {};
-    return all[studentKey] || all.mendez || null;
-  }
-
-  saveBoletaStudentData(studentKey, updatedData) {
-    if (!this.state.boletaData) {
-      this.state.boletaData = JSON.parse(JSON.stringify(initialData.boletaData || {}));
-    }
-    if (!this.state.boletaData[studentKey]) {
-      this.state.boletaData[studentKey] = { grades: {}, attendance: {}, appreciations: {}, parentCriteria: {} };
-    }
-    
-    if (updatedData.grades) {
-      this.state.boletaData[studentKey].grades = {
-        ...(this.state.boletaData[studentKey].grades || {}),
-        ...updatedData.grades
-      };
-    }
-    if (updatedData.appreciations) {
-      this.state.boletaData[studentKey].appreciations = {
-        ...(this.state.boletaData[studentKey].appreciations || {}),
-        ...updatedData.appreciations
-      };
-    }
-    if (updatedData.attendance) {
-      this.state.boletaData[studentKey].attendance = {
-        ...(this.state.boletaData[studentKey].attendance || {}),
-        ...updatedData.attendance
-      };
-    }
-    if (updatedData.parentCriteria) {
-      this.state.boletaData[studentKey].parentCriteria = {
-        ...(this.state.boletaData[studentKey].parentCriteria || {}),
-        ...updatedData.parentCriteria
-      };
-    }
-    
-    this.saveState();
-    return true;
-  }
-
   // =========================================================================
   // MÓDULO DE AULA VIRTUAL Y EVALUACIONES DINÁMICAS (10 PREGUNTAS)
   // =========================================================================
@@ -3638,6 +3790,90 @@ class IntranetStore {
     if (byName) return byName;
 
     return enrollments[0];
+  }
+
+  // =========================================================================
+  // GESTIÓN DE CARTELES TEMÁTICOS MENSUALES (PDF POR CURSO & COMPENDIO DE AULA)
+  // =========================================================================
+  getMonthlyCarteles(gradeId = null, month = null) {
+    if (!this.state.monthlyCarteles || !Array.isArray(this.state.monthlyCarteles)) {
+      this.state.monthlyCarteles = JSON.parse(JSON.stringify(initialData.monthlyCarteles || []));
+    }
+    let list = [...this.state.monthlyCarteles];
+    
+    if (gradeId && gradeId !== 'all') {
+      const cleanG = gradeId.toLowerCase().replace(/[^a-z0-9]/g, '');
+      list = list.filter(c => {
+        const cG = (c.gradeId || this.resolveStudentGradeId(c.gradeName) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
+        return cG === cleanG || cG.includes(cleanG) || cleanG.includes(cG);
+      });
+    }
+
+    if (month && month !== 'all') {
+      const cleanM = month.toLowerCase().trim();
+      list = list.filter(c => (c.month || "").toLowerCase().trim() === cleanM);
+    }
+
+    return list;
+  }
+
+  saveMonthlyCartel(cartelData) {
+    if (!this.state.monthlyCarteles || !Array.isArray(this.state.monthlyCarteles)) {
+      this.state.monthlyCarteles = JSON.parse(JSON.stringify(initialData.monthlyCarteles || []));
+    }
+
+    const id = cartelData.id || `CART-2026-${Math.floor(100 + Math.random() * 900)}`;
+    const gradeLabel = cartelData.gradeName || cartelData.grade || "3° de Primaria";
+    const gradeId = cartelData.gradeId || this.resolveStudentGradeId(gradeLabel) || "3prim";
+
+    const item = {
+      id: id,
+      gradeId: gradeId,
+      gradeName: gradeLabel,
+      courseCode: cartelData.courseCode || `CUR-${Math.floor(100 + Math.random() * 900)}`,
+      courseName: cartelData.courseName || "Asignatura",
+      teacher: cartelData.teacher || "Docente Asignado",
+      month: cartelData.month || "Agosto",
+      year: cartelData.year || "2026",
+      competencies: Array.isArray(cartelData.competencies) 
+        ? cartelData.competencies 
+        : (typeof cartelData.competencies === "string" ? cartelData.competencies.split('\n').filter(Boolean) : ["Competencia Oficial MINEDU"]),
+      weeklyTopics: Array.isArray(cartelData.weeklyTopics)
+        ? cartelData.weeklyTopics
+        : [
+            cartelData.week1 || "Semana 1: Fundamentos y conceptos clave",
+            cartelData.week2 || "Semana 2: Desarrollo temático y práctica guiada",
+            cartelData.week3 || "Semana 3: Aplicación práctica y resolución de problemas",
+            cartelData.week4 || "Semana 4: Evaluación mensual y retroalimentación"
+          ],
+      evaluationCriteria: cartelData.evaluationCriteria || "Prácticas semanales, participación y revisión de cuadernos.",
+      pdfFileName: cartelData.pdfFileName || `${cartelData.courseName || 'Cartel'}_${cartelData.month || 'Agosto'}_2026.pdf`,
+      pdfFileSize: cartelData.pdfFileSize || "350 KB",
+      pdfFileData: cartelData.pdfFileData || null,
+      uploadedAt: cartelData.uploadedAt || new Date().toLocaleDateString("es-PE"),
+      status: "Publicado"
+    };
+
+    const existingIdx = this.state.monthlyCarteles.findIndex(c => c.id === id);
+    if (existingIdx >= 0) {
+      this.state.monthlyCarteles[existingIdx] = { ...this.state.monthlyCarteles[existingIdx], ...item };
+    } else {
+      this.state.monthlyCarteles.unshift(item);
+    }
+
+    this.saveState();
+    this.syncToServer();
+    this.notify();
+    return item;
+  }
+
+  deleteMonthlyCartel(cartelId) {
+    if (!this.state.monthlyCarteles) return false;
+    this.state.monthlyCarteles = this.state.monthlyCarteles.filter(c => c.id !== cartelId);
+    this.saveState();
+    this.syncToServer();
+    this.notify();
+    return true;
   }
 
   resetToInitial() {

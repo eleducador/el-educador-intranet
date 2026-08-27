@@ -2935,15 +2935,9 @@ const Components = {
       const egId = (e.gradeId || (window.appStore && window.appStore.resolveStudentGradeId(e.grade)) || "").toLowerCase().replace(/[^a-z0-9]/g, '');
       return egId === cleanSelectedGrade || egId.includes(cleanSelectedGrade) || cleanSelectedGrade.includes(egId);
     }).map(e => {
-      let key = e.studentCode || e.dni || e.id;
-      const nameLow = (e.studentName || "").toLowerCase();
-      if (nameLow.includes("mendez") || nameLow.includes("méndez")) key = "mendez";
-      else if (nameLow.includes("benitez") || nameLow.includes("benítez")) key = "benitez";
-      else if (nameLow.includes("albujar") || nameLow.includes("albújar")) key = "albujar";
-
       return {
-        key: key,
-        studentCode: e.studentCode || e.dni,
+        key: e.studentCode || e.id || e.dni,
+        studentCode: e.studentCode || e.dni || e.id,
         name: e.studentName,
         dni: e.dni,
         grade: e.grade || currentGradeObj.label,
@@ -2953,10 +2947,13 @@ const Components = {
 
     let selectedStudentKey = state.selectedBoletaStudent;
     if (!selectedStudentKey || !classroomStudents.some(s => s.key === selectedStudentKey)) {
-      selectedStudentKey = classroomStudents.length > 0 ? classroomStudents[0].key : "mendez";
+      selectedStudentKey = classroomStudents.length > 0 ? classroomStudents[0].key : "";
     }
 
-    const tutorStudentData = allBoletas[selectedStudentKey] || (classroomStudents.find(s => s.key === selectedStudentKey) ? { name: classroomStudents.find(s => s.key === selectedStudentKey).name } : allBoletas.mendez) || {};
+    const currentTutorStudent = classroomStudents.find(s => s.key === selectedStudentKey) || (classroomStudents.length > 0 ? classroomStudents[0] : null);
+    const tutorStudentData = (window.appStore && typeof window.appStore.getBoletaData === "function")
+      ? window.appStore.getBoletaData(selectedStudentKey, currentTutorStudent)
+      : { name: currentTutorStudent ? currentTutorStudent.name : "", appreciations: {}, attendance: {}, parentCriteria: {} };
     const tutorApp = tutorStudentData.appreciations || {};
     const tutorAtt = tutorStudentData.attendance || {};
     const tutorPc = tutorStudentData.parentCriteria || {};
@@ -3392,8 +3389,9 @@ const Components = {
   renderPrintableReport(state) {
     const role = state.currentRole;
     const currentUser = (state.currentUser && state.currentUser.name) ? state.currentUser : ((state.users && state.users[role]) || initialData.users[role] || {});
-    const allBoletas = state.boletaData || initialData.boletaData || {};
-    const enrollments = state.enrollments || initialData.enrollments || [];
+    const enrollments = (window.appStore && typeof window.appStore.getEnrollments === "function") 
+      ? window.appStore.getEnrollments() 
+      : (state.enrollments || []);
 
     let selectedStudentKey = state.selectedBoletaStudent;
     
@@ -3406,37 +3404,54 @@ const Components = {
         (childName && e.studentName && (childName.includes(e.studentName.toLowerCase()) || e.studentName.toLowerCase().includes(childName)))
       );
       if (matched) {
-        selectedStudentKey = matched.studentCode || matched.dni;
-      } else {
-        selectedStudentKey = "mendez";
+        selectedStudentKey = matched.studentCode || matched.id || matched.dni;
+      } else if (enrollments.length > 0) {
+        selectedStudentKey = enrollments[0].studentCode || enrollments[0].id || enrollments[0].dni;
       }
     } else if (role === 'estudiante') {
       // Si el usuario es Estudiante: seleccionar su propia boleta
       const sCode = currentUser.code || currentUser.studentCode || currentUser.dni;
       const matched = enrollments.find(e => e.studentCode === sCode || e.dni === sCode || (currentUser.name && e.studentName && e.studentName.toLowerCase().includes(currentUser.name.toLowerCase())));
       if (matched) {
-        selectedStudentKey = matched.studentCode || matched.dni;
-      } else {
-        selectedStudentKey = "mendez";
+        selectedStudentKey = matched.studentCode || matched.id || matched.dni;
+      } else if (enrollments.length > 0) {
+        selectedStudentKey = enrollments[0].studentCode || enrollments[0].id || enrollments[0].dni;
       }
-    } else if (!selectedStudentKey) {
-      selectedStudentKey = "mendez";
+    } else {
+      // Para Docentes y Directivos: si el alumno seleccionado no existe en enrollments, seleccionar el primer alumno de la nómina
+      const existsInEnrollments = enrollments.some(e => 
+        e.studentCode === selectedStudentKey || 
+        e.id === selectedStudentKey || 
+        e.dni === selectedStudentKey ||
+        (e.studentName && e.studentName.toLowerCase().trim() === (selectedStudentKey || "").toLowerCase().trim())
+      );
+      if (!existsInEnrollments && enrollments.length > 0) {
+        selectedStudentKey = enrollments[0].studentCode || enrollments[0].id || enrollments[0].dni;
+        state.selectedBoletaStudent = selectedStudentKey;
+      }
     }
 
-    let student = allBoletas[selectedStudentKey] || allBoletas.mendez;
-    if (!student) {
-      const enr = enrollments.find(e => e.studentCode === selectedStudentKey || e.dni === selectedStudentKey || e.id === selectedStudentKey);
-      student = {
-        student: enr ? enr.studentName : "Estudiante Institucional",
-        code: enr ? enr.studentCode : selectedStudentKey,
-        dni: enr ? enr.dni : "75891234",
-        grade: enr ? enr.grade : "4° de Secundaria",
-        grades: {},
-        appreciations: {},
-        attendance: {},
-        parentCriteria: {}
-      };
-    }
+    const currentEnrollment = enrollments.find(e => 
+      e.studentCode === selectedStudentKey || 
+      e.id === selectedStudentKey || 
+      e.dni === selectedStudentKey ||
+      (e.studentName && e.studentName.toLowerCase().trim() === (selectedStudentKey || "").toLowerCase().trim())
+    ) || (enrollments.length > 0 ? enrollments[0] : null);
+
+    const student = (window.appStore && typeof window.appStore.getBoletaData === "function")
+      ? window.appStore.getBoletaData(selectedStudentKey, currentEnrollment)
+      : {
+          student: currentEnrollment ? currentEnrollment.studentName : "Estudiante Registrado",
+          name: currentEnrollment ? currentEnrollment.studentName : "Estudiante Registrado",
+          code: currentEnrollment ? currentEnrollment.studentCode : "--",
+          dni: currentEnrollment ? currentEnrollment.dni : "--",
+          grade: currentEnrollment ? currentEnrollment.grade : "Secundaria",
+          grades: {},
+          appreciations: {},
+          attendance: {},
+          parentCriteria: {}
+        };
+
     const g = student.grades || {};
     const app = student.appreciations || {};
     const att = student.attendance || {};
@@ -3521,17 +3536,19 @@ const Components = {
             ${isParentOrStudent ? `
               <div style="display: flex; align-items: center; gap: 6px;">
                 <span class="status-badge" style="background: #e0e7ff; color: #3730a3; font-weight: 800; font-size: 12px;">
-                  📄 Boleta Oficial de: <strong>${student.student}</strong> (${student.grade || '2026'})
+                  📄 Boleta Oficial de: <strong>${student.student || student.name}</strong> (${student.grade || '2026'})
                 </span>
               </div>
             ` : `
-              <!-- Selector de Alumno para Docentes y Directivos -->
+              <!-- Selector de Alumno para Docentes y Directivos (Vinculado Estrictamente a la Nómina Oficial de Estudiantes) -->
               <div style="display: flex; align-items: center; gap: 6px;">
                 <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Alumno(a):</span>
-                <select class="form-control" style="font-size: 12px; font-weight: bold; width: auto; padding: 4px 10px;" onchange="window.app.changeBoletaStudent(this.value)">
-                  <option value="mendez" ${selectedStudentKey === 'mendez' ? 'selected' : ''}>MÉNDEZ FLORES, SOFÍA (4° de Secundaria)</option>
-                  <option value="benitez" ${selectedStudentKey === 'benitez' ? 'selected' : ''}>BENÍTEZ RUIZ, CARLOS (4° de Secundaria)</option>
-                  <option value="albujar" ${selectedStudentKey === 'albujar' ? 'selected' : ''}>ALBUJAR ZEGARRA, MARINA DEL CARMEN (2° de Secundaria)</option>
+                <select class="form-control" style="font-size: 12px; font-weight: bold; min-width: 280px; padding: 4px 10px;" onchange="window.app.changeBoletaStudent(this.value)">
+                  ${enrollments.length > 0 ? enrollments.map(e => {
+                    const sVal = e.studentCode || e.id || e.dni;
+                    const isSel = (currentEnrollment && (currentEnrollment.studentCode === e.studentCode || currentEnrollment.id === e.id || currentEnrollment.dni === e.dni)) ? 'selected' : '';
+                    return `<option value="${sVal}" ${isSel}>${(e.studentName || 'Estudiante').toUpperCase()} (${e.grade || 'Nivel Escolar'})</option>`;
+                  }).join('') : '<option value="">No hay estudiantes registrados en la nómina</option>'}
                 </select>
               </div>
             `}
@@ -3856,15 +3873,15 @@ const Components = {
                 
                 <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;">
                   <span style="font-weight: 900; font-size: 8.2pt;">APELLIDOS Y NOMBRES:</span> 
-                  <strong style="text-transform: uppercase; font-size: 8.8pt; color: #000000;">${student.name}</strong>
+                  <strong style="text-transform: uppercase; font-size: 8.8pt; color: #000000;">${student.name || student.student}</strong>
                 </div>
                 
                 <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
                   <div>
-                    <span style="font-weight: 900; font-size: 8.2pt;">GRADO:</span> <strong>${student.grade}</strong>
+                    <span style="font-weight: 900; font-size: 8.2pt;">GRADO:</span> <strong>${student.grade || (currentEnrollment && currentEnrollment.grade) || '4° de Secundaria'}</strong>
                   </div>
                   <div>
-                    <span style="font-weight: 900; font-size: 8.2pt;">NIVEL:</span> <strong>${student.level}</strong>
+                    <span style="font-weight: 900; font-size: 8.2pt;">NIVEL:</span> <strong>${student.level || (currentEnrollment && currentEnrollment.level) || 'SECUNDARIA'}</strong>
                   </div>
                 </div>
 
@@ -3874,7 +3891,7 @@ const Components = {
 
                 <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                   <span style="font-weight: 900; font-size: 8.2pt;">TUTOR (A):</span> 
-                  <strong style="color: #000000;">${student.tutor}</strong>
+                  <strong style="color: #000000;">${student.tutor || (currentEnrollment && currentEnrollment.tutor) || 'Prof. Roberto Silva'}</strong>
                 </div>
 
               </div>
@@ -4445,13 +4462,20 @@ const Components = {
     }
   },
 
-  // Sílabus
+  // Sílabus y Carteles Temáticos Mensuales
   renderSyllabi(state) {
     const role = state.currentRole;
-    const hasAdminEditPower = role === "admin" || (role === "docente" && state.users.docente && state.users.docente.hasAdminPrivileges);
-    const catalog = state.gradesCatalog || initialData.gradesCatalog;
+    const isTeacherOrAdmin = role === "admin" || role === "docente" || role === "director";
+    const catalog = state.gradesCatalog || initialData.gradesCatalog || [];
     
-    let currentGradeId = state.selectedSyllabusGrade || "5prim";
+    // Mes activo seleccionado
+    const selectedMonth = state.selectedSyllabusMonth || "Agosto";
+    const months = ["Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
+
+    let currentGradeId = state.selectedSyllabusGrade || "3prim";
+    let gradeLabel = "3° de Primaria";
+    let tutorName = "Prof. Roberto Silva";
+
     if (role === "padre") {
       const parentUser = this.getCurrentUser(state);
       const children = parentUser.children || [];
@@ -4469,55 +4493,163 @@ const Components = {
       currentGradeId = matched ? matched.id : this.getGradeIdFromLabel(gradeStr);
     }
 
-    const currentGrade = catalog.find(g => g.id === currentGradeId) || catalog.find(g => g.id === "5prim") || catalog[0] || { id: "5prim", label: "5° de Primaria" };
-    const rawSyllabi = state.syllabi || initialData.syllabi;
-    // Si es padre o alumno, filtrar estrictamente para ver solo los cursos de su grado
-    const syllabiList = (role === "padre" || role === "estudiante")
-      ? rawSyllabi.filter(s => s.gradeId === currentGradeId || !s.gradeId)
-      : rawSyllabi.filter(s => s.gradeId === currentGradeId || currentGradeId === "all");
+    const currentGradeObj = catalog.find(g => g.id === currentGradeId) || catalog.find(g => g.id === "3prim") || catalog[0] || { id: "3prim", label: "3° de Primaria", tutor: "Docente Titular", level: "Primaria" };
+    gradeLabel = currentGradeObj.label || "3° de Primaria";
+    tutorName = currentGradeObj.tutor || "Prof. Roberto Silva";
+
+    // Obtener carteles temáticos mensuales de la base de datos
+    const carteles = (window.appStore && typeof window.appStore.getMonthlyCarteles === "function")
+      ? window.appStore.getMonthlyCarteles(currentGradeId, selectedMonth)
+      : [];
 
     const isPadre = role === "padre";
-    const canBrowseAllGrades = role === "admin" || role === "director" || role === "docente";
+    const isEstudiante = role === "estudiante";
+    const canBrowseAllGrades = isTeacherOrAdmin;
 
     return `
       <div class="fade-in">
-        <div class="card" style="margin-bottom: var(--space-6);">
-          <div class="card-header">
+        
+        <!-- Cabecera Institucional del Módulo -->
+        <div class="card" style="margin-bottom: var(--space-5);">
+          <div class="card-header" style="flex-wrap: wrap; gap: 14px;">
             <div>
-              <h2 class="card-title" style="font-size: var(--font-size-xl);">Sílabus Curriculares 2026</h2>
-              <p style="font-size: var(--font-size-xs); color: var(--text-muted);">Competencias y programación temática institucional.</p>
+              <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(30,58,138,0.1); border: 1px solid rgba(59,130,246,0.3); color: #1e40af; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">
+                📑 Carteles Temáticos & Sílabus Curriculares 2026
+              </div>
+              <h2 class="card-title" style="font-size: var(--font-size-xl); margin: 0 0 4px;">
+                Programación Temática Mensual por Asignaturas
+              </h2>
+              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin: 0;">
+                Subida de carteles en PDF por cada docente y consulta/descarga consolidada para padres de familia.
+              </p>
             </div>
-            <div style="display: flex; gap: var(--space-3); align-items: center;">
+
+            <!-- Controles Superiores: Filtro de Grado y Botón de Subida -->
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
               ${canBrowseAllGrades ? `
-                <select class="form-control" style="width: auto; padding: 4px 12px; font-weight: bold;" onchange="window.app.onSyllabusGradeChange(this.value)">
-                  ${catalog.map(g => `<option value="${g.id}" ${g.id === currentGradeId ? 'selected' : ''}>${g.label}</option>`).join('')}
-                </select>
-                ${hasAdminEditPower ? `<button class="btn btn-red btn-sm" onclick="window.app.openCreateSyllabusModal()">+ Crear Sílabo</button>` : ''}
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Aula / Grado:</span>
+                  <select class="form-control" style="width: auto; padding: 6px 12px; font-weight: bold; font-size: 13px;" onchange="window.app.onSyllabusGradeChange(this.value)">
+                    ${catalog.map(g => `<option value="${g.id}" ${g.id === currentGradeId ? 'selected' : ''}>${g.label}</option>`).join('')}
+                  </select>
+                </div>
+                <button class="btn btn-navy" onclick="window.app.openUploadMonthlyCartelModal('', '${currentGradeId}', '${selectedMonth}')" style="font-weight: 800; font-size: 13px; padding: 8px 16px;">
+                  📤 Subir Cartel Temático (PDF)
+                </button>
               ` : `
-                <div style="font-size: 13px; color: var(--color-navy-950); font-weight: 800; background: var(--color-yellow-100); padding: 6px 14px; border-radius: 6px; border: 1px solid var(--color-yellow-400);">
-                  📚 Cursos de: <strong>${currentGrade.label}</strong>
+                <div style="font-size: 13px; color: #1e3a8a; font-weight: 800; background: #eff6ff; padding: 8px 16px; border-radius: 8px; border: 1px solid #bfdbfe;">
+                  🎓 Aula: <strong>${gradeLabel}</strong> &nbsp;|&nbsp; 👨‍🏫 Tutor: <strong>${tutorName}</strong>
                 </div>
               `}
             </div>
           </div>
+        </div>
 
-          <div class="syllabus-card-grid">
-            ${syllabiList.map(s => `
-              <div class="syllabus-card">
+        <!-- Banner Exclusivo para Padres de Familia: Descarga Consolidada Todo en Uno -->
+        <div class="card" style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: white; padding: 22px 24px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div style="max-width: 650px;">
+            <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(254, 240, 138, 0.2); border: 1px solid rgba(254, 240, 138, 0.4); color: #fef08a; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">
+              📄 Compendio Oficial de Aula
+            </div>
+            <h3 style="margin: 0 0 6px; font-size: 18px; font-weight: 900; color: #ffffff;">
+              Compendio Consolidado de Carteles Temáticos – Mes de ${selectedMonth} 2026
+            </h3>
+            <p style="margin: 0; font-size: 13px; color: #cbd5e1; line-height: 1.45;">
+              Vea, descargue e imprima <strong>todas las materias y temas mensuales de ${gradeLabel} en un solo documento PDF unificado</strong> para la carpeta pedagógica familiar.
+            </p>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn btn-yellow" onclick="window.app.openConsolidatedCartelModal('${currentGradeId}', '${selectedMonth}')" style="font-weight: 900; font-size: 13px; padding: 12px 22px; box-shadow: 0 4px 12px rgba(234, 179, 8, 0.35);">
+              🖨️ Descargar / Imprimir Todo en un Solo PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Barra de Navegación por Meses (Marzo a Diciembre) -->
+        <div style="display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 20px;">
+          ${months.map(m => {
+            const isSel = m.toLowerCase() === selectedMonth.toLowerCase();
+            return `
+              <button class="btn ${isSel ? 'btn-navy' : 'btn-outline'}" 
+                onclick="window.app.onSyllabusMonthChange('${m}')" 
+                style="padding: 7px 16px; font-size: 12px; font-weight: ${isSel ? '800' : '600'}; white-space: nowrap; border-radius: 20px;">
+                📅 ${m}
+              </button>
+            `;
+          }).join('')}
+        </div>
+
+        <!-- Listado de Carteles Temáticos por Asignatura -->
+        ${carteles.length === 0 ? `
+          <div class="card" style="text-align: center; padding: 40px 20px;">
+            <div style="font-size: 40px; margin-bottom: 12px;">📁</div>
+            <h3 style="color: var(--color-navy-900); margin: 0 0 6px;">No hay carteles temáticos registrados para ${selectedMonth}</h3>
+            <p style="color: var(--text-muted); font-size: 13px; max-width: 500px; margin: 0 auto 16px;">
+              Los docentes de ${gradeLabel} publicarán sus carteles temáticos en formato PDF a la brevedad.
+            </p>
+            ${isTeacherOrAdmin ? `
+              <button class="btn btn-navy" onclick="window.app.openUploadMonthlyCartelModal('', '${currentGradeId}', '${selectedMonth}')">
+                + Subir el Primer Cartel Temático en PDF
+              </button>
+            ` : ''}
+          </div>
+        ` : `
+          <div class="syllabus-card-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px;">
+            ${carteles.map(c => `
+              <div class="syllabus-card" style="background: white; border-radius: 10px; border: 1px solid #e2e8f0; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s;">
                 <div>
-                  <div class="syllabus-header"><span class="syllabus-code">${s.courseCode}</span><span class="status-badge status-approved">${s.bimester}</span></div>
-                  <h3 class="syllabus-title">${s.courseName}</h3>
-                  <div class="syllabus-meta-list"><div>👨‍Docente: ${s.teacher}</div><div>⏱️ Carga: ${s.hoursWeekly || '4 hrs'}</div></div>
-                  <div class="competency-tag-box">${(s.competencies || ['Competencia General']).map(c => `<span class="competency-pill">✓ ${c}</span>`).join('')}</div>
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                    <span style="background: #e0e7ff; color: #3730a3; font-weight: 800; font-size: 11px; padding: 3px 8px; border-radius: 6px;">
+                      ${c.courseCode || 'OFICIAL'}
+                    </span>
+                    <span style="background: #fef08a; color: #854d0e; font-weight: 800; font-size: 11px; padding: 3px 8px; border-radius: 6px;">
+                      📅 ${c.month} 2026
+                    </span>
+                  </div>
+
+                  <h3 style="font-size: 16px; font-weight: 800; color: var(--color-navy-900); margin: 0 0 8px; line-height: 1.3;">
+                    ${c.courseName}
+                  </h3>
+
+                  <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; display: flex; flex-direction: column; gap: 3px;">
+                    <div>👨‍🏫 <strong>Docente:</strong> ${c.teacher}</div>
+                    <div>🎓 <strong>Grado:</strong> ${c.gradeName}</div>
+                  </div>
+
+                  <!-- Temario Semanal Resumido -->
+                  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 12px; margin-bottom: 12px; font-size: 11.5px; color: #334155;">
+                    <strong style="color: var(--color-navy-900); display: block; margin-bottom: 4px;">📌 Programación del Mes (${c.month}):</strong>
+                    <ul style="margin: 0; padding-left: 16px; line-height: 1.4;">
+                      ${(c.weeklyTopics || []).map(t => `<li>${t}</li>`).join('')}
+                    </ul>
+                  </div>
+
+                  <!-- Badge de Documento PDF Adjunto -->
+                  <div style="display: flex; align-items: center; gap: 6px; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 6px 10px; border-radius: 6px; font-size: 11.5px; color: #065f46; margin-bottom: 14px;">
+                    <span>📄</span>
+                    <span style="font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                      ${c.pdfFileName || 'Cartel_Tematico_Oficial.pdf'} (${c.pdfFileSize || '320 KB'})
+                    </span>
+                  </div>
                 </div>
-                <div style="border-top:1px solid var(--border-subtle); padding-top:10px; display:flex; justify-content:space-between; align-items:center;">
-                  <button class="btn btn-navy btn-sm" onclick="window.app.openSyllabusModal('${s.id}')">Ver Completo</button>
-                  ${hasAdminEditPower ? `<div><button class="btn btn-outline btn-sm" onclick="window.app.openEditSyllabusModal('${s.id}')">✏️</button> <button class="btn btn-outline btn-sm" style="color:var(--color-red-600);" onclick="window.app.confirmDeleteSyllabus('${s.id}')">🗑️</button></div>` : ''}
+
+                <!-- Botones de Acción -->
+                <div style="border-top: 1px solid #e2e8f0; padding-top: 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                  <button class="btn btn-navy btn-sm" onclick="window.app.openViewCartelPdfModal('${c.id}')" style="font-weight: 800; font-size: 12px; flex: 1;">
+                    👁️ Ver / Descargar PDF
+                  </button>
+                  ${isTeacherOrAdmin ? `
+                    <div style="display: flex; gap: 4px;">
+                      <button class="btn btn-outline btn-sm" onclick="window.app.openEditMonthlyCartelModal('${c.id}')" title="Editar Cartel">✏️</button>
+                      <button class="btn btn-outline btn-sm" style="color: var(--color-red-600);" onclick="window.app.confirmDeleteMonthlyCartel('${c.id}')" title="Eliminar Cartel">🗑️</button>
+                    </div>
+                  ` : ''}
                 </div>
               </div>
             `).join('')}
           </div>
-        </div>
+        `}
+
       </div>
     `;
   },

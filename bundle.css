@@ -2076,6 +2076,26 @@ textarea.form-control:focus {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
+
+  .consolidated-cartel-print-container {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .consolidated-cartel-print-container table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  .consolidated-cartel-print-container th,
+  .consolidated-cartel-print-container td {
+    border: 1px solid #000000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
 }
 
 .official-letterhead-banner {

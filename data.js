@@ -1024,42 +1024,6 @@ const initialData = {
         reportCard: false,
         vaccinationCard: true
       }
-    },
-    {
-      id: "MATR-2026-005",
-      studentCode: "EX-EST-2025-089",
-      studentName: "Evelin Estefanía Díaz Chirre",
-      dni: "71290384",
-      siagieCode: "2025-71290384",
-      birthDate: "05/04/2008",
-      gender: "Femenino",
-      address: "Av. Gran Chimú 650",
-      district: "San Juan de Lurigancho",
-      bloodType: "B+",
-      insurance: "Particular (Rímac)",
-      allergies: "Sin alergias",
-      medicalCondition: "Ninguna",
-      emergencyContact: "Familia Díaz Chirre",
-      emergencyPhone: "991-234-876",
-      level: "Secundaria",
-      grade: "5° de Secundaria",
-      gradeId: "5sec",
-      guardian: "Familia Díaz Chirre",
-      guardianDni: "40192834",
-      guardianPhone: "991-234-876",
-      guardianEmail: "diaz.chirre@gmail.com",
-      enrollmentDate: "15/08/2026",
-      feeStatus: "Pagado Trámite",
-      status: "En Observación UGEL 05 (Consulta en curso)",
-      certificateNo: "CERT-UGEL05-RECH-2",
-      documents: {
-        dniStudent: true,
-        dniParent: true,
-        birthCertificate: true,
-        siagieFUM: true,
-        reportCard: true,
-        vaccinationCard: true
-      }
     }
   ],
 
@@ -1756,6 +1720,212 @@ const initialData = {
         }
       ],
       bibliography: "Baldor Álgebra Moderna, Guías Oficiales I.E.P. El Educador 2026."
+    }
+  ],
+
+  // Carteles Temáticos Mensuales 2026 (Subidos por Docente en PDF / Descarga Consolidada por Aula)
+  monthlyCarteles: [
+    {
+      id: "CART-2026-3P-MAT-AGO",
+      gradeId: "3prim",
+      gradeName: "3° de Primaria",
+      courseCode: "MAT-301",
+      courseName: "Matemática & Razonamiento Matemático",
+      teacher: "Miss Julisa Arroyo",
+      month: "Agosto",
+      year: "2026",
+      competencies: [
+        "Resuelve problemas de cantidad y operaciones combinadas",
+        "Usa estrategias de cálculo mental con multiplicación y división",
+        "Modela patrones numéricos y tablas de doble entrada"
+      ],
+      weeklyTopics: [
+        "Semana 1: Multiplicación por 6, 7 y 8 mediante arreglos rectangulares",
+        "Semana 2: Propiedad conmutativa y distributiva aplicada a problemas cotidianos",
+        "Semana 3: División exacta e inexacta como reparto equitativo",
+        "Semana 4: Resolución de problemas de dos etapas y evaluación mensual"
+      ],
+      evaluationCriteria: "Prácticas semanales, situaciones problemáticas y revisión de cuaderno de trabajo.",
+      pdfFileName: "Cartel_Tematico_Matematica_Agosto_3Primaria.pdf",
+      pdfFileSize: "340 KB",
+      uploadedAt: "01/08/2026",
+      status: "Publicado"
+    },
+    {
+      id: "CART-2026-3P-COM-AGO",
+      gradeId: "3prim",
+      gradeName: "3° de Primaria",
+      courseCode: "COM-301",
+      courseName: "Comunicación & Comprensión Lectora",
+      teacher: "Miss Julisa Arroyo",
+      month: "Agosto",
+      year: "2026",
+      competencies: [
+        "Lee diversos tipos de textos escritos en su lengua materna",
+        "Escribe textos narrativos y descriptivos con coherencia y cohesión",
+        "Se comunica oralmente en su lengua materna"
+      ],
+      weeklyTopics: [
+        "Semana 1: Lectura comprensiva de leyendas peruanas e idea principal",
+        "Semana 2: El sustantivo: clases, género y número en oraciones",
+        "Semana 3: Redacción de una fábula con conectores y signos de puntuación",
+        "Semana 4: Declamación poética y evaluación mensual de comprensión lectora"
+      ],
+      evaluationCriteria: "Fichas de lectura crítica, caligrafía, ortografía y exposiciones.",
+      pdfFileName: "Cartel_Tematico_Comunicacion_Agosto_3Primaria.pdf",
+      pdfFileSize: "285 KB",
+      uploadedAt: "01/08/2026",
+      status: "Publicado"
+    },
+    {
+      id: "CART-2026-3P-CTA-AGO",
+      gradeId: "3prim",
+      gradeName: "3° de Primaria",
+      courseCode: "CTA-301",
+      courseName: "Ciencia y Tecnología",
+      teacher: "Miss Leyli Reyes Cerquen",
+      month: "Agosto",
+      year: "2026",
+      competencies: [
+        "Indaga mediante métodos científicos para construir conocimientos",
+        "Explica el mundo físico basándose en seres vivos y ecosistemas"
+      ],
+      weeklyTopics: [
+        "Semana 1: El sistema locomotor: huesos, articulaciones y músculos",
+        "Semana 2: Cuidado de la salud corporal y prevención de lesiones",
+        "Semana 3: La clasificación de los alimentos según su valor nutricional",
+        "Semana 4: Elaboración de una lonchera saludable y feria científica escolar"
+      ],
+      evaluationCriteria: "Informes de experimentos escolares, maquetas y evaluación teórica.",
+      pdfFileName: "Cartel_Tematico_Ciencia_Agosto_3Primaria.pdf",
+      pdfFileSize: "410 KB",
+      uploadedAt: "02/08/2026",
+      status: "Publicado"
+    },
+    {
+      id: "CART-2026-3P-PS-AGO",
+      gradeId: "3prim",
+      gradeName: "3° de Primaria",
+      courseCode: "PS-301",
+      courseName: "Personal Social & Convivencia",
+      teacher: "Prof. Javier Vega",
+      month: "Agosto",
+      year: "2026",
+      competencies: [
+        "Construye su identidad y convive democráticamente",
+        "Gestiona responsablemente el espacio y el ambiente"
+      ],
+      weeklyTopics: [
+        "Semana 1: Las regiones naturales del Perú y su diversidad cultural",
+        "Semana 2: Recursos naturales y actividades económicas comunales",
+        "Semana 3: Medidas de prevención ante desastres naturales en el hogar y colegio",
+        "Semana 4: Proyecto: Valoramos nuestras tradiciones y evaluación mensual"
+      ],
+      evaluationCriteria: "Exposiciones grupales, mapa temático del Perú y participación cívica.",
+      pdfFileName: "Cartel_Tematico_PersonalSocial_Agosto_3Primaria.pdf",
+      pdfFileSize: "320 KB",
+      uploadedAt: "02/08/2026",
+      status: "Publicado"
+    },
+    {
+      id: "CART-2026-3P-ING-AGO",
+      gradeId: "3prim",
+      gradeName: "3° de Primaria",
+      courseCode: "ING-301",
+      courseName: "Inglés & Vocabulario",
+      teacher: "Miss Andrea Ramos",
+      month: "Agosto",
+      year: "2026",
+      competencies: [
+        "Se comunica oralmente en inglés como lengua extranjera",
+        "Escribe textos breves en inglés usando estructuras simples"
+      ],
+      weeklyTopics: [
+        "Semana 1: Vocabulary: Daily routines and time expressions (What time is it?)",
+        "Semana 2: Simple Present Tense: Affirmative and negative sentences",
+        "Semana 3: Asking and answering about hobbies and favorite subjects",
+        "Semana 4: Role-play conversation and monthly vocabulary quiz"
+      ],
+      evaluationCriteria: "Listening audio exercises, flashcards, pronunciation and monthly test.",
+      pdfFileName: "Cartel_Tematico_Ingles_Agosto_3Primaria.pdf",
+      pdfFileSize: "290 KB",
+      uploadedAt: "03/08/2026",
+      status: "Publicado"
+    },
+    {
+      id: "CART-2026-3P-EPT-AGO",
+      gradeId: "3prim",
+      gradeName: "3° de Primaria",
+      courseCode: "EPT-301",
+      courseName: "Computación e Informática",
+      teacher: "Prof. Fernando Rojas",
+      month: "Agosto",
+      year: "2026",
+      competencies: [
+        "Crea objetos virtuales en diversos formatos tecnológicos",
+        "Aplica herramientas digitales para organizar información escolar"
+      ],
+      weeklyTopics: [
+        "Semana 1: Introducción a Microsoft Word: Formato de texto y fuentes",
+        "Semana 2: Inserción de imágenes, formas y tablas sencillas",
+        "Semana 3: Diseño de una tarjeta de felicitación escolar",
+        "Semana 4: Guardado en la nube y evaluación práctica en laboratorio"
+      ],
+      evaluationCriteria: "Trabajos prácticos en la computadora, mecanografía y puntualidad.",
+      pdfFileName: "Cartel_Tematico_Computacion_Agosto_3Primaria.pdf",
+      pdfFileSize: "260 KB",
+      uploadedAt: "03/08/2026",
+      status: "Publicado"
+    },
+    {
+      id: "CART-2026-4S-MAT-AGO",
+      gradeId: "4sec",
+      gradeName: "4° de Secundaria",
+      courseCode: "MAT-401",
+      courseName: "Matemática Avanzada (Álgebra & Trigonometría)",
+      teacher: "Prof. Roberto Silva",
+      month: "Agosto",
+      year: "2026",
+      competencies: [
+        "Resuelve problemas de regularidad, equivalencia y cambio",
+        "Modela situaciones con funciones trigonométricas e identidades"
+      ],
+      weeklyTopics: [
+        "Semana 1: Funciones trigonométricas directas e inversas: Dominio y gráfica",
+        "Semana 2: Identidades trigonométricas fundamentales y auxiliares",
+        "Semana 3: Ecuaciones trigonométricas y sistemas lineales",
+        "Semana 4: Aplicaciones en física vectorial y evaluación tipo admisión"
+      ],
+      evaluationCriteria: "Prácticas calificadas, resolución de guías tipo pre-universitario y cuaderno.",
+      pdfFileName: "Cartel_Tematico_Matematica_Agosto_4Secundaria.pdf",
+      pdfFileSize: "490 KB",
+      uploadedAt: "01/08/2026",
+      status: "Publicado"
+    },
+    {
+      id: "CART-2026-4S-COM-AGO",
+      gradeId: "4sec",
+      gradeName: "4° de Secundaria",
+      courseCode: "COM-401",
+      courseName: "Lenguaje & Literatura Peruana",
+      teacher: "Miss María Daysi Reyes",
+      month: "Agosto",
+      year: "2026",
+      competencies: [
+        "Lee críticamente textos literarios del indigenismo y vanguardismo peruano",
+        "Escribe ensayos argumentativos con rigor académico"
+      ],
+      weeklyTopics: [
+        "Semana 1: El Indigenismo en el Perú: José María Arguedas y Ciro Alegría",
+        "Semana 2: Análisis literario de 'Los ríos profundos' y 'El mundo es ancho y ajeno'",
+        "Semana 3: Sintaxis de la oración compuesta subordinada sustantiva y adjetiva",
+        "Semana 4: Redacción de ensayo crítico y sustentación oral"
+      ],
+      evaluationCriteria: "Ensayos monográficos, análisis de textos y debates en clase.",
+      pdfFileName: "Cartel_Tematico_Literatura_Agosto_4Secundaria.pdf",
+      pdfFileSize: "380 KB",
+      uploadedAt: "01/08/2026",
+      status: "Publicado"
     }
   ],
 

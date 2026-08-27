@@ -5569,53 +5569,487 @@ CREATE TABLE tb_cuadernos_qr (
     }
   }
 
-  // Sílabus
-  openCreateSyllabusModal() {
+  // Carteles Temáticos Mensuales & Sílabus
+  onSyllabusMonthChange(month) {
+    this.store.state.selectedSyllabusMonth = month;
+    this.store.saveState();
+    this.render();
+  }
+
+  openUploadMonthlyCartelModal(courseCode = '', gradeId = '', month = '') {
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+    const activeGradeId = gradeId || this.store.state.selectedSyllabusGrade || "3prim";
+    const activeMonth = month || this.store.state.selectedSyllabusMonth || "Agosto";
+    const months = ["Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
+
+    window._pendingCartelPdf = null;
+
     this.showModal(`
-      <div class="modal-header"><h3>+ Crear Sílabo</h3><button class="modal-close-btn" onclick="window.app.closeModal()">✕</button></div>
-      <div class="modal-body">
-        <div class="form-group"><label class="form-label">Curso:</label><input type="text" id="new-sil-name" class="form-control" /></div>
-        <div class="form-group"><label class="form-label">Docente:</label><input type="text" id="new-sil-teacher" class="form-control" /></div>
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 20px;">📤</span>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 800;">Subir Cartel Temático Mensual (PDF)</h3>
+        </div>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
       </div>
-      <div class="modal-footer"><button class="btn btn-red" onclick="window.app.confirmCreateSyllabus()">Publicar en Servidor</button></div>
+      <div class="modal-body" style="max-height: 78vh; overflow-y: auto;">
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+          <div class="form-group">
+            <label class="form-label">Mes de Programación:</label>
+            <select id="cartel-month" class="form-control" style="font-weight: bold;">
+              ${months.map(m => `<option value="${m}" ${m.toLowerCase() === activeMonth.toLowerCase() ? 'selected' : ''}>📅 ${m} 2026</option>`).join('')}
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Aula / Grado:</label>
+            <select id="cartel-grade" class="form-control" style="font-weight: bold;">
+              ${catalog.map(g => `<option value="${g.id}" ${g.id === activeGradeId ? 'selected' : ''}>${g.label}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+          <div class="form-group">
+            <label class="form-label">Curso / Asignatura:</label>
+            <input type="text" id="cartel-course-name" class="form-control" placeholder="Ej. Matemática & Razonamiento" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Docente Responsable:</label>
+            <input type="text" id="cartel-teacher" class="form-control" value="${this.store.state.currentUser ? this.store.state.currentUser.name : 'Docente Titular'}" />
+          </div>
+        </div>
+
+        <!-- Carga de Archivo PDF Oficial -->
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label class="form-label">Archivo Oficial en Formato PDF:</label>
+          <div style="border: 2px dashed #93c5fd; background: #eff6ff; border-radius: 8px; padding: 16px; text-align: center; cursor: pointer;" onclick="document.getElementById('cartel-pdf-input').click()">
+            <div style="font-size: 28px; margin-bottom: 4px;">📄</div>
+            <div style="font-size: 13px; font-weight: 800; color: #1e40af;">Haga clic para seleccionar el Cartel Temático en PDF</div>
+            <div style="font-size: 11px; color: #64748b;">Formatos aceptados: .pdf (Máx. 10 MB)</div>
+            <input type="file" id="cartel-pdf-input" accept=".pdf,application/pdf" style="display: none;" onchange="window.app.handleCartelPdfSelected(event)" />
+            <div id="cartel-pdf-filename-display" style="margin-top: 8px; font-size: 12px; font-weight: 800; color: #059669; display: none;"></div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label class="form-label">Competencias y Capacidades (MINEDU):</label>
+          <textarea id="cartel-competencies" class="form-control" rows="2" placeholder="Ingrese las competencias del mes (una por línea)..."></textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label class="form-label">Programación Temática Semanal:</label>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <input type="text" id="cartel-w1" class="form-control" placeholder="Semana 1: Tema o contenido..." />
+            <input type="text" id="cartel-w2" class="form-control" placeholder="Semana 2: Tema o contenido..." />
+            <input type="text" id="cartel-w3" class="form-control" placeholder="Semana 3: Tema o contenido..." />
+            <input type="text" id="cartel-w4" class="form-control" placeholder="Semana 4: Tema o contenido y evaluación..." />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Criterios de Evaluación y Evidencias:</label>
+          <input type="text" id="cartel-eval-criteria" class="form-control" value="Prácticas semanales, revisión de cuadernos de trabajo y evaluación mensual continua." />
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-navy" onclick="window.app.confirmSaveMonthlyCartel()">
+          Publicar Cartel Temático
+        </button>
+      </div>
     `);
   }
 
-  confirmCreateSyllabus() {
-    const courseName = document.getElementById("new-sil-name").value;
-    const teacher = document.getElementById("new-sil-teacher").value;
-    if (!courseName) return;
-    this.store.createSyllabus({ courseName, teacher: teacher || "Docente Asignado" });
-    this.closeModal();
-    this.showToast("✓ Sílabo guardado en el servidor", "success");
-  }
+  handleCartelPdfSelected(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
 
-  openEditSyllabusModal(syllabusId) {
-    const syllabus = this.store.state.syllabi.find(s => s.id === syllabusId);
-    if (!syllabus) return;
-    this.showModal(`
-      <div class="modal-header"><h3>✏️ Editar Sílabo</h3><button class="modal-close-btn" onclick="window.app.closeModal()">✕</button></div>
-      <div class="modal-body">
-        <div class="form-group"><label class="form-label">Curso:</label><input type="text" id="edit-sil-name" class="form-control" value="${syllabus.courseName}" /></div>
-        <div class="form-group"><label class="form-label">Docente:</label><input type="text" id="edit-sil-teacher" class="form-control" value="${syllabus.teacher}" /></div>
-      </div>
-      <div class="modal-footer"><button class="btn btn-navy" onclick="window.app.confirmUpdateSyllabus('${syllabus.id}')">Guardar</button></div>
-    `);
-  }
-
-  confirmUpdateSyllabus(syllabusId) {
-    const courseName = document.getElementById("edit-sil-name").value;
-    const teacher = document.getElementById("edit-sil-teacher").value;
-    this.store.updateSyllabus(syllabusId, { courseName, teacher });
-    this.closeModal();
-    this.showToast("✓ Sílabo actualizado en base de datos", "success");
-  }
-
-  confirmDeleteSyllabus(syllabusId) {
-    if (confirm("¿Eliminar sílabo de la base de datos?")) {
-      this.store.deleteSyllabus(syllabusId);
-      this.showToast("Sílabo eliminado de la base de datos", "info");
+    const display = document.getElementById("cartel-pdf-filename-display");
+    if (display) {
+      display.style.display = "block";
+      display.innerHTML = `✓ Archivo cargado: <strong>${file.name}</strong> (${(file.size / 1024).toFixed(1)} KB)`;
     }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      window._pendingCartelPdf = {
+        name: file.name,
+        size: `${(file.size / 1024).toFixed(0)} KB`,
+        data: e.target.result
+      };
+    };
+    reader.readAsDataURL(file);
+  }
+
+  confirmSaveMonthlyCartel(cartelId = null) {
+    const month = document.getElementById("cartel-month").value;
+    const gradeId = document.getElementById("cartel-grade").value;
+    const courseName = document.getElementById("cartel-course-name").value.trim();
+    const teacher = document.getElementById("cartel-teacher").value.trim();
+    const competenciesStr = document.getElementById("cartel-competencies").value.trim();
+    const w1 = document.getElementById("cartel-w1").value.trim();
+    const w2 = document.getElementById("cartel-w2").value.trim();
+    const w3 = document.getElementById("cartel-w3").value.trim();
+    const w4 = document.getElementById("cartel-w4").value.trim();
+    const evalCriteria = document.getElementById("cartel-eval-criteria").value.trim();
+
+    if (!courseName) {
+      this.showToast("Por favor ingrese el nombre del curso", "error");
+      return;
+    }
+
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+    const gradeObj = catalog.find(g => g.id === gradeId) || { label: "3° de Primaria" };
+
+    const pdfInfo = window._pendingCartelPdf || {
+      name: `Cartel_Tematico_${courseName.replace(/\s+/g, '_')}_${month}_2026.pdf`,
+      size: "350 KB",
+      data: null
+    };
+
+    const competencies = competenciesStr ? competenciesStr.split('\n').filter(Boolean) : ["Competencia de Área MINEDU"];
+    const weeklyTopics = [
+      w1 ? `Semana 1: ${w1}` : "Semana 1: Fundamentos y conceptos clave",
+      w2 ? `Semana 2: ${w2}` : "Semana 2: Desarrollo temático y práctica",
+      w3 ? `Semana 3: ${w3}` : "Semana 3: Aplicación y resolución de situaciones",
+      w4 ? `Semana 4: ${w4}` : "Semana 4: Evaluación mensual y retroalimentación"
+    ];
+
+    this.store.saveMonthlyCartel({
+      id: cartelId || undefined,
+      gradeId: gradeId,
+      gradeName: gradeObj.label,
+      courseName: courseName,
+      courseCode: `CUR-${Math.floor(100 + Math.random() * 900)}`,
+      teacher: teacher || "Docente Titular",
+      month: month,
+      year: "2026",
+      competencies: competencies,
+      weeklyTopics: weeklyTopics,
+      evaluationCriteria: evalCriteria,
+      pdfFileName: pdfInfo.name,
+      pdfFileSize: pdfInfo.size,
+      pdfFileData: pdfInfo.data
+    });
+
+    window._pendingCartelPdf = null;
+    this.closeModal();
+    this.showToast(`✓ Cartel temático de ${courseName} publicado exitosamente`, "success");
+    this.render();
+  }
+
+  openEditMonthlyCartelModal(cartelId) {
+    const carteles = this.store.state.monthlyCarteles || initialData.monthlyCarteles || [];
+    const cartel = carteles.find(c => c.id === cartelId);
+    if (!cartel) return;
+
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+    const months = ["Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
+
+    window._pendingCartelPdf = null;
+
+    const topics = cartel.weeklyTopics || [];
+
+    this.showModal(`
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 20px;">✏️</span>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 800;">Editar Cartel Temático Mensual</h3>
+        </div>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+      </div>
+      <div class="modal-body" style="max-height: 78vh; overflow-y: auto;">
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+          <div class="form-group">
+            <label class="form-label">Mes:</label>
+            <select id="cartel-month" class="form-control" style="font-weight: bold;">
+              ${months.map(m => `<option value="${m}" ${m.toLowerCase() === (cartel.month || '').toLowerCase() ? 'selected' : ''}>📅 ${m} 2026</option>`).join('')}
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Aula / Grado:</label>
+            <select id="cartel-grade" class="form-control" style="font-weight: bold;">
+              ${catalog.map(g => `<option value="${g.id}" ${g.id === cartel.gradeId ? 'selected' : ''}>${g.label}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+          <div class="form-group">
+            <label class="form-label">Curso / Asignatura:</label>
+            <input type="text" id="cartel-course-name" class="form-control" value="${cartel.courseName}" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Docente:</label>
+            <input type="text" id="cartel-teacher" class="form-control" value="${cartel.teacher}" />
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label class="form-label">Reemplazar Archivo PDF (Opcional):</label>
+          <div style="border: 2px dashed #93c5fd; background: #eff6ff; border-radius: 8px; padding: 14px; text-align: center; cursor: pointer;" onclick="document.getElementById('cartel-pdf-input').click()">
+            <div style="font-size: 13px; font-weight: 800; color: #1e40af;">Actual: ${cartel.pdfFileName} (${cartel.pdfFileSize})</div>
+            <div style="font-size: 11px; color: #64748b;">Haga clic aquí para adjuntar un nuevo PDF</div>
+            <input type="file" id="cartel-pdf-input" accept=".pdf,application/pdf" style="display: none;" onchange="window.app.handleCartelPdfSelected(event)" />
+            <div id="cartel-pdf-filename-display" style="margin-top: 6px; font-size: 12px; font-weight: 800; color: #059669; display: none;"></div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label class="form-label">Competencias:</label>
+          <textarea id="cartel-competencies" class="form-control" rows="2">${(cartel.competencies || []).join('\n')}</textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label class="form-label">Programación Semanal:</label>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <input type="text" id="cartel-w1" class="form-control" value="${topics[0] || ''}" />
+            <input type="text" id="cartel-w2" class="form-control" value="${topics[1] || ''}" />
+            <input type="text" id="cartel-w3" class="form-control" value="${topics[2] || ''}" />
+            <input type="text" id="cartel-w4" class="form-control" value="${topics[3] || ''}" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Criterios de Evaluación:</label>
+          <input type="text" id="cartel-eval-criteria" class="form-control" value="${cartel.evaluationCriteria || ''}" />
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-navy" onclick="window.app.confirmSaveMonthlyCartel('${cartel.id}')">
+          Guardar Cambios
+        </button>
+      </div>
+    `);
+  }
+
+  openViewCartelPdfModal(cartelId) {
+    const carteles = this.store.state.monthlyCarteles || initialData.monthlyCarteles || [];
+    const cartel = carteles.find(c => c.id === cartelId);
+    if (!cartel) return;
+
+    this.showModal(`
+      <div class="modal-header" style="background: var(--color-navy-900); color: white; border-radius: 8px 8px 0 0; padding: 14px 18px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 20px;">📄</span>
+          <div>
+            <h3 style="margin: 0; font-size: 15px; font-weight: 800; color: white;">${cartel.courseName}</h3>
+            <span style="font-size: 11.5px; color: #93c5fd;">Cartel Temático Mensual – ${cartel.month} 2026 (${cartel.gradeName})</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white; font-size: 20px; background: transparent; border: none; cursor: pointer;">✕</button>
+      </div>
+      <div class="modal-body" style="padding: 20px; max-height: 78vh; overflow-y: auto;">
+        
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 14px; margin-bottom: 16px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12.5px;">
+            <div>👨‍🏫 <strong>Docente:</strong> ${cartel.teacher}</div>
+            <div>🎓 <strong>Grado:</strong> ${cartel.gradeName}</div>
+            <div>📅 <strong>Mes:</strong> ${cartel.month} 2026</div>
+            <div>📄 <strong>Archivo:</strong> ${cartel.pdfFileName} (${cartel.pdfFileSize})</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margin: 0 0 6px;">🎯 Competencias y Capacidades Desarrolladas:</h4>
+          <ul style="margin: 0; padding-left: 20px; font-size: 12px; color: #334155; line-height: 1.45;">
+            ${(cartel.competencies || []).map(comp => `<li>${comp}</li>`).join('')}
+          </ul>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margin: 0 0 6px;">📌 Contenidos Semanales Programados:</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            ${(cartel.weeklyTopics || []).map((w, i) => `
+              <div style="background: #f8fafc; border-left: 3px solid var(--color-navy-600); padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; color: #1e293b;">
+                <strong>${w}</strong>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div style="background: #fefce8; border: 1px solid #fef08a; padding: 12px; border-radius: 8px; font-size: 12px; color: #854d0e;">
+          <strong>📝 Criterios de Evaluación:</strong> ${cartel.evaluationCriteria || 'Evaluación continua, presentación de tareas y prácticas semanales.'}
+        </div>
+
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: space-between;">
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-yellow" onclick="window.print()">🖨️ Imprimir</button>
+          <button class="btn btn-navy" onclick="window.app.downloadCartelPdf('${cartel.id}')">
+            ⬇️ Descargar PDF Oficial
+          </button>
+        </div>
+      </div>
+    `);
+  }
+
+  downloadCartelPdf(cartelId) {
+    const carteles = this.store.state.monthlyCarteles || initialData.monthlyCarteles || [];
+    const cartel = carteles.find(c => c.id === cartelId);
+    if (!cartel) return;
+
+    if (cartel.pdfFileData) {
+      const a = document.createElement("a");
+      a.href = cartel.pdfFileData;
+      a.download = cartel.pdfFileName || "Cartel_Tematico.pdf";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } else {
+      window.print();
+    }
+    this.showToast(`Descargando ${cartel.pdfFileName}...`, "info");
+  }
+
+  confirmDeleteMonthlyCartel(cartelId) {
+    if (confirm("¿Está seguro de eliminar este Cartel Temático Mensual?")) {
+      this.store.deleteMonthlyCartel(cartelId);
+      this.showToast("✓ Cartel temático eliminado", "info");
+      this.render();
+    }
+  }
+
+  openConsolidatedCartelModal(gradeId, month) {
+    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
+    const currentGrade = catalog.find(g => g.id === gradeId) || catalog.find(g => g.id === "3prim") || catalog[0] || { id: "3prim", label: "3° de Primaria", level: "Primaria", tutor: "Prof. Roberto Silva" };
+    const selectedMonth = month || this.store.state.selectedSyllabusMonth || "Agosto";
+    
+    const carteles = this.store.getMonthlyCarteles(gradeId, selectedMonth);
+
+    this.showModal(`
+      <div class="modal-header" style="background: var(--color-navy-900); color: white; border-radius: 8px 8px 0 0; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 20px;">📑</span>
+          <div>
+            <h3 style="margin: 0; font-size: 16px; font-weight: 800; color: white;">Compendio Consolidado de Carteles Temáticos</h3>
+            <span style="font-size: 12px; color: #93c5fd;">Aula: ${currentGrade.label} | Periodo: ${selectedMonth} 2026</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button class="btn btn-yellow btn-sm" onclick="window.print()" style="font-weight: 900; font-size: 12px; padding: 6px 14px;">
+            🖨️ Imprimir / Guardar como PDF
+          </button>
+          <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white; font-size: 20px; background: transparent; border: none; cursor: pointer;">✕</button>
+        </div>
+      </div>
+
+      <div class="modal-body" style="padding: 20px; background: #f8fafc; max-height: 80vh; overflow-y: auto;">
+        
+        <div class="consolidated-cartel-print-container" style="background: white; border: 2px solid #0f172a; border-radius: 8px; padding: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+          
+          <!-- Encabezado Institucional -->
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #1e3a8a; padding-bottom: 12px; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <img src="logo.png" alt="Escudo I.E.P. El Educador" style="width: 50px; height: 50px; object-fit: contain;" onerror="this.src='assets/logo.png'">
+              <div>
+                <div style="font-size: 13px; font-weight: 900; color: #1e3a8a; letter-spacing: 0.5px;">I. E. P. "EL EDUCADOR" — SAN JUAN DE LURIGANCHO</div>
+                <div style="font-size: 10px; font-weight: 700; color: #475569;">UGEL 05 • RD N° 04512-ED • "21 años dejando huellas"</div>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 10px; font-weight: 800; color: #1e3a8a; background: #e0e7ff; padding: 3px 10px; border-radius: 12px; display: inline-block;">
+                DOCUMENTO OFICIAL
+              </div>
+              <div style="font-size: 10px; color: #64748b; margin-top: 3px;">Año Lectivo 2026</div>
+            </div>
+          </div>
+
+          <!-- Título Principal del Compendio -->
+          <div style="text-align: center; margin-bottom: 16px;">
+            <h2 style="font-size: 15px; font-weight: 900; color: #0f172a; text-transform: uppercase; margin: 0 0 4px; letter-spacing: 0.5px;">
+              CARTEL TEMÁTICO MENSUAL CONSOLIDADO DE AULA – 2026
+            </h2>
+            <div style="display: flex; justify-content: center; gap: 16px; font-size: 12px; font-weight: 800; color: #1e3a8a; background: #fef08a; padding: 6px 14px; border-radius: 6px; border: 1px solid #facc15;">
+              <span>🎓 GRADO: <u>${currentGrade.label.toUpperCase()}</u></span>
+              <span>📅 MES: <u>${selectedMonth.toUpperCase()} 2026</u></span>
+              <span>👨‍🏫 TUTOR: <u>${(currentGrade.tutor || 'Prof. Roberto Silva').toUpperCase()}</u></span>
+            </div>
+          </div>
+
+          <!-- Tabla Compendio con Todas las Asignaturas -->
+          <table style="width: 100%; border-collapse: collapse; font-size: 10.5px; margin-bottom: 20px;" border="1" cellpadding="6">
+            <thead>
+              <tr style="background: #1e3a8a; color: white; text-align: center;">
+                <th style="width: 22%; padding: 6px 8px;">ÁREA / ASIGNATURA & DOCENTE</th>
+                <th style="width: 28%; padding: 6px 8px;">COMPETENCIAS & CAPACIDADES MINEDU</th>
+                <th style="width: 34%; padding: 6px 8px;">PROGRAMACIÓN TEMÁTICA MENSUAL (SEMANAL)</th>
+                <th style="width: 16%; padding: 6px 8px;">EVALUACIÓN & EVIDENCIAS</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${carteles.length === 0 ? `
+                <tr><td colspan="4" style="text-align: center; padding: 18px; color: #64748b;">No hay asignaturas registradas para este mes.</td></tr>
+              ` : carteles.map((c, idx) => `
+                <tr style="background: ${idx % 2 === 0 ? '#ffffff' : '#f8fafc'};">
+                  <td style="vertical-align: top; padding: 8px;">
+                    <div style="font-weight: 900; color: #1e3a8a; font-size: 11px; margin-bottom: 2px;">
+                      ${c.courseName}
+                    </div>
+                    <div style="font-size: 9.5px; color: #475569; font-weight: 700;">
+                      👨‍🏫 Docente: ${c.teacher}
+                    </div>
+                    <div style="font-size: 9px; color: #059669; font-weight: 800; margin-top: 4px;">
+                      ✓ PDF Oficial Vinculado
+                    </div>
+                  </td>
+                  <td style="vertical-align: top; padding: 8px;">
+                    <ul style="margin: 0; padding-left: 14px; line-height: 1.35; color: #334155;">
+                      ${(c.competencies || []).map(comp => `<li>${comp}</li>`).join('')}
+                    </ul>
+                  </td>
+                  <td style="vertical-align: top; padding: 8px;">
+                    <ul style="margin: 0; padding-left: 14px; line-height: 1.35; color: #1e293b;">
+                      ${(c.weeklyTopics || []).map(topic => `<li>${topic}</li>`).join('')}
+                    </ul>
+                  </td>
+                  <td style="vertical-align: top; padding: 8px; font-size: 9.5px; line-height: 1.3; color: #334155;">
+                    ${c.evaluationCriteria || 'Prácticas calificadas, revisión de cuadernos de trabajo y evaluación mensual continua.'}
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+
+          <!-- Bloque de Compromiso y Firmas Oficiales -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 30px; padding-top: 15px; border-top: 1px dashed #94a3b8;">
+            <div style="font-size: 9px; color: #64748b; max-width: 320px; line-height: 1.3;">
+              <strong>Nota Pedagógica:</strong> El presente cartel temático consolidado es el instrumento oficial de programación curricular mensual de la I.E.P. "El Educador". Los padres de familia deben monitorear semanalmente el avance de los temas en los cuadernos oficiales de sus menores hijos.
+            </div>
+            <div style="display: flex; gap: 40px;">
+              <div style="text-align: center; border-top: 1.5px solid #0f172a; width: 140px; padding-top: 4px; font-size: 9.5px; font-weight: 800;">
+                TUTOR(A) DE AULA
+              </div>
+              <div style="text-align: center; border-top: 1.5px solid #0f172a; width: 140px; padding-top: 4px; font-size: 9.5px; font-weight: 800;">
+                DIRECCIÓN ACADÉMICA
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 12px; color: var(--text-muted);">
+          Total de asignaturas consolidadas en este documento: <strong>${carteles.length}</strong>
+        </span>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-navy" onclick="window.print()">
+            🖨️ Imprimir / Guardar en PDF
+          </button>
+          <button class="btn btn-outline" onclick="window.app.closeModal()">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    `);
   }
 
   openEditReviewModal(reviewId) {
@@ -6412,11 +6846,7 @@ CREATE TABLE tb_cuadernos_qr (
     });
 
     if (gradeStudents.length > 0) {
-      let sKey = gradeStudents[0].studentCode || gradeStudents[0].dni;
-      const nameLow = (gradeStudents[0].studentName || "").toLowerCase();
-      if (nameLow.includes("mendez") || nameLow.includes("méndez")) sKey = "mendez";
-      else if (nameLow.includes("benitez") || nameLow.includes("benítez")) sKey = "benitez";
-      else if (nameLow.includes("albujar") || nameLow.includes("albújar")) sKey = "albujar";
+      let sKey = gradeStudents[0].studentCode || gradeStudents[0].id || gradeStudents[0].dni;
       this.store.state.selectedBoletaStudent = sKey;
     }
 
@@ -6527,9 +6957,8 @@ CREATE TABLE tb_cuadernos_qr (
       parentCriteria
     });
 
-    const allBoletas = this.store.state.boletaData || initialData.boletaData;
-    const student = allBoletas[studentKey] || allBoletas.mendez;
-    this.showToast(`✓ Evaluación de Tutoría de ${student.name} guardada exitosamente.`, "success");
+    const student = this.store.getBoletaData(studentKey);
+    this.showToast(`✓ Evaluación de Tutoría de ${student.student || student.name} guardada exitosamente.`, "success");
     this.render();
   }
 
@@ -6539,8 +6968,7 @@ CREATE TABLE tb_cuadernos_qr (
     const form = e.target;
     const formData = new FormData(form);
     
-    const allBoletas = this.store.state.boletaData || initialData.boletaData;
-    const currentStudent = allBoletas[studentKey] || allBoletas.mendez;
+    const currentStudent = this.store.getBoletaData(studentKey);
     const updatedGrades = { ...(currentStudent.grades || {}) };
     
     // Normalizador de notas literales y vigesimales
