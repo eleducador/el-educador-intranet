@@ -2579,74 +2579,157 @@ const Components = {
 
   // Dashboard - Docente
   renderTeacherDashboard(state, user) {
-    const students = state.studentListDocente;
-    const hasAdminPrivilege = !!user.hasAdminPrivileges;
+    const hasAdminPrivilege = !!user.hasAdminPrivileges || !!user.hasAdminPrivilege;
+    const assignedCourses = (window.appStore && typeof window.appStore.getTeacherAssignedCourses === "function")
+      ? window.appStore.getTeacherAssignedCourses(user)
+      : [];
+    const enrollments = (window.appStore && typeof window.appStore.getEnrollments === "function")
+      ? window.appStore.getEnrollments()
+      : (state.enrollments || []);
+    const students = enrollments.slice(0, 8);
+
+    const userCoursesList = Array.isArray(user.assignedCourses) && user.assignedCourses.length > 0
+      ? user.assignedCourses
+      : (Array.isArray(user.courses) ? user.courses : (user.subject ? user.subject.split(/,\s*/) : ["Matemática"]));
+
+    const userGradesList = Array.isArray(user.assignedGrades) && user.assignedGrades.length > 0
+      ? user.assignedGrades
+      : ["1° de Secundaria", "2° de Secundaria", "3° de Secundaria", "4° de Secundaria", "5° de Secundaria"];
 
     return `
       <div class="fade-in">
-        <div class="welcome-banner" style="background: linear-gradient(135deg, var(--color-navy-900) 0%, #1e293b 100%);">
+        <div class="welcome-banner" style="background: linear-gradient(135deg, var(--color-navy-950) 0%, #1e3a8a 100%);">
           <div class="welcome-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
               ${hasAdminPrivilege ? `
-                <span class="status-badge status-approved" style="background: rgba(245, 158, 11, 0.2); color: var(--color-yellow-400); border: 1px solid var(--color-yellow-500);">
+                <span class="status-badge status-approved" style="background: rgba(245, 158, 11, 0.2); color: var(--color-yellow-400); border: 1px solid var(--color-yellow-500); font-weight: 900;">
                   ★ PRIVILEGIOS DE EDICIÓN HABILITADOS
                 </span>
               ` : `
-                <span class="status-badge status-approved">PERFIL DOCENTE</span>
+                <span class="status-badge status-approved" style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-weight: 800;">
+                  👨‍ PERFIL DOCENTE ACTIVO
+                </span>
               `}
+              <span style="font-size: 11.5px; color: #93c5fd; font-weight: 700;">
+                Carga Lectiva: <strong>${user.weeklyHours || '24 hrs'}</strong>
+              </span>
             </div>
             <h1 class="welcome-title">Panel Docente: <span>${user.name}</span></h1>
             <p class="welcome-subtitle">
-              Escaneo óptico de cuadernos con cámara de celular, registro de notas y asistencia.
+              Gestión de asignaturas, calificaciones oficiales, carteles temáticos, aula virtual y escaneo QR de cuadernos.
             </p>
 
             <div class="metrics-strip">
-              <div class="metric-card-mini"><span class="metric-label">Alumnos</span><span class="metric-val highlight-yellow">${user.totalStudents}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Cursos Asignados</span><span class="metric-val highlight-yellow">${userCoursesList.length}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Grados a Cargo</span><span class="metric-val highlight-green">${userGradesList.length}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Alumnos Matriculados</span><span class="metric-val highlight-yellow">${enrollments.length}</span></div>
               <div class="metric-card-mini"><span class="metric-label">Cuadernos Hoy</span><span class="metric-val highlight-green">${user.scannedNotebooksToday || 18}</span></div>
-              <div class="metric-card-mini"><span class="metric-label">Pendientes</span><span class="metric-val highlight-red">${user.pendingGrading}</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra Informativa de Asignaturas & Grados Asignados -->
+        <div class="card" style="margin-bottom: var(--space-4); background: #f8fafc; border-left: 4px solid var(--color-navy-800); padding: 14px 18px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <div style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase;">
+                📚 Mis Asignaturas Asignadas en la Intranet:
+              </div>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 5px;">
+                ${userCoursesList.map(c => `
+                  <span class="status-badge" style="background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; font-size: 11.5px; font-weight: 800;">
+                    ✓ ${c}
+                  </span>
+                `).join('')}
+              </div>
+            </div>
+            <div>
+              <div style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase;">
+                🏫 Grados / Aulas Asignadas:
+              </div>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 5px;">
+                ${userGradesList.map(g => `
+                  <span class="status-badge" style="background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; font-size: 11px; font-weight: 700;">
+                    🏫 ${g}
+                  </span>
+                `).join('')}
+              </div>
             </div>
           </div>
         </div>
 
         <div style="display: flex; gap: 10px; margin-bottom: var(--space-6); flex-wrap: wrap; align-items: center;">
-          <button class="btn btn-emerald" onclick="window.app.navigate('asistencia'); window.app.setAttendanceSubTab('door-scanner');">
-            <span>📲</span>
-            <span>Registro de Ingreso & Asistencia QR</span>
+          <button class="btn btn-navy" onclick="window.app.navigate('tareas')" style="font-weight: 800;">
+            <span>💻</span>
+            <span>Mi Aula Virtual & Tareas</span>
           </button>
-          <button class="btn btn-gold" onclick="window.app.navigate('cuadernos-qr')">
-            <span>📷</span>
-            <span>[Cámara] Abrir Escáner QR de Cuadernos</span>
+          <button class="btn btn-navy" onclick="window.app.navigate('silabus')" style="font-weight: 800;">
+            <span>📤</span>
+            <span>Cartel Temático (PDF)</span>
           </button>
-          <button class="btn btn-navy" onclick="window.app.navigate('calificaciones')">
+          <button class="btn btn-navy" onclick="window.app.navigate('calificaciones')" style="font-weight: 800;">
             <span>✏️</span>
             <span>Registrar Notas</span>
           </button>
-          <button class="btn btn-navy" onclick="window.app.navigate('boleta')">
-            <span>📄</span>
-            <span>Boleta Oficial MINEDU 2026</span>
+          <button class="btn btn-gold" onclick="window.app.navigate('cuadernos-qr')" style="font-weight: 800;">
+            <span>📷</span>
+            <span>Escanear Cuadernos QR</span>
           </button>
-          <button class="btn btn-outline" onclick="window.app.navigate('horarios')">
+          <button class="btn btn-emerald" onclick="window.app.navigate('asistencia'); window.app.setAttendanceSubTab('door-scanner');" style="font-weight: 800;">
+            <span>📲</span>
+            <span>Asistencia General</span>
+          </button>
+          <button class="btn btn-outline" onclick="window.app.navigate('horarios')" style="font-weight: 800;">
             <span>📅</span>
-            <span>Ver Horario</span>
+            <span>Mi Horario Docente</span>
           </button>
         </div>
 
+        <!-- Nómina de Estudiantes para Calificación y Seguimiento -->
         <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Registro Rápido de Calificaciones - 4to Sec 'A'</h3>
+          <div class="card-header" style="justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <h3 class="card-title" style="margin: 0; font-size: 15px; font-weight: 800;">
+              👥 Nómina Activa de Estudiantes del Registro General (${enrollments.length} matriculados)
+            </h3>
+            <button class="btn btn-navy btn-sm" onclick="window.app.navigate('calificaciones')" style="font-weight: bold;">
+              Ver Matriz Completa de Calificaciones ➜
+            </button>
           </div>
           <div class="table-container">
             <table class="data-table">
-              <thead><tr><th>Código</th><th>Estudiante</th><th>Asistencia</th><th>Cuaderno QR</th><th>Nota 3er Bim</th><th>Acción</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Estudiante</th>
+                  <th>Grado / Nivel</th>
+                  <th>Apoderado</th>
+                  <th>Asistencia</th>
+                  <th>Cuaderno QR</th>
+                  <th style="text-align: center;">Acción</th>
+                </tr>
+              </thead>
               <tbody>
-                ${students.map(s => `
+                ${students.length > 0 ? students.map(s => `
                   <tr>
-                    <td><code>${s.id}</code></td><td><strong>${s.name}</strong></td><td>${s.attendance}</td>
-                    <td><span class="status-badge ${s.notebookStatus && s.notebookStatus.includes('Al Día') ? 'status-approved' : 'status-failed'}">${s.notebookStatus}</span></td>
-                    <td><input type="number" min="0" max="20" id="grade-input-${s.id}" value="${s.grade}" style="width: 70px; padding: 4px 8px; font-weight: bold;" /></td>
-                    <td><button class="btn btn-navy btn-sm" onclick="window.app.saveStudentGrade('${s.id}')">Guardar</button></td>
+                    <td><code style="font-weight: 800; color: #1e3a8a;">${s.studentCode || s.id}</code></td>
+                    <td><strong>${s.studentName || s.name}</strong></td>
+                    <td><span class="status-badge" style="background:#eff6ff; color:#1e40af; font-size:10.5px; font-weight:bold;">${s.grade || 'Nivel Escolar'}</span></td>
+                    <td><span style="font-size: 11.5px; color: #475569;">${s.guardian || '--'}</span></td>
+                    <td><span class="status-badge status-approved" style="font-size:10.5px; font-weight:bold;">Al Día</span></td>
+                    <td><span class="status-badge status-approved" style="font-size:10.5px; font-weight:bold;">Revisado</span></td>
+                    <td style="text-align: center;">
+                      <button class="btn btn-navy btn-sm" onclick="window.app.navigate('calificaciones')" style="padding: 3px 8px; font-size: 11px; font-weight: bold;">
+                        Calificar
+                      </button>
+                    </td>
                   </tr>
-                `).join('')}
+                `).join('') : `
+                  <tr>
+                    <td colspan="7" style="text-align: center; padding: 20px; color: #64748b;">
+                      No hay estudiantes registrados en la nómina.
+                    </td>
+                  </tr>
+                `}
               </tbody>
             </table>
           </div>
@@ -4667,37 +4750,47 @@ const Components = {
     const currentUser = this.getCurrentUser(state);
     const currentUserName = (currentUser.name || "").toLowerCase();
 
-    // Catálogo completo de cursos por grado y docente
-    const allCourses = [
-      { id: "MAT-401", name: "Matemática Avanzada (Álgebra y Geometría)", teacher: "Prof. Roberto Silva", grade: "4to de Secundaria", icon: "📐", color: "blue", level: "Secundaria" },
-      { id: "COM-404", name: "Comunicación & Literatura", teacher: "Miss María Daysi Reyes", grade: "4to de Secundaria", icon: "📚", color: "navy", level: "Secundaria" },
-      { id: "CTA-403", name: "Ciencia y Tecnología (Física & Química)", teacher: "Miss Leyli Reyes Cerquen", grade: "4to de Secundaria", icon: "🔬", color: "green", level: "Secundaria" },
-      { id: "EPT-402", name: "Computación e Informática / Robótica", teacher: "Prof. Fernando Rojas", grade: "4to de Secundaria", icon: "💻", color: "yellow", level: "Secundaria" },
-      { id: "ING-405", name: "Inglés Técnico & Gramática", teacher: "Miss Andrea Ramos", grade: "4to de Secundaria", icon: "🇬🇧", color: "blue", level: "Secundaria" },
-      { id: "CS-406", name: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", grade: "4to de Secundaria", icon: "🌎", color: "yellow", level: "Secundaria" },
-      { id: "MAT-501", name: "Matemática & Razonamiento Matemático", teacher: "Prof. Roberto Silva", grade: "5° de Primaria", icon: "📐", color: "blue", level: "Primaria" },
-      { id: "COM-501", name: "Comunicación Integral & Comprensión Lectora", teacher: "Miss Julisa Magali Arroyo", grade: "5° de Primaria", icon: "📚", color: "navy", level: "Primaria" },
-      { id: "CTA-501", name: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes Cerquen", grade: "5° de Primaria", icon: "🔬", color: "green", level: "Primaria" },
-      { id: "MAT-101", name: "Matemática Lúdica y Razonamiento", teacher: "Miss Julisa Magali Arroyo", grade: "1ro de Primaria", icon: "🔢", color: "blue", level: "Primaria" },
-      { id: "COM-101", name: "Comunicación Integral & Caligrafía", teacher: "Miss Julisa Magali Arroyo", grade: "1ro de Primaria", icon: "✏️", color: "green", level: "Primaria" }
-    ];
+    // Obtener catálogo dinámico y completo de cursos asignados al perfil del usuario
+    let availableCourses = [];
+    if (window.appStore && typeof window.appStore.getTeacherAssignedCourses === "function") {
+      availableCourses = window.appStore.getTeacherAssignedCourses(currentUser);
+    }
 
-    // Filtrar cursos según el perfil del usuario activo
-    let availableCourses = allCourses;
-    if (role === 'docente') {
-      const myCourses = allCourses.filter(c => c.teacher.toLowerCase().includes("silva") || currentUserName.includes("silva") || c.teacher.toLowerCase().includes(currentUserName));
-      availableCourses = myCourses.length > 0 ? myCourses : allCourses;
-    } else if (role === 'estudiante') {
+    if (!availableCourses || availableCourses.length === 0) {
+      availableCourses = [
+        { id: "MAT-401", courseCode: "MAT-401", name: "Matemática Avanzada (Álgebra y Geometría)", teacher: "Prof. Roberto Silva", grade: "4to de Secundaria", gradeId: "4sec", icon: "📐", color: "blue", level: "Secundaria" },
+        { id: "COM-404", courseCode: "COM-404", name: "Comunicación & Literatura", teacher: "Miss María Daysi Reyes", grade: "4to de Secundaria", gradeId: "4sec", icon: "📚", color: "navy", level: "Secundaria" },
+        { id: "CTA-403", courseCode: "CTA-403", name: "Ciencia y Tecnología (Física & Química)", teacher: "Miss Leyli Reyes Cerquen", grade: "4to de Secundaria", gradeId: "4sec", icon: "🔬", color: "green", level: "Secundaria" },
+        { id: "EPT-402", courseCode: "EPT-402", name: "Computación e Informática / Robótica", teacher: "Prof. Fernando Rojas", grade: "4to de Secundaria", gradeId: "4sec", icon: "💻", color: "yellow", level: "Secundaria" },
+        { id: "ING-405", courseCode: "ING-405", name: "Inglés Técnico & Gramática", teacher: "Miss Andrea Ramos", grade: "4to de Secundaria", gradeId: "4sec", icon: "🇬🇧", color: "blue", level: "Secundaria" },
+        { id: "CS-406", courseCode: "CS-406", name: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", grade: "4to de Secundaria", gradeId: "4sec", icon: "🌎", color: "yellow", level: "Secundaria" },
+        { id: "MAT-501", courseCode: "MAT-501", name: "Matemática & Razonamiento Matemático", teacher: "Prof. Roberto Silva", grade: "5° de Primaria", gradeId: "5prim", icon: "📐", color: "blue", level: "Primaria" },
+        { id: "COM-501", courseCode: "COM-501", name: "Comunicación Integral & Comprensión Lectora", teacher: "Miss Julisa Magali Arroyo", grade: "5° de Primaria", gradeId: "5prim", icon: "📚", color: "navy", level: "Primaria" },
+        { id: "CTA-501", courseCode: "CTA-501", name: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes Cerquen", grade: "5° de Primaria", gradeId: "5prim", icon: "🔬", color: "green", level: "Primaria" }
+      ];
+    }
+
+    if (role === 'estudiante') {
       const gradeText = (currentUser.gradeLevel || currentUser.detail || currentUser.grade || "").toLowerCase();
       const isPrimaria = gradeText.includes("prim") || gradeText.includes("pri");
-      availableCourses = isPrimaria ? allCourses.filter(c => c.level === "Primaria") : allCourses.filter(c => c.level === "Secundaria");
+      availableCourses = isPrimaria ? availableCourses.filter(c => c.level === "Primaria") : availableCourses.filter(c => c.level === "Secundaria" || !c.level);
     }
 
     const selectedCourseId = state.selectedVirtualCourseId || (availableCourses[0] ? availableCourses[0].id : "MAT-401");
-    const currentCourse = availableCourses.find(c => c.id === selectedCourseId) || availableCourses[0] || allCourses[0];
+    const currentCourse = availableCourses.find(c => c.id === selectedCourseId || c.courseCode === selectedCourseId) || availableCourses[0];
 
     // Filtrar materiales del curso seleccionado
-    let courseMaterials = materials.filter(m => m.courseId === selectedCourseId);
+    let courseMaterials = materials.filter(m => 
+      m.courseId === selectedCourseId || 
+      (currentCourse && m.courseId === currentCourse.courseCode) || 
+      (currentCourse && m.courseName && m.courseName.toLowerCase().includes(currentCourse.name.toLowerCase())) ||
+      (currentCourse && currentCourse.name.toLowerCase().includes((m.courseName || "").toLowerCase()))
+    );
+
+    if (courseMaterials.length === 0 && materials.length > 0) {
+      // Si el docente sube materiales nuevos o si es el primer material de muestra
+      courseMaterials = materials.slice(0, 1);
+    }
     if (courseMaterials.length === 0 && materials.length > 0) {
       courseMaterials = [materials[0]];
     }

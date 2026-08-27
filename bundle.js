@@ -2758,6 +2758,7 @@ class IntranetStore {
     this.apiBaseUrl = this.getApiBaseUrl();
     this.isSyncing = false;
     this.lastDataSignature = "";
+    this.tabId = `TAB_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
 
     // Limpieza automática de cualquier residuo corrupto de versiones anteriores en localStorage
     try {
@@ -2784,10 +2785,128 @@ class IntranetStore {
           this.saveState();
         }
       });
+
+      // 3. SINCRONIZACIÓN EN TIEMPO REAL MULTI-PESTAÑA / MULTI-VENTANA (BroadcastChannel)
+      if (typeof window.BroadcastChannel !== "undefined") {
+        try {
+          this.broadcastChannel = new BroadcastChannel("colegio_el_educador_sync_v2026");
+          this.broadcastChannel.onmessage = (event) => {
+            if (event && event.data && event.data.sourceTabId !== this.tabId) {
+              this.handleCrossTabSync(event.data);
+            }
+          };
+        } catch(e) {}
+      }
+
+      // 4. Respaldo de sincronización reactiva ante eventos de almacenamiento del navegador
+      window.addEventListener("storage", (e) => {
+        if (e.key === this.storageKey && e.newValue) {
+          try {
+            const parsed = JSON.parse(e.newValue);
+            this.handleStorageEventSync(parsed);
+          } catch(err) {}
+        }
+      });
     }
 
-    // 3. Sincronización inicial con la nube central multi-dispositivo
+    // 5. Sincronización inicial con la nube central multi-dispositivo
     this.fetchServerState(true);
+  }
+
+  // Manejo de sincronización instantánea entre pestañas / ventanas en el mismo equipo
+  handleCrossTabSync(data) {
+    if (!data) return;
+    try {
+      if (data.deletedIds && Array.isArray(data.deletedIds)) {
+        this.registerDeleted(...data.deletedIds);
+      }
+      // Recargar colecciones limpias desde localStorage conservando la sesión activa del usuario
+      this.reloadStatePreservingSession();
+      this.notify();
+    } catch(err) {}
+  }
+
+  handleStorageEventSync(externalState) {
+    if (!externalState) return;
+    try {
+      if (externalState.deletedIds && Array.isArray(externalState.deletedIds)) {
+        this.registerDeleted(...externalState.deletedIds);
+      }
+      this.reloadStatePreservingSession();
+      this.notify();
+    } catch(err) {}
+  }
+
+  reloadStatePreservingSession() {
+    try {
+      const raw = localStorage.getItem(this.storageKey);
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (!parsed) return;
+
+      const currentAuth = this.state.isAuthenticated;
+      const currentRole = this.state.currentRole;
+      const currentView = this.state.currentView;
+      const currentUser = this.state.currentUser;
+
+      // Fusionar deletedIds
+      if (Array.isArray(parsed.deletedIds)) {
+        this.registerDeleted(...parsed.deletedIds);
+      }
+
+      // Actualizar colecciones filtrando inmediatamente cualquier entidad eliminada
+      if (Array.isArray(parsed.systemUsers)) {
+        this.state.systemUsers = parsed.systemUsers.filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
+      }
+      if (Array.isArray(parsed.enrollments)) {
+        this.state.enrollments = parsed.enrollments.filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian));
+      }
+      if (Array.isArray(parsed.familiesFinancial)) {
+        this.state.familiesFinancial = parsed.familiesFinancial.filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode));
+      }
+      if (Array.isArray(parsed.attendanceRecords)) {
+        this.state.attendanceRecords = parsed.attendanceRecords.filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName));
+      }
+      if (Array.isArray(parsed.notebookReviews)) {
+        this.state.notebookReviews = parsed.notebookReviews.filter(r => !this.isDeleted(r.studentId) && !this.isDeleted(r.studentName));
+      }
+      if (Array.isArray(parsed.behaviorIncidents)) {
+        this.state.behaviorIncidents = parsed.behaviorIncidents.filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName));
+      }
+      if (Array.isArray(parsed.agendaNotes)) {
+        this.state.agendaNotes = parsed.agendaNotes.filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName));
+      }
+      if (Array.isArray(parsed.payments)) {
+        this.state.payments = parsed.payments.filter(p => !this.isDeleted(p.id) && !this.isDeleted(p.studentCode) && !this.isDeleted(p.studentName));
+      }
+      if (Array.isArray(parsed.monthlyCarteles)) {
+        this.state.monthlyCarteles = parsed.monthlyCarteles;
+      }
+      if (Array.isArray(parsed.syllabi)) {
+        this.state.syllabi = parsed.syllabi;
+      }
+      if (Array.isArray(parsed.tasks)) {
+        this.state.tasks = parsed.tasks;
+      }
+      if (Array.isArray(parsed.announcements)) {
+        this.state.announcements = parsed.announcements;
+      }
+      if (Array.isArray(parsed.weeklyMaterials)) {
+        this.state.weeklyMaterials = parsed.weeklyMaterials;
+      }
+      if (parsed.boletaData) {
+        this.state.boletaData = parsed.boletaData;
+      }
+      if (Array.isArray(parsed.teachersList)) {
+        this.state.teachersList = parsed.teachersList;
+      }
+
+      this.state.updatedAt = parsed.updatedAt || Date.now();
+      this.state.isAuthenticated = currentAuth;
+      this.state.currentRole = currentRole;
+      this.state.currentView = currentView;
+      this.state.currentUser = currentUser;
+    } catch(e) {}
   }
 
   // Fusión inteligente de colecciones por identificador único (prioriza datos locales del usuario)
@@ -3199,13 +3318,13 @@ class IntranetStore {
         teachersList: (isScheduleUpdated ? parsed.teachersList : initialData.teachersList).filter(t => !this.isDeleted(t.id) && !this.isDeleted(t.name)),
         schedules: isScheduleUpdated ? parsed.schedules : initialData.schedules,
         systemUsers: (() => {
-          const rawList = Array.isArray(parsed.systemUsers) && parsed.systemUsers.length > 0 ? parsed.systemUsers : initialData.systemUsers;
+          const rawList = this.mergeCollectionsById(initialData.systemUsers || [], parsed.systemUsers || [], "username");
           const seen = new Set();
           const deduped = [];
           
           rawList.forEach(u => {
             if (!this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name)) {
-              const key = `${u.role}_${(u.code || u.username || u.name).toLowerCase().replace(/[\s\.\-_]+/g, '')}`;
+              const key = (u.username || u.code || u.name).toLowerCase().replace(/[\s\.\-_]+/g, '');
               if (!seen.has(key)) {
                 seen.add(key);
                 deduped.push(u);
@@ -3253,6 +3372,22 @@ class IntranetStore {
           docente: {
             ...initialData.users.docente,
             ...((parsed.users && parsed.users.docente) || {})
+          },
+          estudiante: {
+            ...initialData.users.estudiante,
+            ...((parsed.users && parsed.users.estudiante) || {})
+          },
+          padre: {
+            ...initialData.users.padre,
+            ...((parsed.users && parsed.users.padre) || {})
+          },
+          director: {
+            ...initialData.users.director,
+            ...((parsed.users && parsed.users.director) || {})
+          },
+          admin: {
+            ...initialData.users.admin,
+            ...((parsed.users && parsed.users.admin) || {})
           }
         }
       };
@@ -3266,18 +3401,44 @@ class IntranetStore {
       return loadedState;
     }
 
-    const hasSession = typeof sessionStorage !== "undefined" && Boolean(sessionStorage.getItem("colegio_user_session"));
-    const sessionRole = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("colegio_user_role") : null;
-
     return {
-      isAuthenticated: hasSession,
-      currentRole: sessionRole || "docente",
-      currentView: hasSession ? "dashboard" : "login",
+      ...initialData,
+      deletedIds: [],
+      isAuthenticated: false,
+      currentRole: "docente",
+      currentView: "login",
       selectedScheduleGrade: "4sec",
       selectedSyllabusGrade: "4sec",
+      academicConfig: { ...initialData.academicConfig },
+      teachersList: (initialData.teachersList || []).filter(t => !this.isDeleted(t.id) && !this.isDeleted(t.name)),
+      schedules: initialData.schedules,
+      systemUsers: (initialData.systemUsers || []).filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name)),
+      navigationTabsConfig: {
+        ...initialData.navigationTabsConfig,
+        auxiliar: initialData.navigationTabsConfig.auxiliar,
+        docente: initialData.navigationTabsConfig.docente,
+        estudiante: initialData.navigationTabsConfig.estudiante,
+        padre: initialData.navigationTabsConfig.padre,
+        director: initialData.navigationTabsConfig.director
+      },
       usersManagementTab: "users",
-      usersRoleFilter: "all",
-      ...initialData
+      weeklyMaterials: initialData.weeklyMaterials || [],
+      behaviorIncidents: (initialData.behaviorIncidents || []).filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName)),
+      agendaNotes: (initialData.agendaNotes || []).filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName)),
+      attendanceRecords: (initialData.attendanceRecords || []).filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName)),
+      notebookReviews: (initialData.notebookReviews || []).filter(r => !this.isDeleted(r.studentId) && !this.isDeleted(r.studentName)),
+      enrollments: (initialData.enrollments || []).filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian)),
+      familiesFinancial: (initialData.familiesFinancial || []).filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode)),
+      courses: initialData.courses || [],
+      tasks: initialData.tasks || [],
+      payments: initialData.payments || [],
+      announcements: initialData.announcements || [],
+      syllabi: initialData.syllabi || [],
+      selectedVirtualCourseId: "MAT-401",
+      selectedVirtualWeekId: "MAT-SEM-01",
+      activeQuizState: null,
+      boletaData: { ...initialData.boletaData },
+      users: { ...initialData.users }
     };
   }
 
@@ -3290,6 +3451,19 @@ class IntranetStore {
     } catch (e) {
       console.warn("No se pudo guardar en localStorage", e);
     }
+
+    // Difundir actualización instantánea a todas las demás pestañas abiertas
+    if (this.broadcastChannel) {
+      try {
+        this.broadcastChannel.postMessage({
+          type: "STATE_UPDATED",
+          sourceTabId: this.tabId,
+          updatedAt: this.state.updatedAt,
+          deletedIds: this.state.deletedIds || []
+        });
+      } catch(e) {}
+    }
+
     this.syncToServer();
     this.notify();
   }
@@ -3303,7 +3477,7 @@ class IntranetStore {
   }
 
   // =========================================================================
-  // SINCRONIZACIÓN EN TIEMPO REAL CON FIREBASE GOOGLE CLOUD
+  // SINCRONIZACIÓN EN TIEMPO REAL MULTI-DISPOSITIVO (CLOUD REALTIME ENGINE)
   // =========================================================================
   async fetchServerState(silent = false) {
     if (this.isSyncing) return;
@@ -3325,22 +3499,28 @@ class IntranetStore {
         } catch(e) {}
       }
 
-      if (serverData && (serverData.users || serverData.institution || serverData.systemUsers || serverData.attendanceRecords)) {
+      if (serverData && (serverData.users || serverData.institution || serverData.systemUsers || serverData.attendanceRecords || serverData.enrollments)) {
         const currentAuth = this.state.isAuthenticated;
         const currentRole = this.state.currentRole;
         const currentView = this.state.currentView;
+        const currentUser = this.state.currentUser;
         const prevSig = this.getDataSignature(this.state);
 
         const localTime = this.state.updatedAt || 0;
-        // Si el servidor trae deletedIds, fusionarlos
+        const serverTime = (serverData && serverData.updatedAt) ? serverData.updatedAt : Date.now();
+
+        // Si el servidor trae deletedIds, fusionarlos estrictamente
         if (serverData.deletedIds && Array.isArray(serverData.deletedIds)) {
           this.registerDeleted(...serverData.deletedIds);
         }
 
-        // Si la nube tiene datos estrictamente más recientes o si este dispositivo recién abre la página:
+        // Si la nube tiene datos más recientes o si este dispositivo recién inicia sesión:
         if (serverTime > localTime || !this.state.updatedAt) {
-          // Reemplazo limpio y exacto aplicando filtro de eliminados permanente
-          if (serverData.systemUsers) this.state.systemUsers = serverData.systemUsers.filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
+          // Reemplazo limpio y exacto aplicando filtro de eliminados permanente y preservando usuarios del sistema
+          if (serverData.systemUsers) {
+            const serverUsers = serverData.systemUsers.filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
+            this.state.systemUsers = this.mergeCollectionsById(initialData.systemUsers || [], serverUsers, "username");
+          }
           if (serverData.enrollments) this.state.enrollments = serverData.enrollments.filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian));
           if (serverData.familiesFinancial) this.state.familiesFinancial = serverData.familiesFinancial.filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode));
           if (serverData.attendanceRecords) this.state.attendanceRecords = serverData.attendanceRecords.filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName));
@@ -3348,6 +3528,7 @@ class IntranetStore {
           if (serverData.behaviorIncidents) this.state.behaviorIncidents = serverData.behaviorIncidents.filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName));
           if (serverData.agendaNotes) this.state.agendaNotes = serverData.agendaNotes.filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName));
           if (serverData.payments) this.state.payments = serverData.payments.filter(p => !this.isDeleted(p.id) && !this.isDeleted(p.studentCode) && !this.isDeleted(p.studentName));
+          if (serverData.monthlyCarteles) this.state.monthlyCarteles = serverData.monthlyCarteles;
           if (serverData.tasks) this.state.tasks = serverData.tasks;
           if (serverData.announcements) this.state.announcements = serverData.announcements;
           if (serverData.syllabi) this.state.syllabi = serverData.syllabi;
@@ -3357,16 +3538,18 @@ class IntranetStore {
           if (serverData.boletaData) this.state.boletaData = serverData.boletaData;
           if (serverData.academicConfig) this.state.academicConfig = serverData.academicConfig;
           if (serverData.users) this.state.users = serverData.users;
+          if (serverData.teachersList) this.state.teachersList = serverData.teachersList;
           if (serverData.institution) this.state.institution = serverData.institution;
-          this.state.updatedAt = serverTime || Date.now();
-        } else {
-          // Si el cliente local tiene cambios pendientes generados offline, subirlos
+          this.state.updatedAt = serverTime;
+        } else if (localTime > serverTime) {
+          // Si el cliente local tiene cambios pendientes generados offline, subirlos inmediatamente
           this.syncToServer();
         }
 
         this.state.isAuthenticated = currentAuth;
         this.state.currentRole = currentRole;
         this.state.currentView = currentView;
+        this.state.currentUser = currentUser;
 
         const newSig = this.getDataSignature(this.state);
 
@@ -3439,7 +3622,7 @@ class IntranetStore {
     const cleanTerm = term.replace(/[\s\.\-_]+/g, '');
 
     // 1. Buscar primero en el Directorio Maestro de Usuarios del Sistema (Base de Datos Real)
-    const systemUsersList = this.state.systemUsers || initialData.systemUsers || [];
+    const systemUsersList = this.mergeCollectionsById(initialData.systemUsers || [], this.state.systemUsers || [], "username");
     
     // Prioridad 1: Coincidencia directa por username, código, email, alias o nombre limpio exacto
     let systemUser = systemUsersList.find(u => {
@@ -4915,6 +5098,21 @@ class IntranetStore {
     return this.getStudentBoletaCoursesCatalog(gradeId);
   }
 
+  // Normalizar identificador de grado escolar (ej: "4° de Secundaria", "4to Sec", "4sec" -> "4sec")
+  normalizeGradeKey(str) {
+    if (!str) return "";
+    let clean = String(str).toLowerCase()
+      .replace(/[°º]/g, '')
+      .replace(/(\d+)(ro|do|er|to|ta|vo|va|mo|ma|no|na)/g, '$1')
+      .replace(/secundaria|secund/g, 'sec')
+      .replace(/primaria|primar/g, 'prim')
+      .replace(/inicial|inic/g, 'ini')
+      .replace(/de\s+/g, '')
+      .replace(/años|anos/g, 'a')
+      .replace(/[^a-z0-9]/g, '');
+    return clean;
+  }
+
   // Comprobar si un curso está asignado al docente actualmente en sesión
   isTeacherAssignedToCourse(courseObjOrName, user = null, gradeId = "") {
     if (!user) user = this.getCurrentUser();
@@ -4961,23 +5159,33 @@ class IntranetStore {
       }
 
       // Mapeo semántico de áreas
-      if (cleanAssigned.includes("comunicación") || cleanAssigned.includes("comunicacion")) {
+      if (cleanAssigned.includes("comunicación") || cleanAssigned.includes("comunicacion") || cleanAssigned.includes("lenguaje") || cleanAssigned.includes("literatura")) {
         if (cleanCourseName.includes("lenguaje") || cleanCourseName.includes("literatura") || cleanCourseName.includes("plan lector") || cleanCourseName.includes("raz. verbal") || cleanCourseName.includes("razonamiento verbal") || cleanCourseName.includes("comunicación") || cleanCourseName.includes("comunicacion")) {
           return true;
         }
       }
-      if (cleanAssigned.includes("matemática") || cleanAssigned.includes("matematica")) {
-        if (cleanCourseName.includes("aritmética") || cleanCourseName.includes("aritmetica") || cleanCourseName.includes("álgebra") || cleanCourseName.includes("algebra") || cleanCourseName.includes("geometría") || cleanCourseName.includes("geometria") || cleanCourseName.includes("trigonometría") || cleanCourseName.includes("trigonometria") || cleanCourseName.includes("raz. matem") || cleanCourseName.includes("razonamiento matem") || cleanCourseName.includes("matemática")) {
+      if (cleanAssigned.includes("matemática") || cleanAssigned.includes("matematica") || cleanAssigned.includes("álgebra") || cleanAssigned.includes("geometría")) {
+        if (cleanCourseName.includes("aritmética") || cleanCourseName.includes("aritmetica") || cleanCourseName.includes("álgebra") || cleanCourseName.includes("algebra") || cleanCourseName.includes("geometría") || cleanCourseName.includes("geometria") || cleanCourseName.includes("trigonometría") || cleanCourseName.includes("trigonometria") || cleanCourseName.includes("raz. matem") || cleanCourseName.includes("razonamiento matem") || cleanCourseName.includes("matemática") || cleanCourseName.includes("matematica")) {
           return true;
         }
       }
-      if (cleanAssigned.includes("ciencia") || cleanAssigned.includes("cta")) {
+      if (cleanAssigned.includes("ciencia") || cleanAssigned.includes("cta") || cleanAssigned.includes("física") || cleanAssigned.includes("química") || cleanAssigned.includes("biología")) {
         if (cleanCourseName.includes("ciencia") || cleanCourseName.includes("biología") || cleanCourseName.includes("biologia") || cleanCourseName.includes("física") || cleanCourseName.includes("fisica") || cleanCourseName.includes("química") || cleanCourseName.includes("quimica") || cleanCourseName.includes("ambiente")) {
           return true;
         }
       }
-      if (cleanAssigned.includes("computación") || cleanAssigned.includes("computacion") || cleanAssigned.includes("ept") || cleanAssigned.includes("robótica") || cleanAssigned.includes("robotica")) {
+      if (cleanAssigned.includes("computación") || cleanAssigned.includes("computacion") || cleanAssigned.includes("ept") || cleanAssigned.includes("robótica") || cleanAssigned.includes("robotica") || cleanAssigned.includes("informática")) {
         if (cleanCourseName.includes("computación") || cleanCourseName.includes("computacion") || cleanCourseName.includes("informática") || cleanCourseName.includes("informatica") || cleanCourseName.includes("robótica") || cleanCourseName.includes("robotica") || cleanCourseName.includes("ept") || cleanCourseName.includes("gestión") || cleanCourseName.includes("gestion")) {
+          return true;
+        }
+      }
+      if (cleanAssigned.includes("cívica") || cleanAssigned.includes("civica") || cleanAssigned.includes("dpcc") || cleanAssigned.includes("personal social")) {
+        if (cleanCourseName.includes("cívica") || cleanCourseName.includes("civica") || cleanCourseName.includes("dpcc") || cleanCourseName.includes("personal social") || cleanCourseName.includes("psicología") || cleanCourseName.includes("psicologia") || cleanCourseName.includes("filosofía") || cleanCourseName.includes("filosofia") || cleanCourseName.includes("tutoría") || cleanCourseName.includes("tutoria")) {
+          return true;
+        }
+      }
+      if (cleanAssigned.includes("sociales") || cleanAssigned.includes("historia") || cleanAssigned.includes("geografía")) {
+        if (cleanCourseName.includes("historia") || cleanCourseName.includes("geografía") || cleanCourseName.includes("geografia") || cleanCourseName.includes("economía") || cleanCourseName.includes("economia") || cleanCourseName.includes("ciencias sociales")) {
           return true;
         }
       }
@@ -4997,6 +5205,162 @@ class IntranetStore {
     }
 
     return allCourses.filter(c => this.isTeacherAssignedToCourse(c, user, gradeId));
+  }
+
+  // Obtener la lista completa de cursos asignados al docente con metadatos de aula y grado
+  getTeacherAssignedCourses(userOrId = null, gradeId = "") {
+    let user = null;
+    if (!userOrId) {
+      user = this.getCurrentUser();
+    } else if (typeof userOrId === "object") {
+      user = userOrId;
+    } else {
+      user = (this.state.systemUsers || []).find(u => u.id === userOrId || u.code === userOrId || u.username === userOrId) || this.getCurrentUser();
+    }
+
+    if (!user) return [];
+
+    // Enriquecer perfil del docente desde el catálogo maestro si fuera necesario
+    const allMasterUsers = (this.state.systemUsers && this.state.systemUsers.length > 0)
+      ? this.state.systemUsers
+      : (initialData && initialData.systemUsers ? initialData.systemUsers : []);
+
+    const systemUser = allMasterUsers.find(u => 
+      (user.username && u.username && u.username.toLowerCase() === user.username.toLowerCase()) ||
+      (user.code && u.code && u.code.toLowerCase() === user.code.toLowerCase()) ||
+      (user.name && u.name && u.name.toLowerCase().trim() === user.name.toLowerCase().trim())
+    ) || (initialData.systemUsers || []).find(u => (user.name && u.name && u.name.toLowerCase().includes(user.name.toLowerCase())));
+
+    const catalog = this.state.gradesCatalog || initialData.gradesCatalog || [];
+    const role = (user && user.role ? user.role.toLowerCase() : "");
+
+    // Si es directivo o administrador, tiene visión global de todos los cursos
+    const isGlobal = role === "admin" || role === "administrador" || role === "director" || role === "directivo";
+
+    let assignedCoursesList = [];
+    if (user && Array.isArray(user.assignedCourses) && user.assignedCourses.length > 0) {
+      assignedCoursesList = user.assignedCourses;
+    } else if (systemUser && Array.isArray(systemUser.assignedCourses) && systemUser.assignedCourses.length > 0) {
+      assignedCoursesList = systemUser.assignedCourses;
+    } else if (user && Array.isArray(user.courses) && user.courses.length > 0) {
+      assignedCoursesList = user.courses;
+    } else if (user && user.subject) {
+      assignedCoursesList = user.subject.split(/,\s*/);
+    } else if (systemUser && systemUser.subject) {
+      assignedCoursesList = systemUser.subject.split(/,\s*/);
+    }
+
+    let assignedGradesList = [];
+    if (user && Array.isArray(user.assignedGrades) && user.assignedGrades.length > 0) {
+      assignedGradesList = user.assignedGrades;
+    } else if (systemUser && Array.isArray(systemUser.assignedGrades) && systemUser.assignedGrades.length > 0) {
+      assignedGradesList = systemUser.assignedGrades;
+    } else if (user && user.assignedGrades) {
+      assignedGradesList = [user.assignedGrades];
+    } else if (systemUser && systemUser.assignedGrades) {
+      assignedGradesList = [systemUser.assignedGrades];
+    }
+
+    // Copiar las asignaciones al objeto de usuario activo
+    if (user) {
+      if (!user.assignedCourses || user.assignedCourses.length === 0) user.assignedCourses = assignedCoursesList;
+      if (!user.assignedGrades || user.assignedGrades.length === 0) user.assignedGrades = assignedGradesList;
+    }
+
+    // Determinar qué grados consultar
+    let targetGrades = [];
+    if (gradeId) {
+      const normG = this.normalizeGradeKey(gradeId);
+      targetGrades = catalog.filter(g => this.normalizeGradeKey(g.id) === normG || this.normalizeGradeKey(g.label) === normG);
+    } else if (assignedGradesList.length > 0) {
+      targetGrades = catalog.filter(g => assignedGradesList.some(ag => {
+        const normAg = this.normalizeGradeKey(ag);
+        const normG = this.normalizeGradeKey(g.id);
+        const normLabel = this.normalizeGradeKey(g.label);
+        return normAg === normG || normAg === normLabel || normLabel.includes(normAg) || normAg.includes(normLabel);
+      }));
+    }
+
+    if (targetGrades.length === 0) {
+      targetGrades = isGlobal ? catalog : catalog;
+    }
+
+    const result = [];
+    const seen = new Set();
+
+    targetGrades.forEach(g => {
+      const coursesForGrade = this.getStudentBoletaCoursesCatalog(g.id);
+      coursesForGrade.forEach(c => {
+        if (isGlobal || this.isTeacherAssignedToCourse(c, user, g.id)) {
+          const uniqueKey = `${g.id}_${c.name}`;
+          if (!seen.has(uniqueKey)) {
+            seen.add(uniqueKey);
+            result.push({
+              id: `${c.id}-${g.id}`,
+              courseCode: c.id,
+              name: c.name,
+              area: c.area || "Área Pedagógica",
+              grade: g.label,
+              gradeId: g.id,
+              level: g.level,
+              teacher: user ? user.name : c.teacher,
+              icon: c.icon || "📚",
+              color: g.level === "Primaria" ? "green" : g.level === "Inicial" ? "yellow" : "blue"
+            });
+          }
+        }
+      });
+    });
+
+    // Fallback: Si no coincide por catálogo de grado pero tiene cursos asignados en su perfil
+    if (result.length === 0 && assignedCoursesList && assignedCoursesList.length > 0) {
+      const defaultGrade = catalog.find(g => g.id === "4sec") || catalog[0];
+      assignedCoursesList.forEach((cName, idx) => {
+        result.push({
+          id: `DOC-CURSO-${idx + 1}`,
+          courseCode: `CURSO-${idx + 1}`,
+          name: cName,
+          area: "Especialidad Docente",
+          grade: defaultGrade.label,
+          gradeId: defaultGrade.id,
+          level: defaultGrade.level,
+          teacher: user ? user.name : "Docente",
+          icon: "📚",
+          color: "blue"
+        });
+      });
+    }
+
+    return result;
+  }
+
+  // Asignar cursos y grados a un docente con persistencia multiusuario
+  assignCoursesToTeacher(teacherIdOrCode, coursesList = [], gradesList = []) {
+    if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
+    if (!this.state.teachersList) this.state.teachersList = [...initialData.teachersList];
+
+    const cleanCourses = Array.isArray(coursesList) ? coursesList : (coursesList ? coursesList.split(/,\s*/) : []);
+    const cleanGrades = Array.isArray(gradesList) ? gradesList : (gradesList ? gradesList.split(/,\s*/) : []);
+
+    const userIndex = this.state.systemUsers.findIndex(u => u.id === teacherIdOrCode || u.code === teacherIdOrCode || u.username === teacherIdOrCode);
+    if (userIndex !== -1) {
+      this.state.systemUsers[userIndex].assignedCourses = cleanCourses;
+      this.state.systemUsers[userIndex].courses = cleanCourses;
+      this.state.systemUsers[userIndex].subject = cleanCourses.join(', ');
+      this.state.systemUsers[userIndex].assignedGrades = cleanGrades;
+      this.state.systemUsers[userIndex].detail = `${cleanCourses.slice(0, 2).join(', ')}${cleanCourses.length > 2 ? ` (+${cleanCourses.length - 2} más)` : ''} • ${cleanGrades.length} grados`;
+    }
+
+    const tIndex = this.state.teachersList.findIndex(t => t.id === teacherIdOrCode || (userIndex !== -1 && t.name.toLowerCase().trim() === this.state.systemUsers[userIndex].name.toLowerCase().trim()));
+    if (tIndex !== -1) {
+      this.state.teachersList[tIndex].courses = cleanCourses;
+      this.state.teachersList[tIndex].subject = cleanCourses.join(', ');
+      this.state.teachersList[tIndex].assignedGrades = cleanGrades;
+    }
+
+    this.saveState();
+    this.notify();
+    return true;
   }
 
   // Verificar si el usuario en sesión es el Tutor Asignado al Grado / Aula
@@ -9198,74 +9562,157 @@ const Components = {
 
   // Dashboard - Docente
   renderTeacherDashboard(state, user) {
-    const students = state.studentListDocente;
-    const hasAdminPrivilege = !!user.hasAdminPrivileges;
+    const hasAdminPrivilege = !!user.hasAdminPrivileges || !!user.hasAdminPrivilege;
+    const assignedCourses = (window.appStore && typeof window.appStore.getTeacherAssignedCourses === "function")
+      ? window.appStore.getTeacherAssignedCourses(user)
+      : [];
+    const enrollments = (window.appStore && typeof window.appStore.getEnrollments === "function")
+      ? window.appStore.getEnrollments()
+      : (state.enrollments || []);
+    const students = enrollments.slice(0, 8);
+
+    const userCoursesList = Array.isArray(user.assignedCourses) && user.assignedCourses.length > 0
+      ? user.assignedCourses
+      : (Array.isArray(user.courses) ? user.courses : (user.subject ? user.subject.split(/,\s*/) : ["Matemática"]));
+
+    const userGradesList = Array.isArray(user.assignedGrades) && user.assignedGrades.length > 0
+      ? user.assignedGrades
+      : ["1° de Secundaria", "2° de Secundaria", "3° de Secundaria", "4° de Secundaria", "5° de Secundaria"];
 
     return `
       <div class="fade-in">
-        <div class="welcome-banner" style="background: linear-gradient(135deg, var(--color-navy-900) 0%, #1e293b 100%);">
+        <div class="welcome-banner" style="background: linear-gradient(135deg, var(--color-navy-950) 0%, #1e3a8a 100%);">
           <div class="welcome-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
               ${hasAdminPrivilege ? `
-                <span class="status-badge status-approved" style="background: rgba(245, 158, 11, 0.2); color: var(--color-yellow-400); border: 1px solid var(--color-yellow-500);">
+                <span class="status-badge status-approved" style="background: rgba(245, 158, 11, 0.2); color: var(--color-yellow-400); border: 1px solid var(--color-yellow-500); font-weight: 900;">
                   ★ PRIVILEGIOS DE EDICIÓN HABILITADOS
                 </span>
               ` : `
-                <span class="status-badge status-approved">PERFIL DOCENTE</span>
+                <span class="status-badge status-approved" style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-weight: 800;">
+                  👨‍ PERFIL DOCENTE ACTIVO
+                </span>
               `}
+              <span style="font-size: 11.5px; color: #93c5fd; font-weight: 700;">
+                Carga Lectiva: <strong>${user.weeklyHours || '24 hrs'}</strong>
+              </span>
             </div>
             <h1 class="welcome-title">Panel Docente: <span>${user.name}</span></h1>
             <p class="welcome-subtitle">
-              Escaneo óptico de cuadernos con cámara de celular, registro de notas y asistencia.
+              Gestión de asignaturas, calificaciones oficiales, carteles temáticos, aula virtual y escaneo QR de cuadernos.
             </p>
 
             <div class="metrics-strip">
-              <div class="metric-card-mini"><span class="metric-label">Alumnos</span><span class="metric-val highlight-yellow">${user.totalStudents}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Cursos Asignados</span><span class="metric-val highlight-yellow">${userCoursesList.length}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Grados a Cargo</span><span class="metric-val highlight-green">${userGradesList.length}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Alumnos Matriculados</span><span class="metric-val highlight-yellow">${enrollments.length}</span></div>
               <div class="metric-card-mini"><span class="metric-label">Cuadernos Hoy</span><span class="metric-val highlight-green">${user.scannedNotebooksToday || 18}</span></div>
-              <div class="metric-card-mini"><span class="metric-label">Pendientes</span><span class="metric-val highlight-red">${user.pendingGrading}</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra Informativa de Asignaturas & Grados Asignados -->
+        <div class="card" style="margin-bottom: var(--space-4); background: #f8fafc; border-left: 4px solid var(--color-navy-800); padding: 14px 18px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <div style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase;">
+                📚 Mis Asignaturas Asignadas en la Intranet:
+              </div>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 5px;">
+                ${userCoursesList.map(c => `
+                  <span class="status-badge" style="background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; font-size: 11.5px; font-weight: 800;">
+                    ✓ ${c}
+                  </span>
+                `).join('')}
+              </div>
+            </div>
+            <div>
+              <div style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase;">
+                🏫 Grados / Aulas Asignadas:
+              </div>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 5px;">
+                ${userGradesList.map(g => `
+                  <span class="status-badge" style="background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; font-size: 11px; font-weight: 700;">
+                    🏫 ${g}
+                  </span>
+                `).join('')}
+              </div>
             </div>
           </div>
         </div>
 
         <div style="display: flex; gap: 10px; margin-bottom: var(--space-6); flex-wrap: wrap; align-items: center;">
-          <button class="btn btn-emerald" onclick="window.app.navigate('asistencia'); window.app.setAttendanceSubTab('door-scanner');">
-            <span>📲</span>
-            <span>Registro de Ingreso & Asistencia QR</span>
+          <button class="btn btn-navy" onclick="window.app.navigate('tareas')" style="font-weight: 800;">
+            <span>💻</span>
+            <span>Mi Aula Virtual & Tareas</span>
           </button>
-          <button class="btn btn-gold" onclick="window.app.navigate('cuadernos-qr')">
-            <span>📷</span>
-            <span>[Cámara] Abrir Escáner QR de Cuadernos</span>
+          <button class="btn btn-navy" onclick="window.app.navigate('silabus')" style="font-weight: 800;">
+            <span>📤</span>
+            <span>Cartel Temático (PDF)</span>
           </button>
-          <button class="btn btn-navy" onclick="window.app.navigate('calificaciones')">
+          <button class="btn btn-navy" onclick="window.app.navigate('calificaciones')" style="font-weight: 800;">
             <span>✏️</span>
             <span>Registrar Notas</span>
           </button>
-          <button class="btn btn-navy" onclick="window.app.navigate('boleta')">
-            <span>📄</span>
-            <span>Boleta Oficial MINEDU 2026</span>
+          <button class="btn btn-gold" onclick="window.app.navigate('cuadernos-qr')" style="font-weight: 800;">
+            <span>📷</span>
+            <span>Escanear Cuadernos QR</span>
           </button>
-          <button class="btn btn-outline" onclick="window.app.navigate('horarios')">
+          <button class="btn btn-emerald" onclick="window.app.navigate('asistencia'); window.app.setAttendanceSubTab('door-scanner');" style="font-weight: 800;">
+            <span>📲</span>
+            <span>Asistencia General</span>
+          </button>
+          <button class="btn btn-outline" onclick="window.app.navigate('horarios')" style="font-weight: 800;">
             <span>📅</span>
-            <span>Ver Horario</span>
+            <span>Mi Horario Docente</span>
           </button>
         </div>
 
+        <!-- Nómina de Estudiantes para Calificación y Seguimiento -->
         <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Registro Rápido de Calificaciones - 4to Sec 'A'</h3>
+          <div class="card-header" style="justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <h3 class="card-title" style="margin: 0; font-size: 15px; font-weight: 800;">
+              👥 Nómina Activa de Estudiantes del Registro General (${enrollments.length} matriculados)
+            </h3>
+            <button class="btn btn-navy btn-sm" onclick="window.app.navigate('calificaciones')" style="font-weight: bold;">
+              Ver Matriz Completa de Calificaciones ➜
+            </button>
           </div>
           <div class="table-container">
             <table class="data-table">
-              <thead><tr><th>Código</th><th>Estudiante</th><th>Asistencia</th><th>Cuaderno QR</th><th>Nota 3er Bim</th><th>Acción</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Estudiante</th>
+                  <th>Grado / Nivel</th>
+                  <th>Apoderado</th>
+                  <th>Asistencia</th>
+                  <th>Cuaderno QR</th>
+                  <th style="text-align: center;">Acción</th>
+                </tr>
+              </thead>
               <tbody>
-                ${students.map(s => `
+                ${students.length > 0 ? students.map(s => `
                   <tr>
-                    <td><code>${s.id}</code></td><td><strong>${s.name}</strong></td><td>${s.attendance}</td>
-                    <td><span class="status-badge ${s.notebookStatus && s.notebookStatus.includes('Al Día') ? 'status-approved' : 'status-failed'}">${s.notebookStatus}</span></td>
-                    <td><input type="number" min="0" max="20" id="grade-input-${s.id}" value="${s.grade}" style="width: 70px; padding: 4px 8px; font-weight: bold;" /></td>
-                    <td><button class="btn btn-navy btn-sm" onclick="window.app.saveStudentGrade('${s.id}')">Guardar</button></td>
+                    <td><code style="font-weight: 800; color: #1e3a8a;">${s.studentCode || s.id}</code></td>
+                    <td><strong>${s.studentName || s.name}</strong></td>
+                    <td><span class="status-badge" style="background:#eff6ff; color:#1e40af; font-size:10.5px; font-weight:bold;">${s.grade || 'Nivel Escolar'}</span></td>
+                    <td><span style="font-size: 11.5px; color: #475569;">${s.guardian || '--'}</span></td>
+                    <td><span class="status-badge status-approved" style="font-size:10.5px; font-weight:bold;">Al Día</span></td>
+                    <td><span class="status-badge status-approved" style="font-size:10.5px; font-weight:bold;">Revisado</span></td>
+                    <td style="text-align: center;">
+                      <button class="btn btn-navy btn-sm" onclick="window.app.navigate('calificaciones')" style="padding: 3px 8px; font-size: 11px; font-weight: bold;">
+                        Calificar
+                      </button>
+                    </td>
                   </tr>
-                `).join('')}
+                `).join('') : `
+                  <tr>
+                    <td colspan="7" style="text-align: center; padding: 20px; color: #64748b;">
+                      No hay estudiantes registrados en la nómina.
+                    </td>
+                  </tr>
+                `}
               </tbody>
             </table>
           </div>
@@ -11286,37 +11733,47 @@ const Components = {
     const currentUser = this.getCurrentUser(state);
     const currentUserName = (currentUser.name || "").toLowerCase();
 
-    // Catálogo completo de cursos por grado y docente
-    const allCourses = [
-      { id: "MAT-401", name: "Matemática Avanzada (Álgebra y Geometría)", teacher: "Prof. Roberto Silva", grade: "4to de Secundaria", icon: "📐", color: "blue", level: "Secundaria" },
-      { id: "COM-404", name: "Comunicación & Literatura", teacher: "Miss María Daysi Reyes", grade: "4to de Secundaria", icon: "📚", color: "navy", level: "Secundaria" },
-      { id: "CTA-403", name: "Ciencia y Tecnología (Física & Química)", teacher: "Miss Leyli Reyes Cerquen", grade: "4to de Secundaria", icon: "🔬", color: "green", level: "Secundaria" },
-      { id: "EPT-402", name: "Computación e Informática / Robótica", teacher: "Prof. Fernando Rojas", grade: "4to de Secundaria", icon: "💻", color: "yellow", level: "Secundaria" },
-      { id: "ING-405", name: "Inglés Técnico & Gramática", teacher: "Miss Andrea Ramos", grade: "4to de Secundaria", icon: "🇬🇧", color: "blue", level: "Secundaria" },
-      { id: "CS-406", name: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", grade: "4to de Secundaria", icon: "🌎", color: "yellow", level: "Secundaria" },
-      { id: "MAT-501", name: "Matemática & Razonamiento Matemático", teacher: "Prof. Roberto Silva", grade: "5° de Primaria", icon: "📐", color: "blue", level: "Primaria" },
-      { id: "COM-501", name: "Comunicación Integral & Comprensión Lectora", teacher: "Miss Julisa Magali Arroyo", grade: "5° de Primaria", icon: "📚", color: "navy", level: "Primaria" },
-      { id: "CTA-501", name: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes Cerquen", grade: "5° de Primaria", icon: "🔬", color: "green", level: "Primaria" },
-      { id: "MAT-101", name: "Matemática Lúdica y Razonamiento", teacher: "Miss Julisa Magali Arroyo", grade: "1ro de Primaria", icon: "🔢", color: "blue", level: "Primaria" },
-      { id: "COM-101", name: "Comunicación Integral & Caligrafía", teacher: "Miss Julisa Magali Arroyo", grade: "1ro de Primaria", icon: "✏️", color: "green", level: "Primaria" }
-    ];
+    // Obtener catálogo dinámico y completo de cursos asignados al perfil del usuario
+    let availableCourses = [];
+    if (window.appStore && typeof window.appStore.getTeacherAssignedCourses === "function") {
+      availableCourses = window.appStore.getTeacherAssignedCourses(currentUser);
+    }
 
-    // Filtrar cursos según el perfil del usuario activo
-    let availableCourses = allCourses;
-    if (role === 'docente') {
-      const myCourses = allCourses.filter(c => c.teacher.toLowerCase().includes("silva") || currentUserName.includes("silva") || c.teacher.toLowerCase().includes(currentUserName));
-      availableCourses = myCourses.length > 0 ? myCourses : allCourses;
-    } else if (role === 'estudiante') {
+    if (!availableCourses || availableCourses.length === 0) {
+      availableCourses = [
+        { id: "MAT-401", courseCode: "MAT-401", name: "Matemática Avanzada (Álgebra y Geometría)", teacher: "Prof. Roberto Silva", grade: "4to de Secundaria", gradeId: "4sec", icon: "📐", color: "blue", level: "Secundaria" },
+        { id: "COM-404", courseCode: "COM-404", name: "Comunicación & Literatura", teacher: "Miss María Daysi Reyes", grade: "4to de Secundaria", gradeId: "4sec", icon: "📚", color: "navy", level: "Secundaria" },
+        { id: "CTA-403", courseCode: "CTA-403", name: "Ciencia y Tecnología (Física & Química)", teacher: "Miss Leyli Reyes Cerquen", grade: "4to de Secundaria", gradeId: "4sec", icon: "🔬", color: "green", level: "Secundaria" },
+        { id: "EPT-402", courseCode: "EPT-402", name: "Computación e Informática / Robótica", teacher: "Prof. Fernando Rojas", grade: "4to de Secundaria", gradeId: "4sec", icon: "💻", color: "yellow", level: "Secundaria" },
+        { id: "ING-405", courseCode: "ING-405", name: "Inglés Técnico & Gramática", teacher: "Miss Andrea Ramos", grade: "4to de Secundaria", gradeId: "4sec", icon: "🇬🇧", color: "blue", level: "Secundaria" },
+        { id: "CS-406", courseCode: "CS-406", name: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", grade: "4to de Secundaria", gradeId: "4sec", icon: "🌎", color: "yellow", level: "Secundaria" },
+        { id: "MAT-501", courseCode: "MAT-501", name: "Matemática & Razonamiento Matemático", teacher: "Prof. Roberto Silva", grade: "5° de Primaria", gradeId: "5prim", icon: "📐", color: "blue", level: "Primaria" },
+        { id: "COM-501", courseCode: "COM-501", name: "Comunicación Integral & Comprensión Lectora", teacher: "Miss Julisa Magali Arroyo", grade: "5° de Primaria", gradeId: "5prim", icon: "📚", color: "navy", level: "Primaria" },
+        { id: "CTA-501", courseCode: "CTA-501", name: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes Cerquen", grade: "5° de Primaria", gradeId: "5prim", icon: "🔬", color: "green", level: "Primaria" }
+      ];
+    }
+
+    if (role === 'estudiante') {
       const gradeText = (currentUser.gradeLevel || currentUser.detail || currentUser.grade || "").toLowerCase();
       const isPrimaria = gradeText.includes("prim") || gradeText.includes("pri");
-      availableCourses = isPrimaria ? allCourses.filter(c => c.level === "Primaria") : allCourses.filter(c => c.level === "Secundaria");
+      availableCourses = isPrimaria ? availableCourses.filter(c => c.level === "Primaria") : availableCourses.filter(c => c.level === "Secundaria" || !c.level);
     }
 
     const selectedCourseId = state.selectedVirtualCourseId || (availableCourses[0] ? availableCourses[0].id : "MAT-401");
-    const currentCourse = availableCourses.find(c => c.id === selectedCourseId) || availableCourses[0] || allCourses[0];
+    const currentCourse = availableCourses.find(c => c.id === selectedCourseId || c.courseCode === selectedCourseId) || availableCourses[0];
 
     // Filtrar materiales del curso seleccionado
-    let courseMaterials = materials.filter(m => m.courseId === selectedCourseId);
+    let courseMaterials = materials.filter(m => 
+      m.courseId === selectedCourseId || 
+      (currentCourse && m.courseId === currentCourse.courseCode) || 
+      (currentCourse && m.courseName && m.courseName.toLowerCase().includes(currentCourse.name.toLowerCase())) ||
+      (currentCourse && currentCourse.name.toLowerCase().includes((m.courseName || "").toLowerCase()))
+    );
+
+    if (courseMaterials.length === 0 && materials.length > 0) {
+      // Si el docente sube materiales nuevos o si es el primer material de muestra
+      courseMaterials = materials.slice(0, 1);
+    }
     if (courseMaterials.length === 0 && materials.length > 0) {
       courseMaterials = [materials[0]];
     }
@@ -13553,12 +14010,12 @@ class IntranetApp {
   startRealtimeSync() {
     if (this.syncInterval) clearInterval(this.syncInterval);
     this.syncInterval = setInterval(() => {
-      // Sincronización multi-dispositivo continua cada 5 segundos
-      if (!this.store.isUserAuthenticated()) return;
-      // Pausar sync destructivo si la cámara en vivo o la estación de portería está activa
+      // Sincronización multi-dispositivo en tiempo real cada 3.5 segundos
+      if (!this.store || !this.store.isUserAuthenticated()) return;
+      // Pausar re-renderizado si la cámara en vivo de portería está activa
       if (this.isDoorCamActive || this.isCameraActive || this.isAgendaModalCamActive) return;
       this.store.fetchServerState(true);
-    }, 5000);
+    }, 3500);
   }
 
   // Actualización reactiva suave del feed de ingresos (sin parpadeo ni recarga de pantalla)
@@ -18780,7 +19237,12 @@ CREATE TABLE tb_cuadernos_qr (
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
           <div class="form-group">
             <label class="form-label">Curso / Asignatura:</label>
-            <input type="text" id="cartel-course-name" class="form-control" placeholder="Ej. Matemática & Razonamiento" required />
+            <input type="text" id="cartel-course-name" list="teacher-assigned-courses-list" class="form-control" placeholder="Ej. Matemática, Cívica, CTA..." required />
+            <datalist id="teacher-assigned-courses-list">
+              ${((this.store && typeof this.store.getTeacherAssignedCourses === "function") ? this.store.getTeacherAssignedCourses(this.store.getCurrentUser(), activeGradeId) : []).map(c => `
+                <option value="${c.name}">${c.grade || ''}</option>
+              `).join('')}
+            </datalist>
           </div>
           <div class="form-group">
             <label class="form-label">Docente Responsable:</label>
@@ -20708,15 +21170,29 @@ CREATE TABLE tb_cuadernos_qr (
     this.render();
   }
 
+  onUploadMaterialCourseSelectChange(courseId) {
+    const hiddenName = document.getElementById('upload-material-course-name');
+    const select = document.getElementById('upload-material-course-select');
+    if (hiddenName && select && select.selectedIndex >= 0) {
+      const opt = select.options[select.selectedIndex];
+      const text = opt.text.split('(')[0].replace(/^[^\wáéíóúÁÉÍÓÚñÑ]+/, '').trim();
+      hiddenName.value = text;
+    }
+  }
+
   openUploadMaterialModal(courseId) {
-    const courses = [
-      { id: "MAT-401", name: "Matemática Avanzada", icon: "" },
-      { id: "EPT-402", name: "Computación e Informática / Robótica", icon: "🤖" },
-      { id: "CTA-403", name: "Ciencia y Tecnología (Física & Química)", icon: "🔬" },
-      { id: "COM-404", name: "Comunicación & Literatura", icon: "📚" }
+    const currentUser = this.store.getCurrentUser();
+    const assignedCourses = (this.store && typeof this.store.getTeacherAssignedCourses === "function")
+      ? this.store.getTeacherAssignedCourses(currentUser)
+      : [];
+    const courses = (assignedCourses && assignedCourses.length > 0) ? assignedCourses : [
+      { id: "MAT-401", courseCode: "MAT-401", name: "Matemática Avanzada", icon: "📐", grade: "4to de Secundaria", teacher: currentUser ? currentUser.name : "Prof. Roberto Silva" },
+      { id: "EPT-402", courseCode: "EPT-402", name: "Computación e Informática / Robótica", icon: "💻", grade: "4to de Secundaria", teacher: currentUser ? currentUser.name : "Prof. Fernando Rojas" },
+      { id: "CTA-403", courseCode: "CTA-403", name: "Ciencia y Tecnología (Física & Química)", icon: "🔬", grade: "4to de Secundaria", teacher: currentUser ? currentUser.name : "Miss Leyli Reyes Cerquen" },
+      { id: "COM-404", courseCode: "COM-404", name: "Comunicación & Literatura", icon: "📚", grade: "4to de Secundaria", teacher: currentUser ? currentUser.name : "Miss María Daysi Reyes" }
     ];
-    const course = courses.find(c => c.id === courseId) || courses[0];
-    const existingCount = (this.store.state.weeklyMaterials || []).filter(m => m.courseId === course.id).length;
+    const course = courses.find(c => c.id === courseId || c.courseCode === courseId) || courses[0];
+    const existingCount = (this.store.state.weeklyMaterials || []).filter(m => m.courseId === course.id || (course.courseCode && m.courseId === course.courseCode)).length;
     const nextWeek = existingCount + 1;
 
     const html = `
@@ -20735,18 +21211,20 @@ CREATE TABLE tb_cuadernos_qr (
       <form onsubmit="window.app.confirmUploadMaterial(event)">
         <div class="modal-body" style="max-height: 75vh; overflow-y: auto; padding: 18px;">
           
-          <!-- Banner de Asignatura -->
-          <div style="background: #eff6ff; border-left: 4px solid #3b82f6; padding: 10px 14px; border-radius: 6px; margin-bottom: 16px; font-size: 12px; color: #1e40af; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-            <div>
-              <strong>Asignatura:</strong> ${course.icon} ${course.name} • <strong>Grado:</strong> 4to de Secundaria
-            </div>
-            <span class="status-badge" style="background: #dbeafe; color: #1e40af; font-weight: 800; font-size: 10.5px;">
-              Docente: Prof. Roberto Silva
-            </span>
+          <!-- Selector Dinámico de Asignatura Asignada -->
+          <div style="background: #eff6ff; border-left: 4px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 16px;">
+            <label style="font-size: 12px; font-weight: 800; color: #1e40af; display: block; margin-bottom: 4px;">
+              Seleccione la Asignatura / Aula para Publicar Material:
+            </label>
+            <select name="courseId" id="upload-material-course-select" class="form-control" style="font-weight: bold; background: white;" onchange="window.app.onUploadMaterialCourseSelectChange(this.value)">
+              ${courses.map(c => `
+                <option value="${c.id}" ${c.id === course.id ? 'selected' : ''}>
+                  ${c.icon || '📚'} ${c.name} (${c.grade || 'Secundaria'}) - ${c.teacher || (currentUser ? currentUser.name : 'Docente')}
+                </option>
+              `).join('')}
+            </select>
+            <input type="hidden" name="courseName" id="upload-material-course-name" value="${course.name}" />
           </div>
-
-          <input type="hidden" name="courseId" value="${course.id}" />
-          <input type="hidden" name="courseName" value="${course.name}" />
 
           <!-- ZONA DE CARGA DE ARCHIVO INTELIGENTE -->
           <div style="margin-bottom: 18px;">

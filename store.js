@@ -37,6 +37,7 @@ class IntranetStore {
     this.apiBaseUrl = this.getApiBaseUrl();
     this.isSyncing = false;
     this.lastDataSignature = "";
+    this.tabId = `TAB_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
 
     // Limpieza automática de cualquier residuo corrupto de versiones anteriores en localStorage
     try {
@@ -63,10 +64,128 @@ class IntranetStore {
           this.saveState();
         }
       });
+
+      // 3. SINCRONIZACIÓN EN TIEMPO REAL MULTI-PESTAÑA / MULTI-VENTANA (BroadcastChannel)
+      if (typeof window.BroadcastChannel !== "undefined") {
+        try {
+          this.broadcastChannel = new BroadcastChannel("colegio_el_educador_sync_v2026");
+          this.broadcastChannel.onmessage = (event) => {
+            if (event && event.data && event.data.sourceTabId !== this.tabId) {
+              this.handleCrossTabSync(event.data);
+            }
+          };
+        } catch(e) {}
+      }
+
+      // 4. Respaldo de sincronización reactiva ante eventos de almacenamiento del navegador
+      window.addEventListener("storage", (e) => {
+        if (e.key === this.storageKey && e.newValue) {
+          try {
+            const parsed = JSON.parse(e.newValue);
+            this.handleStorageEventSync(parsed);
+          } catch(err) {}
+        }
+      });
     }
 
-    // 3. Sincronización inicial con la nube central multi-dispositivo
+    // 5. Sincronización inicial con la nube central multi-dispositivo
     this.fetchServerState(true);
+  }
+
+  // Manejo de sincronización instantánea entre pestañas / ventanas en el mismo equipo
+  handleCrossTabSync(data) {
+    if (!data) return;
+    try {
+      if (data.deletedIds && Array.isArray(data.deletedIds)) {
+        this.registerDeleted(...data.deletedIds);
+      }
+      // Recargar colecciones limpias desde localStorage conservando la sesión activa del usuario
+      this.reloadStatePreservingSession();
+      this.notify();
+    } catch(err) {}
+  }
+
+  handleStorageEventSync(externalState) {
+    if (!externalState) return;
+    try {
+      if (externalState.deletedIds && Array.isArray(externalState.deletedIds)) {
+        this.registerDeleted(...externalState.deletedIds);
+      }
+      this.reloadStatePreservingSession();
+      this.notify();
+    } catch(err) {}
+  }
+
+  reloadStatePreservingSession() {
+    try {
+      const raw = localStorage.getItem(this.storageKey);
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (!parsed) return;
+
+      const currentAuth = this.state.isAuthenticated;
+      const currentRole = this.state.currentRole;
+      const currentView = this.state.currentView;
+      const currentUser = this.state.currentUser;
+
+      // Fusionar deletedIds
+      if (Array.isArray(parsed.deletedIds)) {
+        this.registerDeleted(...parsed.deletedIds);
+      }
+
+      // Actualizar colecciones filtrando inmediatamente cualquier entidad eliminada
+      if (Array.isArray(parsed.systemUsers)) {
+        this.state.systemUsers = parsed.systemUsers.filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
+      }
+      if (Array.isArray(parsed.enrollments)) {
+        this.state.enrollments = parsed.enrollments.filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian));
+      }
+      if (Array.isArray(parsed.familiesFinancial)) {
+        this.state.familiesFinancial = parsed.familiesFinancial.filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode));
+      }
+      if (Array.isArray(parsed.attendanceRecords)) {
+        this.state.attendanceRecords = parsed.attendanceRecords.filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName));
+      }
+      if (Array.isArray(parsed.notebookReviews)) {
+        this.state.notebookReviews = parsed.notebookReviews.filter(r => !this.isDeleted(r.studentId) && !this.isDeleted(r.studentName));
+      }
+      if (Array.isArray(parsed.behaviorIncidents)) {
+        this.state.behaviorIncidents = parsed.behaviorIncidents.filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName));
+      }
+      if (Array.isArray(parsed.agendaNotes)) {
+        this.state.agendaNotes = parsed.agendaNotes.filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName));
+      }
+      if (Array.isArray(parsed.payments)) {
+        this.state.payments = parsed.payments.filter(p => !this.isDeleted(p.id) && !this.isDeleted(p.studentCode) && !this.isDeleted(p.studentName));
+      }
+      if (Array.isArray(parsed.monthlyCarteles)) {
+        this.state.monthlyCarteles = parsed.monthlyCarteles;
+      }
+      if (Array.isArray(parsed.syllabi)) {
+        this.state.syllabi = parsed.syllabi;
+      }
+      if (Array.isArray(parsed.tasks)) {
+        this.state.tasks = parsed.tasks;
+      }
+      if (Array.isArray(parsed.announcements)) {
+        this.state.announcements = parsed.announcements;
+      }
+      if (Array.isArray(parsed.weeklyMaterials)) {
+        this.state.weeklyMaterials = parsed.weeklyMaterials;
+      }
+      if (parsed.boletaData) {
+        this.state.boletaData = parsed.boletaData;
+      }
+      if (Array.isArray(parsed.teachersList)) {
+        this.state.teachersList = parsed.teachersList;
+      }
+
+      this.state.updatedAt = parsed.updatedAt || Date.now();
+      this.state.isAuthenticated = currentAuth;
+      this.state.currentRole = currentRole;
+      this.state.currentView = currentView;
+      this.state.currentUser = currentUser;
+    } catch(e) {}
   }
 
   // Fusión inteligente de colecciones por identificador único (prioriza datos locales del usuario)
@@ -478,13 +597,13 @@ class IntranetStore {
         teachersList: (isScheduleUpdated ? parsed.teachersList : initialData.teachersList).filter(t => !this.isDeleted(t.id) && !this.isDeleted(t.name)),
         schedules: isScheduleUpdated ? parsed.schedules : initialData.schedules,
         systemUsers: (() => {
-          const rawList = Array.isArray(parsed.systemUsers) && parsed.systemUsers.length > 0 ? parsed.systemUsers : initialData.systemUsers;
+          const rawList = this.mergeCollectionsById(initialData.systemUsers || [], parsed.systemUsers || [], "username");
           const seen = new Set();
           const deduped = [];
           
           rawList.forEach(u => {
             if (!this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name)) {
-              const key = `${u.role}_${(u.code || u.username || u.name).toLowerCase().replace(/[\s\.\-_]+/g, '')}`;
+              const key = (u.username || u.code || u.name).toLowerCase().replace(/[\s\.\-_]+/g, '');
               if (!seen.has(key)) {
                 seen.add(key);
                 deduped.push(u);
@@ -532,6 +651,22 @@ class IntranetStore {
           docente: {
             ...initialData.users.docente,
             ...((parsed.users && parsed.users.docente) || {})
+          },
+          estudiante: {
+            ...initialData.users.estudiante,
+            ...((parsed.users && parsed.users.estudiante) || {})
+          },
+          padre: {
+            ...initialData.users.padre,
+            ...((parsed.users && parsed.users.padre) || {})
+          },
+          director: {
+            ...initialData.users.director,
+            ...((parsed.users && parsed.users.director) || {})
+          },
+          admin: {
+            ...initialData.users.admin,
+            ...((parsed.users && parsed.users.admin) || {})
           }
         }
       };
@@ -545,18 +680,44 @@ class IntranetStore {
       return loadedState;
     }
 
-    const hasSession = typeof sessionStorage !== "undefined" && Boolean(sessionStorage.getItem("colegio_user_session"));
-    const sessionRole = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("colegio_user_role") : null;
-
     return {
-      isAuthenticated: hasSession,
-      currentRole: sessionRole || "docente",
-      currentView: hasSession ? "dashboard" : "login",
+      ...initialData,
+      deletedIds: [],
+      isAuthenticated: false,
+      currentRole: "docente",
+      currentView: "login",
       selectedScheduleGrade: "4sec",
       selectedSyllabusGrade: "4sec",
+      academicConfig: { ...initialData.academicConfig },
+      teachersList: (initialData.teachersList || []).filter(t => !this.isDeleted(t.id) && !this.isDeleted(t.name)),
+      schedules: initialData.schedules,
+      systemUsers: (initialData.systemUsers || []).filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name)),
+      navigationTabsConfig: {
+        ...initialData.navigationTabsConfig,
+        auxiliar: initialData.navigationTabsConfig.auxiliar,
+        docente: initialData.navigationTabsConfig.docente,
+        estudiante: initialData.navigationTabsConfig.estudiante,
+        padre: initialData.navigationTabsConfig.padre,
+        director: initialData.navigationTabsConfig.director
+      },
       usersManagementTab: "users",
-      usersRoleFilter: "all",
-      ...initialData
+      weeklyMaterials: initialData.weeklyMaterials || [],
+      behaviorIncidents: (initialData.behaviorIncidents || []).filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName)),
+      agendaNotes: (initialData.agendaNotes || []).filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName)),
+      attendanceRecords: (initialData.attendanceRecords || []).filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName)),
+      notebookReviews: (initialData.notebookReviews || []).filter(r => !this.isDeleted(r.studentId) && !this.isDeleted(r.studentName)),
+      enrollments: (initialData.enrollments || []).filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian)),
+      familiesFinancial: (initialData.familiesFinancial || []).filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode)),
+      courses: initialData.courses || [],
+      tasks: initialData.tasks || [],
+      payments: initialData.payments || [],
+      announcements: initialData.announcements || [],
+      syllabi: initialData.syllabi || [],
+      selectedVirtualCourseId: "MAT-401",
+      selectedVirtualWeekId: "MAT-SEM-01",
+      activeQuizState: null,
+      boletaData: { ...initialData.boletaData },
+      users: { ...initialData.users }
     };
   }
 
@@ -569,6 +730,19 @@ class IntranetStore {
     } catch (e) {
       console.warn("No se pudo guardar en localStorage", e);
     }
+
+    // Difundir actualización instantánea a todas las demás pestañas abiertas
+    if (this.broadcastChannel) {
+      try {
+        this.broadcastChannel.postMessage({
+          type: "STATE_UPDATED",
+          sourceTabId: this.tabId,
+          updatedAt: this.state.updatedAt,
+          deletedIds: this.state.deletedIds || []
+        });
+      } catch(e) {}
+    }
+
     this.syncToServer();
     this.notify();
   }
@@ -582,7 +756,7 @@ class IntranetStore {
   }
 
   // =========================================================================
-  // SINCRONIZACIÓN EN TIEMPO REAL CON FIREBASE GOOGLE CLOUD
+  // SINCRONIZACIÓN EN TIEMPO REAL MULTI-DISPOSITIVO (CLOUD REALTIME ENGINE)
   // =========================================================================
   async fetchServerState(silent = false) {
     if (this.isSyncing) return;
@@ -604,22 +778,28 @@ class IntranetStore {
         } catch(e) {}
       }
 
-      if (serverData && (serverData.users || serverData.institution || serverData.systemUsers || serverData.attendanceRecords)) {
+      if (serverData && (serverData.users || serverData.institution || serverData.systemUsers || serverData.attendanceRecords || serverData.enrollments)) {
         const currentAuth = this.state.isAuthenticated;
         const currentRole = this.state.currentRole;
         const currentView = this.state.currentView;
+        const currentUser = this.state.currentUser;
         const prevSig = this.getDataSignature(this.state);
 
         const localTime = this.state.updatedAt || 0;
-        // Si el servidor trae deletedIds, fusionarlos
+        const serverTime = (serverData && serverData.updatedAt) ? serverData.updatedAt : Date.now();
+
+        // Si el servidor trae deletedIds, fusionarlos estrictamente
         if (serverData.deletedIds && Array.isArray(serverData.deletedIds)) {
           this.registerDeleted(...serverData.deletedIds);
         }
 
-        // Si la nube tiene datos estrictamente más recientes o si este dispositivo recién abre la página:
+        // Si la nube tiene datos más recientes o si este dispositivo recién inicia sesión:
         if (serverTime > localTime || !this.state.updatedAt) {
-          // Reemplazo limpio y exacto aplicando filtro de eliminados permanente
-          if (serverData.systemUsers) this.state.systemUsers = serverData.systemUsers.filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
+          // Reemplazo limpio y exacto aplicando filtro de eliminados permanente y preservando usuarios del sistema
+          if (serverData.systemUsers) {
+            const serverUsers = serverData.systemUsers.filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
+            this.state.systemUsers = this.mergeCollectionsById(initialData.systemUsers || [], serverUsers, "username");
+          }
           if (serverData.enrollments) this.state.enrollments = serverData.enrollments.filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian));
           if (serverData.familiesFinancial) this.state.familiesFinancial = serverData.familiesFinancial.filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode));
           if (serverData.attendanceRecords) this.state.attendanceRecords = serverData.attendanceRecords.filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName));
@@ -627,6 +807,7 @@ class IntranetStore {
           if (serverData.behaviorIncidents) this.state.behaviorIncidents = serverData.behaviorIncidents.filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName));
           if (serverData.agendaNotes) this.state.agendaNotes = serverData.agendaNotes.filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName));
           if (serverData.payments) this.state.payments = serverData.payments.filter(p => !this.isDeleted(p.id) && !this.isDeleted(p.studentCode) && !this.isDeleted(p.studentName));
+          if (serverData.monthlyCarteles) this.state.monthlyCarteles = serverData.monthlyCarteles;
           if (serverData.tasks) this.state.tasks = serverData.tasks;
           if (serverData.announcements) this.state.announcements = serverData.announcements;
           if (serverData.syllabi) this.state.syllabi = serverData.syllabi;
@@ -636,16 +817,18 @@ class IntranetStore {
           if (serverData.boletaData) this.state.boletaData = serverData.boletaData;
           if (serverData.academicConfig) this.state.academicConfig = serverData.academicConfig;
           if (serverData.users) this.state.users = serverData.users;
+          if (serverData.teachersList) this.state.teachersList = serverData.teachersList;
           if (serverData.institution) this.state.institution = serverData.institution;
-          this.state.updatedAt = serverTime || Date.now();
-        } else {
-          // Si el cliente local tiene cambios pendientes generados offline, subirlos
+          this.state.updatedAt = serverTime;
+        } else if (localTime > serverTime) {
+          // Si el cliente local tiene cambios pendientes generados offline, subirlos inmediatamente
           this.syncToServer();
         }
 
         this.state.isAuthenticated = currentAuth;
         this.state.currentRole = currentRole;
         this.state.currentView = currentView;
+        this.state.currentUser = currentUser;
 
         const newSig = this.getDataSignature(this.state);
 
@@ -718,7 +901,7 @@ class IntranetStore {
     const cleanTerm = term.replace(/[\s\.\-_]+/g, '');
 
     // 1. Buscar primero en el Directorio Maestro de Usuarios del Sistema (Base de Datos Real)
-    const systemUsersList = this.state.systemUsers || initialData.systemUsers || [];
+    const systemUsersList = this.mergeCollectionsById(initialData.systemUsers || [], this.state.systemUsers || [], "username");
     
     // Prioridad 1: Coincidencia directa por username, código, email, alias o nombre limpio exacto
     let systemUser = systemUsersList.find(u => {
@@ -2194,6 +2377,21 @@ class IntranetStore {
     return this.getStudentBoletaCoursesCatalog(gradeId);
   }
 
+  // Normalizar identificador de grado escolar (ej: "4° de Secundaria", "4to Sec", "4sec" -> "4sec")
+  normalizeGradeKey(str) {
+    if (!str) return "";
+    let clean = String(str).toLowerCase()
+      .replace(/[°º]/g, '')
+      .replace(/(\d+)(ro|do|er|to|ta|vo|va|mo|ma|no|na)/g, '$1')
+      .replace(/secundaria|secund/g, 'sec')
+      .replace(/primaria|primar/g, 'prim')
+      .replace(/inicial|inic/g, 'ini')
+      .replace(/de\s+/g, '')
+      .replace(/años|anos/g, 'a')
+      .replace(/[^a-z0-9]/g, '');
+    return clean;
+  }
+
   // Comprobar si un curso está asignado al docente actualmente en sesión
   isTeacherAssignedToCourse(courseObjOrName, user = null, gradeId = "") {
     if (!user) user = this.getCurrentUser();
@@ -2240,23 +2438,33 @@ class IntranetStore {
       }
 
       // Mapeo semántico de áreas
-      if (cleanAssigned.includes("comunicación") || cleanAssigned.includes("comunicacion")) {
+      if (cleanAssigned.includes("comunicación") || cleanAssigned.includes("comunicacion") || cleanAssigned.includes("lenguaje") || cleanAssigned.includes("literatura")) {
         if (cleanCourseName.includes("lenguaje") || cleanCourseName.includes("literatura") || cleanCourseName.includes("plan lector") || cleanCourseName.includes("raz. verbal") || cleanCourseName.includes("razonamiento verbal") || cleanCourseName.includes("comunicación") || cleanCourseName.includes("comunicacion")) {
           return true;
         }
       }
-      if (cleanAssigned.includes("matemática") || cleanAssigned.includes("matematica")) {
-        if (cleanCourseName.includes("aritmética") || cleanCourseName.includes("aritmetica") || cleanCourseName.includes("álgebra") || cleanCourseName.includes("algebra") || cleanCourseName.includes("geometría") || cleanCourseName.includes("geometria") || cleanCourseName.includes("trigonometría") || cleanCourseName.includes("trigonometria") || cleanCourseName.includes("raz. matem") || cleanCourseName.includes("razonamiento matem") || cleanCourseName.includes("matemática")) {
+      if (cleanAssigned.includes("matemática") || cleanAssigned.includes("matematica") || cleanAssigned.includes("álgebra") || cleanAssigned.includes("geometría")) {
+        if (cleanCourseName.includes("aritmética") || cleanCourseName.includes("aritmetica") || cleanCourseName.includes("álgebra") || cleanCourseName.includes("algebra") || cleanCourseName.includes("geometría") || cleanCourseName.includes("geometria") || cleanCourseName.includes("trigonometría") || cleanCourseName.includes("trigonometria") || cleanCourseName.includes("raz. matem") || cleanCourseName.includes("razonamiento matem") || cleanCourseName.includes("matemática") || cleanCourseName.includes("matematica")) {
           return true;
         }
       }
-      if (cleanAssigned.includes("ciencia") || cleanAssigned.includes("cta")) {
+      if (cleanAssigned.includes("ciencia") || cleanAssigned.includes("cta") || cleanAssigned.includes("física") || cleanAssigned.includes("química") || cleanAssigned.includes("biología")) {
         if (cleanCourseName.includes("ciencia") || cleanCourseName.includes("biología") || cleanCourseName.includes("biologia") || cleanCourseName.includes("física") || cleanCourseName.includes("fisica") || cleanCourseName.includes("química") || cleanCourseName.includes("quimica") || cleanCourseName.includes("ambiente")) {
           return true;
         }
       }
-      if (cleanAssigned.includes("computación") || cleanAssigned.includes("computacion") || cleanAssigned.includes("ept") || cleanAssigned.includes("robótica") || cleanAssigned.includes("robotica")) {
+      if (cleanAssigned.includes("computación") || cleanAssigned.includes("computacion") || cleanAssigned.includes("ept") || cleanAssigned.includes("robótica") || cleanAssigned.includes("robotica") || cleanAssigned.includes("informática")) {
         if (cleanCourseName.includes("computación") || cleanCourseName.includes("computacion") || cleanCourseName.includes("informática") || cleanCourseName.includes("informatica") || cleanCourseName.includes("robótica") || cleanCourseName.includes("robotica") || cleanCourseName.includes("ept") || cleanCourseName.includes("gestión") || cleanCourseName.includes("gestion")) {
+          return true;
+        }
+      }
+      if (cleanAssigned.includes("cívica") || cleanAssigned.includes("civica") || cleanAssigned.includes("dpcc") || cleanAssigned.includes("personal social")) {
+        if (cleanCourseName.includes("cívica") || cleanCourseName.includes("civica") || cleanCourseName.includes("dpcc") || cleanCourseName.includes("personal social") || cleanCourseName.includes("psicología") || cleanCourseName.includes("psicologia") || cleanCourseName.includes("filosofía") || cleanCourseName.includes("filosofia") || cleanCourseName.includes("tutoría") || cleanCourseName.includes("tutoria")) {
+          return true;
+        }
+      }
+      if (cleanAssigned.includes("sociales") || cleanAssigned.includes("historia") || cleanAssigned.includes("geografía")) {
+        if (cleanCourseName.includes("historia") || cleanCourseName.includes("geografía") || cleanCourseName.includes("geografia") || cleanCourseName.includes("economía") || cleanCourseName.includes("economia") || cleanCourseName.includes("ciencias sociales")) {
           return true;
         }
       }
@@ -2276,6 +2484,162 @@ class IntranetStore {
     }
 
     return allCourses.filter(c => this.isTeacherAssignedToCourse(c, user, gradeId));
+  }
+
+  // Obtener la lista completa de cursos asignados al docente con metadatos de aula y grado
+  getTeacherAssignedCourses(userOrId = null, gradeId = "") {
+    let user = null;
+    if (!userOrId) {
+      user = this.getCurrentUser();
+    } else if (typeof userOrId === "object") {
+      user = userOrId;
+    } else {
+      user = (this.state.systemUsers || []).find(u => u.id === userOrId || u.code === userOrId || u.username === userOrId) || this.getCurrentUser();
+    }
+
+    if (!user) return [];
+
+    // Enriquecer perfil del docente desde el catálogo maestro si fuera necesario
+    const allMasterUsers = (this.state.systemUsers && this.state.systemUsers.length > 0)
+      ? this.state.systemUsers
+      : (initialData && initialData.systemUsers ? initialData.systemUsers : []);
+
+    const systemUser = allMasterUsers.find(u => 
+      (user.username && u.username && u.username.toLowerCase() === user.username.toLowerCase()) ||
+      (user.code && u.code && u.code.toLowerCase() === user.code.toLowerCase()) ||
+      (user.name && u.name && u.name.toLowerCase().trim() === user.name.toLowerCase().trim())
+    ) || (initialData.systemUsers || []).find(u => (user.name && u.name && u.name.toLowerCase().includes(user.name.toLowerCase())));
+
+    const catalog = this.state.gradesCatalog || initialData.gradesCatalog || [];
+    const role = (user && user.role ? user.role.toLowerCase() : "");
+
+    // Si es directivo o administrador, tiene visión global de todos los cursos
+    const isGlobal = role === "admin" || role === "administrador" || role === "director" || role === "directivo";
+
+    let assignedCoursesList = [];
+    if (user && Array.isArray(user.assignedCourses) && user.assignedCourses.length > 0) {
+      assignedCoursesList = user.assignedCourses;
+    } else if (systemUser && Array.isArray(systemUser.assignedCourses) && systemUser.assignedCourses.length > 0) {
+      assignedCoursesList = systemUser.assignedCourses;
+    } else if (user && Array.isArray(user.courses) && user.courses.length > 0) {
+      assignedCoursesList = user.courses;
+    } else if (user && user.subject) {
+      assignedCoursesList = user.subject.split(/,\s*/);
+    } else if (systemUser && systemUser.subject) {
+      assignedCoursesList = systemUser.subject.split(/,\s*/);
+    }
+
+    let assignedGradesList = [];
+    if (user && Array.isArray(user.assignedGrades) && user.assignedGrades.length > 0) {
+      assignedGradesList = user.assignedGrades;
+    } else if (systemUser && Array.isArray(systemUser.assignedGrades) && systemUser.assignedGrades.length > 0) {
+      assignedGradesList = systemUser.assignedGrades;
+    } else if (user && user.assignedGrades) {
+      assignedGradesList = [user.assignedGrades];
+    } else if (systemUser && systemUser.assignedGrades) {
+      assignedGradesList = [systemUser.assignedGrades];
+    }
+
+    // Copiar las asignaciones al objeto de usuario activo
+    if (user) {
+      if (!user.assignedCourses || user.assignedCourses.length === 0) user.assignedCourses = assignedCoursesList;
+      if (!user.assignedGrades || user.assignedGrades.length === 0) user.assignedGrades = assignedGradesList;
+    }
+
+    // Determinar qué grados consultar
+    let targetGrades = [];
+    if (gradeId) {
+      const normG = this.normalizeGradeKey(gradeId);
+      targetGrades = catalog.filter(g => this.normalizeGradeKey(g.id) === normG || this.normalizeGradeKey(g.label) === normG);
+    } else if (assignedGradesList.length > 0) {
+      targetGrades = catalog.filter(g => assignedGradesList.some(ag => {
+        const normAg = this.normalizeGradeKey(ag);
+        const normG = this.normalizeGradeKey(g.id);
+        const normLabel = this.normalizeGradeKey(g.label);
+        return normAg === normG || normAg === normLabel || normLabel.includes(normAg) || normAg.includes(normLabel);
+      }));
+    }
+
+    if (targetGrades.length === 0) {
+      targetGrades = isGlobal ? catalog : catalog;
+    }
+
+    const result = [];
+    const seen = new Set();
+
+    targetGrades.forEach(g => {
+      const coursesForGrade = this.getStudentBoletaCoursesCatalog(g.id);
+      coursesForGrade.forEach(c => {
+        if (isGlobal || this.isTeacherAssignedToCourse(c, user, g.id)) {
+          const uniqueKey = `${g.id}_${c.name}`;
+          if (!seen.has(uniqueKey)) {
+            seen.add(uniqueKey);
+            result.push({
+              id: `${c.id}-${g.id}`,
+              courseCode: c.id,
+              name: c.name,
+              area: c.area || "Área Pedagógica",
+              grade: g.label,
+              gradeId: g.id,
+              level: g.level,
+              teacher: user ? user.name : c.teacher,
+              icon: c.icon || "📚",
+              color: g.level === "Primaria" ? "green" : g.level === "Inicial" ? "yellow" : "blue"
+            });
+          }
+        }
+      });
+    });
+
+    // Fallback: Si no coincide por catálogo de grado pero tiene cursos asignados en su perfil
+    if (result.length === 0 && assignedCoursesList && assignedCoursesList.length > 0) {
+      const defaultGrade = catalog.find(g => g.id === "4sec") || catalog[0];
+      assignedCoursesList.forEach((cName, idx) => {
+        result.push({
+          id: `DOC-CURSO-${idx + 1}`,
+          courseCode: `CURSO-${idx + 1}`,
+          name: cName,
+          area: "Especialidad Docente",
+          grade: defaultGrade.label,
+          gradeId: defaultGrade.id,
+          level: defaultGrade.level,
+          teacher: user ? user.name : "Docente",
+          icon: "📚",
+          color: "blue"
+        });
+      });
+    }
+
+    return result;
+  }
+
+  // Asignar cursos y grados a un docente con persistencia multiusuario
+  assignCoursesToTeacher(teacherIdOrCode, coursesList = [], gradesList = []) {
+    if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
+    if (!this.state.teachersList) this.state.teachersList = [...initialData.teachersList];
+
+    const cleanCourses = Array.isArray(coursesList) ? coursesList : (coursesList ? coursesList.split(/,\s*/) : []);
+    const cleanGrades = Array.isArray(gradesList) ? gradesList : (gradesList ? gradesList.split(/,\s*/) : []);
+
+    const userIndex = this.state.systemUsers.findIndex(u => u.id === teacherIdOrCode || u.code === teacherIdOrCode || u.username === teacherIdOrCode);
+    if (userIndex !== -1) {
+      this.state.systemUsers[userIndex].assignedCourses = cleanCourses;
+      this.state.systemUsers[userIndex].courses = cleanCourses;
+      this.state.systemUsers[userIndex].subject = cleanCourses.join(', ');
+      this.state.systemUsers[userIndex].assignedGrades = cleanGrades;
+      this.state.systemUsers[userIndex].detail = `${cleanCourses.slice(0, 2).join(', ')}${cleanCourses.length > 2 ? ` (+${cleanCourses.length - 2} más)` : ''} • ${cleanGrades.length} grados`;
+    }
+
+    const tIndex = this.state.teachersList.findIndex(t => t.id === teacherIdOrCode || (userIndex !== -1 && t.name.toLowerCase().trim() === this.state.systemUsers[userIndex].name.toLowerCase().trim()));
+    if (tIndex !== -1) {
+      this.state.teachersList[tIndex].courses = cleanCourses;
+      this.state.teachersList[tIndex].subject = cleanCourses.join(', ');
+      this.state.teachersList[tIndex].assignedGrades = cleanGrades;
+    }
+
+    this.saveState();
+    this.notify();
+    return true;
   }
 
   // Verificar si el usuario en sesión es el Tutor Asignado al Grado / Aula

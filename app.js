@@ -385,12 +385,12 @@ class IntranetApp {
   startRealtimeSync() {
     if (this.syncInterval) clearInterval(this.syncInterval);
     this.syncInterval = setInterval(() => {
-      // Sincronización multi-dispositivo continua cada 5 segundos
-      if (!this.store.isUserAuthenticated()) return;
-      // Pausar sync destructivo si la cámara en vivo o la estación de portería está activa
+      // Sincronización multi-dispositivo en tiempo real cada 3.5 segundos
+      if (!this.store || !this.store.isUserAuthenticated()) return;
+      // Pausar re-renderizado si la cámara en vivo de portería está activa
       if (this.isDoorCamActive || this.isCameraActive || this.isAgendaModalCamActive) return;
       this.store.fetchServerState(true);
-    }, 5000);
+    }, 3500);
   }
 
   // Actualización reactiva suave del feed de ingresos (sin parpadeo ni recarga de pantalla)
@@ -5612,7 +5612,12 @@ CREATE TABLE tb_cuadernos_qr (
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
           <div class="form-group">
             <label class="form-label">Curso / Asignatura:</label>
-            <input type="text" id="cartel-course-name" class="form-control" placeholder="Ej. Matemática & Razonamiento" required />
+            <input type="text" id="cartel-course-name" list="teacher-assigned-courses-list" class="form-control" placeholder="Ej. Matemática, Cívica, CTA..." required />
+            <datalist id="teacher-assigned-courses-list">
+              ${((this.store && typeof this.store.getTeacherAssignedCourses === "function") ? this.store.getTeacherAssignedCourses(this.store.getCurrentUser(), activeGradeId) : []).map(c => `
+                <option value="${c.name}">${c.grade || ''}</option>
+              `).join('')}
+            </datalist>
           </div>
           <div class="form-group">
             <label class="form-label">Docente Responsable:</label>
@@ -7540,15 +7545,29 @@ CREATE TABLE tb_cuadernos_qr (
     this.render();
   }
 
+  onUploadMaterialCourseSelectChange(courseId) {
+    const hiddenName = document.getElementById('upload-material-course-name');
+    const select = document.getElementById('upload-material-course-select');
+    if (hiddenName && select && select.selectedIndex >= 0) {
+      const opt = select.options[select.selectedIndex];
+      const text = opt.text.split('(')[0].replace(/^[^\wáéíóúÁÉÍÓÚñÑ]+/, '').trim();
+      hiddenName.value = text;
+    }
+  }
+
   openUploadMaterialModal(courseId) {
-    const courses = [
-      { id: "MAT-401", name: "Matemática Avanzada", icon: "" },
-      { id: "EPT-402", name: "Computación e Informática / Robótica", icon: "🤖" },
-      { id: "CTA-403", name: "Ciencia y Tecnología (Física & Química)", icon: "🔬" },
-      { id: "COM-404", name: "Comunicación & Literatura", icon: "📚" }
+    const currentUser = this.store.getCurrentUser();
+    const assignedCourses = (this.store && typeof this.store.getTeacherAssignedCourses === "function")
+      ? this.store.getTeacherAssignedCourses(currentUser)
+      : [];
+    const courses = (assignedCourses && assignedCourses.length > 0) ? assignedCourses : [
+      { id: "MAT-401", courseCode: "MAT-401", name: "Matemática Avanzada", icon: "📐", grade: "4to de Secundaria", teacher: currentUser ? currentUser.name : "Prof. Roberto Silva" },
+      { id: "EPT-402", courseCode: "EPT-402", name: "Computación e Informática / Robótica", icon: "💻", grade: "4to de Secundaria", teacher: currentUser ? currentUser.name : "Prof. Fernando Rojas" },
+      { id: "CTA-403", courseCode: "CTA-403", name: "Ciencia y Tecnología (Física & Química)", icon: "🔬", grade: "4to de Secundaria", teacher: currentUser ? currentUser.name : "Miss Leyli Reyes Cerquen" },
+      { id: "COM-404", courseCode: "COM-404", name: "Comunicación & Literatura", icon: "📚", grade: "4to de Secundaria", teacher: currentUser ? currentUser.name : "Miss María Daysi Reyes" }
     ];
-    const course = courses.find(c => c.id === courseId) || courses[0];
-    const existingCount = (this.store.state.weeklyMaterials || []).filter(m => m.courseId === course.id).length;
+    const course = courses.find(c => c.id === courseId || c.courseCode === courseId) || courses[0];
+    const existingCount = (this.store.state.weeklyMaterials || []).filter(m => m.courseId === course.id || (course.courseCode && m.courseId === course.courseCode)).length;
     const nextWeek = existingCount + 1;
 
     const html = `
@@ -7567,18 +7586,20 @@ CREATE TABLE tb_cuadernos_qr (
       <form onsubmit="window.app.confirmUploadMaterial(event)">
         <div class="modal-body" style="max-height: 75vh; overflow-y: auto; padding: 18px;">
           
-          <!-- Banner de Asignatura -->
-          <div style="background: #eff6ff; border-left: 4px solid #3b82f6; padding: 10px 14px; border-radius: 6px; margin-bottom: 16px; font-size: 12px; color: #1e40af; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-            <div>
-              <strong>Asignatura:</strong> ${course.icon} ${course.name} • <strong>Grado:</strong> 4to de Secundaria
-            </div>
-            <span class="status-badge" style="background: #dbeafe; color: #1e40af; font-weight: 800; font-size: 10.5px;">
-              Docente: Prof. Roberto Silva
-            </span>
+          <!-- Selector Dinámico de Asignatura Asignada -->
+          <div style="background: #eff6ff; border-left: 4px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 16px;">
+            <label style="font-size: 12px; font-weight: 800; color: #1e40af; display: block; margin-bottom: 4px;">
+              Seleccione la Asignatura / Aula para Publicar Material:
+            </label>
+            <select name="courseId" id="upload-material-course-select" class="form-control" style="font-weight: bold; background: white;" onchange="window.app.onUploadMaterialCourseSelectChange(this.value)">
+              ${courses.map(c => `
+                <option value="${c.id}" ${c.id === course.id ? 'selected' : ''}>
+                  ${c.icon || '📚'} ${c.name} (${c.grade || 'Secundaria'}) - ${c.teacher || (currentUser ? currentUser.name : 'Docente')}
+                </option>
+              `).join('')}
+            </select>
+            <input type="hidden" name="courseName" id="upload-material-course-name" value="${course.name}" />
           </div>
-
-          <input type="hidden" name="courseId" value="${course.id}" />
-          <input type="hidden" name="courseName" value="${course.name}" />
 
           <!-- ZONA DE CARGA DE ARCHIVO INTELIGENTE -->
           <div style="margin-bottom: 18px;">
