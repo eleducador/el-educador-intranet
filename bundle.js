@@ -1809,17 +1809,19 @@ class IntranetStore {
   getDataSignature(st) {
     if (!st) return "";
     return [
-      st.updatedAt || 0,
       (st.attendanceRecords || []).length,
       (st.notebookReviews || []).length,
       (st.behaviorIncidents || []).length,
+      (st.agendaNotes || []).length,
       (st.enrollments || []).length,
       (st.familiesFinancial || []).length,
       (st.payments || []).length,
       (st.tasks || []).length,
+      (st.announcements || []).length,
       (st.systemUsers || []).length,
-      (st.systemUsers || []).map(u => (u.id || '') + ':' + (u.username || '') + ':' + (u.role || '') + ':' + (u.hasAdminPrivilege ? '1' : '0')).join(','),
-      (st.enrollments || []).map(e => (e.id || '') + ':' + (e.studentCode || '')).join(',')
+      (st.systemUsers || []).map(u => `${u.id || ''}:${u.username || ''}:${u.name || ''}:${u.role || ''}:${u.hasAdminPrivilege ? '1' : '0'}`).join(','),
+      (st.enrollments || []).map(e => `${e.id || ''}:${e.studentCode || ''}:${e.studentName || ''}:${e.grade || ''}`).join(','),
+      (st.teachersList || []).map(t => `${t.id || ''}:${t.name || ''}`).join(',')
     ].join("|");
   }
 
@@ -1829,6 +1831,7 @@ class IntranetStore {
     this.listeners = [];
     this.firebaseUrl = this.getFirebaseUrl();
     this.isSyncing = false;
+    this.isFetching = false;
     this.lastDataSignature = "";
     this.tabId = `TAB_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
 
@@ -2541,9 +2544,6 @@ class IntranetStore {
     this.notify();
   }
 
-  // =========================================================================
-  // SINCRONIZACIÓN EN TIEMPO REAL CON FIREBASE GOOGLE CLOUD (100% EXCLUSIVO)
-  // =========================================================================
   applyServerState(serverData, silent = false) {
     if (!serverData || typeof serverData !== "object") return;
     if (!(serverData.users || serverData.institution || serverData.systemUsers || serverData.attendanceRecords || serverData.enrollments)) return;
@@ -2554,9 +2554,7 @@ class IntranetStore {
     const currentUser = this.state.currentUser;
     const prevSig = this.getDataSignature(this.state);
 
-    const localTime = this.state.updatedAt || 0;
-    const serverTime = (typeof serverData.updatedAt === "number") ? serverData.updatedAt : 0;
-
+    const serverTime = (typeof serverData.updatedAt === "number") ? serverData.updatedAt : Date.now();
     const serverUsers = serverData.systemUsers || [];
     const serverEnrollments = serverData.enrollments || [];
     const serverFamilies = serverData.familiesFinancial || [];
@@ -2565,43 +2563,33 @@ class IntranetStore {
     const serverIncidents = serverData.behaviorIncidents || [];
     const serverNotes = serverData.agendaNotes || [];
     const serverPayments = serverData.payments || [];
+    const serverTeachers = serverData.teachersList || [];
 
-    if (serverTime > localTime || !this.state.updatedAt) {
-      // El servidor trae datos más recientes de otro dispositivo
-      this.state.systemUsers = this.mergeCollectionsById(initialData.systemUsers || [], serverUsers, "username");
-      this.state.enrollments = serverEnrollments;
-      this.state.familiesFinancial = serverFamilies;
-      this.state.attendanceRecords = serverAttendance;
-      this.state.notebookReviews = serverReviews;
-      this.state.behaviorIncidents = serverIncidents;
-      this.state.agendaNotes = serverNotes;
-      this.state.payments = serverPayments;
-      if (serverData.monthlyCarteles) this.state.monthlyCarteles = serverData.monthlyCarteles;
-      if (serverData.tasks) this.state.tasks = serverData.tasks;
-      if (serverData.announcements) this.state.announcements = serverData.announcements;
-      if (serverData.syllabi) this.state.syllabi = serverData.syllabi;
-      if (serverData.weeklyMaterials) this.state.weeklyMaterials = serverData.weeklyMaterials;
-      if (serverData.courses) this.state.courses = serverData.courses;
-      if (serverData.schedules) this.state.schedules = serverData.schedules;
-      if (serverData.boletaData) this.state.boletaData = serverData.boletaData;
-      if (serverData.academicConfig) this.state.academicConfig = serverData.academicConfig;
-      if (serverData.users) this.state.users = serverData.users;
-      if (serverData.teachersList) this.state.teachersList = serverData.teachersList;
-      if (serverData.institution) this.state.institution = serverData.institution;
-      this.state.updatedAt = serverTime;
-    } else if (localTime > serverTime) {
-      // El cliente local tiene creaciones o cambios recientes pendientes de confirmar en la nube
-      const currentUsers = this.state.systemUsers || [];
-      const currentEnrollments = this.state.enrollments || [];
-      const currentFamilies = this.state.familiesFinancial || [];
-
-      const mergedUsers = this.mergeCollectionsById(currentUsers, serverUsers, "username");
-      this.state.systemUsers = this.mergeCollectionsById(initialData.systemUsers || [], mergedUsers, "username");
-      this.state.enrollments = this.mergeCollectionsById(currentEnrollments, serverEnrollments, "id");
-      this.state.familiesFinancial = this.mergeCollectionsById(currentFamilies, serverFamilies, "familyId");
-
-      this.syncToServer();
+    // La nube (Firebase) es la autoridad central sincronizada
+    this.state.systemUsers = (serverUsers && serverUsers.length > 0) ? serverUsers : this.mergeCollectionsById(initialData.systemUsers || [], serverUsers, "username");
+    this.state.enrollments = serverEnrollments;
+    this.state.familiesFinancial = serverFamilies;
+    this.state.attendanceRecords = serverAttendance;
+    this.state.notebookReviews = serverReviews;
+    this.state.behaviorIncidents = serverIncidents;
+    this.state.agendaNotes = serverNotes;
+    this.state.payments = serverPayments;
+    if (serverData.monthlyCarteles) this.state.monthlyCarteles = serverData.monthlyCarteles;
+    if (serverData.tasks) this.state.tasks = serverData.tasks;
+    if (serverData.announcements) this.state.announcements = serverData.announcements;
+    if (serverData.syllabi) this.state.syllabi = serverData.syllabi;
+    if (serverData.weeklyMaterials) this.state.weeklyMaterials = serverData.weeklyMaterials;
+    if (serverData.courses) this.state.courses = serverData.courses;
+    if (serverData.schedules) this.state.schedules = serverData.schedules;
+    if (serverData.boletaData) this.state.boletaData = serverData.boletaData;
+    if (serverData.academicConfig) this.state.academicConfig = serverData.academicConfig;
+    if (serverTeachers.length > 0) {
+      this.state.teachersList = serverTeachers;
+    } else {
+      this.syncTeachersListFromSystemUsers();
     }
+    if (serverData.institution) this.state.institution = serverData.institution;
+    this.state.updatedAt = serverTime;
 
     this.state.isAuthenticated = currentAuth;
     this.state.currentRole = currentRole;
@@ -2617,15 +2605,16 @@ class IntranetStore {
       localStorage.setItem(this.backupKey, serialized);
     } catch(e) {}
 
-    // Si otro dispositivo actualizó los datos o si la petición fue manual: actualizar UI
-    if (!silent || prevSig !== newSig) {
+    // Notificar UI únicamente si el contenido real ha cambiado
+    if (prevSig !== newSig) {
       this.notify();
     }
   }
 
   async fetchServerState(silent = false) {
-    if (this.isSyncing) return;
+    if (this.isFetching) return;
     try {
+      this.isFetching = true;
       let serverData = null;
       try {
         const fbRes = await fetch(this.firebaseUrl, { cache: 'no-store' });
@@ -2641,39 +2630,47 @@ class IntranetStore {
       }
     } catch (err) {
       if (!silent) console.log("Modo offline o sincronización Firebase en espera", err);
+    } finally {
+      this.isFetching = false;
     }
   }
 
   async syncToServer() {
-    if (this.isSyncing) {
+    if (this.currentSyncPromise) {
       this.hasPendingSync = true;
-      return;
+      return this.currentSyncPromise;
     }
-    try {
-      this.isSyncing = true;
-      this.hasPendingSync = false;
-      this.state.updatedAt = Date.now();
-      const payload = JSON.stringify(this.state);
 
-      // Guardar EXCLUSIVAMENTE en Firebase Realtime Database
+    this.currentSyncPromise = (async () => {
       try {
-        await fetch(this.firebaseUrl, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: payload
-        });
-      } catch(e) {
-        console.warn("No se pudo escribir en Firebase Database:", e);
-      }
-    } catch (err) {
-      console.log("No se pudo sincronizar en vivo con Firebase Database", err);
-    } finally {
-      this.isSyncing = false;
-      if (this.hasPendingSync) {
+        this.isSyncing = true;
         this.hasPendingSync = false;
-        this.syncToServer();
+        this.state.updatedAt = Date.now();
+        const payload = JSON.stringify(this.state);
+
+        // Guardar EXCLUSIVAMENTE en Firebase Realtime Database
+        try {
+          await fetch(this.firebaseUrl, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: payload
+          });
+        } catch(e) {
+          console.warn("No se pudo escribir en Firebase Database:", e);
+        }
+      } catch (err) {
+        console.log("No se pudo sincronizar en vivo con Firebase Database", err);
+      } finally {
+        this.isSyncing = false;
+        this.currentSyncPromise = null;
+        if (this.hasPendingSync) {
+          this.hasPendingSync = false;
+          await this.syncToServer();
+        }
       }
-    }
+    })();
+
+    return this.currentSyncPromise;
   }
 
   subscribe(listener) {
@@ -3373,8 +3370,49 @@ class IntranetStore {
     return null;
   }
 
+  syncTeachersListFromSystemUsers() {
+    if (!this.state.systemUsers) return;
+    const teachers = this.state.systemUsers.filter(u => u.role === "Docente" || u.role === "Profesor");
+    const list = teachers.map(t => {
+      const assignedCourses = Array.isArray(t.assignedCourses) ? t.assignedCourses : (Array.isArray(t.courses) ? t.courses : (t.subject ? t.subject.split(/,\s*/) : ["Asignatura"]));
+      const assignedGrades = Array.isArray(t.assignedGrades) ? t.assignedGrades : (t.detail ? [t.detail] : ["4to de Secundaria"]);
+      return {
+        id: t.code || t.id,
+        name: t.name,
+        subject: t.subject || assignedCourses.join(", "),
+        department: "Coordinación Pedagógica",
+        weeklyHours: parseInt(t.weeklyHours) || 24,
+        courses: assignedCourses,
+        assignedGrades: assignedGrades,
+        classrooms: ["Aula 204 - Pabellón A"],
+        hasAdminPrivilege: !!t.hasAdminPrivilege
+      };
+    });
+    this.state.teachersList = list;
+  }
+
   deleteSystemUser(userId) {
-    return this.cascadeDelete(userId);
+    if (!userId) return false;
+    const norm = this.normalizeKey(userId);
+    const raw = String(userId).trim().toLowerCase();
+    if (this.state.systemUsers) {
+      this.state.systemUsers = this.state.systemUsers.filter(u => {
+        const uId = this.normalizeKey(u.id);
+        const uCode = this.normalizeKey(u.code);
+        const uUser = this.normalizeKey(u.username);
+        const uName = this.normalizeKey(u.name);
+        return uId !== norm && uCode !== norm && uUser !== norm && uName !== norm &&
+               (u.id || '').toLowerCase() !== raw && (u.code || '').toLowerCase() !== raw &&
+               (u.username || '').toLowerCase() !== raw && (u.name || '').toLowerCase() !== raw;
+      });
+    }
+    const res = this.cascadeDelete(userId);
+    this.syncTeachersListFromSystemUsers();
+    this.state.updatedAt = Date.now();
+    this.saveState();
+    this.syncToServer();
+    this.notify();
+    return res;
   }
 
   toggleTeacherAdminPrivilege(userId) {
@@ -6555,9 +6593,17 @@ const Components = {
                     <td><span class="status-badge status-approved">✓ Enviado Contador</span></td>
                     <td><span class="status-badge ${u.hasAdminPrivilege ? 'status-approved' : 'status-pending'}">${u.hasAdminPrivilege ? '★ Permisos Admin' : 'Docente'}</span></td>
                     <td>
-                      <button class="btn btn-sm ${u.hasAdminPrivilege ? 'btn-outline' : 'btn-red'}" onclick="window.app.toggleTeacherAdminPrivilege('${u.id}')">
-                        ${u.hasAdminPrivilege ? 'Revocar' : 'Conceder Admin'}
-                      </button>
+                      <div style="display: flex; gap: 4px; align-items: center;">
+                        <button class="btn btn-sm ${u.hasAdminPrivilege ? 'btn-outline' : 'btn-gold'}" onclick="window.app.toggleTeacherAdminPrivilege('${u.id}')" title="${u.hasAdminPrivilege ? 'Revocar Admin' : 'Conceder Admin'}" style="padding: 4px 8px; font-size: 11px;">
+                          ${u.hasAdminPrivilege ? '★ Admin' : '☆'}
+                        </button>
+                        <button class="btn btn-outline btn-sm" onclick="window.app.openEditUserModal('${u.id}')" title="Editar datos del docente" style="padding: 4px 8px;">
+                          ✏️
+                        </button>
+                        <button class="btn btn-outline btn-sm" onclick="window.app.confirmDeleteUser('${u.id}')" title="Eliminar docente" style="padding: 4px 8px; color: var(--color-red-600);">
+                          🗑️
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 `).join('')}
@@ -15331,16 +15377,18 @@ CREATE TABLE tb_cuadernos_qr (
 
   confirmDeleteUser(userId) {
     const currentRole = this.store.getCurrentRole();
-    if (currentRole !== "admin" && currentRole !== "director") {
+    const currentUser = this.store.getCurrentUser();
+    const hasAdmin = currentRole === "admin" || currentRole === "director" || (currentUser && currentUser.hasAdminPrivilege);
+    if (!hasAdmin) {
       this.showToast("⚠️ Solo el Administrador o Directivo pueden eliminar usuarios del sistema.", "danger");
       return;
     }
-    const user = (this.store.state.systemUsers || []).find(u => u.id === userId || u.code === userId);
-    const name = user ? user.name : "este usuario";
+    const user = (this.store.state.systemUsers || []).find(u => u.id === userId || u.code === userId || u.username === userId || u.name === userId);
+    const name = user ? user.name : (userId || "este usuario");
     const role = user ? user.role : "usuario";
-    if (confirm(`¿Está seguro de eliminar a "${name}" (${role}) de la base de datos?\n\nEsta acción eliminará de forma definitiva al usuario, a sus familiares/estudiantes vinculados, nómina de aula y registro en pensiones.`)) {
+    if (confirm(`¿Está seguro de eliminar a "${name}" (${role}) de la base de datos?\n\nEsta acción eliminará de forma definitiva al usuario de todos los módulos y la nube en tiempo real.`)) {
       this.store.deleteSystemUser(userId);
-      this.showToast(`✓ Usuario "${name}" y todos sus registros vinculados fueron eliminados por completo.`, "info");
+      this.showToast(`✓ Usuario "${name}" eliminado con éxito.`, "info");
       this.render();
     }
   }

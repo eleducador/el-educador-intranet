@@ -2630,16 +2630,18 @@ CREATE TABLE tb_cuadernos_qr (
 
   confirmDeleteUser(userId) {
     const currentRole = this.store.getCurrentRole();
-    if (currentRole !== "admin" && currentRole !== "director") {
+    const currentUser = this.store.getCurrentUser();
+    const hasAdmin = currentRole === "admin" || currentRole === "director" || (currentUser && currentUser.hasAdminPrivilege);
+    if (!hasAdmin) {
       this.showToast("⚠️ Solo el Administrador o Directivo pueden eliminar usuarios del sistema.", "danger");
       return;
     }
-    const user = (this.store.state.systemUsers || []).find(u => u.id === userId || u.code === userId);
-    const name = user ? user.name : "este usuario";
+    const user = (this.store.state.systemUsers || []).find(u => u.id === userId || u.code === userId || u.username === userId || u.name === userId);
+    const name = user ? user.name : (userId || "este usuario");
     const role = user ? user.role : "usuario";
-    if (confirm(`¿Está seguro de eliminar a "${name}" (${role}) de la base de datos?\n\nEsta acción eliminará de forma definitiva al usuario, a sus familiares/estudiantes vinculados, nómina de aula y registro en pensiones.`)) {
+    if (confirm(`¿Está seguro de eliminar a "${name}" (${role}) de la base de datos?\n\nEsta acción eliminará de forma definitiva al usuario de todos los módulos y la nube en tiempo real.`)) {
       this.store.deleteSystemUser(userId);
-      this.showToast(`✓ Usuario "${name}" y todos sus registros vinculados fueron eliminados por completo.`, "info");
+      this.showToast(`✓ Usuario "${name}" eliminado con éxito.`, "info");
       this.render();
     }
   }

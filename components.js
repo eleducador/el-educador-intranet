@@ -496,9 +496,17 @@ const Components = {
                     <td><span class="status-badge status-approved">✓ Enviado Contador</span></td>
                     <td><span class="status-badge ${u.hasAdminPrivilege ? 'status-approved' : 'status-pending'}">${u.hasAdminPrivilege ? '★ Permisos Admin' : 'Docente'}</span></td>
                     <td>
-                      <button class="btn btn-sm ${u.hasAdminPrivilege ? 'btn-outline' : 'btn-red'}" onclick="window.app.toggleTeacherAdminPrivilege('${u.id}')">
-                        ${u.hasAdminPrivilege ? 'Revocar' : 'Conceder Admin'}
-                      </button>
+                      <div style="display: flex; gap: 4px; align-items: center;">
+                        <button class="btn btn-sm ${u.hasAdminPrivilege ? 'btn-outline' : 'btn-gold'}" onclick="window.app.toggleTeacherAdminPrivilege('${u.id}')" title="${u.hasAdminPrivilege ? 'Revocar Admin' : 'Conceder Admin'}" style="padding: 4px 8px; font-size: 11px;">
+                          ${u.hasAdminPrivilege ? '★ Admin' : '☆'}
+                        </button>
+                        <button class="btn btn-outline btn-sm" onclick="window.app.openEditUserModal('${u.id}')" title="Editar datos del docente" style="padding: 4px 8px;">
+                          ✏️
+                        </button>
+                        <button class="btn btn-outline btn-sm" onclick="window.app.confirmDeleteUser('${u.id}')" title="Eliminar docente" style="padding: 4px 8px; color: var(--color-red-600);">
+                          🗑️
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 `).join('')}
