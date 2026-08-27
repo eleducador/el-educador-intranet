@@ -1092,7 +1092,10 @@ class IntranetStore {
   }
 
   deleteSystemUser(userId) {
-    if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
+    if (!this.state.systemUsers) this.state.systemUsers = JSON.parse(JSON.stringify(initialData.systemUsers || []));
+    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    if (!this.state.teachersList) this.state.teachersList = JSON.parse(JSON.stringify(initialData.teachersList || []));
+    if (!this.state.familiesFinancial) this.state.familiesFinancial = JSON.parse(JSON.stringify(initialData.familiesFinancial || []));
     const userToDelete = this.state.systemUsers.find(u => u.id === userId || u.code === userId);
     
     if (userToDelete) {
