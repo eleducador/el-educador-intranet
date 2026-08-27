@@ -806,48 +806,49 @@ class IntranetStore {
       this.registerDeleted(...serverData.deletedIds);
     }
 
-    // 2. Si el servidor tiene datos más recientes o no teníamos updatedAt:
+    const serverUsers = (serverData.systemUsers || []).filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
+    const serverEnrollments = (serverData.enrollments || []).filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian));
+    const serverFamilies = (serverData.familiesFinancial || []).filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode));
+    const serverAttendance = (serverData.attendanceRecords || []).filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName));
+    const serverReviews = (serverData.notebookReviews || []).filter(r => !this.isDeleted(r.studentId) && !this.isDeleted(r.studentName));
+    const serverIncidents = (serverData.behaviorIncidents || []).filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName));
+    const serverNotes = (serverData.agendaNotes || []).filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName));
+    const serverPayments = (serverData.payments || []).filter(p => !this.isDeleted(p.id) && !this.isDeleted(p.studentCode) && !this.isDeleted(p.studentName));
+
     if (serverTime > localTime || !this.state.updatedAt) {
-      if (serverData.systemUsers && Array.isArray(serverData.systemUsers)) {
-        const cleanServer = serverData.systemUsers.filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
-        this.state.systemUsers = this.mergeCollectionsById(initialData.systemUsers || [], cleanServer, "username");
-      }
-      if (serverData.enrollments && Array.isArray(serverData.enrollments)) {
-        this.state.enrollments = serverData.enrollments.filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian));
-      }
-      if (serverData.familiesFinancial && Array.isArray(serverData.familiesFinancial)) {
-        this.state.familiesFinancial = serverData.familiesFinancial.filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode));
-      }
-      if (serverData.attendanceRecords && Array.isArray(serverData.attendanceRecords)) {
-        this.state.attendanceRecords = serverData.attendanceRecords.filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName));
-      }
-      if (serverData.notebookReviews && Array.isArray(serverData.notebookReviews)) {
-        this.state.notebookReviews = serverData.notebookReviews.filter(r => !this.isDeleted(r.studentId) && !this.isDeleted(r.studentName));
-      }
-      if (serverData.behaviorIncidents && Array.isArray(serverData.behaviorIncidents)) {
-        this.state.behaviorIncidents = serverData.behaviorIncidents.filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName));
-      }
-      if (serverData.agendaNotes && Array.isArray(serverData.agendaNotes)) {
-        this.state.agendaNotes = serverData.agendaNotes.filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName));
-      }
-      if (serverData.payments && Array.isArray(serverData.payments)) {
-        this.state.payments = serverData.payments.filter(p => !this.isDeleted(p.id) && !this.isDeleted(p.studentCode) && !this.isDeleted(p.studentName));
-      }
+      // El servidor trae datos más recientes de otro dispositivo
+      this.state.systemUsers = this.mergeCollectionsById(initialData.systemUsers || [], serverUsers, "username");
+      this.state.enrollments = serverEnrollments;
+      this.state.familiesFinancial = serverFamilies;
+      this.state.attendanceRecords = serverAttendance;
+      this.state.notebookReviews = serverReviews;
+      this.state.behaviorIncidents = serverIncidents;
+      this.state.agendaNotes = serverNotes;
+      this.state.payments = serverPayments;
       if (serverData.monthlyCarteles) this.state.monthlyCarteles = serverData.monthlyCarteles;
-      if (serverData.tasks && Array.isArray(serverData.tasks)) this.state.tasks = serverData.tasks;
-      if (serverData.announcements && Array.isArray(serverData.announcements)) this.state.announcements = serverData.announcements;
-      if (serverData.syllabi && Array.isArray(serverData.syllabi)) this.state.syllabi = serverData.syllabi;
-      if (serverData.weeklyMaterials && Array.isArray(serverData.weeklyMaterials)) this.state.weeklyMaterials = serverData.weeklyMaterials;
-      if (serverData.courses && Array.isArray(serverData.courses)) this.state.courses = serverData.courses;
+      if (serverData.tasks) this.state.tasks = serverData.tasks;
+      if (serverData.announcements) this.state.announcements = serverData.announcements;
+      if (serverData.syllabi) this.state.syllabi = serverData.syllabi;
+      if (serverData.weeklyMaterials) this.state.weeklyMaterials = serverData.weeklyMaterials;
+      if (serverData.courses) this.state.courses = serverData.courses;
       if (serverData.schedules) this.state.schedules = serverData.schedules;
       if (serverData.boletaData) this.state.boletaData = serverData.boletaData;
       if (serverData.academicConfig) this.state.academicConfig = serverData.academicConfig;
       if (serverData.users) this.state.users = serverData.users;
-      if (serverData.teachersList && Array.isArray(serverData.teachersList)) this.state.teachersList = serverData.teachersList;
+      if (serverData.teachersList) this.state.teachersList = serverData.teachersList;
       if (serverData.institution) this.state.institution = serverData.institution;
       this.state.updatedAt = serverTime;
     } else if (localTime > serverTime) {
-      // Si el cliente local tiene creaciones o cambios más recientes, enviarlos a Firebase
+      // El cliente local tiene creaciones o cambios recientes pendientes de confirmar en la nube
+      const currentUsers = (this.state.systemUsers || []).filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
+      const currentEnrollments = (this.state.enrollments || []).filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian));
+      const currentFamilies = (this.state.familiesFinancial || []).filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode));
+
+      const mergedUsers = this.mergeCollectionsById(currentUsers, serverUsers, "username");
+      this.state.systemUsers = this.mergeCollectionsById(initialData.systemUsers || [], mergedUsers, "username");
+      this.state.enrollments = this.mergeCollectionsById(currentEnrollments, serverEnrollments, "id");
+      this.state.familiesFinancial = this.mergeCollectionsById(currentFamilies, serverFamilies, "familyId");
+
       this.syncToServer();
     }
 
@@ -893,8 +894,14 @@ class IntranetStore {
   }
 
   async syncToServer() {
+    if (this.isSyncing) {
+      this.hasPendingSync = true;
+      return;
+    }
     try {
       this.isSyncing = true;
+      this.hasPendingSync = false;
+      this.state.updatedAt = Date.now();
       const payload = JSON.stringify(this.state);
 
       // Guardar EXCLUSIVAMENTE en Firebase Realtime Database
@@ -911,6 +918,10 @@ class IntranetStore {
       console.log("No se pudo sincronizar en vivo con Firebase Database", err);
     } finally {
       this.isSyncing = false;
+      if (this.hasPendingSync) {
+        this.hasPendingSync = false;
+        this.syncToServer();
+      }
     }
   }
 
@@ -1882,6 +1893,30 @@ class IntranetStore {
         tutor: gradeObj.tutor,
         hasAdminPrivilege: false
       });
+
+      // Crear o actualizar en familiesFinancial
+      if (!this.state.familiesFinancial) this.state.familiesFinancial = [];
+      const famId = `FAM-${studentCode}`;
+      const newFam = {
+        familyId: famId,
+        guardian: cleanGuardianName,
+        studentName: (data.studentName || data.name || "").trim(),
+        studentCode: studentCode,
+        grade: gradeObj.label,
+        pensionStatus: "al_dia",
+        pendingAmount: 0.00,
+        pendingConcept: "--",
+        dueDate: "--",
+        isAccessLocked: false,
+        lastPaymentDate: new Date().toLocaleDateString("es-PE"),
+        guardianPhone: data.guardianPhone || data.phone || "987-654-321"
+      };
+      const famIdx = this.state.familiesFinancial.findIndex(f => f.familyId === famId || f.studentCode === studentCode);
+      if (famIdx >= 0) {
+        this.state.familiesFinancial[famIdx] = Object.assign(this.state.familiesFinancial[famIdx], newFam);
+      } else {
+        this.state.familiesFinancial.unshift(newFam);
+      }
     }
 
     // Inicializar boletaData si no existe
