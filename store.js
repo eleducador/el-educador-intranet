@@ -1097,32 +1097,75 @@ class IntranetStore {
     
     if (userToDelete) {
       if (!this.state.deletedUsersNode) this.state.deletedUsersNode = {};
-      this.state.deletedUsersNode[userId] = true;
-      if (userToDelete.code) this.state.deletedUsersNode[userToDelete.code] = true;
-      if (userToDelete.name) this.state.deletedUsersNode[userToDelete.name] = true;
-      userToDelete._deleted = true;
-      if (this.state.enrollments) {
-        this.state.enrollments.forEach(e => {
-          if (e.studentCode === userToDelete.code || e.studentName === userToDelete.name) {
-            e._deleted = true;
+      
+      // Función recursiva o iterativa para marcar usuario y relacionados
+      const markAsDeleted = (u) => {
+        this.state.deletedUsersNode[u.id] = true;
+        if (u.code) this.state.deletedUsersNode[u.code] = true;
+        if (u.name) this.state.deletedUsersNode[u.name] = true;
+        u._deleted = true;
+        
+        // Marcar matrículas asociadas
+        if (this.state.enrollments) {
+          this.state.enrollments.forEach(e => {
+            if (e.studentCode === u.code || e.studentName === u.name || e.guardian === u.name) {
+              e._deleted = true;
+              this.state.deletedUsersNode[e.studentCode] = true;
+              this.state.deletedUsersNode[e.studentName] = true;
+            }
+          });
+        }
+        
+        // Marcar familias/pensiones asociadas
+        if (this.state.familiesFinancial) {
+          this.state.familiesFinancial.forEach(f => {
+            if (f.familyId === u.code || f.guardian === u.name || f.studentCode === u.code || f.studentName === u.name) {
+              f._deleted = true;
+              this.state.deletedUsersNode[f.familyId] = true;
+              this.state.deletedUsersNode[f.guardian] = true;
+              this.state.deletedUsersNode[f.studentName] = true;
+            }
+          });
+        }
+        
+        // Marcar docentes asociados
+        if (this.state.teachersList) {
+          this.state.teachersList.forEach(t => {
+            if (t.id === u.code || t.name === u.name) {
+              t._deleted = true;
+            }
+          });
+        }
+      };
+
+      // Marcar al usuario principal
+      markAsDeleted(userToDelete);
+
+      // Buscar si es Padre, eliminar a su(s) hijo(s)
+      if (userToDelete.role === "padre" || userToDelete.role === "Padre" || userToDelete.role === "Apoderado" || userToDelete.role === "apoderado") {
+        this.state.systemUsers.forEach(childUser => {
+          if (
+            (userToDelete.children && userToDelete.children.some(c => c.id === childUser.id || c.code === childUser.code)) ||
+            (userToDelete.studentName && childUser.name === userToDelete.studentName)
+          ) {
+            markAsDeleted(childUser);
           }
         });
       }
-      if (this.state.teachersList) {
-        this.state.teachersList.forEach(t => {
-          if (t.id === userToDelete.code || t.name === userToDelete.name) {
-            t._deleted = true;
-          }
-        });
-      }
-      if (this.state.familiesFinancial) {
-        this.state.familiesFinancial.forEach(f => {
-          if (f.familyId === userToDelete.code || f.guardian === userToDelete.name || f.studentCode === userToDelete.code) {
-            f._deleted = true;
+
+      // Buscar si es Hijo, eliminar a su(s) padre(s)
+      if (userToDelete.role === "estudiante" || userToDelete.role === "Estudiante" || userToDelete.role === "Alumno") {
+        this.state.systemUsers.forEach(parentUser => {
+          if (
+            (parentUser.children && parentUser.children.some(c => c.id === userToDelete.id || c.code === userToDelete.code)) ||
+            (parentUser.studentName && parentUser.studentName === userToDelete.name)
+          ) {
+            markAsDeleted(parentUser);
           }
         });
       }
     }
+    
     this.saveState();
     this.notify();
   }
