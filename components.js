@@ -4758,10 +4758,29 @@ const Components = {
     const currentUser = this.getCurrentUser(state);
     const currentUserName = (currentUser.name || "").toLowerCase();
 
-    // Obtener catálogo dinámico y completo de cursos asignados al perfil del usuario
+    const catalog = (window.appStore && window.appStore.state.gradesCatalog) || initialData.gradesCatalog || [];
+    const selectedGradeId = state.selectedVirtualGradeId || (isEstudiante ? ((currentUser.gradeLevel || currentUser.grade || "5prim").toLowerCase().includes("sec") ? "4sec" : "5prim") : "4sec");
+
+    // Lista de grados disponibles según el rol
+    let availableGrades = [];
+    if (isTeacherOrAdmin) {
+      if (role === 'admin' || role === 'director') {
+        availableGrades = catalog;
+      } else {
+        const assigned = currentUser.assignedGrades || [];
+        availableGrades = catalog.filter(g => assigned.some(ag => {
+          const normAg = (window.appStore && window.appStore.normalizeGradeKey(ag)) || ag;
+          const normG = (window.appStore && window.appStore.normalizeGradeKey(g.id)) || g.id;
+          return normAg === normG || g.label.includes(ag);
+        }));
+        if (availableGrades.length === 0) availableGrades = catalog;
+      }
+    }
+
+    // Obtener catálogo dinámico y completo de cursos asignados al grado seleccionado
     let availableCourses = [];
     if (window.appStore && typeof window.appStore.getTeacherAssignedCourses === "function") {
-      availableCourses = window.appStore.getTeacherAssignedCourses(currentUser);
+      availableCourses = window.appStore.getTeacherAssignedCourses(currentUser, selectedGradeId);
     }
 
     if (!availableCourses || availableCourses.length === 0) {
@@ -4771,10 +4790,7 @@ const Components = {
         { id: "CTA-403", courseCode: "CTA-403", name: "Ciencia y Tecnología (Física & Química)", teacher: "Miss Leyli Reyes Cerquen", grade: "4to de Secundaria", gradeId: "4sec", icon: "🔬", color: "green", level: "Secundaria" },
         { id: "EPT-402", courseCode: "EPT-402", name: "Computación e Informática / Robótica", teacher: "Prof. Fernando Rojas", grade: "4to de Secundaria", gradeId: "4sec", icon: "💻", color: "yellow", level: "Secundaria" },
         { id: "ING-405", courseCode: "ING-405", name: "Inglés Técnico & Gramática", teacher: "Miss Andrea Ramos", grade: "4to de Secundaria", gradeId: "4sec", icon: "🇬🇧", color: "blue", level: "Secundaria" },
-        { id: "CS-406", courseCode: "CS-406", name: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", grade: "4to de Secundaria", gradeId: "4sec", icon: "🌎", color: "yellow", level: "Secundaria" },
-        { id: "MAT-501", courseCode: "MAT-501", name: "Matemática & Razonamiento Matemático", teacher: "Prof. Roberto Silva", grade: "5° de Primaria", gradeId: "5prim", icon: "📐", color: "blue", level: "Primaria" },
-        { id: "COM-501", courseCode: "COM-501", name: "Comunicación Integral & Comprensión Lectora", teacher: "Miss Julisa Magali Arroyo", grade: "5° de Primaria", gradeId: "5prim", icon: "📚", color: "navy", level: "Primaria" },
-        { id: "CTA-501", courseCode: "CTA-501", name: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes Cerquen", grade: "5° de Primaria", gradeId: "5prim", icon: "🔬", color: "green", level: "Primaria" }
+        { id: "CS-406", courseCode: "CS-406", name: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", grade: "4to de Secundaria", gradeId: "4sec", icon: "🌎", color: "yellow", level: "Secundaria" }
       ];
     }
 
@@ -4819,7 +4835,7 @@ const Components = {
     const allAttemptsInCourse = courseMaterials.reduce((acc, m) => acc + (m.studentAttempts ? m.studentAttempts.length : 0), 0);
 
     const studentDisplayName = currentUser.name || "Estudiante";
-    const studentDisplayGrade = currentUser.gradeLevel || currentUser.detail || currentUser.grade || "5° de Primaria";
+    const studentDisplayGrade = currentUser.gradeLevel || currentUser.detail || currentUser.grade || (currentCourse ? currentCourse.grade : "4to de Secundaria");
 
     return `
       <div class="fade-in">
@@ -4833,7 +4849,7 @@ const Components = {
                 <span class="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-800); font-weight: 800;">
                   Periodo Lectivo 2026 • III Bimestre
                 </span>
-                ${isTeacherOrAdmin ? `<span class="status-badge" style="background:#dbeafe; color:#1e40af; font-weight:800;">👨‍Modo Gestión Docente</span>` : ''}
+                ${isTeacherOrAdmin ? `<span class="status-badge" style="background:#dbeafe; color:#1e40af; font-weight:800;">👨‍🏫 Modo Gestión Docente</span>` : ''}
                 ${isEstudiante ? `<span class="status-badge" style="background:#dcfce7; color:#166534; font-weight:800;">Alumno(a): ${studentDisplayName} (${studentDisplayGrade})</span>` : ''}
               </div>
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
@@ -4856,21 +4872,45 @@ const Components = {
             ` : ''}
           </div>
 
-          <!-- Selector de Asignatura / Curso -->
-          <div style="display: flex; border-top: 1px solid var(--border-subtle); background: var(--bg-surface-subtle); padding: 10px 14px; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between;">
-            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-              <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Seleccionar Asignatura:</span>
-              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                ${availableCourses.map(c => `
-                  <button class="btn btn-sm ${c.id === selectedCourseId ? 'btn-navy' : 'btn-outline'}" onclick="window.app.onVirtualCourseChange('${c.id}')" style="font-size: 11.5px; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+          <!-- Selector de Grado y Asignatura -->
+          <div style="display: flex; border-top: 1px solid var(--border-subtle); background: var(--bg-surface-subtle); padding: 10px 14px; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              ${isTeacherOrAdmin && availableGrades.length > 0 ? `
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Grado / Aula:</span>
+                  <select class="form-control" onchange="window.app.onVirtualGradeChange(this.value)" style="font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; color: var(--color-navy-950); min-width: 170px;">
+                    ${availableGrades.map(g => `
+                      <option value="${g.id}" ${g.id === selectedGradeId ? 'selected' : ''}>
+                        ${g.label} (${g.level})
+                      </option>
+                    `).join('')}
+                  </select>
+                </div>
+              ` : ''}
+
+              <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Asignatura:</span>
+                <select class="form-control" onchange="window.app.onVirtualCourseChange(this.value)" style="font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; color: var(--color-navy-950); min-width: 220px;">
+                  ${availableCourses.map(c => `
+                    <option value="${c.id}" ${c.id === selectedCourseId ? 'selected' : ''}>
+                      ${c.icon} ${c.name}
+                    </option>
+                  `).join('')}
+                </select>
+              </div>
+
+              <!-- Píldoras Rápidas de Cursos del Grado Seleccionado -->
+              <div style="display: flex; gap: 5px; flex-wrap: wrap; max-width: 580px;">
+                ${availableCourses.slice(0, 6).map(c => `
+                  <button class="btn btn-sm ${c.id === selectedCourseId ? 'btn-navy' : 'btn-outline'}" onclick="window.app.onVirtualCourseChange('${c.id}')" style="font-size: 11px; font-weight: 700; padding: 3px 8px; display: flex; align-items: center; gap: 4px;">
                     <span>${c.icon}</span> <span>${c.name}</span>
                   </button>
                 `).join('')}
               </div>
             </div>
 
-            <div style="font-size: 12px; color: var(--text-muted);">
-              <strong>Docente Responsable:</strong> <span style="color: var(--color-navy-900); font-weight: bold;">${currentCourse.teacher}</span> • <span>${currentCourse.grade}</span>
+            <div style="font-size: 12px; color: var(--text-muted); white-space: nowrap;">
+              <strong>Docente:</strong> <span style="color: var(--color-navy-900); font-weight: bold;">${currentCourse ? currentCourse.teacher : 'Docente'}</span> • <span>${currentCourse ? currentCourse.grade : ''}</span>
             </div>
           </div>
         </div>

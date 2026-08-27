@@ -2596,10 +2596,11 @@ class IntranetStore {
       if (!user.assignedGrades || user.assignedGrades.length === 0) user.assignedGrades = assignedGradesList;
     }
 
-    // Determinar qué grados consultar
+    // Determinar qué grados consultar (siempre acotado al grado activo para evitar desbordamiento)
     let targetGrades = [];
-    if (gradeId) {
-      const normG = this.normalizeGradeKey(gradeId);
+    const activeGradeId = gradeId || (isGlobal ? ((this.state && this.state.selectedVirtualGradeId) || "4sec") : "");
+    if (activeGradeId) {
+      const normG = this.normalizeGradeKey(activeGradeId);
       targetGrades = catalog.filter(g => this.normalizeGradeKey(g.id) === normG || this.normalizeGradeKey(g.label) === normG);
     } else if (assignedGradesList.length > 0) {
       targetGrades = catalog.filter(g => assignedGradesList.some(ag => {
@@ -2611,7 +2612,7 @@ class IntranetStore {
     }
 
     if (targetGrades.length === 0) {
-      targetGrades = isGlobal ? catalog : catalog;
+      targetGrades = [catalog.find(g => g.id === "4sec") || catalog[0]];
     }
 
     const result = [];

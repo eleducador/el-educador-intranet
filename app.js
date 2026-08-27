@@ -7559,6 +7559,18 @@ CREATE TABLE tb_cuadernos_qr (
   // =========================================================================
   // CONTROLADORES DE AULA VIRTUAL Y EVALUACIONES DINÁMICAS (10 PREGUNTAS)
   // =========================================================================
+  onVirtualGradeChange(gradeId) {
+    if (!this.store) return;
+    this.store.state.selectedVirtualGradeId = gradeId;
+    const currentUser = this.store.getCurrentUser();
+    const courses = this.store.getTeacherAssignedCourses(currentUser, gradeId);
+    if (courses && courses.length > 0) {
+      this.store.state.selectedVirtualCourseId = courses[0].id;
+    }
+    this.store.saveLocalSession();
+    this.render();
+  }
+
   onVirtualCourseChange(courseId) {
     this.store.setSelectedVirtualCourse(courseId);
     this.render();
