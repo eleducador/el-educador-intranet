@@ -309,8 +309,8 @@ const Components = {
 
   // Dashboard - Coordinación
   renderAdminDashboard(state, user) {
-    const usersCount = (state.systemUsers || initialData.systemUsers).length;
-    const enrollmentsCount = (state.enrollments || initialData.enrollments).length;
+    const usersCount = (state.systemUsers || initialData.systemUsers || []).filter(u => !u._deleted).length;
+    const enrollmentsCount = (state.enrollments || initialData.enrollments || []).filter(e => !e._deleted).length;
 
     return `
       <div class="fade-in">
@@ -488,7 +488,7 @@ const Components = {
             <table class="data-table">
               <thead><tr><th>Código</th><th>Docente / Personal</th><th>Nivel / Asignatura</th><th>Renta 4ta Cat.</th><th>Privilegio Edición</th><th>Acción</th></tr></thead>
               <tbody>
-                ${(state.systemUsers || initialData.systemUsers).filter(u => u.role === 'Docente').map(u => `
+                ${(state.systemUsers || initialData.systemUsers || []).filter(u => u.role === 'Docente' && !u._deleted).map(u => `
                   <tr>
                     <td><code>${u.code}</code></td>
                     <td><strong>${u.name}</strong><br><span style="font-size:11px; color:var(--text-muted);">${u.email}</span></td>
@@ -2125,8 +2125,8 @@ const Components = {
 
   // Base de Datos
   renderDatabaseManagement(state) {
-    const usersCount = (state.systemUsers || initialData.systemUsers).length;
-    const enrollmentsCount = (state.enrollments || initialData.enrollments).length;
+    const usersCount = (state.systemUsers || initialData.systemUsers || []).filter(u => !u._deleted).length;
+    const enrollmentsCount = (state.enrollments || initialData.enrollments || []).filter(e => !e._deleted).length;
     const reviewsCount = (state.notebookReviews || initialData.notebookReviews).length;
     const coursesCount = (state.courses || initialData.courses).length;
     const announcementsCount = (state.announcements || initialData.announcements).length;
@@ -2211,8 +2211,8 @@ const Components = {
       `;
     }
 
-    const allUsers = state.systemUsers || initialData.systemUsers || [];
-    const enrollments = state.enrollments || initialData.enrollments || [];
+    const allUsers = (state.systemUsers || initialData.systemUsers || []).filter(u => !u._deleted);
+    const enrollments = (state.enrollments || initialData.enrollments || []).filter(e => !e._deleted);
     const activeTab = state.usersManagementTab || "users";
     const roleFilter = state.usersRoleFilter || "all";
     const navConfigs = state.navigationTabsConfig || initialData.navigationTabsConfig || {};
@@ -3897,7 +3897,7 @@ const Components = {
       : (JSON.parse(JSON.stringify((initialData && initialData.teachersList) || [])));
 
     const systemDocentes = ((state.systemUsers && Array.isArray(state.systemUsers)) ? state.systemUsers : ((initialData && initialData.systemUsers) || []))
-      .filter(u => u.role === 'Docente' || u.role === 'Profesor');
+      .filter(u => (u.role === 'Docente' || u.role === 'Profesor') && !u._deleted);
 
     systemDocentes.forEach(doc => {
       let existing = rawTeachers.find(t => t.id === doc.id || t.name.toLowerCase().trim() === doc.name.toLowerCase().trim());
@@ -4055,7 +4055,7 @@ const Components = {
       let selectedTeacherId = state.selectedTeacherId;
       if (!selectedTeacherId || !teachersList.some(t => t.id === selectedTeacherId)) {
         if (role === "docente") {
-          const userDoc = (state.users && state.users.docente) || (state.systemUsers || []).find(u => u.username === "docente" || u.role === "Docente");
+          const userDoc = (state.users && state.users.docente) || (state.systemUsers || []).find(u => (u.username === "docente" || u.role === "Docente") && !u._deleted);
           const match = userDoc && teachersList.find(t => t.name.toLowerCase().includes(userDoc.name.toLowerCase()) || userDoc.name.toLowerCase().includes(t.name.toLowerCase()));
           selectedTeacherId = match ? match.id : teachersList[0].id;
         } else {
