@@ -131,12 +131,6 @@ const Components = {
         <span>Inicio / Resumen</span>
       </a>
 
-      <a class="nav-item ${currentView === 'database' ? 'active' : ''}" data-view="database" id="nav-database" style="background: rgba(34,197,94,0.12); border: 1px dashed rgba(34,197,94,0.3); color: #86efac;">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
-        <span>Base de Datos & DB</span>
-        <span class="nav-badge badge-yellow" style="background:#22c55e; color:#0b132b;">DB Online</span>
-      </a>
-
       <a class="nav-item ${currentView === 'usuarios-matriculas' ? 'active' : ''}" data-view="usuarios-matriculas" id="nav-usuarios-matriculas" style="background: rgba(220,38,38,0.12); border: 1px dashed rgba(220,38,38,0.3); color: #fca5a5;">
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
         <span>Cuentas, Perfiles & Pestañas</span>
