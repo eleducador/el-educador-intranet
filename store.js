@@ -407,7 +407,7 @@ class IntranetStore {
       // Guardar directamente en Firebase Realtime Database
       try {
         await fetch(this.firebaseUrl, {
-          method: "PUT",
+          method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: payload
         });
@@ -494,6 +494,24 @@ class IntranetStore {
     }
 
     if (systemUser) {
+      // Verificar bloqueo de acceso (aplica a padres y estudiantes asociados)
+      if (systemUser.isAccessLocked) {
+        return { success: false, error: "Acceso denegado temporalmente por administración. Por favor regularice su situación o comuníquese con el colegio." };
+      }
+
+      // Verificar bloqueo alternativo si es estudiante buscando a su apoderado
+      if (systemUser.role === "estudiante" || systemUser.role === "Estudiante" || systemUser.role === "Alumno") {
+        const studentId = systemUser.id || systemUser.code;
+        const parent = systemUsersList.find(u => 
+          (u.role === "padre" || u.role === "Padre" || u.role === "Apoderado" || u.role === "apoderado") && 
+          u.children && 
+          u.children.some(c => c.id === studentId || c.code === studentId)
+        );
+        if (parent && parent.isAccessLocked) {
+          return { success: false, error: "Acceso denegado temporalmente. El apoderado debe comunicarse con administración." };
+        }
+      }
+
       const validPass = systemUser.password || "docente2026";
       if (password === validPass || password === "auxiliar2026" || password === "docente2026" || password === "educador2026" || password === "admin2026" || password === "estudiante2026" || password === "padre2026" || password === "director2026") {
         let assignedRole = "docente";
@@ -741,7 +759,7 @@ class IntranetStore {
     });
 
     this.state.systemUsers = deduped;
-    return deduped;
+    return deduped.filter(u => !u._deleted);
   }
 
   getEnrollments() {
@@ -791,7 +809,7 @@ class IntranetStore {
       }
     });
 
-    return list;
+    return list.filter(e => !e._deleted);
   }
 
   // --- Gestión de la Boleta Oficial Dinámica ---
@@ -1042,14 +1060,29 @@ class IntranetStore {
   deleteSystemUser(userId) {
     if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
     const userToDelete = this.state.systemUsers.find(u => u.id === userId || u.code === userId);
-    this.state.systemUsers = this.state.systemUsers.filter(u => u.id !== userId && u.code !== userId);
     
     if (userToDelete) {
+      userToDelete._deleted = true;
       if (this.state.enrollments) {
-        this.state.enrollments = this.state.enrollments.filter(e => e.studentCode !== userToDelete.code && e.studentName !== userToDelete.name);
+        this.state.enrollments.forEach(e => {
+          if (e.studentCode === userToDelete.code || e.studentName === userToDelete.name) {
+            e._deleted = true;
+          }
+        });
       }
       if (this.state.teachersList) {
-        this.state.teachersList = this.state.teachersList.filter(t => t.id !== userToDelete.code && t.name !== userToDelete.name);
+        this.state.teachersList.forEach(t => {
+          if (t.id === userToDelete.code || t.name === userToDelete.name) {
+            t._deleted = true;
+          }
+        });
+      }
+      if (this.state.familiesFinancial) {
+        this.state.familiesFinancial.forEach(f => {
+          if (f.familyId === userToDelete.code || f.guardian === userToDelete.name || f.studentCode === userToDelete.code) {
+            f._deleted = true;
+          }
+        });
       }
     }
     this.saveState();
@@ -1185,6 +1218,29 @@ class IntranetStore {
       this.saveState();
       this.notify();
       return enrollment;
+    }
+    return null;
+  }
+
+  toggleParentPaymentStatus(userId) {
+    const user = this.state.systemUsers.find(u => u.id === userId || u.code === userId);
+    if (user && (user.role === "padre" || user.role === "Padre" || user.role === "Apoderado" || user.role === "apoderado")) {
+      user.pensionStatus = user.pensionStatus === "Al Día" ? "Deuda" : "Al Día";
+      user.paymentsUpToDate = user.pensionStatus === "Al Día";
+      this.saveState();
+      this.notify();
+      return user.pensionStatus;
+    }
+    return null;
+  }
+
+  toggleParentAccess(userId) {
+    const user = this.state.systemUsers.find(u => u.id === userId || u.code === userId);
+    if (user && (user.role === "padre" || user.role === "Padre" || user.role === "Apoderado" || user.role === "apoderado")) {
+      user.isAccessLocked = !user.isAccessLocked;
+      this.saveState();
+      this.notify();
+      return user.isAccessLocked;
     }
     return null;
   }
@@ -2340,7 +2396,7 @@ class IntranetStore {
     const familyMap = new Map();
 
     // 1. Cargar las familias existentes
-    this.state.familiesFinancial.forEach(f => {
+    this.state.familiesFinancial.filter(f => !f._deleted).forEach(f => {
       if (f && (f.familyId || f.studentCode || f.guardian)) {
         const key = (f.familyId || f.studentCode || f.guardian).toLowerCase().trim();
         familyMap.set(key, { ...f });
@@ -2438,7 +2494,8 @@ class IntranetStore {
           if (
             (u.code === familyId || u.id === familyId) ||
             (u.name && fam.guardian && u.name.trim().toLowerCase() === fam.guardian.trim().toLowerCase()) ||
-            (u.studentName && fam.studentName && u.studentName.trim().toLowerCase() === fam.studentName.trim().toLowerCase())
+            (u.studentName && fam.studentName && u.studentName.trim().toLowerCase() === fam.studentName.trim().toLowerCase()) ||
+            (u.name && fam.studentName && u.name.trim().toLowerCase() === fam.studentName.trim().toLowerCase())
           ) {
             u.isAccessLocked = fam.isAccessLocked;
           }
