@@ -2137,19 +2137,19 @@ const Components = {
           <div class="card-header">
             <div>
               <div style="display: flex; align-items: center; gap: 8px;">
-                <h2 class="card-title" style="font-size: var(--font-size-xl);">🗄️ Motor de Base de Datos y Persistencia - I.E.P. "El Educador"</h2>
-                <span class="status-badge status-approved"><span class='status-dot-green'></span> Motor Activo (db.json)</span>
+                <h2 class="card-title" style="font-size: var(--font-size-xl);">☁️ Base de Datos en la Nube - Firebase Realtime Database (Google Cloud)</h2>
+                <span class="status-badge status-approved"><span class='status-dot-green'></span> Firebase Cloud 100% Activo</span>
               </div>
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
-                S.J.L. • UGEL 05 • Sincronización multi-dispositivo en tiempo real y copias de seguridad garantizadas.
+                I.E.P. "El Educador" • S.J.L. • UGEL 05 • Sincronización multiusuario en tiempo real sin servidores locales.
               </p>
             </div>
             <div style="display: flex; gap: var(--space-2);">
-              <a href="/api/backup" download="backup_colegio_educador.json" class="btn btn-navy btn-sm" style="text-decoration:none;">
-                Descargar Backup (.JSON)
-              </a>
-              <button class="btn btn-gold btn-sm" onclick="window.app.showSQLSchemaModal()">
-                Ver Esquema SQL (.SQL)
+              <button onclick="window.app.downloadFullJsonBackup()" class="btn btn-navy btn-sm" style="font-weight: 800; display: flex; align-items: center; gap: 6px;">
+                <span>⬇️</span> Descargar Backup (.JSON)
+              </button>
+              <button class="btn btn-gold btn-sm" onclick="window.app.showSQLSchemaModal()" style="font-weight: 800;">
+                <span>📜</span> Ver Esquema SQL (.SQL)
               </button>
             </div>
           </div>
@@ -2157,32 +2157,32 @@ const Components = {
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6);">
             <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-green-500); background: #f8faf9;">
               <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Estado de Sincronización</span>
-              <div style="font-size: 18px; font-weight: 800; color: var(--color-green-600); margin-top: 2px;"><span class='status-dot-green'></span> Multi-Dispositivo OK</div>
-              <span style="font-size: 10px; color: var(--text-muted);">Sincronización en vivo</span>
+              <div style="font-size: 18px; font-weight: 800; color: var(--color-green-600); margin-top: 2px;"><span class='status-dot-green'></span> Tiempo Real Activo</div>
+              <span style="font-size: 10px; color: var(--text-muted);">Sincronización multi-dispositivo</span>
             </div>
 
             <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-navy-700); background: var(--bg-surface-subtle);">
-              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Almacenamiento en Disco</span>
-              <div style="font-size: 18px; font-weight: 800; color: var(--color-navy-900); margin-top: 2px;">db.json (Permanente)</div>
-              <span style="font-size: 10px; color: var(--text-muted);">Servidor I.E.P. El Educador</span>
+              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Motor de Base de Datos</span>
+              <div style="font-size: 17px; font-weight: 800; color: var(--color-navy-900); margin-top: 2px;">Firebase RTDB (Google Cloud)</div>
+              <span style="font-size: 10px; color: var(--text-muted);">Sin dependencia de servidor local</span>
             </div>
 
             <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-red-500); background: #fffdfd;">
               <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Total Registros en Tablas</span>
               <div style="font-size: 18px; font-weight: 800; color: var(--color-red-600); margin-top: 2px;">${usersCount + enrollmentsCount + reviewsCount + coursesCount + announcementsCount} Registros</div>
-              <span style="font-size: 10px; color: var(--text-muted);">Tablas relacionales activas</span>
+              <span style="font-size: 10px; color: var(--text-muted);">Colecciones activas en la nube</span>
             </div>
           </div>
 
           <div class="table-container">
             <table class="data-table">
-              <thead><tr><th>Tabla</th><th>Descripción</th><th>Persistencia</th><th style="text-align:center;">Registros</th><th>Estado</th></tr></thead>
+              <thead><tr><th>Colección / Tabla</th><th>Descripción</th><th>Persistencia</th><th style="text-align:center;">Registros</th><th>Estado</th></tr></thead>
               <tbody>
-                <tr><td><code>tb_usuarios</code></td><td>Docentes, Personal, Alumnos y Padres</td><td>Servidor (db.json)</td><td style="text-align:center;"><strong>${usersCount}</strong></td><td><span class="status-badge status-approved">Al Día</span></td></tr>
-                <tr><td><code>tb_matriculas</code></td><td>Expedientes y Seguimiento UGEL 05</td><td>Servidor (db.json)</td><td style="text-align:center;"><strong>${enrollmentsCount}</strong></td><td><span class="status-badge status-approved">Al Día</span></td></tr>
-                <tr><td><code>tb_cuadernos_qr</code></td><td>Revisiones y sellos ópticos QR</td><td>Servidor (db.json)</td><td style="text-align:center;"><strong>${reviewsCount}</strong></td><td><span class="status-badge status-approved">Al Día</span></td></tr>
-                <tr><td><code>tb_calificaciones</code></td><td>Notas y Actas Oficiales 2026</td><td>Servidor (db.json)</td><td style="text-align:center;"><strong>${coursesCount}</strong></td><td><span class="status-badge status-approved">Al Día</span></td></tr>
-                <tr><td><code>tb_pensiones</code></td><td>Recaudación acumulada (S/ 25,130.00)</td><td>Servidor (db.json)</td><td style="text-align:center;"><strong>${state.payments.length}</strong></td><td><span class="status-badge status-approved">Al Día</span></td></tr>
+                <tr><td><code>tb_usuarios</code></td><td>Docentes, Personal, Alumnos y Padres</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${usersCount}</strong></td><td><span class="status-badge status-approved">En Vivo</span></td></tr>
+                <tr><td><code>tb_matriculas</code></td><td>Expedientes y Seguimiento UGEL 05</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${enrollmentsCount}</strong></td><td><span class="status-badge status-approved">En Vivo</span></td></tr>
+                <tr><td><code>tb_cuadernos_qr</code></td><td>Revisiones y sellos ópticos QR</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${reviewsCount}</strong></td><td><span class="status-badge status-approved">En Vivo</span></td></tr>
+                <tr><td><code>tb_calificaciones</code></td><td>Notas y Actas Oficiales 2026</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${coursesCount}</strong></td><td><span class="status-badge status-approved">En Vivo</span></td></tr>
+                <tr><td><code>tb_pensiones</code></td><td>Recaudación acumulada (S/ 25,130.00)</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${state.payments.length}</strong></td><td><span class="status-badge status-approved">En Vivo</span></td></tr>
               </tbody>
             </table>
           </div>

@@ -1,19 +1,9 @@
 /**
- * Gestor de Estado y Base de Datos Central Sincronizada (v8.0 - Firebase Cloud Realtime Engine)
+ * Gestor de Estado y Base de Datos Central Sincronizada (v9.0 - Firebase Realtime Database Exclusivo)
  */
 class IntranetStore {
   getFirebaseUrl() {
     return "https://colegio-el-educador-default-rtdb.firebaseio.com/colegio_educador_db.json";
-  }
-
-  getApiBaseUrl() {
-    if (typeof window !== "undefined") {
-      const h = window.location.hostname;
-      if (h.includes("onrender.com") || h.includes("localhost") || h === "127.0.0.1") {
-        return window.location.origin;
-      }
-    }
-    return "https://colegio-el-educador-intranet.onrender.com";
   }
 
   getDataSignature(st) {
@@ -34,7 +24,6 @@ class IntranetStore {
     this.backupKey = "colegio_el_educador_backup_v2026";
     this.listeners = [];
     this.firebaseUrl = this.getFirebaseUrl();
-    this.apiBaseUrl = this.getApiBaseUrl();
     this.isSyncing = false;
     this.lastDataSignature = "";
     this.tabId = `TAB_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
@@ -756,26 +745,20 @@ class IntranetStore {
   }
 
   // =========================================================================
-  // SINCRONIZACIÓN EN TIEMPO REAL MULTI-DISPOSITIVO (CLOUD REALTIME ENGINE)
+  // SINCRONIZACIÓN EN TIEMPO REAL CON FIREBASE GOOGLE CLOUD (100% EXCLUSIVO)
   // =========================================================================
   async fetchServerState(silent = false) {
     if (this.isSyncing) return;
     try {
-      // 1. Obtener estado de Firebase Realtime Database
+      // 1. Obtener estado EXCLUSIVAMENTE desde Firebase Realtime Database
       let serverData = null;
       try {
         const fbRes = await fetch(this.firebaseUrl, { cache: 'no-store' });
         if (fbRes.ok) {
           serverData = await fbRes.json();
         }
-      } catch(e) {}
-
-      // 2. Fallback secundario si fuera necesario
-      if (!serverData) {
-        try {
-          const apiRes = await fetch(`${this.getApiBaseUrl()}/api/state`, { cache: 'no-store' });
-          if (apiRes.ok) serverData = await apiRes.json();
-        } catch(e) {}
+      } catch(e) {
+        if (!silent) console.warn("Modo offline o esperando conexión con Firebase Database:", e);
       }
 
       if (serverData && (serverData.users || serverData.institution || serverData.systemUsers || serverData.attendanceRecords || serverData.enrollments)) {
@@ -821,7 +804,7 @@ class IntranetStore {
           if (serverData.institution) this.state.institution = serverData.institution;
           this.state.updatedAt = serverTime;
         } else if (localTime > serverTime) {
-          // Si el cliente local tiene cambios pendientes generados offline, subirlos inmediatamente
+          // Si el cliente local tiene cambios pendientes generados offline, subirlos directamente a Firebase
           this.syncToServer();
         }
 
@@ -845,7 +828,7 @@ class IntranetStore {
         }
       }
     } catch (err) {
-      if (!silent) console.log("Modo offline o sincronización en espera", err);
+      if (!silent) console.log("Modo offline o sincronización Firebase en espera", err);
     }
   }
 
@@ -854,25 +837,18 @@ class IntranetStore {
       this.isSyncing = true;
       const payload = JSON.stringify(this.state);
 
-      // Guardar directamente en Firebase Realtime Database
+      // Guardar EXCLUSIVAMENTE en Firebase Realtime Database
       try {
         await fetch(this.firebaseUrl, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: payload
         });
-      } catch(e) {}
-
-      // Espejo secundario en backend Render
-      try {
-        await fetch(`${this.getApiBaseUrl()}/api/sync`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: payload
-        });
-      } catch(e) {}
+      } catch(e) {
+        console.warn("No se pudo escribir en Firebase Database:", e);
+      }
     } catch (err) {
-      console.log("No se pudo sincronizar en vivo con la base de datos", err);
+      console.log("No se pudo sincronizar en vivo con Firebase Database", err);
     } finally {
       this.isSyncing = false;
     }

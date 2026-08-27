@@ -2720,21 +2720,11 @@ if (window.initialData && window.initialData.schedules) {
 ;
 /* === store.js === */
 /**
- * Gestor de Estado y Base de Datos Central Sincronizada (v8.0 - Firebase Cloud Realtime Engine)
+ * Gestor de Estado y Base de Datos Central Sincronizada (v9.0 - Firebase Realtime Database Exclusivo)
  */
 class IntranetStore {
   getFirebaseUrl() {
     return "https://colegio-el-educador-default-rtdb.firebaseio.com/colegio_educador_db.json";
-  }
-
-  getApiBaseUrl() {
-    if (typeof window !== "undefined") {
-      const h = window.location.hostname;
-      if (h.includes("onrender.com") || h.includes("localhost") || h === "127.0.0.1") {
-        return window.location.origin;
-      }
-    }
-    return "https://colegio-el-educador-intranet.onrender.com";
   }
 
   getDataSignature(st) {
@@ -2755,7 +2745,6 @@ class IntranetStore {
     this.backupKey = "colegio_el_educador_backup_v2026";
     this.listeners = [];
     this.firebaseUrl = this.getFirebaseUrl();
-    this.apiBaseUrl = this.getApiBaseUrl();
     this.isSyncing = false;
     this.lastDataSignature = "";
     this.tabId = `TAB_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
@@ -3477,26 +3466,20 @@ class IntranetStore {
   }
 
   // =========================================================================
-  // SINCRONIZACIÓN EN TIEMPO REAL MULTI-DISPOSITIVO (CLOUD REALTIME ENGINE)
+  // SINCRONIZACIÓN EN TIEMPO REAL CON FIREBASE GOOGLE CLOUD (100% EXCLUSIVO)
   // =========================================================================
   async fetchServerState(silent = false) {
     if (this.isSyncing) return;
     try {
-      // 1. Obtener estado de Firebase Realtime Database
+      // 1. Obtener estado EXCLUSIVAMENTE desde Firebase Realtime Database
       let serverData = null;
       try {
         const fbRes = await fetch(this.firebaseUrl, { cache: 'no-store' });
         if (fbRes.ok) {
           serverData = await fbRes.json();
         }
-      } catch(e) {}
-
-      // 2. Fallback secundario si fuera necesario
-      if (!serverData) {
-        try {
-          const apiRes = await fetch(`${this.getApiBaseUrl()}/api/state`, { cache: 'no-store' });
-          if (apiRes.ok) serverData = await apiRes.json();
-        } catch(e) {}
+      } catch(e) {
+        if (!silent) console.warn("Modo offline o esperando conexión con Firebase Database:", e);
       }
 
       if (serverData && (serverData.users || serverData.institution || serverData.systemUsers || serverData.attendanceRecords || serverData.enrollments)) {
@@ -3542,7 +3525,7 @@ class IntranetStore {
           if (serverData.institution) this.state.institution = serverData.institution;
           this.state.updatedAt = serverTime;
         } else if (localTime > serverTime) {
-          // Si el cliente local tiene cambios pendientes generados offline, subirlos inmediatamente
+          // Si el cliente local tiene cambios pendientes generados offline, subirlos directamente a Firebase
           this.syncToServer();
         }
 
@@ -3566,7 +3549,7 @@ class IntranetStore {
         }
       }
     } catch (err) {
-      if (!silent) console.log("Modo offline o sincronización en espera", err);
+      if (!silent) console.log("Modo offline o sincronización Firebase en espera", err);
     }
   }
 
@@ -3575,25 +3558,18 @@ class IntranetStore {
       this.isSyncing = true;
       const payload = JSON.stringify(this.state);
 
-      // Guardar directamente en Firebase Realtime Database
+      // Guardar EXCLUSIVAMENTE en Firebase Realtime Database
       try {
         await fetch(this.firebaseUrl, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: payload
         });
-      } catch(e) {}
-
-      // Espejo secundario en backend Render
-      try {
-        await fetch(`${this.getApiBaseUrl()}/api/sync`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: payload
-        });
-      } catch(e) {}
+      } catch(e) {
+        console.warn("No se pudo escribir en Firebase Database:", e);
+      }
     } catch (err) {
-      console.log("No se pudo sincronizar en vivo con la base de datos", err);
+      console.log("No se pudo sincronizar en vivo con Firebase Database", err);
     } finally {
       this.isSyncing = false;
     }
@@ -9120,19 +9096,19 @@ const Components = {
           <div class="card-header">
             <div>
               <div style="display: flex; align-items: center; gap: 8px;">
-                <h2 class="card-title" style="font-size: var(--font-size-xl);">🗄️ Motor de Base de Datos y Persistencia - I.E.P. "El Educador"</h2>
-                <span class="status-badge status-approved"><span class='status-dot-green'></span> Motor Activo (db.json)</span>
+                <h2 class="card-title" style="font-size: var(--font-size-xl);">☁️ Base de Datos en la Nube - Firebase Realtime Database (Google Cloud)</h2>
+                <span class="status-badge status-approved"><span class='status-dot-green'></span> Firebase Cloud 100% Activo</span>
               </div>
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
-                S.J.L. • UGEL 05 • Sincronización multi-dispositivo en tiempo real y copias de seguridad garantizadas.
+                I.E.P. "El Educador" • S.J.L. • UGEL 05 • Sincronización multiusuario en tiempo real sin servidores locales.
               </p>
             </div>
             <div style="display: flex; gap: var(--space-2);">
-              <a href="/api/backup" download="backup_colegio_educador.json" class="btn btn-navy btn-sm" style="text-decoration:none;">
-                Descargar Backup (.JSON)
-              </a>
-              <button class="btn btn-gold btn-sm" onclick="window.app.showSQLSchemaModal()">
-                Ver Esquema SQL (.SQL)
+              <button onclick="window.app.downloadFullJsonBackup()" class="btn btn-navy btn-sm" style="font-weight: 800; display: flex; align-items: center; gap: 6px;">
+                <span>⬇️</span> Descargar Backup (.JSON)
+              </button>
+              <button class="btn btn-gold btn-sm" onclick="window.app.showSQLSchemaModal()" style="font-weight: 800;">
+                <span>📜</span> Ver Esquema SQL (.SQL)
               </button>
             </div>
           </div>
@@ -9140,32 +9116,32 @@ const Components = {
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6);">
             <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-green-500); background: #f8faf9;">
               <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Estado de Sincronización</span>
-              <div style="font-size: 18px; font-weight: 800; color: var(--color-green-600); margin-top: 2px;"><span class='status-dot-green'></span> Multi-Dispositivo OK</div>
-              <span style="font-size: 10px; color: var(--text-muted);">Sincronización en vivo</span>
+              <div style="font-size: 18px; font-weight: 800; color: var(--color-green-600); margin-top: 2px;"><span class='status-dot-green'></span> Tiempo Real Activo</div>
+              <span style="font-size: 10px; color: var(--text-muted);">Sincronización multi-dispositivo</span>
             </div>
 
             <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-navy-700); background: var(--bg-surface-subtle);">
-              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Almacenamiento en Disco</span>
-              <div style="font-size: 18px; font-weight: 800; color: var(--color-navy-900); margin-top: 2px;">db.json (Permanente)</div>
-              <span style="font-size: 10px; color: var(--text-muted);">Servidor I.E.P. El Educador</span>
+              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Motor de Base de Datos</span>
+              <div style="font-size: 17px; font-weight: 800; color: var(--color-navy-900); margin-top: 2px;">Firebase RTDB (Google Cloud)</div>
+              <span style="font-size: 10px; color: var(--text-muted);">Sin dependencia de servidor local</span>
             </div>
 
             <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-red-500); background: #fffdfd;">
               <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Total Registros en Tablas</span>
               <div style="font-size: 18px; font-weight: 800; color: var(--color-red-600); margin-top: 2px;">${usersCount + enrollmentsCount + reviewsCount + coursesCount + announcementsCount} Registros</div>
-              <span style="font-size: 10px; color: var(--text-muted);">Tablas relacionales activas</span>
+              <span style="font-size: 10px; color: var(--text-muted);">Colecciones activas en la nube</span>
             </div>
           </div>
 
           <div class="table-container">
             <table class="data-table">
-              <thead><tr><th>Tabla</th><th>Descripción</th><th>Persistencia</th><th style="text-align:center;">Registros</th><th>Estado</th></tr></thead>
+              <thead><tr><th>Colección / Tabla</th><th>Descripción</th><th>Persistencia</th><th style="text-align:center;">Registros</th><th>Estado</th></tr></thead>
               <tbody>
-                <tr><td><code>tb_usuarios</code></td><td>Docentes, Personal, Alumnos y Padres</td><td>Servidor (db.json)</td><td style="text-align:center;"><strong>${usersCount}</strong></td><td><span class="status-badge status-approved">Al Día</span></td></tr>
-                <tr><td><code>tb_matriculas</code></td><td>Expedientes y Seguimiento UGEL 05</td><td>Servidor (db.json)</td><td style="text-align:center;"><strong>${enrollmentsCount}</strong></td><td><span class="status-badge status-approved">Al Día</span></td></tr>
-                <tr><td><code>tb_cuadernos_qr</code></td><td>Revisiones y sellos ópticos QR</td><td>Servidor (db.json)</td><td style="text-align:center;"><strong>${reviewsCount}</strong></td><td><span class="status-badge status-approved">Al Día</span></td></tr>
-                <tr><td><code>tb_calificaciones</code></td><td>Notas y Actas Oficiales 2026</td><td>Servidor (db.json)</td><td style="text-align:center;"><strong>${coursesCount}</strong></td><td><span class="status-badge status-approved">Al Día</span></td></tr>
-                <tr><td><code>tb_pensiones</code></td><td>Recaudación acumulada (S/ 25,130.00)</td><td>Servidor (db.json)</td><td style="text-align:center;"><strong>${state.payments.length}</strong></td><td><span class="status-badge status-approved">Al Día</span></td></tr>
+                <tr><td><code>tb_usuarios</code></td><td>Docentes, Personal, Alumnos y Padres</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${usersCount}</strong></td><td><span class="status-badge status-approved">En Vivo</span></td></tr>
+                <tr><td><code>tb_matriculas</code></td><td>Expedientes y Seguimiento UGEL 05</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${enrollmentsCount}</strong></td><td><span class="status-badge status-approved">En Vivo</span></td></tr>
+                <tr><td><code>tb_cuadernos_qr</code></td><td>Revisiones y sellos ópticos QR</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${reviewsCount}</strong></td><td><span class="status-badge status-approved">En Vivo</span></td></tr>
+                <tr><td><code>tb_calificaciones</code></td><td>Notas y Actas Oficiales 2026</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${coursesCount}</strong></td><td><span class="status-badge status-approved">En Vivo</span></td></tr>
+                <tr><td><code>tb_pensiones</code></td><td>Recaudación acumulada (S/ 25,130.00)</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${state.payments.length}</strong></td><td><span class="status-badge status-approved">En Vivo</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -14716,6 +14692,28 @@ CREATE TABLE tb_cuadernos_qr (
         <button class="btn btn-navy" onclick="window.app.closeModal()">Cerrar</button>
       </div>
     `);
+  }
+
+  downloadFullJsonBackup() {
+    try {
+      const exportData = {
+        ...this.store.state,
+        exportedAt: new Date().toISOString(),
+        institution: this.store.state.institution || (typeof initialData !== "undefined" ? initialData.institution : {}),
+        databaseEngine: "Google Cloud Firebase Realtime Database"
+      };
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `backup_colegio_educador_${new Date().toISOString().split('T')[0]}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      this.showToast("Copia de seguridad (.JSON) descargada con éxito desde Firebase", "success");
+    } catch(e) {
+      console.error("Error al exportar base de datos:", e);
+      this.showToast("Error al exportar la copia de seguridad", "danger");
+    }
   }
 
   // Navegación Dinámica sin Bloqueos

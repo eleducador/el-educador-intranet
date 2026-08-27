@@ -1093,6 +1093,28 @@ CREATE TABLE tb_cuadernos_qr (
     `);
   }
 
+  downloadFullJsonBackup() {
+    try {
+      const exportData = {
+        ...this.store.state,
+        exportedAt: new Date().toISOString(),
+        institution: this.store.state.institution || (typeof initialData !== "undefined" ? initialData.institution : {}),
+        databaseEngine: "Google Cloud Firebase Realtime Database"
+      };
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `backup_colegio_educador_${new Date().toISOString().split('T')[0]}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      this.showToast("Copia de seguridad (.JSON) descargada con éxito desde Firebase", "success");
+    } catch(e) {
+      console.error("Error al exportar base de datos:", e);
+      this.showToast("Error al exportar la copia de seguridad", "danger");
+    }
+  }
+
   // Navegación Dinámica sin Bloqueos
   navigate(viewName) {
     if (this.store.getCurrentView() === "cuadernos-qr" && viewName !== "cuadernos-qr") {
