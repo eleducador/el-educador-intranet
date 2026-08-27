@@ -296,38 +296,16 @@ class IntranetStore {
 
   // Registrar identificadores eliminados permanentemente
   registerDeleted(...items) {
-    if (!this.state) this.state = {};
-    if (!Array.isArray(this.state.deletedIds)) this.state.deletedIds = [];
-    items.forEach(it => {
-      if (it) {
-        const raw = String(it).trim();
-        const norm = this.normalizeKey(raw);
-        if (norm && !this.state.deletedIds.includes(norm)) {
-          this.state.deletedIds.push(norm);
-        }
-        if (raw && !this.state.deletedIds.includes(raw.toLowerCase())) {
-          this.state.deletedIds.push(raw.toLowerCase());
-        }
-      }
-    });
+    // No-op: Firebase es la única fuente de verdad
   }
 
   // Comprobar si un identificador fue eliminado
   isDeleted(identifier) {
-    if (!identifier) return false;
-    const raw = String(identifier).trim().toLowerCase();
-    if (["pendiente", "--", "sin dni", "apoderado", "apoderado titular", "sin apoderado", "padre", "madre", "null", "undefined", ""].includes(raw)) return false;
-    const deletedList = (this.state && Array.isArray(this.state.deletedIds)) ? this.state.deletedIds : [];
-    if (deletedList.length === 0) return false;
-    const norm = this.normalizeKey(identifier);
-    return deletedList.includes(norm) || deletedList.includes(raw);
+    return false;
   }
 
   unRegisterDeleted(...items) {
-    if (!this.state.deletedIds || !Array.isArray(this.state.deletedIds)) return;
-    const toRemove = items.filter(Boolean).map(it => this.normalizeKey(it));
-    const toRemoveRaw = items.filter(Boolean).map(it => String(it).trim().toLowerCase());
-    this.state.deletedIds = this.state.deletedIds.filter(id => !toRemove.includes(id) && !toRemoveRaw.includes(id));
+    // No-op
   }
 
   // Eliminación Total en Cascada (Borrado integral de Estudiante, Apoderado, Matrícula, Nómina y Pensiones)
@@ -372,7 +350,6 @@ class IntranetStore {
              (f.familyId && f.familyId.toLowerCase() === rawTarget) || (f.guardian && f.guardian.toLowerCase() === rawTarget) || (f.studentName && f.studentName.toLowerCase() === rawTarget);
     });
 
-    // Recolectar todos los identificadores asociados para eliminarlos en cascada
     const allStudentNames = new Set();
     const allStudentCodes = new Set();
     const allGuardianNames = new Set();
@@ -449,25 +426,11 @@ class IntranetStore {
       }
     });
 
-    // Registrar en deletedIds permanente
-    this.registerDeleted(
-      identifier,
-      ...Array.from(allUserIds),
-      ...Array.from(allStudentCodes),
-      ...Array.from(allStudentNames),
-      ...Array.from(allGuardianNames),
-      ...Array.from(allFamilyIds),
-      ...Array.from(allDnis),
-      ...Array.from(allUsernames)
-    );
-
     // 2. Ejecutar borrado real de TODAS las tablas:
     // A. systemUsers
     if (this.state.systemUsers) {
       this.state.systemUsers = this.state.systemUsers.filter(u => {
-        return !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) &&
-               !this.isDeleted(u.name) && !this.isDeleted(u.studentName) && !this.isDeleted(u.guardian) &&
-               !allUserIds.has(u.id) && !allUserIds.has(u.code) && !allUsernames.has(u.username) &&
+        return !allUserIds.has(u.id) && !allUserIds.has(u.code) && !allUsernames.has(u.username) &&
                !allStudentNames.has(u.name) && !allGuardianNames.has(u.name) &&
                !allStudentNames.has(u.studentName) && !allGuardianNames.has(u.guardian);
       });
@@ -476,9 +439,7 @@ class IntranetStore {
     // B. enrollments (Registro de Estudiantes / Nómina de Aula)
     if (this.state.enrollments) {
       this.state.enrollments = this.state.enrollments.filter(e => {
-        return !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) &&
-               !this.isDeleted(e.dni) && !this.isDeleted(e.guardian) &&
-               !allStudentCodes.has(e.studentCode) && !allStudentNames.has(e.studentName) &&
+        return !allStudentCodes.has(e.studentCode) && !allStudentNames.has(e.studentName) &&
                !allGuardianNames.has(e.guardian) && !allUserIds.has(e.id);
       });
     }
@@ -486,9 +447,7 @@ class IntranetStore {
     // C. familiesFinancial (Pestaña de Pensiones & Recaudación)
     if (this.state.familiesFinancial) {
       this.state.familiesFinancial = this.state.familiesFinancial.filter(f => {
-        return !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) &&
-               !this.isDeleted(f.studentCode) &&
-               !allFamilyIds.has(f.familyId) && !allGuardianNames.has(f.guardian) &&
+        return !allFamilyIds.has(f.familyId) && !allGuardianNames.has(f.guardian) &&
                !allStudentNames.has(f.studentName) && !allStudentCodes.has(f.studentCode);
       });
     }
@@ -496,47 +455,42 @@ class IntranetStore {
     // D. payments
     if (this.state.payments) {
       this.state.payments = this.state.payments.filter(p => {
-        return !this.isDeleted(p.id) && !this.isDeleted(p.studentCode) && !this.isDeleted(p.studentName) &&
-               !allStudentCodes.has(p.studentCode) && !allStudentNames.has(p.studentName);
+        return !allStudentCodes.has(p.studentCode) && !allStudentNames.has(p.studentName);
       });
     }
 
     // E. attendanceRecords
     if (this.state.attendanceRecords) {
       this.state.attendanceRecords = this.state.attendanceRecords.filter(a => {
-        return !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName) &&
-               !allStudentCodes.has(a.studentCode) && !allStudentNames.has(a.studentName);
+        return !allStudentCodes.has(a.studentCode) && !allStudentNames.has(a.studentName);
       });
     }
 
     // F. notebookReviews
     if (this.state.notebookReviews) {
       this.state.notebookReviews = this.state.notebookReviews.filter(r => {
-        return !this.isDeleted(r.studentId) && !this.isDeleted(r.studentName) &&
-               !allStudentCodes.has(r.studentId) && !allStudentNames.has(r.studentName);
+        return !allStudentCodes.has(r.studentId) && !allStudentNames.has(r.studentName);
       });
     }
 
     // G. behaviorIncidents
     if (this.state.behaviorIncidents) {
       this.state.behaviorIncidents = this.state.behaviorIncidents.filter(i => {
-        return !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName) &&
-               !allStudentCodes.has(i.studentCode) && !allStudentNames.has(i.studentName);
+        return !allStudentCodes.has(i.studentCode) && !allStudentNames.has(i.studentName);
       });
     }
 
     // H. agendaNotes
     if (this.state.agendaNotes) {
       this.state.agendaNotes = this.state.agendaNotes.filter(n => {
-        return !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName) &&
-               !allStudentCodes.has(n.studentCode) && !allStudentNames.has(n.studentName);
+        return !allStudentCodes.has(n.studentCode) && !allStudentNames.has(n.studentName);
       });
     }
 
     // I. boletaData
     if (this.state.boletaData) {
       for (const k of Object.keys(this.state.boletaData)) {
-        if (this.isDeleted(k) || allStudentCodes.has(k) || allStudentNames.has(k)) {
+        if (allStudentCodes.has(k) || allStudentNames.has(k)) {
           delete this.state.boletaData[k];
         }
       }
@@ -545,13 +499,15 @@ class IntranetStore {
     // J. teachersList (si es docente)
     if (this.state.teachersList) {
       this.state.teachersList = this.state.teachersList.filter(t => {
-        return !this.isDeleted(t.id) && !this.isDeleted(t.name) && !allUserIds.has(t.id);
+        return !allUserIds.has(t.id);
       });
     }
 
+    this.state.updatedAt = Date.now();
     this.saveState();
     this.syncToServer();
     this.notify();
+    return true;
 
     return true;
   }
@@ -624,15 +580,15 @@ class IntranetStore {
           ...initialData.academicConfig,
           ...(parsed.academicConfig || {})
         },
-        teachersList: (isScheduleUpdated ? parsed.teachersList : initialData.teachersList).filter(t => !this.isDeleted(t.id) && !this.isDeleted(t.name)),
+        teachersList: (isScheduleUpdated ? parsed.teachersList : initialData.teachersList),
         schedules: isScheduleUpdated ? parsed.schedules : initialData.schedules,
         systemUsers: (() => {
-          const rawList = this.mergeCollectionsById(parsed.systemUsers || [], initialData.systemUsers || [], "username");
+          const rawList = Array.isArray(parsed.systemUsers) ? parsed.systemUsers : (initialData.systemUsers || []);
           const seen = new Set();
           const deduped = [];
           
           rawList.forEach(u => {
-            if (!this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name)) {
+            if (u && (u.username || u.code || u.name)) {
               const key = `${u.role}_${(u.code || u.username || u.name).toLowerCase().replace(/[\s\.\-_]+/g, '')}`;
               if (!seen.has(key)) {
                 seen.add(key);
@@ -653,12 +609,12 @@ class IntranetStore {
         },
         usersManagementTab: parsed.usersManagementTab || "users",
         weeklyMaterials: Array.isArray(parsed.weeklyMaterials) ? parsed.weeklyMaterials : (initialData.weeklyMaterials || []),
-        behaviorIncidents: (Array.isArray(parsed.behaviorIncidents) ? parsed.behaviorIncidents : (initialData.behaviorIncidents || [])).filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName)),
-        agendaNotes: (Array.isArray(parsed.agendaNotes) ? parsed.agendaNotes : (initialData.agendaNotes || [])).filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName)),
-        attendanceRecords: (Array.isArray(parsed.attendanceRecords) ? parsed.attendanceRecords : (initialData.attendanceRecords || [])).filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName)),
-        notebookReviews: (Array.isArray(parsed.notebookReviews) ? parsed.notebookReviews : (initialData.notebookReviews || [])).filter(r => !this.isDeleted(r.studentId) && !this.isDeleted(r.studentName)),
-        enrollments: (Array.isArray(parsed.enrollments) ? parsed.enrollments : (initialData.enrollments || [])).filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian)),
-        familiesFinancial: (Array.isArray(parsed.familiesFinancial) ? parsed.familiesFinancial : (initialData.familiesFinancial || [])).filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode)),
+        behaviorIncidents: Array.isArray(parsed.behaviorIncidents) ? parsed.behaviorIncidents : (initialData.behaviorIncidents || []),
+        agendaNotes: Array.isArray(parsed.agendaNotes) ? parsed.agendaNotes : (initialData.agendaNotes || []),
+        attendanceRecords: Array.isArray(parsed.attendanceRecords) ? parsed.attendanceRecords : (initialData.attendanceRecords || []),
+        notebookReviews: Array.isArray(parsed.notebookReviews) ? parsed.notebookReviews : (initialData.notebookReviews || []),
+        enrollments: Array.isArray(parsed.enrollments) ? parsed.enrollments : (initialData.enrollments || []),
+        familiesFinancial: Array.isArray(parsed.familiesFinancial) ? parsed.familiesFinancial : (initialData.familiesFinancial || []),
         courses: Array.isArray(parsed.courses) ? parsed.courses : (initialData.courses || []),
         tasks: Array.isArray(parsed.tasks) ? parsed.tasks : (initialData.tasks || []),
         payments: Array.isArray(parsed.payments) ? parsed.payments : (initialData.payments || []),
@@ -719,9 +675,9 @@ class IntranetStore {
       selectedScheduleGrade: "4sec",
       selectedSyllabusGrade: "4sec",
       academicConfig: { ...initialData.academicConfig },
-      teachersList: (initialData.teachersList || []).filter(t => !this.isDeleted(t.id) && !this.isDeleted(t.name)),
+      teachersList: initialData.teachersList || [],
       schedules: initialData.schedules,
-      systemUsers: (initialData.systemUsers || []).filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name)),
+      systemUsers: initialData.systemUsers || [],
       navigationTabsConfig: {
         ...initialData.navigationTabsConfig,
         auxiliar: initialData.navigationTabsConfig.auxiliar,
@@ -732,12 +688,12 @@ class IntranetStore {
       },
       usersManagementTab: "users",
       weeklyMaterials: initialData.weeklyMaterials || [],
-      behaviorIncidents: (initialData.behaviorIncidents || []).filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName)),
-      agendaNotes: (initialData.agendaNotes || []).filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName)),
-      attendanceRecords: (initialData.attendanceRecords || []).filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName)),
-      notebookReviews: (initialData.notebookReviews || []).filter(r => !this.isDeleted(r.studentId) && !this.isDeleted(r.studentName)),
-      enrollments: (initialData.enrollments || []).filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian)),
-      familiesFinancial: (initialData.familiesFinancial || []).filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode)),
+      behaviorIncidents: initialData.behaviorIncidents || [],
+      agendaNotes: initialData.agendaNotes || [],
+      attendanceRecords: initialData.attendanceRecords || [],
+      notebookReviews: initialData.notebookReviews || [],
+      enrollments: initialData.enrollments || [],
+      familiesFinancial: initialData.familiesFinancial || [],
       courses: initialData.courses || [],
       tasks: initialData.tasks || [],
       payments: initialData.payments || [],
@@ -801,19 +757,14 @@ class IntranetStore {
     const localTime = this.state.updatedAt || 0;
     const serverTime = (typeof serverData.updatedAt === "number") ? serverData.updatedAt : 0;
 
-    // 1. Si el servidor trae deletedIds, fusionarlos estrictamente
-    if (serverData.deletedIds && Array.isArray(serverData.deletedIds)) {
-      this.registerDeleted(...serverData.deletedIds);
-    }
-
-    const serverUsers = (serverData.systemUsers || []).filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
-    const serverEnrollments = (serverData.enrollments || []).filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian));
-    const serverFamilies = (serverData.familiesFinancial || []).filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode));
-    const serverAttendance = (serverData.attendanceRecords || []).filter(a => !this.isDeleted(a.studentCode) && !this.isDeleted(a.studentId) && !this.isDeleted(a.studentName));
-    const serverReviews = (serverData.notebookReviews || []).filter(r => !this.isDeleted(r.studentId) && !this.isDeleted(r.studentName));
-    const serverIncidents = (serverData.behaviorIncidents || []).filter(i => !this.isDeleted(i.studentCode) && !this.isDeleted(i.studentName));
-    const serverNotes = (serverData.agendaNotes || []).filter(n => !this.isDeleted(n.studentCode) && !this.isDeleted(n.studentName));
-    const serverPayments = (serverData.payments || []).filter(p => !this.isDeleted(p.id) && !this.isDeleted(p.studentCode) && !this.isDeleted(p.studentName));
+    const serverUsers = serverData.systemUsers || [];
+    const serverEnrollments = serverData.enrollments || [];
+    const serverFamilies = serverData.familiesFinancial || [];
+    const serverAttendance = serverData.attendanceRecords || [];
+    const serverReviews = serverData.notebookReviews || [];
+    const serverIncidents = serverData.behaviorIncidents || [];
+    const serverNotes = serverData.agendaNotes || [];
+    const serverPayments = serverData.payments || [];
 
     if (serverTime > localTime || !this.state.updatedAt) {
       // El servidor trae datos más recientes de otro dispositivo
@@ -840,9 +791,9 @@ class IntranetStore {
       this.state.updatedAt = serverTime;
     } else if (localTime > serverTime) {
       // El cliente local tiene creaciones o cambios recientes pendientes de confirmar en la nube
-      const currentUsers = (this.state.systemUsers || []).filter(u => !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.username) && !this.isDeleted(u.name));
-      const currentEnrollments = (this.state.enrollments || []).filter(e => !this.isDeleted(e.id) && !this.isDeleted(e.studentCode) && !this.isDeleted(e.studentName) && !this.isDeleted(e.guardian));
-      const currentFamilies = (this.state.familiesFinancial || []).filter(f => !this.isDeleted(f.familyId) && !this.isDeleted(f.guardian) && !this.isDeleted(f.studentName) && !this.isDeleted(f.studentCode));
+      const currentUsers = this.state.systemUsers || [];
+      const currentEnrollments = this.state.enrollments || [];
+      const currentFamilies = this.state.familiesFinancial || [];
 
       const mergedUsers = this.mergeCollectionsById(currentUsers, serverUsers, "username");
       this.state.systemUsers = this.mergeCollectionsById(initialData.systemUsers || [], mergedUsers, "username");
@@ -1181,17 +1132,6 @@ class IntranetStore {
       ? this.state.systemUsers 
       : (initialData && initialData.systemUsers ? [...initialData.systemUsers] : []);
 
-    // 1. Filtrar estrictamente cualquier usuario en la lista de eliminados permanentes
-    users = users.filter(u => 
-      !this.isDeleted(u.id) && 
-      !this.isDeleted(u.code) && 
-      !this.isDeleted(u.username) && 
-      !this.isDeleted(u.name) &&
-      !this.isDeleted(u.studentName) &&
-      !this.isDeleted(u.guardian)
-    );
-
-    // 2. Deduplicar por rol + (código o username o nombre)
     const seen = new Set();
     const deduped = [];
     users.forEach(u => {
@@ -1213,7 +1153,7 @@ class IntranetStore {
     
     // Integrar automáticamente estudiantes registrados en systemUsers
     const sysStudents = ((this.state && this.state.systemUsers) || (initialData && initialData.systemUsers) || [])
-      .filter(u => (u.role === 'Estudiante' || u.role === 'Alumno') && !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.name) && !this.isDeleted(u.dni));
+      .filter(u => u && (u.role === 'Estudiante' || u.role === 'Alumno'));
     
     sysStudents.forEach(st => {
       const sCode = st.code || st.id;
@@ -1223,10 +1163,10 @@ class IntranetStore {
         (st.name && e.studentName && e.studentName.toLowerCase().trim() === st.name.toLowerCase().trim())
       );
       if (!exists) {
-        const gradeLabel = st.detail || st.gradeLevel || st.grade || "3° de Primaria";
+        const gradeLabel = st.detail || st.gradeLevel || st.grade || "4° de Secundaria";
         const gradeId = st.gradeId || this.resolveStudentGradeId(gradeLabel);
         list.push({
-          id: `MATR-2026-${Math.floor(100 + Math.random() * 900)}`,
+          id: `MATR-2026-${Date.now().toString().slice(-4)}`,
           studentCode: sCode,
           studentName: st.name,
           dni: st.dni || "79128301",
@@ -1256,17 +1196,18 @@ class IntranetStore {
       }
     });
 
-    // Filtrar estrictamente cualquier matrícula en la lista de eliminados permanentes
-    list = list.filter(e => 
-      !this.isDeleted(e.id) && 
-      !this.isDeleted(e.studentCode) && 
-      !this.isDeleted(e.studentName) && 
-      (e.dni && e.dni !== "Pendiente" ? !this.isDeleted(e.dni) : true) && 
-      (e.guardian && e.guardian !== "Apoderado" ? !this.isDeleted(e.guardian) : true)
-    );
+    const seen = new Set();
+    const deduped = [];
+    list.forEach(e => {
+      const key = (e.studentCode || e.id || e.studentName).toLowerCase().trim();
+      if (!seen.has(key)) {
+        seen.add(key);
+        deduped.push(e);
+      }
+    });
 
-    this.state.enrollments = list;
-    return list;
+    this.state.enrollments = deduped;
+    return deduped;
   }
 
   // --- Gestión de la Boleta Oficial Dinámica Vinculada al Registro General ---
@@ -1473,7 +1414,8 @@ class IntranetStore {
     else if (role === "Apoderado") defaultCodePrefix = "FAM";
     else if (role === "Directivo") defaultCodePrefix = "ADM";
 
-    const autoCode = userData.code || `${defaultCodePrefix}-2026-${Math.floor(100 + Math.random() * 900)}`;
+    const uniqueSuffix = Date.now().toString().slice(-4) + Math.floor(10 + Math.random() * 90);
+    const autoCode = userData.code || `${defaultCodePrefix}-2026-${uniqueSuffix}`;
     const cleanUser = userData.username || userData.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '.');
 
     const assignedCoursesList = Array.isArray(userData.assignedCourses) 
@@ -1483,7 +1425,7 @@ class IntranetStore {
         : (userData.subject ? userData.subject.split(/,\s*/) : []));
 
     const newUser = {
-      id: `USR-${Math.floor(100 + Math.random() * 900)}`,
+      id: `USR-${Date.now()}-${Math.floor(100 + Math.random() * 900)}`,
       code: autoCode,
       username: cleanUser,
       password: userData.password || (role === "Estudiante" ? "estudiante2026" : role === "Apoderado" ? "padre2026" : role === "Directivo" ? "admin2026" : "docente2026"),
@@ -1505,8 +1447,6 @@ class IntranetStore {
       status: "Activo",
       createdDate: new Date().toLocaleDateString("es-PE")
     };
-
-    this.unRegisterDeleted(newUser.id, newUser.code, newUser.username, newUser.name, newUser.dni, newUser.studentName, newUser.guardian);
 
     if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
 
@@ -1832,8 +1772,9 @@ class IntranetStore {
     let gUsername = `apoderado.${stUsername}`;
     if (cleanGuardianName && cleanGuardianName.toLowerCase() !== "apoderado titular" && cleanGuardianName.toLowerCase() !== "sin apoderado") {
       const cleanGName = cleanGuardianName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
-      const gParts = cleanGName.split(/\s+/).filter(Boolean);
-      gUsername = gParts.length >= 2 ? `${gParts[0]}.${gParts[gParts.length - 1]}` : `apoderado.${stUsername}`;
+      const titles = new Set(["ing", "dr", "dra", "sr", "sra", "lic", "prof", "don", "dona", "miss"]);
+      const gParts = cleanGName.split(/\s+/).filter(p => p && !titles.has(p));
+      gUsername = gParts.length >= 2 ? `${gParts[0]}.${gParts[gParts.length - 1]}` : (gParts[0] || `apoderado.${stUsername}`);
     }
 
     this.unRegisterDeleted(
@@ -3129,14 +3070,6 @@ class IntranetStore {
       this.state.familiesFinancial = JSON.parse(JSON.stringify(initialData.familiesFinancial || []));
     }
 
-    // Filtrar familias que hayan sido eliminadas permanentemente
-    this.state.familiesFinancial = this.state.familiesFinancial.filter(f => 
-      !this.isDeleted(f.familyId) && 
-      !this.isDeleted(f.guardian) && 
-      !this.isDeleted(f.studentName) && 
-      !this.isDeleted(f.studentCode)
-    );
-
     const familyMap = new Map();
 
     // 1. Cargar las familias existentes válidas
@@ -3147,46 +3080,44 @@ class IntranetStore {
       }
     });
 
-    // 2. Sincronizar automáticamente con todas las matrículas oficiales (filtradas)
+    // 2. Sincronizar automáticamente con todas las matrículas oficiales
     const enrollments = this.getEnrollments();
     enrollments.forEach(enr => {
       const studentCode = enr.studentCode || enr.id || "EST-2026-000";
-      if (!this.isDeleted(studentCode) && !this.isDeleted(enr.studentName) && !this.isDeleted(enr.guardian)) {
-        const cleanNum = studentCode.replace(/\D/g, '') || Math.floor(100 + Math.random() * 900);
-        const generatedFamId = `FAM-2026-${String(cleanNum).padStart(3, '0').slice(-3)}`;
-        
-        const matchKey = (generatedFamId || studentCode || enr.guardian).toLowerCase().trim();
-        const existing = familyMap.get(matchKey) || Array.from(familyMap.values()).find(f => 
-          (f.studentName && enr.studentName && f.studentName.trim().toLowerCase() === enr.studentName.trim().toLowerCase()) ||
-          (f.studentCode && f.studentCode === studentCode) ||
-          (f.guardian && enr.guardian && f.guardian.trim().toLowerCase() === enr.guardian.trim().toLowerCase())
-        );
+      const cleanNum = studentCode.replace(/\D/g, '') || Math.floor(100 + Math.random() * 900);
+      const generatedFamId = `FAM-2026-${String(cleanNum).padStart(3, '0').slice(-3)}`;
+      
+      const matchKey = (generatedFamId || studentCode || enr.guardian).toLowerCase().trim();
+      const existing = familyMap.get(matchKey) || Array.from(familyMap.values()).find(f => 
+        (f.studentName && enr.studentName && f.studentName.trim().toLowerCase() === enr.studentName.trim().toLowerCase()) ||
+        (f.studentCode && f.studentCode === studentCode) ||
+        (f.guardian && enr.guardian && f.guardian.trim().toLowerCase() === enr.guardian.trim().toLowerCase())
+      );
 
-        if (!existing) {
-          const newFam = {
-            familyId: generatedFamId,
-            guardian: enr.guardian || "Apoderado Registrado",
-            studentName: enr.studentName,
-            studentCode: studentCode,
-            grade: enr.grade || "4to Sec 'A'",
-            pensionStatus: "al_dia",
-            pendingAmount: 0.00,
-            pendingConcept: "--",
-            dueDate: "--",
-            isAccessLocked: false,
-            lastPaymentDate: "15/08/2026",
-            guardianPhone: enr.guardianPhone || "987-654-321"
-          };
-          familyMap.set(generatedFamId.toLowerCase(), newFam);
-          this.state.familiesFinancial.push(newFam);
-        }
+      if (!existing) {
+        const newFam = {
+          familyId: generatedFamId,
+          guardian: enr.guardian || "Apoderado Registrado",
+          studentName: enr.studentName,
+          studentCode: studentCode,
+          grade: enr.grade || "4to Sec 'A'",
+          pensionStatus: "al_dia",
+          pendingAmount: 0.00,
+          pendingConcept: "--",
+          dueDate: "--",
+          isAccessLocked: false,
+          lastPaymentDate: "15/08/2026",
+          guardianPhone: enr.guardianPhone || "987-654-321"
+        };
+        familyMap.set(generatedFamId.toLowerCase(), newFam);
+        this.state.familiesFinancial.push(newFam);
       }
     });
 
-    // 3. Sincronizar con usuarios de rol Apoderado en systemUsers (filtrados)
+    // 3. Sincronizar con usuarios de rol Apoderado en systemUsers
     const systemUsers = this.getSystemUsers();
     systemUsers.forEach(u => {
-      if ((u.role === "Apoderado" || u.role === "Padre") && !this.isDeleted(u.id) && !this.isDeleted(u.code) && !this.isDeleted(u.name)) {
+      if (u.role === "Apoderado" || u.role === "Padre") {
         const famId = u.code && u.code.startsWith("FAM-") ? u.code : `FAM-2026-${(u.id || '').replace(/\D/g, '').padStart(3, '0').slice(-3)}`;
         const existing = Array.from(familyMap.values()).find(f => 
           (f.guardian && u.name && f.guardian.trim().toLowerCase() === u.name.trim().toLowerCase()) ||
@@ -3215,12 +3146,7 @@ class IntranetStore {
       }
     });
 
-    const result = Array.from(familyMap.values()).filter(f => 
-      !this.isDeleted(f.familyId) && 
-      !this.isDeleted(f.guardian) && 
-      !this.isDeleted(f.studentName) && 
-      !this.isDeleted(f.studentCode)
-    );
+    const result = Array.from(familyMap.values());
     this.state.familiesFinancial = result;
     return result;
   }
