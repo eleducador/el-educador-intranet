@@ -25166,7 +25166,7 @@ class IntranetApp {
 
     this.store = window.appStore;
 
-    this.contentrea = document.getElementById("content-area");
+    this.contentArea = document.getElementById("content-area");
 
     this.sidebar = document.getElementById("sidebar");
 
@@ -25182,7 +25182,7 @@ class IntranetApp {
 
   init() {
 
-    this.contentrea = document.getElementById("content-area");
+    this.contentArea = document.getElementById("content-area");
 
     this.sidebar = document.getElementById("sidebar");
 
@@ -25232,7 +25232,7 @@ class IntranetApp {
 
         e.preventDefault();
 
-        const view = item.getttribute("data-view");
+        const view = item.getAttribute("data-view");
 
         this.navigate(view);
 
@@ -27360,17 +27360,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
 
-      const downloadnchor = document.createElement('a');
+      const downloadAnchor = document.createElement('a');
 
-      downloadnchor.setttribute("href", dataStr);
+      downloadAnchor.setAttribute("href", dataStr);
 
-      downloadnchor.setttribute("download", `backup_colegio_educador_${new Date().toISOString().split('T')[0]}.json`);
+      downloadAnchor.setAttribute("download", `backup_colegio_educador_${new Date().toISOString().split('T')[0]}.json`);
 
-      document.body.appendChild(downloadnchor);
+      document.body.appendChild(downloadAnchor);
 
-      downloadnchor.click();
+      downloadAnchor.click();
 
-      downloadnchor.remove();
+      downloadAnchor.remove();
 
       this.showToast("Copia de seguridad (.JSON.) descargada con éxito desde Firebase", "success");
 
@@ -27472,7 +27472,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           e.preventDefault();
 
-          const view = item.getttribute("data-view");
+          const view = item.getAttribute("data-view");
 
           this.navigate(view);
 
@@ -27568,9 +27568,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     if (isLocked && currentView !== "pagos" && currentView !== "comunicados") {
 
-      if (this.contentrea) {
+      if (this.contentArea) {
 
-        this.contentrea.innerHTML = Components.renderLockedccessScreen(state, currentUser);
+        this.contentArea.innerHTML = Components.renderLockedccessScreen(state, currentUser);
 
       }
 
@@ -27710,11 +27710,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-    const content = this.contentrea || document.getElementById("content-area");
+    const content = this.contentArea || document.getElementById("content-area");
 
     if (content) {
 
-      this.contentrea = content;
+      this.contentArea = content;
 
       content.innerHTML = html || Components.renderDashboard(state);
 
@@ -28424,7 +28424,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     checkboxes.forEach(cb => {
 
-      const lvl = cb.getttribute("data-level");
+      const lvl = cb.getAttribute("data-level");
 
       if (mode === "secundaria") {
 
@@ -28800,7 +28800,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       const val = cb.value.toLowerCase();
 
-      const datarea = (cb.getttribute("data-area") || "").toLowerCase();
+      const dataArea = (cb.getAttribute("data-area") || "").toLowerCase();
 
       if (area === "all") {
 
@@ -28812,7 +28812,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       } else if (area === "matematica") {
 
-        if (datarea.includes("matemtica") || val.includes("aritmética") || val.includes("áÁÁÁÁálgebra") || val.includes("geometra") || val.includes("trigonometra") || val.includes("matemtico") || val.includes("avanzada")) {
+        if (dataArea.includes("matemtica") || val.includes("aritmética") || val.includes("áÁÁÁÁálgebra") || val.includes("geometra") || val.includes("trigonometra") || val.includes("matemtico") || val.includes("avanzada")) {
 
           cb.checked = true;
 
@@ -28820,7 +28820,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       } else if (area === "comunicacion") {
 
-        if (datarea.includes("comunicación") || val.includes("lenguíaje") || val.includes("literatura") || val.includes("verbal") || val.includes("inglés")) {
+        if (dataArea.includes("comunicación") || val.includes("lenguíaje") || val.includes("literatura") || val.includes("verbal") || val.includes("inglés")) {
 
           cb.checked = true;
 
@@ -28828,7 +28828,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       } else if (area === "ciencia") {
 
-        if (datarea.includes("ciencia") || val.includes("física") || val.includes("química") || val.includes("biologa")) {
+        if (dataArea.includes("ciencia") || val.includes("física") || val.includes("química") || val.includes("biologa")) {
 
           cb.checked = true;
 
@@ -28836,7 +28836,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       } else if (area === "sociales") {
 
-        if (datarea.includes("sociales") || val.includes("historia") || val.includes("geografía") || val.includes("cívica") || val.includes("filosofía") || val.includes("psicologa") || val.includes("dpcc") || val.includes("economa")) {
+        if (dataArea.includes("sociales") || val.includes("historia") || val.includes("geografía") || val.includes("cívica") || val.includes("filosofía") || val.includes("psicologa") || val.includes("dpcc") || val.includes("economa")) {
 
           cb.checked = true;
 
