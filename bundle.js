@@ -129,7 +129,7 @@ const initialData = {
 
       assignedGrades: ["3ro Sec A", "4to Sec A", "5to Sec B"],
 
-      hasdmiónPrivileges: true,
+      hasAdminPrivileges: true,
 
       adminPrivilegeLabel: "Coordiónador Pedagógico (Permisos de Edición)",
 
@@ -283,7 +283,7 @@ const initialData = {
 
       detail: "Coordiónador General & Documentación",
 
-      hasdmiónPrivilege: true,
+      hasAdminPrivilege: true,
 
       status: "Activo",
 
@@ -309,7 +309,7 @@ const initialData = {
 
       detail: "Director General",
 
-      hasdmiónPrivilege: true,
+      hasAdminPrivilege: true,
 
       status: "Activo",
 
@@ -335,7 +335,7 @@ const initialData = {
 
       detail: "Auxiliar de Educación & Portera (Control de Cuadernos y Asistencia)",
 
-      hasdmiónPrivilege: false,
+      hasAdminPrivilege: false,
 
       status: "Activo",
 
@@ -367,7 +367,7 @@ const initialData = {
 
       weeklyHours: "24 hrs",
 
-      hasdmiónPrivilege: true,
+      hasAdminPrivilege: true,
 
       status: "Activo",
 
@@ -399,7 +399,7 @@ const initialData = {
 
       weeklyHours: "22 hrs",
 
-      hasdmiónPrivilege: true,
+      hasAdminPrivilege: true,
 
       status: "Activo",
 
@@ -431,7 +431,7 @@ const initialData = {
 
       weeklyHours: "20 hrs",
 
-      hasdmiónPrivilege: true,
+      hasAdminPrivilege: true,
 
       status: "Activo",
 
@@ -463,7 +463,7 @@ const initialData = {
 
       weeklyHours: "18 hrs",
 
-      hasdmiónPrivilege: false,
+      hasAdminPrivilege: false,
 
       status: "Activo",
 
@@ -495,7 +495,7 @@ const initialData = {
 
       weeklyHours: "28 hrs",
 
-      hasdmiónPrivilege: true,
+      hasAdminPrivilege: true,
 
       status: "Activo",
 
@@ -529,7 +529,7 @@ const initialData = {
 
       weeklyHours: "30 hrs",
 
-      hasdmiónPrivilege: false,
+      hasAdminPrivilege: false,
 
       status: "Activo",
 
@@ -2851,7 +2851,7 @@ const initialData = {
 
       },
 
-      studentttempts: [
+      studentAttempts: [
 
         {
 
@@ -3233,7 +3233,7 @@ const initialData = {
 
       },
 
-      studentttempts: [
+      studentAttempts: [
 
         {
 
@@ -3569,7 +3569,7 @@ const initialData = {
 
       },
 
-      studentttempts: []
+      studentAttempts: []
 
     }
 
@@ -3658,7 +3658,7 @@ class IntranetStore {
 
       (st.systemUsers || []).length,
 
-      (st.systemUsers || []).map(u => `${u.id || ''}:${u.username || ''}:${u.name || ''}:${u.role || ''}:${u.hasdmiónPrivilege ? '1' : '0'}`).join(','),
+      (st.systemUsers || []).map(u => `${u.id || ''}:${u.username || ''}:${u.name || ''}:${u.role || ''}:${u.hasAdminPrivilege ? '1' : '0'}`).join(','),
 
       (st.enrollments || []).map(e => `${e.id || ''}:${e.studentCode || ''}:${e.studentName || ''}:${e.grade || ''}`).join(','),
 
@@ -4208,7 +4208,7 @@ class IntranetStore {
 
     if (!key) return "";
 
-    return String(key).toLowerCase().normalize("N FD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, "");
+    return String(key).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, "");
 
   }
 
@@ -5518,9 +5518,9 @@ class IntranetStore {
 
           pendióngTasksCount: 0,
 
-          hasdmiónPrivilege: !!systemUser.hasdmiónPrivilege,
+          hasAdminPrivilege: !!systemUser.hasAdminPrivilege,
 
-          hasdmiónPrivileges: !!systemUser.hasdmiónPrivilege
+          hasAdminPrivileges: !!systemUser.hasAdminPrivilege
 
         };
 
@@ -5730,7 +5730,7 @@ class IntranetStore {
 
   getTasks() { return this.state.tasks; }
 
-  getnnouncements() { return this.state.announcements; }
+  getAnnouncements() { return this.state.announcements; }
 
   getttendance() { return this.state.attendance; }
 
@@ -6356,7 +6356,7 @@ class IntranetStore {
       studentName: userData.studentName || "",
       tutor: userData.tutor || "",
       guardian: userData.guardian || "",
-      hasAdminPrivilege: !!userData.hasAdminPrivilege || !!userData.hasdmiónPrivilege,
+      hasAdminPrivilege: !!userData.hasAdminPrivilege || !!userData.hasAdminPrivilege,
       status: "Activo",
       createdDate: new Date().toLocaleDateString("es-PE")
     };
@@ -6568,7 +6568,7 @@ class IntranetStore {
 
         classrooms: ["Aula 204 - Pabellón A"],
 
-        hasdmiónPrivilege: !!t.hasdmiónPrivilege
+        hasAdminPrivilege: !!t.hasAdminPrivilege
 
       };
 
@@ -6628,23 +6628,23 @@ class IntranetStore {
 
 
 
-  toggleTeacherdmiónPrivilege(userId) {
+  toggleTeacherAdminPrivilege(userId) {
 
     const user = this.state.systemUsers.find(u => u.id === userId);
 
     if (user && (user.role === "Docente" || user.role === "Directivo")) {
 
-      user.hasdmiónPrivilege = !user.hasdmiónPrivilege;
+      user.hasAdminPrivilege = !user.hasAdminPrivilege;
 
       if (user.code === "DOC-2026-015" && this.state.users.docente) {
 
-        this.state.users.docente.hasdmiónPrivileges = user.hasdmiónPrivilege;
+        this.state.users.docente.hasAdminPrivileges = user.hasAdminPrivilege;
 
       }
 
       this.saveState();
 
-      return user.hasdmiónPrivilege;
+      return user.hasAdminPrivilege;
 
     }
 
@@ -6856,7 +6856,7 @@ class IntranetStore {
 
       guardian: data.guardian,
 
-      hasdmiónPrivilege: false
+      hasAdminPrivilege: false
 
     });
 
@@ -7108,7 +7108,7 @@ class IntranetStore {
 
   // Elimiónar todos los estudiantes de unaula / grado específico
 
-  clearllStudentsFromGrade(gradeId) {
+  clearAllStudentsFromGrade(gradeId) {
 
     if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
 
@@ -7830,7 +7830,7 @@ class IntranetStore {
 
         if (!gradeMatches) {
 
-          contiónue;
+          continue;
 
         }
 
@@ -8092,7 +8092,7 @@ class IntranetStore {
 
   // Comprobar si uncurso está asignado al docente actualmente ensesión
 
-  isTeacherssignedToCourse(courseObjOrName, user = null, gradeId = "") {
+  isTeacherAssignedToCourse(courseObjOrName, user = null, gradeId = "") {
 
     if (!user) user = this.getCurrentUser();
 
@@ -8154,15 +8154,15 @@ class IntranetStore {
 
     for (const c of assignedCourses) {
 
-      const cleanssigned = (typeof c === 'string' ? c : '').toLowerCase().trim();
+      const cleanAssigned = (typeof c === 'string' ? c : '').toLowerCase().trim();
 
-      if (!cleanssigned) contiónue;
+      if (!cleanAssigned) continue;
 
       
 
       // Coincidencia exacta o por subcadena
 
-      if (cleanCourseName === cleanssigned || cleanCourseName.includes(cleanssigned) || cleanssigned.includes(cleanCourseName)) {
+      if (cleanCourseName === cleanAssigned || cleanCourseName.includes(cleanAssigned) || cleanAssigned.includes(cleanCourseName)) {
 
         return true;
 
@@ -8172,7 +8172,7 @@ class IntranetStore {
 
       // Si es Nivel Inicial y el curso pertenece al catlogo de Inicial
 
-      if (cleanssigned.includes("inicial") && (gradeId.includes("ini") || cleanCourseName.includes("temprana") || cleanCourseName.includes("grafomotricidad") || cleanCourseName.includes("psicomotricidad") || cleanCourseName.includes("cuentos infantiles") || cleanCourseName.includes("mióni-manualidades"))) {
+      if (cleanAssigned.includes("inicial") && (gradeId.includes("ini") || cleanCourseName.includes("temprana") || cleanCourseName.includes("grafomotricidad") || cleanCourseName.includes("psicomotricidad") || cleanCourseName.includes("cuentos infantiles") || cleanCourseName.includes("mióni-manualidades"))) {
 
         return true;
 
@@ -8182,7 +8182,7 @@ class IntranetStore {
 
       // Mapeo semntico de reas
 
-      if (cleanssigned.includes("comunicación") || cleanssigned.includes("comunicacion") || cleanssigned.includes("lenguíaje") || cleanssigned.includes("literatura")) {
+      if (cleanAssigned.includes("comunicación") || cleanAssigned.includes("comunicacion") || cleanAssigned.includes("lenguíaje") || cleanAssigned.includes("literatura")) {
 
         if (cleanCourseName.includes("lenguíaje") || cleanCourseName.includes("literatura") || cleanCourseName.includes("planlector") || cleanCourseName.includes("raíz. verbal") || cleanCourseName.includes("raízonamiento verbal") || cleanCourseName.includes("comunicación") || cleanCourseName.includes("comunicacion")) {
 
@@ -8192,7 +8192,7 @@ class IntranetStore {
 
       }
 
-      if (cleanssigned.includes("matemtica") || cleanssigned.includes("matematica") || cleanssigned.includes("áÁÁÁÁálgebra") || cleanssigned.includes("geometra")) {
+      if (cleanAssigned.includes("matemtica") || cleanAssigned.includes("matematica") || cleanAssigned.includes("áÁÁÁÁálgebra") || cleanAssigned.includes("geometra")) {
 
         if (cleanCourseName.includes("aritmética") || cleanCourseName.includes("aritmetica") || cleanCourseName.includes("áÁÁÁÁálgebra") || cleanCourseName.includes("algebra") || cleanCourseName.includes("geometra") || cleanCourseName.includes("geometria") || cleanCourseName.includes("trigonometra") || cleanCourseName.includes("trigonometria") || cleanCourseName.includes("raíz. matem") || cleanCourseName.includes("raízonamiento matem") || cleanCourseName.includes("matemtica") || cleanCourseName.includes("matematica")) {
 
@@ -8202,7 +8202,7 @@ class IntranetStore {
 
       }
 
-      if (cleanssigned.includes("ciencia") || cleanssigned.includes("cta") || cleanssigned.includes("física") || cleanssigned.includes("química") || cleanssigned.includes("biologa")) {
+      if (cleanAssigned.includes("ciencia") || cleanAssigned.includes("cta") || cleanAssigned.includes("física") || cleanAssigned.includes("química") || cleanAssigned.includes("biologa")) {
 
         if (cleanCourseName.includes("ciencia") || cleanCourseName.includes("biologa") || cleanCourseName.includes("biologia") || cleanCourseName.includes("física") || cleanCourseName.includes("fisica") || cleanCourseName.includes("química") || cleanCourseName.includes("quimica") || cleanCourseName.includes("ambiente")) {
 
@@ -8212,7 +8212,7 @@ class IntranetStore {
 
       }
 
-      if (cleanssigned.includes("computación") || cleanssigned.includes("computacion") || cleanssigned.includes("ept") || cleanssigned.includes("robótica") || cleanssigned.includes("robotica") || cleanssigned.includes("informtica")) {
+      if (cleanAssigned.includes("computación") || cleanAssigned.includes("computacion") || cleanAssigned.includes("ept") || cleanAssigned.includes("robótica") || cleanAssigned.includes("robotica") || cleanAssigned.includes("informtica")) {
 
         if (cleanCourseName.includes("computación") || cleanCourseName.includes("computacion") || cleanCourseName.includes("informtica") || cleanCourseName.includes("informatica") || cleanCourseName.includes("robótica") || cleanCourseName.includes("robotica") || cleanCourseName.includes("ept") || cleanCourseName.includes("gestión") || cleanCourseName.includes("gestion")) {
 
@@ -8222,7 +8222,7 @@ class IntranetStore {
 
       }
 
-      if (cleanssigned.includes("cívica") || cleanssigned.includes("civica") || cleanssigned.includes("dpcc") || cleanssigned.includes("personal social")) {
+      if (cleanAssigned.includes("cívica") || cleanAssigned.includes("civica") || cleanAssigned.includes("dpcc") || cleanAssigned.includes("personal social")) {
 
         if (cleanCourseName.includes("cívica") || cleanCourseName.includes("civica") || cleanCourseName.includes("dpcc") || cleanCourseName.includes("personal social") || cleanCourseName.includes("psicologa") || cleanCourseName.includes("psicologia") || cleanCourseName.includes("filosofía") || cleanCourseName.includes("filosofia") || cleanCourseName.includes("tutora") || cleanCourseName.includes("tutoria")) {
 
@@ -8232,7 +8232,7 @@ class IntranetStore {
 
       }
 
-      if (cleanssigned.includes("sociales") || cleanssigned.includes("historia") || cleanssigned.includes("geografía")) {
+      if (cleanAssigned.includes("sociales") || cleanAssigned.includes("historia") || cleanAssigned.includes("geografía")) {
 
         if (cleanCourseName.includes("historia") || cleanCourseName.includes("geografía") || cleanCourseName.includes("geografia") || cleanCourseName.includes("economa") || cleanCourseName.includes("economia") || cleanCourseName.includes("ciencias sociales")) {
 
@@ -8272,7 +8272,7 @@ class IntranetStore {
 
 
 
-    return allCourses.filter(c => this.isTeacherssignedToCourse(c, user, gradeId));
+    return allCourses.filter(c => this.isTeacherAssignedToCourse(c, user, gradeId));
 
   }
 
@@ -8280,7 +8280,7 @@ class IntranetStore {
 
   // Obtener la lista completa de cursos asignados al docente conmetadatos de aula y grado
 
-  getTeacherssignedCourses(userOrId = null, gradeId = "") {
+  getTeacherAssignedCourses(userOrId = null, gradeId = "") {
 
     let user = null;
 
@@ -8448,7 +8448,7 @@ class IntranetStore {
 
       coursesForGrade.forEach(c => {
 
-        if (isGlobal || this.isTeacherssignedToCourse(c, user, g.id)) {
+        if (isGlobal || this.isTeacherAssignedToCourse(c, user, g.id)) {
 
           const uniqueKey = `${g.id}_${c.name}`;
 
@@ -9300,7 +9300,7 @@ class IntranetStore {
 
 
 
-  payndUnlockIntranet(paymentId, method = "Tarjeta", details = {}) {
+  payAndUnlockIntranet(paymentId, method = "Tarjeta", details = {}) {
 
     const payment = this.state.payments.find(p => p.id === paymentId) || this.state.payments[0];
 
@@ -9688,7 +9688,7 @@ class IntranetStore {
 
   // =========================================================================
 
-  getttendanceRecords(filterGradeId = null, filterDate = null) {
+  getAttendanceRecords(filterGradeId = null, filterDate = null) {
 
     if (!this.state.attendanceRecords) {
 
@@ -9764,7 +9764,7 @@ class IntranetStore {
 
 
 
-  markllStudentsPresent(gradeId = "4sec", date = "19/08/2026") {
+  markAllStudentsPresent(gradeId = "4sec", date = "19/08/2026") {
 
     if (!this.state.attendanceRecords) {
 
@@ -9792,7 +9792,7 @@ class IntranetStore {
 
 
 
-  submitttendanceJustification(studentId, date, reason, attachment = "Constancia_Medica.pdf") {
+  submitAttendanceJustification(studentId, date, reason, attachment = "Constancia_Medica.pdf") {
 
     if (!this.state.attendanceRecords) {
 
@@ -10122,7 +10122,7 @@ class IntranetStore {
 
 
 
-  getDailyttendanceReport(date = "19/08/2026") {
+  getDailyAttendanceReport(date = "19/08/2026") {
 
     if (!this.state.attendanceRecords) {
 
@@ -10330,7 +10330,7 @@ class IntranetStore {
 
 
 
-  getllIncidents(filterGrade = "all", filterSeverity = "all", filterSearch = "") {
+  getAllIncidents(filterGrade = "all", filterSeverity = "all", filterSearch = "") {
 
     if (!this.state.behaviorIncidents) {
 
@@ -10392,13 +10392,13 @@ class IntranetStore {
 
   payPension(paymentId, method) {
 
-    return this.payndUnlockIntranet(paymentId, method).receiptNo;
+    return this.payAndUnlockIntranet(paymentId, method).receiptNo;
 
   }
 
 
 
-  addnnouncement(title, category, content, priority) {
+  addAnnouncement(title, category, content, priority) {
 
     const newnn = {
 
@@ -10678,7 +10678,7 @@ class IntranetStore {
 
       evaluation: materialData.evaluation || null,
 
-      studentttempts: []
+      studentAttempts: []
 
     };
 
@@ -10702,7 +10702,7 @@ class IntranetStore {
 
   // Motor Inteligente de Anlisis y Extracción de Documentos (PDF, DOCX, PPTX, TXT, PNG, etc.)
 
-  analyzendExtractMaterialFromDocument(fileInfo, courseId, manualNotes = "") {
+  analyzeAndExtractMaterialFromDocument(fileInfo, courseId, manualNotes = "") {
 
     const availableCourses = [
 
@@ -11254,9 +11254,9 @@ class IntranetStore {
 
 
 
-    if (!material.studentttempts) {
+    if (!material.studentAttempts) {
 
-      material.studentttempts = [];
+      material.studentAttempts = [];
 
     }
 
@@ -11270,13 +11270,13 @@ class IntranetStore {
 
     let correctCount = 0;
 
-    const usernswers = attemptData.usernswers || {};
+    const userAnswers = attemptData.userAnswers || {};
 
 
 
     evaluation.questions.forEach(q => {
 
-      if (usernswers[q.id] !== undefined && usernswers[q.id] === q.correctIndex) {
+      if (userAnswers[q.id] !== undefined && userAnswers[q.id] === q.correctIndex) {
 
         correctCount++;
 
@@ -11310,7 +11310,7 @@ class IntranetStore {
 
       timeSpent: attemptData.timeSpent || "12 min",
 
-      usernswers: usernswers,
+      userAnswers: userAnswers,
 
       feedback: score >= 18 
 
@@ -11326,15 +11326,15 @@ class IntranetStore {
 
 
 
-    const existióngIdx = material.studentttempts.findIndex(a => a.studentId === attempt.studentId);
+    const existióngIdx = material.studentAttempts.findIndex(a => a.studentId === attempt.studentId);
 
     if (existióngIdx !== -1) {
 
-      material.studentttempts[existióngIdx] = attempt;
+      material.studentAttempts[existióngIdx] = attempt;
 
     } else {
 
-      material.studentttempts.push(attempt);
+      material.studentAttempts.push(attempt);
 
     }
 
@@ -11356,7 +11356,7 @@ class IntranetStore {
 
   // =========================================================================
 
-  getgendaNotes(studentCodeOrId = null) {
+  getAgendaNotes(studentCodeOrId = null) {
 
     const allNotes = this.state.agendaNotes || initialData.agendaNotes || [];
 
@@ -11382,7 +11382,7 @@ class IntranetStore {
 
 
 
-  creategendaNote(noteData) {
+  createAgendaNote(noteData) {
 
     if (!this.state.agendaNotes) {
 
@@ -11484,7 +11484,7 @@ class IntranetStore {
 
 
 
-  signgendaNote(noteId, signedBy = "Apoderado Registrado") {
+  signAgendaNote(noteId, signedBy = "Apoderado Registrado") {
 
     if (!this.state.agendaNotes) {
 
@@ -11516,7 +11516,7 @@ class IntranetStore {
 
 
 
-  deletegendaNote(noteId) {
+  deleteAgendaNote(noteId) {
 
     if (!this.state.agendaNotes) return false;
 
@@ -12377,7 +12377,7 @@ const Components = {
 
     if (role === "admin") {
 
-      return this.renderdmiónDashboard(state, user);
+      return this.renderAdminDashboard(state, user);
 
     } else if (role === "director") {
 
@@ -12389,7 +12389,7 @@ const Components = {
 
     } else if (role === "auxiliar") {
 
-      return this.renderuxiliarDashboard(state, user);
+      return this.renderAuxiliarDashboard(state, user);
 
     } else if (role === "padre") {
 
@@ -12401,7 +12401,7 @@ const Components = {
 
     }
 
-    return this.renderdmiónDashboard(state, user);
+    return this.renderAdminDashboard(state, user);
 
   },
 
@@ -12409,7 +12409,7 @@ const Components = {
 
   // Dashboard - Coordinación
 
-  renderdmiónDashboard(state, user) {
+  renderAdminDashboard(state, user) {
 
     const usersCount = (state.systemUsers || initialData.systemUsers).length;
 
@@ -12781,15 +12781,15 @@ const Components = {
 
                     <td><span class="status-badge status-approved">✓ Enviado Contador</span></td>
 
-                    <td><span class="status-badge ${u.hasdmiónPrivilege ? 'status-approved' : 'status-pendióng'}">${u.hasdmiónPrivilege ? '★ Permisos Admin' : 'Docente'}</span></td>
+                    <td><span class="status-badge ${u.hasAdminPrivilege ? 'status-approved' : 'status-pendióng'}">${u.hasAdminPrivilege ? '★ Permisos Admin' : 'Docente'}</span></td>
 
                     <td>
 
                       <div style="display: flex; gap: 4px; align-items: center;">
 
-                        <button class="btn btn-sm ${u.hasAdminPrivilege || u.hasdmiónPrivilege ? 'btn-outline' : 'btn-gold'}" onclick="window.app.toggleTeacherdmiónPrivilege('${u.id}')" title="${u.hasAdminPrivilege || u.hasdmiónPrivilege ? 'Revocar Admin' : 'Conceder Admin'}" style="padding: 4px 8px; font-size: 11px;">
+                        <button class="btn btn-sm ${u.hasAdminPrivilege || u.hasAdminPrivilege ? 'btn-outline' : 'btn-gold'}" onclick="window.app.toggleTeacherAdminPrivilege('${u.id}')" title="${u.hasAdminPrivilege || u.hasAdminPrivilege ? 'Revocar Admin' : 'Conceder Admin'}" style="padding: 4px 8px; font-size: 11px;">
 
-                          ${u.hasdmiónPrivilege ? '★ Admin' : '☆'}
+                          ${u.hasAdminPrivilege ? '★ Admin' : '☆'}
 
                         </button>
 
@@ -12881,9 +12881,9 @@ const Components = {
 
     // Si es docente, filtrar ESTRICTÍAMENTE a solo sus cursos asignados
 
-    const boletaCourses = (isDocente && currentUser && window.appStore && typeof window.appStore.isTeacherssignedToCourse === "function")
+    const boletaCourses = (isDocente && currentUser && window.appStore && typeof window.appStore.isTeacherAssignedToCourse === "function")
 
-      ? allBoletaCourses.filter(c => window.appStore.isTeacherssignedToCourse(c, currentUser, selectedGrade))
+      ? allBoletaCourses.filter(c => window.appStore.isTeacherAssignedToCourse(c, currentUser, selectedGrade))
 
       : allBoletaCourses;
 
@@ -13005,7 +13005,7 @@ const Components = {
 
               ${isTutor ? `
 
-                <button class="btn btn-gold btn-sm" onclick="window.app.openddStudentModal('${selectedGrade}')" style="font-weight: 900; padding: 8px 16px;">
+                <button class="btn btn-gold btn-sm" onclick="window.app.openAddStudentModal('${selectedGrade}')" style="font-weight: 900; padding: 8px 16px;">
 
                   ➕ Agregar Estudiante
 
@@ -13027,7 +13027,7 @@ const Components = {
 
               `}
 
-              <button class="btn btn-sm" onclick="window.app.downloaduxiliaryRegisterExcel('${selectedGrade}', '${selectedCourse}')" style="background: #0284c7; color: white; font-weight: 900; padding: 8px 16px;">
+              <button class="btn btn-sm" onclick="window.app.downloadAuxiliaryRegisterExcel('${selectedGrade}', '${selectedCourse}')" style="background: #0284c7; color: white; font-weight: 900; padding: 8px 16px;">
 
                 📊 Descargar Registro Auxiliar (.XLS)
 
@@ -13195,7 +13195,7 @@ const Components = {
 
                 </button>
 
-                <button class="btn btn-sm" onclick="window.app.confirmClearllClassroomStudents('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px; background: #fee2e2; color: #b91c1c; border: 1px solid #f87171;" title="Elimiónar todos los registros de estudiantes de esta aula">
+                <button class="btn btn-sm" onclick="window.app.confirmClearAllClassroomStudents('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px; background: #fee2e2; color: #b91c1c; border: 1px solid #f87171;" title="Elimiónar todos los registros de estudiantes de esta aula">
 
                   🗑️ Elimiónar Todos los Registros del Aula
 
@@ -13237,7 +13237,7 @@ const Components = {
 
               ${classroomStudents.length > 0 ? `
 
-                <button class="btn btn-sm" onclick="window.app.confirmClearllClassroomStudents('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px; background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; padding: 4px 12px;" title="Vaciar la nómina de esta aula">
+                <button class="btn btn-sm" onclick="window.app.confirmClearAllClassroomStudents('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px; background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; padding: 4px 12px;" title="Vaciar la nómina de esta aula">
 
                   🗑️ Elimiónar Todos los Registros (${classroomStudents.length})
 
@@ -13297,7 +13297,7 @@ const Components = {
 
                         <div style="display: flex; gap: 8px; justify-content: center;">
 
-                          <button class="btn btn-gold btn-sm" onclick="window.app.openddStudentModal('${selectedGrade}')" style="font-weight: 800;">
+                          <button class="btn btn-gold btn-sm" onclick="window.app.openAddStudentModal('${selectedGrade}')" style="font-weight: 800;">
 
                             ➕ Agregar Estudiante
 
@@ -13419,7 +13419,7 @@ const Components = {
 
               </button>
 
-              <button class="btn btn-navy btn-sm" onclick="window.app.downloaduxiliaryRegisterExcel('${selectedGrade}', '${selectedCourse}')" style="font-weight: 800;">
+              <button class="btn btn-navy btn-sm" onclick="window.app.downloadAuxiliaryRegisterExcel('${selectedGrade}', '${selectedCourse}')" style="font-weight: 800;">
 
                 📊 Descargar Registro Auxiliar (Excel)
 
@@ -13443,7 +13443,7 @@ const Components = {
 
   // Dashboard - Auxiliar de Educación & Portera
 
-  renderuxiliarDashboard(state, user) {
+  renderAuxiliarDashboard(state, user) {
 
     const records = state.attendanceRecords || (initialData && initialData.attendanceRecords) || [];
 
@@ -13451,9 +13451,9 @@ const Components = {
 
     const incidents = state.behaviorIncidents || (initialData && initialData.behaviorIncidents) || [];
 
-    const dayReport = (window.appStore && typeof window.appStore.getDailyttendanceReport === 'function')
+    const dayReport = (window.appStore && typeof window.appStore.getDailyAttendanceReport === 'function')
 
-      ? window.appStore.getDailyttendanceReport("19/08/2026")
+      ? window.appStore.getDailyAttendanceReport("19/08/2026")
 
       : { presentList: [], tardiónessList: [], absenceList: [] };
 
@@ -13757,9 +13757,9 @@ const Components = {
 
 
 
-    const allNotes = (window.appStore && typeof window.appStore.getgendaNotes === "function") 
+    const allNotes = (window.appStore && typeof window.appStore.getAgendaNotes === "function") 
 
-      ? window.appStore.getgendaNotes("all") 
+      ? window.appStore.getAgendaNotes("all") 
 
       : (state.agendaNotes || initialData.agendaNotes || []);
 
@@ -13859,9 +13859,9 @@ const Components = {
 
       // Buscar anotaciones de este estudiante
 
-      const studentNotes = (window.appStore && typeof window.appStore.getgendaNotes === "function")
+      const studentNotes = (window.appStore && typeof window.appStore.getAgendaNotes === "function")
 
-        ? window.appStore.getgendaNotes(studentCode)
+        ? window.appStore.getAgendaNotes(studentCode)
 
         : allNotes.filter(n => (n.studentCode && n.studentCode === studentCode) || (n.studentName && n.studentName.toLowerCase().includes(studentName.toLowerCase())));
 
@@ -14215,7 +14215,7 @@ const Components = {
 
                             </span>
 
-                            <button class="btn btn-navy btn-sm" onclick="window.app.signgendaNote('${note.id}')" style="font-weight: 800; font-size: 11px; padding: 4px 12px; border-radius: 14px;">
+                            <button class="btn btn-navy btn-sm" onclick="window.app.signAgendaNote('${note.id}')" style="font-weight: 800; font-size: 11px; padding: 4px 12px; border-radius: 14px;">
 
                               ✍️ Firmar de Enterado(a)
 
@@ -14231,7 +14231,7 @@ const Components = {
 
                       <div style="display: flex; gap: 6px;">
 
-                        <button class="btn btn-sm" onclick="window.app.sendgendaNoteWhatspp('${note.id}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 11px; padding: 4px 10px; border-radius: 14px;" title="Ver o Enviar por Whatspp">
+                        <button class="btn btn-sm" onclick="window.app.sendAgendaNoteWhatsapp('${note.id}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 11px; padding: 4px 10px; border-radius: 14px;" title="Ver o Enviar por Whatspp">
 
                           💬 Whatspp
 
@@ -14385,13 +14385,13 @@ const Components = {
 
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
 
-              <button class="btn btn-navy btn-sm" onclick="window.app.opengendaQRScannerModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px;">
+              <button class="btn btn-navy btn-sm" onclick="window.app.openAgendaQRScannerModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px;">
 
                 <span>📹</span> Escanear Fotocheck conCmara
 
               </button>
 
-              <button class="btn btn-gold btn-sm" onclick="window.app.opencreategendaNoteModal()" style="font-weight: 900; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(245,158,11,0.3);">
+              <button class="btn btn-gold btn-sm" onclick="window.app.openCreateAgendaNoteModal()" style="font-weight: 900; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(245,158,11,0.3);">
 
                 <span>➕</span> N ueva Anotación engenda
 
@@ -14661,7 +14661,7 @@ const Components = {
 
                         <div style="display: flex; gap: 4px; justify-content: center;">
 
-                          <button class="btn btn-sm" onclick="window.app.sendgendaNoteWhatspp('${note.id}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 10.5px; padding: 3px 8px;" title="N otificar por Whatspp">
+                          <button class="btn btn-sm" onclick="window.app.sendAgendaNoteWhatsapp('${note.id}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 10.5px; padding: 3px 8px;" title="N otificar por Whatspp">
 
                             💬 Whatspp
 
@@ -15055,7 +15055,7 @@ const Components = {
 
     // --- VISTÍA DOCENTE / AUXILIR / COORDINCIÓN / ADMINISTRÍADOR ---
 
-    const hasdmiónEditPower = state.currentRole === "admin" || state.currentRole === "director" || (state.currentRole === "docente" && state.users.docente && state.users.docente.hasdmiónPrivileges);
+    const hasAdminEditPower = state.currentRole === "admin" || state.currentRole === "director" || (state.currentRole === "docente" && state.users.docente && state.users.docente.hasAdminPrivileges);
 
     const isDocenteOrdmión = state.currentRole === "docente" || state.currentRole === "auxiliar" || state.currentRole === "admin" || state.currentRole === "director";
 
@@ -15169,19 +15169,19 @@ const Components = {
 
               </button>
 
-              <button class="btn btn-sm ${activeSubTab === 'scanner' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setNotebookctiveSubTab('scanner')" style="font-weight: 800;">
+              <button class="btn btn-sm ${activeSubTab === 'scanner' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setNotebookActiveSubTab('scanner')" style="font-weight: 800;">
 
                 [Cmara] 1. Escner enVivo
 
               </button>
 
-              <button class="btn btn-sm ${activeSubTab === 'stickers' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setNotebookctiveSubTab('stickers')" style="font-weight: 800;">
+              <button class="btn btn-sm ${activeSubTab === 'stickers' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setNotebookActiveSubTab('stickers')" style="font-weight: 800;">
 
                 2. Plancha de Stickers QR
 
               </button>
 
-              <button class="btn btn-sm ${activeSubTab === 'report' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setNotebookctiveSubTab('report')" style="font-weight: 800;">
+              <button class="btn btn-sm ${activeSubTab === 'report' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setNotebookActiveSubTab('report')" style="font-weight: 800;">
 
                 3. Informe de Supervisión
 
@@ -16585,9 +16585,9 @@ const Components = {
 
                             ${isDocente || isDirectivo ? `
 
-                              <span class="status-badge ${u.hasdmiónPrivilege ? 'status-approved' : 'status-pendióng'}" style="${u.hasdmiónPrivilege ? 'background:#fef08a; color:#854d0e; font-weight:800;' : ''}">
+                              <span class="status-badge ${u.hasAdminPrivilege ? 'status-approved' : 'status-pendióng'}" style="${u.hasAdminPrivilege ? 'background:#fef08a; color:#854d0e; font-weight:800;' : ''}">
 
-                                ${u.hasdmiónPrivilege ? '★ Permisos Admin' : 'Estndar'}
+                                ${u.hasAdminPrivilege ? '★ Permisos Admin' : 'Estndar'}
 
                               </span>
 
@@ -16621,9 +16621,9 @@ const Components = {
 
                               ${isDocente ? `
 
-                                <button class="btn btn-sm ${u.hasdmiónPrivilege ? 'btn-outline' : 'btn-gold'}" onclick="window.app.toggleTeacherdmiónPrivilege('${u.id}')" title="${u.hasdmiónPrivilege ? 'Revocar Permiso Admin' : 'Conceder Permiso Admin'}" style="padding: 4px 8px; font-size: 11px;">
+                                <button class="btn btn-sm ${u.hasAdminPrivilege ? 'btn-outline' : 'btn-gold'}" onclick="window.app.toggleTeacherAdminPrivilege('${u.id}')" title="${u.hasAdminPrivilege ? 'Revocar Permiso Admin' : 'Conceder Permiso Admin'}" style="padding: 4px 8px; font-size: 11px;">
 
-                                  ${u.hasdmiónPrivilege ? '★' : '☆'}
+                                  ${u.hasAdminPrivilege ? '★' : '☆'}
 
                                 </button>
 
@@ -16967,11 +16967,11 @@ const Components = {
 
   renderTeacherDashboard(state, user) {
 
-    const hasdmiónPrivilege = !!user.hasdmiónPrivileges || !!user.hasdmiónPrivilege;
+    const hasAdminPrivilege = !!user.hasAdminPrivileges || !!user.hasAdminPrivilege;
 
-    const assignedCourses = (window.appStore && typeof window.appStore.getTeacherssignedCourses === "function")
+    const assignedCourses = (window.appStore && typeof window.appStore.getTeacherAssignedCourses === "function")
 
-      ? window.appStore.getTeacherssignedCourses(user)
+      ? window.appStore.getTeacherAssignedCourses(user)
 
       : [];
 
@@ -17011,7 +17011,7 @@ const Components = {
 
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
 
-              ${hasdmiónPrivilege ? `
+              ${hasAdminPrivilege ? `
 
                 <span class="status-badge status-approved" style="background: rgba(245, 158, 11, 0.2); color: var(--color-yellow-400); border: 1px solid var(--color-yellow-500); font-weight: 900;">
 
@@ -17805,9 +17805,9 @@ const Components = {
 
     // Si es docente, filtrar ESTRICTÍAMENTE a solo sus cursos asignados
 
-    const visibleSubjects = (isDocente && currentUser && window.appStore && typeof window.appStore.isTeacherssignedToCourse === "function")
+    const visibleSubjects = (isDocente && currentUser && window.appStore && typeof window.appStore.isTeacherAssignedToCourse === "function")
 
-      ? subjectDirectory.filter(s => window.appStore.isTeacherssignedToCourse(s, currentUser, selectedGradióngGrade))
+      ? subjectDirectory.filter(s => window.appStore.isTeacherAssignedToCourse(s, currentUser, selectedGradióngGrade))
 
       : subjectDirectory;
 
@@ -17937,19 +17937,19 @@ const Components = {
 
           <div style="display: flex; border-top: 1px solid var(--border-subtle); background: var(--bg-surface-subtle); padding: 6px 12px; gap: 8px; flex-wrap: wrap;">
 
-            <button class="btn btn-sm ${activeTab === 'subject' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesctiveTab('subject')" style="font-weight: 800;">
+            <button class="btn btn-sm ${activeTab === 'subject' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesActiveTab('subject')" style="font-weight: 800;">
 
               👨‍1. Carga por Docente de Curso (Grado & Asignatura)
 
             </button>
 
-            <button class="btn btn-sm ${activeTab === 'tutor' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesctiveTab('tutor')" style="font-weight: 800;">
+            <button class="btn btn-sm ${activeTab === 'tutor' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesActiveTab('tutor')" style="font-weight: 800;">
 
               2. Módulo de Tutora (Asistencia, Apreciaciones y Familias)
 
             </button>
 
-            <button class="btn btn-sm ${activeTab === 'overview' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesctiveTab('overview')" style="font-weight: 800;">
+            <button class="btn btn-sm ${activeTab === 'overview' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesActiveTab('overview')" style="font-weight: 800;">
 
               3. Sbana Consolidada del Aula
 
@@ -19899,7 +19899,7 @@ const Components = {
 
       if (!str) return "";
 
-      return str.toLowerCase().normalize("N FD").replace(/[\u0300-\u036f]/g, "").replace(/^(prof\.|prof|miss|dra\.|dra|lic\.|lic|ing\.|ing)\s*/i, '').trim();
+      return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/^(prof\.|prof|miss|dra\.|dra|lic\.|lic|ing\.|ing)\s*/i, '').trim();
 
     };
 
@@ -20085,7 +20085,7 @@ const Components = {
 
       const role = state.currentRole || "admin";
 
-      const hasdmiónEditPower = role === "admin" || role === "director" || (role === "docente" && state.users && state.users.docente && state.users.docente.hasdmiónPrivileges);
+      const hasAdminEditPower = role === "admin" || role === "director" || (role === "docente" && state.users && state.users.docente && state.users.docente.hasAdminPrivileges);
 
       
 
@@ -20287,7 +20287,7 @@ const Components = {
 
           <!-- BNN ER PRINCIPL DE GESTIÓN Y CRECIÓN DE HORÍARIOS (ADMINISTRÍADOR) -->
 
-          ${hasdmiónEditPower ? `
+          ${hasAdminEditPower ? `
 
             <div style="background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); color: #ffffff; padding: 16px 20px; border-radius: 10px; margin-bottom: 16px; box-shadow: 0 4px 14px rgba(0,0,0,0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border: 1px solid #3b82f6;">
 
@@ -20335,7 +20335,7 @@ const Components = {
 
                 </button>
 
-                <button class="btn btn-outline" onclick="window.app.openutoScheduleModal('${currentGradeId}')" style="background: rgba(255,255,255,0.12); color: #ffffff; border-color: rgba(255,255,255,0.4); font-weight: 800; font-size: 12px; padding: 8px 14px;">
+                <button class="btn btn-outline" onclick="window.app.openAutoScheduleModal('${currentGradeId}')" style="background: rgba(255,255,255,0.12); color: #ffffff; border-color: rgba(255,255,255,0.4); font-weight: 800; font-size: 12px; padding: 8px 14px;">
 
                   ⚡ Horario Automtico
 
@@ -20439,7 +20439,7 @@ const Components = {
 
                   </select>
 
-                  ${hasdmiónEditPower ? `
+                  ${hasAdminEditPower ? `
 
                     <button class="btn btn-gold btn-sm" onclick="window.app.opencreateScheduleModal('${currentGradeId}')" style="font-weight: 900; white-space: nowrap; padding: 6px 12px;">
 
@@ -20599,7 +20599,7 @@ const Components = {
 
                             if (!slot) {
 
-                              return hasdmiónEditPower ? `
+                              return hasAdminEditPower ? `
 
                                 <td style="background:#fafafa; padding: 4px;">
 
@@ -20627,7 +20627,7 @@ const Components = {
 
                               <td style="${opacityStyle}">
 
-                                <div class="schedule-slot-card slot-${slot.color || 'navy'}" ${hasdmiónEditPower ? `onclick="window.app.openEditScheduleSlotModal('${slot.gradeId || currentGradeId}', ${slot.rowIndex || rIdx}, '${slot.dayKey || dayKey}')" style="cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.06); border-radius: 6px; padding: 8px 10px;"` : 'style="box-shadow: 0 2px 5px rgba(0,0,0,0.06); border-radius: 6px; padding: 8px 10px;"'}>
+                                <div class="schedule-slot-card slot-${slot.color || 'navy'}" ${hasAdminEditPower ? `onclick="window.app.openEditScheduleSlotModal('${slot.gradeId || currentGradeId}', ${slot.rowIndex || rIdx}, '${slot.dayKey || dayKey}')" style="cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.06); border-radius: 6px; padding: 8px 10px;"` : 'style="box-shadow: 0 2px 5px rgba(0,0,0,0.06); border-radius: 6px; padding: 8px 10px;"'}>
 
                                   <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3px;">
 
@@ -20681,7 +20681,7 @@ const Components = {
 
                     <h2 class="card-title" style="font-size: var(--font-size-xl);">Horario Académico Escolar por Aulas - 2026</h2>
 
-                    ${hasdmiónEditPower ? `<span class="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-700);">Modo Edición Habilitado</span>` : ''}
+                    ${hasAdminEditPower ? `<span class="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-700);">Modo Edición Habilitado</span>` : ''}
 
                   </div>
 
@@ -20737,7 +20737,7 @@ const Components = {
 
 
 
-                ${hasdmiónEditPower ? `
+                ${hasAdminEditPower ? `
 
                   <div style="display: flex; gap: 6px; flex-wrap: wrap;">
 
@@ -20747,7 +20747,7 @@ const Components = {
 
                     </button>
 
-                    <button class="btn btn-outline btn-sm" onclick="window.app.openutoScheduleModal('${currentGradeId}')" style="font-weight: 800; font-size: 11.5px; color: #1e3a8a;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.openAutoScheduleModal('${currentGradeId}')" style="font-weight: 800; font-size: 11.5px; color: #1e3a8a;">
 
                       ⚡ Generar Horario Automtico
 
@@ -20807,7 +20807,7 @@ const Components = {
 
                             if (!slot) {
 
-                              return hasdmiónEditPower ? `
+                              return hasAdminEditPower ? `
 
                                 <td style="background:#fafafa; padding: 4px;">
 
@@ -20827,13 +20827,13 @@ const Components = {
 
                               <td>
 
-                                <div class="schedule-slot-card slot-${slot.color || 'navy'}" ${hasdmiónEditPower ? `onclick="window.app.openEditScheduleSlotModal('${currentGradeId}', ${rowIndex}, '${dayKey}')" style="cursor: pointer;"` : ''}>
+                                <div class="schedule-slot-card slot-${slot.color || 'navy'}" ${hasAdminEditPower ? `onclick="window.app.openEditScheduleSlotModal('${currentGradeId}', ${rowIndex}, '${dayKey}')" style="cursor: pointer;"` : ''}>
 
                                   <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2px;">
 
                                     <div class="slot-course-title">${slot.course}</div>
 
-                                    ${hasdmiónEditPower ? `<span style="font-size: 10px; opacity: 0.8;">✏️</span>` : ''}
+                                    ${hasAdminEditPower ? `<span style="font-size: 10px; opacity: 0.8;">✏️</span>` : ''}
 
                                   </div>
 
@@ -21351,9 +21351,9 @@ const Components = {
 
     let availableCourses = [];
 
-    if (window.appStore && typeof window.appStore.getTeacherssignedCourses === "function") {
+    if (window.appStore && typeof window.appStore.getTeacherAssignedCourses === "function") {
 
-      availableCourses = window.appStore.getTeacherssignedCourses(currentUser, selectedGradeId);
+      availableCourses = window.appStore.getTeacherAssignedCourses(currentUser, selectedGradeId);
 
     }
 
@@ -21443,9 +21443,9 @@ const Components = {
 
     const currentStudentId = currentUser.code || currentUser.id || "EST-2026-055";
 
-    const studentttempt = activeMaterial && activeMaterial.studentttempts 
+    const studentttempt = activeMaterial && activeMaterial.studentAttempts 
 
-      ? activeMaterial.studentttempts.find(a => a.studentId === currentStudentId) 
+      ? activeMaterial.studentAttempts.find(a => a.studentId === currentStudentId) 
 
       : null;
 
@@ -21457,7 +21457,7 @@ const Components = {
 
     const totalEvaluations = courseMaterials.filter(m => m.evaluation && m.evaluation.questions && m.evaluation.questions.length > 0).length;
 
-    const allttemptsInCourse = courseMaterials.reduce((acc, m) => acc + (m.studentttempts ? m.studentttempts.length : 0), 0);
+    const allttemptsInCourse = courseMaterials.reduce((acc, m) => acc + (m.studentAttempts ? m.studentAttempts.length : 0), 0);
 
 
 
@@ -22125,7 +22125,7 @@ const Components = {
 
                         <span>Estudiantes Evaluados:</span>
 
-                        <span style="color: #047857;">${(activeMaterial.studentttempts || []).length} alumnos</span>
+                        <span style="color: #047857;">${(activeMaterial.studentAttempts || []).length} alumnos</span>
 
                       </h4>
 
@@ -22151,7 +22151,7 @@ const Components = {
 
                           <tbody>
 
-                            ${(activeMaterial.studentttempts && activeMaterial.studentttempts.length > 0) ? activeMaterial.studentttempts.map(att => `
+                            ${(activeMaterial.studentAttempts && activeMaterial.studentAttempts.length > 0) ? activeMaterial.studentAttempts.map(att => `
 
                               <tr style="border-bottom: 1px solid #f1f5f9;">
 
@@ -22413,13 +22413,13 @@ const Components = {
 
     // Reporte Diario Global de Tardanzas e Inasistencias
 
-    let dayReport = (window.appStore && typeof window.appStore.getDailyttendanceReport === 'function') 
+    let dayReport = (window.appStore && typeof window.appStore.getDailyAttendanceReport === 'function') 
 
-      ? window.appStore.getDailyttendanceReport(selectedDate) 
+      ? window.appStore.getDailyAttendanceReport(selectedDate) 
 
-      : ((window.app && window.app.store && typeof window.app.store.getDailyttendanceReport === 'function')
+      : ((window.app && window.app.store && typeof window.app.store.getDailyAttendanceReport === 'function')
 
-        ? window.app.store.getDailyttendanceReport(selectedDate)
+        ? window.app.store.getDailyAttendanceReport(selectedDate)
 
         : {
 
@@ -26258,7 +26258,7 @@ class IntranetApp {
 
 
 
-  setNotebookctiveSubTab(subTab) {
+  setNotebookActiveSubTab(subTab) {
 
     this.store.state.notebookctiveSubTab = subTab;
 
@@ -28930,7 +28930,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-    const clean = currentName.toLowerCase().normalize("N FD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
+    const clean = currentName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
 
     const parts = clean.split(/\s+/).filter(Boolean);
 
@@ -29132,7 +29132,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       }
 
-      const clean = val.toLowerCase().normalize("N FD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
+      const clean = val.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
 
       const parts = clean.split(/\s+/).filter(Boolean);
 
@@ -29532,7 +29532,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     if (nameInput && nameInput.value.trim()) {
 
-      const clean = nameInput.value.trim().toLowerCase().normalize("N FD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
+      const clean = nameInput.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
 
       const parts = clean.split(/\s+/).filter(Boolean);
 
@@ -29580,7 +29580,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     const dni = document.getElementById("new-user-dni") ? document.getElementById("new-user-dni").value.trim() : "";
 
-    const hasdmión = document.getElementById("new-user-has-admin") ? document.getElementById("new-user-has-admin").checked : false;
+    const hasAdmin = document.getElementById("new-user-has-admin") ? document.getElementById("new-user-has-admin").checked : false;
 
 
 
@@ -29692,7 +29692,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         // Generar credenciales de estudiante
 
-        const cleanStName = stName.toLowerCase().normalize("N FD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
+        const cleanStName = stName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
 
         const stParts = cleanStName.split(/\s+/).filter(Boolean);
 
@@ -29738,7 +29738,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           tutor: defaultTutor,
 
-          hasdmiónPrivilege: false
+          hasAdminPrivilege: false
 
         });
 
@@ -29850,7 +29850,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       guardian,
 
-      hasdmiónPrivilege: hasdmión
+      hasAdminPrivilege: hasAdmin
 
     });
 
@@ -30114,7 +30114,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <label style="display: flex; align-items: center; gap: 8px; font-weight: bold; color: var(--color-navy-900); cursor: pointer; background: var(--color-yellow-50); padding: 10px; border: 1px dashed var(--color-yellow-500); border-radius: 8px;">
 
-            <input type="checkbox" id="edit-user-has-admin" ${user.hasdmiónPrivilege ? 'checked' : ''} />
+            <input type="checkbox" id="edit-user-has-admin" ${user.hasAdminPrivilege ? 'checked' : ''} />
 
             <span>★ Conceder Privilegios de Administrador (Edición de Horarios, Sílabus, Notas)</span>
 
@@ -30158,7 +30158,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     let detail = document.getElementById("edit-user-detail").value.trim();
 
-    const hasdmión = document.getElementById("edit-user-has-admin").checked;
+    const hasAdmin = document.getElementById("edit-user-has-admin").checked;
 
 
 
@@ -30244,7 +30244,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          const cleanStName = stName.toLowerCase().normalize("N FD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
+          const cleanStName = stName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
 
           const stParts = cleanStName.split(/\s+/).filter(Boolean);
 
@@ -30284,7 +30284,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               tutor: defaultTutor,
 
-              hasdmiónPrivilege: false
+              hasAdminPrivilege: false
 
             });
 
@@ -30382,7 +30382,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       linkedStudents: linkedStudents && linkedStudents.length > 0 ? linkedStudents : undefined,
 
-      hasdmiónPrivilege: hasdmión
+      hasAdminPrivilege: hasAdmin
 
     });
 
@@ -30396,9 +30396,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  toggleTeacherdmiónPrivilege(userId) {
+  toggleTeacherAdminPrivilege(userId) {
 
-    const res = this.store.toggleTeacherdmiónPrivilege(userId);
+    const res = this.store.toggleTeacherAdminPrivilege(userId);
 
     if (res !== null) {
 
@@ -30416,9 +30416,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     const currentUser = this.store.getCurrentUser();
 
-    const hasdmión = currentRole === "admin" || currentRole === "director" || (currentUser && currentUser.hasdmiónPrivilege);
+    const hasAdmin = currentRole === "admin" || currentRole === "director" || (currentUser && currentUser.hasAdminPrivilege);
 
-    if (!hasdmión) {
+    if (!hasAdmin) {
 
       this.showToast("⚠️ Solo el Administrador o Directivo puedenelimiónar usuarios del sistema.", "danger");
 
@@ -30486,7 +30486,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  opencreateEnrollmentModal() {
+  openCreateEnrollmentModal() {
 
     this.showModal(`
 
@@ -30888,7 +30888,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <button class="btn btn-navy" onclick="window.app.confirmcreateEnrollment()" style="font-weight: 800; padding: 8px 20px;">
+        <button class="btn btn-navy" onclick="window.app.confirmCreateEnrollment()" style="font-weight: 800; padding: 8px 20px;">
 
           ✓ Guardar Matrícula & Generar Ficha FUM
 
@@ -30924,7 +30924,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  confirmcreateEnrollment() {
+  confirmCreateEnrollment() {
 
     const studentName = document.getElementById("new-matr-name").value.trim();
 
@@ -32206,7 +32206,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
   markllClassroomPresent(gradeId, date) {
 
-    this.store.markllStudentsPresent(gradeId, date);
+    this.store.markAllStudentsPresent(gradeId, date);
 
     this.showToast(`✓ Todos los estudiantes del aula marcados como "Presente a Tiempo"`, "success");
 
@@ -32312,7 +32312,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-    this.store.submitttendanceJustification(studentId, date, fullReason);
+    this.store.submitAttendanceJustification(studentId, date, fullReason);
 
     this.closeModal();
 
@@ -32654,7 +32654,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               </button>
 
-              <button class="btn btn-gold btn-sm" onclick="window.app.opencreategendaNoteModal('${result.student.studentCode}', 'merito')" style="font-weight: 800; font-size: 11px;">
+              <button class="btn btn-gold btn-sm" onclick="window.app.openCreateAgendaNoteModal('${result.student.studentCode}', 'merito')" style="font-weight: 800; font-size: 11px;">
 
                 ★ Anotar Mérito
 
@@ -33652,7 +33652,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
   notifyllbsencesndTardiónessWhatspp(date = "19/08/2026") {
 
-    const report = this.store.getDailyttendanceReport(date);
+    const report = this.store.getDailyAttendanceReport(date);
 
     const totalToNotify = report.tardiónessList.length + report.absenceList.length;
 
@@ -33868,13 +33868,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  signgendaNote(noteId) {
+  signAgendaNote(noteId) {
 
     const currentUser = this.store.getCurrentUser();
 
     const signerName = (currentUser && currentUser.name) ? currentUser.name : "Padre / Apoderado Registrado";
 
-    const ok = this.store.signgendaNote(noteId, signerName);
+    const ok = this.store.signAgendaNote(noteId, signerName);
 
     if (ok) {
 
@@ -33888,7 +33888,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  opencreategendaNoteModal(preselectedStudentCode = null, defaultType = "pedagogica") {
+  openCreateAgendaNoteModal(preselectedStudentCode = null, defaultType = "pedagogica") {
 
     const enrollments = this.store.getEnrollments();
 
@@ -34164,7 +34164,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-    const newNote = this.store.creategendaNote({
+    const newNote = this.store.createAgendaNote({
 
       studentCode: formData.get("studentCode"),
 
@@ -34204,7 +34204,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       setTimeout(() => {
 
-        this.sendgendaNoteWhatspp(newNote.id);
+        this.sendAgendaNoteWhatsapp(newNote.id);
 
       }, 350);
 
@@ -34214,9 +34214,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  sendgendaNoteWhatspp(noteId) {
+  sendAgendaNoteWhatsapp(noteId) {
 
-    const allNotes = this.store.getgendaNotes("all");
+    const allNotes = this.store.getAgendaNotes("all");
 
     const note = allNotes.find(n => n.id === noteId) || (this.store.state.agendaNotes && this.store.state.agendaNotes[0]);
 
@@ -34304,7 +34304,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  opengendaQRScannerModal() {
+  openAgendaQRScannerModal() {
 
     this.showModal(`
 
@@ -34318,7 +34318,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         </div>
 
-        <button class="modal-close-btn" onclick="window.app.closegendaScannerModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeAgendaScannerModal()" style="color: white;">✕</button>
 
       </div>
 
@@ -34350,19 +34350,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
 
-            <button class="btn btn-outline btn-sm" onclick="window.app.processgendaQRScan('EST-2026-055')">
+            <button class="btn btn-outline btn-sm" onclick="window.app.processAgendaQRScan('EST-2026-055')">
 
               Salim Cceres (5 Prim)
 
             </button>
 
-            <button class="btn btn-outline btn-sm" onclick="window.app.processgendaQRScan('EST-2026-042')">
+            <button class="btn btn-outline btn-sm" onclick="window.app.processAgendaQRScan('EST-2026-042')">
 
               Sofía Méndez (4 Sec)
 
             </button>
 
-            <button class="btn btn-outline btn-sm" onclick="window.app.processgendaQRScan('EST-2026-011')">
+            <button class="btn btn-outline btn-sm" onclick="window.app.processAgendaQRScan('EST-2026-011')">
 
               Carlos Benítez (4 Sec)
 
@@ -34378,7 +34378,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <button class="btn btn-outline btn-sm" onclick="window.app.closegendaScannerModal()">Cerrar Cmara</button>
+        <button class="btn btn-outline btn-sm" onclick="window.app.closeAgendaScannerModal()">Cerrar Cmara</button>
 
       </div>
 
@@ -34404,7 +34404,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             (decodedText) => {
 
-              this.processgendaQRScan(decodedText);
+              this.processAgendaQRScan(decodedText);
 
             },
 
@@ -34426,7 +34426,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  closegendaScannerModal() {
+  closeAgendaScannerModal() {
 
     if (this.agendaModalScanner) {
 
@@ -34448,11 +34448,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  processgendaQRScan(qrPayload) {
+  processAgendaQRScan(qrPayload) {
 
-    if (this.isgendaScanProcessióng) return;
+    if (this.isAgendaScanProcessing) return;
 
-    this.isgendaScanProcessióng = true;
+    this.isAgendaScanProcessing = true;
 
 
 
@@ -34460,13 +34460,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     const student = this.store.resolveStudentByQR(qrPayload);
 
-    this.closegendaScannerModal();
+    this.closeAgendaScannerModal();
 
 
 
     setTimeout(() => {
 
-      this.isgendaScanProcessióng = false;
+      this.isAgendaScanProcessing = false;
 
     }, 1200);
 
@@ -34492,7 +34492,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     const student = this.store.resolveStudentByQR(studentCode) || { studentCode, studentName: "Estudiante", grade: "5 de Primaria" };
 
-    const notes = this.store.getgendaNotes(student.studentCode);
+    const notes = this.store.getAgendaNotes(student.studentCode);
 
 
 
@@ -34532,7 +34532,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           </div>
 
-          <button class="btn btn-gold btn-sm" onclick="window.app.closeModal(); window.app.opencreategendaNoteModal('${student.studentCode}')" style="font-weight: 800;">
+          <button class="btn btn-gold btn-sm" onclick="window.app.closeModal(); window.app.openCreateAgendaNoteModal('${student.studentCode}')" style="font-weight: 800;">
 
             ➕ N ueva Anotación
 
@@ -34618,7 +34618,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     const student = this.store.resolveStudentByQR(studentCode) || { studentCode, studentName: "Estudiante", grade: "5 de Primaria" };
 
-    const notes = this.store.getgendaNotes(student.studentCode);
+    const notes = this.store.getAgendaNotes(student.studentCode);
 
 
 
@@ -34802,7 +34802,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
   openOfficialDailyReportPrintModal(date = "19/08/2026") {
 
-    const report = this.store.getDailyttendanceReport(date);
+    const report = this.store.getDailyAttendanceReport(date);
 
 
 
@@ -36004,7 +36004,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  openutoScheduleModal(gradeId) {
+  openAutoScheduleModal(gradeId) {
 
     const targetGradeId = gradeId || this.store.state.selectedScheduleGrade || "4sec-a";
 
@@ -36060,7 +36060,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <button class="btn btn-navy" onclick="window.app.confirmGenerateutoSchedule('${targetGradeId}')" style="font-weight: 800;">
+        <button class="btn btn-navy" onclick="window.app.confirmGenerateAutoSchedule('${targetGradeId}')" style="font-weight: 800;">
 
           ⚡ Generar y Publicar Horario Balanceado
 
@@ -36074,7 +36074,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  confirmGenerateutoSchedule(gradeId) {
+  confirmGenerateAutoSchedule(gradeId) {
 
     const targetGradeId = gradeId || this.store.state.selectedScheduleGrade || "4sec-a";
 
@@ -36430,7 +36430,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <datalist id="teacher-assigned-courses-list">
 
-              ${((this.store && typeof this.store.getTeacherssignedCourses === "function") ? this.store.getTeacherssignedCourses(this.store.getCurrentUser(), activeGradeId) : []).map(c => `
+              ${((this.store && typeof this.store.getTeacherAssignedCourses === "function") ? this.store.getTeacherAssignedCourses(this.store.getCurrentUser(), activeGradeId) : []).map(c => `
 
                 <option value="${c.name}">${c.grade || ''}</option>
 
@@ -36572,7 +36572,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     };
 
-    reader.readsDataURL(file);
+    reader.readAsDataURL(file);
 
   }
 
@@ -37356,7 +37356,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
   openStickerSheetModal() {
 
-    this.setNotebookctiveSubTab('stickers');
+    this.setNotebookActiveSubTab('stickers');
 
   }
 
@@ -37364,7 +37364,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
   // Cambiar pestaña del Módulo de Calificaciones
 
-  setGradesctiveTab(tab) {
+  setGradesActiveTab(tab) {
 
     this.store.state.activeGradesTab = tab;
 
@@ -37440,7 +37440,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  openddStudentModal(gradeId) {
+  openAddStudentModal(gradeId) {
 
     const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
 
@@ -37478,7 +37478,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       </div>
 
-      <form onsubmit="window.app.confirmddStudent(event)">
+      <form onsubmit="window.app.confirmAddStudent(event)">
 
         <div class="modal-body" style="padding: 20px; background: #f8fafc;">
 
@@ -37602,7 +37602,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  confirmddStudent(event) {
+  confirmAddStudent(event) {
 
     if (event) event.preventDefault();
 
@@ -37800,11 +37800,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       const content = e.target.result;
 
-      this.parsendPreviewExcelContent(content, gradeId);
+      this.parseAndPreviewExcelContent(content, gradeId);
 
     };
 
-    reader.readsText(file, "UTF-8");
+    reader.readAsText(file, "UTF-8");
 
   }
 
@@ -37912,13 +37912,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     if (!textarea) return;
 
-    this.parsendPreviewExcelContent(textarea.value, gradeId);
+    this.parseAndPreviewExcelContent(textarea.value, gradeId);
 
   }
 
 
 
-  parsendPreviewExcelContent(rawText, gradeId) {
+  parseAndPreviewExcelContent(rawText, gradeId) {
 
     if (!rawText || !rawText.trim()) return;
 
@@ -38146,7 +38146,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  downloaduxiliaryRegisterExcel(gradeId, courseName) {
+  downloadAuxiliaryRegisterExcel(gradeId, courseName) {
 
     const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
 
@@ -38680,7 +38680,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
   // Elimiónar todos los registros de estudiantes del aula activa
 
-  confirmClearllClassroomStudents(gradeId) {
+  confirmClearAllClassroomStudents(gradeId) {
 
     const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
 
@@ -38726,7 +38726,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     if (confirm(`⚠️ ¿Está seguro de elimiónar TODOS los (${count}) registros de estudiantes de ${gradeObj.label}?\n\nEsta acción vaciará por completo la nómina del aula seleccionada.`)) {
 
-      const removed = this.store.clearllStudentsFromGrade(gradeId);
+      const removed = this.store.clearAllStudentsFromGrade(gradeId);
 
       this.showToast(`✓ Se elimiónarontodos los registros de estudiantes de ${gradeObj.label} (${removed} alumnos retirados).`, "info");
 
@@ -39212,7 +39212,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     // Extraer apreciaciones docentes
 
-    const updatedppreciations = {
+    const updatedAppreciations = {
 
       b1: formData.get("app_b1") || "",
 
@@ -39230,7 +39230,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       grades: updatedGrades,
 
-      appreciations: updatedppreciations
+      appreciations: updatedAppreciations
 
     });
 
@@ -39622,7 +39622,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     setTimeout(() => {
 
-      const res = this.store.payndUnlockIntranet(paymentId, "Tarjeta Visa / Débito");
+      const res = this.store.payAndUnlockIntranet(paymentId, "Tarjeta Visa / Débito");
 
       this.closeModal();
 
@@ -39726,7 +39726,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     setTimeout(() => {
 
-      const res = this.store.payndUnlockIntranet(paymentId, "Yape Móvil");
+      const res = this.store.payAndUnlockIntranet(paymentId, "Yape Móvil");
 
       this.closeModal();
 
@@ -39812,7 +39812,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     setTimeout(() => {
 
-      const res = this.store.payndUnlockIntranet(paymentId, "Depósito Bancario BCP");
+      const res = this.store.payAndUnlockIntranet(paymentId, "Depósito Bancario BCP");
 
       this.closeModal();
 
@@ -40010,7 +40010,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-    const res = this.store.payndUnlockIntranet("PEN-08", method);
+    const res = this.store.payAndUnlockIntranet("PEN-08", method);
 
     this.closeModal();
 
@@ -40128,7 +40128,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     if (!t || !c) return;
 
-    this.store.addnnouncement(t, "Institucional", c, "normal");
+    this.store.addAnnouncement(t, "Institucional", c, "normal");
 
     this.closeModal();
 
@@ -40280,7 +40280,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     const currentUser = this.store.getCurrentUser();
 
-    const courses = this.store.getTeacherssignedCourses(currentUser, gradeId);
+    const courses = this.store.getTeacherAssignedCourses(currentUser, gradeId);
 
     if (courses && courses.length > 0) {
 
@@ -40340,9 +40340,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     const currentUser = this.store.getCurrentUser();
 
-    const assignedCourses = (this.store && typeof this.store.getTeacherssignedCourses === "function")
+    const assignedCourses = (this.store && typeof this.store.getTeacherAssignedCourses === "function")
 
-      ? this.store.getTeacherssignedCourses(currentUser)
+      ? this.store.getTeacherAssignedCourses(currentUser)
 
       : [];
 
@@ -40494,19 +40494,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               <span style="font-size: 11px; font-weight: 700; color: #64748b;">O probar condocumento de muestra:</span>
 
-              <button type="button" class="btn btn-outline btn-sm" onclick="window.app.loadDemoFileFornalysis('Guia_Trigonometria_Angulos_Dobles.pdf', '${course.id}')" style="font-size: 10.5px; padding: 3px 8px; font-weight: 700;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="window.app.loadDemoFileForAnalysis('Guia_Trigonometria_Angulos_Dobles.pdf', '${course.id}')" style="font-size: 10.5px; padding: 3px 8px; font-weight: 700;">
 
                 📕 Guía_Trigonometria.pdf
 
               </button>
 
-              <button type="button" class="btn btn-outline btn-sm" onclick="window.app.loadDemoFileFornalysis('Sesion_Arduino_Servomotores_S3.pptx', '${course.id}')" style="font-size: 10.5px; padding: 3px 8px; font-weight: 700;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="window.app.loadDemoFileForAnalysis('Sesion_Arduino_Servomotores_S3.pptx', '${course.id}')" style="font-size: 10.5px; padding: 3px 8px; font-weight: 700;">
 
                 Arduino_Robótica.pptx
 
               </button>
 
-              <button type="button" class="btn btn-outline btn-sm" onclick="window.app.loadDemoFileFornalysis('Laboratorio_Leyes_Termodiónamica_Carnot.docx', '${course.id}')" style="font-size: 10.5px; padding: 3px 8px; font-weight: 700;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="window.app.loadDemoFileForAnalysis('Laboratorio_Leyes_Termodiónamica_Carnot.docx', '${course.id}')" style="font-size: 10.5px; padding: 3px 8px; font-weight: 700;">
 
                 📘 Termodiónamica_Carnot.docx
 
@@ -40654,7 +40654,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       this.currentUploadedFileSize = (file.size / (1024 * 1024)).toFixed(1) + " MB";
 
-      this.runDocumentnalysisPipeline({
+      this.runDocumentAnalysisPipeline({
 
         name: file.name,
 
@@ -40668,13 +40668,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     };
 
-    reader.readsDataURL(file);
+    reader.readAsDataURL(file);
 
   }
 
 
 
-  loadDemoFileFornalysis(fileName, courseId) {
+  loadDemoFileForAnalysis(fileName, courseId) {
 
     this.currentUploadedFileData = null;
 
@@ -40682,7 +40682,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     this.currentUploadedFileSize = "2.9 MB";
 
-    this.runDocumentnalysisPipeline({
+    this.runDocumentAnalysisPipeline({
 
       name: fileName,
 
@@ -40696,7 +40696,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  runDocumentnalysisPipeline(fileInfo, courseId) {
+  runDocumentAnalysisPipeline(fileInfo, courseId) {
 
     const indicator = document.getElementById("ai-analysis-indicator");
 
@@ -40746,7 +40746,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          const analyzed = this.store.analyzendExtractMaterialFromDocument(fileInfo, courseId);
+          const analyzed = this.store.analyzeAndExtractMaterialFromDocument(fileInfo, courseId);
 
 
 
@@ -41254,7 +41254,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-    window.tempQuiznswers = {};
+    window.tempQuizAnswers = {};
 
     const evalObj = material.evaluation;
 
@@ -41264,7 +41264,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     const renderQuizModal = () => {
 
-      const answeredCount = Object.keys(window.tempQuiznswers).length;
+      const answeredCount = Object.keys(window.tempQuizAnswers).length;
 
 
 
@@ -41316,7 +41316,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           ${questions.map((q, qIdx) => {
 
-            const selectedOpt = window.tempQuiznswers[q.id];
+            const selectedOpt = window.tempQuizAnswers[q.id];
 
             return `
 
@@ -41412,13 +41412,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
   selectStudentQuiznswer(materialId, questionId, optionIndex) {
 
-    if (!window.tempQuiznswers) {
+    if (!window.tempQuizAnswers) {
 
-      window.tempQuiznswers = {};
+      window.tempQuizAnswers = {};
 
     }
 
-    window.tempQuiznswers[questionId] = optionIndex;
+    window.tempQuizAnswers[questionId] = optionIndex;
 
     this.startStudentQuiz(materialId);
 
@@ -41434,9 +41434,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-    const usernswers = window.tempQuiznswers || {};
+    const userAnswers = window.tempQuizAnswers || {};
 
-    const answeredCount = Object.keys(usernswers).length;
+    const answeredCount = Object.keys(userAnswers).length;
 
 
 
@@ -41462,7 +41462,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       studentName: currentStudent.name,
 
-      usernswers: usernswers,
+      userAnswers: userAnswers,
 
       timeSpent: "15 mión"
 
@@ -41500,7 +41500,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     const currentStudentId = currentStudent.code || currentStudent.id || "EST-2026-055";
 
-    const attempt = (material.studentttempts || []).find(a => a.studentId === currentStudentId) || (material.studentttempts && material.studentttempts[0]);
+    const attempt = (material.studentAttempts || []).find(a => a.studentId === currentStudentId) || (material.studentAttempts && material.studentAttempts[0]);
 
     if (!attempt) return;
 
@@ -41508,7 +41508,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     const questions = material.evaluation.questions || [];
 
-    const usernswers = attempt.usernswers || {};
+    const userAnswers = attempt.userAnswers || {};
 
 
 
@@ -41580,7 +41580,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         ${questions.map((q, idx) => {
 
-          const userns = usernswers[q.id];
+          const userns = userAnswers[q.id];
 
           const isCorrect = userns !== undefined && userns === q.correctIndex;
 
