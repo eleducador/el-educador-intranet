@@ -18,7 +18,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigión>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
@@ -56,7 +56,7 @@
 
   <!-- Contenedor Principal de la Intranet -->
 
-  <div class="apapp-container">
+  <div class="app-container">
 
     
 
@@ -68,13 +68,13 @@
 
         <img src="logo.png" alt="Escudo I.E.P. El Educador S.J.L." class="school-logo" onerror="this.src='assets/logo.png'">
 
-        <div class="school-brandióng">
+        <div class="school-branding">
 
-          <spanclas s="school-title">I. E. P.</span>
+          <span class="school-title">I. E. P.</span>
 
-          <spanclas s="school-name">El Educador</span>
+          <span class="school-name">El Educador</span>
 
-          <spanstyl e="font-size: 10px; color: var(--color-yellow-400); font-weight: 800; display: block; margión-top: 2px;">
+          <span style="font-size: 10px; color: var(--color-yellow-400); font-weight: 800; display: block; margin-top: 2px;">
 
             21 años dejando huellas
 
@@ -88,7 +88,7 @@
 
       <nav class="sidebar-nav">
 
-        <div class="nav-section-title">Coordiónación & Dirección</div>
+        <div class="nav-section-title">Coordinación & Dirección</div>
 
         
 
@@ -102,7 +102,7 @@
 
 
 
-        <!-- Módulos de Coordiónación & TI -->
+        <!-- Módulos de Coordinación & TI -->
 
         <a class="nav-item" data-view="database" id="nav-database" style="background: rgba(34,197,94,0.12); border: 1px dashed rgba(34,197,94,0.3); color: #86efac;">
 
@@ -110,7 +110,7 @@
 
           <span>Base de Datos & DB</span>
 
-          <spanclas s="nav-badge badge-yellow" style="background:#22c55e; color:#0b132b;">DB Online</span>
+          <span class="nav-badge badge-yellow" style="background:#22c55e; color:#0b132b;">DB Online</span>
 
         </a>
 
@@ -122,7 +122,7 @@
 
           <span>Gestión de Perfiles & Cuentas</span>
 
-          <spanclas s="nav-badge badge-yellow" style="background: #3b82f6; color: #ffffff;">PERFILES</span>
+          <span class="nav-badge badge-yellow" style="background: #3b82f6; color: #ffffff;">PERFILES</span>
 
         </a>
 
@@ -138,7 +138,7 @@
 
           <span>Registro de Estudiantes</span>
 
-          <spanclas s="nav-badge badge-yellow" style="background:#10b981; color:#0b132b; font-weight:900;">EXCEL</span>
+          <span class="nav-badge badge-yellow" style="background:#10b981; color:#0b132b; font-weight:900;">EXCEL</span>
 
         </a>
 
@@ -150,7 +150,7 @@
 
           <span>Lector de Cuadernos QR</span>
 
-          <spanclas s="nav-badge badge-yellow" style="background:#f59e0b; color:#0b132b;">CMARÍA VIVA</span>
+          <span class="nav-badge badge-yellow" style="background:#f59e0b; color:#0b132b;">CMARÍA VIVA</span>
 
         </a>
 
@@ -162,7 +162,7 @@
 
           <span>Registro de Notas</span>
 
-          <spanclas s="nav-badge badge-yellow">Bimestral</span>
+          <span class="nav-badge badge-yellow">Bimestral</span>
 
         </a>
 
@@ -194,7 +194,7 @@
 
           <span>Aula Virtual & Quizzes</span>
 
-          <spanclas s="nav-badge badge-yellow" id="badge-pendióng-tasks" style="background:#f59e0b; color:#0b132b; font-weight:800;">10P</span>
+          <span class="nav-badge badge-yellow" id="badge-pendióng-tasks" style="background:#f59e0b; color:#0b132b; font-weight:800;">10P</span>
 
         </a>
 
@@ -206,7 +206,7 @@
 
           <span>Registro de Ingreso & QR</span>
 
-          <spanclas s="nav-badge badge-yellow" style="background: #22c55e; color: #0b132b; font-weight: 800;">QR Puerta</span>
+          <span class="nav-badge badge-yellow" style="background: #22c55e; color: #0b132b; font-weight: 800;">QR Puerta</span>
 
         </a>
 
@@ -222,7 +222,7 @@
 
           <span>Informes & Circulares</span>
 
-          <spanclas s="nav-badge badge-yellow">N  003</span>
+          <span class="nav-badge badge-yellow">N°003</span>
 
         </a>
 
@@ -278,7 +278,7 @@
 
         <div class="header-left">
 
-          <buttonclas s="sidebar-toggle-btn" id="sidebar-toggle" aria-label="Abrir Menú">
+          <button class="sidebar-toggle-btn" id="sidebar-toggle" aria-label="Abrir Menú">
 
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
 
@@ -302,11 +302,11 @@
 
           <!-- Indicador y Botón de Sióncronización en la N ube -->
 
-          <buttonclas s="btnbtn-outline btn-sm" onclick="window.appStore.fetchServerState(false); window.app.showToast('✓ Sióncronizado enTiempo Real con la N ube Central', 'success');" style="color: #047857; border-color: #86efac; background: #f0fdf4; font-weight: 800; display: flex; align-items: center; gap: 6px; border-radius: 18px; paddióng: 6px 12px;" title="Sióncronizar ahora contodos los celulares y computadoras">
+          <button class="btn btn-outline btn-sm" onclick="window.appStore.fetchServerState(false); window.app.showToast('✓ Sióncronizado enTiempo Real con la N ube Central', 'success');" style="color: #047857; border-color: #86efac; background: #f0fdf4; font-weight: 800; display: flex; align-items: center; gap: 6px; border-radius: 18px; padding: 6px 12px;" title="Sióncronizar ahora contodos los celulares y computadoras">
 
-            <spanclas s="status-dot-green"></span>
+            <span class="status-dot-green"></span>
 
-            <spanstyl e="font-size: 11.5px;">N ube Activa</span>
+            <span style="font-size: 11.5px;">N ube Activa</span>
 
           </button>
 
@@ -314,11 +314,11 @@
 
           <!-- Botón de Conexión Móvil QR (Multi-Dispositivo) -->
 
-          <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openMultiDeviceConnectModal()" style="color: #1e3a8a; border-color: #93c5fd; background: #eff6ff; font-weight: 800; display: flex; align-items: center; gap: 6px; border-radius: 18px; paddióng: 6px 12px;" title="Conectar Celular / Escanear desde Móvil">
+          <button class="btn btn-outline btn-sm" onclick="window.app.openMultiDeviceConnectModal()" style="color: #1e3a8a; border-color: #93c5fd; background: #eff6ff; font-weight: 800; display: flex; align-items: center; gap: 6px; border-radius: 18px; padding: 6px 12px;" title="Conectar Celular / Escanear desde Móvil">
 
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
 
-            <spanstyl e="font-size: 11.5px;">Conectar Celular</span>
+            <span style="font-size: 11.5px;">Conectar Celular</span>
 
           </button>
 
@@ -326,11 +326,11 @@
 
           <!-- Campana de N otificaciones -->
 
-          <buttonclas s="notification-btn" aria-label="N otificaciones" onclick="window.app.navigate('comunicados')">
+          <button class="notification-btn" aria-label="N otificaciones" onclick="window.app.navigate('comunicados')">
 
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
 
-            <spanclas s="notif-badge">1</span>
+            <span class="notif-badge">1</span>
 
           </button>
 
@@ -348,9 +348,9 @@
 
             <div class="user-info">
 
-              <spanclas s="user-name" id="header-user-name" style="font-weight: 800; font-size: 13px; color: var(--color-navy-900);">Prof. Alex Lino</span>
+              <span class="user-name" id="header-user-name" style="font-weight: 800; font-size: 13px; color: var(--color-navy-900);">Prof. Alex Lino</span>
 
-              <spanclas s="user-role-tag" id="header-user-role" style="font-size: 11px; color: var(--text-muted); display: block;">Coordiónación & Documentación</span>
+              <span class="user-role-tag" id="header-user-role" style="font-size: 11px; color: var(--text-muted); display: block;">Coordinación & Documentación</span>
 
             </div>
 
@@ -360,11 +360,11 @@
 
           <!-- Botón Cambiar Contraseña -->
 
-          <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openChangePasswordModal()" style="color: #0f172a; border-color: #cbd5e1; background: #f8fafc; font-weight: 800; display: flex; align-items: center; gap: 4px;" title="Cambiar mi contraseña">
+          <button class="btn btn-outline btn-sm" onclick="window.app.openChangePasswordModal()" style="color: #0f172a; border-color: #cbd5e1; background: #f8fafc; font-weight: 800; display: flex; align-items: center; gap: 4px;" title="Cambiar mi contraseña">
 
             <span>🔑</span>
 
-            <spanstyl e="font-size: 11.5px;">Clave</span>
+            <span style="font-size: 11.5px;">Clave</span>
 
           </button>
 
@@ -372,7 +372,7 @@
 
           <!-- Botón de Cerrar Sesión -->
 
-          <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.handleLogout()" style="color: var(--color-red-600); border-color: var(--color-red-200); display: flex; align-items: center; gap: 4px;" title="Cerrar Sesión">
+          <button class="btn btn-outline btn-sm" onclick="window.app.handleLogout()" style="color: var(--color-red-600); border-color: var(--color-red-200); display: flex; align-items: center; gap: 4px;" title="Cerrar Sesión">
 
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
 
@@ -388,7 +388,7 @@
 
       <!-- rea de Contenido Principal Dinmico -->
 
-      <maini d="content-area" class="content-area">
+      <main id="content-area" class="content-area">
 
         <!-- Renderizado diónmicamente por JavaScript -->
 
@@ -406,7 +406,7 @@
 
   <!-- Modal Global Overlay -->
 
-  <div class="modal-overlay" id="apapp-modal-overlay"></div>
+  <div class="modal-overlay" id="app-modal-overlay"></div>
 
 
 

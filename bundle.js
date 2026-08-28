@@ -1,7 +1,7 @@
 /* === data.js === */
 /**
 
- * Datos Iniciales del Sistema - Institución Educativa Privada "EL EDUCDOR" (S.J.L.)
+ * Datos Iniciales del Sistema - Institución Educativa Privada "EL EDUCADOR" (S.J.L.)
 
  * "21 años dejando huellas" • UGEL 05
 
@@ -13,7 +13,7 @@ const initialData = {
 
   institution: {
 
-    name: "INSTITUCIÓN EDUCTIVA PRIVDÍA \"EL EDUCDOR\"",
+    name: "INSTITUCIÓN EDUCTIVA PRIVDÍA \"EL EDUCADOR\"",
 
     levels: "INICIL - PRIMRIA - SECUNDÍARIA",
 
@@ -33,7 +33,7 @@ const initialData = {
 
       targetmount: 24000.00,
 
-      reportCode: "INFORME- N  003 /ED - COORDINCIÓN Y DOCUMENTÍACIÓN  ",
+      reportCode: "INFORME- N003 /ED - COORDINCIÓN Y DOCUMENTÍACIÓN",
 
       reportDate: "15/08/2026"
 
@@ -67,7 +67,7 @@ const initialData = {
 
       role: "admin",
 
-      roleLabel: "Coordiónación General & Documentación",
+      roleLabel: "Coordinación General & Documentación",
 
       avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80",
 
@@ -625,7 +625,7 @@ const initialData = {
 
       { id: "asistencia", label: "📅 Asistencia de mi Hijo(a)", icon: "attendance", enabled: true },
 
-      { id: "comunicados", label: "Informes y Circulares", badge: "N  003", icon: "announcements", enabled: true },
+      { id: "comunicados", label: "Informes y Circulares", badge: "N003", icon: "announcements", enabled: true },
 
       { id: "pagos", label: "Pensiones & Recaudación", badge: "S/ 480", icon: "payments", enabled: true }
 
@@ -655,7 +655,7 @@ const initialData = {
 
       { id: "asistencia", label: "Registro de Ingreso & QR", badge: "EnVivo", icon: "attendance", enabled: true },
 
-      { id: "comunicados", label: "Informes & Circulares", badge: "N  003", icon: "announcements", enabled: true },
+      { id: "comunicados", label: "Informes & Circulares", badge: "N003", icon: "announcements", enabled: true },
 
       { id: "pagos", label: "Reportes Económicos & Caja", badge: "S/ 25,130", icon: "payments", enabled: true },
 
@@ -839,7 +839,7 @@ const initialData = {
 
       id: "EST-2026-089",
 
-      name: "ALBUJR ZEGÍARRÍA, MRINA DEL CRMEN  ",
+      name: "ALBUJR ZEGÍARRÍA, MRINA DEL CRMEN",
 
       dni: "75849301",
 
@@ -1063,7 +1063,7 @@ const initialData = {
 
       id: "EST-2026-011",
 
-      name: "BEN  ÍTEZ RUIZ, CRLOS",
+      name: "BENÍTEZ RUIZ, CRLOS",
 
       dni: "74891255",
 
@@ -2051,7 +2051,7 @@ const initialData = {
 
           topics: ["Domióniño y rango", "Parbolas encontextos reales", "Teorema del residuo"],
 
-          evaluation: "Prctica Calificada N  1"
+          evaluation: "Prctica Calificada N1"
 
         }
 
@@ -2485,11 +2485,11 @@ const initialData = {
 
     {
 
-      id: "ANN  -003-ED",
+      id: "ANN-003-ED",
 
-      title: "INFORME N  003 /ED - COORDINCIÓN Y DOCUMENTÍACIÓN   (15/08/2026)",
+      title: "INFORME N003 /ED - COORDINCIÓN Y DOCUMENTÍACIÓN (15/08/2026)",
 
-      category: "Coordiónación Institucional",
+      category: "Coordinación Institucional",
 
       priority: "high",
 
@@ -2517,7 +2517,7 @@ const initialData = {
 
 
 
-  // 6. Libro Oficial de Registro de Incidencias & Convivencia Escolar (Ley N  29719 / MINEDU)
+  // 6. Libro Oficial de Registro de Incidencias & Convivencia Escolar (Ley N29719 / MINEDU)
 
   behaviorIncidents: [],
 
@@ -2535,7 +2535,7 @@ const initialData = {
 
   // =========================================================================
 
-  // AULA VIRTUL: MTERILES SEMNALES Y EVLUCIONES DIN  ÁMICS (10 PREGUNTÍAS)
+  // AULA VIRTUL: MTERILES SEMNALES Y EVLUCIONES DINÁMICS (10 PREGUNTÍAS)
 
   // =========================================================================
 
@@ -2595,7 +2595,7 @@ const initialData = {
 
         id: "EVL-MT-S1",
 
-        title: "Evaluación Dinmica Semanal N  01: Funciones Cuadrticas",
+        title: "Evaluación Dinmica Semanal N01: Funciones Cuadrticas",
 
         timeLimitMinutes: 25,
 
@@ -2977,7 +2977,7 @@ const initialData = {
 
         id: "EVL-COMP-S1",
 
-        title: "Evaluación Dinmica Semanal N  01: Robótica y Sensores",
+        title: "Evaluación Dinmica Semanal N01: Robótica y Sensores",
 
         timeLimitMinutes: 20,
 
@@ -3293,7 +3293,7 @@ const initialData = {
 
         "Diagrama de Cuerpo Libre (DCL)",
 
-        "Fuerza de Rozamiento f_k = μ_k · N  ",
+        "Fuerza de Rozamiento f_k = μ_k · N",
 
         "Unidades en el Sistema Internacional (N ewton, kg, m/s²)"
 
@@ -3313,7 +3313,7 @@ const initialData = {
 
         id: "EVL-CTÍA-S1",
 
-        title: "Evaluación Dinmica Semanal N  01: Dinmica Lineal",
+        title: "Evaluación Dinmica Semanal N01: Dinmica Lineal",
 
         timeLimitMinutes: 20,
 
@@ -3357,7 +3357,7 @@ const initialData = {
 
             options: [
 
-              "N ewton (N  ), equivalente a kg · m / s²",
+              "N ewton (N), equivalente a kg · m / s²",
 
               "Joule (J)",
 
@@ -3369,7 +3369,7 @@ const initialData = {
 
             correctIndex: 0,
 
-            explanation: "1 N ewton (N  ) se define como la fuerza necesaria para acelerar 1 kg de masa a raízón de 1 m/s²."
+            explanation: "1 N ewton (N) se define como la fuerza necesaria para acelerar 1 kg de masa a raízón de 1 m/s²."
 
           },
 
@@ -3377,7 +3377,7 @@ const initialData = {
 
             id: 3,
 
-            question: "Si a unbloque de 5 kg se le aplica una fuerza neta horizontal de 20 N  , ¿cul es su aceleración?",
+            question: "Si a unbloque de 5 kg se le aplica una fuerza neta horizontal de 20 N, ¿cul es su aceleración?",
 
             options: [
 
@@ -3393,7 +3393,7 @@ const initialData = {
 
             correctIndex: 0,
 
-            explanation: "Despejando la aceleración: a = F / m = 20 N  / 5 kg = 4 m/s²."
+            explanation: "Despejando la aceleración: a = F / m = 20 N/ 5 kg = 4 m/s²."
 
           },
 
@@ -3473,7 +3473,7 @@ const initialData = {
 
             id: 7,
 
-            question: "La fuerza N ormal (N  ) ejercida por una superficie plana horizontal sobre unbloque enreposo es iguíal a:",
+            question: "La fuerza N ormal (N) ejercida por una superficie plana horizontal sobre unbloque enreposo es iguíal a:",
 
             options: [
 
@@ -3489,7 +3489,7 @@ const initialData = {
 
             correctIndex: 0,
 
-            explanation: "Enequilibrio vertical sobre superficie horizontal (ΣFy = 0), la fuerza N ormal equilibra exactamente al peso: N  = P = m · g."
+            explanation: "Enequilibrio vertical sobre superficie horizontal (ΣFy = 0), la fuerza N ormal equilibra exactamente al peso: N= P = m · g."
 
           },
 
@@ -3549,19 +3549,19 @@ const initialData = {
 
             options: [
 
-              "30 N  ",
+              "30 N",
 
-              "3.33 N  ",
+              "3.33 N",
 
-              "13 N  ",
+              "13 N",
 
-              "0.3 N  "
+              "0.3 N"
 
             ],
 
             correctIndex: 0,
 
-            explanation: "F = m · a = 10 kg × 3 m/s² = 30 N ewtons (N  )."
+            explanation: "F = m · a = 10 kg × 3 m/s² = 30 N ewtons (N)."
 
           }
 
@@ -4242,7 +4242,7 @@ class IntranetStore {
 
 
 
-  // Elimiónación Total enCascada (Borrado integral de Estudiante, Apoderado, Matrícula, N  ómióna y Pensiones)
+  // Elimiónación Total enCascada (Borrado integral de Estudiante, Apoderado, Matrícula, Nómina y Pensiones)
 
   cascadeDelete(identifier) {
 
@@ -4344,7 +4344,7 @@ class IntranetStore {
 
     const isValidDni = (d) => d && typeof d === 'string' && d.trim().length >= 6 && !["pendiente", "--", "sióndni", "null", "undefined"].includes(d.trim().toLowerCase());
 
-    const isValidGuardian = (g) => g && typeof g === 'string' && g.trim().length >= 4 && !["apoderado", "apoderado titular", "siónapoderado", "padre", "madre", "--"].includes(g.trim().toLowerCase());
+    const isValidGuardian = (g) => g && typeof g === 'string' && g.trim().length >= 4 && !["apoderado", "apoderado titular", "Sin apoderado", "padre", "madre", "--"].includes(g.trim().toLowerCase());
 
 
 
@@ -4498,7 +4498,7 @@ class IntranetStore {
 
 
 
-    // B. enrollments (Registro de Estudiantes / N  ómióna de Aula)
+    // B. enrollments (Registro de Estudiantes / Nómina de Aula)
 
     if (this.state.enrollments) {
 
@@ -5934,7 +5934,7 @@ class IntranetStore {
 
     
 
-    // Buscar estudiante real en la nómióna general
+    // Buscar estudiante real en la nómina general
 
     let enr = null;
 
@@ -6506,7 +6506,7 @@ class IntranetStore {
 
             subject: user.subject || tCourses.join(', '),
 
-            department: "Coordiónación Pedagógica",
+            department: "Coordinación Pedagógica",
 
             weeklyHours: parseInt(user.weeklyHours) || 24,
 
@@ -6558,7 +6558,7 @@ class IntranetStore {
 
         subject: t.subject || assignedCourses.join(", "),
 
-        department: "Coordiónación Pedagógica",
+        department: "Coordinación Pedagógica",
 
         weeklyHours: parseInt(t.weeklyHours) || 24,
 
@@ -6770,7 +6770,7 @@ class IntranetStore {
 
       birthDate: data.birthDate || "14/05/2010",
 
-      gender: data.gender || "Femenióno",
+      gender: data.gender || "Femenino",
 
       address: data.address || "SanJuan de Lurigancho",
 
@@ -6780,7 +6780,7 @@ class IntranetStore {
 
       insurance: data.insurance || "EsSalud / SIS",
 
-      allergies: data.allergies || "Siónalergias conocidas",
+      allergies: data.allergies || "Sin alergias conocidas",
 
       medicalCondition: data.medicalCondition || "N inguna (Apto para actividades escolares)",
 
@@ -6898,7 +6898,7 @@ class IntranetStore {
 
   // =========================================================================
 
-  // REGISTRO DE ESTUDINTES, N  ÓMINA OFICIL E IMPORTÍACIÓN MSIVA DESDE EXCEL
+  // REGISTRO DE ESTUDINTES, NÓMINA OFICIL E IMPORTÍACIÓN MSIVA DESDE EXCEL
 
   // =========================================================================
 
@@ -9156,7 +9156,7 @@ class IntranetStore {
 
       if (cleanCode.includes("COM")) matchedSubject = subjects[1];
 
-      else if (cleanCode.includes("CTÍA") || cleanCode.includes("CIEN  ")) matchedSubject = subjects[2];
+      else if (cleanCode.includes("CTÍA") || cleanCode.includes("CIEN")) matchedSubject = subjects[2];
 
       else if (cleanCode.includes("SOC") || cleanCode.includes("HIS")) matchedSubject = subjects[3];
 
@@ -9210,7 +9210,7 @@ class IntranetStore {
 
     const stampType = status === "Al Día" ? "stamp-al-dia" : status === "Observado" ? "stamp-observado" : "stamp-no-presento";
 
-    const stampText = status === "Al Día" ? "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA" : status === "Observado" ? "<spanclas s='status-dot-yellow'></span> OBSERVDO" : "<spanclas s='status-dot-red'></span> NO PRESENTÓ";
+    const stampText = status === "Al Día" ? "<span class='status-dot-green'></span> REVISDO & AL DÍA" : status === "Observado" ? "<span class='status-dot-yellow'></span> OBSERVDO" : "<span class='status-dot-red'></span> NO PRESENTÓ";
 
 
 
@@ -9232,11 +9232,11 @@ class IntranetStore {
 
       evaluator: currentUser.name || (currentRole === "auxiliar" ? "Lic. Carlos Medióna (Auxiliar)" : "Docente Responsable"),
 
-      evaluatorRole: currentRole === "auxiliar" ? "Auxiliar de Educación" : currentRole === "docente" ? "Docente Titular" : "Coordiónación",
+      evaluatorRole: currentRole === "auxiliar" ? "Auxiliar de Educación" : currentRole === "docente" ? "Docente Titular" : "Coordinación",
 
       date: new Date().toLocaleDateString("es-PE"),
 
-      time: new Date().toLocaleTimeString("es-PE", { hour: "2-digit", miónute: "2-digit" }),
+      time: new Date().toLocaleTimeString("es-PE", { hour: "2-digit", minute: "2-digit" }),
 
       score: scoreNum,
 
@@ -9412,7 +9412,7 @@ class IntranetStore {
 
 
 
-  // Obtener nómióna unificada de familias y estado financiero entiempo real
+  // Obtener nómina unificada de familias y estado financiero entiempo real
 
   getFamiliesFinancial() {
 
@@ -9896,7 +9896,7 @@ class IntranetStore {
 
     // 07:00 a 07:45 AM -> Presente (Puntual)
 
-    // 07:46 a 08:30 AM -> Tardanza (+X miónde demora)
+    // 07:46 a 08:30 AM -> Tardanza (+X min de demora)
 
     // 08:31 AM enadelante -> Inasistencia / Falta (Puerta cerrada a las 08:30 AM)
 
@@ -9940,7 +9940,7 @@ class IntranetStore {
 
           delayMinutes = (hour === 7) ? (mión - 45) : (15 + mión);
 
-          observations = `Tardanza enportera (+${delayMinutes} miónde retraso)`;
+          observations = `Tardanza enportera (+${delayMinutes} min de retraso)`;
 
         } else if (hour >= 8 && mión > 30) {
 
@@ -10268,7 +10268,7 @@ class IntranetStore {
 
       date: incidentData.date || new Date().toLocaleDateString("es-PE"),
 
-      time: incidentData.time || new Date().toLocaleTimeString("es-PE", { hour: '2-digit', miónute: '2-digit' }),
+      time: incidentData.time || new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' }),
 
       reportedBy: incidentData.reportedBy || (this.getCurrentUser() ? this.getCurrentUser().name : "Prof. Alex Lino"),
 
@@ -10278,7 +10278,7 @@ class IntranetStore {
 
       location: incidentData.location || "Aula 304",
 
-      description: incidentData.description || "Sióndescripción",
+      description: incidentData.description || "Sin descripción",
 
       correctiveMeasure: incidentData.correctiveMeasure || "Dilogo reflexivo y compromiso formativo.",
 
@@ -10402,7 +10402,7 @@ class IntranetStore {
 
     const newnn = {
 
-      id: `ANN  -${Math.floor(50 + Math.random() * 50)}`,
+      id: `ANN-${Math.floor(50 + Math.random() * 50)}`,
 
       title: title,
 
@@ -10594,7 +10594,7 @@ class IntranetStore {
 
   // =========================================================================
 
-  // MÓDULO DE AULA VIRTUL Y EVLUCIONES DIN  ÁMICS (10 PREGUNTÍAS)
+  // MÓDULO DE AULA VIRTUL Y EVLUCIONES DINÁMICS (10 PREGUNTÍAS)
 
   // =========================================================================
 
@@ -11302,13 +11302,13 @@ class IntranetStore {
 
       total: 20,
 
-      date: new Date().toLocaleDateString("es-PE") + " " + new Date().toLocaleTimeString("es-PE", { hour: '2-digit', miónute: '2-digit' }),
+      date: new Date().toLocaleDateString("es-PE") + " " + new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' }),
 
       status: status,
 
       correctCount: correctCount,
 
-      timeSpent: attemptData.timeSpent || "12 mión",
+      timeSpent: attemptData.timeSpent || "12 min",
 
       usernswers: usernswers,
 
@@ -11424,7 +11424,7 @@ class IntranetStore {
 
     const newNote = {
 
-      id: `AGN  -2026-${String(Math.floor(Math.random() * 900) + 100)}`,
+      id: `AGN-2026-${String(Math.floor(Math.random() * 900) + 100)}`,
 
       studentCode: student ? (student.studentCode || student.dni) : (noteData.studentCode || "EST-2026-055"),
 
@@ -11438,7 +11438,7 @@ class IntranetStore {
 
       date: noteData.date || new Date().toLocaleDateString("es-PE"),
 
-      time: noteData.time || new Date().toLocaleTimeString("es-PE", { hour: '2-digit', miónute: '2-digit' }),
+      time: noteData.time || new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' }),
 
       type: noteData.type || "pedagogica",
 
@@ -11502,7 +11502,7 @@ class IntranetStore {
 
     note.signedBy = signedBy;
 
-    note.signedDate = new Date().toLocaleDateString("es-PE") + " " + new Date().toLocaleTimeString("es-PE", { hour: '2-digit', miónute: '2-digit' });
+    note.signedDate = new Date().toLocaleDateString("es-PE") + " " + new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' });
 
 
 
@@ -11901,7 +11901,7 @@ const Components = {
 
   // =========================================================================
 
-  // N AVEGÍACIÓN DIN  ÁMICA CONESPCIOS SELECTOS POR PERFIL DE USURIO
+  // N AVEGÍACIÓN DINÁMICA CONESPCIOS SELECTOS POR PERFIL DE USURIO
 
   // =========================================================================
 
@@ -12029,7 +12029,7 @@ const Components = {
 
               <span>${t.label}</span>
 
-              ${t.badge ? `<spanclas s="nav-badge ${isQR ? 'badge-yellow' : isExcel ? 'badge-yellow' : isBoleta ? 'badge-yellow' : 'badge-red'}">${t.badge}</span>` : ''}
+              ${t.badge ? `<span class="nav-badge ${isQR ? 'badge-yellow' : isExcel ? 'badge-yellow' : isBoleta ? 'badge-yellow' : 'badge-red'}">${t.badge}</span>` : ''}
 
             </a>
 
@@ -12043,11 +12043,11 @@ const Components = {
 
 
 
-    // Default: Coordiónación General & Documentación (Prof. Alex Lino / Admin)
+    // Default: Coordinación General & Documentación (Prof. Alex Lino / Admin)
 
     return `
 
-      <div class="nav-section-title">Coordiónación & Dirección</div>
+      <div class="nav-section-title">Coordinación & Dirección</div>
 
       
 
@@ -12067,7 +12067,7 @@ const Components = {
 
         <span>Base de Datos & DB</span>
 
-        <spanclas s="nav-badge badge-yellow" style="background:#22c55e; color:#0b132b;">DB Online</span>
+        <span class="nav-badge badge-yellow" style="background:#22c55e; color:#0b132b;">DB Online</span>
 
       </a>
 
@@ -12079,7 +12079,7 @@ const Components = {
 
         <span>Cuentas, Perfiles & Pestañas</span>
 
-        <spanclas s="nav-badge badge-red">ADMIN  </span>
+        <span class="nav-badge badge-red">ADMIN</span>
 
       </a>
 
@@ -12095,7 +12095,7 @@ const Components = {
 
         <span>Registro de Estudiantes</span>
 
-        <spanclas s="nav-badge badge-yellow" style="background:#10b981; color:#0b132b; font-weight:900;">EXCEL</span>
+        <span class="nav-badge badge-yellow" style="background:#10b981; color:#0b132b; font-weight:900;">EXCEL</span>
 
       </a>
 
@@ -12107,7 +12107,7 @@ const Components = {
 
         <span>Lector de Cuadernos QR</span>
 
-        <spanclas s="nav-badge badge-yellow" style="background:#f59e0b; color:#0b132b;">CMARÍA VIVA</span>
+        <span class="nav-badge badge-yellow" style="background:#f59e0b; color:#0b132b;">CMARÍA VIVA</span>
 
       </a>
 
@@ -12119,7 +12119,7 @@ const Components = {
 
         <span>Registro de Notas</span>
 
-        <spanclas s="nav-badge badge-yellow">Bimestral</span>
+        <span class="nav-badge badge-yellow">Bimestral</span>
 
       </a>
 
@@ -12151,7 +12151,7 @@ const Components = {
 
         <span>Aula Virtual / Tareas</span>
 
-        <spanclas s="nav-badge badge-red" id="badge-pendióng-tasks">1</span>
+        <span class="nav-badge badge-red" id="badge-pendióng-tasks">1</span>
 
       </a>
 
@@ -12163,7 +12163,7 @@ const Components = {
 
         <span>Registro de Ingreso & QR</span>
 
-        <spanclas s="nav-badge badge-yellow" style="background: #22c55e; color: #0b132b; font-weight: 800;">QR Puerta</span>
+        <span class="nav-badge badge-yellow" style="background: #22c55e; color: #0b132b; font-weight: 800;">QR Puerta</span>
 
       </a>
 
@@ -12179,7 +12179,7 @@ const Components = {
 
         <span>Informes & Circulares</span>
 
-        <spanclas s="nav-badge badge-yellow">N  003</span>
+        <span class="nav-badge badge-yellow">N003</span>
 
       </a>
 
@@ -12225,11 +12225,11 @@ const Components = {
 
             <div>
 
-              <div style="font-size: 11px; font-weight: 800; color: #0b132b; letter-spacióng: 0.1em; text-transform: uppercase;">INSTITUCIÓN EDUCTIVA PRIVDÍA</div>
+              <div style="font-size: 11px; font-weight: 800; color: #0b132b; letter-spacing: 0.1em; text-transform: uppercase;">INSTITUCIÓN EDUCTIVA PRIVDÍA</div>
 
-              <div style="font-size: 26px; font-weight: 900; color: #0b132b; font-family: 'Plus Jakarta Sans', serif; line-height: 1.1;">“EL EDUCDOR”</div>
+              <div style="font-size: 26px; font-weight: 900; color: #0b132b; font-family: 'Plus Jakarta Sans', serif; line-height: 1.1;">“EL EDUCADOR”</div>
 
-              <div style="font-size: 12px; font-weight: 700; color: #dc2626; letter-spacióng: 0.15em;">INICIL – PRIMRIA – SECUNDÍARIA • UGEL 05</div>
+              <div style="font-size: 12px; font-weight: 700; color: #dc2626; letter-spacing: 0.15em;">INICIL – PRIMRIA – SECUNDÍARIA • UGEL 05</div>
 
             </div>
 
@@ -12243,7 +12243,7 @@ const Components = {
 
         </div>
 
-        <div style="text-align: center; margión-top: 10px;">
+        <div style="text-align: center; margin-top: 10px;">
 
           <div style="font-size: 15px; font-weight: 900; text-decoration: underline; color: #0b132b; text-transform: uppercase;">${docTitle}</div>
 
@@ -12271,9 +12271,9 @@ const Components = {
 
             <img src="logo.png" alt="Colegio El Educador S.J.L." class="login-school-logo" style="object-fit: contain;" onerror="this.src='assets/logo.png'">
 
-            <h2 class="login-title">I.E.P. "EL EDUCDOR"</h2>
+            <h2 class="login-title">I.E.P. "EL EDUCADOR"</h2>
 
-            <div style="background: linear-gradient(90deg, #f59e0b, #fbbf24); color: #0b132b; font-size: 11px; font-weight: 800; paddióng: 3px 12px; border-radius: 20px; display: inline-block; margión: 4px 0 8px;">
+            <div style="background: linear-gradient(90deg, #f59e0b, #fbbf24); color: #0b132b; font-size: 11px; font-weight: 800; padding: 3px 12px; border-radius: 20px; display: inline-block; margin: 4px 0 8px;">
 
               21 años dejando huellas • S.J.L. • UGEL 05
 
@@ -12303,7 +12303,7 @@ const Components = {
 
             <form id="login-form" onsubmit="window.app.handleLogin(event)">
 
-              <div class="form-group" style="margión-bottom: 16px;">
+              <div class="form-group" style="margin-bottom: 16px;">
 
                 <label class="form-label" for="login-username" style="font-weight: 800; font-size: 12.5px; color: var(--color-navy-900);">
 
@@ -12311,17 +12311,17 @@ const Components = {
 
                 </label>
 
-                <input type="text" id="login-username" class="form-control" placeholder="Ej. admin, roberto.silva, auxiliar, sofia.mendez" required autofocus style="border-radius: 22px; paddióng: 13px 20px; font-size: 14px; border: 1.5px solid #cbd5e1; background: #f8fafc; box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);" />
+                <input type="text" id="login-username" class="form-control" placeholder="Ej. admin, roberto.silva, auxiliar, sofia.mendez" required autofocus style="border-radius: 22px; padding: 13px 20px; font-size: 14px; border: 1.5px solid #cbd5e1; background: #f8fafc; box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);" />
 
               </div>
 
 
 
-              <div class="form-group" style="margión-bottom: 18px;">
+              <div class="form-group" style="margin-bottom: 18px;">
 
-                <div style="display:flex; justify-content:space-between; align-items:center; margión-bottom: 5px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
 
-                  <label class="form-label" for="login-password" style="font-weight: 800; font-size: 12.5px; color: var(--color-navy-900); margión: 0;">
+                  <label class="form-label" for="login-password" style="font-weight: 800; font-size: 12.5px; color: var(--color-navy-900); margin: 0;">
 
                     Contraseña:
 
@@ -12333,9 +12333,9 @@ const Components = {
 
                 <div class="password-input-group">
 
-                  <input type="password" id="login-password" class="form-control" placeholder="••••••••" required style="border-radius: 22px; paddióng: 13px 44px 13px 20px; font-size: 14px; border: 1.5px solid #cbd5e1; background: #f8fafc; box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);" />
+                  <input type="password" id="login-password" class="form-control" placeholder="••••••••" required style="border-radius: 22px; padding: 13px 44px 13px 20px; font-size: 14px; border: 1.5px solid #cbd5e1; background: #f8fafc; box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);" />
 
-                  <buttontyp e="button" class="toggle-password-btn" onclick="window.app.togglePasswordVisibility()" aria-label="Mostrar contraseña" style="right: 14px;">
+                  <button type="button" class="toggle-password-btn" onclick="window.app.togglePasswordVisibility()" aria-label="Mostrar contraseña" style="right: 14px;">
 
                     <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="13" r="3"></circle></svg>
 
@@ -12347,11 +12347,7 @@ const Components = {
 
 
 
-              <buttontyp e="submit" class="btnbtn-navy" style="width: 100%; paddióng: 13px; font-size: 14px; font-weight: 900; border-radius: 22px; box-shadow: 0 4px 14px rgba(11,19,43,0.3); transition: all 0.2s ease;">
-
-                Ingresar al Sistema
-
-              </button>
+              <button type="submit" class="btn btn-gold" style="width: 100%; padding: 13px; font-size: 15px; font-weight: 900; border-radius: 22px; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4); text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s ease;">Ingresar al Sistema</button>
 
             </form>
 
@@ -12411,7 +12407,7 @@ const Components = {
 
 
 
-  // Dashboard - Coordiónación
+  // Dashboard - Coordinación
 
   renderdmiónDashboard(state, user) {
 
@@ -12429,17 +12425,17 @@ const Components = {
 
           <div class="welcome-content">
 
-            <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
 
-              <spanclas s="status-badge status-approved" style="background: rgba(245, 158, 11, 0.2); color: #fde047; border: 1px solid var(--color-yellow-500);">
+              <span class="status-badge status-approved" style="background: rgba(245, 158, 11, 0.2); color: #fde047; border: 1px solid var(--color-yellow-500);">
 
-                ★ COORDINCIÓN   & DOCUMENTÍACIÓN   • I.E.P. "EL EDUCDOR"
+                ★ COORDINCIÓN & DOCUMENTÍACIÓN • I.E.P. "EL EDUCADOR"
 
               </span>
 
-              <spanclas s="status-badge status-approved" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid #22c55e;">
+              <span class="status-badge status-approved" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid #22c55e;">
 
-                <spanclas s='status-dot-green'></span> 21 años dejando huellas (S.J.L. - UGEL 05)
+                <span class='status-dot-green'></span> 21 años dejando huellas (S.J.L. - UGEL 05)
 
               </span>
 
@@ -12455,33 +12451,33 @@ const Components = {
 
               <div class="metric-card-mióni">
 
-                <spanclas s="metric-label">Recaudación Agosto</span>
+                <span class="metric-label">Recaudación Agosto</span>
 
-                <spanclas s="metric-val highlight-green">S/ 25,130.00</span>
-
-              </div>
-
-              <div class="metric-card-mióni">
-
-                <spanclas s="metric-label">Personal & Docentes</span>
-
-                <spanclas s="metric-val highlight-yellow">${usersCount}</span>
+                <span class="metric-val highlight-green">S/ 25,130.00</span>
 
               </div>
 
               <div class="metric-card-mióni">
 
-                <spanclas s="metric-label">Lector Cmara QR</span>
+                <span class="metric-label">Personal & Docentes</span>
 
-                <spanclas s="metric-val highlight-yellow">ACTIVO [Cmara]</span>
+                <span class="metric-val highlight-yellow">${usersCount}</span>
 
               </div>
 
               <div class="metric-card-mióni">
 
-                <spanclas s="metric-label">Base de Datos</span>
+                <span class="metric-label">Lector Cmara QR</span>
 
-                <spanclas s="metric-val highlight-green">ENDISCO</span>
+                <span class="metric-val highlight-yellow">ACTIVO [Cmara]</span>
+
+              </div>
+
+              <div class="metric-card-mióni">
+
+                <span class="metric-label">Base de Datos</span>
+
+                <span class="metric-val highlight-green">ENDISCO</span>
 
               </div>
 
@@ -12493,15 +12489,15 @@ const Components = {
 
 
 
-        <!-- Módulos Clave de Coordiónación -->
+        <!-- Módulos Clave de Coordinación -->
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(260px, 1fr)); gap: var(--space-4); margión-bottom: var(--space-6);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6);">
 
           <!-- 0. Registro de Ingreso y Asistencia QR (Puerta) -->
 
           <div class="card" style="border-top: 4px solid #10b981; background: #f0fdf4;">
 
-            <div style="display:flex; justify-content:space-between; align-items:center; margión-bottom: 4px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 4px;">
 
               <h4 style="font-size: var(--font-size-base); font-weight: 900; color: #065f46;">
 
@@ -12509,17 +12505,17 @@ const Components = {
 
               </h4>
 
-              <spanclas s="status-badge status-approved">Auxiliar / Puerta</span>
+              <span class="status-badge status-approved">Auxiliar / Puerta</span>
 
             </div>
 
-            <p style="font-size: 12px; color: #166534; margión-bottom: var(--space-4);">
+            <p style="font-size: 12px; color: #166534; margin-bottom: var(--space-4);">
 
               Registro biométrico/QR enportera, parte diario de inasistencias a las 08:30 AM y libro de incidencias.
 
             </p>
 
-            <buttonclas s="btnbtn-sm" onclick="window.app.navigate('asistencia')" style="background: #047857; color: white; width: 100%; font-weight: 800; paddióng: 8px;">
+            <button class="btn btn-sm" onclick="window.app.navigate('asistencia')" style="background: #047857; color: white; width: 100%; font-weight: 800; padding: 8px;">
 
               Acceder al Control de Asistencia
 
@@ -12533,7 +12529,7 @@ const Components = {
 
           <div class="card" style="border-top: 4px solid var(--color-yellow-500); background: #fffdf5;">
 
-            <div style="display:flex; justify-content:space-between; align-items:center; margión-bottom: 4px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 4px;">
 
               <h4 style="font-size: var(--font-size-base); font-weight: bold; color: var(--color-navy-900);">
 
@@ -12541,17 +12537,17 @@ const Components = {
 
               </h4>
 
-              <spanclas s="status-badge status-approved" style="background:#f59e0b; color:#0b132b;">EnVivo</span>
+              <span class="status-badge status-approved" style="background:#f59e0b; color:#0b132b;">EnVivo</span>
 
             </div>
 
-            <p style="font-size: 12px; color: var(--text-secondary); margión-bottom: var(--space-4);">
+            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: var(--space-4);">
 
               Abra la cmara de su celular o computadora para escanear y calificar cuadernos escolares al instante.
 
             </p>
 
-            <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.navigate('cuadernos-qr')" style="width: 100%; font-weight: 800;">
+            <button class="btn btn-gold btn-sm" onclick="window.app.navigate('cuadernos-qr')" style="width: 100%; font-weight: 800;">
 
               [Cmara] Abrir Escner por Cmara
 
@@ -12565,19 +12561,19 @@ const Components = {
 
           <div class="card" style="border-top: 4px solid var(--color-navy-700);">
 
-            <h4 style="font-size: var(--font-size-base); font-weight: bold; color: var(--color-navy-900); margión-bottom: 4px;">
+            <h4 style="font-size: var(--font-size-base); font-weight: bold; color: var(--color-navy-900); margin-bottom: 4px;">
 
               Registro Oficial de Notas
 
             </h4>
 
-            <p style="font-size: 12px; color: var(--text-secondary); margión-bottom: var(--space-4);">
+            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: var(--space-4);">
 
               Edición de calificaciones del 1, 2, 3 y 4 Bimestre conpromedios automticos.
 
             </p>
 
-            <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.navigate('calificaciones')" style="width: 100%;">
+            <button class="btn btn-navy btn-sm" onclick="window.app.navigate('calificaciones')" style="width: 100%;">
 
               Ver y Modificar Calificaciones
 
@@ -12587,23 +12583,23 @@ const Components = {
 
 
 
-          <!-- 3. Informe N  003 -->
+          <!-- 3. Informe N003 -->
 
           <div class="card" style="border-top: 4px solid var(--color-red-500);">
 
-            <h4 style="font-size: var(--font-size-base); font-weight: bold; color: var(--color-navy-900); margión-bottom: 4px;">
+            <h4 style="font-size: var(--font-size-base); font-weight: bold; color: var(--color-navy-900); margin-bottom: 4px;">
 
-              Informe Oficial N  003/ED
+              Informe Oficial N003/ED
 
             </h4>
 
-            <p style="font-size: 12px; color: var(--text-secondary); margión-bottom: var(--space-4);">
+            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: var(--space-4);">
 
               Recaudación de agosto (S/ 25,130), 4ta categora y expedientes ante la UGEL 05.
 
             </p>
 
-            <buttonclas s="btnbtn-red btn-sm" onclick="window.app.showOfficialReportModal()" style="width: 100%;">
+            <button class="btn btn-red btn-sm" onclick="window.app.showOfficialReportModal()" style="width: 100%;">
 
               Ver Documento Oficial
 
@@ -12621,7 +12617,7 @@ const Components = {
 
              ========================================================================= -->
 
-        <div class="card" style="margión-bottom: var(--space-6); border-top: 4px solid var(--color-navy-800);">
+        <div class="card" style="margin-bottom: var(--space-6); border-top: 4px solid var(--color-navy-800);">
 
           <div class="card-header" style="flex-wrap: wrap; gap: 10px;">
 
@@ -12629,9 +12625,9 @@ const Components = {
 
               <div style="display: flex; align-items: center; gap: 8px;">
 
-                <h3 class="card-title" style="margión: 0; font-size: 16px;">🏛️ Estructura de Grados Institucionales</h3>
+                <h3 class="card-title" style="margin: 0; font-size: 16px;">🏛️ Estructura de Grados Institucionales</h3>
 
-                <spanclas s="status-badge status-approved" style="background: #e0e7ff; color: #3730a3; font-weight: 800; font-size: 11px;">
+                <span class="status-badge status-approved" style="background: #e0e7ff; color: #3730a3; font-weight: 800; font-size: 11px;">
 
                   ${(state.academicConfig && state.academicConfig.hasSections) ? 'Modo Multi-Sección Habilitado' : 'Modelo Grados Únicos (SiónSecciones)'}
 
@@ -12639,7 +12635,7 @@ const Components = {
 
               </div>
 
-              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margión-top: 4px;">
+              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
                 El colegio opera bajo el modelo de <strong>Grados Únicos</strong> (sióndivisiones paraúlelas A/B/C por defecto). Puede editar los grados, aulas físicas, tutores o habilitar secciones si es requerido.
 
@@ -12651,13 +12647,13 @@ const Components = {
 
             <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
 
-              <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.togglecademicSections(${!(state.academicConfig && state.academicConfig.hasSections)})" style="font-size: 11.5px; font-weight: 700;">
+              <button class="btn btn-outline btn-sm" onclick="window.app.togglecademicSections(${!(state.academicConfig && state.academicConfig.hasSections)})" style="font-size: 11.5px; font-weight: 700;">
 
                 ${(state.academicConfig && state.academicConfig.hasSections) ? 'Desactivar Secciones' : '⚙️ Habilitar Secciones'}
 
               </button>
 
-              <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.opencreateGradeModal()" style="font-weight: 800; font-size: 11.5px;">
+              <button class="btn btn-navy btn-sm" onclick="window.app.opencreateGradeModal()" style="font-weight: 800; font-size: 11.5px;">
 
                 + Agregar N uevo Grado
 
@@ -12701,7 +12697,7 @@ const Components = {
 
                     <td>
 
-                      <spanclas s="status-badge ${g.level === 'Inicial' ? 'status-pendióng' : g.level === 'Primaria' ? 'status-approved' : 'status-failed'}" style="font-size: 10px; font-weight: 800;">
+                      <span class="status-badge ${g.level === 'Inicial' ? 'status-pendióng' : g.level === 'Primaria' ? 'status-approved' : 'status-failed'}" style="font-size: 10px; font-weight: 800;">
 
                         ${g.level}
 
@@ -12713,7 +12709,7 @@ const Components = {
 
                     <td>
 
-                      <spanstyl e="color: ${g.section ? 'var(--color-navy-900)' : 'var(--text-muted)'}; font-weight: ${g.section ? '800' : 'normal'};">
+                      <span style="color: ${g.section ? 'var(--color-navy-900)' : 'var(--text-muted)'}; font-weight: ${g.section ? '800' : 'normal'};">
 
                         ${g.section ? g.section : ((state.academicConfig && state.academicConfig.hasSections) ? 'Siónasignar' : 'Única')}
 
@@ -12723,17 +12719,17 @@ const Components = {
 
                     <td><code>${g.classroom || 'Pabellón Central'}</code></td>
 
-                    <td>${g.tutor || '<spanstyl e="color:#94a3b8; font-style:italic;">Por asignar</span>'}</td>
+                    <td>${g.tutor || '<span style="color:#94a3b8; font-style:italic;">Por asignar</span>'}</td>
 
                     <td style="text-align: right;">
 
-                      <buttonclas s="btnbtn-sm btn-outline" onclick="window.app.openEditGradeModal('${g.id}')" title="Editar Grado" style="paddióng: 3px 8px; font-size: 11px;">
+                      <button class="btn btn-sm btn-outline" onclick="window.app.openEditGradeModal('${g.id}')" title="Editar Grado" style="padding: 3px 8px; font-size: 11px;">
 
                         ✏️ Editar
 
                       </button>
 
-                      <buttonclas s="btnbtn-sm btn-red" onclick="window.app.confirmDeleteGrade('${g.id}')" title="Elimiónar Grado" style="paddióng: 3px 8px; font-size: 11px;">
+                      <button class="btn btn-sm btn-red" onclick="window.app.confirmDeleteGrade('${g.id}')" title="Elimiónar Grado" style="padding: 3px 8px; font-size: 11px;">
 
                         🗑️
 
@@ -12761,7 +12757,7 @@ const Components = {
 
             <h3 class="card-title">Plana Docente & Gestión de 4ta Categora / Privilegios</h3>
 
-            <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.opencreateUserModal()">+ Agregar Personal</button>
+            <button class="btn btn-outline btn-sm" onclick="window.app.opencreateUserModal()">+ Agregar Personal</button>
 
           </div>
 
@@ -12779,31 +12775,31 @@ const Components = {
 
                     <td><code>${u.code}</code></td>
 
-                    <td><strong>${u.name}</strong><br><spanstyl e="font-size:11px; color:var(--text-muted);">${u.email}</span></td>
+                    <td><strong>${u.name}</strong><br><span style="font-size:11px; color:var(--text-muted);">${u.email}</span></td>
 
                     <td>${u.detail}</td>
 
-                    <td><spanclas s="status-badge status-approved">✓ Enviado Contador</span></td>
+                    <td><span class="status-badge status-approved">✓ Enviado Contador</span></td>
 
-                    <td><spanclas s="status-badge ${u.hasdmiónPrivilege ? 'status-approved' : 'status-pendióng'}">${u.hasdmiónPrivilege ? '★ Permisos Admin' : 'Docente'}</span></td>
+                    <td><span class="status-badge ${u.hasdmiónPrivilege ? 'status-approved' : 'status-pendióng'}">${u.hasdmiónPrivilege ? '★ Permisos Admin' : 'Docente'}</span></td>
 
                     <td>
 
                       <div style="display: flex; gap: 4px; align-items: center;">
 
-                        <buttonclas s="btnbtn-sm ${u.hasdmiónPrivilege ? 'btn-outline' : 'btn-gold'}" onclick="window.app.toggleTeacherdmiónPrivilege('${u.id}')" title="${u.hasdmiónPrivilege ? 'Revocar Admin' : 'Conceder Admin'}" style="paddióng: 4px 8px; font-size: 11px;">
+                        <button class="btn btn-sm ${u.hasAdminPrivilege || u.hasdmiónPrivilege ? 'btn-outline' : 'btn-gold'}" onclick="window.app.toggleTeacherdmiónPrivilege('${u.id}')" title="${u.hasAdminPrivilege || u.hasdmiónPrivilege ? 'Revocar Admin' : 'Conceder Admin'}" style="padding: 4px 8px; font-size: 11px;">
 
                           ${u.hasdmiónPrivilege ? '★ Admin' : '☆'}
 
                         </button>
 
-                        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openEditUserModal('${u.id}')" title="Editar datos del docente" style="paddióng: 4px 8px;">
+                        <button class="btn btn-outline btn-sm" onclick="window.app.openEditUserModal('${u.id}')" title="Editar datos del docente" style="padding: 4px 8px;">
 
                           ✏️
 
                         </button>
 
-                        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.confirmDeleteUser('${u.id}')" title="Elimiónar docente" style="paddióng: 4px 8px; color: var(--color-red-600);">
+                        <button class="btn btn-outline btn-sm" onclick="window.app.confirmDeleteUser('${u.id}')" title="Elimiónar docente" style="padding: 4px 8px; color: var(--color-red-600);">
 
                           🗑️
 
@@ -12957,7 +12953,7 @@ const Components = {
 
         <!-- Cabecera Institucional -->
 
-        <div class="card" style="margión-bottom: var(--space-6); background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: #ffffff;">
+        <div class="card" style="margin-bottom: var(--space-6); background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: #ffffff;">
 
           <div class="card-header" style="border-bottom: 1px solid rgba(255,255,255,0.15); flex-wrap: wrap; gap: 14px;">
 
@@ -12965,17 +12961,17 @@ const Components = {
 
               <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
 
-                <h2 class="card-title" style="font-size: var(--font-size-xl); color: #fde047; margión: 0;">
+                <h2 class="card-title" style="font-size: var(--font-size-xl); color: #fde047; margin: 0;">
 
                   📋 Registro Oficial de Estudiantes & Registro Auxiliar
 
                 </h2>
 
-                <spanclas s="status-badge" style="background: #22c55e; color: #0b132b; font-weight: 900;">Periodo 2026</span>
+                <span class="status-badge" style="background: #22c55e; color: #0b132b; font-weight: 900;">Periodo 2026</span>
 
                 ${isTutor ? `
 
-                  <spanclas s="status-badge" style="background: #fef08a; color: #854d0e; font-weight: 900; border: 1px solid #facc15;">
+                  <span class="status-badge" style="background: #fef08a; color: #854d0e; font-weight: 900; border: 1px solid #facc15;">
 
                     👑 Docente Tutor Responsable del Aula
 
@@ -12983,7 +12979,7 @@ const Components = {
 
                 ` : `
 
-                  <spanclas s="status-badge" style="background: #f1f5f9; color: #475569; font-weight: 700; border: 1px solid #cbd5e1;">
+                  <span class="status-badge" style="background: #f1f5f9; color: #475569; font-weight: 700; border: 1px solid #cbd5e1;">
 
                     👁️ Vista Docente de Asignatura
 
@@ -12993,9 +12989,9 @@ const Components = {
 
               </div>
 
-              <p style="font-size: 12px; color: rgba(255,255,255,0.85); margión-top: 4px;">
+              <p style="font-size: 12px; color: rgba(255,255,255,0.85); margin-top: 4px;">
 
-                I.E.P. "El Educador" • UGEL 05 S.J.L. • Gestión de N  ómióna, Importación desde Excel y Generación de Registro Auxiliar MINEDU.
+                I.E.P. "El Educador" • UGEL 05 S.J.L. • Gestión de Nómina, Importación desde Excel y Generación de Registro Auxiliar MINEDU.
 
               </p>
 
@@ -13009,13 +13005,13 @@ const Components = {
 
               ${isTutor ? `
 
-                <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.openddStudentModal('${selectedGrade}')" style="font-weight: 900; paddióng: 8px 16px;">
+                <button class="btn btn-gold btn-sm" onclick="window.app.openddStudentModal('${selectedGrade}')" style="font-weight: 900; padding: 8px 16px;">
 
                   ➕ Agregar Estudiante
 
                 </button>
 
-                <buttonclas s="btnbtn-sm" onclick="window.app.openImportStudentsModal('${selectedGrade}')" style="background: #10b981; color: white; font-weight: 900; paddióng: 8px 16px;">
+                <button class="btn btn-sm" onclick="window.app.openImportStudentsModal('${selectedGrade}')" style="background: #10b981; color: white; font-weight: 900; padding: 8px 16px;">
 
                   📥 Importar desde Excel
 
@@ -13023,7 +13019,7 @@ const Components = {
 
               ` : `
 
-                <div style="font-size: 11.5px; color: #f8fafc; background: rgba(0,0,0,0.3); paddióng: 6px 12px; border-radius: 6px; border: 1px dashed rgba(255,255,255,0.4);">
+                <div style="font-size: 11.5px; color: #f8fafc; background: rgba(0,0,0,0.3); padding: 6px 12px; border-radius: 6px; border: 1px dashed rgba(255,255,255,0.4);">
 
                   🔒 Matrícula restringida: Solo el Tutor(a) <strong>${currentGradeObj.tutor || 'Asignado'}</strong> o Dirección.
 
@@ -13031,7 +13027,7 @@ const Components = {
 
               `}
 
-              <buttonclas s="btnbtn-sm" onclick="window.app.downloaduxiliaryRegisterExcel('${selectedGrade}', '${selectedCourse}')" style="background: #0284c7; color: white; font-weight: 900; paddióng: 8px 16px;">
+              <button class="btn btn-sm" onclick="window.app.downloaduxiliaryRegisterExcel('${selectedGrade}', '${selectedCourse}')" style="background: #0284c7; color: white; font-weight: 900; padding: 8px 16px;">
 
                 📊 Descargar Registro Auxiliar (.XLS)
 
@@ -13045,7 +13041,7 @@ const Components = {
 
           <!-- Métricas Rpidas del Aula -->
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(200px, 1fr)); gap: 12px; paddióng: 14px 20px; background: rgba(0,0,0,0.15);">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; padding: 14px 20px; background: rgba(0,0,0,0.15);">
 
             <div style="border-left: 3px solid #38bdf8; paddióng-left: 10px;">
 
@@ -13079,7 +13075,7 @@ const Components = {
 
         <!-- Barra de Control, Filtrado y Búsqueda -->
 
-        <div class="card" style="margión-bottom: var(--space-4); paddióng: 16px; background: #ffffff;">
+        <div class="card" style="margin-bottom: var(--space-4); padding: 16px; background: #ffffff;">
 
           <div style="display: flex; gap: 14px; align-items: center; justify-content: space-between; flex-wrap: wrap;">
 
@@ -13091,47 +13087,47 @@ const Components = {
 
               <div style="display: flex; align-items: center; gap: 8px;">
 
-                <spanstyl e="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">🏫 Grado:</span>
+                <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">🏫 Grado:</span>
 
-                <select class="form-control" style="font-weight: bold; width: auto; font-size: 12.5px; mión-width: 200px; background: #fffbeb; border-color: #f59e0b;" onchange="window.app.changeStudentRegistryGrade(this.value)">
+                <select class="form-control" style="font-weight: bold; width: auto; font-size: 12.5px; min-width: 200px; background: #fffbeb; border-color: #f59e0b;" onchange="window.app.changeStudentRegistryGrade(this.value)">
 
                   <optgroup label="--- N IVEL INICIL ---">
 
-                    <optionvalu e="ini-3" ${cleanSelectedGrade === 'ini3' || cleanSelectedGrade === 'ini-3' ? 'selected' : ''}>Inicial 3 Años</option>
+                    <option value="ini-3" ${cleanSelectedGrade === 'ini3' || cleanSelectedGrade === 'ini-3' ? 'selected' : ''}>Inicial 3 Años</option>
 
-                    <optionvalu e="ini-4" ${cleanSelectedGrade === 'ini4' || cleanSelectedGrade === 'ini-4' ? 'selected' : ''}>Inicial 4 Años</option>
+                    <option value="ini-4" ${cleanSelectedGrade === 'ini4' || cleanSelectedGrade === 'ini-4' ? 'selected' : ''}>Inicial 4 Años</option>
 
-                    <optionvalu e="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
+                    <option value="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
 
                   </optgroup>
 
                   <optgroup label="--- N IVEL PRIMRIA ---">
 
-                    <optionvalu e="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1 de Primaria</option>
+                    <option value="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1 de Primaria</option>
 
-                    <optionvalu e="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2 de Primaria</option>
+                    <option value="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2 de Primaria</option>
 
-                    <optionvalu e="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3 de Primaria</option>
+                    <option value="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3 de Primaria</option>
 
-                    <optionvalu e="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4 de Primaria</option>
+                    <option value="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4 de Primaria</option>
 
-                    <optionvalu e="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5 de Primaria</option>
+                    <option value="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5 de Primaria</option>
 
-                    <optionvalu e="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6 de Primaria</option>
+                    <option value="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6 de Primaria</option>
 
                   </optgroup>
 
                   <optgroup label="--- N IVEL SECUNDÍARIA ---">
 
-                    <optionvalu e="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1 de Secundaria</option>
+                    <option value="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1 de Secundaria</option>
 
-                    <optionvalu e="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2 de Secundaria</option>
+                    <option value="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2 de Secundaria</option>
 
-                    <optionvalu e="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3 de Secundaria</option>
+                    <option value="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3 de Secundaria</option>
 
-                    <optionvalu e="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4 de Secundaria</option>
+                    <option value="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4 de Secundaria</option>
 
-                    <optionvalu e="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5 de Secundaria</option>
+                    <option value="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5 de Secundaria</option>
 
                   </optgroup>
 
@@ -13145,17 +13141,17 @@ const Components = {
 
               <div style="display: flex; align-items: center; gap: 8px;">
 
-                <spanstyl e="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">📚 Asignatura:</span>
+                <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">📚 Asignatura:</span>
 
-                <select class="form-control" style="font-weight: bold; width: auto; font-size: 12.5px; mión-width: 220px;" onchange="window.app.changeStudentRegistryCourse(this.value)">
+                <select class="form-control" style="font-weight: bold; width: auto; font-size: 12.5px; min-width: 220px;" onchange="window.app.changeStudentRegistryCourse(this.value)">
 
                   ${boletaCourses.length === 0 ? `
 
-                    <optionvalu e="" disabled selected>(N o tienes asignaturas a cargo en${currentGradeObj.label})</option>
+                    <option value="" disabled selected>(N o tienes asignaturas a cargo en${currentGradeObj.label})</option>
 
                   ` : boletaCourses.map(c => `
 
-                    <optionvalu e="${c.name}" ${c.name === selectedCourse ? 'selected' : ''}>
+                    <option value="${c.name}" ${c.name === selectedCourse ? 'selected' : ''}>
 
                       ${c.icon || '📖'} ${c.name} • (${c.teacher})
 
@@ -13171,9 +13167,9 @@ const Components = {
 
               <!-- 3. Buscador enTiempo Real -->
 
-              <div style="position: relative; mión-width: 220px;">
+              <div style="position: relative; min-width: 220px;">
 
-                <input type="text" class="form-control" placeholder="🔍 Buscar por nombre o DNI..." value="${state.studentRegistrySearchQuery || ''}" oniónput="window.app.filterStudentRegistry(this.value)" style="font-size: 12px;" />
+                <input type="text" class="form-control" placeholder="🔍 Buscar por nombre o DNI..." value="${state.studentRegistrySearchQuery || ''}" oninput="window.app.filterStudentRegistry(this.value)" style="font-size: 12px;" />
 
               </div>
 
@@ -13187,19 +13183,19 @@ const Components = {
 
               ${isTutor ? `
 
-                <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openPasteFromExcelModal('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px;">
+                <button class="btn btn-outline btn-sm" onclick="window.app.openPasteFromExcelModal('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px;">
 
                   📋 Pegar Filas de Excel
 
                 </button>
 
-                <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.downloadExcelTemplate()" style="font-weight: 800; font-size: 11.5px; color: #0284c7; border-color: #38bdf8;">
+                <button class="btn btn-outline btn-sm" onclick="window.app.downloadExcelTemplate()" style="font-weight: 800; font-size: 11.5px; color: #0284c7; border-color: #38bdf8;">
 
                   📄 Plantilla Excel
 
                 </button>
 
-                <buttonclas s="btnbtn-sm" onclick="window.app.confirmClearllClassroomStudents('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px; background: #fee2e2; color: #b91c1c; border: 1px solid #f87171;" title="Elimiónar todos los registros de estudiantes de esta aula">
+                <button class="btn btn-sm" onclick="window.app.confirmClearllClassroomStudents('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px; background: #fee2e2; color: #b91c1c; border: 1px solid #f87171;" title="Elimiónar todos los registros de estudiantes de esta aula">
 
                   🗑️ Elimiónar Todos los Registros del Aula
 
@@ -13207,7 +13203,7 @@ const Components = {
 
               ` : `
 
-                <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.downloadExcelTemplate()" style="font-weight: 800; font-size: 11.5px; color: #0284c7; border-color: #38bdf8;">
+                <button class="btn btn-outline btn-sm" onclick="window.app.downloadExcelTemplate()" style="font-weight: 800; font-size: 11.5px; color: #0284c7; border-color: #38bdf8;">
 
                   📄 Plantilla Excel
 
@@ -13227,13 +13223,13 @@ const Components = {
 
         <!-- Tabla Principal de Estudiantes -->
 
-        <div class="card" style="margión-bottom: var(--space-6);">
+        <div class="card" style="margin-bottom: var(--space-6);">
 
           <div class="card-header" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
 
             <div style="font-size: 13px; font-weight: 800; color: var(--color-navy-900);">
 
-              N  ómióna Oficial de Estudiantes — ${currentGradeObj.label || selectedGrade} (${classroomStudents.length} Alumnos Registrados)
+              Nómina Oficial de Estudiantes — ${currentGradeObj.label || selectedGrade} (${classroomStudents.length} Alumnos Registrados)
 
             </div>
 
@@ -13241,7 +13237,7 @@ const Components = {
 
               ${classroomStudents.length > 0 ? `
 
-                <buttonclas s="btnbtn-sm" onclick="window.app.confirmClearllClassroomStudents('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px; background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; paddióng: 4px 12px;" title="Vaciar la nómióna de esta aula">
+                <button class="btn btn-sm" onclick="window.app.confirmClearllClassroomStudents('${selectedGrade}')" style="font-weight: 800; font-size: 11.5px; background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; padding: 4px 12px;" title="Vaciar la nómina de esta aula">
 
                   🗑️ Elimiónar Todos los Registros (${classroomStudents.length})
 
@@ -13263,7 +13259,7 @@ const Components = {
 
                 <tr style="background: var(--color-navy-900); color: white;">
 
-                  <th style="width: 5%; text-align: center;">N  </th>
+                  <th style="width: 5%; text-align: center;">N</th>
 
                   <th style="width: 32%;">N ombre y Apellido</th>
 
@@ -13285,13 +13281,13 @@ const Components = {
 
                   <tr>
 
-                    <td colspan="6" style="text-align: center; paddióng: 40px 20px; color: #64748b;">
+                    <td colspan="6" style="text-align: center; padding: 40px 20px; color: #64748b;">
 
-                      <div style="font-size: 32px; margión-bottom: 8px;">📂</div>
+                      <div style="font-size: 32px; margin-bottom: 8px;">📂</div>
 
                       <div style="font-size: 14px; font-weight: 800; color: #1e293b;">N o hay estudiantes registrados en${currentGradeObj.label || selectedGrade}.</div>
 
-                      <p style="font-size: 12px; margión-top: 4px; margión-bottom: 16px;">
+                      <p style="font-size: 12px; margin-top: 4px; margin-bottom: 16px;">
 
                         Puede agregar alumnos con el botón "+ Agregar Estudiante" ingresando N ombre, Grado, Apoderado y Teléfono, o importar desde unlibro de Excel.
 
@@ -13301,13 +13297,13 @@ const Components = {
 
                         <div style="display: flex; gap: 8px; justify-content: center;">
 
-                          <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.openddStudentModal('${selectedGrade}')" style="font-weight: 800;">
+                          <button class="btn btn-gold btn-sm" onclick="window.app.openddStudentModal('${selectedGrade}')" style="font-weight: 800;">
 
                             ➕ Agregar Estudiante
 
                           </button>
 
-                          <buttonclas s="btnbtn-sm" onclick="window.app.openImportStudentsModal('${selectedGrade}')" style="background: #10b981; color: white; font-weight: 800;">
+                          <button class="btn btn-sm" onclick="window.app.openImportStudentsModal('${selectedGrade}')" style="background: #10b981; color: white; font-weight: 800;">
 
                             📥 Importar desde Excel
 
@@ -13319,7 +13315,7 @@ const Components = {
 
                         <div style="font-size: 12px; color: #64748b;">
 
-                          🔒 La matrícula y gestión de nómióna está reservada para el Tutor(a) <strong>${currentGradeObj.tutor || 'Asignado'}</strong> o Dirección.
+                          🔒 La matrícula y gestión de nómina está reservada para el Tutor(a) <strong>${currentGradeObj.tutor || 'Asignado'}</strong> o Dirección.
 
                         </div>
 
@@ -13345,7 +13341,7 @@ const Components = {
 
                     <td>
 
-                      <spanclas s="status-badge" style="background: #e0f2fe; color: #0369a1; font-weight: 800; font-size: 11.5px;">
+                      <span class="status-badge" style="background: #e0f2fe; color: #0369a1; font-weight: 800; font-size: 11.5px;">
 
                         ${st.grade || currentGradeObj.label}
 
@@ -13369,7 +13365,7 @@ const Components = {
 
                       <div style="display: flex; gap: 4px; justify-content: center;">
 
-                        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${st.studentCode || st.dni}')" title="Ver Stickers QR de Cuadernos" style="paddióng: 4px 7px; font-size: 11px;">
+                        <button class="btn btn-outline btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${st.studentCode || st.dni}')" title="Ver Stickers QR de Cuadernos" style="padding: 4px 7px; font-size: 11px;">
 
                           ⚡ QR
 
@@ -13377,13 +13373,13 @@ const Components = {
 
                         ${isTutor ? `
 
-                          <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openEditStudentModal('${st.id || st.studentCode}')" title="Editar datos del estudiante" style="paddióng: 4px 7px; font-size: 11px;">
+                          <button class="btn btn-outline btn-sm" onclick="window.app.openEditStudentModal('${st.id || st.studentCode}')" title="Editar datos del estudiante" style="padding: 4px 7px; font-size: 11px;">
 
                             ✏️
 
                           </button>
 
-                          <buttonclas s="btnbtn-sm" onclick="window.app.confirmDeleteStudent('${st.studentCode || st.id}')" title="Elimiónar estudiante" style="paddióng: 4px 7px; font-size: 11px; background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5;">
+                          <button class="btn btn-sm" onclick="window.app.confirmDeleteStudent('${st.studentCode || st.id}')" title="Elimiónar estudiante" style="padding: 4px 7px; font-size: 11px; background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5;">
 
                             🗑️
 
@@ -13407,23 +13403,23 @@ const Components = {
 
 
 
-          <div style="paddióng: 14px 18px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div style="padding: 14px 18px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
 
             <div style="font-size: 12px; color: #475569;">
 
-              Total de estudiantes ennómióna: <strong>${classroomStudents.length}</strong> • I.E.P. "El Educador" S.J.L.
+              Total de estudiantes ennómina: <strong>${classroomStudents.length}</strong> • I.E.P. "El Educador" S.J.L.
 
             </div>
 
             <div style="display: flex; gap: 8px;">
 
-              <buttonclas s="btnbtn-outline btn-sm" onclick="window.print()" style="font-weight: 800;">
+              <button class="btn btn-outline btn-sm" onclick="window.print()" style="font-weight: 800;">
 
-                🖨️ Imprimir N  ómióna
+                🖨️ Imprimir Nómina
 
               </button>
 
-              <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.downloaduxiliaryRegisterExcel('${selectedGrade}', '${selectedCourse}')" style="font-weight: 800;">
+              <button class="btn btn-navy btn-sm" onclick="window.app.downloaduxiliaryRegisterExcel('${selectedGrade}', '${selectedCourse}')" style="font-weight: 800;">
 
                 📊 Descargar Registro Auxiliar (Excel)
 
@@ -13479,15 +13475,15 @@ const Components = {
 
           <div class="welcome-content">
 
-            <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
 
-              <spanclas s="status-badge status-approved" style="background: rgba(16, 185, 129, 0.25); color: #6ee7b7; border: 1px solid #10b981; font-weight: 800;">
+              <span class="status-badge status-approved" style="background: rgba(16, 185, 129, 0.25); color: #6ee7b7; border: 1px solid #10b981; font-weight: 800;">
 
-                👮 TURNO DE AUXILIR & CONTROL ESCOLR • I.E.P. "EL EDUCDOR"
+                👮 TURNO DE AUXILIR & CONTROL ESCOLR • I.E.P. "EL EDUCADOR"
 
               </span>
 
-              <spanclas s="status-badge status-approved" style="background: rgba(245, 158, 11, 0.2); color: #fde047; border: 1px solid #f59e0b;">
+              <span class="status-badge status-approved" style="background: rgba(245, 158, 11, 0.2); color: #fde047; border: 1px solid #f59e0b;">
 
                 Portera Puerta 1 & Pabellón Secundaria
 
@@ -13509,33 +13505,33 @@ const Components = {
 
               <div class="metric-card-mióni">
 
-                <spanclas s="metric-label">Ingresos enPuerta</span>
+                <span class="metric-label">Ingresos enPuerta</span>
 
-                <spanclas s="metric-val highlight-green">${totalIngresos > 0 ? totalIngresos : 42} Alumnos</span>
-
-              </div>
-
-              <div class="metric-card-mióni">
-
-                <spanclas s="metric-label">Tardanzas Hoy</span>
-
-                <spanclas s="metric-val highlight-yellow">${totalTardanzas > 0 ? totalTardanzas : 3}</span>
+                <span class="metric-val highlight-green">${totalIngresos > 0 ? totalIngresos : 42} Alumnos</span>
 
               </div>
 
               <div class="metric-card-mióni">
 
-                <spanclas s="metric-label">Cuadernos Sellados</span>
+                <span class="metric-label">Tardanzas Hoy</span>
 
-                <spanclas s="metric-val highlight-yellow">${reviews.length > 0 ? reviews.length : 26}</span>
+                <span class="metric-val highlight-yellow">${totalTardanzas > 0 ? totalTardanzas : 3}</span>
 
               </div>
 
               <div class="metric-card-mióni">
 
-                <spanclas s="metric-label">Incidencias Reportadas</span>
+                <span class="metric-label">Cuadernos Sellados</span>
 
-                <spanclas s="metric-val highlight-red">${incidents.length}</span>
+                <span class="metric-val highlight-yellow">${reviews.length > 0 ? reviews.length : 26}</span>
+
+              </div>
+
+              <div class="metric-card-mióni">
+
+                <span class="metric-label">Incidencias Reportadas</span>
+
+                <span class="metric-val highlight-red">${incidents.length}</span>
 
               </div>
 
@@ -13549,7 +13545,7 @@ const Components = {
 
         <!-- Módulos Exclusivos del Auxiliar -->
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(320px, 1fr)); gap: var(--space-4); margión-bottom: var(--space-6);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6);">
 
           
 
@@ -13557,19 +13553,19 @@ const Components = {
 
           <div class="card" style="border-top: 5px solid #10b981; box-shadow: 0 4px 14px rgba(16,185,129,0.15);">
 
-            <div style="display:flex; justify-content:space-between; align-items:center; margión-bottom: 8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px;">
 
-              <h3 style="font-size: 16px; font-weight: 900; color: #065f46; margión: 0;">
+              <h3 style="font-size: 16px; font-weight: 900; color: #065f46; margin: 0;">
 
                 1. Control de Asistencia & Portera
 
               </h3>
 
-              <spanclas s="status-badge status-approved" style="background:#10b981; color:white; font-weight: 900;">07:00 - 08:30 AM</span>
+              <span class="status-badge status-approved" style="background:#10b981; color:white; font-weight: 900;">07:00 - 08:30 AM</span>
 
             </div>
 
-            <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margión-bottom: 16px;">
+            <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px;">
 
               Escaneo óptico de fotochecks QR enpuerta, control automtico de tolerancia (07:45 AM), inasistencias (08:30 AM) y libro de incidencias.
 
@@ -13577,19 +13573,19 @@ const Components = {
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
 
-              <buttonclas s="btnbtn-sm" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('door-scanner');" style="background: #047857; color: white; font-weight: 800; paddióng: 10px 8px; font-size: 12px;">
+              <button class="btn btn-sm" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('door-scanner');" style="background: #047857; color: white; font-weight: 800; padding: 10px 8px; font-size: 12px;">
 
                 [Cmara] Escner enPuerta
 
               </button>
 
-              <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('id-cards');" style="font-weight: 800; paddióng: 10px 8px; font-size: 12px;">
+              <button class="btn btn-gold btn-sm" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('id-cards');" style="font-weight: 800; padding: 10px 8px; font-size: 12px;">
 
                 Plancha QR (SiónFoto)
 
               </button>
 
-              <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('daily-report');" style="font-weight: 800; paddióng: 10px 8px; font-size: 12px; grid-column: span2;">
+              <button class="btn btn-navy btn-sm" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('daily-report');" style="font-weight: 800; padding: 10px 8px; font-size: 12px; grid-column: span2;">
 
                 Parte Diario de Tardanzas / Inasistencias (08:30 AM)
 
@@ -13605,19 +13601,19 @@ const Components = {
 
           <div class="card" style="border-top: 5px solid #f59e0b; box-shadow: 0 4px 14px rgba(245,158,11,0.15);">
 
-            <div style="display:flex; justify-content:space-between; align-items:center; margión-bottom: 8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px;">
 
-              <h3 style="font-size: 16px; font-weight: 900; color: #b45309; margión: 0;">
+              <h3 style="font-size: 16px; font-weight: 900; color: #b45309; margin: 0;">
 
                 2. Lector de Cuadernos QR
 
               </h3>
 
-              <spanclas s="status-badge" style="background:#f59e0b; color:#0b132b; font-weight: 900;">CMARÍA VIVA</span>
+              <span class="status-badge" style="background:#f59e0b; color:#0b132b; font-weight: 900;">CMARÍA VIVA</span>
 
             </div>
 
-            <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margión-bottom: 16px;">
+            <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px;">
 
               Supervisión de cuadernos escolares, sellado digital mediante lectura de código QR, verificación de tareas completas y registro de observaciones.
 
@@ -13625,19 +13621,19 @@ const Components = {
 
             <div style="display: grid; grid-template-columns: 1fr; gap: 8px;">
 
-              <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.navigate('cuadernos-qr')" style="font-weight: 900; paddióng: 10px; font-size: 13px;">
+              <button class="btn btn-gold btn-sm" onclick="window.app.navigate('cuadernos-qr')" style="font-weight: 900; padding: 10px; font-size: 13px;">
 
                 [Cmara] Iniciar Lector de Cuadernos QR
 
               </button>
 
-              <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('EST-2026-042')" style="font-weight: 800; paddióng: 9px; font-size: 12px; background: #0f172a; color: #fde047; border: 1px solid #f59e0b;">
+              <button class="btn btn-navy btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('EST-2026-042')" style="font-weight: 800; padding: 9px; font-size: 12px; background: #0f172a; color: #fde047; border: 1px solid #f59e0b;">
 
                 ⚡ Plancha QR por Estudiante (Cursos Boleta)
 
               </button>
 
-              <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('incidents');" style="font-weight: 800; paddióng: 8px; font-size: 12px; color: #dc2626; border-color: #fca5a5;">
+              <button class="btn btn-outline btn-sm" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('incidents');" style="font-weight: 800; padding: 8px; font-size: 12px; color: #dc2626; border-color: #fca5a5;">
 
                 Registrar Incidencia Conductual
 
@@ -13659,13 +13655,13 @@ const Components = {
 
           <div class="card-header" style="border-bottom: 1px solid var(--border-subtle); paddióng-bottom: 10px;">
 
-            <h3 class="card-title" style="font-size: var(--font-size-base); margión: 0;">
+            <h3 class="card-title" style="font-size: var(--font-size-base); margin: 0;">
 
               Padrón Rpido de Aulas a Cargo del Auxiliar
 
             </h3>
 
-            <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('classroom');">
+            <button class="btn btn-navy btn-sm" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('classroom');">
 
               Ver Asistencia por Aula Completa
 
@@ -13703,7 +13699,7 @@ const Components = {
 
                   <tr>
 
-                    <td><spanclas s="status-badge ${g.level === 'Inicial' ? 'status-pendióng' : g.level === 'Primaria' ? 'status-approved' : 'status-failed'}" style="font-size: 10px;">${g.level}</span></td>
+                    <td><span class="status-badge ${g.level === 'Inicial' ? 'status-pendióng' : g.level === 'Primaria' ? 'status-approved' : 'status-failed'}" style="font-size: 10px;">${g.level}</span></td>
 
                     <td><strong>${g.label}</strong></td>
 
@@ -13715,7 +13711,7 @@ const Components = {
 
                     <td style="text-align: right;">
 
-                      <buttonclas s="btnbtn-sm btn-outline" onclick="window.app.navigate('asistencia'); window.app.onttendanceGradeChange('${g.id}'); window.app.setttendanceSubTab('classroom');" style="font-size: 11px; paddióng: 4px 8px;">
+                      <button class="btn btn-sm btn-outline" onclick="window.app.navigate('asistencia'); window.app.onttendanceGradeChange('${g.id}'); window.app.setttendanceSubTab('classroom');" style="font-size: 11px; padding: 4px 8px;">
 
                         Ver Aula
 
@@ -13903,7 +13899,7 @@ const Components = {
 
         <div class="fade-in">
 
-          <div class="card" style="margión-bottom: var(--space-6);">
+          <div class="card" style="margin-bottom: var(--space-6);">
 
             
 
@@ -13913,11 +13909,11 @@ const Components = {
 
             <!-- Tarjeta de Identificación del Estudiante & Enlace al QR de Asistencia -->
 
-            <div style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white; border-radius: 12px; paddióng: 18px; margión: 16px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; box-shadow: 0 4px 15px rgba(11,19,43,0.15); border-left: 6px solid #f59e0b;">
+            <div style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white; border-radius: 12px; padding: 18px; margin: 16px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; box-shadow: 0 4px 15px rgba(11,19,43,0.15); border-left: 6px solid #f59e0b;">
 
               <div style="display: flex; align-items: center; gap: 16px;">
 
-                <div style="width: 70px; height: 70px; background: white; border-radius: 8px; paddióng: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                <div style="width: 70px; height: 70px; background: white; border-radius: 8px; padding: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
 
                   ${this.generateQRSVG(studentCode)}
 
@@ -13925,13 +13921,13 @@ const Components = {
 
                 <div>
 
-                  <spanstyl e="font-size: 10px; font-weight: 900; color: #fde047; letter-spacióng: 0.05em; text-transform: uppercase;">
+                  <span style="font-size: 10px; font-weight: 900; color: #fde047; letter-spacing: 0.05em; text-transform: uppercase;">
 
-                    ★ AGENDÍA VINCULDÍA AL FOTOCHECK QR N  ${studentCode}
+                    ★ AGENDÍA VINCULDÍA AL FOTOCHECK QR N${studentCode}
 
                   </span>
 
-                  <div style="font-size: 18px; font-weight: 900; color: #ffffff; margión: 2px 0;">
+                  <div style="font-size: 18px; font-weight: 900; color: #ffffff; margin: 2px 0;">
 
                     ${studentName}
 
@@ -13943,7 +13939,7 @@ const Components = {
 
                   </div>
 
-                  <div style="font-size: 11px; color: #e2e8f0; margión-top: 4px;">
+                  <div style="font-size: 11px; color: #e2e8f0; margin-top: 4px;">
 
                     ${isPadre ? `Apoderada: <strong>${parentName}</strong>` : `Apoderado(a) Registrado: <strong>${parentName}</strong>`}
 
@@ -13957,13 +13953,13 @@ const Components = {
 
               <div style="display: flex; gap: 8px; flex-wrap: wrap;">
 
-                <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.openPrintgendaOfficialModal('${studentCode}')" style="font-weight: 800; paddióng: 8px 16px; border-radius: 20px;">
+                <button class="btn btn-gold btn-sm" onclick="window.app.openPrintgendaOfficialModal('${studentCode}')" style="font-weight: 800; padding: 8px 16px; border-radius: 20px;">
 
                   📄 Imprimir Agenda A4 / PDF
 
                 </button>
 
-                <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openStudentQRModal('${studentCode}')" style="color: #ffffff; border-color: rgba(255,255,255,0.4); font-weight: 800; border-radius: 20px;">
+                <button class="btn btn-outline btn-sm" onclick="window.app.openStudentQRModal('${studentCode}')" style="color: #ffffff; border-color: rgba(255,255,255,0.4); font-weight: 800; border-radius: 20px;">
 
                   Ver Mi Fotocheck QR
 
@@ -13977,55 +13973,55 @@ const Components = {
 
             <!-- ResumenEstadístico de Anotaciones en la Agenda -->
 
-            <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, miónmax(160px, 1fr)); margión-bottom: var(--space-5);">
+            <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-bottom: var(--space-5);">
 
               <div class="card metric-card" style="border-top: 4px solid #10b981; cursor: pointer;" onclick="window.app.setgendaFilter('merito')">
 
-                <spanclas s="metric-title">★ Méritos / Felicitaciones</span>
+                <span class="metric-title">★ Méritos / Felicitaciones</span>
 
                 <div class="metric-value highlight-green">${meritosCount}</div>
 
-                <spanclas s="metric-trend up" style="font-size: 11px;">Conducta destacada</span>
+                <span class="metric-trend up" style="font-size: 11px;">Conducta destacada</span>
 
               </div>
 
               <div class="card metric-card" style="border-top: 4px solid #3b82f6; cursor: pointer;" onclick="window.app.setgendaFilter('pedagogica')">
 
-                <spanclas s="metric-title">📝 Tareas & Materiales</span>
+                <span class="metric-title">📝 Tareas & Materiales</span>
 
                 <div class="metric-value highlight-navy">${pedagogicasCount}</div>
 
-                <spanclas s="metric-trend" style="font-size: 11px; color: #1e40af;">Requerimientos pedagógicos</span>
+                <span class="metric-trend" style="font-size: 11px; color: #1e40af;">Requerimientos pedagógicos</span>
 
               </div>
 
               <div class="card metric-card" style="border-top: 4px solid #f59e0b; cursor: pointer;" onclick="window.app.setgendaFilter('conducta')">
 
-                <spanclas s="metric-title">⚠️ Observaciones</span>
+                <span class="metric-title">⚠️ Observaciones</span>
 
                 <div class="metric-value highlight-yellow">${conductasCount}</div>
 
-                <spanclas s="metric-trend" style="font-size: 11px; color: #b45309;">Llamados de atención</span>
+                <span class="metric-trend" style="font-size: 11px; color: #b45309;">Llamados de atención</span>
 
               </div>
 
               <div class="card metric-card" style="border-top: 4px solid #8b5cf6; cursor: pointer;" onclick="window.app.setgendaFilter('citacion')">
 
-                <spanclas s="metric-title">📅 Citaciones Familia</span>
+                <span class="metric-title">📅 Citaciones Familia</span>
 
                 <div class="metric-value" style="color: #6d28d9;">${citacionesCount}</div>
 
-                <spanclas s="metric-trend" style="font-size: 11px; color: #5b21b6;">Entrevistas de tutora</span>
+                <span class="metric-trend" style="font-size: 11px; color: #5b21b6;">Entrevistas de tutora</span>
 
               </div>
 
               <div class="card metric-card" style="border-top: 4px solid ${pendióngSignCount > 0 ? '#ef4444' : '#10b981'}; cursor: pointer;" onclick="window.app.setgendaFilter('pendióng-sign')">
 
-                <spanclas s="metric-title">✍️ Firmas Pendientes</span>
+                <span class="metric-title">✍️ Firmas Pendientes</span>
 
                 <div class="metric-value" style="color: ${pendióngSignCount > 0 ? '#dc2626' : '#15803d'};">${pendióngSignCount}</div>
 
-                <spanclas s="metric-trend" style="font-size: 11px; color: ${pendióngSignCount > 0 ? '#dc2626' : '#047857'};">${pendióngSignCount > 0 ? 'Requierenfirma de apoderado' : 'Todas firmadas al día'}</span>
+                <span class="metric-trend" style="font-size: 11px; color: ${pendióngSignCount > 0 ? '#dc2626' : '#047857'};">${pendióngSignCount > 0 ? 'Requierenfirma de apoderado' : 'Todas firmadas al día'}</span>
 
               </div>
 
@@ -14035,41 +14031,41 @@ const Components = {
 
             <!-- Barra de Filtros de la Agenda -->
 
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margión-bottom: 16px; border-bottom: 2px solid #e2e8f0; paddióng-bottom: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; border-bottom: 2px solid #e2e8f0; paddióng-bottom: 12px;">
 
               <div style="display: flex; gap: 6px; flex-wrap: wrap;">
 
-                <buttonclas s="btnbtn-sm ${activeFilter === 'all' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setgendaFilter('all')" style="font-weight: 800; font-size: 11.5px; border-radius: 16px;">
+                <button class="btn btn-sm ${activeFilter === 'all' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setgendaFilter('all')" style="font-weight: 800; font-size: 11.5px; border-radius: 16px;">
 
                   Todas (${totalCount})
 
                 </button>
 
-                <buttonclas s="btnbtn-sm ${activeFilter === 'merito' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setgendaFilter('merito')" style="font-weight: 800; font-size: 11.5px; border-radius: 16px; color: #047857;">
+                <button class="btn btn-sm ${activeFilter === 'merito' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setgendaFilter('merito')" style="font-weight: 800; font-size: 11.5px; border-radius: 16px; color: #047857;">
 
                   ★ Méritos (${meritosCount})
 
                 </button>
 
-                <buttonclas s="btnbtn-sm ${activeFilter === 'pedagogica' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setgendaFilter('pedagogica')" style="font-weight: 800; font-size: 11.5px; border-radius: 16px; color: #1e40af;">
+                <button class="btn btn-sm ${activeFilter === 'pedagogica' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setgendaFilter('pedagogica')" style="font-weight: 800; font-size: 11.5px; border-radius: 16px; color: #1e40af;">
 
                   📝 Tareas (${pedagogicasCount})
 
                 </button>
 
-                <buttonclas s="btnbtn-sm ${activeFilter === 'conducta' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setgendaFilter('conducta')" style="font-weight: 800; font-size: 11.5px; border-radius: 16px; color: #b45309;">
+                <button class="btn btn-sm ${activeFilter === 'conducta' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setgendaFilter('conducta')" style="font-weight: 800; font-size: 11.5px; border-radius: 16px; color: #b45309;">
 
                   ⚠️ Observaciones (${conductasCount})
 
                 </button>
 
-                <buttonclas s="btnbtn-sm ${activeFilter === 'citacion' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setgendaFilter('citacion')" style="font-weight: 800; font-size: 11.5px; border-radius: 16px; color: #6d28d9;">
+                <button class="btn btn-sm ${activeFilter === 'citacion' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setgendaFilter('citacion')" style="font-weight: 800; font-size: 11.5px; border-radius: 16px; color: #6d28d9;">
 
                   📅 Citaciones (${citacionesCount})
 
                 </button>
 
-                <buttonclas s="btnbtn-sm ${activeFilter === 'pendióng-sign' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setgendaFilter('pendióng-sign')" style="font-weight: 800; font-size: 11.5px; border-radius: 16px;">
+                <button class="btn btn-sm ${activeFilter === 'pendióng-sign' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setgendaFilter('pendióng-sign')" style="font-weight: 800; font-size: 11.5px; border-radius: 16px;">
 
                   ✍️ Por Firmar (${pendióngSignCount})
 
@@ -14079,7 +14075,7 @@ const Components = {
 
 
 
-              <spanstyl e="font-size: 11.5px; color: #64748b; font-weight: bold;">
+              <span style="font-size: 11.5px; color: #64748b; font-weight: bold;">
 
                 Mostrando <strong>${filteredNotes.length}</strong> anotaciones oficiales
 
@@ -14117,17 +14113,17 @@ const Components = {
 
                 return `
 
-                  <div class="card" style="border-left: 6px solid ${borderColor}; paddióng: 16px; background: #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-radius: 10px;">
+                  <div class="card" style="border-left: 6px solid ${borderColor}; padding: 16px; background: #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-radius: 10px;">
 
                     
 
                     <!-- Encabezado de la Tarjeta -->
 
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margión-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
 
                       <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
 
-                        <spanclas s="status-badge" style="background: ${badgeBg}; color: ${badgeColor}; font-weight: 900; font-size: 11px; paddióng: 4px 10px; border: 1px solid ${borderColor};">
+                        <span class="status-badge" style="background: ${badgeBg}; color: ${badgeColor}; font-weight: 900; font-size: 11px; padding: 4px 10px; border: 1px solid ${borderColor};">
 
                           ${note.typeLabel || 'Anotación'}
 
@@ -14135,13 +14131,13 @@ const Components = {
 
                         <strong style="color: #0b132b; font-size: 13.5px;">${note.course}</strong>
 
-                        <spanstyl e="font-size: 11.5px; color: #475569;">• Docente: <strong>${note.teacher}</strong></span>
+                        <span style="font-size: 11.5px; color: #475569;">• Docente: <strong>${note.teacher}</strong></span>
 
                       </div>
 
 
 
-                      <div style="font-size: 11px; color: #64748b; font-weight: bold; background: #f1f5f9; paddióng: 3px 8px; border-radius: 6px;">
+                      <div style="font-size: 11px; color: #64748b; font-weight: bold; background: #f1f5f9; padding: 3px 8px; border-radius: 6px;">
 
                         🗓️ ${note.date} • ${note.time}
 
@@ -14153,13 +14149,13 @@ const Components = {
 
                     <!-- Título y Detalle -->
 
-                    <h4 style="font-size: 14.5px; font-weight: 800; color: #0b132b; margión: 0 0 6px 0;">
+                    <h4 style="font-size: 14.5px; font-weight: 800; color: #0b132b; margin: 0 0 6px 0;">
 
                       ${note.title}
 
                     </h4>
 
-                    <p style="font-size: 12.5px; color: #334155; line-height: 1.55; margión: 0 0 10px 0;">
+                    <p style="font-size: 12.5px; color: #334155; line-height: 1.55; margin: 0 0 10px 0;">
 
                       ${note.description}
 
@@ -14171,17 +14167,17 @@ const Components = {
 
                     ${note.taskOrMaterial && note.taskOrMaterial !== 'Ninguno' ? `
 
-                      <div style="background: ${bgColor}; border: 1px solid ${borderColor}; border-radius: 8px; paddióng: 10px 12px; margión-bottom: 12px; font-size: 12px;">
+                      <div style="background: ${bgColor}; border: 1px solid ${borderColor}; border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; font-size: 12px;">
 
-                        <strong style="color: ${badgeColor}; display: block; margión-bottom: 2px;">
+                        <strong style="color: ${badgeColor}; display: block; margin-bottom: 2px;">
 
                           📌 ${isCitacion ? 'Fecha y Lugar de Citación:' : isConducta ? 'Compromiso Suscrito:' : 'Tarea / Material Requerido:'}
 
                         </strong>
 
-                        <spanstyl e="color: #1e293b;">${note.taskOrMaterial}</span>
+                        <span style="color: #1e293b;">${note.taskOrMaterial}</span>
 
-                        ${note.dueDate ? `<div style="font-size: 11px; color: #64748b; margión-top: 4px;">📅 Fecha límite: <strong>${note.dueDate}</strong></div>` : ''}
+                        ${note.dueDate ? `<div style="font-size: 11px; color: #64748b; margin-top: 4px;">📅 Fecha límite: <strong>${note.dueDate}</strong></div>` : ''}
 
                       </div>
 
@@ -14191,7 +14187,7 @@ const Components = {
 
                     <!-- Pie de la Anotación: Firma de Apoderado & N otificación -->
 
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-top: 1px dashed #e2e8f0; paddióng-top: 10px; margión-top: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-top: 1px dashed #e2e8f0; paddióng-top: 10px; margin-top: 8px;">
 
                       <div>
 
@@ -14199,13 +14195,13 @@ const Components = {
 
                           <div style="display: flex; align-items: center; gap: 6px;">
 
-                            <spanclas s="status-badge status-approved" style="font-size: 11px; font-weight: 800;">
+                            <span class="status-badge status-approved" style="font-size: 11px; font-weight: 800;">
 
                               ✓ Firmado Digitalmente
 
                             </span>
 
-                            <spanstyl e="font-size: 11px; color: #047857;">por ${note.signedBy} (${note.signedDate})</span>
+                            <span style="font-size: 11px; color: #047857;">por ${note.signedBy} (${note.signedDate})</span>
 
                           </div>
 
@@ -14213,13 +14209,13 @@ const Components = {
 
                           <div style="display: flex; align-items: center; gap: 8px;">
 
-                            <spanclas s="status-badge status-pendióng" style="font-size: 11px; font-weight: 800;">
+                            <span class="status-badge status-pendióng" style="font-size: 11px; font-weight: 800;">
 
                               ⏳ Pendiente de Firma
 
                             </span>
 
-                            <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.signgendaNote('${note.id}')" style="font-weight: 800; font-size: 11px; paddióng: 4px 12px; border-radius: 14px;">
+                            <button class="btn btn-navy btn-sm" onclick="window.app.signgendaNote('${note.id}')" style="font-weight: 800; font-size: 11px; padding: 4px 12px; border-radius: 14px;">
 
                               ✍️ Firmar de Enterado(a)
 
@@ -14235,7 +14231,7 @@ const Components = {
 
                       <div style="display: flex; gap: 6px;">
 
-                        <buttonclas s="btnbtn-sm" onclick="window.app.sendgendaNoteWhatspp('${note.id}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 11px; paddióng: 4px 10px; border-radius: 14px;" title="Ver o Enviar por Whatspp">
+                        <button class="btn btn-sm" onclick="window.app.sendgendaNoteWhatspp('${note.id}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 11px; padding: 4px 10px; border-radius: 14px;" title="Ver o Enviar por Whatspp">
 
                           💬 Whatspp
 
@@ -14253,23 +14249,23 @@ const Components = {
 
               }).join('') : `
 
-                <div class="card" style="text-align: center; paddióng: 36px 20px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px;">
+                <div class="card" style="text-align: center; padding: 36px 20px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px;">
 
-                  <div style="font-size: 36px; margión-bottom: 8px;">📖</div>
+                  <div style="font-size: 36px; margin-bottom: 8px;">📖</div>
 
-                  <h3 style="font-size: 15px; font-weight: 800; color: #0b132b; margión: 0 0 4px 0;">
+                  <h3 style="font-size: 15px; font-weight: 800; color: #0b132b; margin: 0 0 4px 0;">
 
                     N o hay anotaciones registradas bajo este filtro
 
                   </h3>
 
-                  <p style="font-size: 12px; color: #64748b; margión: 0 0 12px 0;">
+                  <p style="font-size: 12px; color: #64748b; margin: 0 0 12px 0;">
 
                     Las anotaciones, tareas y felicitaciones de los profesores aparecern aquí enorden cronológico.
 
                   </p>
 
-                  <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.setgendaFilter('all')">
+                  <button class="btn btn-outline btn-sm" onclick="window.app.setgendaFilter('all')">
 
                     Ver Todas las Anotaciones
 
@@ -14285,7 +14281,7 @@ const Components = {
 
             <!-- N ota Formativa Institucional -->
 
-            <div style="margión-top: var(--space-4); paddióng: 12px; background: rgba(30,58,138,0.05); border-radius: 6px; font-size: 11px; color: var(--color-navy-800); display: flex; align-items: center; gap: 8px;">
+            <div style="margin-top: var(--space-4); padding: 12px; background: rgba(30,58,138,0.05); border-radius: 6px; font-size: 11px; color: var(--color-navy-800); display: flex; align-items: center; gap: 8px;">
 
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
 
@@ -14353,7 +14349,7 @@ const Components = {
 
       <div class="fade-in">
 
-        <div class="card" style="margión-bottom: var(--space-6);">
+        <div class="card" style="margin-bottom: var(--space-6);">
 
           
 
@@ -14365,19 +14361,19 @@ const Components = {
 
               <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
 
-                <h2 class="card-title" style="font-size: var(--font-size-xl); margión: 0; color: var(--color-navy-900);">
+                <h2 class="card-title" style="font-size: var(--font-size-xl); margin: 0; color: var(--color-navy-900);">
 
                   📖 Agenda Virtual Escolar & Control de Convivencia
 
                 </h2>
 
-                <spanclas s="status-badge status-approved" style="background:#10b981; color:white; font-weight:800;">ENLCE QR FOTOCHECK</span>
+                <span class="status-badge status-approved" style="background:#10b981; color:white; font-weight:800;">ENLCE QR FOTOCHECK</span>
 
-                <spanclas s="status-badge status-approved" style="background:#22c55e; color:white; font-weight:800;">WHTSPP OFICIL</span>
+                <span class="status-badge status-approved" style="background:#22c55e; color:white; font-weight:800;">WHTSPP OFICIL</span>
 
               </div>
 
-              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margión-top: 4px;">
+              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
                 I.E.P. "El Educador" • Registro entiempo real de felicitaciones, requerimientos pedagógicos, observaciones de conducta y citaciones vinculadas al código QR del estudiante.
 
@@ -14389,13 +14385,13 @@ const Components = {
 
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
 
-              <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.opengendaQRScannerModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px;">
+              <button class="btn btn-navy btn-sm" onclick="window.app.opengendaQRScannerModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px;">
 
                 <span>📹</span> Escanear Fotocheck conCmara
 
               </button>
 
-              <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.opencreategendaNoteModal()" style="font-weight: 900; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(245,158,11,0.3);">
+              <button class="btn btn-gold btn-sm" onclick="window.app.opencreategendaNoteModal()" style="font-weight: 900; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(245,158,11,0.3);">
 
                 <span>➕</span> N ueva Anotación engenda
 
@@ -14409,17 +14405,17 @@ const Components = {
 
           <!-- Filtros de Grado, Alumno y Tipo -->
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(200px, 1fr)); gap: 12px; background: #f8fafc; paddióng: 14px; border-radius: 10px; border: 1px solid #cbd5e1; margión: 16px 0;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; background: #f8fafc; padding: 14px; border-radius: 10px; border: 1px solid #cbd5e1; margin: 16px 0;">
 
-            <div class="form-group" style="margión: 0;">
+            <div class="form-group" style="margin: 0;">
 
               <label class="form-label" style="font-size: 11px; font-weight: 800;">1. Filtrar por Grado / Aula:</label>
 
               <select class="form-control" onchange="window.app.ongendaGradeFilterChange(this.value)" style="font-size: 12px; font-weight: bold;">
 
-                <optionvalu e="all">-- Todos los Grados --</option>
+                <option value="all">-- Todos los Grados --</option>
 
-                ${catalogGrades.map(g => `<optionvalu e="${g.id}" ${selectedGrade === g.id ? 'selected' : ''}>${g.label} (${g.level})</option>`).join('')}
+                ${catalogGrades.map(g => `<option value="${g.id}" ${selectedGrade === g.id ? 'selected' : ''}>${g.label} (${g.level})</option>`).join('')}
 
               </select>
 
@@ -14427,17 +14423,17 @@ const Components = {
 
 
 
-            <div class="form-group" style="margión: 0;">
+            <div class="form-group" style="margin: 0;">
 
               <label class="form-label" style="font-size: 11px; font-weight: 800;">2. Filtrar por Estudiante:</label>
 
               <select class="form-control" onchange="window.app.ongendaStudentFilterChange(this.value)" style="font-size: 12px; font-weight: bold;">
 
-                <optionvalu e="all">-- Todos los Estudiantes --</option>
+                <option value="all">-- Todos los Estudiantes --</option>
 
                 ${enrollments.filter(e => selectedGrade === 'all' || e.gradeId === selectedGrade).map(e => `
 
-                  <optionvalu e="${e.studentCode || e.dni}" ${selectedStudent === (e.studentCode || e.dni) ? 'selected' : ''}>
+                  <option value="${e.studentCode || e.dni}" ${selectedStudent === (e.studentCode || e.dni) ? 'selected' : ''}>
 
                     ${e.studentName} (${e.grade})
 
@@ -14451,21 +14447,21 @@ const Components = {
 
 
 
-            <div class="form-group" style="margión: 0;">
+            <div class="form-group" style="margin: 0;">
 
               <label class="form-label" style="font-size: 11px; font-weight: 800;">3. Tipo de Anotación:</label>
 
               <select class="form-control" onchange="window.app.ongendaTypeFilterChange(this.value)" style="font-size: 12px; font-weight: bold;">
 
-                <optionvalu e="all" ${selectedType === 'all' ? 'selected' : ''}>-- Todos los Tipos --</option>
+                <option value="all" ${selectedType === 'all' ? 'selected' : ''}>-- Todos los Tipos --</option>
 
-                <optionvalu e="merito" ${selectedType === 'merito' ? 'selected' : ''}>★ Mérito / Felicitación (${meritosTotal})</option>
+                <option value="merito" ${selectedType === 'merito' ? 'selected' : ''}>★ Mérito / Felicitación (${meritosTotal})</option>
 
-                <optionvalu e="pedagogica" ${selectedType === 'pedagogica' ? 'selected' : ''}>📝 Tarea / Material (${pedagogicasTotal})</option>
+                <option value="pedagogica" ${selectedType === 'pedagogica' ? 'selected' : ''}>📝 Tarea / Material (${pedagogicasTotal})</option>
 
-                <optionvalu e="conducta" ${selectedType === 'conducta' ? 'selected' : ''}>⚠️ Observación de Conducta (${conductasTotal})</option>
+                <option value="conducta" ${selectedType === 'conducta' ? 'selected' : ''}>⚠️ Observación de Conducta (${conductasTotal})</option>
 
-                <optionvalu e="citacion" ${selectedType === 'citacion' ? 'selected' : ''}>📅 Citación a Apoderado (${citacionesTotal})</option>
+                <option value="citacion" ${selectedType === 'citacion' ? 'selected' : ''}>📅 Citación a Apoderado (${citacionesTotal})</option>
 
               </select>
 
@@ -14477,45 +14473,45 @@ const Components = {
 
           <!-- Métricas Generales del Panel Docente -->
 
-          <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, miónmax(160px, 1fr)); margión-bottom: 16px;">
+          <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-bottom: 16px;">
 
             <div class="card metric-card" style="border-top: 4px solid #10b981;">
 
-              <spanclas s="metric-title">★ Méritos & Felicitaciones</span>
+              <span class="metric-title">★ Méritos & Felicitaciones</span>
 
               <div class="metric-value highlight-green">${meritosTotal}</div>
 
-              <spanclas s="metric-trend up" style="font-size: 11px;">Reconocimientos formativos</span>
+              <span class="metric-trend up" style="font-size: 11px;">Reconocimientos formativos</span>
 
             </div>
 
             <div class="card metric-card" style="border-top: 4px solid #3b82f6;">
 
-              <spanclas s="metric-title">📝 Tareas & Materiales</span>
+              <span class="metric-title">📝 Tareas & Materiales</span>
 
               <div class="metric-value highlight-navy">${pedagogicasTotal}</div>
 
-              <spanclas s="metric-trend" style="font-size: 11px; color: #1e40af;">Requerimientos de clase</span>
+              <span class="metric-trend" style="font-size: 11px; color: #1e40af;">Requerimientos de clase</span>
 
             </div>
 
             <div class="card metric-card" style="border-top: 4px solid #f59e0b;">
 
-              <spanclas s="metric-title">⚠️ Observaciones Conducta</span>
+              <span class="metric-title">⚠️ Observaciones Conducta</span>
 
               <div class="metric-value highlight-yellow">${conductasTotal}</div>
 
-              <spanclas s="metric-trend" style="font-size: 11px; color: #b45309;">Convivencia escolar</span>
+              <span class="metric-trend" style="font-size: 11px; color: #b45309;">Convivencia escolar</span>
 
             </div>
 
             <div class="card metric-card" style="border-top: 4px solid #8b5cf6;">
 
-              <spanclas s="metric-title">📅 Citaciones a Padres</span>
+              <span class="metric-title">📅 Citaciones a Padres</span>
 
               <div class="metric-value" style="color: #6d28d9;">${citacionesTotal}</div>
 
-              <spanclas s="metric-trend" style="font-size: 11px; color: #5b21b6;">Entrevistas de tutora</span>
+              <span class="metric-trend" style="font-size: 11px; color: #5b21b6;">Entrevistas de tutora</span>
 
             </div>
 
@@ -14525,15 +14521,15 @@ const Components = {
 
           <!-- Tabla de Anotaciones Registradas -->
 
-          <div class="card-header" style="margión-bottom: 8px; paddióng-bottom: 8px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+          <div class="card-header" style="margin-bottom: 8px; paddióng-bottom: 8px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
 
-            <h3 class="card-title" style="font-size: var(--font-size-base); margión: 0;">
+            <h3 class="card-title" style="font-size: var(--font-size-base); margin: 0;">
 
               📋 Expediente de Anotaciones en la Agenda Virtual (${filteredNotes.length} Registros)
 
             </h3>
 
-            <buttonclas s="btnbtn-navy btn-sm" onclick="window.print()" style="font-size: 11.5px; font-weight: 800;">
+            <button class="btn btn-navy btn-sm" onclick="window.print()" style="font-size: 11.5px; font-weight: 800;">
 
               Imprimir Consolidado A4
 
@@ -14585,7 +14581,7 @@ const Components = {
 
                         <strong>${note.date}</strong><br>
 
-                        <spanstyl e="font-size: 10.5px; color: #64748b;">${note.time}</span>
+                        <span style="font-size: 10.5px; color: #64748b;">${note.time}</span>
 
                       </td>
 
@@ -14599,7 +14595,7 @@ const Components = {
 
                       <td>
 
-                        <spanclas s="status-badge" style="background:#e0e7ff; color:#3730a3; font-weight:bold; font-size: 10.5px;">
+                        <span class="status-badge" style="background:#e0e7ff; color:#3730a3; font-weight:bold; font-size: 10.5px;">
 
                           ${note.grade}
 
@@ -14609,13 +14605,13 @@ const Components = {
 
                       <td>
 
-                        <spanclas s="status-badge" style="background: ${badgeColor}; color: white; font-weight: 800; font-size: 10px;">
+                        <span class="status-badge" style="background: ${badgeColor}; color: white; font-weight: 800; font-size: 10px;">
 
                           ${note.typeLabel || note.type}
 
                         </span>
 
-                        <div style="font-size: 10.5px; color: #475569; margión-top: 2px;">${note.category}</div>
+                        <div style="font-size: 10.5px; color: #475569; margin-top: 2px;">${note.category}</div>
 
                       </td>
 
@@ -14623,7 +14619,7 @@ const Components = {
 
                         <strong>${note.course}</strong><br>
 
-                        <spanstyl e="font-size: 11px; color: #047857;">${note.teacher}</span>
+                        <span style="font-size: 11px; color: #047857;">${note.teacher}</span>
 
                       </td>
 
@@ -14631,9 +14627,9 @@ const Components = {
 
                         <strong>${note.title}</strong><br>
 
-                        <spanstyl e="font-size: 11px; color: #475569;">${note.description}</span>
+                        <span style="font-size: 11px; color: #475569;">${note.description}</span>
 
-                        ${note.taskOrMaterial && note.taskOrMaterial !== 'Ninguno' ? `<div style="font-size: 10.5px; color: #1e3a8a; font-weight: bold; margión-top: 2px;">📌 ${note.taskOrMaterial}</div>` : ''}
+                        ${note.taskOrMaterial && note.taskOrMaterial !== 'Ninguno' ? `<div style="font-size: 10.5px; color: #1e3a8a; font-weight: bold; margin-top: 2px;">📌 ${note.taskOrMaterial}</div>` : ''}
 
                       </td>
 
@@ -14641,17 +14637,17 @@ const Components = {
 
                         ${note.parentSigned ? `
 
-                          <spanclas s="status-badge status-approved" style="font-size: 10px; font-weight: 800;">
+                          <span class="status-badge status-approved" style="font-size: 10px; font-weight: 800;">
 
                             ✓ Firmado
 
                           </span><br>
 
-                          <spanstyl e="font-size: 9.5px; color: #047857;">${note.signedDate}</span>
+                          <span style="font-size: 9.5px; color: #047857;">${note.signedDate}</span>
 
                         ` : `
 
-                          <spanclas s="status-badge status-pendióng" style="font-size: 10px; font-weight: 800;">
+                          <span class="status-badge status-pendióng" style="font-size: 10px; font-weight: 800;">
 
                             ⏳ Pendiente
 
@@ -14665,13 +14661,13 @@ const Components = {
 
                         <div style="display: flex; gap: 4px; justify-content: center;">
 
-                          <buttonclas s="btnbtn-sm" onclick="window.app.sendgendaNoteWhatspp('${note.id}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 10.5px; paddióng: 3px 8px;" title="N otificar por Whatspp">
+                          <button class="btn btn-sm" onclick="window.app.sendgendaNoteWhatspp('${note.id}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 10.5px; padding: 3px 8px;" title="N otificar por Whatspp">
 
                             💬 Whatspp
 
                           </button>
 
-                          <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openPrintgendaOfficialModal('${note.studentCode}')" style="font-size: 10.5px; paddióng: 3px 8px;" title="Ver Ficha Agenda A4">
+                          <button class="btn btn-outline btn-sm" onclick="window.app.openPrintgendaOfficialModal('${note.studentCode}')" style="font-size: 10.5px; padding: 3px 8px;" title="Ver Ficha Agenda A4">
 
                             Ficha A4
 
@@ -14689,7 +14685,7 @@ const Components = {
 
                   <tr>
 
-                    <td colspan="8" style="text-align: center; paddióng: 24px; color: #64748b;">
+                    <td colspan="8" style="text-align: center; padding: 24px; color: #64748b;">
 
                       N o hay registros de agenda para los filtros seleccionados.
 
@@ -14823,31 +14819,31 @@ const Components = {
 
       const defaultNotebooks = isPrimaria ? [
 
-        { course: "Matemtica & Raízonamiento", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, mrgenes impecables y esquemas enorden." },
+        { course: "Matemtica & Raízonamiento", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, mrgenes impecables y esquemas enorden." },
 
-        { course: "Comunicación Integral & Lectura", teacher: "Miss Julisa Magali Arroyo", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Caligrafía prolija y lecturas analizadas conclaridad." },
+        { course: "Comunicación Integral & Lectura", teacher: "Miss Julisa Magali Arroyo", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Caligrafía prolija y lecturas analizadas conclaridad." },
 
-        { course: "Ciencia y Tecnologa", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Fichas de experimentos y dibujosé científicos completos." },
+        { course: "Ciencia y Tecnologa", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Fichas de experimentos y dibujosé científicos completos." },
 
-        { course: "Personal Social & Valores", teacher: "Miss Julisa Magali Arroyo", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Resúmenes ordenados y participación constante." },
+        { course: "Personal Social & Valores", teacher: "Miss Julisa Magali Arroyo", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Resúmenes ordenados y participación constante." },
 
-        { course: "Inglés Técnico", teacher: "Miss Andrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "17 (A)", remarks: "Ejercicios de vocabulario al día." },
+        { course: "Inglés Técnico", teacher: "Miss Andrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "17 (A)", remarks: "Ejercicios de vocabulario al día." },
 
-        { course: "Computación & Informtica", teacher: "Prof. Fernando Rojas", lastDate: "10/08/2026", status: "al_dia", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Prcticas de laboratorio técnico enorden." }
+        { course: "Computación & Informtica", teacher: "Prof. Fernando Rojas", lastDate: "10/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Prcticas de laboratorio técnico enorden." }
 
       ] : [
 
-        { course: "Matemtica Avanzada (ÁÁÁÁálgebra / Geometra)", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, mrgenes impecables y esquemas enorden." },
+        { course: "Matemtica Avanzada (ÁÁÁÁálgebra / Geometra)", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, mrgenes impecables y esquemas enorden." },
 
-        { course: "Comunicación & Literatura", teacher: "Miss Mara Daysi Reyes", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "17 (A)", remarks: "Anlisis de textos y caligrafía óptima. Muy buendesarrollo." },
+        { course: "Comunicación & Literatura", teacher: "Miss Mara Daysi Reyes", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "17 (A)", remarks: "Anlisis de textos y caligrafía óptima. Muy buendesarrollo." },
 
-        { course: "Ciencia y Tecnologa (Física / Química)", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Prcticas experimentales ilustradas y fichas de laboratorio selladas." },
+        { course: "Ciencia y Tecnologa (Física / Química)", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Prcticas experimentales ilustradas y fichas de laboratorio selladas." },
 
-        { course: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "16 (A)", remarks: "Mapas históricos y resúmenes de época bienestructurados." },
+        { course: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "16 (A)", remarks: "Mapas históricos y resúmenes de época bienestructurados." },
 
-        { course: "Inglés Institucional", teacher: "Miss Andrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Vocabulario y ejercicios de gramtica avanzados completos." },
+        { course: "Inglés Institucional", teacher: "Miss Andrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Vocabulario y ejercicios de gramtica avanzados completos." },
 
-        { course: "EPT (Computación / Robótica)", teacher: "Prof. Alex Lino", lastDate: "10/08/2026", status: "observado", statusLabel: "<spanclas s='status-dot-yellow'></span> OBSERVDO", score: "13 (B)", remarks: "Falta pegar y desarrollar la ficha de proyecto técnico N  3. Presentar este viernes." }
+        { course: "EPT (Computación / Robótica)", teacher: "Prof. Alex Lino", lastDate: "10/08/2026", status: "observado", statusLabel: "<span class='status-dot-yellow'></span> OBSERVDO", score: "13 (B)", remarks: "Falta pegar y desarrollar la ficha de proyecto técnico N3. Presentar este viernes." }
 
       ];
 
@@ -14863,7 +14859,7 @@ const Components = {
 
         status: r.status === "Observado" ? "observado" : "al_dia",
 
-        statusLabel: r.status === "Observado" ? "<spanclas s='status-dot-yellow'></span> OBSERVDO" : "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA",
+        statusLabel: r.status === "Observado" ? "<span class='status-dot-yellow'></span> OBSERVDO" : "<span class='status-dot-green'></span> REVISDO & AL DÍA",
 
         score: `${r.score || 18} (${r.score >= 18 ? 'AD' : r.score >= 14 ? 'A' : 'B'})`,
 
@@ -14885,7 +14881,7 @@ const Components = {
 
         <div class="fade-in">
 
-          <div class="card" style="margión-bottom: var(--space-6);">
+          <div class="card" style="margin-bottom: var(--space-6);">
 
             
 
@@ -14893,31 +14889,31 @@ const Components = {
 
 
 
-            <div style="background: var(--bg-surface-subtle); border-radius: 8px; paddióng: 16px; margión: 16px 0; border: 1px solid var(--border-subtle); display: grid; grid-template-columns: repeat(auto-fit, miónmax(220px, 1fr)); gap: 12px;">
+            <div style="background: var(--bg-surface-subtle); border-radius: 8px; padding: 16px; margin: 16px 0; border: 1px solid var(--border-subtle); display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
 
               <div>
 
-                <spanstyl e="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Estudiante:</span>
+                <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Estudiante:</span>
 
                 <div style="font-size: 16px; font-weight: 900; color: var(--color-navy-900);">${studentName}</div>
 
-                <spanstyl e="font-size: 12px; color: var(--color-red-600); font-weight: 700;">${studentGrade} • Código: ${studentCode}</span>
+                <span style="font-size: 12px; color: var(--color-red-600); font-weight: 700;">${studentGrade} • Código: ${studentCode}</span>
 
               </div>
 
               <div>
 
-                <spanstyl e="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">${isPadre ? 'Apoderado(a) Responsable:' : 'Tutor y Apoderado:'}</span>
+                <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">${isPadre ? 'Apoderado(a) Responsable:' : 'Tutor y Apoderado:'}</span>
 
                 <div style="font-size: 14px; font-weight: 700; color: var(--color-navy-900);">${isPadre ? parentName : studentTutor}</div>
 
-                <spanstyl e="font-size: 12px; color: var(--text-muted);">${isPadre ? `Tutor de Aula: ${studentTutor}` : `Apoderado(a): ${parentName}`}</span>
+                <span style="font-size: 12px; color: var(--text-muted);">${isPadre ? `Tutor de Aula: ${studentTutor}` : `Apoderado(a): ${parentName}`}</span>
 
               </div>
 
               <div style="display: flex; gap: 8px; align-items: center; justify-content: flex-end;">
 
-                <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.openPrintParentNotebookReportModal()" style="font-weight: 800; paddióng: 8px 16px;">
+                <button class="btn btn-gold btn-sm" onclick="window.app.openPrintParentNotebookReportModal()" style="font-weight: 800; padding: 8px 16px;">
 
                   Imprimir / Guardar PDF
 
@@ -14931,35 +14927,35 @@ const Components = {
 
             <!-- ResumenEstadístico de Sellos -->
 
-            <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, miónmax(180px, 1fr)); margión-bottom: var(--space-6);">
+            <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: var(--space-6);">
 
               <div class="card metric-card" style="border-top: 4px solid #22c55e;">
 
-                <spanclas s="metric-title">Cuadernos al Da</span>
+                <span class="metric-title">Cuadernos al Da</span>
 
                 <div class="metric-value highlight-green">${alDiaTotal} / ${displayNotebooks.length}</div>
 
-                <spanclas s="metric-trend up" style="font-size: 11px;">${pctLogro}% Cumplimiento</span>
+                <span class="metric-trend up" style="font-size: 11px;">${pctLogro}% Cumplimiento</span>
 
               </div>
 
               <div class="card metric-card" style="border-top: 4px solid #f59e0b;">
 
-                <spanclas s="metric-title">Observados / Incompletos</span>
+                <span class="metric-title">Observados / Incompletos</span>
 
                 <div class="metric-value highlight-yellow">${obsTotal}</div>
 
-                <spanclas s="metric-trend" style="font-size: 11px; color: var(--color-yellow-600);">${obsTotal > 0 ? 'Requierenregularización' : 'N inguna observación'}</span>
+                <span class="metric-trend" style="font-size: 11px; color: var(--color-yellow-600);">${obsTotal > 0 ? 'Requierenregularización' : 'N inguna observación'}</span>
 
               </div>
 
               <div class="card metric-card" style="border-top: 4px solid var(--color-navy-600);">
 
-                <spanclas s="metric-title">Promedio de Cuadernos</span>
+                <span class="metric-title">Promedio de Cuadernos</span>
 
                 <div class="metric-value highlight-navy">${pctLogro >= 85 ? '18.5 (AD)' : '16.0 (A)'}</div>
 
-                <spanclas s="metric-trend up" style="font-size: 11px;">${pctLogro >= 85 ? 'Logro Destacado (AD)' : 'Logro Esperado (A)'}</span>
+                <span class="metric-trend up" style="font-size: 11px;">${pctLogro >= 85 ? 'Logro Destacado (AD)' : 'Logro Esperado (A)'}</span>
 
               </div>
 
@@ -14969,7 +14965,7 @@ const Components = {
 
             <!-- Detalle por Curso y Sellos Oficiales -->
 
-            <div class="card-header" style="margión-bottom: 8px; paddióng-bottom: 8px; border-bottom: 1px solid var(--border-subtle);">
+            <div class="card-header" style="margin-bottom: 8px; paddióng-bottom: 8px; border-bottom: 1px solid var(--border-subtle);">
 
               <h3 class="card-title" style="font-size: var(--font-size-base);">
 
@@ -14977,7 +14973,7 @@ const Components = {
 
               </h3>
 
-              <spanclas s="status-badge status-approved">Actualizado al Da</span>
+              <span class="status-badge status-approved">Actualizado al Da</span>
 
             </div>
 
@@ -15019,7 +15015,7 @@ const Components = {
 
                       <td>${nb.lastDate}</td>
 
-                      <td><spanclas s="digital-stamp ${nb.status === 'al_dia' ? 'stamp-al-dia' : 'stamp-observado'}">${nb.statusLabel}</span></td>
+                      <td><span class="digital-stamp ${nb.status === 'al_dia' ? 'stamp-al-dia' : 'stamp-observado'}">${nb.statusLabel}</span></td>
 
                       <td><strong style="color: ${nb.status === 'al_dia' ? '#15803d' : '#b45309'}; font-size: 14px;">${nb.score}</strong></td>
 
@@ -15037,7 +15033,7 @@ const Components = {
 
 
 
-            <div style="margión-top: var(--space-4); paddióng: 12px; background: rgba(30,58,138,0.05); border-radius: 6px; font-size: 11px; color: var(--color-navy-800); display: flex; align-items: center; gap: 8px;">
+            <div style="margin-top: var(--space-4); padding: 12px; background: rgba(30,58,138,0.05); border-radius: 6px; font-size: 11px; color: var(--color-navy-800); display: flex; align-items: center; gap: 8px;">
 
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
 
@@ -15057,7 +15053,7 @@ const Components = {
 
 
 
-    // --- VISTÍA DOCENTE / AUXILIR / COORDINCIÓN   / ADMINISTRÍADOR ---
+    // --- VISTÍA DOCENTE / AUXILIR / COORDINCIÓN / ADMINISTRÍADOR ---
 
     const hasdmiónEditPower = state.currentRole === "admin" || state.currentRole === "director" || (state.currentRole === "docente" && state.users.docente && state.users.docente.hasdmiónPrivileges);
 
@@ -15133,7 +15129,7 @@ const Components = {
 
       <div class="fade-in">
 
-        <div class="card" style="margión-bottom: var(--space-6);">
+        <div class="card" style="margin-bottom: var(--space-6);">
 
           
 
@@ -15147,13 +15143,13 @@ const Components = {
 
                 <h2 class="card-title" style="font-size: var(--font-size-xl);">Control y Sellado de Cuadernos Mediante QR</h2>
 
-                <spanclas s="status-badge status-approved" style="background:#10b981; color:white; font-weight:800;">CMARÍA BJO DEMNDÍA</span>
+                <span class="status-badge status-approved" style="background:#10b981; color:white; font-weight:800;">CMARÍA BJO DEMNDÍA</span>
 
-                <spanclas s="status-badge status-approved" style="background:#3b82f6; color:white; font-weight:800;">MULTI-DOCENTE ENVIVO</span>
+                <span class="status-badge status-approved" style="background:#3b82f6; color:white; font-weight:800;">MULTI-DOCENTE ENVIVO</span>
 
               </div>
 
-              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margión-top: 4px;">
+              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
                 I.E.P. "El Educador" • Escaneo óptico de stickers de cuadernos. <strong>Varios profesores puedenescanear simultneamente desde sus celulares</strong> siónsobreescritura de datos.
 
@@ -15167,25 +15163,25 @@ const Components = {
 
             <div style="display:flex; gap: 8px; flex-wrap: wrap; align-items: center;">
 
-              <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openMultiDeviceConnectModal()" style="font-weight: 800; color: #1e3a8a; border-color: #3b82f6; background: #eff6ff; border-radius: 18px; paddióng: 6px 14px;">
+              <button class="btn btn-outline btn-sm" onclick="window.app.openMultiDeviceConnectModal()" style="font-weight: 800; color: #1e3a8a; border-color: #3b82f6; background: #eff6ff; border-radius: 18px; padding: 6px 14px;">
 
                 Conectar Celular
 
               </button>
 
-              <buttonclas s="btnbtn-sm ${activeSubTab === 'scanner' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setNotebookctiveSubTab('scanner')" style="font-weight: 800;">
+              <button class="btn btn-sm ${activeSubTab === 'scanner' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setNotebookctiveSubTab('scanner')" style="font-weight: 800;">
 
                 [Cmara] 1. Escner enVivo
 
               </button>
 
-              <buttonclas s="btnbtn-sm ${activeSubTab === 'stickers' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setNotebookctiveSubTab('stickers')" style="font-weight: 800;">
+              <button class="btn btn-sm ${activeSubTab === 'stickers' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setNotebookctiveSubTab('stickers')" style="font-weight: 800;">
 
                 2. Plancha de Stickers QR
 
               </button>
 
-              <buttonclas s="btnbtn-sm ${activeSubTab === 'report' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setNotebookctiveSubTab('report')" style="font-weight: 800;">
+              <button class="btn btn-sm ${activeSubTab === 'report' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setNotebookctiveSubTab('report')" style="font-weight: 800;">
 
                 3. Informe de Supervisión
 
@@ -15209,11 +15205,11 @@ const Components = {
 
             <!-- Banner de Escaneo Protegido Bajo Demanda y Multi-Dispositivo -->
 
-            <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1.5px solid #93c5fd; border-radius: 12px; paddióng: 12px 16px; margión-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1.5px solid #93c5fd; border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
 
               <div style="display: flex; align-items: center; gap: 12px;">
 
-                <spanstyl e="font-size: 26px;">️</span>
+                <span style="font-size: 26px;">️</span>
 
                 <div>
 
@@ -15233,7 +15229,7 @@ const Components = {
 
               </div>
 
-              <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.openMultiDeviceConnectModal()" style="font-weight: 800; border-radius: 16px; font-size: 11.5px; box-shadow: 0 4px 10px rgba(15,23,42,0.15);">
+              <button class="btn btn-navy btn-sm" onclick="window.app.openMultiDeviceConnectModal()" style="font-weight: 800; border-radius: 16px; font-size: 11.5px; box-shadow: 0 4px 10px rgba(15,23,42,0.15);">
 
                 📲 Abrir QR para mi Celular
 
@@ -15243,23 +15239,23 @@ const Components = {
 
 
 
-            <div class="dashboard-grid" style="margión-bottom: var(--space-6); align-items: stretch;">
+            <div class="dashboard-grid" style="margin-bottom: var(--space-6); align-items: stretch;">
 
               
 
               <!-- Visor de Cmara Real para Celulares / PC -->
 
-              <div class="card" style="background: var(--color-navy-950); color: white; border: 2px solid var(--color-yellow-500); paddióng: var(--space-4); display:flex; flex-direction:column; align-items:center;">
+              <div class="card" style="background: var(--color-navy-950); color: white; border: 2px solid var(--color-yellow-500); padding: var(--space-4); display:flex; flex-direction:column; align-items:center;">
 
-                <div style="display:flex; justify-content:space-between; width:100%; align-items:center; margión-bottom: 8px;">
+                <div style="display:flex; justify-content:space-between; width:100%; align-items:center; margin-bottom: 8px;">
 
-                  <spanstyl e="font-size:12px; font-weight:800; color:var(--color-yellow-400); letter-spacióng:0.05em;">
+                  <span style="font-size:12px; font-weight:800; color:var(--color-yellow-400); letter-spacing:0.05em;">
 
                     📸 ESCN ER POR CMARÍA (CELULR / WEBCM)
 
                   </span>
 
-                  <spani d="camera-status-tag" class="status-badge status-pendióng" style="font-size:10px;">
+                  <span id="camera-status-tag" class="status-badge status-pendióng" style="font-size:10px;">
 
                     Cmara Apagada (EnEspera)
 
@@ -15273,11 +15269,11 @@ const Components = {
 
                 <div id="qr-live-camera-feed" style="width: 100%; max-width: 320px; mión-height: 240px; background: #000; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; border: 1px dashed rgba(255,255,255,0.2);">
 
-                  <div id="camera-placeholder-msg" style="text-align: center; paddióng: 20px; color: rgba(255,255,255,0.7);">
+                  <div id="camera-placeholder-msg" style="text-align: center; padding: 20px; color: rgba(255,255,255,0.7);">
 
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margión: 0 auto 8px; display:block; color: var(--color-yellow-400);"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin: 0 auto 8px; display:block; color: var(--color-yellow-400);"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
 
-                    <spanstyl e="font-size: 12px; font-weight: 700;">Presiona 'Encender Cmara' para iniciar el escaneo</span>
+                    <span style="font-size: 12px; font-weight: 700;">Presiona 'Encender Cmara' para iniciar el escaneo</span>
 
                   </div>
 
@@ -15287,15 +15283,15 @@ const Components = {
 
                 <!-- Botones de Control de Cmara -->
 
-                <div style="display: flex; gap: 8px; margión-top: 12px; width: 100%; justify-content: center; flex-wrap: wrap;">
+                <div style="display: flex; gap: 8px; margin-top: 12px; width: 100%; justify-content: center; flex-wrap: wrap;">
 
-                  <buttoni d="btn-start-camera" class="btnbtn-gold" onclick="window.app.startLiveCameraScanner()" style="font-weight:800; font-size:13px; border-radius: 20px; paddióng: 10px 20px;">
+                  <buttoni d="btn-start-camera" class="btn btn-gold" onclick="window.app.startLiveCameraScanner()" style="font-weight:800; font-size:13px; border-radius: 20px; padding: 10px 20px;">
 
                     [Cmara] Encender Cmara
 
                   </button>
 
-                  <buttoni d="btn-stop-camera" class="btnbtn-outline" onclick="window.app.stopLiveCameraScanner()" style="display:none; color:#fca5a5; border-color:rgba(220,38,38,0.4); border-radius: 20px;">
+                  <buttoni d="btn-stop-camera" class="btn btn-outline" onclick="window.app.stopLiveCameraScanner()" style="display:none; color:#fca5a5; border-color:rgba(220,38,38,0.4); border-radius: 20px;">
 
                     ⏹️ Apagar Cmara
 
@@ -15313,19 +15309,19 @@ const Components = {
 
                 <div>
 
-                  <div style="display:flex; justify-content:space-between; align-items:center; margión-bottom: 6px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
 
-                    <h4 style="margión:0; color: var(--color-navy-900); font-weight: 800;">
+                    <h4 style="margin:0; color: var(--color-navy-900); font-weight: 800;">
 
                       ⚡ Escaneo Rpido de Cuadernos (Demo Directo)
 
                     </h4>
 
-                    <spanclas s="status-badge status-approved" style="font-size:10px;">Exclusivo por Alumno y Curso</span>
+                    <span class="status-badge status-approved" style="font-size:10px;">Exclusivo por Alumno y Curso</span>
 
                   </div>
 
-                  <p style="font-size: 11.5px; color: var(--text-muted); margión-bottom: 12px;">
+                  <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 12px;">
 
                     Al escanear el QR, el sistema identifica automticamente al <strong>Alumno, Grado, Curso y Profesor Titular</strong>:
 
@@ -15333,9 +15329,9 @@ const Components = {
 
 
 
-                  <div style="display: flex; flex-direction:column; gap: 6px; margión-bottom: 12px;">
+                  <div style="display: flex; flex-direction:column; gap: 6px; margin-bottom: 12px;">
 
-                    <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Matemtica Avanzada (ÁÁÁÁálgebra / Geometra)|Prof. Roberto Silva')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; paddióng: 8px 12px;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Matemtica Avanzada (ÁÁÁÁálgebra / Geometra)|Prof. Roberto Silva')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; padding: 8px 12px;">
 
                       <div>
 
@@ -15345,13 +15341,13 @@ const Components = {
 
                       </div>
 
-                      <spanclas s="status-badge status-approved" style="font-size: 10px;">Evaluar</span>
+                      <span class="status-badge status-approved" style="font-size: 10px;">Evaluar</span>
 
                     </button>
 
 
 
-                    <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Comunicación & Literatura|Miss Mara Daysi Reyes Milla')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; paddióng: 8px 12px;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Comunicación & Literatura|Miss Mara Daysi Reyes Milla')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; padding: 8px 12px;">
 
                       <div>
 
@@ -15361,13 +15357,13 @@ const Components = {
 
                       </div>
 
-                      <spanclas s="status-badge status-approved" style="font-size: 10px;">Evaluar</span>
+                      <span class="status-badge status-approved" style="font-size: 10px;">Evaluar</span>
 
                     </button>
 
 
 
-                    <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-055|Gael Alessandro Cceres|4 de Secundaria|Ciencia y Tecnologa (Física / Química)|Miss Leyli Graciela Reyes Cerquen')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; paddióng: 8px 12px;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-055|Gael Alessandro Cceres|4 de Secundaria|Ciencia y Tecnologa (Física / Química)|Miss Leyli Graciela Reyes Cerquen')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; padding: 8px 12px;">
 
                       <div>
 
@@ -15377,13 +15373,13 @@ const Components = {
 
                       </div>
 
-                      <spanclas s="status-badge status-approved" style="font-size: 10px;">Evaluar</span>
+                      <span class="status-badge status-approved" style="font-size: 10px;">Evaluar</span>
 
                     </button>
 
 
 
-                    <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-089|Marina del Carmenlbújar|4 de Secundaria|Ciencias Sociales & Historia|Prof. Javier Vega')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; paddióng: 8px 12px;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-089|Marina del Carmenlbújar|4 de Secundaria|Ciencias Sociales & Historia|Prof. Javier Vega')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; padding: 8px 12px;">
 
                       <div>
 
@@ -15393,7 +15389,7 @@ const Components = {
 
                       </div>
 
-                      <spanclas s="status-badge status-approved" style="font-size: 10px;">Evaluar</span>
+                      <span class="status-badge status-approved" style="font-size: 10px;">Evaluar</span>
 
                     </button>
 
@@ -15411,7 +15407,7 @@ const Components = {
 
                     <input type="text" id="manual-qr-input" class="form-control" value="QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Matemtica Avanzada (ÁÁÁÁálgebra / Geometra)|Prof. Roberto Silva" style="font-size: 11.5px; border-radius: 16px;" />
 
-                    <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.simulateQRScan(document.getElementById('manual-qr-input').value)" style="border-radius: 16px; font-weight: 800;">
+                    <button class="btn btn-navy btn-sm" onclick="window.app.simulateQRScan(document.getElementById('manual-qr-input').value)" style="border-radius: 16px; font-weight: 800;">
 
                       Revisar
 
@@ -15431,7 +15427,7 @@ const Components = {
 
             <!-- Tabla de Revisiones Recientes del Da -->
 
-            <div class="card-header" style="margión-bottom: 8px; paddióng-bottom: 8px; border-bottom: 1px solid var(--border-subtle);">
+            <div class="card-header" style="margin-bottom: 8px; paddióng-bottom: 8px; border-bottom: 1px solid var(--border-subtle);">
 
               <h3 class="card-title" style="font-size: var(--font-size-base);">
 
@@ -15439,7 +15435,7 @@ const Components = {
 
               </h3>
 
-              <spanclas s="status-badge status-approved">${reviews.length} Evaluados</span>
+              <span class="status-badge status-approved">${reviews.length} Evaluados</span>
 
             </div>
 
@@ -15485,15 +15481,15 @@ const Components = {
 
                       <td><strong>${r.studentName}</strong></td>
 
-                      <td><spanclas s="status-badge status-pendióng" style="font-size: 10px;">${r.grade}</span></td>
+                      <td><span class="status-badge status-pendióng" style="font-size: 10px;">${r.grade}</span></td>
 
                       <td><strong>${r.course}</strong></td>
 
                       <td>${r.teacher || 'Prof. Roberto Silva'}</td>
 
-                      <td><spanstyl e="color:#047857; font-weight:700; font-size:11px;">${r.evaluator || 'Auxiliar de Educación'}</span></td>
+                      <td><span style="color:#047857; font-weight:700; font-size:11px;">${r.evaluator || 'Auxiliar de Educación'}</span></td>
 
-                      <td><spanclas s="digital-stamp ${r.stampType}">${r.stampText}</span></td>
+                      <td><span class="digital-stamp ${r.stampType}">${r.stampText}</span></td>
 
                       <td><strong style="font-size:14px; color:${r.score >= 15 ? '#15803d' : '#b45309'};">${r.score}</strong></td>
 
@@ -15521,25 +15517,25 @@ const Components = {
 
           ${activeSubTab === 'stickers' ? `
 
-            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; paddióng: 16px; margión-bottom: 20px;">
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
 
-              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 12px; margión-bottom: 16px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 12px; margin-bottom: 16px;">
 
                 <div>
 
                   <div style="display: flex; align-items: center; gap: 8px;">
 
-                    <h3 style="font-size: 16px; font-weight: 800; color: var(--color-navy-900); margión: 0;">
+                    <h3 style="font-size: 16px; font-weight: 800; color: var(--color-navy-900); margin: 0;">
 
                       Planchas de Stickers QR Exclusivos por Estudiante y Curso
 
                     </h3>
 
-                    <spanclas s="status-badge status-approved" style="font-size: 10.5px; font-weight: 800;">Boleta Oficial 2026</span>
+                    <span class="status-badge status-approved" style="font-size: 10.5px; font-weight: 800;">Boleta Oficial 2026</span>
 
                   </div>
 
-                  <p style="font-size: 12px; color: var(--text-secondary); margión: 4px 0 0 0;">
+                  <p style="font-size: 12px; color: var(--text-secondary); margin: 4px 0 0 0;">
 
                     Genera stickers individuales o la <strong>plancha completa conlos 22 cursos curriculares</strong> de la boleta de notas.
 
@@ -15553,13 +15549,13 @@ const Components = {
 
                   <!-- BOTÓN PRINCIPL SOLICITÍADO: GENERÍAR QR AUTOMTICO POR ESTUDINTE CONTODOS LOS CURSOS DE LA BOLETÍA -->
 
-                  <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${selectedStudentId !== 'all' ? selectedStudentId : 'EST-2026-042'}')" style="font-weight: 900; paddióng: 10px 18px; border-radius: 20px; font-size: 13px; box-shadow: 0 4px 14px rgba(245,158,11,0.4); background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #0b132b; display: flex; align-items: center; gap: 6px;">
+                  <button class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${selectedStudentId !== 'all' ? selectedStudentId : 'EST-2026-042'}')" style="font-weight: 900; padding: 10px 18px; border-radius: 20px; font-size: 13px; box-shadow: 0 4px 14px rgba(245,158,11,0.4); background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #0b132b; display: flex; align-items: center; gap: 6px;">
 
                     <span>⚡</span> <span>Generar QR por Estudiante (Todos los Cursos de Boleta)</span>
 
                   </button>
 
-                  <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.printNotebookStickerSheet()" style="font-weight: 800; paddióng: 10px 16px; border-radius: 20px; font-size: 12.5px;">
+                  <button class="btn btn-navy btn-sm" onclick="window.app.printNotebookStickerSheet()" style="font-weight: 800; padding: 10px 16px; border-radius: 20px; font-size: 12.5px;">
 
                     Imprimir Selección A4 (15 QR / Hoja)
 
@@ -15573,15 +15569,15 @@ const Components = {
 
               <!-- Filtros para la Generación de Stickers y Selección de Formato -->
 
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(190px, 1fr)); gap: 12px; background: #ffffff; paddióng: 12px; border-radius: 10px; border: 1px solid #cbd5e1;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; background: #ffffff; padding: 12px; border-radius: 10px; border: 1px solid #cbd5e1;">
 
-                <div class="form-group" style="margión:0;">
+                <div class="form-group" style="margin:0;">
 
                   <label class="form-label" style="font-size: 11px; font-weight: 700; color: #1e3a8a;">1. Grado Escolar:</label>
 
                   <select id="sticker-grade-select" class="form-control" onchange="window.app.onNotebookGradeFilterChange(this.value)" style="font-size: 12px; font-weight: bold;">
 
-                    ${catalogGrades.map(g => `<optionvalu e="${g.id}" ${selectedGrade === g.id ? 'selected' : ''}>${g.label} (${g.level})</option>`).join('')}
+                    ${catalogGrades.map(g => `<option value="${g.id}" ${selectedGrade === g.id ? 'selected' : ''}>${g.label} (${g.level})</option>`).join('')}
 
                   </select>
 
@@ -15589,17 +15585,17 @@ const Components = {
 
 
 
-                <div class="form-group" style="margión:0;">
+                <div class="form-group" style="margin:0;">
 
                   <label class="form-label" style="font-size: 11px; font-weight: 700; color: #1e3a8a;">2. Filtrar por Estudiante:</label>
 
                   <select id="sticker-student-select" class="form-control" onchange="window.app.onNotebookStudentFilterChange(this.value)" style="font-size: 12px; font-weight: bold;">
 
-                    <optionvalu e="all">-- Todos los Alumnos del Grado --</option>
+                    <option value="all">-- Todos los Alumnos del Grado --</option>
 
                     ${enrollments.filter(e => e.gradeId === selectedGrade || !selectedGrade).map(e => `
 
-                      <optionvalu e="${e.studentCode || e.dni}" ${selectedStudentId === (e.studentCode || e.dni) ? 'selected' : ''}>
+                      <option value="${e.studentCode || e.dni}" ${selectedStudentId === (e.studentCode || e.dni) ? 'selected' : ''}>
 
                         ${e.studentName} (${e.studentCode || e.dni})
 
@@ -15613,17 +15609,17 @@ const Components = {
 
 
 
-                <div class="form-group" style="margión:0;">
+                <div class="form-group" style="margin:0;">
 
                   <label class="form-label" style="font-size: 11px; font-weight: 700; color: #1e3a8a;">3. Curso de Boleta Oficial:</label>
 
                   <select id="sticker-course-select" class="form-control" onchange="window.app.onNotebookCourseFilterChange(this.value)" style="font-size: 12px; font-weight: bold;">
 
-                    <optionvalu e="all">-- Todos los Cursos de Boleta (${boletaCoursesCatalog.length}) --</option>
+                    <option value="all">-- Todos los Cursos de Boleta (${boletaCoursesCatalog.length}) --</option>
 
                     ${boletaCoursesCatalog.map(c => `
 
-                      <optionvalu e="${c.id}" ${selectedCourseFilter === c.id ? 'selected' : ''}>
+                      <option value="${c.id}" ${selectedCourseFilter === c.id ? 'selected' : ''}>
 
                         ${c.icon || '📚'} ${c.name} (${c.teacher})
 
@@ -15637,15 +15633,15 @@ const Components = {
 
 
 
-                <div class="form-group" style="margión:0;">
+                <div class="form-group" style="margin:0;">
 
                   <label class="form-label" style="font-size: 11px; font-weight: 700; color: #1e3a8a;">4. Distribución por Hoja A4:</label>
 
                   <select id="sticker-layout-select" class="form-control" style="font-size: 12px; font-weight: 800; background: #eff6ff; border: 1.5px solid #3b82f6; color: #1e3a8a;">
 
-                    <optionvalu e="3x5" selected>3 × 5 (15 QR por Hoja)</option>
+                    <option value="3x5" selected>3 × 5 (15 QR por Hoja)</option>
 
-                    <optionvalu e="3x4">3 × 4 (12 QR por Hoja)</option>
+                    <option value="3x4">3 × 4 (12 QR por Hoja)</option>
 
                   </select>
 
@@ -15659,7 +15655,7 @@ const Components = {
 
             <!-- Grilla de Stickers de Cuadernos (Cursos Oficiales de Boleta) -->
 
-            <div id="printable-stickers-sheet" class="qr-sticker-sheet" style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(280px, 1fr)); gap: 14px;">
+            <div id="printable-stickers-sheet" class="qr-sticker-sheet" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
 
               ${stickersData.map(st => {
 
@@ -15667,31 +15663,31 @@ const Components = {
 
                 return `
 
-                  <div class="qr-notebook-sticker" style="border: 2px solid #0f172a; border-radius: 10px; paddióng: 12px; background: #ffffff; display: flex; gap: 12px; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: relative; border-left: 6px solid #f59e0b;">
+                  <div class="qr-notebook-sticker" style="border: 2px solid #0f172a; border-radius: 10px; padding: 12px; background: #ffffff; display: flex; gap: 12px; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: relative; border-left: 6px solid #f59e0b;">
 
                     <div style="flex-shrink: 0; text-align: center; width: 75px;">
 
-                      <div style="width: 75px; height: 75px; border: 1px solid #cbd5e1; border-radius: 6px; paddióng: 2px; background: white; margión: 0 auto;">
+                      <div style="width: 75px; height: 75px; border: 1px solid #cbd5e1; border-radius: 6px; padding: 2px; background: white; margin: 0 auto;">
 
                         ${Components.generateQRSVG(st.qrPayload, 140)}
 
                       </div>
 
-                      <spanstyl e="font-size: 8px; font-weight: 800; color: #475569; display: block; margión-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><code>${st.qrCode}</code></span>
+                      <span style="font-size: 8px; font-weight: 800; color: #475569; display: block; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><code>${st.qrCode}</code></span>
 
                     </div>
 
-                    <div style="flex: 1; display: flex; flex-direction: column; gap: 2px; mión-width: 0;">
+                    <div style="flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0;">
 
                       <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                        <spanstyl e="font-size: 8.5px; font-weight: 900; color: #dc2626; letter-spacióng: 0.05em; text-transform: uppercase;">
+                        <span style="font-size: 8.5px; font-weight: 900; color: #dc2626; letter-spacing: 0.05em; text-transform: uppercase;">
 
-                          ★ I.E.P. EL EDUCDOR • SJL
+                          ★ I.E.P. EL EDUCADOR • SJL
 
                         </span>
 
-                        <spanclas s="status-badge" style="font-size: 8px; paddióng: 1px 4px; font-weight: 800; background: #eff6ff; color: #1e40af;">
+                        <span class="status-badge" style="font-size: 8px; padding: 1px 4px; font-weight: 800; background: #eff6ff; color: #1e40af;">
 
                           ${st.area || 'Oficial'}
 
@@ -15723,15 +15719,15 @@ const Components = {
 
                       </div>
 
-                      <div style="margión-top: 6px; display: flex; gap: 4px;">
+                      <div style="margin-top: 6px; display: flex; gap: 4px;">
 
-                        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.simulateQRScan('${safePayload}')" style="font-size: 9.5px; paddióng: 2px 7px; border-radius: 12px; font-weight: 800;">
+                        <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('${safePayload}')" style="font-size: 9.5px; padding: 2px 7px; border-radius: 12px; font-weight: 800;">
 
                           [Cmara] Probar Escaneo
 
                         </button>
 
-                        <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${st.studentCode}')" style="font-size: 9.5px; paddióng: 2px 7px; border-radius: 12px; font-weight: 800;">
+                        <button class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${st.studentCode}')" style="font-size: 9.5px; padding: 2px 7px; border-radius: 12px; font-weight: 800;">
 
                           Plancha Alumno
 
@@ -15761,19 +15757,19 @@ const Components = {
 
           ${activeSubTab === 'report' ? `
 
-            <div style="margión-bottom: 20px;">
+            <div style="margin-bottom: 20px;">
 
-              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 12px; margión-bottom: 16px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 12px; margin-bottom: 16px;">
 
                 <div>
 
-                  <h3 style="font-size: 16px; font-weight: 800; color: var(--color-navy-900); margión: 0 0 4px 0;">
+                  <h3 style="font-size: 16px; font-weight: 800; color: var(--color-navy-900); margin: 0 0 4px 0;">
 
                     Informe General de Cuadernos Revisados & Sellos Otorgados
 
                   </h3>
 
-                  <p style="font-size: 12px; color: var(--text-secondary); margión: 0;">
+                  <p style="font-size: 12px; color: var(--text-secondary); margin: 0;">
 
                     Consolidado de cumplimiento de tareas, cuadernos observados y sellos otorgados por el Auxiliar y Docentes.
 
@@ -15783,7 +15779,7 @@ const Components = {
 
                 
 
-                <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.printNotebookGeneralReport()" style="font-weight: 800; paddióng: 8px 16px; border-radius: 18px;">
+                <button class="btn btn-navy btn-sm" onclick="window.app.printNotebookGeneralReport()" style="font-weight: 800; padding: 8px 16px; border-radius: 18px;">
 
                   Imprimir Informe Oficial PDF
 
@@ -15795,45 +15791,45 @@ const Components = {
 
               <!-- Tarjetas de Métricas del Informe -->
 
-              <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, miónmax(180px, 1fr)); margión-bottom: 16px;">
+              <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: 16px;">
 
                 <div class="card metric-card" style="border-top: 4px solid #10b981;">
 
-                  <spanclas s="metric-title">Cuadernos al Da</span>
+                  <span class="metric-title">Cuadernos al Da</span>
 
                   <div class="metric-value highlight-green">${alDiaCount}</div>
 
-                  <spanclas s="metric-trend up" style="font-size: 11px;">${pctlDia}% de Cumplimiento</span>
+                  <span class="metric-trend up" style="font-size: 11px;">${pctlDia}% de Cumplimiento</span>
 
                 </div>
 
                 <div class="card metric-card" style="border-top: 4px solid #f59e0b;">
 
-                  <spanclas s="metric-title">Cuadernos Observados</span>
+                  <span class="metric-title">Cuadernos Observados</span>
 
                   <div class="metric-value highlight-yellow">${observadosCount}</div>
 
-                  <spanclas s="metric-trend" style="font-size: 11px; color: #b45309;">RequierenRegularización</span>
+                  <span class="metric-trend" style="font-size: 11px; color: #b45309;">RequierenRegularización</span>
 
                 </div>
 
                 <div class="card metric-card" style="border-top: 4px solid #ef4444;">
 
-                  <spanclas s="metric-title">N o Presentados</span>
+                  <span class="metric-title">N o Presentados</span>
 
                   <div class="metric-value highlight-red">${noPresentoCount}</div>
 
-                  <spanclas s="metric-trend" style="font-size: 11px; color: #dc2626;">Amonestación / Citación</span>
+                  <span class="metric-trend" style="font-size: 11px; color: #dc2626;">Amonestación / Citación</span>
 
                 </div>
 
                 <div class="card metric-card" style="border-top: 4px solid var(--color-navy-800);">
 
-                  <spanclas s="metric-title">Total Evaluaciones</span>
+                  <span class="metric-title">Total Evaluaciones</span>
 
                   <div class="metric-value highlight-navy">${totalReviews}</div>
 
-                  <spanclas s="metric-trend" style="font-size: 11px;">Registros enServidor</span>
+                  <span class="metric-trend" style="font-size: 11px;">Registros enServidor</span>
 
                 </div>
 
@@ -15843,27 +15839,27 @@ const Components = {
 
               <!-- Filtro de Búsqueda en el Informe -->
 
-              <div style="display:flex; gap: 12px; margión-bottom: 12px; flex-wrap: wrap;">
+              <div style="display:flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;">
 
-                <div style="flex: 1; mión-width: 200px;">
+                <div style="flex: 1; min-width: 200px;">
 
                   <label class="form-label" style="font-size: 11px;">Filtrar por Asignatura:</label>
 
                   <select class="form-control" onchange="window.app.onNotebookCourseFilterChange(this.value)" style="font-size: 12px;">
 
-                    <optionvalu e="all">-- Todos los Cursos --</option>
+                    <option value="all">-- Todos los Cursos --</option>
 
-                    <optionvalu e="Matemtica Avanzada" ${selectedCourseFilter === 'Matemtica Avanzada' ? 'selected' : ''}>Matemtica Avanzada (Prof. Roberto Silva)</option>
+                    <option value="Matemtica Avanzada" ${selectedCourseFilter === 'Matemtica Avanzada' ? 'selected' : ''}>Matemtica Avanzada (Prof. Roberto Silva)</option>
 
-                    <optionvalu e="Comunicación & Literatura" ${selectedCourseFilter === 'Comunicación & Literatura' ? 'selected' : ''}>Comunicación & Literatura (Miss Mara Daysi Reyes)</option>
+                    <option value="Comunicación & Literatura" ${selectedCourseFilter === 'Comunicación & Literatura' ? 'selected' : ''}>Comunicación & Literatura (Miss Mara Daysi Reyes)</option>
 
-                    <optionvalu e="Ciencia y Tecnologa" ${selectedCourseFilter === 'Ciencia y Tecnologa' ? 'selected' : ''}>Ciencia y Tecnologa (Miss Leyli Reyes)</option>
+                    <option value="Ciencia y Tecnologa" ${selectedCourseFilter === 'Ciencia y Tecnologa' ? 'selected' : ''}>Ciencia y Tecnologa (Miss Leyli Reyes)</option>
 
-                    <optionvalu e="Ciencias Sociales" ${selectedCourseFilter === 'Ciencias Sociales' ? 'selected' : ''}>Ciencias Sociales (Prof. Javier Vega)</option>
+                    <option value="Ciencias Sociales" ${selectedCourseFilter === 'Ciencias Sociales' ? 'selected' : ''}>Ciencias Sociales (Prof. Javier Vega)</option>
 
-                    <optionvalu e="Inglés Institucional" ${selectedCourseFilter === 'Inglés Institucional' ? 'selected' : ''}>Inglés Institucional (Miss Andrea Ramos)</option>
+                    <option value="Inglés Institucional" ${selectedCourseFilter === 'Inglés Institucional' ? 'selected' : ''}>Inglés Institucional (Miss Andrea Ramos)</option>
 
-                    <optionvalu e="EPT (Computación)" ${selectedCourseFilter === 'EPT (Computación)' ? 'selected' : ''}>EPT (Computación) (Prof. Fernando Rojas)</option>
+                    <option value="EPT (Computación)" ${selectedCourseFilter === 'EPT (Computación)' ? 'selected' : ''}>EPT (Computación) (Prof. Fernando Rojas)</option>
 
                   </select>
 
@@ -15875,9 +15871,9 @@ const Components = {
 
               <!-- Matriz Resumende Cuadernos por Alumno del Aula -->
 
-              <div class="card" style="margión-bottom: 16px; background: #ffffff; border: 1px solid #cbd5e1; paddióng: 14px; border-radius: 10px;">
+              <div class="card" style="margin-bottom: 16px; background: #ffffff; border: 1px solid #cbd5e1; padding: 14px; border-radius: 10px;">
 
-                <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margión: 0 0 10px 0;">
+                <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margin: 0 0 10px 0;">
 
                   Matriz de Estado de Cuadernos por Estudiante (4 de Secundaria "A")
 
@@ -15919,11 +15915,11 @@ const Components = {
 
                           if (rev) {
 
-                            return `<spanclas s="digital-stamp ${rev.stampType}" style="font-size: 9.5px; paddióng: 2px 6px;">${rev.status} (${rev.score})</span>`;
+                            return `<span class="digital-stamp ${rev.stampType}" style="font-size: 9.5px; padding: 2px 6px;">${rev.status} (${rev.score})</span>`;
 
                           }
 
-                          return `<spanstyl e="color: #94a3b8; font-size: 10px;">⚪ Pendiente</span>`;
+                          return `<span style="color: #94a3b8; font-size: 10px;">⚪ Pendiente</span>`;
 
                         };
 
@@ -16007,15 +16003,15 @@ const Components = {
 
                         <td><strong>${r.studentName}</strong></td>
 
-                        <td><spanclas s="status-badge status-pendióng" style="font-size: 10px;">${r.grade}</span></td>
+                        <td><span class="status-badge status-pendióng" style="font-size: 10px;">${r.grade}</span></td>
 
                         <td><strong>${r.course}</strong></td>
 
                         <td>${r.teacher || 'Prof. Titular'}</td>
 
-                        <td><spanstyl e="color:#047857; font-weight:700;">${r.evaluator || 'Auxiliar'}</span></td>
+                        <td><span style="color:#047857; font-weight:700;">${r.evaluator || 'Auxiliar'}</span></td>
 
-                        <td><spanclas s="digital-stamp ${r.stampType}">${r.stampText}</span></td>
+                        <td><span class="digital-stamp ${r.stampType}">${r.stampText}</span></td>
 
                         <td><strong style="font-size:14px; color:${r.score >= 15 ? '#15803d' : '#b45309'};">${r.score}</strong></td>
 
@@ -16023,7 +16019,7 @@ const Components = {
 
                         <td style="text-align: right;">
 
-                          <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openEditReviewModal('${r.id}')" style="font-size: 11px; paddióng: 4px 8px;">
+                          <button class="btn btn-outline btn-sm" onclick="window.app.openEditReviewModal('${r.id}')" style="font-size: 11px; padding: 4px 8px;">
 
                             ✏️ Editar
 
@@ -16079,7 +16075,7 @@ const Components = {
 
       <div class="fade-in">
 
-        <div class="card" style="margión-bottom: var(--space-6);">
+        <div class="card" style="margin-bottom: var(--space-6);">
 
           <div class="card-header">
 
@@ -16089,11 +16085,11 @@ const Components = {
 
                 <h2 class="card-title" style="font-size: var(--font-size-xl);">☁️ Base de Datos en la N ube - Firebase Realtime Database (Google Cloud)</h2>
 
-                <spanclas s="status-badge status-approved"><spanclas s='status-dot-green'></span> Firebase Cloud 100% Activo</span>
+                <span class="status-badge status-approved"><span class='status-dot-green'></span> Firebase Cloud 100% Activo</span>
 
               </div>
 
-              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margión-top: 4px;">
+              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
                 I.E.P. "El Educador" • S.J.L. • UGEL 05 • Sióncronización multiusuario entiempo real siónservidores locales.
 
@@ -16103,13 +16099,13 @@ const Components = {
 
             <div style="display: flex; gap: var(--space-2);">
 
-              <buttononclic k="window.app.downloadFullJsonBackup()" class="btnbtn-navy btn-sm" style="font-weight: 800; display: flex; align-items: center; gap: 6px;">
+              <buttononclic k="window.app.downloadFullJsonBackup()" class="btn btn-navy btn-sm" style="font-weight: 800; display: flex; align-items: center; gap: 6px;">
 
                 <span>⬇️</span> Descargar Backup (.JSON.)
 
               </button>
 
-              <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.showSQLSchemaModal()" style="font-weight: 800;">
+              <button class="btn btn-gold btn-sm" onclick="window.app.showSQLSchemaModal()" style="font-weight: 800;">
 
                 <span>📜</span> Ver Esquema SQL (.SQL)
 
@@ -16121,39 +16117,39 @@ const Components = {
 
 
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(200px, 1fr)); gap: var(--space-4); margión-bottom: var(--space-6);">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6);">
 
-            <div class="card" style="paddióng: var(--space-4); border-left: 4px solid var(--color-green-500); background: #f8faf9;">
+            <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-green-500); background: #f8faf9;">
 
-              <spanstyl e="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Estado de Sióncronización</span>
+              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Estado de Sióncronización</span>
 
-              <div style="font-size: 18px; font-weight: 800; color: var(--color-green-600); margión-top: 2px;"><spanclas s='status-dot-green'></span> Tiempo Real Activo</div>
+              <div style="font-size: 18px; font-weight: 800; color: var(--color-green-600); margin-top: 2px;"><span class='status-dot-green'></span> Tiempo Real Activo</div>
 
-              <spanstyl e="font-size: 10px; color: var(--text-muted);">Sióncronización multi-dispositivo</span>
-
-            </div>
-
-
-
-            <div class="card" style="paddióng: var(--space-4); border-left: 4px solid var(--color-navy-700); background: var(--bg-surface-subtle);">
-
-              <spanstyl e="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Motor de Base de Datos</span>
-
-              <div style="font-size: 17px; font-weight: 800; color: var(--color-navy-900); margión-top: 2px;">Firebase RTDB (Google Cloud)</div>
-
-              <spanstyl e="font-size: 10px; color: var(--text-muted);">Sióndependencia de servidor local</span>
+              <span style="font-size: 10px; color: var(--text-muted);">Sióncronización multi-dispositivo</span>
 
             </div>
 
 
 
-            <div class="card" style="paddióng: var(--space-4); border-left: 4px solid var(--color-red-500); background: #fffdfd;">
+            <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-navy-700); background: var(--bg-surface-subtle);">
 
-              <spanstyl e="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Total Registros enTablas</span>
+              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Motor de Base de Datos</span>
 
-              <div style="font-size: 18px; font-weight: 800; color: var(--color-red-600); margión-top: 2px;">${usersCount + enrollmentsCount + reviewsCount + coursesCount + announcementsCount} Registros</div>
+              <div style="font-size: 17px; font-weight: 800; color: var(--color-navy-900); margin-top: 2px;">Firebase RTDB (Google Cloud)</div>
 
-              <spanstyl e="font-size: 10px; color: var(--text-muted);">Colecciones activas en la nube</span>
+              <span style="font-size: 10px; color: var(--text-muted);">Sióndependencia de servidor local</span>
+
+            </div>
+
+
+
+            <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-red-500); background: #fffdfd;">
+
+              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Total Registros enTablas</span>
+
+              <div style="font-size: 18px; font-weight: 800; color: var(--color-red-600); margin-top: 2px;">${usersCount + enrollmentsCount + reviewsCount + coursesCount + announcementsCount} Registros</div>
+
+              <span style="font-size: 10px; color: var(--text-muted);">Colecciones activas en la nube</span>
 
             </div>
 
@@ -16169,15 +16165,15 @@ const Components = {
 
               <tbody>
 
-                <tr><td><code>tb_usuarios</code></td><td>Docentes, Personal, Alumnos y Padres</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${usersCount}</strong></td><td><spanclas s="status-badge status-approved">EnVivo</span></td></tr>
+                <tr><td><code>tb_usuarios</code></td><td>Docentes, Personal, Alumnos y Padres</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${usersCount}</strong></td><td><span class="status-badge status-approved">EnVivo</span></td></tr>
 
-                <tr><td><code>tb_matriculas</code></td><td>Expedientes y Seguimiento UGEL 05</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${enrollmentsCount}</strong></td><td><spanclas s="status-badge status-approved">EnVivo</span></td></tr>
+                <tr><td><code>tb_matriculas</code></td><td>Expedientes y Seguimiento UGEL 05</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${enrollmentsCount}</strong></td><td><span class="status-badge status-approved">EnVivo</span></td></tr>
 
-                <tr><td><code>tb_cuadernos_qr</code></td><td>Revisiones y sellos ópticos QR</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${reviewsCount}</strong></td><td><spanclas s="status-badge status-approved">EnVivo</span></td></tr>
+                <tr><td><code>tb_cuadernos_qr</code></td><td>Revisiones y sellos ópticos QR</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${reviewsCount}</strong></td><td><span class="status-badge status-approved">EnVivo</span></td></tr>
 
-                <tr><td><code>tb_calificaciones</code></td><td>Notas y Actas Oficiales 2026</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${coursesCount}</strong></td><td><spanclas s="status-badge status-approved">EnVivo</span></td></tr>
+                <tr><td><code>tb_calificaciones</code></td><td>Notas y Actas Oficiales 2026</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${coursesCount}</strong></td><td><span class="status-badge status-approved">EnVivo</span></td></tr>
 
-                <tr><td><code>tb_pensiones</code></td><td>Recaudación acumulada (S/ 25,130.00)</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${state.payments.length}</strong></td><td><spanclas s="status-badge status-approved">EnVivo</span></td></tr>
+                <tr><td><code>tb_pensiones</code></td><td>Recaudación acumulada (S/ 25,130.00)</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${state.payments.length}</strong></td><td><span class="status-badge status-approved">EnVivo</span></td></tr>
 
               </tbody>
 
@@ -16205,23 +16201,23 @@ const Components = {
 
       return `
 
-        <div class="fade-incard" style="paddióng: 50px 20px; text-align: center; max-width: 600px; margión: 40px auto; border-top: 4px solid var(--color-red-600);">
+        <div class="fade-incard" style="padding: 50px 20px; text-align: center; max-width: 600px; margin: 40px auto; border-top: 4px solid var(--color-red-600);">
 
-          <div style="font-size: 48px; margión-bottom: 12px;">🔒</div>
+          <div style="font-size: 48px; margin-bottom: 12px;">🔒</div>
 
-          <h2 style="font-size: 18px; font-weight: 900; color: var(--color-navy-900); margión-bottom: 8px;">
+          <h2 style="font-size: 18px; font-weight: 900; color: var(--color-navy-900); margin-bottom: 8px;">
 
             Módulo Exclusivo de Administración y Dirección
 
           </h2>
 
-          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margión-bottom: 20px;">
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
 
             Solo el personal directivo o de administración general tiene autorización para crear, editar o elimiónar usuarios y expedientes de matrícula.
 
           </p>
 
-          <buttonclas s="btnbtn-navy" onclick="window.app.navigate('dashboard')" style="font-weight: 800; paddióng: 10px 24px;">
+          <button class="btn btn-navy" onclick="window.app.navigate('dashboard')" style="font-weight: 800; padding: 10px 24px;">
 
             Volver al Inicio
 
@@ -16289,7 +16285,7 @@ const Components = {
 
       <div class="fade-in">
 
-        <div class="card" style="margión-bottom: var(--space-6);">
+        <div class="card" style="margin-bottom: var(--space-6);">
 
           
 
@@ -16301,13 +16297,13 @@ const Components = {
 
               <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
 
-                <h2 class="card-title" style="font-size: var(--font-size-xl); margión: 0; color: var(--color-navy-900);">
+                <h2 class="card-title" style="font-size: var(--font-size-xl); margin: 0; color: var(--color-navy-900);">
 
                   👥 Centro de Control de Cuentas, Perfiles & Pestañas
 
                 </h2>
 
-                <spanclas s="status-badge status-approved" style="background: #e0e7ff; color: #3730a3; font-weight: 800;">
+                <span class="status-badge status-approved" style="background: #e0e7ff; color: #3730a3; font-weight: 800;">
 
                   ★ Módulo Exclusivo Administrador
 
@@ -16315,7 +16311,7 @@ const Components = {
 
               </div>
 
-              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margión-top: 4px;">
+              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
                 I.E.P. "El Educador" • UGEL 05 • Creación de cuentas institucionales, asignación de roles y control de menús visibles.
 
@@ -16327,13 +16323,13 @@ const Components = {
 
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
 
-              <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.opendmiónddStudentWithParentModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px; paddióng: 8px 14px;">
+              <button class="btn btn-gold btn-sm" onclick="window.app.opendmiónddStudentWithParentModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px; padding: 8px 14px;">
 
                 <span>➕</span> Matricular Estudiante & Apoderado
 
               </button>
 
-              <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.opencreateUserModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px; paddióng: 8px 14px;">
+              <button class="btn btn-navy btn-sm" onclick="window.app.opencreateUserModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px; padding: 8px 14px;">
 
                 <span>👤</span> Crear Usuario Manual
 
@@ -16347,45 +16343,45 @@ const Components = {
 
           <!-- Métricas Resumende Cuentas -->
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(160px, 1fr)); gap: 12px; margión: 16px 0;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 16px 0;">
 
-            <div class="card" style="paddióng: 10px 14px; border-left: 4px solid var(--color-navy-700); background: #f8fafc;">
+            <div class="card" style="padding: 10px 14px; border-left: 4px solid var(--color-navy-700); background: #f8fafc;">
 
-              <spanstyl e="font-size: 10.5px; font-weight: 700; color: #64748b; text-transform: uppercase;">Total Usuarios</span>
+              <span style="font-size: 10.5px; font-weight: 700; color: #64748b; text-transform: uppercase;">Total Usuarios</span>
 
-              <div style="font-size: 20px; font-weight: 900; color: var(--color-navy-950); margión-top: 2px;">${allUsers.length}</div>
-
-            </div>
-
-            <div class="card" style="paddióng: 10px 14px; border-left: 4px solid #8b5cf6; background: #faf5ff;">
-
-              <spanstyl e="font-size: 10.5px; font-weight: 700; color: #6b21a8; text-transform: uppercase;">Directivos</span>
-
-              <div style="font-size: 20px; font-weight: 900; color: #581c87; margión-top: 2px;">${directivosCount}</div>
+              <div style="font-size: 20px; font-weight: 900; color: var(--color-navy-950); margin-top: 2px;">${allUsers.length}</div>
 
             </div>
 
-            <div class="card" style="paddióng: 10px 14px; border-left: 4px solid #3b82f6; background: #eff6ff;">
+            <div class="card" style="padding: 10px 14px; border-left: 4px solid #8b5cf6; background: #faf5ff;">
 
-              <spanstyl e="font-size: 10.5px; font-weight: 700; color: #1e40af; text-transform: uppercase;">Docentes</span>
+              <span style="font-size: 10.5px; font-weight: 700; color: #6b21a8; text-transform: uppercase;">Directivos</span>
 
-              <div style="font-size: 20px; font-weight: 900; color: #1e3a8a; margión-top: 2px;">${docentesCount}</div>
-
-            </div>
-
-            <div class="card" style="paddióng: 10px 14px; border-left: 4px solid #10b981; background: #ecfdf5;">
-
-              <spanstyl e="font-size: 10.5px; font-weight: 700; color: #047857; text-transform: uppercase;">Estudiantes</span>
-
-              <div style="font-size: 20px; font-weight: 900; color: #065f46; margión-top: 2px;">${estudiantesCount}</div>
+              <div style="font-size: 20px; font-weight: 900; color: #581c87; margin-top: 2px;">${directivosCount}</div>
 
             </div>
 
-            <div class="card" style="paddióng: 10px 14px; border-left: 4px solid #f59e0b; background: #fffbeb;">
+            <div class="card" style="padding: 10px 14px; border-left: 4px solid #3b82f6; background: #eff6ff;">
 
-              <spanstyl e="font-size: 10.5px; font-weight: 700; color: #b45309; text-transform: uppercase;">Apoderados</span>
+              <span style="font-size: 10.5px; font-weight: 700; color: #1e40af; text-transform: uppercase;">Docentes</span>
 
-              <div style="font-size: 20px; font-weight: 900; color: #92400e; margión-top: 2px;">${apoderadosCount}</div>
+              <div style="font-size: 20px; font-weight: 900; color: #1e3a8a; margin-top: 2px;">${docentesCount}</div>
+
+            </div>
+
+            <div class="card" style="padding: 10px 14px; border-left: 4px solid #10b981; background: #ecfdf5;">
+
+              <span style="font-size: 10.5px; font-weight: 700; color: #047857; text-transform: uppercase;">Estudiantes</span>
+
+              <div style="font-size: 20px; font-weight: 900; color: #065f46; margin-top: 2px;">${estudiantesCount}</div>
+
+            </div>
+
+            <div class="card" style="padding: 10px 14px; border-left: 4px solid #f59e0b; background: #fffbeb;">
+
+              <span style="font-size: 10.5px; font-weight: 700; color: #b45309; text-transform: uppercase;">Apoderados</span>
+
+              <div style="font-size: 20px; font-weight: 900; color: #92400e; margin-top: 2px;">${apoderadosCount}</div>
 
             </div>
 
@@ -16395,15 +16391,15 @@ const Components = {
 
           <!-- Pestañas de Navegación del Módulo -->
 
-          <div style="display: flex; gap: 8px; border-bottom: 2px solid #e2e8f0; margión-bottom: 16px; flex-wrap: wrap;">
+          <div style="display: flex; gap: 8px; border-bottom: 2px solid #e2e8f0; margin-bottom: 16px; flex-wrap: wrap;">
 
-            <buttonclas s="btn${activeTab === 'users' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserManagementTab('users')" style="font-weight: 800; font-size: 12.5px;">
+            <button class="btn${activeTab === 'users' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserManagementTab('users')" style="font-weight: 800; font-size: 12.5px;">
 
               👥 Directorio de Cuentas & Perfiles (${allUsers.length})
 
             </button>
 
-            <buttonclas s="btn${activeTab === 'tabs' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserManagementTab('tabs')" style="font-weight: 800; font-size: 12.5px;">
+            <button class="btn${activeTab === 'tabs' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserManagementTab('tabs')" style="font-weight: 800; font-size: 12.5px;">
 
               ⚙️ Editor de Pestañas & Menús por Perfil
 
@@ -16425,21 +16421,21 @@ const Components = {
 
               <!-- Barra de Filtros por Rol y Búsqueda -->
 
-              <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; paddióng: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; margión-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
 
                 <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
 
-                  <spanstyl e="font-size: 12px; font-weight: 800; color: #334155;">Filtrar Rol:</span>
+                  <span style="font-size: 12px; font-weight: 800; color: #334155;">Filtrar Rol:</span>
 
-                  <buttonclas s="btnbtn-sm ${roleFilter === 'all' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserRoleFilter('all')">Todos (${allUsers.length})</button>
+                  <button class="btn btn-sm ${roleFilter === 'all' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserRoleFilter('all')">Todos (${allUsers.length})</button>
 
-                  <buttonclas s="btnbtn-sm ${roleFilter === 'directivo' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserRoleFilter('directivo')">Directivos (${directivosCount})</button>
+                  <button class="btn btn-sm ${roleFilter === 'directivo' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserRoleFilter('directivo')">Directivos (${directivosCount})</button>
 
-                  <buttonclas s="btnbtn-sm ${roleFilter === 'docente' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserRoleFilter('docente')">Docentes (${docentesCount})</button>
+                  <button class="btn btn-sm ${roleFilter === 'docente' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserRoleFilter('docente')">Docentes (${docentesCount})</button>
 
-                  <buttonclas s="btnbtn-sm ${roleFilter === 'estudiante' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserRoleFilter('estudiante')">Estudiantes (${estudiantesCount})</button>
+                  <button class="btn btn-sm ${roleFilter === 'estudiante' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserRoleFilter('estudiante')">Estudiantes (${estudiantesCount})</button>
 
-                  <buttonclas s="btnbtn-sm ${roleFilter === 'apoderado' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserRoleFilter('apoderado')">Apoderados (${apoderadosCount})</button>
+                  <button class="btn btn-sm ${roleFilter === 'apoderado' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setUserRoleFilter('apoderado')">Apoderados (${apoderadosCount})</button>
 
                 </div>
 
@@ -16447,7 +16443,7 @@ const Components = {
 
                 <div style="display: flex; align-items: center; gap: 8px;">
 
-                  <input type="text" id="user-search-input" class="form-control" placeholder="Buscar por nombre, usuario, DNI..." oniónput="window.app.onUserSearchFilter(this.value)" style="font-size: 12px; paddióng: 5px 12px; width: 220px;" />
+                  <input type="text" id="user-search-input" class="form-control" placeholder="Buscar por nombre, usuario, DNI..." oninput="window.app.onUserSearchFilter(this.value)" style="font-size: 12px; padding: 5px 12px; width: 220px;" />
 
                 </div>
 
@@ -16519,7 +16515,7 @@ const Components = {
 
                             <code style="font-weight: 800; color: var(--color-navy-900);">${u.code || u.id}</code><br>
 
-                            <spanstyl e="font-size: 11px; font-weight: 700; color: #2563eb;">@${u.username || 'usuario'}</span>
+                            <span style="font-size: 11px; font-weight: 700; color: #2563eb;">@${u.username || 'usuario'}</span>
 
                           </td>
 
@@ -16527,13 +16523,13 @@ const Components = {
 
                             <strong>${u.name}</strong><br>
 
-                            <spanstyl e="font-size: 11px; color: var(--text-secondary);">${u.email || '--'}</span>
+                            <span style="font-size: 11px; color: var(--text-secondary);">${u.email || '--'}</span>
 
                           </td>
 
                           <td>
 
-                            <spanclas s="status-badge" style="${roleBadgeClass} font-size: 11px; font-weight: 800; paddióng: 3px 8px;">
+                            <span class="status-badge" style="${roleBadgeClass} font-size: 11px; font-weight: 800; padding: 3px 8px;">
 
                               ${roleEmoji} ${u.role}
 
@@ -16545,7 +16541,7 @@ const Components = {
 
                             <div style="display: flex; align-items: center; gap: 6px;">
 
-                              <code id="pass-field-${u.id}" style="background: #f1f5f9; paddióng: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 12px; color: #0b132b; border: 1px solid #cbd5e1;">${u.password || 'educador2026'}</code>
+                              <code id="pass-field-${u.id}" style="background: #f1f5f9; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 12px; color: #0b132b; border: 1px solid #cbd5e1;">${u.password || 'educador2026'}</code>
 
                             </div>
 
@@ -16559,25 +16555,25 @@ const Components = {
 
                                 <strong>👨‍👧 ${u.detail || ('Apoderado de ' + (u.studentName || '--'))}</strong>
 
-                                ${u.studentName ? `<br><spanstyl e="font-size: 11px; color: #1e40af; font-weight: 600;">Hijo(a): ${u.studentName}</span>` : ''}
+                                ${u.studentName ? `<br><span style="font-size: 11px; color: #1e40af; font-weight: 600;">Hijo(a): ${u.studentName}</span>` : ''}
 
-                                ${u.phone ? `<br><spanstyl e="font-size: 11px; color: #16a34a; font-weight: bold;">📞 ${u.phone}</span>` : ''}
+                                ${u.phone ? `<br><span style="font-size: 11px; color: #16a34a; font-weight: bold;">📞 ${u.phone}</span>` : ''}
 
                               ` : isEstudiante ? `
 
                                 <strong>🎒 ${u.grade || u.detail || u.gradeLevel || '--'}</strong>
 
-                                ${u.guardian ? `<br><spanstyl e="font-size: 11px; color: #64748b;">Apoderado: ${u.guardian}</span>` : ''}
+                                ${u.guardian ? `<br><span style="font-size: 11px; color: #64748b;">Apoderado: ${u.guardian}</span>` : ''}
 
-                                ${u.phone ? `<br><spanstyl e="font-size: 11px; color: #16a34a;">📞 ${u.phone}</span>` : ''}
+                                ${u.phone ? `<br><span style="font-size: 11px; color: #16a34a;">📞 ${u.phone}</span>` : ''}
 
                               ` : `
 
                                 <strong>${u.detail || u.subject || '--'}</strong>
 
-                                ${u.weeklyHours ? `<br><spanstyl e="font-size: 10.5px; color: #64748b;">⏱️ ${u.weeklyHours}</span>` : ''}
+                                ${u.weeklyHours ? `<br><span style="font-size: 10.5px; color: #64748b;">⏱️ ${u.weeklyHours}</span>` : ''}
 
-                                ${u.dni ? `<br><spanstyl e="font-size: 10.5px; color: #64748b;">🆔 DNI: ${u.dni}</span>` : ''}
+                                ${u.dni ? `<br><span style="font-size: 10.5px; color: #64748b;">🆔 DNI: ${u.dni}</span>` : ''}
 
                               `}
 
@@ -16589,7 +16585,7 @@ const Components = {
 
                             ${isDocente || isDirectivo ? `
 
-                              <spanclas s="status-badge ${u.hasdmiónPrivilege ? 'status-approved' : 'status-pendióng'}" style="${u.hasdmiónPrivilege ? 'background:#fef08a; color:#854d0e; font-weight:800;' : ''}">
+                              <span class="status-badge ${u.hasdmiónPrivilege ? 'status-approved' : 'status-pendióng'}" style="${u.hasdmiónPrivilege ? 'background:#fef08a; color:#854d0e; font-weight:800;' : ''}">
 
                                 ${u.hasdmiónPrivilege ? '★ Permisos Admin' : 'Estndar'}
 
@@ -16597,7 +16593,7 @@ const Components = {
 
                             ` : `
 
-                              <spanstyl e="font-size: 11px; color: #94a3b8;">--</span>
+                              <span style="font-size: 11px; color: #94a3b8;">--</span>
 
                             `}
 
@@ -16609,7 +16605,7 @@ const Components = {
 
                               ${isEstudiante ? `
 
-                                <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.openStudentQRModal('${u.code || u.id}')" title="Ver Tarjeta QR de Asistencia (SiónFoto)" style="paddióng: 4px 8px; font-size: 11px; font-weight: bold;">
+                                <button class="btn btn-gold btn-sm" onclick="window.app.openStudentQRModal('${u.code || u.id}')" title="Ver Tarjeta QR de Asistencia (SiónFoto)" style="padding: 4px 8px; font-size: 11px; font-weight: bold;">
 
                                   QR
 
@@ -16617,7 +16613,7 @@ const Components = {
 
                               ` : ''}
 
-                              <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openEditUserModal('${u.id}')" title="Editar datos y contraseña" style="paddióng: 4px 8px;">
+                              <button class="btn btn-outline btn-sm" onclick="window.app.openEditUserModal('${u.id}')" title="Editar datos y contraseña" style="padding: 4px 8px;">
 
                                 ✏️
 
@@ -16625,7 +16621,7 @@ const Components = {
 
                               ${isDocente ? `
 
-                                <buttonclas s="btnbtn-sm ${u.hasdmiónPrivilege ? 'btn-outline' : 'btn-gold'}" onclick="window.app.toggleTeacherdmiónPrivilege('${u.id}')" title="${u.hasdmiónPrivilege ? 'Revocar Permiso Admin' : 'Conceder Permiso Admin'}" style="paddióng: 4px 8px; font-size: 11px;">
+                                <button class="btn btn-sm ${u.hasdmiónPrivilege ? 'btn-outline' : 'btn-gold'}" onclick="window.app.toggleTeacherdmiónPrivilege('${u.id}')" title="${u.hasdmiónPrivilege ? 'Revocar Permiso Admin' : 'Conceder Permiso Admin'}" style="padding: 4px 8px; font-size: 11px;">
 
                                   ${u.hasdmiónPrivilege ? '★' : '☆'}
 
@@ -16633,7 +16629,7 @@ const Components = {
 
                               ` : ''}
 
-                              <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.confirmDeleteUser('${u.id}')" title="Elimiónar usuario" style="paddióng: 4px 8px; color: var(--color-red-600);">
+                              <button class="btn btn-outline btn-sm" onclick="window.app.confirmDeleteUser('${u.id}')" title="Elimiónar usuario" style="padding: 4px 8px; color: var(--color-red-600);">
 
                                 🗑️
 
@@ -16663,7 +16659,7 @@ const Components = {
 
           <!-- =========================================================================
 
-               VISTÍA 2: EDITOR DE PESTÍAÑAS & MEN  ÚS POR PERFIL
+               VISTÍA 2: EDITOR DE PESTÍAÑAS & MENÚS POR PERFIL
 
                ========================================================================= -->
 
@@ -16671,19 +16667,19 @@ const Components = {
 
             <div>
 
-              <div style="background: #eff6ff; border: 1px solid #bfdbfe; paddióng: 14px; border-radius: 8px; margión-bottom: 16px;">
+              <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 14px; border-radius: 8px; margin-bottom: 16px;">
 
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
 
                   <div>
 
-                    <h3 style="font-size: 14px; font-weight: 800; color: #1e3a8a; margión: 0 0 4px;">
+                    <h3 style="font-size: 14px; font-weight: 800; color: #1e3a8a; margin: 0 0 4px;">
 
                       🛠️ Configuración de Pestañas Visibles para Perfiles
 
                     </h3>
 
-                    <p style="font-size: 12px; color: #1e40af; margión: 0;">
+                    <p style="font-size: 12px; color: #1e40af; margin: 0;">
 
                       Active, desactive o renombre los espacios y accesos directos que cada perfil (Docente, Estudiante, Padre de Familia, Director) puede visualizar en la barra lateral.
 
@@ -16697,15 +16693,15 @@ const Components = {
 
                     <label style="font-size: 12px; font-weight: 800; color: #1e3a8a;">Perfil a Editar:</label>
 
-                    <select class="form-control" style="width: auto; paddióng: 4px 12px; font-weight: bold;" onchange="window.app.onSelectNavConfigRole(this.value)">
+                    <select class="form-control" style="width: auto; padding: 4px 12px; font-weight: bold;" onchange="window.app.onSelectNavConfigRole(this.value)">
 
-                      <optionvalu e="docente" ${targetNavRole === 'docente' ? 'selected' : ''}>👨‍Panel Docente</option>
+                      <option value="docente" ${targetNavRole === 'docente' ? 'selected' : ''}>👨‍Panel Docente</option>
 
-                      <optionvalu e="estudiante" ${targetNavRole === 'estudiante' ? 'selected' : ''}>🎒 Portal del Estudiante</option>
+                      <option value="estudiante" ${targetNavRole === 'estudiante' ? 'selected' : ''}>🎒 Portal del Estudiante</option>
 
-                      <optionvalu e="padre" ${targetNavRole === 'padre' ? 'selected' : ''}>👨‍👩‍👧 Portal de Familias (Apoderados)</option>
+                      <option value="padre" ${targetNavRole === 'padre' ? 'selected' : ''}>👨‍👩‍👧 Portal de Familias (Apoderados)</option>
 
-                      <optionvalu e="director" ${targetNavRole === 'director' ? 'selected' : ''}>Dirección General</option>
+                      <option value="director" ${targetNavRole === 'director' ? 'selected' : ''}>Dirección General</option>
 
                     </select>
 
@@ -16719,7 +16715,7 @@ const Components = {
 
               <!-- Matriz de Pestañas del Perfil Seleccionado -->
 
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(320px, 1fr)); gap: 14px; margión-bottom: 18px;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; margin-bottom: 18px;">
 
                 ${currentRoleTabs.map(tab => {
 
@@ -16727,13 +16723,13 @@ const Components = {
 
                   return `
 
-                    <div class="card" style="paddióng: 14px; border: 1px solid ${isEnabled ? '#cbd5e1' : '#f1f5f9'}; background: ${isEnabled ? '#ffffff' : '#f8fafc'}; opacity: ${isEnabled ? '1' : '0.65'};">
+                    <div class="card" style="padding: 14px; border: 1px solid ${isEnabled ? '#cbd5e1' : '#f1f5f9'}; background: ${isEnabled ? '#ffffff' : '#f8fafc'}; opacity: ${isEnabled ? '1' : '0.65'};">
 
-                      <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 10px;">
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
 
                         <div style="display: flex; align-items: center; gap: 8px;">
 
-                          <spanstyl e="font-size: 18px;"></span>
+                          <span style="font-size: 18px;"></span>
 
                           <strong style="font-size: 13px; color: var(--color-navy-900);">${tab.id}</strong>
 
@@ -16747,7 +16743,7 @@ const Components = {
 
                           <input type="checkbox" ${isEnabled ? 'checked' : ''} onchange="window.app.toggleNavTab('${targetNavRole}', '${tab.id}', this.checked)" />
 
-                          <span>${isEnabled ? '<spanclas s="status-dot-green"></span> VISIBLE' : '⚪ OCULTO'}</span>
+                          <span>${isEnabled ? '<span class="status-dot-green"></span> VISIBLE' : '⚪ OCULTO'}</span>
 
                         </label>
 
@@ -16757,19 +16753,19 @@ const Components = {
 
                       <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 8px;">
 
-                        <div class="form-group" style="margión-bottom: 0;">
+                        <div class="form-group" style="margin-bottom: 0;">
 
-                          <label class="form-label" style="font-size: 11px; margión-bottom: 2px;">Etiqueta / N ombre Visible:</label>
+                          <label class="form-label" style="font-size: 11px; margin-bottom: 2px;">Etiqueta / N ombre Visible:</label>
 
-                          <input type="text" id="tab-label-${targetNavRole}-${tab.id}" class="form-control" value="${tab.label}" style="font-size: 12px; paddióng: 4px 8px;" />
+                          <input type="text" id="tab-label-${targetNavRole}-${tab.id}" class="form-control" value="${tab.label}" style="font-size: 12px; padding: 4px 8px;" />
 
                         </div>
 
-                        <div class="form-group" style="margión-bottom: 0;">
+                        <div class="form-group" style="margin-bottom: 0;">
 
-                          <label class="form-label" style="font-size: 11px; margión-bottom: 2px;">Badge (opcional):</label>
+                          <label class="form-label" style="font-size: 11px; margin-bottom: 2px;">Badge (opcional):</label>
 
-                          <input type="text" id="tab-badge-${targetNavRole}-${tab.id}" class="form-control" value="${tab.badge || ''}" placeholder="Ej. 10P, N UEVO" style="font-size: 12px; paddióng: 4px 8px;" />
+                          <input type="text" id="tab-badge-${targetNavRole}-${tab.id}" class="form-control" value="${tab.badge || ''}" placeholder="Ej. 10P, N UEVO" style="font-size: 12px; padding: 4px 8px;" />
 
                         </div>
 
@@ -16777,9 +16773,9 @@ const Components = {
 
 
 
-                      <div style="margión-top: 8px; text-align: right;">
+                      <div style="margin-top: 8px; text-align: right;">
 
-                        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.saveSióngleNavTab('${targetNavRole}', '${tab.id}')" style="font-size: 11px; paddióng: 2px 10px; font-weight: bold;">
+                        <button class="btn btn-outline btn-sm" onclick="window.app.saveSióngleNavTab('${targetNavRole}', '${tab.id}')" style="font-size: 11px; padding: 2px 10px; font-weight: bold;">
 
                           ✓ Guardar Texto
 
@@ -16799,15 +16795,15 @@ const Components = {
 
               <!-- Acciones Globales del Editor de Pestañas -->
 
-              <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; paddióng: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
+              <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
 
-                <spanstyl e="font-size: 12px; color: #64748b;">
+                <span style="font-size: 12px; color: #64748b;">
 
                   * Los cambios de visibilidad y nombres se aplicaniónmediatamente a todos los usuarios con el rol <strong>${targetNavRole.toUpperCase()}</strong>.
 
                 </span>
 
-                <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.resetNavTabsToDefault('${targetNavRole}')" style="color: var(--color-red-600); border-color: var(--color-red-200); font-weight: bold;">
+                <button class="btn btn-outline btn-sm" onclick="window.app.resetNavTabsToDefault('${targetNavRole}')" style="color: var(--color-red-600); border-color: var(--color-red-200); font-weight: bold;">
 
                   Restaurar Menús por Defecto
 
@@ -16851,13 +16847,13 @@ const Components = {
 
             <div class="metrics-strip">
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Matrícula Total</span><spanclas s="metric-val highlight-yellow">${user.totalStudents}</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Matrícula Total</span><span class="metric-val highlight-yellow">${user.totalStudents}</span></div>
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Plana Docente</span><spanclas s="metric-val highlight-green">${user.totalTeachers}</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Plana Docente</span><span class="metric-val highlight-green">${user.totalTeachers}</span></div>
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Asistencia Promedio</span><spanclas s="metric-val highlight-green">${user.avgttendance}</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Asistencia Promedio</span><span class="metric-val highlight-green">${user.avgttendance}</span></div>
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Recaudación Agosto</span><spanclas s="metric-val highlight-green">S/ 25,130.00</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Recaudación Agosto</span><span class="metric-val highlight-green">S/ 25,130.00</span></div>
 
             </div>
 
@@ -16877,7 +16873,7 @@ const Components = {
 
                 <h3 class="card-title">Muro de Circulares e Informes</h3>
 
-                <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.showOfficialReportModal()">Ver Informe N  003</button>
+                <button class="btn btn-gold btn-sm" onclick="window.app.showOfficialReportModal()">Ver Informe N003</button>
 
               </div>
 
@@ -16887,7 +16883,7 @@ const Components = {
 
                   <div class="announcement-card ${a.priority === 'high' ? 'priority-high' : ''}">
 
-                    <div class="announcement-meta"><spanclas s="announcement-tag tag-urgent">${a.tagLabel}</span><spanclas s="announcement-date">${a.date}</span></div>
+                    <div class="announcement-meta"><span class="announcement-tag tag-urgent">${a.tagLabel}</span><span class="announcement-date">${a.date}</span></div>
 
                     <h4 class="announcement-title">${a.title}</h4>
 
@@ -16911,7 +16907,7 @@ const Components = {
 
               <div style="display:flex; flex-direction:column; gap: 8px;">
 
-                <buttonclas s="btnbtn-emeraúld" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('door-scanner');" style="text-align: left; justify-content: flex-start;">
+                <button class="btn btn-emeraúld" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('door-scanner');" style="text-align: left; justify-content: flex-start;">
 
                   <span>📲</span>
 
@@ -16919,7 +16915,7 @@ const Components = {
 
                 </button>
 
-                <buttonclas s="btnbtn-gold" onclick="window.app.navigate('cuadernos-qr')" style="text-align: left; justify-content: flex-start;">
+                <button class="btn btn-gold" onclick="window.app.navigate('cuadernos-qr')" style="text-align: left; justify-content: flex-start;">
 
                   <span>📷</span>
 
@@ -16927,7 +16923,7 @@ const Components = {
 
                 </button>
 
-                <buttonclas s="btnbtn-navy" onclick="window.app.navigate('calificaciones')" style="text-align: left; justify-content: flex-start;">
+                <button class="btn btn-navy" onclick="window.app.navigate('calificaciones')" style="text-align: left; justify-content: flex-start;">
 
                   <span>📊</span>
 
@@ -16935,7 +16931,7 @@ const Components = {
 
                 </button>
 
-                <buttonclas s="btnbtn-navy" onclick="window.app.navigate('horarios')" style="text-align: left; justify-content: flex-start;">
+                <button class="btn btn-navy" onclick="window.app.navigate('horarios')" style="text-align: left; justify-content: flex-start;">
 
                   <span>📅</span>
 
@@ -16943,7 +16939,7 @@ const Components = {
 
                 </button>
 
-                <buttonclas s="btnbtn-navy" onclick="window.app.navigate('silabus')" style="text-align: left; justify-content: flex-start;">
+                <button class="btn btn-navy" onclick="window.app.navigate('silabus')" style="text-align: left; justify-content: flex-start;">
 
                   <span>📑</span>
 
@@ -17013,11 +17009,11 @@ const Components = {
 
           <div class="welcome-content">
 
-            <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
 
               ${hasdmiónPrivilege ? `
 
-                <spanclas s="status-badge status-approved" style="background: rgba(245, 158, 11, 0.2); color: var(--color-yellow-400); border: 1px solid var(--color-yellow-500); font-weight: 900;">
+                <span class="status-badge status-approved" style="background: rgba(245, 158, 11, 0.2); color: var(--color-yellow-400); border: 1px solid var(--color-yellow-500); font-weight: 900;">
 
                   ★ PRIVILEGIOS DE EDICIÓN HBILITÍADOS
 
@@ -17025,7 +17021,7 @@ const Components = {
 
               ` : `
 
-                <spanclas s="status-badge status-approved" style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-weight: 800;">
+                <span class="status-badge status-approved" style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-weight: 800;">
 
                   👨‍ PERFIL DOCENTE ACTIVO
 
@@ -17033,7 +17029,7 @@ const Components = {
 
               `}
 
-              <spanstyl e="font-size: 11.5px; color: #93c5fd; font-weight: 700;">
+              <span style="font-size: 11.5px; color: #93c5fd; font-weight: 700;">
 
                 Carga Lectiva: <strong>${user.weeklyHours || '24 hrs'}</strong>
 
@@ -17053,13 +17049,13 @@ const Components = {
 
             <div class="metrics-strip">
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Cursos Asignados</span><spanclas s="metric-val highlight-yellow">${userCoursesList.length}</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Cursos Asignados</span><span class="metric-val highlight-yellow">${userCoursesList.length}</span></div>
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Grados a Cargo</span><spanclas s="metric-val highlight-green">${userGradesList.length}</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Grados a Cargo</span><span class="metric-val highlight-green">${userGradesList.length}</span></div>
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Alumnos Matriculados</span><spanclas s="metric-val highlight-yellow">${enrollments.length}</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Alumnos Matriculados</span><span class="metric-val highlight-yellow">${enrollments.length}</span></div>
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Cuadernos Hoy</span><spanclas s="metric-val highlight-green">${user.scannedNotebooksToday || 18}</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Cuadernos Hoy</span><span class="metric-val highlight-green">${user.scannedNotebooksToday || 18}</span></div>
 
             </div>
 
@@ -17071,7 +17067,7 @@ const Components = {
 
         <!-- Barra Informativa de Asignaturas & Grados Asignados -->
 
-        <div class="card" style="margión-bottom: var(--space-4); background: #f8fafc; border-left: 4px solid var(--color-navy-800); paddióng: 14px 18px;">
+        <div class="card" style="margin-bottom: var(--space-4); background: #f8fafc; border-left: 4px solid var(--color-navy-800); padding: 14px 18px;">
 
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
 
@@ -17083,11 +17079,11 @@ const Components = {
 
               </div>
 
-              <div style="display: flex; gap: 6px; flex-wrap: wrap; margión-top: 5px;">
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 5px;">
 
                 ${userCoursesList.map(c => `
 
-                  <spanclas s="status-badge" style="background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; font-size: 11.5px; font-weight: 800;">
+                  <span class="status-badge" style="background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; font-size: 11.5px; font-weight: 800;">
 
                     ✓ ${c}
 
@@ -17107,11 +17103,11 @@ const Components = {
 
               </div>
 
-              <div style="display: flex; gap: 6px; flex-wrap: wrap; margión-top: 5px;">
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 5px;">
 
                 ${userGradesList.map(g => `
 
-                  <spanclas s="status-badge" style="background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; font-size: 11px; font-weight: 700;">
+                  <span class="status-badge" style="background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; font-size: 11px; font-weight: 700;">
 
                     🏫 ${g}
 
@@ -17129,9 +17125,9 @@ const Components = {
 
 
 
-        <div style="display: flex; gap: 10px; margión-bottom: var(--space-6); flex-wrap: wrap; align-items: center;">
+        <div style="display: flex; gap: 10px; margin-bottom: var(--space-6); flex-wrap: wrap; align-items: center;">
 
-          <buttonclas s="btnbtn-navy" onclick="window.app.navigate('tareas')" style="font-weight: 800;">
+          <button class="btn btn-navy" onclick="window.app.navigate('tareas')" style="font-weight: 800;">
 
             <span>💻</span>
 
@@ -17139,7 +17135,7 @@ const Components = {
 
           </button>
 
-          <buttonclas s="btnbtn-navy" onclick="window.app.navigate('silabus')" style="font-weight: 800;">
+          <button class="btn btn-navy" onclick="window.app.navigate('silabus')" style="font-weight: 800;">
 
             <span>📤</span>
 
@@ -17147,7 +17143,7 @@ const Components = {
 
           </button>
 
-          <buttonclas s="btnbtn-navy" onclick="window.app.navigate('calificaciones')" style="font-weight: 800;">
+          <button class="btn btn-navy" onclick="window.app.navigate('calificaciones')" style="font-weight: 800;">
 
             <span>✏️</span>
 
@@ -17155,7 +17151,7 @@ const Components = {
 
           </button>
 
-          <buttonclas s="btnbtn-gold" onclick="window.app.navigate('cuadernos-qr')" style="font-weight: 800;">
+          <button class="btn btn-gold" onclick="window.app.navigate('cuadernos-qr')" style="font-weight: 800;">
 
             <span>📷</span>
 
@@ -17163,7 +17159,7 @@ const Components = {
 
           </button>
 
-          <buttonclas s="btnbtn-emeraúld" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('door-scanner');" style="font-weight: 800;">
+          <button class="btn btn-emeraúld" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('door-scanner');" style="font-weight: 800;">
 
             <span>📲</span>
 
@@ -17171,7 +17167,7 @@ const Components = {
 
           </button>
 
-          <buttonclas s="btnbtn-outline" onclick="window.app.navigate('horarios')" style="font-weight: 800;">
+          <button class="btn btn-outline" onclick="window.app.navigate('horarios')" style="font-weight: 800;">
 
             <span>📅</span>
 
@@ -17183,19 +17179,19 @@ const Components = {
 
 
 
-        <!-- N  ómióna de Estudiantes para Calificación y Seguimiento -->
+        <!-- Nómina de Estudiantes para Calificación y Seguimiento -->
 
         <div class="card">
 
           <div class="card-header" style="justify-content: space-between; flex-wrap: wrap; gap: 8px;">
 
-            <h3 class="card-title" style="margión: 0; font-size: 15px; font-weight: 800;">
+            <h3 class="card-title" style="margin: 0; font-size: 15px; font-weight: 800;">
 
-              👥 N  ómióna Activa de Estudiantes del Registro General (${enrollments.length} matriculados)
+              👥 Nómina Activa de Estudiantes del Registro General (${enrollments.length} matriculados)
 
             </h3>
 
-            <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.navigate('calificaciones')" style="font-weight: bold;">
+            <button class="btn btn-navy btn-sm" onclick="window.app.navigate('calificaciones')" style="font-weight: bold;">
 
               Ver Matriz Completa de Calificaciones ➜
 
@@ -17239,17 +17235,17 @@ const Components = {
 
                     <td><strong>${s.studentName || s.name}</strong></td>
 
-                    <td><spanclas s="status-badge" style="background:#eff6ff; color:#1e40af; font-size:10.5px; font-weight:bold;">${s.grade || 'Nivel Escolar'}</span></td>
+                    <td><span class="status-badge" style="background:#eff6ff; color:#1e40af; font-size:10.5px; font-weight:bold;">${s.grade || 'Nivel Escolar'}</span></td>
 
-                    <td><spanstyl e="font-size: 11.5px; color: #475569;">${s.guardian || '--'}</span></td>
+                    <td><span style="font-size: 11.5px; color: #475569;">${s.guardian || '--'}</span></td>
 
-                    <td><spanclas s="status-badge status-approved" style="font-size:10.5px; font-weight:bold;">Al Día</span></td>
+                    <td><span class="status-badge status-approved" style="font-size:10.5px; font-weight:bold;">Al Día</span></td>
 
-                    <td><spanclas s="status-badge status-approved" style="font-size:10.5px; font-weight:bold;">Revisado</span></td>
+                    <td><span class="status-badge status-approved" style="font-size:10.5px; font-weight:bold;">Revisado</span></td>
 
                     <td style="text-align: center;">
 
-                      <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.navigate('calificaciones')" style="paddióng: 3px 8px; font-size: 11px; font-weight: bold;">
+                      <button class="btn btn-navy btn-sm" onclick="window.app.navigate('calificaciones')" style="padding: 3px 8px; font-size: 11px; font-weight: bold;">
 
                         Calificar
 
@@ -17263,9 +17259,9 @@ const Components = {
 
                   <tr>
 
-                    <td colspan="7" style="text-align: center; paddióng: 20px; color: #64748b;">
+                    <td colspan="7" style="text-align: center; padding: 20px; color: #64748b;">
 
-                      N o hay estudiantes registrados en la nómióna.
+                      N o hay estudiantes registrados en la nómina.
 
                     </td>
 
@@ -17317,11 +17313,11 @@ const Components = {
 
             <div class="metrics-strip">
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Estudiante</span><spanclas s="metric-val highlight-yellow">${studentName}</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Estudiante</span><span class="metric-val highlight-yellow">${studentName}</span></div>
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Cuadernos QR</span><spanclas s="metric-val highlight-green">5/6 Al Día</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Cuadernos QR</span><span class="metric-val highlight-green">5/6 Al Día</span></div>
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Asistencia</span><spanclas s="metric-val highlight-green">98.5%</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Asistencia</span><span class="metric-val highlight-green">98.5%</span></div>
 
             </div>
 
@@ -17331,53 +17327,53 @@ const Components = {
 
 
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(200px, 1fr)); gap: var(--space-4); margión-bottom: var(--space-6);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6);">
 
-          <div class="card" style="paddióng: 14px; cursor: pointer; border-left: 4px solid #1e3a8a; background: #eff6ff;" onclick="window.app.navigate('boleta')">
+          <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid #1e3a8a; background: #eff6ff;" onclick="window.app.navigate('boleta')">
 
-            <h4 style="font-size:14px; color:#1e3a8a; margión:0 0 2px;">📊 Boleta Oficial de Notas</h4>
+            <h4 style="font-size:14px; color:#1e3a8a; margin:0 0 2px;">📊 Boleta Oficial de Notas</h4>
 
-            <spanstyl e="font-size:12px; color:#2563eb; font-weight: bold;">Formato oficial MINEDU e impresión</span>
-
-          </div>
-
-          <div class="card" style="paddióng: 14px; cursor: pointer; border-left: 4px solid #10b981; background: #f0fdf4;" onclick="window.app.navigate('pagos')">
-
-            <h4 style="font-size:14px; color:#065f46; margión:0 0 2px;">💳 Pensiones & Pagos</h4>
-
-            <spanstyl e="font-size:12px; color:#047857;">Estado de cuenta y comprobantes al día</span>
+            <span style="font-size:12px; color:#2563eb; font-weight: bold;">Formato oficial MINEDU e impresión</span>
 
           </div>
 
-          <div class="card" style="paddióng: 14px; cursor: pointer; border-left: 4px solid var(--color-yellow-500);" onclick="window.app.navigate('horarios')">
+          <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid #10b981; background: #f0fdf4;" onclick="window.app.navigate('pagos')">
 
-            <h4 style="font-size:14px; color:var(--color-navy-900); margión:0 0 2px;">⏰ Horario de Clases</h4>
+            <h4 style="font-size:14px; color:#065f46; margin:0 0 2px;">💳 Pensiones & Pagos</h4>
 
-            <spanstyl e="font-size:12px; color:var(--text-muted);">${studentGrade}</span>
-
-          </div>
-
-          <div class="card" style="paddióng: 14px; cursor: pointer; border-left: 4px solid var(--color-navy-600);" onclick="window.app.navigate('silabus')">
-
-            <h4 style="font-size:14px; color:var(--color-navy-900); margión:0 0 2px;">📚 Sílabus Curriculares</h4>
-
-            <spanstyl e="font-size:12px; color:var(--text-muted);">Programación y competencias 2026</span>
+            <span style="font-size:12px; color:#047857;">Estado de cuenta y comprobantes al día</span>
 
           </div>
 
-          <div class="card" style="paddióng: 14px; cursor: pointer; border-left: 4px solid var(--color-yellow-600);" onclick="window.app.navigate('cuadernos-qr')">
+          <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid var(--color-yellow-500);" onclick="window.app.navigate('horarios')">
 
-            <h4 style="font-size:14px; color:var(--color-navy-900); margión:0 0 2px;">Cuadernos QR</h4>
+            <h4 style="font-size:14px; color:var(--color-navy-900); margin:0 0 2px;">⏰ Horario de Clases</h4>
 
-            <spanstyl e="font-size:12px; color:var(--text-muted);">Sellos y revisiones al día</span>
+            <span style="font-size:12px; color:var(--text-muted);">${studentGrade}</span>
 
           </div>
 
-          <div class="card" style="paddióng: 14px; cursor: pointer; border-left: 4px solid var(--color-red-500);" onclick="window.app.navigate('asistencia')">
+          <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid var(--color-navy-600);" onclick="window.app.navigate('silabus')">
 
-            <h4 style="font-size:14px; color:var(--color-navy-900); margión:0 0 2px;">📅 Control de Asistencia</h4>
+            <h4 style="font-size:14px; color:var(--color-navy-900); margin:0 0 2px;">📚 Sílabus Curriculares</h4>
 
-            <spanstyl e="font-size:12px; color:var(--text-muted);">Puntualidad biométrica (98.5%)</span>
+            <span style="font-size:12px; color:var(--text-muted);">Programación y competencias 2026</span>
+
+          </div>
+
+          <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid var(--color-yellow-600);" onclick="window.app.navigate('cuadernos-qr')">
+
+            <h4 style="font-size:14px; color:var(--color-navy-900); margin:0 0 2px;">Cuadernos QR</h4>
+
+            <span style="font-size:12px; color:var(--text-muted);">Sellos y revisiones al día</span>
+
+          </div>
+
+          <div class="card" style="padding: 14px; cursor: pointer; border-left: 4px solid var(--color-red-500);" onclick="window.app.navigate('asistencia')">
+
+            <h4 style="font-size:14px; color:var(--color-navy-900); margin:0 0 2px;">📅 Control de Asistencia</h4>
+
+            <span style="font-size:12px; color:var(--text-muted);">Puntualidad biométrica (98.5%)</span>
 
           </div>
 
@@ -17391,7 +17387,7 @@ const Components = {
 
             <h3 class="card-title">Últimos Informes y Circulares Institucionales</h3>
 
-            <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.navigate('comunicados')">Ver Todos</button>
+            <button class="btn btn-outline btn-sm" onclick="window.app.navigate('comunicados')">Ver Todos</button>
 
           </div>
 
@@ -17401,7 +17397,7 @@ const Components = {
 
               <div class="announcement-card ${a.priority === 'high' ? 'priority-high' : ''}">
 
-                <div class="announcement-meta"><spanclas s="announcement-tag tag-urgent">${a.tagLabel}</span><spanclas s="announcement-date">${a.date}</span></div>
+                <div class="announcement-meta"><span class="announcement-tag tag-urgent">${a.tagLabel}</span><span class="announcement-date">${a.date}</span></div>
 
                 <h4 class="announcement-title">${a.title}</h4>
 
@@ -17451,13 +17447,13 @@ const Components = {
 
             <div class="metrics-strip">
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Grado Escolar</span><spanclas s="metric-val highlight-yellow">${userGrade}</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Grado Escolar</span><span class="metric-val highlight-yellow">${userGrade}</span></div>
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Asistencia</span><spanclas s="metric-val highlight-green">${activeUser.attendanceRate || '100%'}</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Asistencia</span><span class="metric-val highlight-green">${activeUser.attendanceRate || '100%'}</span></div>
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Cuadernos QR</span><spanclas s="metric-val highlight-green">${activeUser.notebooksUpToDate || 'Al Día'}</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Cuadernos QR</span><span class="metric-val highlight-green">${activeUser.notebooksUpToDate || 'Al Día'}</span></div>
 
-              <div class="metric-card-mióni"><spanclas s="metric-label">Tareas</span><spanclas s="metric-val highlight-red">${activeUser.pendióngTasksCount || 0}</span></div>
+              <div class="metric-card-mióni"><span class="metric-label">Tareas</span><span class="metric-val highlight-red">${activeUser.pendióngTasksCount || 0}</span></div>
 
             </div>
 
@@ -17467,45 +17463,45 @@ const Components = {
 
 
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(180px, 1fr)); gap: var(--space-3); margión-bottom: var(--space-6);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-3); margin-bottom: var(--space-6);">
 
-          <div class="card" style="paddióng: 12px; cursor: pointer; border-left: 4px solid #1e3a8a; background: #eff6ff;" onclick="window.app.navigate('boleta')">
+          <div class="card" style="padding: 12px; cursor: pointer; border-left: 4px solid #1e3a8a; background: #eff6ff;" onclick="window.app.navigate('boleta')">
 
-            <h4 style="font-size:13px; color: #1e3a8a; margión: 0 0 2px;">📊 Mi Boleta Oficial</h4>
+            <h4 style="font-size:13px; color: #1e3a8a; margin: 0 0 2px;">📊 Mi Boleta Oficial</h4>
 
-            <spanstyl e="font-size:11px; color:#2563eb; font-weight: bold;">Notas y calificaciones MINEDU</span>
-
-          </div>
-
-          <div class="card" style="paddióng: 12px; cursor: pointer; border-left: 4px solid #10b981; background: #f0fdf4;" onclick="window.app.navigate('asistencia')">
-
-            <h4 style="font-size:13px; color: #065f46; margión: 0 0 2px;">📲 Mi Asistencia & QR</h4>
-
-            <spanstyl e="font-size:11px; color:#047857;">Marcaciones y código QR</span>
+            <span style="font-size:11px; color:#2563eb; font-weight: bold;">Notas y calificaciones MINEDU</span>
 
           </div>
 
-          <div class="card" style="paddióng: 12px; cursor: pointer; border-left: 4px solid var(--color-yellow-500);" onclick="window.app.navigate('horarios')">
+          <div class="card" style="padding: 12px; cursor: pointer; border-left: 4px solid #10b981; background: #f0fdf4;" onclick="window.app.navigate('asistencia')">
 
-            <h4 style="font-size:13px; margión: 0 0 2px;">📅 Horario de Clases</h4>
+            <h4 style="font-size:13px; color: #065f46; margin: 0 0 2px;">📲 Mi Asistencia & QR</h4>
 
-            <spanstyl e="font-size:11px; color:var(--text-muted);">${userGrade}</span>
-
-          </div>
-
-          <div class="card" style="paddióng: 12px; cursor: pointer; border-left: 4px solid var(--color-navy-600);" onclick="window.app.navigate('silabus')">
-
-            <h4 style="font-size:13px; margión: 0 0 2px;">📚 Sílabus 2026</h4>
-
-            <spanstyl e="font-size:11px; color:var(--text-muted);">Cursos de ${userGrade}</span>
+            <span style="font-size:11px; color:#047857;">Marcaciones y código QR</span>
 
           </div>
 
-          <div class="card" style="paddióng: 12px; cursor: pointer; border-left: 4px solid var(--color-red-500);" onclick="window.app.navigate('cuadernos-qr')">
+          <div class="card" style="padding: 12px; cursor: pointer; border-left: 4px solid var(--color-yellow-500);" onclick="window.app.navigate('horarios')">
 
-            <h4 style="font-size:13px; margión: 0 0 2px;">📷 Mis Cuadernos QR</h4>
+            <h4 style="font-size:13px; margin: 0 0 2px;">📅 Horario de Clases</h4>
 
-            <spanstyl e="font-size:11px; color:var(--text-muted);">Sellos y stickers QR</span>
+            <span style="font-size:11px; color:var(--text-muted);">${userGrade}</span>
+
+          </div>
+
+          <div class="card" style="padding: 12px; cursor: pointer; border-left: 4px solid var(--color-navy-600);" onclick="window.app.navigate('silabus')">
+
+            <h4 style="font-size:13px; margin: 0 0 2px;">📚 Sílabus 2026</h4>
+
+            <span style="font-size:11px; color:var(--text-muted);">Cursos de ${userGrade}</span>
+
+          </div>
+
+          <div class="card" style="padding: 12px; cursor: pointer; border-left: 4px solid var(--color-red-500);" onclick="window.app.navigate('cuadernos-qr')">
+
+            <h4 style="font-size:13px; margin: 0 0 2px;">📷 Mis Cuadernos QR</h4>
+
+            <span style="font-size:11px; color:var(--text-muted);">Sellos y stickers QR</span>
 
           </div>
 
@@ -17527,9 +17523,9 @@ const Components = {
 
                   <div class="grade-pill-card" style="cursor: pointer;" onclick="window.app.navigate('tareas')">
 
-                    <spanclas s="course-name" style="font-weight: 800; color: var(--color-navy-900);">${c.name}</span>
+                    <span class="course-name" style="font-weight: 800; color: var(--color-navy-900);">${c.name}</span>
 
-                    <spanstyl e="font-size: 11px; color: var(--text-muted);">${c.teacher}</span>
+                    <span style="font-size: 11px; color: var(--text-muted);">${c.teacher}</span>
 
                   </div>
 
@@ -17591,23 +17587,23 @@ const Components = {
 
       return `
 
-        <div class="fade-incard" style="paddióng: 50px 20px; text-align: center; max-width: 600px; margión: 40px auto; border-top: 4px solid var(--color-red-600);">
+        <div class="fade-incard" style="padding: 50px 20px; text-align: center; max-width: 600px; margin: 40px auto; border-top: 4px solid var(--color-red-600);">
 
-          <div style="font-size: 48px; margión-bottom: 12px;">🔒</div>
+          <div style="font-size: 48px; margin-bottom: 12px;">🔒</div>
 
-          <h2 style="font-size: 18px; font-weight: 900; color: var(--color-navy-900); margión-bottom: 8px;">
+          <h2 style="font-size: 18px; font-weight: 900; color: var(--color-navy-900); margin-bottom: 8px;">
 
             Módulo Exclusivo de Control Interno (Docentes y Dirección)
 
           </h2>
 
-          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margión-bottom: 20px;">
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
 
             El registro de calificaciones es de uso estricto y confidencial del personal docente y directivo de la institución. N o está habilitado para estudiantes ni padres de familia.
 
           </p>
 
-          <buttonclas s="btnbtn-navy" onclick="window.app.navigate('dashboard')" style="font-weight: 800; paddióng: 10px 24px;">
+          <button class="btn btn-navy" onclick="window.app.navigate('dashboard')" style="font-weight: 800; padding: 10px 24px;">
 
             Volver al Inicio
 
@@ -17903,7 +17899,7 @@ const Components = {
 
         <!-- Cabecera Institucional del Módulo -->
 
-        <div class="card" style="margión-bottom: var(--space-6);">
+        <div class="card" style="margin-bottom: var(--space-6);">
 
           <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
 
@@ -17913,11 +17909,11 @@ const Components = {
 
                 <h2 class="card-title" style="font-size: var(--font-size-xl);">Sistema Descentralizado de Calificaciones</h2>
 
-                <spanclas s="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-700);">Periodo Lectivo 2026</span>
+                <span class="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-700);">Periodo Lectivo 2026</span>
 
               </div>
 
-              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margión-top: 4px;">
+              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
                 I.E.P. "El Educador" • Selección y registro filtrado por <strong>Grado Escolar</strong> y <strong>Curso</strong>.
 
@@ -17927,7 +17923,7 @@ const Components = {
 
             
 
-            <buttonclas s="btnbtn-gold" onclick="window.app.navigate('boleta')" style="font-weight: 800;">
+            <button class="btn btn-gold" onclick="window.app.navigate('boleta')" style="font-weight: 800;">
 
               Ver Boleta Oficial Consolidada
 
@@ -17939,21 +17935,21 @@ const Components = {
 
           <!-- Selector de Pestañas / Modalidades -->
 
-          <div style="display: flex; border-top: 1px solid var(--border-subtle); background: var(--bg-surface-subtle); paddióng: 6px 12px; gap: 8px; flex-wrap: wrap;">
+          <div style="display: flex; border-top: 1px solid var(--border-subtle); background: var(--bg-surface-subtle); padding: 6px 12px; gap: 8px; flex-wrap: wrap;">
 
-            <buttonclas s="btnbtn-sm ${activeTab === 'subject' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesctiveTab('subject')" style="font-weight: 800;">
+            <button class="btn btn-sm ${activeTab === 'subject' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesctiveTab('subject')" style="font-weight: 800;">
 
               👨‍1. Carga por Docente de Curso (Grado & Asignatura)
 
             </button>
 
-            <buttonclas s="btnbtn-sm ${activeTab === 'tutor' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesctiveTab('tutor')" style="font-weight: 800;">
+            <button class="btn btn-sm ${activeTab === 'tutor' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesctiveTab('tutor')" style="font-weight: 800;">
 
               2. Módulo de Tutora (Asistencia, Apreciaciones y Familias)
 
             </button>
 
-            <buttonclas s="btnbtn-sm ${activeTab === 'overview' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesctiveTab('overview')" style="font-weight: 800;">
+            <button class="btn btn-sm ${activeTab === 'overview' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesctiveTab('overview')" style="font-weight: 800;">
 
               3. Sbana Consolidada del Aula
 
@@ -17973,7 +17969,7 @@ const Components = {
 
                ===================================================================== -->
 
-          <div class="card" style="margión-bottom: var(--space-6);">
+          <div class="card" style="margin-bottom: var(--space-6);">
 
             <div class="card-header" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap; gap: 14px;">
 
@@ -17989,47 +17985,47 @@ const Components = {
 
                 <div style="display: flex; align-items: center; gap: 8px;">
 
-                  <spanstyl e="font-size: 13px; font-weight: 800; color: var(--color-navy-900); white-space: nowrap;">🏫 Grado Escolar:</span>
+                  <span style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); white-space: nowrap;">🏫 Grado Escolar:</span>
 
-                  <select class="form-control" style="font-weight: bold; width: auto; font-size: 13px; mión-width: 220px; background: #fffbeb; border-color: #f59e0b;" onchange="window.app.changeGradióngGrade(this.value)">
+                  <select class="form-control" style="font-weight: bold; width: auto; font-size: 13px; min-width: 220px; background: #fffbeb; border-color: #f59e0b;" onchange="window.app.changeGradióngGrade(this.value)">
 
                     <optgroup label="--- N IVEL INICIL ---">
 
-                      <optionvalu e="ini-3" ${cleanSelectedGrade === 'ini3' || cleanSelectedGrade === 'ini-3' ? 'selected' : ''}>Inicial 3 Años</option>
+                      <option value="ini-3" ${cleanSelectedGrade === 'ini3' || cleanSelectedGrade === 'ini-3' ? 'selected' : ''}>Inicial 3 Años</option>
 
-                      <optionvalu e="ini-4" ${cleanSelectedGrade === 'ini4' || cleanSelectedGrade === 'ini-4' ? 'selected' : ''}>Inicial 4 Años</option>
+                      <option value="ini-4" ${cleanSelectedGrade === 'ini4' || cleanSelectedGrade === 'ini-4' ? 'selected' : ''}>Inicial 4 Años</option>
 
-                      <optionvalu e="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
+                      <option value="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
 
                     </optgroup>
 
                     <optgroup label="--- N IVEL PRIMRIA ---">
 
-                      <optionvalu e="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1 de Primaria (1er Grado)</option>
+                      <option value="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1 de Primaria (1er Grado)</option>
 
-                      <optionvalu e="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2 de Primaria (2do Grado)</option>
+                      <option value="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2 de Primaria (2do Grado)</option>
 
-                      <optionvalu e="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3 de Primaria (3er Grado)</option>
+                      <option value="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3 de Primaria (3er Grado)</option>
 
-                      <optionvalu e="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4 de Primaria (4to Grado)</option>
+                      <option value="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4 de Primaria (4to Grado)</option>
 
-                      <optionvalu e="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5 de Primaria (5to Grado)</option>
+                      <option value="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5 de Primaria (5to Grado)</option>
 
-                      <optionvalu e="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6 de Primaria (6to Grado)</option>
+                      <option value="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6 de Primaria (6to Grado)</option>
 
                     </optgroup>
 
                     <optgroup label="--- N IVEL SECUNDÍARIA ---">
 
-                      <optionvalu e="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1 de Secundaria (1er Año)</option>
+                      <option value="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1 de Secundaria (1er Año)</option>
 
-                      <optionvalu e="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2 de Secundaria (2do Año)</option>
+                      <option value="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2 de Secundaria (2do Año)</option>
 
-                      <optionvalu e="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3 de Secundaria (3er Año)</option>
+                      <option value="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3 de Secundaria (3er Año)</option>
 
-                      <optionvalu e="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4 de Secundaria (4to Año)</option>
+                      <option value="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4 de Secundaria (4to Año)</option>
 
-                      <optionvalu e="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5 de Secundaria (5to Año)</option>
+                      <option value="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5 de Secundaria (5to Año)</option>
 
                     </optgroup>
 
@@ -18043,19 +18039,19 @@ const Components = {
 
                 <div style="display: flex; align-items: center; gap: 8px;">
 
-                  <spanstyl e="font-size: 13px; font-weight: 800; color: var(--color-navy-900); white-space: nowrap;">📚 Asignatura / Curso:</span>
+                  <span style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); white-space: nowrap;">📚 Asignatura / Curso:</span>
 
-                  <select class="form-control" style="font-weight: bold; width: auto; font-size: 13px; mión-width: 260px;" onchange="window.app.changeSelectedGradióngSubject(this.value)">
+                  <select class="form-control" style="font-weight: bold; width: auto; font-size: 13px; min-width: 260px;" onchange="window.app.changeSelectedGradióngSubject(this.value)">
 
                     ${visibleSubjects.length === 0 ? `
 
-                      <optionvalu e="" disabled selected>(N o tienes cursos asignados en${currentGradeObj.label})</option>
+                      <option value="" disabled selected>(N o tienes cursos asignados en${currentGradeObj.label})</option>
 
                     ` : visibleSubjects.map(s => {
 
                       return `
 
-                        <optionvalu e="${s.key}" ${s.key === selectedSubjectKey ? 'selected' : ''}>
+                        <option value="${s.key}" ${s.key === selectedSubjectKey ? 'selected' : ''}>
 
                           ${s.icon} ${s.name} • (${s.teacher})${isDocente ? ' ★ (Mi Curso)' : ''}
 
@@ -18077,15 +18073,15 @@ const Components = {
 
               <!-- Info del Curso & Aula Seleccionada -->
 
-              <div style="font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margión-top: 4px;">
+              <div style="font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 4px;">
 
-                <span><strong>Grado:</strong> <spanstyl e="color: var(--color-navy-900); font-weight: bold;">${currentGradeObj.label || selectedGradióngGrade}</span></span>
+                <span><strong>Grado:</strong> <span style="color: var(--color-navy-900); font-weight: bold;">${currentGradeObj.label || selectedGradióngGrade}</span></span>
 
-                <span><strong>Docente Responsable:</strong> <spanstyl e="color: var(--color-navy-900); font-weight: bold;">${currentSubject.teacher}</span></span>
+                <span><strong>Docente Responsable:</strong> <span style="color: var(--color-navy-900); font-weight: bold;">${currentSubject.teacher}</span></span>
 
                 <span><strong>rea Curricular:</strong> ${currentSubject.area}</span>
 
-                <spanclas s="status-badge status-primary" style="font-size: 11px;">👥 ${classroomStudents.length} Alumno(s) eneste Grado</span>
+                <span class="status-badge status-primary" style="font-size: 11px;">👥 ${classroomStudents.length} Alumno(s) eneste Grado</span>
 
               </div>
 
@@ -18097,9 +18093,9 @@ const Components = {
 
             <!-- Formulario de Calificaciones para los Alumnos del Aula eneste Curso -->
 
-            <form onsubmit="window.app.handleSaveSubjectGrades(event, '${selectedSubjectKey}')" style="paddióng: 16px;">
+            <form onsubmit="window.app.handleSaveSubjectGrades(event, '${selectedSubjectKey}')" style="padding: 16px;">
 
-              <div style="margión-bottom: 12px; font-size: 12px; color: #475569;">
+              <div style="margin-bottom: 12px; font-size: 12px; color: #475569;">
 
                 Mostrando únicamente estudiantes matriculados en <strong>${currentGradeObj.label || selectedGradióngGrade}</strong> para la materia <strong>${currentSubject.name}</strong>. Acepta letras (<strong>AD, A, B, C</strong>) o números (<strong>0-20</strong>).
 
@@ -18137,13 +18133,13 @@ const Components = {
 
                       <tr>
 
-                        <td colspan="6" style="text-align: center; paddióng: 36px 16px; color: #64748b; font-size: 13px;">
+                        <td colspan="6" style="text-align: center; padding: 36px 16px; color: #64748b; font-size: 13px;">
 
-                          <div style="font-size: 28px; margión-bottom: 6px;">📂</div>
+                          <div style="font-size: 28px; margin-bottom: 6px;">📂</div>
 
                           <strong>N o hay estudiantes matriculados en${currentGradeObj.label || selectedGradióngGrade}.</strong><br>
 
-                          <spanstyl e="font-size: 11.5px; opacity: 0.85;">Puede registrar estudiantes en la pestaña "Gestión de Perfiles & Cuentas" o cambiar de grado arriba.</span>
+                          <span style="font-size: 11.5px; opacity: 0.85;">Puede registrar estudiantes en la pestaña "Gestión de Perfiles & Cuentas" o cambiar de grado arriba.</span>
 
                         </td>
 
@@ -18165,25 +18161,25 @@ const Components = {
 
                           <td style="text-align:center;">
 
-                            <input type="text" class="form-control" name="grade_${st.key}_b1" value="${studentGrades.b1 || ''}" placeholder="-" style="width: 65px; text-align:center; font-weight:bold; text-transform:uppercase; margión: 0 auto;" maxlength="4" />
+                            <input type="text" class="form-control" name="grade_${st.key}_b1" value="${studentGrades.b1 || ''}" placeholder="-" style="width: 65px; text-align:center; font-weight:bold; text-transform:uppercase; margin: 0 auto;" maxlength="4" />
 
                           </td>
 
                           <td style="text-align:center;">
 
-                            <input type="text" class="form-control" name="grade_${st.key}_b2" value="${studentGrades.b2 || ''}" placeholder="-" style="width: 65px; text-align:center; font-weight:bold; text-transform:uppercase; margión: 0 auto;" maxlength="4" />
+                            <input type="text" class="form-control" name="grade_${st.key}_b2" value="${studentGrades.b2 || ''}" placeholder="-" style="width: 65px; text-align:center; font-weight:bold; text-transform:uppercase; margin: 0 auto;" maxlength="4" />
 
                           </td>
 
                           <td style="text-align:center;">
 
-                            <input type="text" class="form-control" name="grade_${st.key}_b3" value="${studentGrades.b3 || ''}" placeholder="-" style="width: 65px; text-align:center; font-weight:bold; text-transform:uppercase; margión: 0 auto;" maxlength="4" />
+                            <input type="text" class="form-control" name="grade_${st.key}_b3" value="${studentGrades.b3 || ''}" placeholder="-" style="width: 65px; text-align:center; font-weight:bold; text-transform:uppercase; margin: 0 auto;" maxlength="4" />
 
                           </td>
 
                           <td style="text-align:center;">
 
-                            <input type="text" class="form-control" name="grade_${st.key}_b4" value="${studentGrades.b4 || ''}" placeholder="-" style="width: 65px; text-align:center; font-weight:bold; text-transform:uppercase; margión: 0 auto;" maxlength="4" />
+                            <input type="text" class="form-control" name="grade_${st.key}_b4" value="${studentGrades.b4 || ''}" placeholder="-" style="width: 65px; text-align:center; font-weight:bold; text-transform:uppercase; margin: 0 auto;" maxlength="4" />
 
                           </td>
 
@@ -18203,9 +18199,9 @@ const Components = {
 
               ${classroomStudents.length > 0 ? `
 
-                <div style="display: flex; justify-content: flex-end; gap: 12px; margión-top: 16px;">
+                <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 16px;">
 
-                  <buttontyp e="submit" class="btnbtn-navy" style="font-weight: 800; paddióng: 10px 22px;">
+                  <button type="submit" class="btn btn-navy" style="font-weight: 800; padding: 10px 22px;">
 
                     💾 Guardar Notas de ${currentSubject.name} (${currentGradeObj.label || selectedGradióngGrade})
 
@@ -18231,7 +18227,7 @@ const Components = {
 
                ===================================================================== -->
 
-          <div class="card" style="margión-bottom: var(--space-6);">
+          <div class="card" style="margin-bottom: var(--space-6);">
 
             <div class="card-header" style="background: #eff6ff; border-bottom: 1px solid #bfdbfe; flex-wrap: wrap; gap: 12px;">
 
@@ -18239,7 +18235,7 @@ const Components = {
 
                 <h3 class="card-title" style="color: #1e3a8a;">Módulo de Tutora y Convivencia Escolar</h3>
 
-                <p style="font-size: 12px; color: #1e40af; margión-top: 2px;">
+                <p style="font-size: 12px; color: #1e40af; margin-top: 2px;">
 
                   <strong>Tutor a Cargo:</strong> ${currentGradeObj.tutor || 'Docente Tutor'} • <strong>Aula:</strong> ${currentGradeObj.label || selectedGradióngGrade}
 
@@ -18257,33 +18253,33 @@ const Components = {
 
                 <div style="display: flex; align-items: center; gap: 6px;">
 
-                  <spanstyl e="font-size: 12px; font-weight: 800; color: #1e3a8a;">Grado:</span>
+                  <span style="font-size: 12px; font-weight: 800; color: #1e3a8a;">Grado:</span>
 
                   <select class="form-control" style="font-weight: bold; width: auto; font-size: 12px;" onchange="window.app.changeGradióngGrade(this.value)">
 
-                    <optionvalu e="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
+                    <option value="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
 
-                    <optionvalu e="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1 de Primaria</option>
+                    <option value="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1 de Primaria</option>
 
-                    <optionvalu e="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2 de Primaria</option>
+                    <option value="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2 de Primaria</option>
 
-                    <optionvalu e="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3 de Primaria</option>
+                    <option value="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3 de Primaria</option>
 
-                    <optionvalu e="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4 de Primaria</option>
+                    <option value="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4 de Primaria</option>
 
-                    <optionvalu e="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5 de Primaria</option>
+                    <option value="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5 de Primaria</option>
 
-                    <optionvalu e="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6 de Primaria</option>
+                    <option value="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6 de Primaria</option>
 
-                    <optionvalu e="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1 de Secundaria</option>
+                    <option value="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1 de Secundaria</option>
 
-                    <optionvalu e="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2 de Secundaria</option>
+                    <option value="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2 de Secundaria</option>
 
-                    <optionvalu e="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3 de Secundaria</option>
+                    <option value="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3 de Secundaria</option>
 
-                    <optionvalu e="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4 de Secundaria</option>
+                    <option value="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4 de Secundaria</option>
 
-                    <optionvalu e="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5 de Secundaria</option>
+                    <option value="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5 de Secundaria</option>
 
                   </select>
 
@@ -18293,17 +18289,17 @@ const Components = {
 
                 <div style="display: flex; align-items: center; gap: 6px;">
 
-                  <spanstyl e="font-size: 12px; font-weight: 800; color: #1e3a8a;">Estudiante:</span>
+                  <span style="font-size: 12px; font-weight: 800; color: #1e3a8a;">Estudiante:</span>
 
-                  <select class="form-control" style="font-weight: bold; width: auto; font-size: 12px; mión-width: 200px;" onchange="window.app.changeBoletaStudent(this.value)">
+                  <select class="form-control" style="font-weight: bold; width: auto; font-size: 12px; min-width: 200px;" onchange="window.app.changeBoletaStudent(this.value)">
 
                     ${classroomStudents.length === 0 ? `
 
-                      <optionvalu e="">Siónestudiantes eneste grado</option>
+                      <option value="">Siónestudiantes eneste grado</option>
 
                     ` : classroomStudents.map(st => `
 
-                      <optionvalu e="${st.key}" ${selectedStudentKey === st.key ? 'selected' : ''}>${st.name}</option>
+                      <option value="${st.key}" ${selectedStudentKey === st.key ? 'selected' : ''}>${st.name}</option>
 
                     `).join('')}
 
@@ -18315,7 +18311,7 @@ const Components = {
 
                 ${classroomStudents.length > 0 ? `
 
-                  <buttontyp e="button" class="btnbtn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${tutorStudentData.code || tutorStudentData.id || selectedStudentKey}')" style="font-weight: 900; font-size: 11.5px; paddióng: 6px 14px; border-radius: 16px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #0b132b;">
+                  <button type="button" class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${tutorStudentData.code || tutorStudentData.id || selectedStudentKey}')" style="font-weight: 900; font-size: 11.5px; padding: 6px 14px; border-radius: 16px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #0b132b;">
 
                     ⚡ Stickers QR de Boleta
 
@@ -18329,25 +18325,25 @@ const Components = {
 
 
 
-            <form onsubmit="window.app.handleSaveTutorEvaluation(event, '${selectedStudentKey}')" style="paddióng: 20px;">
+            <form onsubmit="window.app.handleSaveTutorEvaluation(event, '${selectedStudentKey}')" style="padding: 20px;">
 
               
 
               <!-- 1. Apreciación Pedagógica del Tutor -->
 
-              <div style="margión-bottom: 24px;">
+              <div style="margin-bottom: 24px;">
 
-                <h4 style="font-size: 14px; font-weight: 800; color: var(--color-navy-900); margión-bottom: 10px; border-bottom: 2px solid var(--border-subtle); paddióng-bottom: 6px;">
+                <h4 style="font-size: 14px; font-weight: 800; color: var(--color-navy-900); margin-bottom: 10px; border-bottom: 2px solid var(--border-subtle); paddióng-bottom: 6px;">
 
                   1. Apreciación del Tutor (Observaciones Oficiales para la Boleta)
 
                 </h4>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(280px, 1fr)); gap: 12px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
 
                   <div>
 
-                    <label style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); display: block; margión-bottom: 4px;">I BIMESTRE:</label>
+                    <label style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); display: block; margin-bottom: 4px;">I BIMESTRE:</label>
 
                     <textarea class="form-control" name="app_b1" rows="3" placeholder="Apreciación del 1er Bimestre...">${tutorpp.b1 || ''}</textarea>
 
@@ -18355,7 +18351,7 @@ const Components = {
 
                   <div>
 
-                    <label style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); display: block; margión-bottom: 4px;">II BIMESTRE:</label>
+                    <label style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); display: block; margin-bottom: 4px;">II BIMESTRE:</label>
 
                     <textarea class="form-control" name="app_b2" rows="3" placeholder="Apreciación del 2do Bimestre...">${tutorpp.b2 || ''}</textarea>
 
@@ -18363,7 +18359,7 @@ const Components = {
 
                   <div>
 
-                    <label style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); display: block; margión-bottom: 4px;">III BIMESTRE:</label>
+                    <label style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); display: block; margin-bottom: 4px;">III BIMESTRE:</label>
 
                     <textarea class="form-control" name="app_b3" rows="3" placeholder="Apreciación del 3er Bimestre...">${tutorpp.b3 || ''}</textarea>
 
@@ -18371,7 +18367,7 @@ const Components = {
 
                   <div>
 
-                    <label style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); display: block; margión-bottom: 4px;">IV BIMESTRE:</label>
+                    <label style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); display: block; margin-bottom: 4px;">IV BIMESTRE:</label>
 
                     <textarea class="form-control" name="app_b4" rows="3" placeholder="Apreciación del 4to Bimestre...">${tutorpp.b4 || ''}</textarea>
 
@@ -18385,9 +18381,9 @@ const Components = {
 
               <!-- 2. Registro de Asistencia del Estudiante -->
 
-              <div style="margión-bottom: 24px;">
+              <div style="margin-bottom: 24px;">
 
-                <h4 style="font-size: 14px; font-weight: 800; color: var(--color-navy-900); margión-bottom: 10px; border-bottom: 2px solid var(--border-subtle); paddióng-bottom: 6px;">
+                <h4 style="font-size: 14px; font-weight: 800; color: var(--color-navy-900); margin-bottom: 10px; border-bottom: 2px solid var(--border-subtle); paddióng-bottom: 6px;">
 
                   2. Resumende Asistencia del Estudiante (Inasistencias y Tardanzas)
 
@@ -18437,13 +18433,13 @@ const Components = {
 
                             <td style="font-weight:bold; text-align:center;">${bLabel}</td>
 
-                            <td style="text-align:center;"><input type="text" class="form-control" name="att_${b}_ij" value="${rec.inasist_just || '-'}" style="width:60px; text-align:center; margión:0 auto;" /></td>
+                            <td style="text-align:center;"><input type="text" class="form-control" name="att_${b}_ij" value="${rec.inasist_just || '-'}" style="width:60px; text-align:center; margin:0 auto;" /></td>
 
-                            <td style="text-align:center;"><input type="text" class="form-control" name="att_${b}_ii" value="${rec.inasist_injust || '-'}" style="width:60px; text-align:center; margión:0 auto;" /></td>
+                            <td style="text-align:center;"><input type="text" class="form-control" name="att_${b}_ii" value="${rec.inasist_injust || '-'}" style="width:60px; text-align:center; margin:0 auto;" /></td>
 
-                            <td style="text-align:center;"><input type="text" class="form-control" name="att_${b}_tj" value="${rec.tard_just || '-'}" style="width:60px; text-align:center; margión:0 auto;" /></td>
+                            <td style="text-align:center;"><input type="text" class="form-control" name="att_${b}_tj" value="${rec.tard_just || '-'}" style="width:60px; text-align:center; margin:0 auto;" /></td>
 
-                            <td style="text-align:center;"><input type="text" class="form-control" name="att_${b}_ti" value="${rec.tard_injust || '-'}" style="width:60px; text-align:center; margión:0 auto;" /></td>
+                            <td style="text-align:center;"><input type="text" class="form-control" name="att_${b}_ti" value="${rec.tard_injust || '-'}" style="width:60px; text-align:center; margin:0 auto;" /></td>
 
                           </tr>
 
@@ -18463,9 +18459,9 @@ const Components = {
 
               <!-- 3. Evaluación de Participación de los Padres de Familia -->
 
-              <div style="margión-bottom: 24px;">
+              <div style="margin-bottom: 24px;">
 
-                <h4 style="font-size: 14px; font-weight: 800; color: var(--color-navy-900); margión-bottom: 10px; border-bottom: 2px solid var(--border-subtle); paddióng-bottom: 6px;">
+                <h4 style="font-size: 14px; font-weight: 800; color: var(--color-navy-900); margin-bottom: 10px; border-bottom: 2px solid var(--border-subtle); paddióng-bottom: 6px;">
 
                   3. Participación de los Padres de Familia (6 Criterios MINEDU: AD, A, B, C)
 
@@ -18519,13 +18515,13 @@ const Components = {
 
                             <td><strong>${crit.text}</strong></td>
 
-                            <td style="text-align:center;"><input type="text" class="form-control" name="pc_c${crit.id}_b1" value="${cVal.b1 || ''}" placeholder="A" style="width:60px; text-align:center; font-weight:bold; text-transform:uppercase; margión:0 auto;" maxlength="2" /></td>
+                            <td style="text-align:center;"><input type="text" class="form-control" name="pc_c${crit.id}_b1" value="${cVal.b1 || ''}" placeholder="A" style="width:60px; text-align:center; font-weight:bold; text-transform:uppercase; margin:0 auto;" maxlength="2" /></td>
 
-                            <td style="text-align:center;"><input type="text" class="form-control" name="pc_c${crit.id}_b2" value="${cVal.b2 || ''}" placeholder="-" style="width:60px; text-align:center; font-weight:bold; text-transform:uppercase; margión:0 auto;" maxlength="2" /></td>
+                            <td style="text-align:center;"><input type="text" class="form-control" name="pc_c${crit.id}_b2" value="${cVal.b2 || ''}" placeholder="-" style="width:60px; text-align:center; font-weight:bold; text-transform:uppercase; margin:0 auto;" maxlength="2" /></td>
 
-                            <td style="text-align:center;"><input type="text" class="form-control" name="pc_c${crit.id}_b3" value="${cVal.b3 || ''}" placeholder="-" style="width:60px; text-align:center; font-weight:bold; text-transform:uppercase; margión:0 auto;" maxlength="2" /></td>
+                            <td style="text-align:center;"><input type="text" class="form-control" name="pc_c${crit.id}_b3" value="${cVal.b3 || ''}" placeholder="-" style="width:60px; text-align:center; font-weight:bold; text-transform:uppercase; margin:0 auto;" maxlength="2" /></td>
 
-                            <td style="text-align:center;"><input type="text" class="form-control" name="pc_c${crit.id}_b4" value="${cVal.b4 || ''}" placeholder="-" style="width:60px; text-align:center; font-weight:bold; text-transform:uppercase; margión:0 auto;" maxlength="2" /></td>
+                            <td style="text-align:center;"><input type="text" class="form-control" name="pc_c${crit.id}_b4" value="${cVal.b4 || ''}" placeholder="-" style="width:60px; text-align:center; font-weight:bold; text-transform:uppercase; margin:0 auto;" maxlength="2" /></td>
 
                           </tr>
 
@@ -18547,7 +18543,7 @@ const Components = {
 
                 <div style="display: flex; justify-content: flex-end; gap: 12px;">
 
-                  <buttontyp e="submit" class="btnbtn-red" style="font-weight: 800; paddióng: 12px 24px;">
+                  <button type="submit" class="btn btn-red" style="font-weight: 800; padding: 12px 24px;">
 
                     💾 Guardar Evaluación de Tutora de ${tutorStudentData.name || 'Estudiante'}
 
@@ -18575,7 +18571,7 @@ const Components = {
 
                ===================================================================== -->
 
-          <div class="card" style="margión-bottom: var(--space-6);">
+          <div class="card" style="margin-bottom: var(--space-6);">
 
             <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
 
@@ -18583,7 +18579,7 @@ const Components = {
 
                 <h3 class="card-title">Sbana Consolidada de Calificaciones - ${currentGradeObj.label || selectedGradióngGrade}</h3>
 
-                <p style="font-size: 12px; color: var(--text-muted); margión-top: 2px;">
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
 
                   Consolidado automtico de calificaciones de los estudiantes matriculados en <strong>${currentGradeObj.label || selectedGradióngGrade}</strong>.
 
@@ -18597,33 +18593,33 @@ const Components = {
 
               <div style="display: flex; align-items: center; gap: 8px;">
 
-                <spanstyl e="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Grado:</span>
+                <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Grado:</span>
 
                 <select class="form-control" style="font-weight: bold; width: auto; font-size: 12px;" onchange="window.app.changeGradióngGrade(this.value)">
 
-                  <optionvalu e="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
+                  <option value="ini-5" ${cleanSelectedGrade === 'ini5' || cleanSelectedGrade === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
 
-                  <optionvalu e="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1 de Primaria</option>
+                  <option value="1prim" ${cleanSelectedGrade === '1prim' ? 'selected' : ''}>1 de Primaria</option>
 
-                  <optionvalu e="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2 de Primaria</option>
+                  <option value="2prim" ${cleanSelectedGrade === '2prim' ? 'selected' : ''}>2 de Primaria</option>
 
-                  <optionvalu e="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3 de Primaria</option>
+                  <option value="3prim" ${cleanSelectedGrade === '3prim' ? 'selected' : ''}>3 de Primaria</option>
 
-                  <optionvalu e="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4 de Primaria</option>
+                  <option value="4prim" ${cleanSelectedGrade === '4prim' ? 'selected' : ''}>4 de Primaria</option>
 
-                  <optionvalu e="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5 de Primaria</option>
+                  <option value="5prim" ${cleanSelectedGrade === '5prim' ? 'selected' : ''}>5 de Primaria</option>
 
-                  <optionvalu e="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6 de Primaria</option>
+                  <option value="6prim" ${cleanSelectedGrade === '6prim' ? 'selected' : ''}>6 de Primaria</option>
 
-                  <optionvalu e="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1 de Secundaria</option>
+                  <option value="1sec" ${cleanSelectedGrade === '1sec' ? 'selected' : ''}>1 de Secundaria</option>
 
-                  <optionvalu e="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2 de Secundaria</option>
+                  <option value="2sec" ${cleanSelectedGrade === '2sec' ? 'selected' : ''}>2 de Secundaria</option>
 
-                  <optionvalu e="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3 de Secundaria</option>
+                  <option value="3sec" ${cleanSelectedGrade === '3sec' ? 'selected' : ''}>3 de Secundaria</option>
 
-                  <optionvalu e="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4 de Secundaria</option>
+                  <option value="4sec" ${cleanSelectedGrade === '4sec' ? 'selected' : ''}>4 de Secundaria</option>
 
-                  <optionvalu e="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5 de Secundaria</option>
+                  <option value="5sec" ${cleanSelectedGrade === '5sec' ? 'selected' : ''}>5 de Secundaria</option>
 
                 </select>
 
@@ -18663,7 +18659,7 @@ const Components = {
 
                     <tr>
 
-                      <td colspan="4" style="text-align: center; paddióng: 24px; color: #64748b;">
+                      <td colspan="4" style="text-align: center; padding: 24px; color: #64748b;">
 
                         N o hay estudiantes matriculados eneste grado.
 
@@ -18693,9 +18689,9 @@ const Components = {
 
                         <td style="text-align:center;">
 
-                          <spanclas s="status-badge status-approved">
+                          <span class="status-badge status-approved">
 
-                            <spanclas s="status-dot-green"></span> Registrado
+                            <span class="status-dot-green"></span> Registrado
 
                           </span>
 
@@ -18715,15 +18711,15 @@ const Components = {
 
 
 
-            <div style="paddióng: 16px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div style="padding: 16px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
 
-              <spanstyl e="font-size: 13px; font-weight: 700; color: #1e293b;">
+              <span style="font-size: 13px; font-weight: 700; color: #1e293b;">
 
                 Consolidado oficial de ${currentGradeObj.label || selectedGradióngGrade}.
 
               </span>
 
-              <buttonclas s="btnbtn-navy" onclick="window.app.navigate('boleta')" style="font-weight: 800;">
+              <button class="btn btn-navy" onclick="window.app.navigate('boleta')" style="font-weight: 800;">
 
                 Generar Boleta Oficial MINEDU (PDF)
 
@@ -18747,7 +18743,7 @@ const Components = {
 
   // =========================================================================
 
-  // BOLETÍA OFICIL IMPRIMIBLE CONFORMTO MINEDU (2 PGINS DIN  ÁMICS)
+  // BOLETÍA OFICIL IMPRIMIBLE CONFORMTO MINEDU (2 PGINS DINÁMICS)
 
   // =========================================================================
 
@@ -18815,7 +18811,7 @@ const Components = {
 
     } else {
 
-      // Para Docentes y Directivos: si el alumno seleccionado no existe enenrollments, seleccionar el primer alumno de la nómióna
+      // Para Docentes y Directivos: si el alumno seleccionado no existe enenrollments, seleccionar el primer alumno de la nómina
 
       const existsInEnrollments = enrollments.some(e => 
 
@@ -18915,7 +18911,7 @@ const Components = {
 
         else if (u === "C") sum += 1;
 
-        else if (!isNaN  (parseFloat(u))) {
+        else if (!isNaN(parseFloat(u))) {
 
           const num = parseFloat(u);
 
@@ -19033,11 +19029,11 @@ const Components = {
 
         <!-- Barra Superior de Control (N o Imprimible) -->
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 16px; flex-wrap: wrap; gap: 12px; background: white; paddióng: 14px 18px; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 2px 8px rgba(0,0,0,0.05);" class="no-print">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; background: white; padding: 14px 18px; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 2px 8px rgba(0,0,0,0.05);" class="no-print">
 
           <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
 
-            <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.navigate('${isParentOrStudent ? 'dashboard' : 'calificaciones'}')">
+            <button class="btn btn-outline btn-sm" onclick="window.app.navigate('${isParentOrStudent ? 'dashboard' : 'calificaciones'}')">
 
               ← ${isParentOrStudent ? 'Volver al Inicio' : 'Volver al Registro de Notas'}
 
@@ -19049,7 +19045,7 @@ const Components = {
 
               <div style="display: flex; align-items: center; gap: 6px;">
 
-                <spanclas s="status-badge" style="background: #e0e7ff; color: #3730a3; font-weight: 800; font-size: 12px;">
+                <span class="status-badge" style="background: #e0e7ff; color: #3730a3; font-weight: 800; font-size: 12px;">
 
                   📄 Boleta Oficial de: <strong>${student.student || student.name}</strong> (${student.grade || '2026'})
 
@@ -19059,13 +19055,13 @@ const Components = {
 
             ` : `
 
-              <!-- Selector de Alumno para Docentes y Directivos (Vinculado Estrictamente a la N  ómióna Oficial de Estudiantes) -->
+              <!-- Selector de Alumno para Docentes y Directivos (Vinculado Estrictamente a la Nómina Oficial de Estudiantes) -->
 
               <div style="display: flex; align-items: center; gap: 6px;">
 
-                <spanstyl e="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Alumno(a):</span>
+                <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Alumno(a):</span>
 
-                <select class="form-control" style="font-size: 12px; font-weight: bold; mión-width: 280px; paddióng: 4px 10px;" onchange="window.app.changeBoletaStudent(this.value)">
+                <select class="form-control" style="font-size: 12px; font-weight: bold; min-width: 280px; padding: 4px 10px;" onchange="window.app.changeBoletaStudent(this.value)">
 
                   ${enrollments.length > 0 ? enrollments.map(e => {
 
@@ -19073,9 +19069,9 @@ const Components = {
 
                     const isSel = (currentEnrollment && (currentEnrollment.studentCode === e.studentCode || currentEnrollment.id === e.id || currentEnrollment.dni === e.dni)) ? 'selected' : '';
 
-                    return `<optionvalu e="${sVal}" ${isSel}>${(e.studentName || 'Estudiante').toUpperCase()} (${e.grade || 'Nivel Escolar'})</option>`;
+                    return `<option value="${sVal}" ${isSel}>${(e.studentName || 'Estudiante').toUpperCase()} (${e.grade || 'Nivel Escolar'})</option>`;
 
-                  }).join('') : '<optionvalu e="">N o hay estudiantes registrados en la nómióna</option>'}
+                  }).join('') : '<option value="">N o hay estudiantes registrados en la nómina</option>'}
 
                 </select>
 
@@ -19089,7 +19085,7 @@ const Components = {
 
           <div style="display: flex; gap: 8px; align-items: center;">
 
-            <buttonclas s="btnbtn-navy" onclick="window.print()" style="font-weight: 800; font-size: 13px; paddióng: 9px 20px;">
+            <button class="btn btn-navy" onclick="window.print()" style="font-weight: 800; font-size: 13px; padding: 9px 20px;">
 
               🖨️ Imprimir Boleta Oficial Completa (PDF / Doble Cara)
 
@@ -19103,11 +19099,11 @@ const Components = {
 
         <!-- =========================================================================
 
-             PGINA 1: CLIFICTIVO DEL APRENDIZJE & ASISTENCIA & APRECICIÓN  
+             PGINA 1: CLIFICTIVO DEL APRENDIZJE & ASISTENCIA & APRECICIÓN
 
              ========================================================================= -->
 
-        <div class="official-boleta-page official-boleta-page-1" style="background-image: url('assets/boleta_document_bg.png'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center; paddióng: 12px 14px;">
+        <div class="official-boleta-page official-boleta-page-1" style="background-image: url('assets/boleta_document_bg.png'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center; padding: 12px 14px;">
 
           
 
@@ -19157,7 +19153,7 @@ const Components = {
 
                 <tbody>
 
-                  <!-- COMUNICCIÓN  -->
+                  <!-- COMUNICCIÓN-->
 
                   <tr><td>LENGUÍAJE</td><td style="text-align:center;">${val("lenguíaje","b1")}</td><td style="text-align:center;">${val("lenguíaje","b2")}</td><td style="text-align:center;">${val("lenguíaje","b3")}</td><td style="text-align:center;">${val("lenguíaje","b4")}</td><td style="text-align:center;">${calcPF("lenguíaje")}</td></tr>
 
@@ -19165,7 +19161,7 @@ const Components = {
 
                   <tr><td>RÍAZONMIEN TO VERBL</td><td style="text-align:center;">${val("raíz_verbal","b1")}</td><td style="text-align:center;">${val("raíz_verbal","b2")}</td><td style="text-align:center;">${val("raíz_verbal","b3")}</td><td style="text-align:center;">${val("raíz_verbal","b4")}</td><td style="text-align:center;">${calcPF("raíz_verbal")}</td></tr>
 
-                  <tr class="boleta-yellow-row"><td>PROMEDIO DE COMUNICCIÓN  </td><td style="text-align:center;">${comB1}</td><td style="text-align:center;">${comB2}</td><td style="text-align:center;">${comB3}</td><td style="text-align:center;">${comB4}</td><td style="text-align:center;">${comB1 && comB2 ? comB1 : ''}</td></tr>
+                  <tr class="boleta-yellow-row"><td>PROMEDIO DE COMUNICCIÓN</td><td style="text-align:center;">${comB1}</td><td style="text-align:center;">${comB2}</td><td style="text-align:center;">${comB3}</td><td style="text-align:center;">${comB4}</td><td style="text-align:center;">${comB1 && comB2 ? comB1 : ''}</td></tr>
 
 
 
@@ -19217,13 +19213,13 @@ const Components = {
 
                   <tr><td>PSICOLOGÍA</td><td style="text-align:center;">${val("psicologia","b1")}</td><td style="text-align:center;">${val("psicologia","b2")}</td><td style="text-align:center;">${val("psicologia","b3")}</td><td style="text-align:center;">${val("psicologia","b4")}</td><td style="text-align:center;">${calcPF("psicologia")}</td></tr>
 
-                  <tr class="boleta-yellow-row"><td>PROMEDIO DE DESRROLLO PERSONL, CIUDÍADÍAN  ÍA Y CÍVICA</td><td style="text-align:center;">${dpccB1}</td><td style="text-align:center;">${dpccB2}</td><td style="text-align:center;">${dpccB3}</td><td style="text-align:center;">${dpccB4}</td><td style="text-align:center;">${dpccB1 && dpccB2 ? dpccB1 : ''}</td></tr>
+                  <tr class="boleta-yellow-row"><td>PROMEDIO DE DESRROLLO PERSONL, CIUDÍADÍANÍA Y CÍVICA</td><td style="text-align:center;">${dpccB1}</td><td style="text-align:center;">${dpccB2}</td><td style="text-align:center;">${dpccB3}</td><td style="text-align:center;">${dpccB4}</td><td style="text-align:center;">${dpccB1 && dpccB2 ? dpccB1 : ''}</td></tr>
 
 
 
                   <!-- EDUCCIÓN PRÍA EL TRÍABJO -->
 
-                  <tr><td>COMPUTÍACIÓN  </td><td style="text-align:center;">${val("computacion","b1")}</td><td style="text-align:center;">${val("computacion","b2")}</td><td style="text-align:center;">${val("computacion","b3")}</td><td style="text-align:center;">${val("computacion","b4")}</td><td style="text-align:center;">${calcPF("computacion")}</td></tr>
+                  <tr><td>COMPUTÍACIÓN</td><td style="text-align:center;">${val("computacion","b1")}</td><td style="text-align:center;">${val("computacion","b2")}</td><td style="text-align:center;">${val("computacion","b3")}</td><td style="text-align:center;">${val("computacion","b4")}</td><td style="text-align:center;">${calcPF("computacion")}</td></tr>
 
                   <tr><td>GESTIÓN EMPRESRIL</td><td style="text-align:center;">${val("gestion_empresarial","b1")}</td><td style="text-align:center;">${val("gestion_empresarial","b2")}</td><td style="text-align:center;">${val("gestion_empresarial","b3")}</td><td style="text-align:center;">${val("gestion_empresarial","b4")}</td><td style="text-align:center;">${calcPF("gestion_empresarial")}</td></tr>
 
@@ -19245,11 +19241,11 @@ const Components = {
 
                   <!-- COMPETENCIS TRÍANSVERSLES -->
 
-                  <tr><td colspan="6" style="font-size: 9.5px; paddióng: 3px 5px;"><strong>SE DESENVUELVE ENEN TORNOS VIRTULES GENERÍADOS POR LS TIC</strong></td></tr>
+                  <tr><td colspan="6" style="font-size: 9.5px; padding: 3px 5px;"><strong>SE DESENVUELVE ENEN TORNOS VIRTULES GENERÍADOS POR LS TIC</strong></td></tr>
 
                   <tr>
 
-                    <td colspan="6" style="font-size: 8.5px; line-height: 1.25; paddióng: 3px 5px;">
+                    <td colspan="6" style="font-size: 8.5px; line-height: 1.25; padding: 3px 5px;">
 
                       <strong>GESTIONA SU APRENDIZJE DE MNERÍA AUTÓN OMA</strong>, permite que los estudiantes participenactivamente en el logro de aprendizajes tomando encuenta sus potencialidades y a organizarse por sí mismos frente a esta necesidad.
 
@@ -19289,7 +19285,7 @@ const Components = {
 
               <!-- Resumende Asistencia -->
 
-              <div style="text-align: center; margión-bottom: 6px;">
+              <div style="text-align: center; margin-bottom: 6px;">
 
                 <div class="boleta-badge-title">RESUMENDE ASISTENCIA DEL ESTUDINTE</div>
 
@@ -19297,7 +19293,7 @@ const Components = {
 
 
 
-              <table class="boleta-table" style="margión-bottom: 12px;">
+              <table class="boleta-table" style="margin-bottom: 12px;">
 
                 <thead>
 
@@ -19391,7 +19387,7 @@ const Components = {
 
               <!-- Apreciación del Docente -->
 
-              <div style="text-align: center; margión-bottom: 6px;">
+              <div style="text-align: center; margin-bottom: 6px;">
 
                 <div class="boleta-badge-title">APRECICIÓN DEL DOCENTE</div>
 
@@ -19405,7 +19401,7 @@ const Components = {
 
                   <div class="boleta-appreciation-item">
 
-                    <spanclas s="boleta-appreciation-tag">I BIM:</span>
+                    <span class="boleta-appreciation-tag">I BIM:</span>
 
                     <div>
 
@@ -19417,7 +19413,7 @@ const Components = {
 
                   <div class="boleta-appreciation-item">
 
-                    <spanclas s="boleta-appreciation-tag">II BIM:</span>
+                    <span class="boleta-appreciation-tag">II BIM:</span>
 
                     <div>
 
@@ -19429,7 +19425,7 @@ const Components = {
 
                   <div class="boleta-appreciation-item" style="mión-height: 24px;">
 
-                    <spanclas s="boleta-appreciation-tag">III BIM:</span>
+                    <span class="boleta-appreciation-tag">III BIM:</span>
 
                     <div>${app.b3 || ''}</div>
 
@@ -19437,7 +19433,7 @@ const Components = {
 
                   <div class="boleta-appreciation-item" style="mión-height: 24px;">
 
-                    <spanclas s="boleta-appreciation-tag">IV BIM:</span>
+                    <span class="boleta-appreciation-tag">IV BIM:</span>
 
                     <div>${app.b4 || ''}</div>
 
@@ -19459,7 +19455,7 @@ const Components = {
 
               <div class="boleta-scale-legend">
 
-                <div style="margión-bottom: 4px;">
+                <div style="margin-bottom: 4px;">
 
                   <strong style="color: #1e3a8a;">AD &nbsp; LOGRO DESTÍACDO:</strong><br>
 
@@ -19467,7 +19463,7 @@ const Components = {
 
                 </div>
 
-                <div style="margión-bottom: 4px;">
+                <div style="margin-bottom: 4px;">
 
                   <strong style="color: #1e3a8a;">A &nbsp; LOGRO ESPERÍADO:</strong><br>
 
@@ -19475,7 +19471,7 @@ const Components = {
 
                 </div>
 
-                <div style="margión-bottom: 4px;">
+                <div style="margin-bottom: 4px;">
 
                   <strong style="color: #1e3a8a;">B &nbsp; ENPROCESO:</strong><br>
 
@@ -19513,7 +19509,7 @@ const Components = {
 
              ========================================================================= -->
 
-        <div class="official-boleta-page official-boleta-page-2" style="background-image: url('assets/boleta_document_bg.png'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center; paddióng: 12px 14px;">
+        <div class="official-boleta-page official-boleta-page-2" style="background-image: url('assets/boleta_document_bg.png'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center; padding: 12px 14px;">
 
           
 
@@ -19523,41 +19519,41 @@ const Components = {
 
             <!-- Columna Izquierda: Participación de Padres & Compromiso & Firmas -->
 
-            <div class="boleta-page-2-left-box" style="display: flex; flex-direction: column; justify-content: space-between; border: 2px solid #000000; border-radius: 8px; paddióng: 14px 16px; box-sizing: border-box; height: 100%; background: rgba(255, 255, 255, 0.94);">
+            <div class="boleta-page-2-left-box" style="display: flex; flex-direction: column; justify-content: space-between; border: 2px solid #000000; border-radius: 8px; padding: 14px 16px; box-sizing: border-box; height: 100%; background: rgba(255, 255, 255, 0.94);">
 
               <div>
 
-                <div style="text-align: center; margión-bottom: 8px;">
+                <div style="text-align: center; margin-bottom: 8px;">
 
-                  <div class="boleta-badge-title" style="font-size: 8.5pt; paddióng: 3px 14px;">PRTICIPCIÓN DE LOS PDRES DE FMILIA</div>
+                  <div class="boleta-badge-title" style="font-size: 8.5pt; padding: 3px 14px;">PRTICIPCIÓN DE LOS PDRES DE FMILIA</div>
 
                 </div>
 
 
 
-                <table class="boleta-table" style="margión-bottom: 10px;">
+                <table class="boleta-table" style="margin-bottom: 10px;">
 
                   <thead>
 
                     <tr>
 
-                      <th rowspan="2" style="width: 60%; text-align: left; paddióng: 4px 6px; background:#fef08a;">CRITERIOS DE EVLUCIÓN  </th>
+                      <th rowspan="2" style="width: 60%; text-align: left; padding: 4px 6px; background:#fef08a;">CRITERIOS DE EVLUCIÓN</th>
 
-                      <th colspan="4" style="background:#fef08a; paddióng: 4px;">BIMESTRES</th>
+                      <th colspan="4" style="background:#fef08a; padding: 4px;">BIMESTRES</th>
 
-                      <th rowspan="2" style="background:#fef08a; width: 10%; paddióng: 4px;">P.F</th>
+                      <th rowspan="2" style="background:#fef08a; width: 10%; padding: 4px;">P.F</th>
 
                     </tr>
 
                     <tr>
 
-                      <th style="background:#fef08a; width: 7%; paddióng: 3px;">I</th>
+                      <th style="background:#fef08a; width: 7%; padding: 3px;">I</th>
 
-                      <th style="background:#fef08a; width: 7%; paddióng: 3px;">II</th>
+                      <th style="background:#fef08a; width: 7%; padding: 3px;">II</th>
 
-                      <th style="background:#fef08a; width: 7%; paddióng: 3px;">III</th>
+                      <th style="background:#fef08a; width: 7%; padding: 3px;">III</th>
 
-                      <th style="background:#fef08a; width: 7%; paddióng: 3px;">IV</th>
+                      <th style="background:#fef08a; width: 7%; padding: 3px;">IV</th>
 
                     </tr>
 
@@ -19567,7 +19563,7 @@ const Components = {
 
                     <tr>
 
-                      <td style="paddióng: 4px 5px;">1. Se interesa por el aprendizaje de su hijo(a).</td>
+                      <td style="padding: 4px 5px;">1. Se interesa por el aprendizaje de su hijo(a).</td>
 
                       <td style="text-align:center; font-weight:bold;">${(pc.c1 && pc.c1.b1) || 'A'}</td>
 
@@ -19583,7 +19579,7 @@ const Components = {
 
                     <tr>
 
-                      <td style="paddióng: 4px 5px;">2. Enva oportunamente sus materiales (útiles escolares).</td>
+                      <td style="padding: 4px 5px;">2. Enva oportunamente sus materiales (útiles escolares).</td>
 
                       <td style="text-align:center; font-weight:bold;">${(pc.c2 && pc.c2.b1) || ''}</td>
 
@@ -19599,7 +19595,7 @@ const Components = {
 
                     <tr>
 
-                      <td style="paddióng: 4px 5px;">3. Participa enactividades en el aula e Institución Educativa.</td>
+                      <td style="padding: 4px 5px;">3. Participa enactividades en el aula e Institución Educativa.</td>
 
                       <td style="text-align:center; font-weight:bold;">${(pc.c3 && pc.c3.b1) || 'A'}</td>
 
@@ -19615,7 +19611,7 @@ const Components = {
 
                     <tr>
 
-                      <td style="paddióng: 4px 5px;">4. Enva puntualmente a su hijo(a) a la Institución Educativa.</td>
+                      <td style="padding: 4px 5px;">4. Enva puntualmente a su hijo(a) a la Institución Educativa.</td>
 
                       <td style="text-align:center; font-weight:bold;">${(pc.c4 && pc.c4.b1) || 'A'}</td>
 
@@ -19631,7 +19627,7 @@ const Components = {
 
                     <tr>
 
-                      <td style="paddióng: 4px 5px;">5. Asiste a la Escuela de Padres.</td>
+                      <td style="padding: 4px 5px;">5. Asiste a la Escuela de Padres.</td>
 
                       <td style="text-align:center; font-weight:bold;">${(pc.c5 && pc.c5.b1) || ''}</td>
 
@@ -19647,7 +19643,7 @@ const Components = {
 
                     <tr>
 
-                      <td style="paddióng: 4px 5px;">6. Padres / apoderados, se comunicancon frecuencia para conocer la situación de su hijo(a).</td>
+                      <td style="padding: 4px 5px;">6. Padres / apoderados, se comunicancon frecuencia para conocer la situación de su hijo(a).</td>
 
                       <td style="text-align:center; font-weight:bold;">${(pc.c6 && pc.c6.b1) || ''}</td>
 
@@ -19669,9 +19665,9 @@ const Components = {
 
                 <!-- Compromiso Formativo del Apoderado -->
 
-                <div style="border: 1.2px solid #000000; border-radius: 6px; paddióng: 6px 8px; background: #f8fafc; font-size: 7.6pt; line-height: 1.3; margión-top: 8px;">
+                <div style="border: 1.2px solid #000000; border-radius: 6px; padding: 6px 8px; background: #f8fafc; font-size: 7.6pt; line-height: 1.3; margin-top: 8px;">
 
-                  <strong style="color: #1e3a8a; display: block; margión-bottom: 2px;">COMPROMISO DEL APODERÍADO:</strong>
+                  <strong style="color: #1e3a8a; display: block; margin-bottom: 2px;">COMPROMISO DEL APODERÍADO:</strong>
 
                   El padre o tutor legal se compromete a acompañar el desarrollo formativo y académico de su menor hijo(a), velando por su puntualidad y asistiendo a las reuniñones pedagógicas convocadas por la Institución.
 
@@ -19683,7 +19679,7 @@ const Components = {
 
               <!-- Pie de Firmas Oficiales conSellos -->
 
-              <div style="display: flex; justify-content: space-around; text-align: center; margión-top: auto; paddióng-top: 28px;">
+              <div style="display: flex; justify-content: space-around; text-align: center; margin-top: auto; paddióng-top: 28px;">
 
                 <div style="border-top: 1.5px solid #000000; width: 150px; paddióng-top: 4px; font-size: 10px; font-weight: 800;">
 
@@ -19705,7 +19701,7 @@ const Components = {
 
             <!-- Columna Derecha: Cartula Oficial Institucional (Fondo Oficial de la Institución) -->
 
-            <div class="boleta-cover-container" style="position: relative; height: 100%; mión-height: 198mm; box-sizing: border-box; overflow: hidden; border-radius: 4px; paddióng: 0; background: #ffffff;">
+            <div class="boleta-cover-container" style="position: relative; height: 100%; mión-height: 198mm; box-sizing: border-box; overflow: hidden; border-radius: 4px; padding: 0; background: #ffffff;">
 
               
 
@@ -19717,13 +19713,13 @@ const Components = {
 
               <!-- Cajetín Dinmico del Estudiante sobre el espacio amarillo de la plantilla -->
 
-              <div style="position: absolute; bottom: 12.8%; left: 13.5%; width: 73%; height: 14.8%; display: flex; flex-direction: column; justify-content: center; font-size: 8.5pt; line-height: 1.35; color: #000000; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 800; text-align: left; box-sizing: border-box; paddióng: 2px 6px;">
+              <div style="position: absolute; bottom: 12.8%; left: 13.5%; width: 73%; height: 14.8%; display: flex; flex-direction: column; justify-content: center; font-size: 8.5pt; line-height: 1.35; color: #000000; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 800; text-align: left; box-sizing: border-box; padding: 2px 6px;">
 
                 
 
-                <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margión-bottom: 2px;">
+                <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;">
 
-                  <spanstyl e="font-weight: 900; font-size: 8.2pt;">APELLIDOS Y N OMBRES:</span> 
+                  <span style="font-weight: 900; font-size: 8.2pt;">APELLIDOS Y N OMBRES:</span> 
 
                   <strong style="text-transform: uppercase; font-size: 8.8pt; color: #000000;">${student.name || student.student}</strong>
 
@@ -19731,17 +19727,17 @@ const Components = {
 
                 
 
-                <div style="display: flex; justify-content: space-between; margión-bottom: 2px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
 
                   <div>
 
-                    <spanstyl e="font-weight: 900; font-size: 8.2pt;">GRÍADO:</span> <strong>${student.grade || (currentEnrollment && currentEnrollment.grade) || '4 de Secundaria'}</strong>
+                    <span style="font-weight: 900; font-size: 8.2pt;">GRÍADO:</span> <strong>${student.grade || (currentEnrollment && currentEnrollment.grade) || '4 de Secundaria'}</strong>
 
                   </div>
 
                   <div>
 
-                    <spanstyl e="font-weight: 900; font-size: 8.2pt;">N IVEL:</span> <strong>${student.level || (currentEnrollment && currentEnrollment.level) || 'SECUNDÍARIA'}</strong>
+                    <span style="font-weight: 900; font-size: 8.2pt;">N IVEL:</span> <strong>${student.level || (currentEnrollment && currentEnrollment.level) || 'SECUNDÍARIA'}</strong>
 
                   </div>
 
@@ -19749,9 +19745,9 @@ const Components = {
 
 
 
-                <div style="margión-bottom: 2px;">
+                <div style="margin-bottom: 2px;">
 
-                  <spanstyl e="font-weight: 900; font-size: 8.2pt;">SECCIÓN  :</span> <strong>${student.section ? student.section : 'Única'}</strong>
+                  <span style="font-weight: 900; font-size: 8.2pt;">SECCIÓN:</span> <strong>${student.section ? student.section : 'Única'}</strong>
 
                 </div>
 
@@ -19759,7 +19755,7 @@ const Components = {
 
                 <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
 
-                  <spanstyl e="font-weight: 900; font-size: 8.2pt;">TUTOR (A):</span> 
+                  <span style="font-weight: 900; font-size: 8.2pt;">TUTOR (A):</span> 
 
                   <strong style="color: #000000;">${student.tutor || (currentEnrollment && currentEnrollment.tutor) || 'Prof. Roberto Silva'}</strong>
 
@@ -19911,7 +19907,7 @@ const Components = {
 
     rawTeachers.forEach(t => {
 
-      // Plantilla base limpia con8 bloques lectivos de 50 mióny 2 recesos (Siónclases inventadas)
+      // Plantilla base limpia con8 bloques lectivos de 50 miny 2 recesos (Siónclases inventadas)
 
       t.schedule = [
 
@@ -20293,17 +20289,17 @@ const Components = {
 
           ${hasdmiónEditPower ? `
 
-            <div style="background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); color: #ffffff; paddióng: 16px 20px; border-radius: 10px; margión-bottom: 16px; box-shadow: 0 4px 14px rgba(0,0,0,0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border: 1px solid #3b82f6;">
+            <div style="background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); color: #ffffff; padding: 16px 20px; border-radius: 10px; margin-bottom: 16px; box-shadow: 0 4px 14px rgba(0,0,0,0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border: 1px solid #3b82f6;">
 
               <div>
 
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
 
-                  <spanstyl e="font-size: 24px;">📅</span>
+                  <span style="font-size: 24px;">📅</span>
 
-                  <h2 style="font-size: 18px; font-weight: 900; margión: 0; color: #ffffff;">Gestión y Creación de Horarios Escolares</h2>
+                  <h2 style="font-size: 18px; font-weight: 900; margin: 0; color: #ffffff;">Gestión y Creación de Horarios Escolares</h2>
 
-                  <spanclas s="status-badge" style="background: #f59e0b; color: #78350f; font-weight: 900; font-size: 11px;">
+                  <span class="status-badge" style="background: #f59e0b; color: #78350f; font-weight: 900; font-size: 11px;">
 
                     ️ Modo Administrador Activo
 
@@ -20311,7 +20307,7 @@ const Components = {
 
                 </div>
 
-                <p style="font-size: 12px; color: #cbd5e1; margión: 4px 0 0 0;">
+                <p style="font-size: 12px; color: #cbd5e1; margin: 4px 0 0 0;">
 
                   Cree, asigne, modifique y organice los bloques lectivos y asignaturas para todos los grados y docentes.
 
@@ -20325,33 +20321,33 @@ const Components = {
 
               <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
 
-                <buttonclas s="btn" onclick="window.app.opencreateScheduleModal('${currentGradeId}')" style="background: #f59e0b; color: #0b132b; font-weight: 900; font-size: 13px; paddióng: 9px 18px; border: 2px solid #fbbf24; border-radius: 6px; box-shadow: 0 2px 10px rgba(245,158,11,0.5); display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                <button class="btn" onclick="window.app.opencreateScheduleModal('${currentGradeId}')" style="background: #f59e0b; color: #0b132b; font-weight: 900; font-size: 13px; padding: 9px 18px; border: 2px solid #fbbf24; border-radius: 6px; box-shadow: 0 2px 10px rgba(245,158,11,0.5); display: flex; align-items: center; gap: 6px; cursor: pointer;">
 
-                  <spanstyl e="font-size: 16px;">➕</span>
+                  <span style="font-size: 16px;">➕</span>
 
                   <span>+ CRER / ASIGNR CLSE</span>
 
                 </button>
 
-                <buttonclas s="btnbtn-outline" onclick="window.app.setTeacherScheduleTab('${activeTab === 'personal' ? 'classroom' : 'personal'}')" style="background: rgba(255,255,255,0.18); color: #ffffff; border-color: rgba(255,255,255,0.5); font-weight: 800; font-size: 12px; paddióng: 8px 14px;">
+                <button class="btn btn-outline" onclick="window.app.setTeacherScheduleTab('${activeTab === 'personal' ? 'classroom' : 'personal'}')" style="background: rgba(255,255,255,0.18); color: #ffffff; border-color: rgba(255,255,255,0.5); font-weight: 800; font-size: 12px; padding: 8px 14px;">
 
                   ${activeTab === 'personal' ? 'Ver Horario por Aula' : '👨‍Ver Horario Semanal Docente'}
 
                 </button>
 
-                <buttonclas s="btnbtn-outline" onclick="window.app.openutoScheduleModal('${currentGradeId}')" style="background: rgba(255,255,255,0.12); color: #ffffff; border-color: rgba(255,255,255,0.4); font-weight: 800; font-size: 12px; paddióng: 8px 14px;">
+                <button class="btn btn-outline" onclick="window.app.openutoScheduleModal('${currentGradeId}')" style="background: rgba(255,255,255,0.12); color: #ffffff; border-color: rgba(255,255,255,0.4); font-weight: 800; font-size: 12px; padding: 8px 14px;">
 
                   ⚡ Horario Automtico
 
                 </button>
 
-                <buttonclas s="btnbtn-outline" onclick="window.app.openCloneScheduleModal('${currentGradeId}')" style="background: rgba(255,255,255,0.12); color: #ffffff; border-color: rgba(255,255,255,0.4); font-weight: 800; font-size: 12px; paddióng: 8px 14px;">
+                <button class="btn btn-outline" onclick="window.app.openCloneScheduleModal('${currentGradeId}')" style="background: rgba(255,255,255,0.12); color: #ffffff; border-color: rgba(255,255,255,0.4); font-weight: 800; font-size: 12px; padding: 8px 14px;">
 
                   Clonar Horario
 
                 </button>
 
-                <buttonclas s="btnbtn-outline" onclick="window.app.clearScheduleGrade('${currentGradeId}')" style="background: rgba(239,68,68,0.25); color: #fca5a5; border-color: #ef4444; font-weight: 800; font-size: 12px; paddióng: 8px 12px;">
+                <button class="btn btn-outline" onclick="window.app.clearScheduleGrade('${currentGradeId}')" style="background: rgba(239,68,68,0.25); color: #fca5a5; border-color: #ef4444; font-weight: 800; font-size: 12px; padding: 8px 12px;">
 
                   🗑️ Limpiar
 
@@ -20369,15 +20365,15 @@ const Components = {
 
           ${isTeacherOrdmión ? `
 
-            <div style="display: flex; gap: 8px; margión-bottom: 16px; background: #f1f5f9; paddióng: 6px; border-radius: 10px; border: 1px solid #cbd5e1; flex-wrap: wrap;">
+            <div style="display: flex; gap: 8px; margin-bottom: 16px; background: #f1f5f9; padding: 6px; border-radius: 10px; border: 1px solid #cbd5e1; flex-wrap: wrap;">
 
-              <buttonclas s="btn${activeTab === 'classroom' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setTeacherScheduleTab('classroom')" style="flex: 1; mión-width: 220px; font-weight: 900; font-size: 13px; paddióng: 10px 16px; border-radius: 8px; box-shadow: ${activeTab === 'classroom' ? '0 3px 10px rgba(30,58,138,0.25)' : 'none'}; display: flex; justify-content: center; align-items: center; gap: 8px;">
+              <button class="btn${activeTab === 'classroom' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setTeacherScheduleTab('classroom')" style="flex: 1; min-width: 220px; font-weight: 900; font-size: 13px; padding: 10px 16px; border-radius: 8px; box-shadow: ${activeTab === 'classroom' ? '0 3px 10px rgba(30,58,138,0.25)' : 'none'}; display: flex; justify-content: center; align-items: center; gap: 8px;">
 
                 <span></span> Horario General por Aula / Grado (Secciones)
 
               </button>
 
-              <buttonclas s="btn${activeTab === 'personal' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setTeacherScheduleTab('personal')" style="flex: 1; mión-width: 220px; font-weight: 900; font-size: 13px; paddióng: 10px 16px; border-radius: 8px; box-shadow: ${activeTab === 'personal' ? '0 3px 10px rgba(30,58,138,0.25)' : 'none'}; display: flex; justify-content: center; align-items: center; gap: 8px;">
+              <button class="btn${activeTab === 'personal' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setTeacherScheduleTab('personal')" style="flex: 1; min-width: 220px; font-weight: 900; font-size: 13px; padding: 10px 16px; border-radius: 8px; box-shadow: ${activeTab === 'personal' ? '0 3px 10px rgba(30,58,138,0.25)' : 'none'}; display: flex; justify-content: center; align-items: center; gap: 8px;">
 
                 <span>👨‍</span> Horario Semanal por Docente (Carga Horaria & Cursos)
 
@@ -20393,23 +20389,23 @@ const Components = {
 
             <!-- VISTÍA: MI HORÍARIO SEMNAL DOCENTE (DOCENTE DE CURSO) -->
 
-            <div class="card" style="margión-bottom: var(--space-6);">
+            <div class="card" style="margin-bottom: var(--space-6);">
 
               
 
               <!-- Banner Informativo del Perfil Docente -->
 
-              <div class="teacher-schedule-banner" style="background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%); color: #ffffff; paddióng: 16px 20px; border-radius: 8px; margión-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+              <div class="teacher-schedule-banner" style="background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%); color: #ffffff; padding: 16px 20px; border-radius: 8px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
 
                 <div>
 
                   <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
 
-                    <spanstyl e="font-size: 24px;">👨‍</span>
+                    <span style="font-size: 24px;">👨‍</span>
 
-                    <h2 style="font-size: 19px; font-weight: 900; margión: 0; color: #ffffff;">${currentTeacher.name}</h2>
+                    <h2 style="font-size: 19px; font-weight: 900; margin: 0; color: #ffffff;">${currentTeacher.name}</h2>
 
-                    <spanclas s="status-badge" style="background: #fef08a; color: #854d0e; font-weight: 900; font-size: 11px;">
+                    <span class="status-badge" style="background: #fef08a; color: #854d0e; font-weight: 900; font-size: 11px;">
 
                       Docente Curricular
 
@@ -20417,7 +20413,7 @@ const Components = {
 
                   </div>
 
-                  <p style="font-size: 12.5px; opacity: 0.95; margión: 4px 0 0 0;">
+                  <p style="font-size: 12.5px; opacity: 0.95; margin: 4px 0 0 0;">
 
                     ${currentTeacher.department || 'rea Pedagógica'} • Especialidad: <strong>${currentTeacher.subject || teacherCourses.join(', ')}</strong>
 
@@ -20431,13 +20427,13 @@ const Components = {
 
                   <label style="font-size: 12px; font-weight: 800; color: #e2e8f0;">Seleccionar Docente:</label>
 
-                  <select id="selected-teacher-dropdown" class="form-control" style="width: auto; paddióng: 6px 14px; font-weight: 900; font-size: 12.5px; background: #ffffff; color: #0b132b; border: 2px solid #3b82f6;" onchange="window.app.onTeacherChange(this.value)">
+                  <select id="selected-teacher-dropdown" class="form-control" style="width: auto; padding: 6px 14px; font-weight: 900; font-size: 12.5px; background: #ffffff; color: #0b132b; border: 2px solid #3b82f6;" onchange="window.app.onTeacherChange(this.value)">
 
                     ${teachersList.map(t => {
 
                       const tCourseName = (t.scheduledCourses && t.scheduledCourses[0]) || (t.courses && t.courses[0]) || t.subject || "Docente";
 
-                      return `<optionvalu e="${t.id}" ${t.id === selectedTeacherId ? 'selected' : ''}>${t.name} (${tCourseName})</option>`;
+                      return `<option value="${t.id}" ${t.id === selectedTeacherId ? 'selected' : ''}>${t.name} (${tCourseName})</option>`;
 
                     }).join('')}
 
@@ -20445,7 +20441,7 @@ const Components = {
 
                   ${hasdmiónEditPower ? `
 
-                    <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.opencreateScheduleModal('${currentGradeId}')" style="font-weight: 900; white-space: nowrap; paddióng: 6px 12px;">
+                    <button class="btn btn-gold btn-sm" onclick="window.app.opencreateScheduleModal('${currentGradeId}')" style="font-weight: 900; white-space: nowrap; padding: 6px 12px;">
 
                       ➕ + Asignar Clase
 
@@ -20453,7 +20449,7 @@ const Components = {
 
                   ` : ''}
 
-                  <buttonclas s="btnbtn-outline btn-sm" onclick="window.print()" style="font-weight: 800; white-space: nowrap; color: #ffffff; border-color: rgba(255,255,255,0.4); paddióng: 6px 12px;">
+                  <button class="btn btn-outline btn-sm" onclick="window.print()" style="font-weight: 800; white-space: nowrap; color: #ffffff; border-color: rgba(255,255,255,0.4); padding: 6px 12px;">
 
                     Imprimir A4
 
@@ -20467,51 +20463,51 @@ const Components = {
 
               <!-- ResumenMétrico de Carga Horaria Real Asignada -->
 
-              <div class="teacher-stat-grid" style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(200px, 1fr)); gap: 12px; margión-bottom: 16px;">
+              <div class="teacher-stat-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px;">
 
-                <div class="teacher-stat-card" style="background: #eff6ff; border-left: 4px solid #3b82f6; paddióng: 12px 14px; border-radius: 6px; border: 1px solid #bfdbfe;">
+                <div class="teacher-stat-card" style="background: #eff6ff; border-left: 4px solid #3b82f6; padding: 12px 14px; border-radius: 6px; border: 1px solid #bfdbfe;">
 
-                  <spanclas s="teacher-stat-lbl" style="font-size: 11px; font-weight: 700; color: #1e40af; display: block;">⏱️ Carga Real Asignada</span>
+                  <span class="teacher-stat-lbl" style="font-size: 11px; font-weight: 700; color: #1e40af; display: block;">⏱️ Carga Real Asignada</span>
 
-                  <spanclas s="teacher-stat-val" style="font-size: 18px; font-weight: 900; color: #1e3a8a; display: block; margión: 2px 0;">${teacherHours}</span>
+                  <span class="teacher-stat-val" style="font-size: 18px; font-weight: 900; color: #1e3a8a; display: block; margin: 2px 0;">${teacherHours}</span>
 
-                  <spanstyl e="font-size: 11px; color: #64748b;">${currentTeacher.assignedSlotCount || 0} bloque(s) lectivo(s) programados</span>
-
-                </div>
-
-
-
-                <div class="teacher-stat-card" style="background: #ecfdf5; border-left: 4px solid #10b981; paddióng: 12px 14px; border-radius: 6px; border: 1px solid #a7f3d0;">
-
-                  <spanclas s="teacher-stat-lbl" style="font-size: 11px; font-weight: 700; color: #065f46; display: block;">📚 Asignaturas Dictadas</span>
-
-                  <spanclas s="teacher-stat-val" style="font-size: 18px; font-weight: 900; color: #047857; display: block; margión: 2px 0;">${teacherCourses.length} Cursos</span>
-
-                  <spanstyl e="font-size: 11px; color: #64748b;">${teacherCourses.slice(0, 2).join(', ')}${teacherCourses.length > 2 ? '...' : ''}</span>
+                  <span style="font-size: 11px; color: #64748b;">${currentTeacher.assignedSlotCount || 0} bloque(s) lectivo(s) programados</span>
 
                 </div>
 
 
 
-                <div class="teacher-stat-card" style="background: #fffbeb; border-left: 4px solid #f59e0b; paddióng: 12px 14px; border-radius: 6px; border: 1px solid #fde68a;">
+                <div class="teacher-stat-card" style="background: #ecfdf5; border-left: 4px solid #10b981; padding: 12px 14px; border-radius: 6px; border: 1px solid #a7f3d0;">
 
-                  <spanclas s="teacher-stat-lbl" style="font-size: 11px; font-weight: 700; color: #92400e; display: block;">Aulas / Grados Asignados</span>
+                  <span class="teacher-stat-lbl" style="font-size: 11px; font-weight: 700; color: #065f46; display: block;">📚 Asignaturas Dictadas</span>
 
-                  <spanclas s="teacher-stat-val" style="font-size: 18px; font-weight: 900; color: #b45309; display: block; margión: 2px 0;">${teacherGrades.length} Grados</span>
+                  <span class="teacher-stat-val" style="font-size: 18px; font-weight: 900; color: #047857; display: block; margin: 2px 0;">${teacherCourses.length} Cursos</span>
 
-                  <spanstyl e="font-size: 11px; color: #64748b;">${teacherGrades.slice(0, 2).join(', ')}${teacherGrades.length > 2 ? '...' : ''}</span>
+                  <span style="font-size: 11px; color: #64748b;">${teacherCourses.slice(0, 2).join(', ')}${teacherCourses.length > 2 ? '...' : ''}</span>
 
                 </div>
 
 
 
-                <div class="teacher-stat-card" style="background: #faf5ff; border-left: 4px solid #8b5cf6; paddióng: 12px 14px; border-radius: 6px; border: 1px solid #e9d5ff;">
+                <div class="teacher-stat-card" style="background: #fffbeb; border-left: 4px solid #f59e0b; padding: 12px 14px; border-radius: 6px; border: 1px solid #fde68a;">
 
-                  <spanclas s="teacher-stat-lbl" style="font-size: 11px; font-weight: 700; color: #5b21b6; display: block;">🔬 Ambientes Asignados</span>
+                  <span class="teacher-stat-lbl" style="font-size: 11px; font-weight: 700; color: #92400e; display: block;">Aulas / Grados Asignados</span>
 
-                  <spanclas s="teacher-stat-val" style="font-size: 15px; font-weight: 900; color: #6b21a8; display: block; margión: 4px 0;">${teacherClassrooms[0] || 'Aula Principal'}</span>
+                  <span class="teacher-stat-val" style="font-size: 18px; font-weight: 900; color: #b45309; display: block; margin: 2px 0;">${teacherGrades.length} Grados</span>
 
-                  <spanstyl e="font-size: 11px; color: #64748b;">${teacherClassrooms.length} ambiente(s)</span>
+                  <span style="font-size: 11px; color: #64748b;">${teacherGrades.slice(0, 2).join(', ')}${teacherGrades.length > 2 ? '...' : ''}</span>
+
+                </div>
+
+
+
+                <div class="teacher-stat-card" style="background: #faf5ff; border-left: 4px solid #8b5cf6; padding: 12px 14px; border-radius: 6px; border: 1px solid #e9d5ff;">
+
+                  <span class="teacher-stat-lbl" style="font-size: 11px; font-weight: 700; color: #5b21b6; display: block;">🔬 Ambientes Asignados</span>
+
+                  <span class="teacher-stat-val" style="font-size: 15px; font-weight: 900; color: #6b21a8; display: block; margin: 4px 0;">${teacherClassrooms[0] || 'Aula Principal'}</span>
+
+                  <span style="font-size: 11px; color: #64748b;">${teacherClassrooms.length} ambiente(s)</span>
 
                 </div>
 
@@ -20521,17 +20517,17 @@ const Components = {
 
               <!-- Barra de Filtros por Curso y Alerta de Disponibilidad -->
 
-              <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; paddióng: 10px 14px; border-radius: 6px; border: 1px solid #e2e8f0; margión-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 10px 14px; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
 
                 <div style="display: flex; align-items: center; gap: 8px;">
 
                   <label style="font-size: 12px; font-weight: 800; color: #1e293b;">Filtrar por Asignatura:</label>
 
-                  <select class="form-control" style="width: auto; paddióng: 4px 10px; font-size: 12px; font-weight: bold;" onchange="window.app.onTeacherCourseFilterChange(this.value)">
+                  <select class="form-control" style="width: auto; padding: 4px 10px; font-size: 12px; font-weight: bold;" onchange="window.app.onTeacherCourseFilterChange(this.value)">
 
-                    <optionvalu e="all" ${courseFilter === 'all' ? 'selected' : ''}>Todos los cursos (${teacherCourses.length})</option>
+                    <option value="all" ${courseFilter === 'all' ? 'selected' : ''}>Todos los cursos (${teacherCourses.length})</option>
 
-                    ${teacherCourses.map(c => `<optionvalu e="${c}" ${courseFilter === c ? 'selected' : ''}>${c}</option>`).join('')}
+                    ${teacherCourses.map(c => `<option value="${c}" ${courseFilter === c ? 'selected' : ''}>${c}</option>`).join('')}
 
                   </select>
 
@@ -20539,7 +20535,7 @@ const Components = {
 
 
 
-                <div style="font-size: 11.5px; color: #047857; font-weight: 700; background: #d1fae5; paddióng: 4px 12px; border-radius: 12px; border: 1px solid #a7f3d0;">
+                <div style="font-size: 11.5px; color: #047857; font-weight: 700; background: #d1fae5; padding: 4px 12px; border-radius: 12px; border: 1px solid #a7f3d0;">
 
                   ✓ Mostrando únicamente las clases programadas por el Administrador • Periodo 2026
 
@@ -20605,9 +20601,9 @@ const Components = {
 
                               return hasdmiónEditPower ? `
 
-                                <td style="background:#fafafa; paddióng: 4px;">
+                                <td style="background:#fafafa; padding: 4px;">
 
-                                  <div class="empty-schedule-slot" onclick="window.app.opencreateScheduleModal('${currentGradeId}', ${rIdx}, '${dayKey}')" style="border: 1px dashed #cbd5e1; border-radius: 6px; paddióng: 10px 4px; text-align: center; cursor: pointer; color: #94a3b8; font-size: 11px; font-weight: 700; transition: all 0.2s;" onmouseover="this.style.borderColor='#3b82f6'; this.style.color='#1e40af'; this.style.background='#eff6ff';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#94a3b8'; this.style.background='transparent';">
+                                  <div class="empty-schedule-slot" onclick="window.app.opencreateScheduleModal('${currentGradeId}', ${rIdx}, '${dayKey}')" style="border: 1px dashed #cbd5e1; border-radius: 6px; padding: 10px 4px; text-align: center; cursor: pointer; color: #94a3b8; font-size: 11px; font-weight: 700; transition: all 0.2s;" onmouseover="this.style.borderColor='#3b82f6'; this.style.color='#1e40af'; this.style.background='#eff6ff';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#94a3b8'; this.style.background='transparent';">
 
                                     ➕ Asignar Clase
 
@@ -20631,17 +20627,17 @@ const Components = {
 
                               <td style="${opacityStyle}">
 
-                                <div class="schedule-slot-card slot-${slot.color || 'navy'}" ${hasdmiónEditPower ? `onclick="window.app.openEditScheduleSlotModal('${slot.gradeId || currentGradeId}', ${slot.rowIndex || rIdx}, '${slot.dayKey || dayKey}')" style="cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.06); border-radius: 6px; paddióng: 8px 10px;"` : 'style="box-shadow: 0 2px 5px rgba(0,0,0,0.06); border-radius: 6px; paddióng: 8px 10px;"'}>
+                                <div class="schedule-slot-card slot-${slot.color || 'navy'}" ${hasdmiónEditPower ? `onclick="window.app.openEditScheduleSlotModal('${slot.gradeId || currentGradeId}', ${slot.rowIndex || rIdx}, '${slot.dayKey || dayKey}')" style="cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.06); border-radius: 6px; padding: 8px 10px;"` : 'style="box-shadow: 0 2px 5px rgba(0,0,0,0.06); border-radius: 6px; padding: 8px 10px;"'}>
 
-                                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margión-bottom: 3px;">
+                                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3px;">
 
                                     <div class="slot-course-title" style="font-size: 12.5px; font-weight: 800;">${slot.course}</div>
 
-                                    <spanstyl e="font-size: 9.5px; font-weight: 900; background: #1e3a8a; color: #ffffff; paddióng: 1px 6px; border-radius: 10px;">${slot.grade || 'Secundaria'}</span>
+                                    <span style="font-size: 9.5px; font-weight: 900; background: #1e3a8a; color: #ffffff; padding: 1px 6px; border-radius: 10px;">${slot.grade || 'Secundaria'}</span>
 
                                   </div>
 
-                                  <div class="slot-room-badge" style="background: rgba(0,0,0,0.06); font-size: 10px; font-weight: 800; color: #0b132b; margión-top: 3px;">
+                                  <div class="slot-room-badge" style="background: rgba(0,0,0,0.06); font-size: 10px; font-weight: 800; color: #0b132b; margin-top: 3px;">
 
                                     📍 ${slot.room || 'Aula Principal'}
 
@@ -20675,7 +20671,7 @@ const Components = {
 
             <!-- VISTÍA: HORÍARIO GENERÍAL POR AULA / GRÍADO -->
 
-            <div class="card" style="margión-bottom: var(--space-6);">
+            <div class="card" style="margin-bottom: var(--space-6);">
 
               <div class="card-header">
 
@@ -20685,19 +20681,19 @@ const Components = {
 
                     <h2 class="card-title" style="font-size: var(--font-size-xl);">Horario Académico Escolar por Aulas - 2026</h2>
 
-                    ${hasdmiónEditPower ? `<spanclas s="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-700);">Modo Edición Habilitado</span>` : ''}
+                    ${hasdmiónEditPower ? `<span class="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-700);">Modo Edición Habilitado</span>` : ''}
 
                   </div>
 
-                  <p style="font-size: var(--font-size-xs); color: var(--text-muted); margión-top: 4px;">
+                  <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
-                    I.E.P. "El Educador" • "21 años dejando huellas" (S.J.L. • UGEL 05) • Bloques de 50 mión
+                    I.E.P. "El Educador" • "21 años dejando huellas" (S.J.L. • UGEL 05) • Bloques de 50 min
 
                   </p>
 
                 </div>
 
-                <buttonclas s="btnbtn-navy btn-sm" onclick="window.print()">Imprimir Horario de Aula</button>
+                <button class="btn btn-navy btn-sm" onclick="window.print()">Imprimir Horario de Aula</button>
 
               </div>
 
@@ -20711,13 +20707,13 @@ const Components = {
 
                     <label style="font-size: 12px; font-weight: 800; color: #1e293b;">Seleccionar Aula / Grado:</label>
 
-                    <select class="form-control" style="width: auto; paddióng: 4px 12px; font-weight: bold; border-color: #3b82f6;" onchange="window.app.onScheduleGradeChange(this.value)">
+                    <select class="form-control" style="width: auto; padding: 4px 12px; font-weight: bold; border-color: #3b82f6;" onchange="window.app.onScheduleGradeChange(this.value)">
 
-                      ${catalog.map(g => `<optionvalu e="${g.id}" ${g.id === currentGradeId ? 'selected' : ''}>${g.label} (${g.level})</option>`).join('')}
+                      ${catalog.map(g => `<option value="${g.id}" ${g.id === currentGradeId ? 'selected' : ''}>${g.label} (${g.level})</option>`).join('')}
 
                     </select>
 
-                    <spanstyl e="font-size: 11.5px; color: var(--color-navy-800); background: #f1f5f9; paddióng: 3px 8px; border-radius: 4px; border: 1px solid #cbd5e1;">
+                    <span style="font-size: 11.5px; color: var(--color-navy-800); background: #f1f5f9; padding: 3px 8px; border-radius: 4px; border: 1px solid #cbd5e1;">
 
                       Aula: <strong>${currentGrade.classroom || 'Aula Principal'}</strong> • Tutor: <strong>${currentGrade.tutor || 'Tutor Asignado'}</strong>
 
@@ -20727,7 +20723,7 @@ const Components = {
 
                 ` : `
 
-                  <div style="font-size: 13px; color: var(--color-navy-950); font-weight: 800; background: var(--color-yellow-100); paddióng: 8px 16px; border-radius: 6px; border: 1px solid var(--color-yellow-400); display: inline-flex; align-items: center; gap: 8px;">
+                  <div style="font-size: 13px; color: var(--color-navy-950); font-weight: 800; background: var(--color-yellow-100); padding: 8px 16px; border-radius: 6px; border: 1px solid var(--color-yellow-400); display: inline-flex; align-items: center; gap: 8px;">
 
                     <span>📍 Horario Exclusivo: <strong>${currentGrade.label} (${currentGrade.level})</strong></span>
 
@@ -20745,25 +20741,25 @@ const Components = {
 
                   <div style="display: flex; gap: 6px; flex-wrap: wrap;">
 
-                    <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.opencreateScheduleModal('${currentGradeId}')" style="font-weight: 800; font-size: 11.5px; background: #1e3a8a;">
+                    <button class="btn btn-navy btn-sm" onclick="window.app.opencreateScheduleModal('${currentGradeId}')" style="font-weight: 800; font-size: 11.5px; background: #1e3a8a;">
 
                       ➕ + Crear / Asignar Clase
 
                     </button>
 
-                    <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openutoScheduleModal('${currentGradeId}')" style="font-weight: 800; font-size: 11.5px; color: #1e3a8a;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.openutoScheduleModal('${currentGradeId}')" style="font-weight: 800; font-size: 11.5px; color: #1e3a8a;">
 
                       ⚡ Generar Horario Automtico
 
                     </button>
 
-                    <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openCloneScheduleModal('${currentGradeId}')" style="font-weight: 800; font-size: 11.5px;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.openCloneScheduleModal('${currentGradeId}')" style="font-weight: 800; font-size: 11.5px;">
 
                       Clonar a Otra Aula
 
                     </button>
 
-                    <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.clearScheduleGrade('${currentGradeId}')" style="font-weight: 800; font-size: 11.5px; color: var(--color-red-600);">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.clearScheduleGrade('${currentGradeId}')" style="font-weight: 800; font-size: 11.5px; color: var(--color-red-600);">
 
                       🗑️ Limpiar
 
@@ -20813,9 +20809,9 @@ const Components = {
 
                               return hasdmiónEditPower ? `
 
-                                <td style="background:#fafafa; paddióng: 4px;">
+                                <td style="background:#fafafa; padding: 4px;">
 
-                                  <div class="empty-schedule-slot" onclick="window.app.opencreateScheduleModal('${currentGradeId}', ${rowIndex}, '${dayKey}')" style="border: 1px dashed #cbd5e1; border-radius: 6px; paddióng: 10px 4px; text-align: center; cursor: pointer; color: #94a3b8; font-size: 11px; font-weight: 700; transition: all 0.2s;" onmouseover="this.style.borderColor='#3b82f6'; this.style.color='#1e40af'; this.style.background='#eff6ff';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#94a3b8'; this.style.background='transparent';">
+                                  <div class="empty-schedule-slot" onclick="window.app.opencreateScheduleModal('${currentGradeId}', ${rowIndex}, '${dayKey}')" style="border: 1px dashed #cbd5e1; border-radius: 6px; padding: 10px 4px; text-align: center; cursor: pointer; color: #94a3b8; font-size: 11px; font-weight: 700; transition: all 0.2s;" onmouseover="this.style.borderColor='#3b82f6'; this.style.color='#1e40af'; this.style.background='#eff6ff';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#94a3b8'; this.style.background='transparent';">
 
                                     ➕ Asignar Clase
 
@@ -20833,11 +20829,11 @@ const Components = {
 
                                 <div class="schedule-slot-card slot-${slot.color || 'navy'}" ${hasdmiónEditPower ? `onclick="window.app.openEditScheduleSlotModal('${currentGradeId}', ${rowIndex}, '${dayKey}')" style="cursor: pointer;"` : ''}>
 
-                                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margión-bottom: 2px;">
+                                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2px;">
 
                                     <div class="slot-course-title">${slot.course}</div>
 
-                                    ${hasdmiónEditPower ? `<spanstyl e="font-size: 10px; opacity: 0.8;">✏️</span>` : ''}
+                                    ${hasdmiónEditPower ? `<span style="font-size: 10px; opacity: 0.8;">✏️</span>` : ''}
 
                                   </div>
 
@@ -20881,13 +20877,13 @@ const Components = {
 
       return `
 
-        <div class="card" style="paddióng: 20px; text-align: center; background: #fff1f2; border: 1px solid #fecdd3;">
+        <div class="card" style="padding: 20px; text-align: center; background: #fff1f2; border: 1px solid #fecdd3;">
 
-          <h3 style="color: #9f1239; margión-bottom: 8px;">⚠️ Restableciendo visualización de Horarios</h3>
+          <h3 style="color: #9f1239; margin-bottom: 8px;">⚠️ Restableciendo visualización de Horarios</h3>
 
           <p style="color: #4b5563; font-size: 13px;">Se ha detectado una actualización en la estructura de horarios. Pulse el botón inferior para sióncronizar:</p>
 
-          <buttonclas s="btnbtn-navy" onclick="window.app.render()" style="font-weight: 800; margión-top: 10px;">
+          <button class="btn btn-navy" onclick="window.app.render()" style="font-weight: 800; margin-top: 10px;">
 
             Sióncronizar y Ver Horarios
 
@@ -20999,25 +20995,25 @@ const Components = {
 
         <!-- Cabecera Institucional del Módulo -->
 
-        <div class="card" style="margión-bottom: var(--space-5);">
+        <div class="card" style="margin-bottom: var(--space-5);">
 
           <div class="card-header" style="flex-wrap: wrap; gap: 14px;">
 
             <div>
 
-              <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(30,58,138,0.1); border: 1px solid rgba(59,130,246,0.3); color: #1e40af; paddióng: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 800; text-transform: uppercase; margión-bottom: 4px;">
+              <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(30,58,138,0.1); border: 1px solid rgba(59,130,246,0.3); color: #1e40af; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">
 
                 📑 Carteles Temticos & Sílabus Curriculares 2026
 
               </div>
 
-              <h2 class="card-title" style="font-size: var(--font-size-xl); margión: 0 0 4px;">
+              <h2 class="card-title" style="font-size: var(--font-size-xl); margin: 0 0 4px;">
 
                 Programación Temtica Mensual por Asignaturas
 
               </h2>
 
-              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margión: 0;">
+              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin: 0;">
 
                 Subida de carteles enPDF por cada docente y consulta/descarga consolidada para padres de familia.
 
@@ -21035,17 +21031,17 @@ const Components = {
 
                 <div style="display: flex; align-items: center; gap: 6px;">
 
-                  <spanstyl e="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Aula / Grado:</span>
+                  <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Aula / Grado:</span>
 
-                  <select class="form-control" style="width: auto; paddióng: 6px 12px; font-weight: bold; font-size: 13px;" onchange="window.app.onSyllabusGradeChange(this.value)">
+                  <select class="form-control" style="width: auto; padding: 6px 12px; font-weight: bold; font-size: 13px;" onchange="window.app.onSyllabusGradeChange(this.value)">
 
-                    ${catalog.map(g => `<optionvalu e="${g.id}" ${g.id === currentGradeId ? 'selected' : ''}>${g.label}</option>`).join('')}
+                    ${catalog.map(g => `<option value="${g.id}" ${g.id === currentGradeId ? 'selected' : ''}>${g.label}</option>`).join('')}
 
                   </select>
 
                 </div>
 
-                <buttonclas s="btnbtn-navy" onclick="window.app.openUploadMonthlyCartelModal('', '${currentGradeId}', '${selectedMonth}')" style="font-weight: 800; font-size: 13px; paddióng: 8px 16px;">
+                <button class="btn btn-navy" onclick="window.app.openUploadMonthlyCartelModal('', '${currentGradeId}', '${selectedMonth}')" style="font-weight: 800; font-size: 13px; padding: 8px 16px;">
 
                   📤 Subir Cartel Temtico (PDF)
 
@@ -21053,7 +21049,7 @@ const Components = {
 
               ` : `
 
-                <div style="font-size: 13px; color: #1e3a8a; font-weight: 800; background: #eff6ff; paddióng: 8px 16px; border-radius: 8px; border: 1px solid #bfdbfe;">
+                <div style="font-size: 13px; color: #1e3a8a; font-weight: 800; background: #eff6ff; padding: 8px 16px; border-radius: 8px; border: 1px solid #bfdbfe;">
 
                   🎓 Aula: <strong>${gradeLabel}</strong> &nbsp;|&nbsp; 👨‍🏫 Tutor: <strong>${tutorName}</strong>
 
@@ -21071,23 +21067,23 @@ const Components = {
 
         <!-- Banner Exclusivo para Padres de Familia: Descarga Consolidada Todo enUno -->
 
-        <div class="card" style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: white; paddióng: 22px 24px; border-radius: 12px; margión-bottom: 24px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div class="card" style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: white; padding: 22px 24px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
 
           <div style="max-width: 650px;">
 
-            <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(254, 240, 138, 0.2); border: 1px solid rgba(254, 240, 138, 0.4); color: #fef08a; paddióng: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; margión-bottom: 8px;">
+            <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(254, 240, 138, 0.2); border: 1px solid rgba(254, 240, 138, 0.4); color: #fef08a; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">
 
               📄 Compendio Oficial de Aula
 
             </div>
 
-            <h3 style="margión: 0 0 6px; font-size: 18px; font-weight: 900; color: #ffffff;">
+            <h3 style="margin: 0 0 6px; font-size: 18px; font-weight: 900; color: #ffffff;">
 
               Compendio Consolidado de Carteles Temticos – Mes de ${selectedMonth} 2026
 
             </h3>
 
-            <p style="margión: 0; font-size: 13px; color: #cbd5e1; line-height: 1.45;">
+            <p style="margin: 0; font-size: 13px; color: #cbd5e1; line-height: 1.45;">
 
               Vea, descargue e imprima <strong>todas las materias y temas mensuales de ${gradeLabel} enun solo documento PDF unificado</strong> para la carpeta pedagógica familiar.
 
@@ -21097,7 +21093,7 @@ const Components = {
 
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
 
-            <buttonclas s="btnbtn-yellow" onclick="window.app.openConsolidatedCartelModal('${currentGradeId}', '${selectedMonth}')" style="font-weight: 900; font-size: 13px; paddióng: 12px 22px; box-shadow: 0 4px 12px rgba(234, 179, 8, 0.35);">
+            <button class="btn btn-yellow" onclick="window.app.openConsolidatedCartelModal('${currentGradeId}', '${selectedMonth}')" style="font-weight: 900; font-size: 13px; padding: 12px 22px; box-shadow: 0 4px 12px rgba(234, 179, 8, 0.35);">
 
               🖨️ Descargar / Imprimir Todo enun Solo PDF
 
@@ -21111,7 +21107,7 @@ const Components = {
 
         <!-- Barra de Navegación por Meses (Marzo a Diciembre) -->
 
-        <div style="display: flex; gap: 6px; overflow-x: auto; paddióng-bottom: 8px; margión-bottom: 20px;">
+        <div style="display: flex; gap: 6px; overflow-x: auto; paddióng-bottom: 8px; margin-bottom: 20px;">
 
           ${months.map(m => {
 
@@ -21119,11 +21115,11 @@ const Components = {
 
             return `
 
-              <buttonclas s="btn${isSel ? 'btn-navy' : 'btn-outline'}" 
+              <button class="btn${isSel ? 'btn-navy' : 'btn-outline'}" 
 
                 onclick="window.app.onSyllabusMonthChange('${m}')" 
 
-                style="paddióng: 7px 16px; font-size: 12px; font-weight: ${isSel ? '800' : '600'}; white-space: nowrap; border-radius: 20px;">
+                style="padding: 7px 16px; font-size: 12px; font-weight: ${isSel ? '800' : '600'}; white-space: nowrap; border-radius: 20px;">
 
                 📅 ${m}
 
@@ -21141,13 +21137,13 @@ const Components = {
 
         ${carteles.length === 0 ? `
 
-          <div class="card" style="text-align: center; paddióng: 40px 20px;">
+          <div class="card" style="text-align: center; padding: 40px 20px;">
 
-            <div style="font-size: 40px; margión-bottom: 12px;">📁</div>
+            <div style="font-size: 40px; margin-bottom: 12px;">📁</div>
 
-            <h3 style="color: var(--color-navy-900); margión: 0 0 6px;">N o hay carteles temticos registrados para ${selectedMonth}</h3>
+            <h3 style="color: var(--color-navy-900); margin: 0 0 6px;">N o hay carteles temticos registrados para ${selectedMonth}</h3>
 
-            <p style="color: var(--text-muted); font-size: 13px; max-width: 500px; margión: 0 auto 16px;">
+            <p style="color: var(--text-muted); font-size: 13px; max-width: 500px; margin: 0 auto 16px;">
 
               Los docentes de ${gradeLabel} publicarn sus carteles temticos enformato PDF a la brevedad.
 
@@ -21155,7 +21151,7 @@ const Components = {
 
             ${isTeacherOrdmión ? `
 
-              <buttonclas s="btnbtn-navy" onclick="window.app.openUploadMonthlyCartelModal('', '${currentGradeId}', '${selectedMonth}')">
+              <button class="btn btn-navy" onclick="window.app.openUploadMonthlyCartelModal('', '${currentGradeId}', '${selectedMonth}')">
 
                 + Subir el Primer Cartel Temtico enPDF
 
@@ -21167,23 +21163,23 @@ const Components = {
 
         ` : `
 
-          <div class="syllabus-card-grid" style="display: grid; grid-template-columns: repeat(auto-fill, miónmax(320px, 1fr)); gap: 16px;">
+          <div class="syllabus-card-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px;">
 
             ${carteles.map(c => `
 
-              <div class="syllabus-card" style="background: white; border-radius: 10px; border: 1px solid #e2e8f0; paddióng: 18px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s;">
+              <div class="syllabus-card" style="background: white; border-radius: 10px; border: 1px solid #e2e8f0; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s;">
 
                 <div>
 
-                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margión-bottom: 10px;">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
 
-                    <spanstyl e="background: #e0e7ff; color: #3730a3; font-weight: 800; font-size: 11px; paddióng: 3px 8px; border-radius: 6px;">
+                    <span style="background: #e0e7ff; color: #3730a3; font-weight: 800; font-size: 11px; padding: 3px 8px; border-radius: 6px;">
 
                       ${c.courseCode || 'OFICIL'}
 
                     </span>
 
-                    <spanstyl e="background: #fef08a; color: #854d0e; font-weight: 800; font-size: 11px; paddióng: 3px 8px; border-radius: 6px;">
+                    <span style="background: #fef08a; color: #854d0e; font-weight: 800; font-size: 11px; padding: 3px 8px; border-radius: 6px;">
 
                       📅 ${c.month} 2026
 
@@ -21193,7 +21189,7 @@ const Components = {
 
 
 
-                  <h3 style="font-size: 16px; font-weight: 800; color: var(--color-navy-900); margión: 0 0 8px; line-height: 1.3;">
+                  <h3 style="font-size: 16px; font-weight: 800; color: var(--color-navy-900); margin: 0 0 8px; line-height: 1.3;">
 
                     ${c.courseName}
 
@@ -21201,7 +21197,7 @@ const Components = {
 
 
 
-                  <div style="font-size: 12px; color: #64748b; margión-bottom: 12px; display: flex; flex-direction: column; gap: 3px;">
+                  <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; display: flex; flex-direction: column; gap: 3px;">
 
                     <div>👨‍🏫 <strong>Docente:</strong> ${c.teacher}</div>
 
@@ -21213,11 +21209,11 @@ const Components = {
 
                   <!-- Temario Semanal Resumido -->
 
-                  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; paddióng: 10px 12px; margión-bottom: 12px; font-size: 11.5px; color: #334155;">
+                  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 12px; margin-bottom: 12px; font-size: 11.5px; color: #334155;">
 
-                    <strong style="color: var(--color-navy-900); display: block; margión-bottom: 4px;">📌 Programación del Mes (${c.month}):</strong>
+                    <strong style="color: var(--color-navy-900); display: block; margin-bottom: 4px;">📌 Programación del Mes (${c.month}):</strong>
 
-                    <ul style="margión: 0; paddióng-left: 16px; line-height: 1.4;">
+                    <ul style="margin: 0; paddióng-left: 16px; line-height: 1.4;">
 
                       ${(c.weeklyTopics || []).map(t => `<li>${t}</li>`).join('')}
 
@@ -21229,11 +21225,11 @@ const Components = {
 
                   <!-- Badge de Documento PDF Adjunto -->
 
-                  <div style="display: flex; align-items: center; gap: 6px; background: #ecfdf5; border: 1px solid #a7f3d0; paddióng: 6px 10px; border-radius: 6px; font-size: 11.5px; color: #065f46; margión-bottom: 14px;">
+                  <div style="display: flex; align-items: center; gap: 6px; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 6px 10px; border-radius: 6px; font-size: 11.5px; color: #065f46; margin-bottom: 14px;">
 
                     <span>📄</span>
 
-                    <spanstyl e="font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    <span style="font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
 
                       ${c.pdfFileName || 'Cartel_Tematico_Oficial.pdf'} (${c.pdfFileSize || '320 KB'})
 
@@ -21249,7 +21245,7 @@ const Components = {
 
                 <div style="border-top: 1px solid #e2e8f0; paddióng-top: 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
 
-                  <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.openViewCartelPdfModal('${c.id}')" style="font-weight: 800; font-size: 12px; flex: 1;">
+                  <button class="btn btn-navy btn-sm" onclick="window.app.openViewCartelPdfModal('${c.id}')" style="font-weight: 800; font-size: 12px; flex: 1;">
 
                     👁️ Ver / Descargar PDF
 
@@ -21259,9 +21255,9 @@ const Components = {
 
                     <div style="display: flex; gap: 4px;">
 
-                      <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openEditMonthlyCartelModal('${c.id}')" title="Editar Cartel">✏️</button>
+                      <button class="btn btn-outline btn-sm" onclick="window.app.openEditMonthlyCartelModal('${c.id}')" title="Editar Cartel">✏️</button>
 
-                      <buttonclas s="btnbtn-outline btn-sm" style="color: var(--color-red-600);" onclick="window.app.confirmDeleteMonthlyCartel('${c.id}')" title="Elimiónar Cartel">🗑️</button>
+                      <button class="btn btn-outline btn-sm" style="color: var(--color-red-600);" onclick="window.app.confirmDeleteMonthlyCartel('${c.id}')" title="Elimiónar Cartel">🗑️</button>
 
                     </div>
 
@@ -21289,7 +21285,7 @@ const Components = {
 
   // =========================================================================
 
-  // AULA VIRTUL: MTERILES SEMNALES Y EVLUCIONES DIN  ÁMICS (10 PREGUNTÍAS)
+  // AULA VIRTUL: MTERILES SEMNALES Y EVLUCIONES DINÁMICS (10 PREGUNTÍAS)
 
   // =========================================================================
 
@@ -21479,7 +21475,7 @@ const Components = {
 
         <!-- Encabezado Principal del Aula Virtual -->
 
-        <div class="card" style="margión-bottom: var(--space-6); border-top: 4px solid var(--color-navy-800);">
+        <div class="card" style="margin-bottom: var(--space-6); border-top: 4px solid var(--color-navy-800);">
 
           <div class="card-header" style="flex-wrap: wrap; gap: 14px;">
 
@@ -21487,21 +21483,21 @@ const Components = {
 
               <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
 
-                <h2 class="card-title" style="font-size: var(--font-size-xl); margión: 0;">💻 Aula Virtual & Evaluaciones Dinmicas Semanales</h2>
+                <h2 class="card-title" style="font-size: var(--font-size-xl); margin: 0;">💻 Aula Virtual & Evaluaciones Dinmicas Semanales</h2>
 
-                <spanclas s="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-800); font-weight: 800;">
+                <span class="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-800); font-weight: 800;">
 
                   Periodo Lectivo 2026 • III Bimestre
 
                 </span>
 
-                ${isTeacherOrdmión ? `<spanclas s="status-badge" style="background:#dbeafe; color:#1e40af; font-weight:800;">👨‍🏫 Modo Gestión Docente</span>` : ''}
+                ${isTeacherOrdmión ? `<span class="status-badge" style="background:#dbeafe; color:#1e40af; font-weight:800;">👨‍🏫 Modo Gestión Docente</span>` : ''}
 
-                ${isEstudiante ? `<spanclas s="status-badge" style="background:#dcfce7; color:#166534; font-weight:800;">Alumno(a): ${studentDisplayName} (${studentDisplayGrade})</span>` : ''}
+                ${isEstudiante ? `<span class="status-badge" style="background:#dcfce7; color:#166534; font-weight:800;">Alumno(a): ${studentDisplayName} (${studentDisplayGrade})</span>` : ''}
 
               </div>
 
-              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margión-top: 4px;">
+              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
                 I.E.P. "El Educador" • Publicación contiónua del trabajo realizado en el aula y generación automtica de evaluaciones diónmicas de 10 preguntas conretroalimentación inmediata.
 
@@ -21517,7 +21513,7 @@ const Components = {
 
               <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
 
-                <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.openUploadMaterialModal('${selectedCourseId}')" style="font-weight: 800;">
+                <button class="btn btn-navy btn-sm" onclick="window.app.openUploadMaterialModal('${selectedCourseId}')" style="font-weight: 800;">
 
                   ➕ Subir Material Semanal
 
@@ -21525,7 +21521,7 @@ const Components = {
 
                 ${activeMaterial ? `
 
-                  <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.openGenerateQuizModal('${activeMaterial.id}')" style="font-weight: 800;">
+                  <button class="btn btn-gold btn-sm" onclick="window.app.openGenerateQuizModal('${activeMaterial.id}')" style="font-weight: 800;">
 
                     ⚡ Generar Evaluación (10 Preguntas)
 
@@ -21543,7 +21539,7 @@ const Components = {
 
           <!-- Selector de Grado y Asignatura -->
 
-          <div style="display: flex; border-top: 1px solid var(--border-subtle); background: var(--bg-surface-subtle); paddióng: 10px 14px; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+          <div style="display: flex; border-top: 1px solid var(--border-subtle); background: var(--bg-surface-subtle); padding: 10px 14px; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;">
 
             <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
 
@@ -21551,13 +21547,13 @@ const Components = {
 
                 <div style="display: flex; align-items: center; gap: 6px;">
 
-                  <spanstyl e="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Grado / Aula:</span>
+                  <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Grado / Aula:</span>
 
-                  <select class="form-control" onchange="window.app.onVirtualGradeChange(this.value)" style="font-size: 12px; font-weight: 700; paddióng: 4px 8px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; color: var(--color-navy-950); mión-width: 170px;">
+                  <select class="form-control" onchange="window.app.onVirtualGradeChange(this.value)" style="font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; color: var(--color-navy-950); min-width: 170px;">
 
                     ${availableGrades.map(g => `
 
-                      <optionvalu e="${g.id}" ${g.id === selectedGradeId ? 'selected' : ''}>
+                      <option value="${g.id}" ${g.id === selectedGradeId ? 'selected' : ''}>
 
                         ${g.label} (${g.level})
 
@@ -21575,13 +21571,13 @@ const Components = {
 
               <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
 
-                <spanstyl e="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Asignatura:</span>
+                <span style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">Asignatura:</span>
 
-                <select class="form-control" onchange="window.app.onVirtualCourseChange(this.value)" style="font-size: 12px; font-weight: 700; paddióng: 4px 8px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; color: var(--color-navy-950); mión-width: 220px;">
+                <select class="form-control" onchange="window.app.onVirtualCourseChange(this.value)" style="font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; color: var(--color-navy-950); min-width: 220px;">
 
                   ${availableCourses.map(c => `
 
-                    <optionvalu e="${c.id}" ${c.id === selectedCourseId ? 'selected' : ''}>
+                    <option value="${c.id}" ${c.id === selectedCourseId ? 'selected' : ''}>
 
                       ${c.icon} ${c.name}
 
@@ -21601,7 +21597,7 @@ const Components = {
 
                 ${availableCourses.slice(0, 6).map(c => `
 
-                  <buttonclas s="btnbtn-sm ${c.id === selectedCourseId ? 'btn-navy' : 'btn-outline'}" onclick="window.app.onVirtualCourseChange('${c.id}')" style="font-size: 11px; font-weight: 700; paddióng: 3px 8px; display: flex; align-items: center; gap: 4px;">
+                  <button class="btn btn-sm ${c.id === selectedCourseId ? 'btn-navy' : 'btn-outline'}" onclick="window.app.onVirtualCourseChange('${c.id}')" style="font-size: 11px; font-weight: 700; padding: 3px 8px; display: flex; align-items: center; gap: 4px;">
 
                     <span>${c.icon}</span> <span>${c.name}</span>
 
@@ -21617,7 +21613,7 @@ const Components = {
 
             <div style="font-size: 12px; color: var(--text-muted); white-space: nowrap;">
 
-              <strong>Docente:</strong> <spanstyl e="color: var(--color-navy-900); font-weight: bold;">${currentCourse ? currentCourse.teacher : 'Docente'}</span> • <span>${currentCourse ? currentCourse.grade : ''}</span>
+              <strong>Docente:</strong> <span style="color: var(--color-navy-900); font-weight: bold;">${currentCourse ? currentCourse.teacher : 'Docente'}</span> • <span>${currentCourse ? currentCourse.grade : ''}</span>
 
             </div>
 
@@ -21631,45 +21627,45 @@ const Components = {
 
         ${isTeacherOrdmión ? `
 
-          <div class="teacher-stat-grid" style="margión-bottom: var(--space-6);">
+          <div class="teacher-stat-grid" style="margin-bottom: var(--space-6);">
 
             <div class="teacher-stat-card" style="border-left: 4px solid #3b82f6;">
 
-              <spanclas s="teacher-stat-lbl">📁 Sesiones Semanales</span>
+              <span class="teacher-stat-lbl">📁 Sesiones Semanales</span>
 
-              <spanclas s="teacher-stat-val" style="color: #1e40af;">${totalWeeklySessions} Semanas</span>
+              <span class="teacher-stat-val" style="color: #1e40af;">${totalWeeklySessions} Semanas</span>
 
-              <spanstyl e="font-size: 10.5px; color: #64748b;">Materiales de clase subidos</span>
+              <span style="font-size: 10.5px; color: #64748b;">Materiales de clase subidos</span>
 
             </div>
 
             <div class="teacher-stat-card" style="border-left: 4px solid #f59e0b;">
 
-              <spanclas s="teacher-stat-lbl">⚡ Evaluaciones Dinmicas</span>
+              <span class="teacher-stat-lbl">⚡ Evaluaciones Dinmicas</span>
 
-              <spanclas s="teacher-stat-val" style="color: #b45309;">${totalEvaluations} Quizzes (10 Preg.)</span>
+              <span class="teacher-stat-val" style="color: #b45309;">${totalEvaluations} Quizzes (10 Preg.)</span>
 
-              <spanstyl e="font-size: 10.5px; color: #64748b;">Conretroalimentación IA</span>
+              <span style="font-size: 10.5px; color: #64748b;">Conretroalimentación IA</span>
 
             </div>
 
             <div class="teacher-stat-card" style="border-left: 4px solid #10b981;">
 
-              <spanclas s="teacher-stat-lbl">👥 Evaluaciones Rendidas</span>
+              <span class="teacher-stat-lbl">👥 Evaluaciones Rendidas</span>
 
-              <spanclas s="teacher-stat-val" style="color: #065f46;">${allttemptsInCourse} Intentos</span>
+              <span class="teacher-stat-val" style="color: #065f46;">${allttemptsInCourse} Intentos</span>
 
-              <spanstyl e="font-size: 10.5px; color: #64748b;">Estudiantes evaluados</span>
+              <span style="font-size: 10.5px; color: #64748b;">Estudiantes evaluados</span>
 
             </div>
 
             <div class="teacher-stat-card" style="border-left: 4px solid #8b5cf6;">
 
-              <spanclas s="teacher-stat-lbl">Promedio de Logro</span>
+              <span class="teacher-stat-lbl">Promedio de Logro</span>
 
-              <spanclas s="teacher-stat-val" style="color: #5b21b6;">17.8 / 20</span>
+              <span class="teacher-stat-val" style="color: #5b21b6;">17.8 / 20</span>
 
-              <spanstyl e="font-size: 10.5px; color: #64748b;">Nivel Logro Destacado (AD)</span>
+              <span style="font-size: 10.5px; color: #64748b;">Nivel Logro Destacado (AD)</span>
 
             </div>
 
@@ -21681,15 +21677,15 @@ const Components = {
 
         <!-- Pestañas de Navegación por Semanas del Curso -->
 
-        <div style="display: flex; gap: 8px; margión-bottom: 16px; overflow-x: auto; paddióng-bottom: 6px;">
+        <div style="display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; paddióng-bottom: 6px;">
 
           ${courseMaterials.map((m, idx) => `
 
-            <buttonclas s="btnbtn-sm ${m.id === (activeMaterial && activeMaterial.id) ? 'btn-gold' : 'btn-outline'}" onclick="window.app.onVirtualWeekChange('${m.id}')" style="font-weight: 800; font-size: 12px; white-space: nowrap; paddióng: 6px 14px; display: flex; align-items: center; gap: 6px;">
+            <button class="btn btn-sm ${m.id === (activeMaterial && activeMaterial.id) ? 'btn-gold' : 'btn-outline'}" onclick="window.app.onVirtualWeekChange('${m.id}')" style="font-weight: 800; font-size: 12px; white-space: nowrap; padding: 6px 14px; display: flex; align-items: center; gap: 6px;">
 
               <span>🗓️ Semana ${m.weekNumber}</span>
 
-              ${m.evaluation ? `<spanstyl e="background:#1e3a8a; color:white; font-size:9px; paddióng:1px 5px; border-radius:10px;">⚡ 10P</span>` : ''}
+              ${m.evaluation ? `<span style="background:#1e3a8a; color:white; font-size:9px; padding:1px 5px; border-radius:10px;">⚡ 10P</span>` : ''}
 
             </button>
 
@@ -21697,7 +21693,7 @@ const Components = {
 
           ${isTeacherOrdmión ? `
 
-            <buttonclas s="btnbtn-sm btn-outline" onclick="window.app.openUploadMaterialModal('${selectedCourseId}')" style="font-weight: 800; font-size: 12px; white-space: nowrap; border-style: dashed;">
+            <button class="btn btn-sm btn-outline" onclick="window.app.openUploadMaterialModal('${selectedCourseId}')" style="font-weight: 800; font-size: 12px; white-space: nowrap; border-style: dashed;">
 
               + N ueva Semana
 
@@ -21711,13 +21707,13 @@ const Components = {
 
         ${!activeMaterial ? `
 
-          <div class="card" style="text-align: center; paddióng: 40px 20px;">
+          <div class="card" style="text-align: center; padding: 40px 20px;">
 
-            <div style="font-size: 40px; margión-bottom: 10px;">📚</div>
+            <div style="font-size: 40px; margin-bottom: 10px;">📚</div>
 
             <h3 style="font-size: 18px; color: var(--color-navy-900); font-weight: 800;">N o hay sesiones registradas aún eneste curso</h3>
 
-            <p style="font-size: 13px; color: var(--text-muted); max-width: 500px; margión: 0 auto 16px;">
+            <p style="font-size: 13px; color: var(--text-muted); max-width: 500px; margin: 0 auto 16px;">
 
               El docente responsable publicará cada semana el resumende la clase presencial, diapositivas y la evaluación diónmica de 10 preguntas.
 
@@ -21725,7 +21721,7 @@ const Components = {
 
             ${isTeacherOrdmión ? `
 
-              <buttonclas s="btnbtn-navy" onclick="window.app.openUploadMaterialModal('${selectedCourseId}')">
+              <button class="btn btn-navy" onclick="window.app.openUploadMaterialModal('${selectedCourseId}')">
 
                 + Subir Primer Material Semanal
 
@@ -21755,25 +21751,25 @@ const Components = {
 
               <!-- Tarjeta de Contenido de la Clase Presencial -->
 
-              <div class="card" style="margión-bottom: var(--space-5);">
+              <div class="card" style="margin-bottom: var(--space-5);">
 
                 <div class="card-header" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap; gap: 8px;">
 
                   <div>
 
-                    <div style="display: flex; align-items: center; gap: 6px; margión-bottom: 2px;">
+                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
 
-                      <spanclas s="status-badge" style="background: #e0e7ff; color: #3730a3; font-weight: 800; font-size: 10.5px;">
+                      <span class="status-badge" style="background: #e0e7ff; color: #3730a3; font-weight: 800; font-size: 10.5px;">
 
                         Semana ${activeMaterial.weekNumber} • ${activeMaterial.bimester}
 
                       </span>
 
-                      <spanstyl e="font-size: 11px; color: var(--text-muted);">🗓️ Fecha de Clase: ${activeMaterial.sessionDate}</span>
+                      <span style="font-size: 11px; color: var(--text-muted);">🗓️ Fecha de Clase: ${activeMaterial.sessionDate}</span>
 
                     </div>
 
-                    <h3 style="font-size: 17px; font-weight: 900; color: var(--color-navy-900); margión: 0;">
+                    <h3 style="font-size: 17px; font-weight: 900; color: var(--color-navy-900); margin: 0;">
 
                       ${activeMaterial.title}
 
@@ -21787,13 +21783,13 @@ const Components = {
 
                     <div style="display: flex; gap: 6px;">
 
-                      <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openEditMaterialModal('${activeMaterial.id}')" title="Editar Sesión" style="paddióng: 4px 8px; font-size: 11px;">
+                      <button class="btn btn-outline btn-sm" onclick="window.app.openEditMaterialModal('${activeMaterial.id}')" title="Editar Sesión" style="padding: 4px 8px; font-size: 11px;">
 
                         ✏️ Editar
 
                       </button>
 
-                      <buttonclas s="btnbtn-red btn-sm" onclick="window.app.confirmDeleteMaterial('${activeMaterial.id}')" title="Elimiónar Sesión" style="paddióng: 4px 8px; font-size: 11px;">
+                      <button class="btn btn-red btn-sm" onclick="window.app.confirmDeleteMaterial('${activeMaterial.id}')" title="Elimiónar Sesión" style="padding: 4px 8px; font-size: 11px;">
 
                         🗑️
 
@@ -21807,17 +21803,17 @@ const Components = {
 
 
 
-                <div style="paddióng: 20px;">
+                <div style="padding: 20px;">
 
                   <!-- ResumenPedagógico del Trabajo en el Aula -->
 
-                  <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margión-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                  <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
 
                     <span>👨‍Resumendel Trabajo Realizado en el Aula:</span>
 
                   </h4>
 
-                  <div style="background: #f1f5f9; border-left: 4px solid var(--color-navy-800); paddióng: 14px 16px; border-radius: 6px; font-size: 13px; line-height: 1.6; color: #334155; margión-bottom: 18px;">
+                  <div style="background: #f1f5f9; border-left: 4px solid var(--color-navy-800); padding: 14px 16px; border-radius: 6px; font-size: 13px; line-height: 1.6; color: #334155; margin-bottom: 18px;">
 
                     ${activeMaterial.summary}
 
@@ -21827,17 +21823,17 @@ const Components = {
 
                   <!-- Conceptos Clave Trabajados -->
 
-                  <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margión-bottom: 8px;">
+                  <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margin-bottom: 8px;">
 
                     Conceptos Clave Abordados enClase:
 
                   </h4>
 
-                  <div style="display: flex; flex-wrap: wrap; gap: 6px; margión-bottom: 20px;">
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px;">
 
                     ${(activeMaterial.keyConcepts || []).map(c => `
 
-                      <spanstyl e="font-size: 11.5px; font-weight: 700; background: #e2e8f0; color: #1e293b; paddióng: 4px 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+                      <span style="font-size: 11.5px; font-weight: 700; background: #e2e8f0; color: #1e293b; padding: 4px 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
 
                         ✓ ${c}
 
@@ -21851,17 +21847,17 @@ const Components = {
 
                   <!-- Materiales y Recursos Adjuntos para Descargar -->
 
-                  <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margión-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
+                  <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
 
                     <span>📎 Materiales de Estudio y Recursos de la Clase:</span>
 
-                    <spanstyl e="font-size: 11px; color: var(--text-muted); font-weight: normal;">${(activeMaterial.attachments || []).length} archivos adjuntos</span>
+                    <span style="font-size: 11px; color: var(--text-muted); font-weight: normal;">${(activeMaterial.attachments || []).length} archivos adjuntos</span>
 
                   </h4>
 
                   
 
-                  <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(240px, 1fr)); gap: 12px;">
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
 
                     ${(activeMaterial.attachments || []).map((att, attIdx) => {
 
@@ -21875,13 +21871,13 @@ const Components = {
 
                       return `
 
-                        <div style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; paddióng: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); transition: transform 0.2s;" class="hover-shadow">
+                        <div style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); transition: transform 0.2s;" class="hover-shadow">
 
-                          <div style="display: flex; align-items: center; gap: 10px; mión-width: 0;">
+                          <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
 
                             <div style="font-size: 26px;">${fileIcon}</div>
 
-                            <div style="mión-width: 0;">
+                            <div style="min-width: 0;">
 
                               <div style="font-size: 12.5px; font-weight: 800; color: var(--color-navy-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${att.name}">
 
@@ -21889,9 +21885,9 @@ const Components = {
 
                               </div>
 
-                              <div style="font-size: 11px; color: var(--text-muted); display: flex; gap: 6px; align-items: center; margión-top: 2px;">
+                              <div style="font-size: 11px; color: var(--text-muted); display: flex; gap: 6px; align-items: center; margin-top: 2px;">
 
-                                <spanstyl e="background:#f1f5f9; paddióng: 1px 6px; border-radius: 4px; font-weight: 700; color:#475569;">${badgeLabel}</span>
+                                <span style="background:#f1f5f9; padding: 1px 6px; border-radius: 4px; font-weight: 700; color:#475569;">${badgeLabel}</span>
 
                                 <span>${att.size || 'Oficial'}</span>
 
@@ -21901,7 +21897,7 @@ const Components = {
 
                           </div>
 
-                          <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.downloadMaterialttachment('${att.name}', '${activeMaterial.id}', ${attIdx})" style="paddióng: 6px 14px; font-size: 12px; font-weight: 800; border-radius: 16px; white-space: nowrap; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(11,19,43,0.2);" title="Descargar material para estudiar encasa">
+                          <button class="btn btn-navy btn-sm" onclick="window.app.downloadMaterialttachment('${att.name}', '${activeMaterial.id}', ${attIdx})" style="padding: 6px 14px; font-size: 12px; font-weight: 800; border-radius: 16px; white-space: nowrap; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(11,19,43,0.2);" title="Descargar material para estudiar encasa">
 
                             <span>⬇️</span> <span>Descargar</span>
 
@@ -21925,7 +21921,7 @@ const Components = {
 
 
 
-            <!-- Columna Derecha: MÓDULO DE EVLUCIÓN DIN  ÁMICA (10 PREGUNTÍAS) -->
+            <!-- Columna Derecha: MÓDULO DE EVLUCIÓN DINÁMICA (10 PREGUNTÍAS) -->
 
             <div>
 
@@ -21937,17 +21933,17 @@ const Components = {
 
                   <div style="display: flex; align-items: center; gap: 8px;">
 
-                    <spanstyl e="font-size: 20px;">⚡</span>
+                    <span style="font-size: 20px;">⚡</span>
 
                     <div>
 
-                      <h3 style="font-size: 15px; font-weight: 900; margión: 0; color: ${activeMaterial.evaluation ? '#ffffff' : '#0b132b'};">
+                      <h3 style="font-size: 15px; font-weight: 900; margin: 0; color: ${activeMaterial.evaluation ? '#ffffff' : '#0b132b'};">
 
                         Evaluación Dinmica Semanal
 
                       </h3>
 
-                      <spanstyl e="font-size: 11px; opacity: 0.9;">10 Preguntas conRetroalimentación</span>
+                      <span style="font-size: 11px; opacity: 0.9;">10 Preguntas conRetroalimentación</span>
 
                     </div>
 
@@ -21957,19 +21953,19 @@ const Components = {
 
 
 
-                <div style="paddióng: 18px;">
+                <div style="padding: 18px;">
 
                   ${!activeMaterial.evaluation ? `
 
                     <!-- Caso: Aún no se ha generado la evaluación -->
 
-                    <div style="text-align: center; paddióng: 20px 10px;">
+                    <div style="text-align: center; padding: 20px 10px;">
 
-                      <div style="font-size: 32px; margión-bottom: 8px;">🤖</div>
+                      <div style="font-size: 32px; margin-bottom: 8px;">🤖</div>
 
                       <h4 style="font-size: 14px; font-weight: 800; color: var(--color-navy-900);">Evaluación no generada</h4>
 
-                      <p style="font-size: 12px; color: var(--text-muted); margión-bottom: 14px;">
+                      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
 
                         El sistema puede generar uncuestionario diónmico de 10 preguntas calibrado automticamente sobre el tema de esta semana.
 
@@ -21977,7 +21973,7 @@ const Components = {
 
                       ${isTeacherOrdmión ? `
 
-                        <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.openGenerateQuizModal('${activeMaterial.id}')" style="width: 100%; font-weight: 800;">
+                        <button class="btn btn-gold btn-sm" onclick="window.app.openGenerateQuizModal('${activeMaterial.id}')" style="width: 100%; font-weight: 800;">
 
                           ⚡ Generar 10 Preguntas conIA
 
@@ -21985,7 +21981,7 @@ const Components = {
 
                       ` : `
 
-                        <spanclas s="status-badge status-pendióng" style="font-size: 11px;">Pendiente de publicación por el profesor</span>
+                        <span class="status-badge status-pendióng" style="font-size: 11px;">Pendiente de publicación por el profesor</span>
 
                       `}
 
@@ -21995,19 +21991,19 @@ const Components = {
 
                     <!-- Caso: Evaluación de 10 preguntas Lista -->
 
-                    <div style="margión-bottom: 14px;">
+                    <div style="margin-bottom: 14px;">
 
-                      <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 8px;">
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
 
-                        <spanstyl e="font-size: 12px; font-weight: 800; color: #1e293b;">Estructura del Test:</span>
+                        <span style="font-size: 12px; font-weight: 800; color: #1e293b;">Estructura del Test:</span>
 
-                        <spanclas s="status-badge status-approved" style="font-size: 10.5px; font-weight: 800;">10 Ítems • 20 Puntos</span>
+                        <span class="status-badge status-approved" style="font-size: 10.5px; font-weight: 800;">10 Ítems • 20 Puntos</span>
 
                       </div>
 
                       
 
-                      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; paddióng: 10px; font-size: 11.5px; color: #475569; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px; font-size: 11.5px; color: #475569; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
 
                         <div>⏱️ <strong>Tiempo:</strong> 20 mión</div>
 
@@ -22031,23 +22027,23 @@ const Components = {
 
                         <!-- Alumno ya rindió la prueba -->
 
-                        <div style="background: ${studentttempt.score >= 14 ? '#ecfdf5' : '#fff1f2'}; border: 2px solid ${studentttempt.score >= 14 ? '#10b981' : '#f43f5e'}; border-radius: 8px; paddióng: 14px; margión-bottom: 14px; text-align: center;">
+                        <div style="background: ${studentttempt.score >= 14 ? '#ecfdf5' : '#fff1f2'}; border: 2px solid ${studentttempt.score >= 14 ? '#10b981' : '#f43f5e'}; border-radius: 8px; padding: 14px; margin-bottom: 14px; text-align: center;">
 
-                          <spanstyl e="font-size: 11px; font-weight: 800; text-transform: uppercase; color: ${studentttempt.score >= 14 ? '#047857' : '#be123c'};">Tu Calificación Obtenida:</span>
+                          <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: ${studentttempt.score >= 14 ? '#047857' : '#be123c'};">Tu Calificación Obtenida:</span>
 
-                          <div style="font-size: 28px; font-weight: 900; color: ${studentttempt.score >= 14 ? '#047857' : '#be123c'}; margión: 4px 0;">
+                          <div style="font-size: 28px; font-weight: 900; color: ${studentttempt.score >= 14 ? '#047857' : '#be123c'}; margin: 4px 0;">
 
                             ${studentttempt.score} / 20
 
                           </div>
 
-                          <spanclas s="status-badge ${studentttempt.score >= 14 ? 'status-approved' : 'status-failed'}" style="font-weight: 800; font-size: 11px;">
+                          <span class="status-badge ${studentttempt.score >= 14 ? 'status-approved' : 'status-failed'}" style="font-weight: 800; font-size: 11px;">
 
                             ${studentttempt.status} (${studentttempt.correctCount} / 10 correctas)
 
                           </span>
 
-                          <p style="font-size: 11px; color: #475569; margión-top: 8px; line-height: 1.4; text-align: left; background: rgba(255,255,255,0.7); paddióng: 8px; border-radius: 4px;">
+                          <p style="font-size: 11px; color: #475569; margin-top: 8px; line-height: 1.4; text-align: left; background: rgba(255,255,255,0.7); padding: 8px; border-radius: 4px;">
 
                             <strong>Retroalimentación del Sistema:</strong> ${studentttempt.feedback}
 
@@ -22059,13 +22055,13 @@ const Components = {
 
                         <div style="display: flex; flex-direction: column; gap: 8px;">
 
-                          <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.openQuizResultsModal('${activeMaterial.id}')" style="width: 100%; font-weight: 800;">
+                          <button class="btn btn-navy btn-sm" onclick="window.app.openQuizResultsModal('${activeMaterial.id}')" style="width: 100%; font-weight: 800;">
 
                             👁️ Revisar Respuestas y Explicaciones
 
                           </button>
 
-                          <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.startStudentQuiz('${activeMaterial.id}')" style="width: 100%; font-weight: 700; font-size: 11px;">
+                          <button class="btn btn-outline btn-sm" onclick="window.app.startStudentQuiz('${activeMaterial.id}')" style="width: 100%; font-weight: 700; font-size: 11px;">
 
                             Rendir N uevo Intento de Refuerzo
 
@@ -22077,17 +22073,17 @@ const Components = {
 
                         <!-- Alumno no ha rendido la prueba aún -->
 
-                        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; paddióng: 14px; margión-bottom: 14px; text-align: center;">
+                        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 14px; margin-bottom: 14px; text-align: center;">
 
-                          <spanstyl e="font-size: 11px; font-weight: 800; color: #1e40af; text-transform: uppercase;">Estado: Pendiente</span>
+                          <span style="font-size: 11px; font-weight: 800; color: #1e40af; text-transform: uppercase;">Estado: Pendiente</span>
 
-                          <p style="font-size: 12px; color: #1e3a8a; margión: 6px 0 12px;">
+                          <p style="font-size: 12px; color: #1e3a8a; margin: 6px 0 12px;">
 
                             Pona prueba lo aprendido en la clase de <strong>${activeMaterial.title}</strong> conesta evaluación de 10 preguntas.
 
                           </p>
 
-                          <buttonclas s="btnbtn-gold" onclick="window.app.startStudentQuiz('${activeMaterial.id}')" style="width: 100%; font-weight: 900; font-size: 13px; paddióng: 10px;">
+                          <button class="btn btn-gold" onclick="window.app.startStudentQuiz('${activeMaterial.id}')" style="width: 100%; font-weight: 900; font-size: 13px; padding: 10px;">
 
                             📝 Iniciar Evaluación (10 Preguntas)
 
@@ -22105,15 +22101,15 @@ const Components = {
 
                     ${isTeacherOrdmión ? `
 
-                      <div style="display: flex; flex-direction: column; gap: 8px; margión-bottom: 16px;">
+                      <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
 
-                        <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.openPreviewQuizModal('${activeMaterial.id}')" style="width: 100%; font-weight: 800;">
+                        <button class="btn btn-navy btn-sm" onclick="window.app.openPreviewQuizModal('${activeMaterial.id}')" style="width: 100%; font-weight: 800;">
 
                           👁️ Previsualizar / Editar 10 Preguntas
 
                         </button>
 
-                        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.confirmRegenerateQuiz('${activeMaterial.id}')" style="width: 100%; font-weight: 700; font-size: 11.5px;">
+                        <button class="btn btn-outline btn-sm" onclick="window.app.confirmRegenerateQuiz('${activeMaterial.id}')" style="width: 100%; font-weight: 700; font-size: 11.5px;">
 
                           ⚡ Regenerar Cuestionario conIA
 
@@ -22125,11 +22121,11 @@ const Components = {
 
                       <!-- Tabla Resumende Alumnos que rindieronla prueba -->
 
-                      <h4 style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); margión-bottom: 6px; display: flex; justify-content: space-between;">
+                      <h4 style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); margin-bottom: 6px; display: flex; justify-content: space-between;">
 
                         <span>Estudiantes Evaluados:</span>
 
-                        <spanstyl e="color: #047857;">${(activeMaterial.studentttempts || []).length} alumnos</span>
+                        <span style="color: #047857;">${(activeMaterial.studentttempts || []).length} alumnos</span>
 
                       </h4>
 
@@ -22143,11 +22139,11 @@ const Components = {
 
                             <tr>
 
-                              <th style="paddióng: 6px; text-align: left;">Alumno</th>
+                              <th style="padding: 6px; text-align: left;">Alumno</th>
 
-                              <th style="paddióng: 6px; text-align: center;">Aciertos</th>
+                              <th style="padding: 6px; text-align: center;">Aciertos</th>
 
-                              <th style="paddióng: 6px; text-align: right;">N ota</th>
+                              <th style="padding: 6px; text-align: right;">N ota</th>
 
                             </tr>
 
@@ -22159,23 +22155,23 @@ const Components = {
 
                               <tr style="border-bottom: 1px solid #f1f5f9;">
 
-                                <td style="paddióng: 5px 6px;">
+                                <td style="padding: 5px 6px;">
 
                                   <strong>${att.studentName}</strong><br>
 
-                                  <spanstyl e="font-size: 9.5px; color: #64748b;">${att.date}</span>
+                                  <span style="font-size: 9.5px; color: #64748b;">${att.date}</span>
 
                                 </td>
 
-                                <td style="paddióng: 5px 6px; text-align: center;">
+                                <td style="padding: 5px 6px; text-align: center;">
 
-                                  <spanstyl e="font-weight: 800;">${att.correctCount}/10</span>
+                                  <span style="font-weight: 800;">${att.correctCount}/10</span>
 
                                 </td>
 
-                                <td style="paddióng: 5px 6px; text-align: right;">
+                                <td style="padding: 5px 6px; text-align: right;">
 
-                                  <spanclas s="status-badge ${att.score >= 14 ? 'status-approved' : 'status-failed'}" style="font-size: 10px; font-weight: 900;">
+                                  <span class="status-badge ${att.score >= 14 ? 'status-approved' : 'status-failed'}" style="font-size: 10px; font-weight: 900;">
 
                                     ${att.score}
 
@@ -22189,7 +22185,7 @@ const Components = {
 
                               <tr>
 
-                                <td colspan="3" style="text-align: center; paddióng: 14px; color: #94a3b8;">
+                                <td colspan="3" style="text-align: center; padding: 14px; color: #94a3b8;">
 
                                   N ingún alumno ha rendido la evaluación aún.
 
@@ -22213,9 +22209,9 @@ const Components = {
 
                     ${isPadre ? `
 
-                      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; paddióng: 14px;">
+                      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px;">
 
-                        <h4 style="font-size: 12px; font-weight: 800; color: #1e3a8a; margión-bottom: 6px;">
+                        <h4 style="font-size: 12px; font-weight: 800; color: #1e3a8a; margin-bottom: 6px;">
 
                           Informe de Evaluación para el Apoderado
 
@@ -22223,19 +22219,19 @@ const Components = {
 
                         ${studentttempt ? `
 
-                          <div style="font-size: 13px; margión-bottom: 6px;">
+                          <div style="font-size: 13px; margin-bottom: 6px;">
 
                             Calificación de su menor hija(o): <strong style="color: #047857; font-size: 15px;">${studentttempt.score} / 20</strong> (${studentttempt.status})
 
                           </div>
 
-                          <p style="font-size: 11.5px; color: #475569; margión: 0 0 10px; line-height: 1.4;">
+                          <p style="font-size: 11.5px; color: #475569; margin: 0 0 10px; line-height: 1.4;">
 
                             ${studentttempt.feedback}
 
                           </p>
 
-                          <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.openQuizResultsModal('${activeMaterial.id}')" style="width: 100%; font-size: 11px;">
+                          <button class="btn btn-navy btn-sm" onclick="window.app.openQuizResultsModal('${activeMaterial.id}')" style="width: 100%; font-size: 11px;">
 
                             👁️ Ver Respuestas y Retroalimentación
 
@@ -22243,7 +22239,7 @@ const Components = {
 
                         ` : `
 
-                          <p style="font-size: 12px; color: #94a3b8; margión: 0;">
+                          <p style="font-size: 12px; color: #94a3b8; margin: 0;">
 
                             Su menor hija(o) aún no ha rendido la evaluación de esta semana.
 
@@ -22495,19 +22491,19 @@ const Components = {
 
         <!-- ENCBEZDO INSTITUCION AL DE ASISTENCIA -->
 
-        <div class="welcome-banner" style="margión-bottom: var(--space-4);">
+        <div class="welcome-banner" style="margin-bottom: var(--space-4);">
 
           <div class="welcome-content">
 
-            <div style="display: flex; align-items: center; gap: 8px; margión-bottom: 4px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
 
-              <spanclas s="status-badge status-approved" style="background: #22c55e; color: #0b132b; font-weight: 800;">
+              <span class="status-badge status-approved" style="background: #22c55e; color: #0b132b; font-weight: 800;">
 
-                <spanclas s='status-dot-green'></span> SISTEMA QR & BIOMÉTRICO ENPUERTÍA ACTIVO
+                <span class='status-dot-green'></span> SISTEMA QR & BIOMÉTRICO ENPUERTÍA ACTIVO
 
               </span>
 
-              <spanstyl e="font-size: 11.5px; opacity: 0.9;">Tolerancia Oficial: 07:45 AM • UGEL 05 S.J.L.</span>
+              <span style="font-size: 11.5px; opacity: 0.9;">Tolerancia Oficial: 07:45 AM • UGEL 05 S.J.L.</span>
 
             </div>
 
@@ -22537,31 +22533,31 @@ const Components = {
 
           <!-- =========================================================================
 
-               SUB-PESTÍAÑAS DE CONTROL DE ASISTENCIA Y PORTERÍA (EXCLUSIVO PROFESORES / AUXILIRES / DIRECCIÓN  )
+               SUB-PESTÍAÑAS DE CONTROL DE ASISTENCIA Y PORTERÍA (EXCLUSIVO PROFESORES / AUXILIRES / DIRECCIÓN)
 
                ========================================================================= -->
 
-          <div style="display: flex; gap: 8px; margión-bottom: 16px; border-bottom: 2px solid #e2e8f0; paddióng-bottom: 10px; overflow-x: auto;">
+          <div style="display: flex; gap: 8px; margin-bottom: 16px; border-bottom: 2px solid #e2e8f0; paddióng-bottom: 10px; overflow-x: auto;">
 
-            <buttonclas s="btnbtn-sm ${activeSubTab === 'door-scanner' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setttendanceSubTab('door-scanner')" style="font-weight: 900; font-size: 12.5px; white-space: nowrap; paddióng: 8px 16px; border: 2px solid #f59e0b; box-shadow: ${activeSubTab === 'door-scanner' ? '0 2px 8px rgba(245,158,11,0.4)' : 'none'};">
+            <button class="btn btn-sm ${activeSubTab === 'door-scanner' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setttendanceSubTab('door-scanner')" style="font-weight: 900; font-size: 12.5px; white-space: nowrap; padding: 8px 16px; border: 2px solid #f59e0b; box-shadow: ${activeSubTab === 'door-scanner' ? '0 2px 8px rgba(245,158,11,0.4)' : 'none'};">
 
               1. Registro de Ingreso (Escner QR enPortera)
 
             </button>
 
-            <buttonclas s="btnbtn-sm ${activeSubTab === 'id-cards' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setttendanceSubTab('id-cards')" style="font-weight: 900; font-size: 12px; white-space: nowrap; paddióng: 7px 14px;">
+            <button class="btn btn-sm ${activeSubTab === 'id-cards' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setttendanceSubTab('id-cards')" style="font-weight: 900; font-size: 12px; white-space: nowrap; padding: 7px 14px;">
 
               2. Generador de Códigos QR (SiónFotos)
 
             </button>
 
-            <buttonclas s="btnbtn-sm ${activeSubTab === 'daily-report' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setttendanceSubTab('daily-report')" style="font-weight: 800; font-size: 12px; white-space: nowrap; paddióng: 7px 14px; position: relative;">
+            <button class="btn btn-sm ${activeSubTab === 'daily-report' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setttendanceSubTab('daily-report')" style="font-weight: 800; font-size: 12px; white-space: nowrap; padding: 7px 14px; position: relative;">
 
               <span>3. Parte Diario de Tardanzas e Inasistencias (Corte 08:30 AM)</span>
 
               ${dayReport.tardiónessList.length > 0 || dayReport.absenceList.length > 0 ? `
 
-                <spanstyl e="background: #ef4444; color: white; border-radius: 10px; paddióng: 1px 6px; font-size: 10px; font-weight: 900; margión-left: 4px;">
+                <span style="background: #ef4444; color: white; border-radius: 10px; padding: 1px 6px; font-size: 10px; font-weight: 900; margin-left: 4px;">
 
                   ${dayReport.tardiónessList.length + dayReport.absenceList.length}
 
@@ -22571,17 +22567,17 @@ const Components = {
 
             </button>
 
-            <buttonclas s="btnbtn-sm ${activeSubTab === 'classroom' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setttendanceSubTab('classroom')" style="font-weight: 800; font-size: 12px; white-space: nowrap; paddióng: 7px 14px;">
+            <button class="btn btn-sm ${activeSubTab === 'classroom' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setttendanceSubTab('classroom')" style="font-weight: 800; font-size: 12px; white-space: nowrap; padding: 7px 14px;">
 
               4. Lista y Marcación por Aula
 
             </button>
 
-            <buttonclas s="btnbtn-sm ${activeSubTab === 'incidents' ? 'btn-red' : 'btn-outline'}" onclick="window.app.setttendanceSubTab('incidents')" style="font-weight: 800; font-size: 12px; white-space: nowrap; paddióng: 7px 14px; position: relative;">
+            <button class="btn btn-sm ${activeSubTab === 'incidents' ? 'btn-red' : 'btn-outline'}" onclick="window.app.setttendanceSubTab('incidents')" style="font-weight: 800; font-size: 12px; white-space: nowrap; padding: 7px 14px; position: relative;">
 
               <span>5. Libro de Incidencias Conductuales</span>
 
-              <spanstyl e="background: #dc2626; color: white; border-radius: 10px; paddióng: 1px 6px; font-size: 10px; font-weight: 900; margión-left: 4px;">
+              <span style="background: #dc2626; color: white; border-radius: 10px; padding: 1px 6px; font-size: 10px; font-weight: 900; margin-left: 4px;">
 
                 ${(state.behaviorIncidents || initialData.behaviorIncidents || []).length}
 
@@ -22607,7 +22603,7 @@ const Components = {
 
             <!-- FILTROS Y SELECTORES DE AULA / FECHA -->
 
-            <div class="card" style="margión-bottom: var(--space-4); paddióng: 14px;">
+            <div class="card" style="margin-bottom: var(--space-4); padding: 14px;">
 
               <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
 
@@ -22617,11 +22613,11 @@ const Components = {
 
                   <div>
 
-                    <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margión-bottom: 2px;">Grado / Aula:</label>
+                    <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margin-bottom: 2px;">Grado / Aula:</label>
 
                     <select class="form-control" style="font-weight: bold; font-size: 12px; border-color: #3b82f6; width: auto;" onchange="window.app.onttendanceGradeChange(this.value)">
 
-                      ${catalog.map(g => `<optionvalu e="${g.id}" ${g.id === selectedGradeId ? 'selected' : ''}>${g.label} (${g.level})</option>`).join('')}
+                      ${catalog.map(g => `<option value="${g.id}" ${g.id === selectedGradeId ? 'selected' : ''}>${g.label} (${g.level})</option>`).join('')}
 
                     </select>
 
@@ -22631,15 +22627,15 @@ const Components = {
 
                   <div>
 
-                    <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margión-bottom: 2px;">📅 Fecha de Control:</label>
+                    <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margin-bottom: 2px;">📅 Fecha de Control:</label>
 
                     <select class="form-control" style="font-weight: bold; font-size: 12px; border-color: #3b82f6; width: auto;" onchange="window.app.onttendanceDateChange(this.value)">
 
-                      <optionvalu e="19/08/2026" ${selectedDate === '19/08/2026' ? 'selected' : ''}>Hoy - Miércoles 19/08/2026</option>
+                      <option value="19/08/2026" ${selectedDate === '19/08/2026' ? 'selected' : ''}>Hoy - Miércoles 19/08/2026</option>
 
-                      <optionvalu e="18/08/2026" ${selectedDate === '18/08/2026' ? 'selected' : ''}>Ayer - Martes 18/08/2026</option>
+                      <option value="18/08/2026" ${selectedDate === '18/08/2026' ? 'selected' : ''}>Ayer - Martes 18/08/2026</option>
 
-                      <optionvalu e="15/08/2026" ${selectedDate === '15/08/2026' ? 'selected' : ''}>Viernes 15/08/2026</option>
+                      <option value="15/08/2026" ${selectedDate === '15/08/2026' ? 'selected' : ''}>Viernes 15/08/2026</option>
 
                     </select>
 
@@ -22647,7 +22643,7 @@ const Components = {
 
 
 
-                  <div style="font-size: 11.5px; color: #475569; background: #f1f5f9; paddióng: 6px 12px; border-radius: 6px; border: 1px solid #cbd5e1; margión-top: 14px;">
+                  <div style="font-size: 11.5px; color: #475569; background: #f1f5f9; padding: 6px 12px; border-radius: 6px; border: 1px solid #cbd5e1; margin-top: 14px;">
 
                     Tutor de Aula: <strong>${currentGrade.tutor || 'Prof. Roberto Silva'}</strong> • Aula: <strong>${currentGrade.classroom || 'Aula Principal'}</strong>
 
@@ -22659,21 +22655,21 @@ const Components = {
 
                 <!-- BOTONES DE ACCIÓN RPIDÍA -->
 
-                <div style="display: flex; gap: 6px; flex-wrap: wrap; margión-top: 10px;">
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px;">
 
-                  <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.markllClassroomPresent('${selectedGradeId}', '${selectedDate}')" style="font-weight: 800; font-size: 11.5px;">
+                  <button class="btn btn-gold btn-sm" onclick="window.app.markllClassroomPresent('${selectedGradeId}', '${selectedDate}')" style="font-weight: 800; font-size: 11.5px;">
 
                     ⚡ Marcar Todos Presentes
 
                   </button>
 
-                  <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.setttendanceSubTab('door-scanner')" style="font-weight: 800; font-size: 11.5px;">
+                  <button class="btn btn-navy btn-sm" onclick="window.app.setttendanceSubTab('door-scanner')" style="font-weight: 800; font-size: 11.5px;">
 
                     [Cmara] Escanear QR enPuerta
 
                   </button>
 
-                  <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openMonthlyttendanceReportModal('${selectedGradeId}')" style="font-weight: 800; font-size: 11.5px;">
+                  <button class="btn btn-outline btn-sm" onclick="window.app.openMonthlyttendanceReportModal('${selectedGradeId}')" style="font-weight: 800; font-size: 11.5px;">
 
                     Consolidado UGEL 05
 
@@ -22691,63 +22687,63 @@ const Components = {
 
             <!-- MÉTRICS RESUMENDEL DÍA -->
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(160px, 1fr)); gap: 10px; margión-bottom: var(--space-4);">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: var(--space-4);">
 
-              <div class="card" style="paddióng: 12px; border-left: 4px solid #3b82f6; background: #eff6ff;">
+              <div class="card" style="padding: 12px; border-left: 4px solid #3b82f6; background: #eff6ff;">
 
-                <spanstyl e="font-size: 11px; font-weight: 800; color: #1e40af;">👥 MTRICULDOS</span>
+                <span style="font-size: 11px; font-weight: 800; color: #1e40af;">👥 MTRICULDOS</span>
 
-                <div style="font-size: 22px; font-weight: 900; color: #1e3a8a; margión: 2px 0;">${totalStudents} Alumnos</div>
+                <div style="font-size: 22px; font-weight: 900; color: #1e3a8a; margin: 2px 0;">${totalStudents} Alumnos</div>
 
-                <spanstyl e="font-size: 10px; color: #64748b;">Padrón de Aula</span>
+                <span style="font-size: 10px; color: #64748b;">Padrón de Aula</span>
 
               </div>
 
               
 
-              <div class="card" style="paddióng: 12px; border-left: 4px solid #10b981; background: #ecfdf5;">
+              <div class="card" style="padding: 12px; border-left: 4px solid #10b981; background: #ecfdf5;">
 
-                <spanstyl e="font-size: 11px; font-weight: 800; color: #065f46;"><spanclas s='status-dot-green'></span> PRESENTES</span>
+                <span style="font-size: 11px; font-weight: 800; color: #065f46;"><span class='status-dot-green'></span> PRESENTES</span>
 
-                <div style="font-size: 22px; font-weight: 900; color: #047857; margión: 2px 0;">${presentCount} (${attendancePct}%)</div>
+                <div style="font-size: 22px; font-weight: 900; color: #047857; margin: 2px 0;">${presentCount} (${attendancePct}%)</div>
 
-                <spanstyl e="font-size: 10px; color: #047857;">A tiempo enportera</span>
-
-              </div>
-
-
-
-              <div class="card" style="paddióng: 12px; border-left: 4px solid #f59e0b; background: #fffbeb;">
-
-                <spanstyl e="font-size: 11px; font-weight: 800; color: #92400e;"><spanclas s='status-dot-yellow'></span> TÍARDÍANZS</span>
-
-                <div style="font-size: 22px; font-weight: 900; color: #b45309; margión: 2px 0;">${lateCount}</div>
-
-                <spanstyl e="font-size: 10px; color: #b45309;">Después de 07:45 am</span>
+                <span style="font-size: 10px; color: #047857;">A tiempo enportera</span>
 
               </div>
 
 
 
-              <div class="card" style="paddióng: 12px; border-left: 4px solid #ef4444; background: #fef2f2;">
+              <div class="card" style="padding: 12px; border-left: 4px solid #f59e0b; background: #fffbeb;">
 
-                <spanstyl e="font-size: 11px; font-weight: 800; color: #991b1b;"><spanclas s='status-dot-red'></span> INSISTEN CIS</span>
+                <span style="font-size: 11px; font-weight: 800; color: #92400e;"><span class='status-dot-yellow'></span> TÍARDÍANZS</span>
 
-                <div style="font-size: 22px; font-weight: 900; color: #dc2626; margión: 2px 0;">${absentCount}</div>
+                <div style="font-size: 22px; font-weight: 900; color: #b45309; margin: 2px 0;">${lateCount}</div>
 
-                <spanstyl e="font-size: 10px; color: #dc2626;">Siónregistro biométrico</span>
+                <span style="font-size: 10px; color: #b45309;">Después de 07:45 am</span>
 
               </div>
 
 
 
-              <div class="card" style="paddióng: 12px; border-left: 4px solid #8b5cf6; background: #f5f3ff;">
+              <div class="card" style="padding: 12px; border-left: 4px solid #ef4444; background: #fef2f2;">
 
-                <spanstyl e="font-size: 11px; font-weight: 800; color: #5b21b6;">🔵 JUSTIFICDÍAS</span>
+                <span style="font-size: 11px; font-weight: 800; color: #991b1b;"><span class='status-dot-red'></span> INSISTEN CIS</span>
 
-                <div style="font-size: 22px; font-weight: 900; color: #6d28d9; margión: 2px 0;">${justifiedCount}</div>
+                <div style="font-size: 22px; font-weight: 900; color: #dc2626; margin: 2px 0;">${absentCount}</div>
 
-                <spanstyl e="font-size: 10px; color: #6d28d9;">Concertificado médico</span>
+                <span style="font-size: 10px; color: #dc2626;">Siónregistro biométrico</span>
+
+              </div>
+
+
+
+              <div class="card" style="padding: 12px; border-left: 4px solid #8b5cf6; background: #f5f3ff;">
+
+                <span style="font-size: 11px; font-weight: 800; color: #5b21b6;">🔵 JUSTIFICDÍAS</span>
+
+                <div style="font-size: 22px; font-weight: 900; color: #6d28d9; margin: 2px 0;">${justifiedCount}</div>
+
+                <span style="font-size: 10px; color: #6d28d9;">Concertificado médico</span>
 
               </div>
 
@@ -22763,13 +22759,13 @@ const Components = {
 
                 <div>
 
-                  <h3 class="card-title" style="font-size: var(--font-size-base); margión: 0;">
+                  <h3 class="card-title" style="font-size: var(--font-size-base); margin: 0;">
 
                     Registro y Marcación de Asistencia: ${currentGrade.label} • Fecha: ${selectedDate}
 
                   </h3>
 
-                  <spanstyl e="font-size: 11px; color: var(--text-muted);">
+                  <span style="font-size: 11px; color: var(--text-muted);">
 
                     Haga clic en los botones de estado para cambiar la asistencia del estudiante al instante.
 
@@ -22823,7 +22819,7 @@ const Components = {
 
                           <code>${r.studentCode || r.studentId}</code><br>
 
-                          <spanstyl e="font-size: 10.5px; color: #64748b;">DNI: ${r.dni || '--'}</span>
+                          <span style="font-size: 10.5px; color: #64748b;">DNI: ${r.dni || '--'}</span>
 
                         </td>
 
@@ -22841,25 +22837,25 @@ const Components = {
 
                           <div style="display: flex; gap: 4px; flex-wrap: wrap;">
 
-                            <buttonclas s="btnbtn-sm" onclick="window.app.setStudentttendanceStatus('${r.id}', 'Presente')" style="font-size: 10.5px; paddióng: 2px 7px; font-weight: 800; background: ${r.status === 'Presente' ? '#10b981' : '#f1f5f9'}; color: ${r.status === 'Presente' ? '#ffffff' : '#334155'}; border: 1px solid ${r.status === 'Presente' ? '#059669' : '#cbd5e1'};">
+                            <button class="btn btn-sm" onclick="window.app.setStudentttendanceStatus('${r.id}', 'Presente')" style="font-size: 10.5px; padding: 2px 7px; font-weight: 800; background: ${r.status === 'Presente' ? '#10b981' : '#f1f5f9'}; color: ${r.status === 'Presente' ? '#ffffff' : '#334155'}; border: 1px solid ${r.status === 'Presente' ? '#059669' : '#cbd5e1'};">
 
-                              <spanclas s='status-dot-green'></span> Presente
-
-                            </button>
-
-                            <buttonclas s="btnbtn-sm" onclick="window.app.setStudentttendanceStatus('${r.id}', 'Tardanza')" style="font-size: 10.5px; paddióng: 2px 7px; font-weight: 800; background: ${r.status === 'Tardanza' ? '#f59e0b' : '#f1f5f9'}; color: ${r.status === 'Tardanza' ? '#ffffff' : '#334155'}; border: 1px solid ${r.status === 'Tardanza' ? '#d97706' : '#cbd5e1'};">
-
-                              <spanclas s='status-dot-yellow'></span> Tardanza
+                              <span class='status-dot-green'></span> Presente
 
                             </button>
 
-                            <buttonclas s="btnbtn-sm" onclick="window.app.setStudentttendanceStatus('${r.id}', 'Falta')" style="font-size: 10.5px; paddióng: 2px 7px; font-weight: 800; background: ${r.status === 'Falta' ? '#ef4444' : '#f1f5f9'}; color: ${r.status === 'Falta' ? '#ffffff' : '#334155'}; border: 1px solid ${r.status === 'Falta' ? '#dc2626' : '#cbd5e1'};">
+                            <button class="btn btn-sm" onclick="window.app.setStudentttendanceStatus('${r.id}', 'Tardanza')" style="font-size: 10.5px; padding: 2px 7px; font-weight: 800; background: ${r.status === 'Tardanza' ? '#f59e0b' : '#f1f5f9'}; color: ${r.status === 'Tardanza' ? '#ffffff' : '#334155'}; border: 1px solid ${r.status === 'Tardanza' ? '#d97706' : '#cbd5e1'};">
 
-                              <spanclas s='status-dot-red'></span> Falta
+                              <span class='status-dot-yellow'></span> Tardanza
 
                             </button>
 
-                            <buttonclas s="btnbtn-sm" onclick="window.app.setStudentttendanceStatus('${r.id}', 'Justificada')" style="font-size: 10.5px; paddióng: 2px 7px; font-weight: 800; background: ${r.status === 'Justificada' ? '#8b5cf6' : '#f1f5f9'}; color: ${r.status === 'Justificada' ? '#ffffff' : '#334155'}; border: 1px solid ${r.status === 'Justificada' ? '#7c3aed' : '#cbd5e1'};">
+                            <button class="btn btn-sm" onclick="window.app.setStudentttendanceStatus('${r.id}', 'Falta')" style="font-size: 10.5px; padding: 2px 7px; font-weight: 800; background: ${r.status === 'Falta' ? '#ef4444' : '#f1f5f9'}; color: ${r.status === 'Falta' ? '#ffffff' : '#334155'}; border: 1px solid ${r.status === 'Falta' ? '#dc2626' : '#cbd5e1'};">
+
+                              <span class='status-dot-red'></span> Falta
+
+                            </button>
+
+                            <button class="btn btn-sm" onclick="window.app.setStudentttendanceStatus('${r.id}', 'Justificada')" style="font-size: 10.5px; padding: 2px 7px; font-weight: 800; background: ${r.status === 'Justificada' ? '#8b5cf6' : '#f1f5f9'}; color: ${r.status === 'Justificada' ? '#ffffff' : '#334155'}; border: 1px solid ${r.status === 'Justificada' ? '#7c3aed' : '#cbd5e1'};">
 
                               🔵 Justificada
 
@@ -22871,7 +22867,7 @@ const Components = {
 
                         <td>
 
-                          <spanstyl e="font-size: 11px; color: #475569;">
+                          <span style="font-size: 11px; color: #475569;">
 
                             ${r.method || 'Molinete Huella Digital'}
 
@@ -22881,7 +22877,7 @@ const Components = {
 
                         <td>
 
-                          <spanstyl e="font-size: 11px; color: #64748b;">
+                          <span style="font-size: 11px; color: #64748b;">
 
                             ${r.observations || 'Siónobservaciones'}
 
@@ -22891,7 +22887,7 @@ const Components = {
 
                         <td style="text-align: center;">
 
-                          <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openJustifyttendanceModal('${r.studentId}', '${r.date}')" style="font-size: 10.5px; paddióng: 3px 8px;">
+                          <button class="btn btn-outline btn-sm" onclick="window.app.openJustifyttendanceModal('${r.studentId}', '${r.date}')" style="font-size: 10.5px; padding: 3px 8px;">
 
                             ✏️ Justificar
 
@@ -22925,25 +22921,25 @@ const Components = {
 
             
 
-            <div class="card" style="margión-bottom: var(--space-4); background: #f8fafc; border: 1px solid #cbd5e1;">
+            <div class="card" style="margin-bottom: var(--space-4); background: #f8fafc; border: 1px solid #cbd5e1;">
 
-              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; paddióng: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 14px;">
 
                 <div>
 
                   <div style="display: flex; align-items: center; gap: 8px;">
 
-                    <spanstyl e="font-size: 20px;"></span>
+                    <span style="font-size: 20px;"></span>
 
                     <div>
 
-                      <h2 style="font-size: 17px; font-weight: 900; color: #0b132b; margión: 0;">
+                      <h2 style="font-size: 17px; font-weight: 900; color: #0b132b; margin: 0;">
 
                         Parte Diario Oficial de Tardanzas e Inasistencias
 
                       </h2>
 
-                      <spanstyl e="font-size: 11.5px; color: #64748b;">
+                      <span style="font-size: 11.5px; color: #64748b;">
 
                         Fecha: <strong>${selectedDate}</strong> • Hora de Corte Oficial: <strong>08:15 AM</strong> • I.E.P. "El Educador" (UGEL 05)
 
@@ -22959,13 +22955,13 @@ const Components = {
 
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
 
-                  <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.openOfficialDailyReportPrintModal('${selectedDate}')" style="font-weight: 800; font-size: 12px;">
+                  <button class="btn btn-navy btn-sm" onclick="window.app.openOfficialDailyReportPrintModal('${selectedDate}')" style="font-weight: 800; font-size: 12px;">
 
                     Imprimir Parte Diario A4 (UGEL 05)
 
                   </button>
 
-                  <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.notifyllbsencesndTardiónessWhatspp('${selectedDate}')" style="font-weight: 800; font-size: 12px;">
+                  <button class="btn btn-gold btn-sm" onclick="window.app.notifyllbsencesndTardiónessWhatspp('${selectedDate}')" style="font-weight: 800; font-size: 12px;">
 
                     📲 N otificar a Todos los Apoderados (Whatspp)
 
@@ -22981,51 +22977,51 @@ const Components = {
 
             <!-- CUDRO RESUMENDE INCIDEN CIS -->
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(200px, 1fr)); gap: 12px; margión-bottom: var(--space-5);">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: var(--space-5);">
 
-              <div class="card" style="paddióng: 14px; border-left: 4px solid #10b981; background: #ecfdf5;">
+              <div class="card" style="padding: 14px; border-left: 4px solid #10b981; background: #ecfdf5;">
 
-                <spanstyl e="font-size: 11px; font-weight: 800; color: #065f46;">ASISTENCIA GENERÍAL</span>
+                <span style="font-size: 11px; font-weight: 800; color: #065f46;">ASISTENCIA GENERÍAL</span>
 
-                <div style="font-size: 24px; font-weight: 900; color: #047857; margión: 2px 0;">${dayReport.attendanceRate}%</div>
+                <div style="font-size: 24px; font-weight: 900; color: #047857; margin: 2px 0;">${dayReport.attendanceRate}%</div>
 
-                <spanstyl e="font-size: 10.5px; color: #047857;">${dayReport.presentList.length} alumnos puntuales</span>
-
-              </div>
-
-
-
-              <div class="card" style="paddióng: 14px; border-left: 4px solid #f59e0b; background: #fffbeb;">
-
-                <spanstyl e="font-size: 11px; font-weight: 800; color: #92400e;">TÍARDÍANZS ENPUERTÍA</span>
-
-                <div style="font-size: 24px; font-weight: 900; color: #b45309; margión: 2px 0;">${dayReport.tardiónessList.length} Casos</div>
-
-                <spanstyl e="font-size: 10.5px; color: #b45309;">Registrados post 07:45 am</span>
+                <span style="font-size: 10.5px; color: #047857;">${dayReport.presentList.length} alumnos puntuales</span>
 
               </div>
 
 
 
-              <div class="card" style="paddióng: 14px; border-left: 4px solid #ef4444; background: #fef2f2;">
+              <div class="card" style="padding: 14px; border-left: 4px solid #f59e0b; background: #fffbeb;">
 
-                <spanstyl e="font-size: 11px; font-weight: 800; color: #991b1b;">INSISTEN CIS DEL DÍA</span>
+                <span style="font-size: 11px; font-weight: 800; color: #92400e;">TÍARDÍANZS ENPUERTÍA</span>
 
-                <div style="font-size: 24px; font-weight: 900; color: #dc2626; margión: 2px 0;">${dayReport.absenceList.length} Alumnos</div>
+                <div style="font-size: 24px; font-weight: 900; color: #b45309; margin: 2px 0;">${dayReport.tardiónessList.length} Casos</div>
 
-                <spanstyl e="font-size: 10.5px; color: #dc2626;">Siónmarcación de ingreso</span>
+                <span style="font-size: 10.5px; color: #b45309;">Registrados post 07:45 am</span>
 
               </div>
 
 
 
-              <div class="card" style="paddióng: 14px; border-left: 4px solid #8b5cf6; background: #f5f3ff;">
+              <div class="card" style="padding: 14px; border-left: 4px solid #ef4444; background: #fef2f2;">
 
-                <spanstyl e="font-size: 11px; font-weight: 800; color: #5b21b6;">FLTÍAS JUSTIFICDÍAS</span>
+                <span style="font-size: 11px; font-weight: 800; color: #991b1b;">INSISTEN CIS DEL DÍA</span>
 
-                <div style="font-size: 24px; font-weight: 900; color: #6d28d9; margión: 2px 0;">${dayReport.justifiedList.length} Casos</div>
+                <div style="font-size: 24px; font-weight: 900; color: #dc2626; margin: 2px 0;">${dayReport.absenceList.length} Alumnos</div>
 
-                <spanstyl e="font-size: 10.5px; color: #6d28d9;">Conaviso / descanso médico</span>
+                <span style="font-size: 10.5px; color: #dc2626;">Siónmarcación de ingreso</span>
+
+              </div>
+
+
+
+              <div class="card" style="padding: 14px; border-left: 4px solid #8b5cf6; background: #f5f3ff;">
+
+                <span style="font-size: 11px; font-weight: 800; color: #5b21b6;">FLTÍAS JUSTIFICDÍAS</span>
+
+                <div style="font-size: 24px; font-weight: 900; color: #6d28d9; margin: 2px 0;">${dayReport.justifiedList.length} Casos</div>
+
+                <span style="font-size: 10.5px; color: #6d28d9;">Conaviso / descanso médico</span>
 
               </div>
 
@@ -23035,23 +23031,23 @@ const Components = {
 
             <!-- SECCIÓN A: TÍABLA DE TÍARDÍANZS -->
 
-            <div class="card" style="margión-bottom: var(--space-5); border: 1px solid #fde68a;">
+            <div class="card" style="margin-bottom: var(--space-5); border: 1px solid #fde68a;">
 
               <div class="card-header" style="background: #fffbeb; border-bottom: 1px solid #fef3c7;">
 
                 <div style="display: flex; align-items: center; gap: 8px;">
 
-                  <spanstyl e="font-size: 18px;"><spanclas s='status-dot-yellow'></span></span>
+                  <span style="font-size: 18px;"><span class='status-dot-yellow'></span></span>
 
                   <div>
 
-                    <h3 style="font-size: 14px; font-weight: 900; color: #92400e; margión: 0;">
+                    <h3 style="font-size: 14px; font-weight: 900; color: #92400e; margin: 0;">
 
                       1. Registro Detallado de Tardanzas enPortera (${dayReport.tardiónessList.length} casos)
 
                     </h3>
 
-                    <spanstyl e="font-size: 11px; color: #b45309;">
+                    <span style="font-size: 11px; color: #b45309;">
 
                       Estudiantes que ingresarondespués de las 07:45 AM mediante escaneo de código QR o torniquete.
 
@@ -23073,7 +23069,7 @@ const Components = {
 
                     <tr>
 
-                      <th>N  </th>
+                      <th>N</th>
 
                       <th>Estudiante</th>
 
@@ -23105,15 +23101,15 @@ const Components = {
 
                           <strong>${t.studentName}</strong><br>
 
-                          <spanstyl e="font-size: 10.5px; color: #64748b;">Código: ${t.studentCode} • DNI: ${t.dni}</span>
+                          <span style="font-size: 10.5px; color: #64748b;">Código: ${t.studentCode} • DNI: ${t.dni}</span>
 
                         </td>
 
-                        <td><spanclas s="status-badge" style="background:#e0e7ff; color:#3730a3; font-weight:bold;">${t.grade}</span></td>
+                        <td><span class="status-badge" style="background:#e0e7ff; color:#3730a3; font-weight:bold;">${t.grade}</span></td>
 
                         <td><strong style="color: #b45309; font-size: 13px;">${t.arrivalTime}</strong></td>
 
-                        <td><spanclas s="status-badge status-failed" style="background: #fef3c7; color: #92400e; font-weight: 800;">+${t.delayMinutes || '7'} mión</span></td>
+                        <td><span class="status-badge status-failed" style="background: #fef3c7; color: #92400e; font-weight: 800;">+${t.delayMinutes || '7'} mión</span></td>
 
                         <td>${t.guardian || 'Apoderado'}</td>
 
@@ -23123,13 +23119,13 @@ const Components = {
 
                           <div style="display: flex; gap: 4px; justify-content: center;">
 
-                            <buttonclas s="btnbtn-sm" onclick="window.app.sendTardiónessWhatspp('${t.studentName}', '${t.arrivalTime}', '${t.delayMinutes || '7'}', '${t.guardianPhone || '984-123-456'}', '${t.guardian || 'Apoderado'}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 10.5px; paddióng: 4px 8px;" title="Enviar notificación a Whatspp">
+                            <button class="btn btn-sm" onclick="window.app.sendTardiónessWhatspp('${t.studentName}', '${t.arrivalTime}', '${t.delayMinutes || '7'}', '${t.guardianPhone || '984-123-456'}', '${t.guardian || 'Apoderado'}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 10.5px; padding: 4px 8px;" title="Enviar notificación a Whatspp">
 
                               💬 Whatspp
 
                             </button>
 
-                            <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.showTardiónessPassModal('${t.studentCode}')" style="font-size: 10.5px; paddióng: 4px 8px;" title="Emitir Pase de Tardanza">
+                            <button class="btn btn-outline btn-sm" onclick="window.app.showTardiónessPassModal('${t.studentCode}')" style="font-size: 10.5px; padding: 4px 8px;" title="Emitir Pase de Tardanza">
 
                               Pase
 
@@ -23145,7 +23141,7 @@ const Components = {
 
                       <tr>
 
-                        <td colspan="8" style="text-align: center; paddióng: 18px; color: #047857; font-weight: bold;">
+                        <td colspan="8" style="text-align: center; padding: 18px; color: #047857; font-weight: bold;">
 
                           ✓ N o se registrarontardanzas en el control de puerta enesta fecha.
 
@@ -23173,17 +23169,17 @@ const Components = {
 
                 <div style="display: flex; align-items: center; gap: 8px;">
 
-                  <spanstyl e="font-size: 18px;"><spanclas s='status-dot-red'></span></span>
+                  <span style="font-size: 18px;"><span class='status-dot-red'></span></span>
 
                   <div>
 
-                    <h3 style="font-size: 14px; font-weight: 900; color: #991b1b; margión: 0;">
+                    <h3 style="font-size: 14px; font-weight: 900; color: #991b1b; margin: 0;">
 
                       2. Registro de Inasistencias del Da (${dayReport.absenceList.length} casos)
 
                     </h3>
 
-                    <spanstyl e="font-size: 11px; color: #dc2626;">
+                    <span style="font-size: 11px; color: #dc2626;">
 
                       Alumnos siónregistro biométrico ni escaneo de fotocheck al cierre de puerta.
 
@@ -23205,7 +23201,7 @@ const Components = {
 
                     <tr>
 
-                      <th>N  </th>
+                      <th>N</th>
 
                       <th>Estudiante</th>
 
@@ -23237,11 +23233,11 @@ const Components = {
 
                           <strong>${a.studentName}</strong><br>
 
-                          <spanstyl e="font-size: 10.5px; color: #64748b;">DNI: ${a.dni} • ${a.studentCode}</span>
+                          <span style="font-size: 10.5px; color: #64748b;">DNI: ${a.dni} • ${a.studentCode}</span>
 
                         </td>
 
-                        <td><spanclas s="status-badge" style="background:#e0e7ff; color:#3730a3; font-weight:bold;">${a.grade}</span></td>
+                        <td><span class="status-badge" style="background:#e0e7ff; color:#3730a3; font-weight:bold;">${a.grade}</span></td>
 
                         <td>${currentGrade.tutor || 'Prof. Roberto Silva'}</td>
 
@@ -23249,19 +23245,19 @@ const Components = {
 
                         <td><code>${a.guardianPhone || '984-123-456'}</code></td>
 
-                        <td><spanclas s="status-badge status-failed" style="font-weight: 800;"><spanclas s='status-dot-red'></span> Inasistencia Injustificada</span></td>
+                        <td><span class="status-badge status-failed" style="font-weight: 800;"><span class='status-dot-red'></span> Inasistencia Injustificada</span></td>
 
                         <td style="text-align: center;">
 
                           <div style="display: flex; gap: 4px; justify-content: center;">
 
-                            <buttonclas s="btnbtn-sm" onclick="window.app.sendbsenceWhatspp('${a.studentName}', '${a.guardianPhone || '984-123-456'}', '${a.guardian || 'Apoderado'}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 10.5px; paddióng: 4px 8px;" title="N otificar Inasistencia por Whatspp">
+                            <button class="btn btn-sm" onclick="window.app.sendbsenceWhatspp('${a.studentName}', '${a.guardianPhone || '984-123-456'}', '${a.guardian || 'Apoderado'}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 10.5px; padding: 4px 8px;" title="N otificar Inasistencia por Whatspp">
 
                               💬 Whatspp
 
                             </button>
 
-                            <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openJustifyttendanceModal('${a.studentCode}', '${selectedDate}')" style="font-size: 10.5px; paddióng: 4px 8px;" title="Registrar Justificación">
+                            <button class="btn btn-outline btn-sm" onclick="window.app.openJustifyttendanceModal('${a.studentCode}', '${selectedDate}')" style="font-size: 10.5px; padding: 4px 8px;" title="Registrar Justificación">
 
                               📝 Justificar
 
@@ -23277,7 +23273,7 @@ const Components = {
 
                       <tr>
 
-                        <td colspan="8" style="text-align: center; paddióng: 18px; color: #047857; font-weight: bold;">
+                        <td colspan="8" style="text-align: center; padding: 18px; color: #047857; font-weight: bold;">
 
                           ✓ Asistencia al 100%. N o hay alumnos inasistentes registrados.
 
@@ -23325,23 +23321,23 @@ const Components = {
 
                     <div style="display: flex; align-items: center; gap: 8px;">
 
-                      <spanstyl e="font-size: 20px;">[Cmara]</span>
+                      <span style="font-size: 20px;">[Cmara]</span>
 
                       <div>
 
-                        <h3 style="font-size: 15px; font-weight: 900; color: white; margión: 0;">
+                        <h3 style="font-size: 15px; font-weight: 900; color: white; margin: 0;">
 
                           Estación de Portera & Auxiliar: Escner QR Inteligente
 
                         </h3>
 
-                        <spanstyl e="font-size: 11px; color: #94a3b8;">Asistencia enPuerta (07:00 - 08:30 AM) • Incidencias durante la jornada</span>
+                        <span style="font-size: 11px; color: #94a3b8;">Asistencia enPuerta (07:00 - 08:30 AM) • Incidencias durante la jornada</span>
 
                       </div>
 
                     </div>
 
-                    <spani d="camera-door-status" class="status-badge status-approved" style="font-size: 10px;"><spanclas s='status-dot-green'></span> LISTO</span>
+                    <span id="camera-door-status" class="status-badge status-approved" style="font-size: 10px;"><span class='status-dot-green'></span> LISTO</span>
 
                   </div>
 
@@ -23349,15 +23345,15 @@ const Components = {
 
 
 
-                <div style="paddióng: 20px; text-align: center;">
+                <div style="padding: 20px; text-align: center;">
 
                   
 
-                  <div id="qr-door-camera-feed" style="width: 100%; max-width: 320px; height: 240px; margión: 0 auto 16px; border: 3px dashed #3b82f6; border-radius: 12px; background: #0f172a; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                  <div id="qr-door-camera-feed" style="width: 100%; max-width: 320px; height: 240px; margin: 0 auto 16px; border: 3px dashed #3b82f6; border-radius: 12px; background: #0f172a; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
 
                     <div style="color: white; text-align: center;">
 
-                      <div style="font-size: 48px; margión-bottom: 6px;">⚡</div>
+                      <div style="font-size: 48px; margin-bottom: 6px;">⚡</div>
 
                       <div style="font-size: 12px; font-weight: bold; color: #38bdf8;">Lector QR Activo</div>
 
@@ -23371,15 +23367,15 @@ const Components = {
 
                   <!-- Botones de Control de Cmara -->
 
-                  <div style="display: flex; gap: 8px; justify-content: center; margión-bottom: 20px;">
+                  <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 20px;">
 
-                    <buttoni d="btn-start-door-cam" class="btnbtn-navy btn-sm" onclick="window.app.startDoorCameraScanner()" style="font-weight: 800;">
+                    <buttoni d="btn-start-door-cam" class="btn btn-navy btn-sm" onclick="window.app.startDoorCameraScanner()" style="font-weight: 800;">
 
                       📹 Encender Cmara enVivo
 
                     </button>
 
-                    <buttoni d="btn-stop-door-cam" class="btnbtn-red btn-sm" onclick="window.app.stopDoorCameraScanner()" style="font-weight: 800; display: none;">
+                    <buttoni d="btn-stop-door-cam" class="btn btn-red btn-sm" onclick="window.app.stopDoorCameraScanner()" style="font-weight: 800; display: none;">
 
                       ⏹️ Detener Cmara
 
@@ -23391,7 +23387,7 @@ const Components = {
 
                   <!-- Simulador de Escaneo Inteligente -->
 
-                  <h4 style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); margión-bottom: 8px;">
+                  <h4 style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); margin-bottom: 8px;">
 
                     ⚡ Simulación de Lecturas QR (Asistencia vs. Incidencias):
 
@@ -23399,27 +23395,27 @@ const Components = {
 
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
 
-                    <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-042', '07:38 AM')" style="font-size: 11px; text-align: left; paddióng: 8px;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-042', '07:38 AM')" style="font-size: 11px; text-align: left; padding: 8px;">
 
-                      <spanclas s='status-dot-green'></span> <strong>Sofía Méndez</strong><br><spanstyl e="font-size: 9.5px; color: #047857;">1er Escaneo: Puntual (07:38 AM)</span>
-
-                    </button>
-
-                    <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-011', '08:10 AM')" style="font-size: 11px; text-align: left; paddióng: 8px;">
-
-                      <spanclas s='status-dot-yellow'></span> <strong>Carlos Benítez</strong><br><spanstyl e="font-size: 9.5px; color: #b45309;">1er Escaneo: Tardanza (08:10 AM)</span>
+                      <span class='status-dot-green'></span> <strong>Sofía Méndez</strong><br><span style="font-size: 9.5px; color: #047857;">1er Escaneo: Puntual (07:38 AM)</span>
 
                     </button>
 
-                    <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-055', '07:35 AM')" style="font-size: 11px; text-align: left; paddióng: 8px;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-011', '08:10 AM')" style="font-size: 11px; text-align: left; padding: 8px;">
 
-                      <spanclas s='status-dot-green'></span> <strong>Salim Cceres</strong><br><spanstyl e="font-size: 9.5px; color: #047857;">Ingreso Puntual (07:35 AM)</span>
+                      <span class='status-dot-yellow'></span> <strong>Carlos Benítez</strong><br><span style="font-size: 9.5px; color: #b45309;">1er Escaneo: Tardanza (08:10 AM)</span>
 
                     </button>
 
-                    <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-025', '08:45 AM')" style="font-size: 11px; text-align: left; paddióng: 8px;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-055', '07:35 AM')" style="font-size: 11px; text-align: left; padding: 8px;">
 
-                      <spanclas s='status-dot-red'></span> <strong>Mateo Ramos</strong><br><spanstyl e="font-size: 9.5px; color: #dc2626;">08:45 AM (Puerta Cerrada / Falta)</span>
+                      <span class='status-dot-green'></span> <strong>Salim Cceres</strong><br><span style="font-size: 9.5px; color: #047857;">Ingreso Puntual (07:35 AM)</span>
+
+                    </button>
+
+                    <button class="btn btn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-025', '08:45 AM')" style="font-size: 11px; text-align: left; padding: 8px;">
+
+                      <span class='status-dot-red'></span> <strong>Mateo Ramos</strong><br><span style="font-size: 9.5px; color: #dc2626;">08:45 AM (Puerta Cerrada / Falta)</span>
 
                     </button>
 
@@ -23429,9 +23425,9 @@ const Components = {
 
                   <!-- Entrada para Pistola Lectora USB o Teclado -->
 
-                  <div style="background: white; border: 1.5px solid #cbd5e1; border-radius: 8px; paddióng: 10px 14px; margión-top: 14px; text-align: left;">
+                  <div style="background: white; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 10px 14px; margin-top: 14px; text-align: left;">
 
-                    <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margión-bottom: 4px;">
+                    <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margin-bottom: 4px;">
 
                       🔫 O Escanear conPistola USB / Ingreso Manual:
 
@@ -23441,7 +23437,7 @@ const Components = {
 
                       <input type="text" id="door-manual-barcode-input" class="form-control" placeholder="Escanear fotocheck o escribir DNI / Cód..." style="font-size: 12px; font-weight: bold;" onkeydown="if(event.key==='Enter'){ window.app.processSmartQRScan(this.value); this.value=''; }" />
 
-                      <buttonclas s="btnbtn-navy btn-sm" onclick="const inp=document.getElementById('door-manual-barcode-input'); if(inp && inp.value){ window.app.processSmartQRScan(inp.value); inp.value=''; }" style="font-weight: 800; white-space: nowrap;">
+                      <button class="btn btn-navy btn-sm" onclick="const inp=document.getElementById('door-manual-barcode-input'); if(inp && inp.value){ window.app.processSmartQRScan(inp.value); inp.value=''; }" style="font-weight: 800; white-space: nowrap;">
 
                         Validar
 
@@ -23463,11 +23459,11 @@ const Components = {
 
               <div>
 
-                <div class="card" style="border: 2px solid var(--border-subtle); margión-bottom: 16px;">
+                <div class="card" style="border: 2px solid var(--border-subtle); margin-bottom: 16px;">
 
                   <div class="card-header" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
 
-                    <h3 style="font-size: 14px; font-weight: 800; color: #1e293b; margión: 0;">
+                    <h3 style="font-size: 14px; font-weight: 800; color: #1e293b; margin: 0;">
 
                       🖥️ Pantalla de Validación de Puerta & Auxiliar
 
@@ -23477,17 +23473,17 @@ const Components = {
 
                   
 
-                  <div id="door-last-scan-display" style="paddióng: 20px; text-align: center;">
+                  <div id="door-last-scan-display" style="padding: 20px; text-align: center;">
 
-                    <div style="font-size: 40px; margión-bottom: 6px;"></div>
+                    <div style="font-size: 40px; margin-bottom: 6px;"></div>
 
-                    <h4 style="font-size: 15px; font-weight: 800; color: var(--color-navy-900); margión-bottom: 4px;">
+                    <h4 style="font-size: 15px; font-weight: 800; color: var(--color-navy-900); margin-bottom: 4px;">
 
                       Esperando lectura de fotocheck escolar...
 
                     </h4>
 
-                    <p style="font-size: 12px; color: var(--text-muted); margión: 0;">
+                    <p style="font-size: 12px; color: var(--text-muted); margin: 0;">
 
                       Al escanear enpuerta se valida asistencia. Si se escanea durante el horario escolar o recreo, se habilita el registro de incidencias conductuales.
 
@@ -23503,21 +23499,21 @@ const Components = {
 
                 <div class="card">
 
-                  <div class="card-header" style="paddióng: 10px 14px; border-bottom: 1px solid #e2e8f0;">
+                  <div class="card-header" style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">
 
                     <strong style="font-size: 12px; color: #1e3a8a;">⏱️ Últimos Alumnos validados por QR:</strong>
 
                   </div>
 
-                  <div id="door-recent-scans-container" style="max-height: 180px; overflow-y: auto; font-size: 11.5px; paddióng: 6px;">
+                  <div id="door-recent-scans-container" style="max-height: 180px; overflow-y: auto; font-size: 11.5px; padding: 6px;">
 
                     ${classroomRecords.slice(0, 5).map(r => `
 
-                      <div style="display: flex; justify-content: space-between; align-items: center; paddióng: 6px 8px; border-bottom: 1px solid #f1f5f9;">
+                      <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 8px; border-bottom: 1px solid #f1f5f9;">
 
                         <div>
 
-                          <strong>${r.studentName}</strong> <spanstyl e="font-size: 10px; color: #64748b;">(${r.grade})</span>
+                          <strong>${r.studentName}</strong> <span style="font-size: 10px; color: #64748b;">(${r.grade})</span>
 
                         </div>
 
@@ -23525,7 +23521,7 @@ const Components = {
 
                           <code>${r.arrivalTime}</code>
 
-                          <spanclas s="status-badge ${r.status === 'Presente' ? 'status-approved' : r.status === 'Tardanza' ? 'status-pendióng' : 'status-failed'}" style="font-size: 9.5px; paddióng: 1px 5px;">
+                          <span class="status-badge ${r.status === 'Presente' ? 'status-approved' : r.status === 'Tardanza' ? 'status-pendióng' : 'status-failed'}" style="font-size: 9.5px; padding: 1px 5px;">
 
                             ${r.status}
 
@@ -23615,25 +23611,25 @@ const Components = {
 
               return `
 
-                <div class="card" style="margión-bottom: var(--space-4); background: #f8fafc; border: 1px solid #cbd5e1;">
+                <div class="card" style="margin-bottom: var(--space-4); background: #f8fafc; border: 1px solid #cbd5e1;">
 
-                  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; paddióng: 14px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 14px;">
 
                     <div>
 
                       <div style="display: flex; align-items: center; gap: 8px;">
 
-                        <spanstyl e="font-size: 24px;">🏷️</span>
+                        <span style="font-size: 24px;">🏷️</span>
 
                         <div>
 
-                          <h3 style="font-size: 16px; font-weight: 900; color: #0b132b; margión: 0;">
+                          <h3 style="font-size: 16px; font-weight: 900; color: #0b132b; margin: 0;">
 
                             Planchas Oficiales de Códigos QR por Curso & Boleta de Notas
 
                           </h3>
 
-                          <spanstyl e="font-size: 11.5px; color: #64748b;">
+                          <span style="font-size: 11.5px; color: #64748b;">
 
                             Generación de <strong>uncódigo QR por curso oficial</strong> de la boleta de calificaciones para pegar en los cuadernos del estudiante o credencial de asistencia.
 
@@ -23651,15 +23647,15 @@ const Components = {
 
                       <!-- Selector de Modo de Plancha -->
 
-                      <div style="display: flex; background: #e2e8f0; border-radius: 20px; paddióng: 2px;">
+                      <div style="display: flex; background: #e2e8f0; border-radius: 20px; padding: 2px;">
 
-                        <buttonclas s="btnbtn-sm ${qrSheetMode === 'stickers' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setttendanceQRSheetMode('stickers')" style="border-radius: 18px; font-size: 11px; font-weight: 800; paddióng: 4px 12px; border: none;">
+                        <button class="btn btn-sm ${qrSheetMode === 'stickers' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setttendanceQRSheetMode('stickers')" style="border-radius: 18px; font-size: 11px; font-weight: 800; padding: 4px 12px; border: none;">
 
                           📚 Stickers QR por Curso (Cuadernos)
 
                         </button>
 
-                        <buttonclas s="btnbtn-sm ${qrSheetMode === 'cards' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setttendanceQRSheetMode('cards')" style="border-radius: 18px; font-size: 11px; font-weight: 800; paddióng: 4px 12px; border: none;">
+                        <button class="btn btn-sm ${qrSheetMode === 'cards' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setttendanceQRSheetMode('cards')" style="border-radius: 18px; font-size: 11px; font-weight: 800; padding: 4px 12px; border: none;">
 
                           🪪 Fotocheck Asistencia (Portera)
 
@@ -23671,13 +23667,13 @@ const Components = {
 
                       ${qrSheetMode === 'stickers' ? `
 
-                        <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${qrSheetStudent !== 'all' ? qrSheetStudent : 'EST-2026-042'}')" style="font-weight: 900; paddióng: 7px 16px; border-radius: 20px; font-size: 11.5px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #0b132b;">
+                        <button class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${qrSheetStudent !== 'all' ? qrSheetStudent : 'EST-2026-042'}')" style="font-weight: 900; padding: 7px 16px; border-radius: 20px; font-size: 11.5px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #0b132b;">
 
                           ⚡ Plancha Completa Alumno
 
                         </button>
 
-                        <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.printNotebookStickerSheet('attendance-printable-stickers-sheet', '${qrSheetLayout}')" style="font-weight: 800; font-size: 11.5px; paddióng: 7px 14px; border-radius: 20px;">
+                        <button class="btn btn-navy btn-sm" onclick="window.app.printNotebookStickerSheet('attendance-printable-stickers-sheet', '${qrSheetLayout}')" style="font-weight: 800; font-size: 11.5px; padding: 7px 14px; border-radius: 20px;">
 
                           🖨️ Imprimir Plancha A4 (${stickersList.length} QR)
 
@@ -23685,7 +23681,7 @@ const Components = {
 
                       ` : `
 
-                        <buttonclas s="btnbtn-navy btn-sm" onclick="window.print()" style="font-weight: 800; font-size: 11.5px; paddióng: 7px 14px; border-radius: 20px;">
+                        <button class="btn btn-navy btn-sm" onclick="window.print()" style="font-weight: 800; font-size: 11.5px; padding: 7px 14px; border-radius: 20px;">
 
                           🖨️ Imprimir Fotochecks A4
 
@@ -23703,15 +23699,15 @@ const Components = {
 
                     <!-- Filtros Dinmicos para Planchas de Stickers QR por Curso -->
 
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(190px, 1fr)); gap: 10px; background: #ffffff; paddióng: 12px 14px; border-top: 1px solid #e2e8f0;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; background: #ffffff; padding: 12px 14px; border-top: 1px solid #e2e8f0;">
 
                       <div>
 
-                        <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margión-bottom: 2px;">1. Grado Escolar:</label>
+                        <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margin-bottom: 2px;">1. Grado Escolar:</label>
 
                         <select class="form-control" onchange="window.app.onttendanceStickerGradeChange(this.value)" style="font-size: 12px; font-weight: bold;">
 
-                          ${catalog.map(g => `<optionvalu e="${g.id}" ${g.id === qrSheetGrade ? 'selected' : ''}>${g.label} (${g.level})</option>`).join('')}
+                          ${catalog.map(g => `<option value="${g.id}" ${g.id === qrSheetGrade ? 'selected' : ''}>${g.label} (${g.level})</option>`).join('')}
 
                         </select>
 
@@ -23721,15 +23717,15 @@ const Components = {
 
                       <div>
 
-                        <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margión-bottom: 2px;">2. Estudiante:</label>
+                        <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margin-bottom: 2px;">2. Estudiante:</label>
 
                         <select class="form-control" onchange="window.app.onttendanceStickerStudentChange(this.value)" style="font-size: 12px; font-weight: bold;">
 
-                          <optionvalu e="all">-- Todos los Alumnos del Grado (${activeEnrollments.length}) --</option>
+                          <option value="all">-- Todos los Alumnos del Grado (${activeEnrollments.length}) --</option>
 
                           ${activeEnrollments.map(e => `
 
-                            <optionvalu e="${e.studentCode || e.dni}" ${qrSheetStudent === (e.studentCode || e.dni) ? 'selected' : ''}>
+                            <option value="${e.studentCode || e.dni}" ${qrSheetStudent === (e.studentCode || e.dni) ? 'selected' : ''}>
 
                               ${e.studentName} (${e.studentCode || e.dni})
 
@@ -23745,15 +23741,15 @@ const Components = {
 
                       <div>
 
-                        <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margión-bottom: 2px;">3. Curso de Boleta Oficial:</label>
+                        <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margin-bottom: 2px;">3. Curso de Boleta Oficial:</label>
 
                         <select class="form-control" onchange="window.app.onttendanceStickerCourseChange(this.value)" style="font-size: 12px; font-weight: bold;">
 
-                          <optionvalu e="all">-- Todos los Cursos de Boleta (${boletaCourses.length}) --</option>
+                          <option value="all">-- Todos los Cursos de Boleta (${boletaCourses.length}) --</option>
 
                           ${boletaCourses.map(c => `
 
-                            <optionvalu e="${c.id}" ${qrSheetCourse === c.id ? 'selected' : ''}>
+                            <option value="${c.id}" ${qrSheetCourse === c.id ? 'selected' : ''}>
 
                               ${c.icon || '📚'} ${c.name} (${c.teacher})
 
@@ -23769,13 +23765,13 @@ const Components = {
 
                       <div>
 
-                        <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margión-bottom: 2px;">4. Formato Hoja A4:</label>
+                        <label style="font-size: 11px; font-weight: 800; color: #1e3a8a; display: block; margin-bottom: 2px;">4. Formato Hoja A4:</label>
 
                         <select id="attendance-sticker-layout-select" class="form-control" style="font-size: 12px; font-weight: 800; background: #eff6ff; border: 1.5px solid #3b82f6; color: #1e3a8a;">
 
-                          <optionvalu e="3x5" ${qrSheetLayout === '3x5' ? 'selected' : ''}>3 × 5 (15 QR por Hoja A4)</option>
+                          <option value="3x5" ${qrSheetLayout === '3x5' ? 'selected' : ''}>3 × 5 (15 QR por Hoja A4)</option>
 
-                          <optionvalu e="3x4" ${qrSheetLayout === '3x4' ? 'selected' : ''}>3 × 4 (12 QR por Hoja A4)</option>
+                          <option value="3x4" ${qrSheetLayout === '3x4' ? 'selected' : ''}>3 × 4 (12 QR por Hoja A4)</option>
 
                         </select>
 
@@ -23797,15 +23793,15 @@ const Components = {
 
                        ========================================================= -->
 
-                  <div style="margión-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                  <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
 
-                    <spanstyl e="font-size: 12px; color: #475569; font-weight: 700;">
+                    <span style="font-size: 12px; color: #475569; font-weight: 700;">
 
                       Mostrando <strong>${stickersList.length} stickers adhesivos</strong> correspondientes a los cursos de la Boleta Oficial de Notas:
 
                     </span>
 
-                    <spanclas s="status-badge status-approved" style="font-size: 10.5px; font-weight: 800;">
+                    <span class="status-badge status-approved" style="font-size: 10.5px; font-weight: 800;">
 
                       100% Escaneable conCelular o Lector
 
@@ -23815,7 +23811,7 @@ const Components = {
 
 
 
-                  <div id="attendance-printable-stickers-sheet" class="qr-sticker-sheet" style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(280px, 1fr)); gap: 14px; margión-bottom: 24px;">
+                  <div id="attendance-printable-stickers-sheet" class="qr-sticker-sheet" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 24px;">
 
                     ${stickersList.map(st => {
 
@@ -23823,31 +23819,31 @@ const Components = {
 
                       return `
 
-                        <div class="qr-notebook-sticker" style="border: 2px solid #0f172a; border-radius: 10px; paddióng: 12px; background: #ffffff; display: flex; gap: 12px; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: relative; border-left: 6px solid #f59e0b;">
+                        <div class="qr-notebook-sticker" style="border: 2px solid #0f172a; border-radius: 10px; padding: 12px; background: #ffffff; display: flex; gap: 12px; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: relative; border-left: 6px solid #f59e0b;">
 
                           <div style="flex-shrink: 0; text-align: center; width: 75px;">
 
-                            <div style="width: 75px; height: 75px; border: 1px solid #cbd5e1; border-radius: 6px; paddióng: 2px; background: white; margión: 0 auto;">
+                            <div style="width: 75px; height: 75px; border: 1px solid #cbd5e1; border-radius: 6px; padding: 2px; background: white; margin: 0 auto;">
 
                               ${Components.generateQRSVG(st.qrPayload, 140)}
 
                             </div>
 
-                            <spanstyl e="font-size: 8px; font-weight: 800; color: #475569; display: block; margión-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><code>${st.qrCode}</code></span>
+                            <span style="font-size: 8px; font-weight: 800; color: #475569; display: block; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><code>${st.qrCode}</code></span>
 
                           </div>
 
-                          <div style="flex: 1; display: flex; flex-direction: column; gap: 2px; mión-width: 0;">
+                          <div style="flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0;">
 
                             <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                              <spanstyl e="font-size: 8.5px; font-weight: 900; color: #dc2626; letter-spacióng: 0.05em; text-transform: uppercase;">
+                              <span style="font-size: 8.5px; font-weight: 900; color: #dc2626; letter-spacing: 0.05em; text-transform: uppercase;">
 
-                                ★ I.E.P. EL EDUCDOR • SJL
+                                ★ I.E.P. EL EDUCADOR • SJL
 
                               </span>
 
-                              <spanclas s="status-badge" style="font-size: 8px; paddióng: 1px 4px; font-weight: 800; background: #eff6ff; color: #1e40af;">
+                              <span class="status-badge" style="font-size: 8px; padding: 1px 4px; font-weight: 800; background: #eff6ff; color: #1e40af;">
 
                                 ${st.area || 'Oficial'}
 
@@ -23879,15 +23875,15 @@ const Components = {
 
                             </div>
 
-                            <div style="margión-top: 6px; display: flex; gap: 4px;">
+                            <div style="margin-top: 6px; display: flex; gap: 4px;">
 
-                              <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.simulateQRScan('${safePayload}')" style="font-size: 9.5px; paddióng: 2px 7px; border-radius: 12px; font-weight: 800;">
+                              <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('${safePayload}')" style="font-size: 9.5px; padding: 2px 7px; border-radius: 12px; font-weight: 800;">
 
                                 [Cmara] Probar
 
                               </button>
 
-                              <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${st.studentCode}')" style="font-size: 9.5px; paddióng: 2px 7px; border-radius: 12px; font-weight: 800;">
+                              <button class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${st.studentCode}')" style="font-size: 9.5px; padding: 2px 7px; border-radius: 12px; font-weight: 800;">
 
                                 Plancha Alumno
 
@@ -23913,19 +23909,19 @@ const Components = {
 
                        ========================================================= -->
 
-                  <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(260px, 1fr)); gap: 16px; margión-bottom: 20px;">
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 20px;">
 
                     ${enrollments.map(st => `
 
                       <div class="card" style="border: 2px solid #1e3a8a; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.06); background: #ffffff; text-align: center;">
 
-                        <div style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white; paddióng: 8px 12px; display: flex; align-items: center; justify-content: center; gap: 6px; border-bottom: 3px solid #f59e0b;">
+                        <div style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white; padding: 8px 12px; display: flex; align-items: center; justify-content: center; gap: 6px; border-bottom: 3px solid #f59e0b;">
 
                           <img src="logo.png" onerror="this.src='assets/logo.png'" alt="Escudo" style="width: 22px; height: 22px; object-fit: contain;" />
 
                           <div style="text-align: center;">
 
-                            <div style="font-size: 10px; font-weight: 900; letter-spacióng: 0.05em; color: #fde047;">I.E.P. "EL EDUCDOR"</div>
+                            <div style="font-size: 10px; font-weight: 900; letter-spacing: 0.05em; color: #fde047;">I.E.P. "EL EDUCADOR"</div>
 
                             <div style="font-size: 8px; opacity: 0.9;">CONTROL DE ASISTENCIA QR 2026</div>
 
@@ -23933,27 +23929,27 @@ const Components = {
 
                         </div>
 
-                        <div style="paddióng: 16px 12px;">
+                        <div style="padding: 16px 12px;">
 
-                          <div style="width: 140px; height: 140px; margión: 0 auto 12px; border: 2px solid #0b132b; border-radius: 8px; paddióng: 6px; background: white; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+                          <div style="width: 140px; height: 140px; margin: 0 auto 12px; border: 2px solid #0b132b; border-radius: 8px; padding: 6px; background: white; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
 
                             ${Components.generateQRSVG(st.studentCode)}
 
                           </div>
 
-                          <div style="font-size: 13.5px; font-weight: 900; color: #0b132b; text-transform: uppercase; line-height: 1.25; margión-bottom: 4px;">
+                          <div style="font-size: 13.5px; font-weight: 900; color: #0b132b; text-transform: uppercase; line-height: 1.25; margin-bottom: 4px;">
 
                             ${st.studentName}
 
                           </div>
 
-                          <div style="font-size: 12px; font-weight: 800; color: #1e40af; margión-bottom: 6px;">
+                          <div style="font-size: 12px; font-weight: 800; color: #1e40af; margin-bottom: 6px;">
 
                             ${st.grade}
 
                           </div>
 
-                          <div style="font-size: 10.5px; color: #475569; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; paddióng: 3px 8px; display: inline-block;">
+                          <div style="font-size: 10.5px; color: #475569; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px 8px; display: inline-block;">
 
                             <strong>CÓD:</strong> <code>${st.studentCode}</code> • <strong>DNI:</strong> <code>${st.dni}</code>
 
@@ -23961,21 +23957,21 @@ const Components = {
 
                         </div>
 
-                        <div style="background: #f8fafc; border-top: 1px solid #e2e8f0; paddióng: 8px 12px; display: flex; justify-content: space-between; align-items: center; gap: 6px;">
+                        <div style="background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; gap: 6px;">
 
-                          <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.openStudentQRModal('${st.studentCode}')" style="font-size: 11px; font-weight: bold; paddióng: 4px 10px; flex: 1;">
+                          <button class="btn btn-navy btn-sm" onclick="window.app.openStudentQRModal('${st.studentCode}')" style="font-size: 11px; font-weight: bold; padding: 4px 10px; flex: 1;">
 
                             Ver QR
 
                           </button>
 
-                          <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.downloadStudentQR('${st.studentCode}')" style="font-size: 11px; font-weight: bold; paddióng: 4px 8px;">
+                          <button class="btn btn-gold btn-sm" onclick="window.app.downloadStudentQR('${st.studentCode}')" style="font-size: 11px; font-weight: bold; padding: 4px 8px;">
 
                             Guardar
 
                           </button>
 
-                          <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.opencreateIncidentModal('${st.studentCode}')" style="font-size: 11px; font-weight: bold; paddióng: 4px 8px; color: #dc2626; border-color: #fca5a5;">
+                          <button class="btn btn-outline btn-sm" onclick="window.app.opencreateIncidentModal('${st.studentCode}')" style="font-size: 11px; font-weight: bold; padding: 4px 8px; color: #dc2626; border-color: #fca5a5;">
 
                             Informe
 
@@ -24011,27 +24007,27 @@ const Components = {
 
             <!-- Encabezado de la Sub-Pestaña -->
 
-            <div class="card" style="margión-bottom: var(--space-4); background: #f8fafc; border: 1px solid #cbd5e1;">
+            <div class="card" style="margin-bottom: var(--space-4); background: #f8fafc; border: 1px solid #cbd5e1;">
 
-              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; paddióng: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 14px;">
 
                 <div>
 
                   <div style="display: flex; align-items: center; gap: 8px;">
 
-                    <spanstyl e="font-size: 22px;"></span>
+                    <span style="font-size: 22px;"></span>
 
                     <div>
 
-                      <h2 style="font-size: 16px; font-weight: 900; color: #991b1b; margión: 0;">
+                      <h2 style="font-size: 16px; font-weight: 900; color: #991b1b; margin: 0;">
 
                         Libro Oficial de Registro de Incidencias & Convivencia Escolar
 
                       </h2>
 
-                      <spanstyl e="font-size: 11.5px; color: #64748b;">
+                      <span style="font-size: 11.5px; color: #64748b;">
 
-                        I.E.P. "El Educador" • Conforme a la Ley N  29719 / MINEDU y D.S. N  004-2018-MINEDU
+                        I.E.P. "El Educador" • Conforme a la Ley N29719 / MINEDU y D.S. N004-2018-MINEDU
 
                       </span>
 
@@ -24045,13 +24041,13 @@ const Components = {
 
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
 
-                  <buttonclas s="btnbtn-red btn-sm" onclick="window.app.opencreateIncidentModal()" style="font-weight: 800; font-size: 12px;">
+                  <button class="btn btn-red btn-sm" onclick="window.app.opencreateIncidentModal()" style="font-weight: 800; font-size: 12px;">
 
                     + Registrar N uevo Informe de Incidencia / Mérito
 
                   </button>
 
-                  <buttonclas s="btnbtn-navy btn-sm" onclick="window.print()" style="font-weight: 800; font-size: 12px;">
+                  <button class="btn btn-navy btn-sm" onclick="window.print()" style="font-weight: 800; font-size: 12px;">
 
                     Imprimir Libro de Incidencias
 
@@ -24083,63 +24079,63 @@ const Components = {
 
               return `
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(170px, 1fr)); gap: 10px; margión-bottom: var(--space-4);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: var(--space-4);">
 
-                  <div class="card" style="paddióng: 12px; border-left: 4px solid #3b82f6; background: #eff6ff;">
+                  <div class="card" style="padding: 12px; border-left: 4px solid #3b82f6; background: #eff6ff;">
 
-                    <spanstyl e="font-size: 11px; font-weight: 800; color: #1e40af;">TOTÍAL REGISTRÍADOS</span>
+                    <span style="font-size: 11px; font-weight: 800; color: #1e40af;">TOTÍAL REGISTRÍADOS</span>
 
-                    <div style="font-size: 22px; font-weight: 900; color: #1e3a8a; margión: 2px 0;">${allInc.length} Informes</div>
+                    <div style="font-size: 22px; font-weight: 900; color: #1e3a8a; margin: 2px 0;">${allInc.length} Informes</div>
 
-                    <spanstyl e="font-size: 10px; color: #64748b;">Año Lectivo 2026</span>
+                    <span style="font-size: 10px; color: #64748b;">Año Lectivo 2026</span>
 
                   </div>
 
                   
 
-                  <div class="card" style="paddióng: 12px; border-left: 4px solid #f59e0b; background: #fffbeb;">
+                  <div class="card" style="padding: 12px; border-left: 4px solid #f59e0b; background: #fffbeb;">
 
-                    <spanstyl e="font-size: 11px; font-weight: 800; color: #92400e;"><spanclas s='status-dot-yellow'></span> FLTÍAS LEVES</span>
+                    <span style="font-size: 11px; font-weight: 800; color: #92400e;"><span class='status-dot-yellow'></span> FLTÍAS LEVES</span>
 
-                    <div style="font-size: 22px; font-weight: 900; color: #b45309; margión: 2px 0;">${leves}</div>
+                    <div style="font-size: 22px; font-weight: 900; color: #b45309; margin: 2px 0;">${leves}</div>
 
-                    <spanstyl e="font-size: 10px; color: #b45309;">Uniforme, tardanza aula</span>
-
-                  </div>
-
-
-
-                  <div class="card" style="paddióng: 12px; border-left: 4px solid #ef4444; background: #fef2f2;">
-
-                    <spanstyl e="font-size: 11px; font-weight: 800; color: #991b1b;"><spanclas s='status-dot-red'></span> FLTÍAS GRÍAVES</span>
-
-                    <div style="font-size: 22px; font-weight: 900; color: #dc2626; margión: 2px 0;">${graves}</div>
-
-                    <spanstyl e="font-size: 10px; color: #dc2626;">Desobediencia, celulares</span>
+                    <span style="font-size: 10px; color: #b45309;">Uniforme, tardanza aula</span>
 
                   </div>
 
 
 
-                  <div class="card" style="paddióng: 12px; border-left: 4px solid #991b1b; background: #ffe4e6;">
+                  <div class="card" style="padding: 12px; border-left: 4px solid #ef4444; background: #fef2f2;">
 
-                    <spanstyl e="font-size: 11px; font-weight: 800; color: #881337;">⛔ MUY GRÍAVES</span>
+                    <span style="font-size: 11px; font-weight: 800; color: #991b1b;"><span class='status-dot-red'></span> FLTÍAS GRÍAVES</span>
 
-                    <div style="font-size: 22px; font-weight: 900; color: #9f1239; margión: 2px 0;">${muyGraves}</div>
+                    <div style="font-size: 22px; font-weight: 900; color: #dc2626; margin: 2px 0;">${graves}</div>
 
-                    <spanstyl e="font-size: 10px; color: #9f1239;">Agresiones, daños</span>
+                    <span style="font-size: 10px; color: #dc2626;">Desobediencia, celulares</span>
 
                   </div>
 
 
 
-                  <div class="card" style="paddióng: 12px; border-left: 4px solid #10b981; background: #ecfdf5;">
+                  <div class="card" style="padding: 12px; border-left: 4px solid #991b1b; background: #ffe4e6;">
 
-                    <spanstyl e="font-size: 11px; font-weight: 800; color: #065f46;">★ MÉRITOS / FELICITÍACIONES</span>
+                    <span style="font-size: 11px; font-weight: 800; color: #881337;">⛔ MUY GRÍAVES</span>
 
-                    <div style="font-size: 22px; font-weight: 900; color: #047857; margión: 2px 0;">${meritos}</div>
+                    <div style="font-size: 22px; font-weight: 900; color: #9f1239; margin: 2px 0;">${muyGraves}</div>
 
-                    <spanstyl e="font-size: 10px; color: #047857;">Conducta destacada</span>
+                    <span style="font-size: 10px; color: #9f1239;">Agresiones, daños</span>
+
+                  </div>
+
+
+
+                  <div class="card" style="padding: 12px; border-left: 4px solid #10b981; background: #ecfdf5;">
+
+                    <span style="font-size: 11px; font-weight: 800; color: #065f46;">★ MÉRITOS / FELICITÍACIONES</span>
+
+                    <div style="font-size: 22px; font-weight: 900; color: #047857; margin: 2px 0;">${meritos}</div>
+
+                    <span style="font-size: 10px; color: #047857;">Conducta destacada</span>
 
                   </div>
 
@@ -24155,13 +24151,13 @@ const Components = {
 
                     <div>
 
-                      <h3 class="card-title" style="font-size: 14px; margión: 0;">
+                      <h3 class="card-title" style="font-size: 14px; margin: 0;">
 
                         Expediente Conductual & Registro de Casos
 
                       </h3>
 
-                      <spanstyl e="font-size: 11px; color: var(--text-muted);">
+                      <span style="font-size: 11px; color: var(--text-muted);">
 
                         Cada reporte está amarrado al código QR y perfil del estudiante connotificación inmediata a su apoderado.
 
@@ -24173,7 +24169,7 @@ const Components = {
 
                     <div style="display: flex; gap: 8px;">
 
-                      <input type="text" id="incident-search-input" class="form-control" placeholder="Buscar por estudiante (ej: Gael Cceres)..." style="font-size: 11.5px; width: 260px;" oniónput="window.app.filterIncidentsTable(this.value)">
+                      <input type="text" id="incident-search-input" class="form-control" placeholder="Buscar por estudiante (ej: Gael Cceres)..." style="font-size: 11.5px; width: 260px;" oninput="window.app.filterIncidentsTable(this.value)">
 
                     </div>
 
@@ -24189,7 +24185,7 @@ const Components = {
 
                         <tr>
 
-                          <th>N  / Código</th>
+                          <th>N/ Código</th>
 
                           <th>Estudiante</th>
 
@@ -24235,25 +24231,25 @@ const Components = {
 
                                 <strong>${inc.studentName}</strong><br>
 
-                                <spanstyl e="font-size: 10.5px; color: #64748b;">DNI: ${inc.dni} • ${inc.studentCode}</span>
+                                <span style="font-size: 10.5px; color: #64748b;">DNI: ${inc.dni} • ${inc.studentCode}</span>
 
                               </td>
 
-                              <td><spanclas s="status-badge" style="background:#e0e7ff; color:#3730a3; font-weight:bold;">${inc.grade}</span></td>
+                              <td><span class="status-badge" style="background:#e0e7ff; color:#3730a3; font-weight:bold;">${inc.grade}</span></td>
 
                               <td>
 
                                 <strong>${inc.date}</strong><br>
 
-                                <spanstyl e="font-size: 11px; color: #64748b;">${inc.time}</span>
+                                <span style="font-size: 11px; color: #64748b;">${inc.time}</span>
 
                               </td>
 
                               <td>
 
-                                <spanclas s="status-badge" style="background: ${badgeColor}; color: white; font-weight: 800; font-size: 10px;">
+                                <span class="status-badge" style="background: ${badgeColor}; color: white; font-weight: 800; font-size: 10px;">
 
-                                  ${inc.severity === 'Mérito' ? '★ Mérito' : inc.severity === 'Leve' ? '<spanclas s="status-dot-yellow"></span> Leve' : inc.severity === 'Grave' ? '<spanclas s="status-dot-red"></span> Grave' : '⛔ Muy Grave'}
+                                  ${inc.severity === 'Mérito' ? '★ Mérito' : inc.severity === 'Leve' ? '<span class="status-dot-yellow"></span> Leve' : inc.severity === 'Grave' ? '<span class="status-dot-red"></span> Grave' : '⛔ Muy Grave'}
 
                                 </span>
 
@@ -24261,23 +24257,23 @@ const Components = {
 
                               <td><strong>${inc.category}</strong></td>
 
-                              <td><spanstyl e="font-size: 11px; color: #475569;">${inc.location}</span></td>
+                              <td><span style="font-size: 11px; color: #475569;">${inc.location}</span></td>
 
-                              <td><spanstyl e="font-size: 11px; color: #1e3a8a; font-weight: bold;">${inc.reportedBy}</span></td>
+                              <td><span style="font-size: 11px; color: #1e3a8a; font-weight: bold;">${inc.reportedBy}</span></td>
 
-                              <td><spanstyl e="font-size: 11px; color: #334155;">${inc.correctiveMeasure}</span></td>
+                              <td><span style="font-size: 11px; color: #334155;">${inc.correctiveMeasure}</span></td>
 
                               <td style="text-align: center;">
 
                                 <div style="display: flex; gap: 4px; justify-content: center;">
 
-                                  <buttonclas s="btnbtn-sm" onclick="window.app.sendIncidentWhatspp('${inc.id}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 10.5px; paddióng: 3px 8px;" title="N otificar a Apoderado por Whatspp">
+                                  <button class="btn btn-sm" onclick="window.app.sendIncidentWhatspp('${inc.id}')" style="background: #22c55e; color: white; font-weight: 800; font-size: 10.5px; padding: 3px 8px;" title="N otificar a Apoderado por Whatspp">
 
                                     💬 Whatspp
 
                                   </button>
 
-                                  <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.openIncidentOfficialPrintModal('${inc.id}')" style="font-size: 10.5px; paddióng: 3px 8px;" title="Imprimir Acta A4 de Compromiso">
+                                  <button class="btn btn-navy btn-sm" onclick="window.app.openIncidentOfficialPrintModal('${inc.id}')" style="font-size: 10.5px; padding: 3px 8px;" title="Imprimir Acta A4 de Compromiso">
 
                                     Acta A4
 
@@ -24295,7 +24291,7 @@ const Components = {
 
                           <tr>
 
-                            <td colspan="10" style="text-align: center; paddióng: 20px; color: #64748b;">
+                            <td colspan="10" style="text-align: center; padding: 20px; color: #64748b;">
 
                               N o hay incidencias registradas en el periodo escolar.
 
@@ -24335,51 +24331,51 @@ const Components = {
 
           <!-- RESUMENDE ASISTENCIA DEL ESTUDINTE -->
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(200px, 1fr)); gap: 12px; margión-bottom: var(--space-5);">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: var(--space-5);">
 
-            <div class="card" style="paddióng: 14px; border-left: 4px solid #10b981; background: #ecfdf5;">
+            <div class="card" style="padding: 14px; border-left: 4px solid #10b981; background: #ecfdf5;">
 
-              <spanstyl e="font-size: 11px; font-weight: 800; color: #065f46;">PORCENTÍAJE DE ASISTENCIA</span>
+              <span style="font-size: 11px; font-weight: 800; color: #065f46;">PORCENTÍAJE DE ASISTENCIA</span>
 
-              <div style="font-size: 26px; font-weight: 900; color: #047857; margión: 4px 0;">98.5%</div>
+              <div style="font-size: 26px; font-weight: 900; color: #047857; margin: 4px 0;">98.5%</div>
 
-              <spanclas s="status-badge status-approved" style="font-size: 10px;">★ Récord Destacado</span>
-
-            </div>
-
-
-
-            <div class="card" style="paddióng: 14px; border-left: 4px solid #3b82f6; background: #eff6ff;">
-
-              <spanstyl e="font-size: 11px; font-weight: 800; color: #1e40af;">DÍAS ASISTIDOS PUNTUL</span>
-
-              <div style="font-size: 26px; font-weight: 900; color: #1e3a8a; margión: 4px 0;">22 Das</div>
-
-              <spanstyl e="font-size: 10.5px; color: #64748b;">Enel presente bimestre</span>
+              <span class="status-badge status-approved" style="font-size: 10px;">★ Récord Destacado</span>
 
             </div>
 
 
 
-            <div class="card" style="paddióng: 14px; border-left: 4px solid #f59e0b; background: #fffbeb;">
+            <div class="card" style="padding: 14px; border-left: 4px solid #3b82f6; background: #eff6ff;">
 
-              <spanstyl e="font-size: 11px; font-weight: 800; color: #92400e;">TÍARDÍANZS REGISTRÍADÍAS</span>
+              <span style="font-size: 11px; font-weight: 800; color: #1e40af;">DÍAS ASISTIDOS PUNTUL</span>
 
-              <div style="font-size: 26px; font-weight: 900; color: #b45309; margión: 4px 0;">1 Da</div>
+              <div style="font-size: 26px; font-weight: 900; color: #1e3a8a; margin: 4px 0;">22 Das</div>
 
-              <spanstyl e="font-size: 10.5px; color: #b45309;">(Tardanza justificada)</span>
+              <span style="font-size: 10.5px; color: #64748b;">Enel presente bimestre</span>
 
             </div>
 
 
 
-            <div class="card" style="paddióng: 14px; border-left: 4px solid #8b5cf6; background: #f5f3ff;">
+            <div class="card" style="padding: 14px; border-left: 4px solid #f59e0b; background: #fffbeb;">
 
-              <spanstyl e="font-size: 11px; font-weight: 800; color: #5b21b6;">FLTÍAS JUSTIFICDÍAS</span>
+              <span style="font-size: 11px; font-weight: 800; color: #92400e;">TÍARDÍANZS REGISTRÍADÍAS</span>
 
-              <div style="font-size: 26px; font-weight: 900; color: #6d28d9; margión: 4px 0;">1 Falta</div>
+              <div style="font-size: 26px; font-weight: 900; color: #b45309; margin: 4px 0;">1 Da</div>
 
-              <spanstyl e="font-size: 10.5px; color: #6d28d9;">Conconstancia médica</span>
+              <span style="font-size: 10.5px; color: #b45309;">(Tardanza justificada)</span>
+
+            </div>
+
+
+
+            <div class="card" style="padding: 14px; border-left: 4px solid #8b5cf6; background: #f5f3ff;">
+
+              <span style="font-size: 11px; font-weight: 800; color: #5b21b6;">FLTÍAS JUSTIFICDÍAS</span>
+
+              <div style="font-size: 26px; font-weight: 900; color: #6d28d9; margin: 4px 0;">1 Falta</div>
+
+              <span style="font-size: 10.5px; color: #6d28d9;">Conconstancia médica</span>
 
             </div>
 
@@ -24389,19 +24385,19 @@ const Components = {
 
           <!-- HISTORIL BIOMÉTRICO DETÍALLDO -->
 
-          <div class="card" style="margión-bottom: var(--space-4);">
+          <div class="card" style="margin-bottom: var(--space-4);">
 
             <div class="card-header" style="border-bottom: 1px solid var(--border-subtle); paddióng-bottom: 10px; flex-wrap: wrap; gap: 8px;">
 
               <div>
 
-                <h3 class="card-title" style="font-size: var(--font-size-base); margión: 0;">
+                <h3 class="card-title" style="font-size: var(--font-size-base); margin: 0;">
 
                   ⏱️ Historial de Marcación QR enPuerta: ${studentName} (${studentGrade})
 
                 </h3>
 
-                <spanstyl e="font-size: 11px; color: var(--text-muted);">
+                <span style="font-size: 11px; color: var(--text-muted);">
 
                   Registro automtico del escner enportera y molinete de acceso.
 
@@ -24413,7 +24409,7 @@ const Components = {
 
               <div style="display: flex; gap: 6px;">
 
-                <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.openStudentQRModal('${studentCode}')" style="font-weight: 800; font-size: 11.5px;">
+                <button class="btn btn-navy btn-sm" onclick="window.app.openStudentQRModal('${studentCode}')" style="font-weight: 800; font-size: 11.5px;">
 
                   Ver Mi Código QR
 
@@ -24421,7 +24417,7 @@ const Components = {
 
                 ${isPadre ? `
 
-                  <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openJustifyttendanceModal('${studentCode}', '19/08/2026')" style="font-weight: 800; font-size: 11.5px;">
+                  <button class="btn btn-outline btn-sm" onclick="window.app.openJustifyttendanceModal('${studentCode}', '19/08/2026')" style="font-weight: 800; font-size: 11.5px;">
 
                     📝 Enviar Justificación
 
@@ -24485,9 +24481,9 @@ const Components = {
 
                       <td>
 
-                        <spanclas s="status-badge ${h.status === 'Presente' ? 'status-approved' : h.status === 'Tardanza' ? 'status-pendióng' : 'status-approved'}" style="font-weight: 800;">
+                        <span class="status-badge ${h.status === 'Presente' ? 'status-approved' : h.status === 'Tardanza' ? 'status-pendióng' : 'status-approved'}" style="font-weight: 800;">
 
-                          ${h.status === 'Presente' ? '<spanclas s="status-dot-green"></span> Presente a Tiempo' : h.status === 'Tardanza' ? '<spanclas s="status-dot-yellow"></span> Tardanza' : '🔵 Justificada'}
+                          ${h.status === 'Presente' ? '<span class="status-dot-green"></span> Presente a Tiempo' : h.status === 'Tardanza' ? '<span class="status-dot-yellow"></span> Tardanza' : '🔵 Justificada'}
 
                         </span>
 
@@ -24495,7 +24491,7 @@ const Components = {
 
                       <td>
 
-                        <spanstyl e="font-size: 11px; color: #475569;">
+                        <span style="font-size: 11px; color: #475569;">
 
                           ${h.method || 'Fotocheck QR (Portera)'}
 
@@ -24505,7 +24501,7 @@ const Components = {
 
                       <td>
 
-                        <spanstyl e="font-size: 11px; color: #64748b;">
+                        <span style="font-size: 11px; color: #64748b;">
 
                           ${h.observations || 'Conforme'}
 
@@ -24527,7 +24523,7 @@ const Components = {
 
 
 
-          <!-- SECCIÓN  : REGISTRO CONDUCTUL & ANECDOTÍARIO ESCOLR DEL ALUMNO -->
+          <!-- SECCIÓN: REGISTRO CONDUCTUL & ANECDOTÍARIO ESCOLR DEL ALUMNO -->
 
           ${(() => {
 
@@ -24549,13 +24545,13 @@ const Components = {
 
                   <div>
 
-                    <h3 class="card-title" style="font-size: var(--font-size-base); margión: 0; color: #1e3a8a;">
+                    <h3 class="card-title" style="font-size: var(--font-size-base); margin: 0; color: #1e3a8a;">
 
                       Registro Conductual & Anecdotario Escolar de ${studentName}
 
                     </h3>
 
-                    <spanstyl e="font-size: 11px; color: var(--text-muted);">
+                    <span style="font-size: 11px; color: var(--text-muted);">
 
                       Seguimiento formativo, reconocimientos e informes disciplinarios registrados institucionalmente.
 
@@ -24599,11 +24595,11 @@ const Components = {
 
                         <tr>
 
-                          <td><strong>${inc.date}</strong><br><spanstyl e="font-size: 10.5px; color:#64748b;">${inc.time}</span></td>
+                          <td><strong>${inc.date}</strong><br><span style="font-size: 10.5px; color:#64748b;">${inc.time}</span></td>
 
                           <td>
 
-                            <spanclas s="status-badge" style="background: ${inc.severity === 'Mérito' ? '#10b981' : inc.severity === 'Leve' ? '#f59e0b' : '#ef4444'}; color: white; font-weight: 800;">
+                            <span class="status-badge" style="background: ${inc.severity === 'Mérito' ? '#10b981' : inc.severity === 'Leve' ? '#f59e0b' : '#ef4444'}; color: white; font-weight: 800;">
 
                               ${inc.severity}
 
@@ -24621,13 +24617,13 @@ const Components = {
 
                             <div>${inc.description}</div>
 
-                            <div style="color: #1e3a8a; font-weight: bold; margión-top: 2px;">Compromiso: ${inc.correctiveMeasure}</div>
+                            <div style="color: #1e3a8a; font-weight: bold; margin-top: 2px;">Compromiso: ${inc.correctiveMeasure}</div>
 
                           </td>
 
                           <td style="text-align: center;">
 
-                            <spanclas s="status-badge status-approved" style="font-size: 10px;">✓ ${inc.status}</span>
+                            <span class="status-badge status-approved" style="font-size: 10px;">✓ ${inc.status}</span>
 
                           </td>
 
@@ -24637,7 +24633,7 @@ const Components = {
 
                         <tr>
 
-                          <td colspan="7" style="text-align: center; paddióng: 18px; color: #047857; font-weight: bold;">
+                          <td colspan="7" style="text-align: center; padding: 18px; color: #047857; font-weight: bold;">
 
                             🌟 ¡Excelente conducta! N o registra niónguna observación disciplinaria ensu expediente escolar.
 
@@ -24689,7 +24685,7 @@ const Components = {
 
             <h2 class="card-title" style="font-size: var(--font-size-xl);">Muro de Circulares e Informes</h2>
 
-            ${isdmión ? `<buttonclas s="btnbtn-red btn-sm" onclick="window.app.openNewnnouncementModal()">+ Publicar</button>` : ''}
+            ${isdmión ? `<button class="btn btn-red btn-sm" onclick="window.app.openNewnnouncementModal()">+ Publicar</button>` : ''}
 
           </div>
 
@@ -24699,15 +24695,15 @@ const Components = {
 
               <div class="card" style="border-left: 6px solid ${a.priority === 'high' ? 'var(--color-yellow-500)' : 'var(--color-navy-700)'};">
 
-                <spanclas s="announcement-tag tag-urgent">${a.tagLabel}</span>
+                <span class="announcement-tag tag-urgent">${a.tagLabel}</span>
 
                 <h3>${a.title}</h3>
 
-                <p style="font-size:13px; color:var(--text-secondary); margión-top:4px;">${a.content}</p>
+                <p style="font-size:13px; color:var(--text-secondary); margin-top:4px;">${a.content}</p>
 
-                <div style="margión-top: 8px;">
+                <div style="margin-top: 8px;">
 
-                  <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.showOfficialReportModal()">Ver Documento Completo</button>
+                  <button class="btn btn-outline btn-sm" onclick="window.app.showOfficialReportModal()">Ver Documento Completo</button>
 
                 </div>
 
@@ -24743,7 +24739,7 @@ const Components = {
 
     return `
 
-      <div class="fade-in" style="max-width: 780px; margión: 0 auto; paddióng: var(--space-4);">
+      <div class="fade-in" style="max-width: 780px; margin: 0 auto; padding: var(--space-4);">
 
         <div class="card" style="border: 2px solid var(--color-red-500); box-shadow: 0 10px 25px rgba(220, 38, 38, 0.15); border-radius: 12px; overflow: hidden;">
 
@@ -24751,23 +24747,23 @@ const Components = {
 
           <!-- Encabezado de Alerta Institucional -->
 
-          <div style="background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%); color: white; paddióng: 24px; text-align: center;">
+          <div style="background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%); color: white; padding: 24px; text-align: center;">
 
-            <img src="logo.png" onerror="this.src='assets/logo.png'" alt="Escudo I.E.P. El Educador" style="width: 80px; height: 80px; object-fit: contain; margión-bottom: 8px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));" />
+            <img src="logo.png" onerror="this.src='assets/logo.png'" alt="Escudo I.E.P. El Educador" style="width: 80px; height: 80px; object-fit: contain; margin-bottom: 8px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));" />
 
-            <div style="font-size: 12px; font-weight: 800; letter-spacióng: 0.1em; color: var(--color-yellow-300); text-transform: uppercase;">
+            <div style="font-size: 12px; font-weight: 800; letter-spacing: 0.1em; color: var(--color-yellow-300); text-transform: uppercase;">
 
-              I.E.P. "EL EDUCDOR" • 21 AÑOS DEJNDO HUELLS (S.J.L.)
+              I.E.P. "EL EDUCADOR" • 21 AÑOS DEJNDO HUELLS (S.J.L.)
 
             </div>
 
-            <h2 style="font-size: 22px; font-weight: 900; margión: 6px 0 4px; color: white;">
+            <h2 style="font-size: 22px; font-weight: 900; margin: 6px 0 4px; color: white;">
 
               ACCESO A LA INTRÍAN ET RESTRINGIDO
 
             </h2>
 
-            <p style="font-size: 13px; color: #fecaca; margión: 0;">
+            <p style="font-size: 13px; color: #fecaca; margin: 0;">
 
               Validación de Pensión Escolar Requerida para el Alumno(a) y Apoderado(a)
 
@@ -24777,17 +24773,17 @@ const Components = {
 
 
 
-          <div style="paddióng: 24px;">
+          <div style="padding: 24px;">
 
-            <div style="background: #fff5f5; border-left: 4px solid var(--color-red-500); paddióng: 14px 18px; border-radius: 6px; margión-bottom: 20px;">
+            <div style="background: #fff5f5; border-left: 4px solid var(--color-red-500); padding: 14px 18px; border-radius: 6px; margin-bottom: 20px;">
 
-              <div style="font-weight: 800; color: #991b1b; font-size: 14px; margión-bottom: 4px;">
+              <div style="font-weight: 800; color: #991b1b; font-size: 14px; margin-bottom: 4px;">
 
-                ⚠️ N otificación de Coordiónación y Tesorera
+                ⚠️ N otificación de Coordinación y Tesorera
 
               </div>
 
-              <p style="font-size: 13px; color: #7f1d1d; margión: 0; line-height: 1.5;">
+              <p style="font-size: 13px; color: #7f1d1d; margin: 0; line-height: 1.5;">
 
                 Estimado(a) <strong>${user.name}</strong>, el acceso a las notas bimestrales, horario de clases, control de cuadernos QR y aula virtual se encuentra temporaúlmente bloqueado debido a una cuota pendiente de pago.
 
@@ -24799,11 +24795,11 @@ const Components = {
 
             <!-- Resumende Cuenta Pendiente -->
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(200px, 1fr)); gap: 12px; background: var(--bg-surface-subtle); paddióng: 16px; border-radius: 8px; margión-bottom: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; background: var(--bg-surface-subtle); padding: 16px; border-radius: 8px; margin-bottom: 20px;">
 
               <div>
 
-                <spanstyl e="font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase;">Concepto Pendiente</span>
+                <span style="font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase;">Concepto Pendiente</span>
 
                 <div style="font-size: 14px; font-weight: 800; color: var(--color-navy-900);">${concept}</div>
 
@@ -24811,7 +24807,7 @@ const Components = {
 
               <div>
 
-                <spanstyl e="font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase;">Monto a Cancelar</span>
+                <span style="font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase;">Monto a Cancelar</span>
 
                 <div style="font-size: 22px; font-weight: 900; color: var(--color-red-600);">S/ ${debtmount.toFixed(2)}</div>
 
@@ -24819,9 +24815,9 @@ const Components = {
 
               <div>
 
-                <spanstyl e="font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase;">Estado Actual</span>
+                <span style="font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase;">Estado Actual</span>
 
-                <div><spanclas s="status-badge status-failed" style="font-weight: bold;"><spanclas s='status-dot-red'></span> Bloqueado por Mora</span></div>
+                <div><span class="status-badge status-failed" style="font-weight: bold;"><span class='status-dot-red'></span> Bloqueado por Mora</span></div>
 
               </div>
 
@@ -24831,7 +24827,7 @@ const Components = {
 
             <!-- Métodos de Pago y Desbloqueo Inmediato -->
 
-            <h3 style="font-size: 15px; font-weight: 800; color: var(--color-navy-900); margión-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <h3 style="font-size: 15px; font-weight: 800; color: var(--color-navy-900); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
 
               ⚡ Realizar Pago y Desbloquear Intranet enTiempo Real:
 
@@ -24839,21 +24835,21 @@ const Components = {
 
 
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(220px, 1fr)); gap: 12px; margión-bottom: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 20px;">
 
               
 
               <!-- Opción 1: Tarjeta Débito / Crédito -->
 
-              <div class="card" style="border: 2px solid var(--border-subtle); cursor: pointer; paddióng: 14px; text-align: center; transition: all 0.2s;" onclick="window.app.openPayModal('PEN  -08', ${debtmount}, '${concept}')">
+              <div class="card" style="border: 2px solid var(--border-subtle); cursor: pointer; padding: 14px; text-align: center; transition: all 0.2s;" onclick="window.app.openPayModal('PEN-08', ${debtmount}, '${concept}')">
 
-                <div style="font-size: 24px; margión-bottom: 4px;"></div>
+                <div style="font-size: 24px; margin-bottom: 4px;"></div>
 
                 <strong style="font-size: 13px; color: var(--color-navy-900);">Tarjeta Débito / Crédito</strong>
 
-                <p style="font-size: 11px; color: var(--text-muted); margión-top: 4px;">Visa, Mastercard, Débito</p>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Visa, Mastercard, Débito</p>
 
-                <spanclas s="status-badge status-approved" style="background: #22c55e; color: #0b132b; font-weight: 800; margión-top: 6px;">Desbloqueo Inmediato</span>
+                <span class="status-badge status-approved" style="background: #22c55e; color: #0b132b; font-weight: 800; margin-top: 6px;">Desbloqueo Inmediato</span>
 
               </div>
 
@@ -24861,15 +24857,15 @@ const Components = {
 
               <!-- Opción 2: Yape / Plin -->
 
-              <div class="card" style="border: 2px solid var(--border-subtle); cursor: pointer; paddióng: 14px; text-align: center; transition: all 0.2s;" onclick="window.app.openYapePayModal('PEN  -08', ${debtmount})">
+              <div class="card" style="border: 2px solid var(--border-subtle); cursor: pointer; padding: 14px; text-align: center; transition: all 0.2s;" onclick="window.app.openYapePayModal('PEN-08', ${debtmount})">
 
-                <div style="font-size: 24px; margión-bottom: 4px;"></div>
+                <div style="font-size: 24px; margin-bottom: 4px;"></div>
 
                 <strong style="font-size: 13px; color: #6d28d9;">Yape / PlinInstitucional</strong>
 
-                <p style="font-size: 11px; color: var(--text-muted); margión-top: 4px;">987-654-321 (I.E.P. El Educador)</p>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">987-654-321 (I.E.P. El Educador)</p>
 
-                <spanclas s="status-badge status-approved" style="background: #22c55e; color: #0b132b; font-weight: 800; margión-top: 6px;">Validación Automtica</span>
+                <span class="status-badge status-approved" style="background: #22c55e; color: #0b132b; font-weight: 800; margin-top: 6px;">Validación Automtica</span>
 
               </div>
 
@@ -24877,15 +24873,15 @@ const Components = {
 
               <!-- Opción 3: Transferencia BCP / BBVA -->
 
-              <div class="card" style="border: 2px solid var(--border-subtle); cursor: pointer; paddióng: 14px; text-align: center; transition: all 0.2s;" onclick="window.app.openBankTransferModal('PEN  -08', ${debtmount})">
+              <div class="card" style="border: 2px solid var(--border-subtle); cursor: pointer; padding: 14px; text-align: center; transition: all 0.2s;" onclick="window.app.openBankTransferModal('PEN-08', ${debtmount})">
 
-                <div style="font-size: 24px; margión-bottom: 4px;">🏦</div>
+                <div style="font-size: 24px; margin-bottom: 4px;">🏦</div>
 
                 <strong style="font-size: 13px; color: var(--color-navy-900);">Depósito Bancario / Agente</strong>
 
-                <p style="font-size: 11px; color: var(--text-muted); margión-top: 4px;">BCP / BBVA / Banco N ación</p>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">BCP / BBVA / Banco N ación</p>
 
-                <spanclas s="status-badge status-approved" style="background: #f59e0b; color: #0b132b; font-weight: 800; margión-top: 6px;">Ingresar Voucher</span>
+                <span class="status-badge status-approved" style="background: #f59e0b; color: #0b132b; font-weight: 800; margin-top: 6px;">Ingresar Voucher</span>
 
               </div>
 
@@ -24895,7 +24891,7 @@ const Components = {
 
             <!-- Botón de Pago Rpido Principal -->
 
-            <buttonclas s="btnbtn-red" onclick="window.app.openPayModal('PEN  -08', ${debtmount}, '${concept}')" style="width: 100%; paddióng: 14px; font-size: 15px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);">
+            <button class="btn btn-red" onclick="window.app.openPayModal('PEN-08', ${debtmount}, '${concept}')" style="width: 100%; padding: 14px; font-size: 15px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);">
 
               <span>Pagar S/ ${debtmount.toFixed(2)} y Desbloquear Intranet Ahora</span>
 
@@ -24903,7 +24899,7 @@ const Components = {
 
 
 
-            <div style="text-align: center; margión-top: 14px; font-size: 11px; color: var(--text-muted);">
+            <div style="text-align: center; margin-top: 14px; font-size: 11px; color: var(--text-muted);">
 
               Al confirmar el pago, la base de datos central emitirá su recibo digital y se habilitará el acceso entodos sus dispositivos al instante.
 
@@ -24939,7 +24935,7 @@ const Components = {
 
       <div class="fade-in">
 
-        <div class="card" style="margión-bottom: var(--space-6);">
+        <div class="card" style="margin-bottom: var(--space-6);">
 
           <div class="card-header">
 
@@ -24949,11 +24945,11 @@ const Components = {
 
                 <h2 class="card-title" style="font-size: var(--font-size-xl);">Control de Pensiones & Validación Automtica de Intranet</h2>
 
-                <spanclas s="status-badge status-approved"><spanclas s='status-dot-green'></span> Sistema de Pago Online Activo</span>
+                <span class="status-badge status-approved"><span class='status-dot-green'></span> Sistema de Pago Online Activo</span>
 
               </div>
 
-              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margión-top: 4px;">
+              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
                 I.E.P. "El Educador" • "21 años dejando huellas" (S.J.L. • UGEL 05)
 
@@ -24963,7 +24959,7 @@ const Components = {
 
             ${isCoordiónation ? `
 
-              <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.openManualPaymentModal()">
+              <button class="btn btn-gold btn-sm" onclick="window.app.openManualPaymentModal()">
 
                 + Registrar Pago en Caja (Efectivo/Banco)
 
@@ -24977,15 +24973,15 @@ const Components = {
 
           <!-- Métricas de Validación -->
 
-          <div style="margión-bottom: var(--space-6);">
+          <div style="margin-bottom: var(--space-6);">
 
-            <div class="card" style="paddióng: var(--space-4); border-left: 4px solid var(--color-navy-700); background: var(--bg-surface-subtle);">
+            <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-navy-700); background: var(--bg-surface-subtle);">
 
-              <spanstyl e="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Validación Automtica</span>
+              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Validación Automtica</span>
 
-              <div style="font-size: 18px; font-weight: 800; color: var(--color-navy-900); margión-top: 2px;">Habilitada ⚡</div>
+              <div style="font-size: 18px; font-weight: 800; color: var(--color-navy-900); margin-top: 2px;">Habilitada ⚡</div>
 
-              <spanstyl e="font-size: 10px; color: var(--text-muted);">Desbloqueo inmediato conpago</span>
+              <span style="font-size: 10px; color: var(--text-muted);">Desbloqueo inmediato conpago</span>
 
             </div>
 
@@ -24995,11 +24991,11 @@ const Components = {
 
           ${isCoordiónation ? `
 
-            <!-- Panel Exclusivo para Coordiónación y Dirección: Control de Familias y Bloqueos -->
+            <!-- Panel Exclusivo para Coordinación y Dirección: Control de Familias y Bloqueos -->
 
-            <div style="margión-bottom: var(--space-6);">
+            <div style="margin-bottom: var(--space-6);">
 
-              <div class="card-header" style="margión-bottom: 8px; border-bottom: 1px solid var(--border-subtle); paddióng-bottom: 8px;">
+              <div class="card-header" style="margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); paddióng-bottom: 8px;">
 
                 <h3 class="card-title" style="font-size: var(--font-size-base);">
 
@@ -25007,7 +25003,7 @@ const Components = {
 
                 </h3>
 
-                <spanclas s="status-badge status-approved">${families.length} Familias Monitoreadas</span>
+                <span class="status-badge status-approved">${families.length} Familias Monitoreadas</span>
 
               </div>
 
@@ -25041,9 +25037,9 @@ const Components = {
 
                         <td>
 
-                          <spanclas s="status-badge ${f.isccessLocked ? 'status-failed' : 'status-approved'}" style="font-weight: bold;">
+                          <span class="status-badge ${f.isccessLocked ? 'status-failed' : 'status-approved'}" style="font-weight: bold;">
 
-                            ${f.isccessLocked ? '<spanclas s="status-dot-red"></span> BLOQUEDO POR MORÍA' : '<spanclas s="status-dot-green"></span> ACCESO HBILITÍADO'}
+                            ${f.isccessLocked ? '<span class="status-dot-red"></span> BLOQUEDO POR MORÍA' : '<span class="status-dot-green"></span> ACCESO HBILITÍADO'}
 
                           </span>
 
@@ -25051,13 +25047,13 @@ const Components = {
 
                         <td style="text-align:center; white-space: nowrap;">
 
-                          <buttonclas s="btnbtn-sm ${f.isccessLocked ? 'btn-gold' : 'btn-outline'}" onclick="window.app.toggleFamilyLock('${f.familyId}')">
+                          <button class="btn btn-sm ${f.isccessLocked ? 'btn-gold' : 'btn-outline'}" onclick="window.app.toggleFamilyLock('${f.familyId}')">
 
-                            ${f.isccessLocked ? '<spanclas s="status-dot-green"></span> Desbloquear / Prórroga' : '<spanclas s="status-dot-red"></span> Bloquear Acceso'}
+                            ${f.isccessLocked ? '<span class="status-dot-green"></span> Desbloquear / Prórroga' : '<span class="status-dot-red"></span> Bloquear Acceso'}
 
                           </button>
 
-                          <buttonclas s="btnbtn-red btn-sm" onclick="window.app.confirmDeleteFamily('${f.familyId}')" title="Elimiónar registro de familia y accesos vinculados" style="margión-left: 4px; paddióng: 4px 8px;">
+                          <button class="btn btn-red btn-sm" onclick="window.app.confirmDeleteFamily('${f.familyId}')" title="Elimiónar registro de familia y accesos vinculados" style="margin-left: 4px; padding: 4px 8px;">
 
                             🗑️
 
@@ -25081,7 +25077,7 @@ const Components = {
 
             <!-- Lista de Pagos del Apoderado / Estudiante -->
 
-            <div class="card-header" style="margión-bottom: 8px; border-bottom: 1px solid var(--border-subtle); paddióng-bottom: 8px;">
+            <div class="card-header" style="margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); paddióng-bottom: 8px;">
 
               <h3 class="card-title" style="font-size: var(--font-size-base);">
 
@@ -25099,15 +25095,15 @@ const Components = {
 
                 <div>
 
-                  <h4 style="margión-bottom: 2px;">${p.concept}</h4>
+                  <h4 style="margin-bottom: 2px;">${p.concept}</h4>
 
-                  <spanstyl e="font-size:12px; color:var(--text-muted);">Vencimiento: ${p.dueDate} ${p.paidDate ? `• Cancelado: ${p.paidDate}` : ''}</span>
+                  <span style="font-size:12px; color:var(--text-muted);">Vencimiento: ${p.dueDate} ${p.paidDate ? `• Cancelado: ${p.paidDate}` : ''}</span>
 
                 </div>
 
                 <div style="display:flex; align-items:center; gap:var(--space-4); flex-wrap: wrap;">
 
-                  <spanclas s="payment-amount" style="color: ${p.status === 'paid' ? 'var(--color-green-600)' : 'var(--color-red-600)'};">
+                  <span class="payment-amount" style="color: ${p.status === 'paid' ? 'var(--color-green-600)' : 'var(--color-red-600)'};">
 
                     S/ ${p.amount.toFixed(2)}
 
@@ -25115,7 +25111,7 @@ const Components = {
 
                   ${p.status === 'paid' ? `
 
-                    <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.showReceiptModal('${p.id}')">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.showReceiptModal('${p.id}')">
 
                       Ver Recibo (${p.receiptNo || 'REC-2026'})
 
@@ -25123,7 +25119,7 @@ const Components = {
 
                   ` : `
 
-                    <buttonclas s="btnbtn-red btn-sm" onclick="window.app.openPayModal('${p.id}', ${p.amount}, '${p.concept}')" style="font-weight: 800;">
+                    <button class="btn btn-red btn-sm" onclick="window.app.openPayModal('${p.id}', ${p.amount}, '${p.concept}')" style="font-weight: 800;">
 
                       Pagar y Validar Intranet
 
@@ -25158,7 +25154,7 @@ const Components = {
 /* === app.js === */
 /**
 
- * Controlador Principal y Aplicación - I.E.P. "EL EDUCDOR" S.J.L. (v5.4 conLector de Cmara QR Real)
+ * Controlador Principal y Aplicación - I.E.P. "EL EDUCADOR" S.J.L. (v5.4 conLector de Cmara QR Real)
 
  * "21 años dejando huellas" • UGEL 05
 
@@ -25294,7 +25290,7 @@ class IntranetApp {
 
   // =========================================================================
 
-  // CONTROLDOR DE LOGINY AUTENTICCIÓN  
+  // CONTROLDOR DE LOGINY AUTENTICCIÓN
 
   // =========================================================================
 
@@ -25420,21 +25416,21 @@ class IntranetApp {
 
         <h3>Recuperación de Contraseña</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
-      <div class="modal-body" style="text-align: center; paddióng: var(--space-6);">
+      <div class="modal-body" style="text-align: center; padding: var(--space-6);">
 
-        <h4 style="color: var(--color-navy-900); font-weight: 800; margión-bottom: 8px;">Coordiónación y Documentación (Prof. Alex Lino)</h4>
+        <h4 style="color: var(--color-navy-900); font-weight: 800; margin-bottom: 8px;">Coordinación y Documentación (Prof. Alex Lino)</h4>
 
         <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
 
-          Para restablecimiento de credenciales, comuníquese con la oficióna de Coordiónación:
+          Para restablecimiento de credenciales, comuníquese con la oficióna de Coordinación:
 
         </p>
 
-        <div style="background: var(--color-navy-50); paddióng: 10px; border-radius: 6px; font-weight: bold; color: var(--color-red-600); margión: 12px 0;">
+        <div style="background: var(--color-navy-50); padding: 10px; border-radius: 6px; font-weight: bold; color: var(--color-red-600); margin: 12px 0;">
 
           coordiónacion@eleducador.edu.pe
 
@@ -25450,7 +25446,7 @@ class IntranetApp {
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.closeModal()">Entendido</button>
+        <button class="btn btn-navy" onclick="window.app.closeModal()">Entendido</button>
 
       </div>
 
@@ -25476,35 +25472,35 @@ class IntranetApp {
 
         <div>
 
-          <h3 style="margión: 0; font-size: 16px; font-weight: 900; color: #fde047;">🔑 Cambiar Mi Contraseña de Acceso</h3>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">🔑 Cambiar Mi Contraseña de Acceso</h3>
 
-          <spanstyl e="font-size: 11px; opacity: 0.9;">Usuario: <strong>${user.name || user.username}</strong> (${user.role || 'Docente'})</span>
+          <span style="font-size: 11px; opacity: 0.9;">Usuario: <strong>${user.name || user.username}</strong> (${user.role || 'Docente'})</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
 
       </div>
 
       <form onsubmit="window.app.confirmChangePassword(event)">
 
-        <div class="modal-body" style="paddióng: 20px; background: #f8fafc;">
+        <div class="modal-body" style="padding: 20px; background: #f8fafc;">
 
           
 
-          <div class="form-group" style="margión-bottom: 14px;">
+          <div class="form-group" style="margin-bottom: 14px;">
 
             <label class="form-label" style="font-weight: 800; color: #0f172a;">Contraseña Actual *</label>
 
             <input type="password" name="currentPassword" class="form-control" placeholder="Ingrese su clave actual" required style="font-weight: bold; font-size: 13px;" />
 
-            <spanstyl e="font-size: 11px; color: #64748b;">(Clave actual activa en el sistema)</span>
+            <span style="font-size: 11px; color: #64748b;">(Clave actual activa en el sistema)</span>
 
           </div>
 
 
 
-          <div class="form-group" style="margión-bottom: 14px;">
+          <div class="form-group" style="margin-bottom: 14px;">
 
             <label class="form-label" style="font-weight: 800; color: #0f172a;">N ueva Contraseña *</label>
 
@@ -25514,7 +25510,7 @@ class IntranetApp {
 
 
 
-          <div class="form-group" style="margión-bottom: 14px;">
+          <div class="form-group" style="margin-bottom: 14px;">
 
             <label class="form-label" style="font-weight: 800; color: #0f172a;">Confirmar N ueva Contraseña *</label>
 
@@ -25524,7 +25520,7 @@ class IntranetApp {
 
 
 
-          <div style="paddióng: 10px 14px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px; font-size: 11.5px; color: #1e40af;">
+          <div style="padding: 10px 14px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px; font-size: 11.5px; color: #1e40af;">
 
             ℹ️ <strong>Seguridad Institucional:</strong> Por políticas de soporte, la administración institucional podrá visualizar su nueva clave en el directorio general para evitar pérdidas de acceso.
 
@@ -25534,11 +25530,11 @@ class IntranetApp {
 
         </div>
 
-        <div class="modal-footer" style="paddióng: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
+        <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
 
-          <buttontyp e="button" class="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-          <buttontyp e="submit" class="btnbtn-navy" style="font-weight: 900;">✓ Actualizar Contraseña</button>
+          <button type="submit" class="btn btn-navy" style="font-weight: 900;">✓ Actualizar Contraseña</button>
 
         </div>
 
@@ -25616,19 +25612,19 @@ class IntranetApp {
 
         <div>
 
-          <h3 style="margión: 0; font-size: 16px; font-weight: 900; color: #fde047;">➕ Matricular Estudiante & Crear Cuenta de Apoderado</h3>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">➕ Matricular Estudiante & Crear Cuenta de Apoderado</h3>
 
-          <spanstyl e="font-size: 11px; opacity: 0.9;">I.E.P. "El Educador" • Generación Automtica de Cuentas y Accesos</span>
+          <span style="font-size: 11px; opacity: 0.9;">I.E.P. "El Educador" • Generación Automtica de Cuentas y Accesos</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
 
       </div>
 
       <form onsubmit="window.app.confirmdmiónddStudentWithParent(event)">
 
-        <div class="modal-body" style="paddióng: 20px; background: #f8fafc;">
+        <div class="modal-body" style="padding: 20px; background: #f8fafc;">
 
           
 
@@ -25654,7 +25650,7 @@ class IntranetApp {
 
                 ${catalog.map(g => `
 
-                  <optionvalu e="${g.id}">${g.label} • (Tutor: ${g.tutor || 'Asignado'})</option>
+                  <option value="${g.id}">${g.label} • (Tutor: ${g.tutor || 'Asignado'})</option>
 
                 `).join('')}
 
@@ -25698,7 +25694,7 @@ class IntranetApp {
 
 
 
-          <div style="margión-top: 14px; paddióng: 12px 14px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px; font-size: 11.5px; color: #1e40af; line-height: 1.4;">
+          <div style="margin-top: 14px; padding: 12px 14px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px; font-size: 11.5px; color: #1e40af; line-height: 1.4;">
 
             ✨ <strong>Sióncronización Total de Cuentas:</strong><br>
 
@@ -25714,11 +25710,11 @@ class IntranetApp {
 
         </div>
 
-        <div class="modal-footer" style="paddióng: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
+        <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
 
-          <buttontyp e="button" class="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-          <buttontyp e="submit" class="btnbtn-gold" style="font-weight: 900;">✓ Matricular y Crear Cuentas</button>
+          <button type="submit" class="btn btn-gold" style="font-weight: 900;">✓ Matricular y Crear Cuentas</button>
 
         </div>
 
@@ -25838,29 +25834,29 @@ class IntranetApp {
 
         <div>
 
-          <h3 style="margión: 0; font-size: 16px; font-weight: 900; color: #fde047;">
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">
 
             Conectar Celular para Escaneo Simultneo
 
           </h3>
 
-          <spanstyl e="font-size: 11px; opacity: 0.9;">Acceso Multi-Dispositivo enTiempo Real (Varios Profesores a la Vez)</span>
+          <span style="font-size: 11px; opacity: 0.9;">Acceso Multi-Dispositivo enTiempo Real (Varios Profesores a la Vez)</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
 
       </div>
 
-      <div class="modal-body" style="text-align: center; paddióng: 20px; background: #f8fafc;">
+      <div class="modal-body" style="text-align: center; padding: 20px; background: #f8fafc;">
 
         
 
-        <div style="background: white; border: 2px solid #3b82f6; border-radius: 16px; paddióng: 20px; display: inline-block; box-shadow: 0 8px 24px rgba(59,130,246,0.15); margión-bottom: 16px;">
+        <div style="background: white; border: 2px solid #3b82f6; border-radius: 16px; padding: 20px; display: inline-block; box-shadow: 0 8px 24px rgba(59,130,246,0.15); margin-bottom: 16px;">
 
-          <img src="${qrpiUrl}" alt="QR Conexión Móvil" style="width: 200px; height: 200px; display: block; border-radius: 8px; margión: 0 auto;" onerror="this.src='https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(targetUrl)}'" />
+          <img src="${qrpiUrl}" alt="QR Conexión Móvil" style="width: 200px; height: 200px; display: block; border-radius: 8px; margin: 0 auto;" onerror="this.src='https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(targetUrl)}'" />
 
-          <div style="margión-top: 10px; font-size: 13px; font-weight: 900; color: #1e3a8a;">
+          <div style="margin-top: 10px; font-size: 13px; font-weight: 900; color: #1e3a8a;">
 
             ${targetUrl}
 
@@ -25870,15 +25866,15 @@ class IntranetApp {
 
 
 
-        <div style="text-align: left; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; paddióng: 14px; margión-bottom: 16px;">
+        <div style="text-align: left; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 14px; margin-bottom: 16px;">
 
-          <h4 style="margión: 0 0 8px 0; font-size: 13px; color: #0f172a; font-weight: 800;">
+          <h4 style="margin: 0 0 8px 0; font-size: 13px; color: #0f172a; font-weight: 800;">
 
             ¿Cómo escanear convarios celulares al mismo tiempo siónperder datos?
 
           </h4>
 
-          <ol style="margión: 0; paddióng-left: 20px; font-size: 12px; color: #475569; line-height: 1.6;">
+          <ol style="margin: 0; paddióng-left: 20px; font-size: 12px; color: #475569; line-height: 1.6;">
 
             <li>Conecta tu celular a la <strong>misma red Wi-Fi</strong> del colegio.</li>
 
@@ -25898,7 +25894,7 @@ class IntranetApp {
 
         <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
 
-          <buttonclas s="btnbtn-outline btn-sm" onclick="navigator.clipboard.writeText('${targetUrl}'); window.app.showToast('Enlace copiado al portapapeles: ${targetUrl}', 'success');" style="font-weight: 700;">
+          <button class="btn btn-outline btn-sm" onclick="navigator.clipboard.writeText('${targetUrl}'); window.app.showToast('Enlace copiado al portapapeles: ${targetUrl}', 'success');" style="font-weight: 700;">
 
             Copiar Enlace Directo
 
@@ -25910,7 +25906,7 @@ class IntranetApp {
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.closeModal()" style="font-weight: 800;">
+        <button class="btn btn-navy btn-sm" onclick="window.app.closeModal()" style="font-weight: 800;">
 
           Entendido / Cerrar
 
@@ -25960,11 +25956,11 @@ class IntranetApp {
 
       recentContainer.innerHTML = recent.map(r => `
 
-        <div style="display: flex; justify-content: space-between; align-items: center; paddióng: 6px 8px; border-bottom: 1px solid #f1f5f9; animation: fadeIn0.3s ease;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 8px; border-bottom: 1px solid #f1f5f9; animation: fadeIn0.3s ease;">
 
           <div>
 
-            <strong>${r.studentName}</strong> <spanstyl e="font-size: 10px; color: #64748b;">(${r.grade})</span>
+            <strong>${r.studentName}</strong> <span style="font-size: 10px; color: #64748b;">(${r.grade})</span>
 
           </div>
 
@@ -25972,7 +25968,7 @@ class IntranetApp {
 
             <code>${r.arrivalTime}</code>
 
-            <spanclas s="status-badge ${r.status === 'Presente' ? 'status-approved' : r.status === 'Tardanza' ? 'status-pendióng' : 'status-failed'}" style="font-size: 9.5px; paddióng: 1px 5px;">
+            <span class="status-badge ${r.status === 'Presente' ? 'status-approved' : r.status === 'Tardanza' ? 'status-pendióng' : 'status-failed'}" style="font-size: 9.5px; padding: 1px 5px;">
 
               ${r.status}
 
@@ -25982,7 +25978,7 @@ class IntranetApp {
 
         </div>
 
-      `).join('') || '<div style="text-align: center; color: #64748b; paddióng: 10px;">Siónregistros recientes</div>';
+      `).join('') || '<div style="text-align: center; color: #64748b; padding: 10px;">Siónregistros recientes</div>';
 
     }
 
@@ -26088,11 +26084,11 @@ class IntranetApp {
 
 
 
-      // Preferir cmara trasera encelulares (facióngMode: environment)
+      // Preferir cmara trasera encelulares (facingMode: environment)
 
       this.html5QrScanner.start(
 
-        { facióngMode: "environment" },
+        { facingMode: "environment" },
 
         config,
 
@@ -26142,7 +26138,7 @@ class IntranetApp {
 
         if (statusTag) {
 
-          statusTag.textContent = "<spanclas s='status-dot-green'></span> CMARÍA ACTIVA";
+          statusTag.textContent = "<span class='status-dot-green'></span> CMARÍA ACTIVA";
 
           statusTag.className = "status-badge status-approved";
 
@@ -26218,11 +26214,11 @@ class IntranetApp {
 
           feedContainer.innerHTML = `
 
-            <div style="text-align: center; paddióng: 20px; color: rgba(255,255,255,0.7);">
+            <div style="text-align: center; padding: 20px; color: rgba(255,255,255,0.7);">
 
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margión: 0 auto 8px; display:block; color: var(--color-yellow-400);"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin: 0 auto 8px; display:block; color: var(--color-yellow-400);"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
 
-              <spanstyl e="font-size: 12px; font-weight: 700;">Presiona 'Encender Cmara' para iniciar el escaneo</span>
+              <span style="font-size: 12px; font-weight: 700;">Presiona 'Encender Cmara' para iniciar el escaneo</span>
 
             </div>
 
@@ -26346,17 +26342,17 @@ class IntranetApp {
 
         <div>
 
-          <h3 style="margión: 0; font-size: 16px; font-weight: 900; color: var(--color-navy-900);">
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: var(--color-navy-900);">
 
             Calificar & Sellar Cuaderno Escolar
 
           </h3>
 
-          <spanstyl e="font-size: 11px; color: var(--text-secondary);">Escaneo de Código QR Verificado</span>
+          <span style="font-size: 11px; color: var(--text-secondary);">Escaneo de Código QR Verificado</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
@@ -26366,17 +26362,17 @@ class IntranetApp {
 
         <!-- Ficha de Identificación del Cuaderno (Alumno + Curso + Profesor) -->
 
-        <div style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: white; paddióng: 14px; border-radius: 12px; margión-bottom: 16px; border-left: 6px solid #f59e0b; box-shadow: 0 4px 12px rgba(15,23,42,0.15);">
+        <div style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: white; padding: 14px; border-radius: 12px; margin-bottom: 16px; border-left: 6px solid #f59e0b; box-shadow: 0 4px 12px rgba(15,23,42,0.15);">
 
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; margión-bottom: 6px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
 
-            <spanstyl e="font-size: 10px; font-weight: 900; color: #fde047; letter-spacióng: 0.05em; text-transform: uppercase;">
+            <span style="font-size: 10px; font-weight: 900; color: #fde047; letter-spacing: 0.05em; text-transform: uppercase;">
 
-              ★ I.E.P. EL EDUCDOR • CUDERNO OFICIL 2026
+              ★ I.E.P. EL EDUCADOR • CUDERNO OFICIL 2026
 
             </span>
 
-            <spanstyl e="font-size: 10px; background: rgba(255,255,255,0.15); paddióng: 2px 8px; border-radius: 10px;">
+            <span style="font-size: 10px; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 10px;">
 
               <code>${data.qrCode}</code>
 
@@ -26386,7 +26382,7 @@ class IntranetApp {
 
 
 
-          <div style="font-size: 17px; font-weight: 900; margión-bottom: 4px; color: #ffffff;">
+          <div style="font-size: 17px; font-weight: 900; margin-bottom: 4px; color: #ffffff;">
 
             📚 ${data.course}
 
@@ -26394,11 +26390,11 @@ class IntranetApp {
 
 
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(180px, 1fr)); gap: 8px; margión-top: 8px; font-size: 12px; background: rgba(255,255,255,0.08); paddióng: 8px 12px; border-radius: 8px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; margin-top: 8px; font-size: 12px; background: rgba(255,255,255,0.08); padding: 8px 12px; border-radius: 8px;">
 
             <div>
 
-              <spanstyl e="color: rgba(255,255,255,0.7); display: block; font-size: 10px; text-transform: uppercase;">Estudiante:</span>
+              <span style="color: rgba(255,255,255,0.7); display: block; font-size: 10px; text-transform: uppercase;">Estudiante:</span>
 
               <strong style="color: #fde047;">${data.studentName}</strong>
 
@@ -26408,7 +26404,7 @@ class IntranetApp {
 
             <div>
 
-              <spanstyl e="color: rgba(255,255,255,0.7); display: block; font-size: 10px; text-transform: uppercase;">Docente Titular:</span>
+              <span style="color: rgba(255,255,255,0.7); display: block; font-size: 10px; text-transform: uppercase;">Docente Titular:</span>
 
               <strong>${data.teacher || 'Prof. Responsable'}</strong>
 
@@ -26424,7 +26420,7 @@ class IntranetApp {
 
         <!-- 1. Estado / Sello Digital Oficial -->
 
-        <div class="form-group" style="margión-bottom: 14px;">
+        <div class="form-group" style="margin-bottom: 14px;">
 
           <label class="form-label" style="font-weight: 800; font-size: 12px; color: var(--color-navy-900);">
 
@@ -26434,43 +26430,43 @@ class IntranetApp {
 
           <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
 
-            <label style="border: 2px solid #10b981; background: #ecfdf5; border-radius: 12px; paddióng: 10px 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <label style="border: 2px solid #10b981; background: #ecfdf5; border-radius: 12px; padding: 10px 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;">
 
               <input type="radio" name="nb-status-radio" value="Al Día" ${defaultStatus === 'Al Día' ? 'checked' : ''} onchange="document.getElementById('nb-status-val').value = 'Al Día'; document.getElementById('nb-score-input').value = '18';" />
 
-              <spanstyl e="font-size: 16px;"><spanclas s='status-dot-green'></span></span>
+              <span style="font-size: 16px;"><span class='status-dot-green'></span></span>
 
               <strong style="font-size: 11px; color: #065f46;">AL DÍA</strong>
 
-              <spanstyl e="font-size: 9.5px; color: #047857;">Tareas 100%</span>
+              <span style="font-size: 9.5px; color: #047857;">Tareas 100%</span>
 
             </label>
 
 
 
-            <label style="border: 2px solid #f59e0b; background: #fffbeb; border-radius: 12px; paddióng: 10px 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <label style="border: 2px solid #f59e0b; background: #fffbeb; border-radius: 12px; padding: 10px 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;">
 
               <input type="radio" name="nb-status-radio" value="Observado" ${defaultStatus === 'Observado' ? 'checked' : ''} onchange="document.getElementById('nb-status-val').value = 'Observado'; document.getElementById('nb-score-input').value = '13';" />
 
-              <spanstyl e="font-size: 16px;"><spanclas s='status-dot-yellow'></span></span>
+              <span style="font-size: 16px;"><span class='status-dot-yellow'></span></span>
 
               <strong style="font-size: 11px; color: #b45309;">OBSERVDO</strong>
 
-              <spanstyl e="font-size: 9.5px; color: #92400e;">Incompleto / Atraso</span>
+              <span style="font-size: 9.5px; color: #92400e;">Incompleto / Atraso</span>
 
             </label>
 
 
 
-            <label style="border: 2px solid #ef4444; background: #fef2f2; border-radius: 12px; paddióng: 10px 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <label style="border: 2px solid #ef4444; background: #fef2f2; border-radius: 12px; padding: 10px 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;">
 
               <input type="radio" name="nb-status-radio" value="N o Presentó" ${defaultStatus === 'N o Presentó' ? 'checked' : ''} onchange="document.getElementById('nb-status-val').value = 'N o Presentó'; document.getElementById('nb-score-input').value = '05';" />
 
-              <spanstyl e="font-size: 16px;"><spanclas s='status-dot-red'></span></span>
+              <span style="font-size: 16px;"><span class='status-dot-red'></span></span>
 
               <strong style="font-size: 11px; color: #b91c1c;">NO PRESENTÓ</strong>
 
-              <spanstyl e="font-size: 9.5px; color: #dc2626;">Siónentrega</span>
+              <span style="font-size: 9.5px; color: #dc2626;">Siónentrega</span>
 
             </label>
 
@@ -26484,9 +26480,9 @@ class IntranetApp {
 
         <!-- 2. Calificación Formativa Vigesimal -->
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margión-bottom: 14px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
 
-          <div class="form-group" style="margión: 0;">
+          <div class="form-group" style="margin: 0;">
 
             <label class="form-label" style="font-weight: 800; font-size: 12px;">Calificación (0 a 20):</label>
 
@@ -26494,11 +26490,11 @@ class IntranetApp {
 
           </div>
 
-          <div class="form-group" style="margión: 0; display:flex; flex-direction:column; justify-content:center;">
+          <div class="form-group" style="margin: 0; display:flex; flex-direction:column; justify-content:center;">
 
-            <spanstyl e="font-size: 11px; color: var(--text-muted);">Escala N acional:</span>
+            <span style="font-size: 11px; color: var(--text-muted);">Escala N acional:</span>
 
-            <div style="font-size: 12px; font-weight: 800; color: #047857; margión-top: 4px;">
+            <div style="font-size: 12px; font-weight: 800; color: #047857; margin-top: 4px;">
 
               ★ 18-20: AD (Destacado)<br>✓ 14-17: A (Esperado)
 
@@ -26512,11 +26508,11 @@ class IntranetApp {
 
         <!-- 3. Criterios de Evaluación -->
 
-        <div class="form-group" style="margión-bottom: 14px;">
+        <div class="form-group" style="margin-bottom: 14px;">
 
           <label class="form-label" style="font-weight: 800; font-size: 12px;">Criterios Verificados:</label>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; background: #f8fafc; paddióng: 10px; border-radius: 10px; border: 1px solid #e2e8f0;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; background: #f8fafc; padding: 10px; border-radius: 10px; border: 1px solid #e2e8f0;">
 
             <label style="display:flex; align-items:center; gap: 6px;"><input type="checkbox" id="chk-margenes" checked /> Mrgenes y Fechas</label>
 
@@ -26534,35 +26530,35 @@ class IntranetApp {
 
         <!-- 4. Observaciones contajosé Rpidos -->
 
-        <div class="form-group" style="margión-bottom: 8px;">
+        <div class="form-group" style="margin-bottom: 8px;">
 
           <label class="form-label" style="font-weight: 800; font-size: 12px;">Observaciones para el Estudiante y Apoderado:</label>
 
-          <input type="text" id="nb-remarks-input" class="form-control" value="${defaultRemarks}" style="margión-bottom: 8px;" />
+          <input type="text" id="nb-remarks-input" class="form-control" value="${defaultRemarks}" style="margin-bottom: 8px;" />
 
           
 
           <div style="display: flex; gap: 6px; flex-wrap: wrap;">
 
-            <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.setNotebookQuickRemark('Tareas completas al 100% y presentación impecable.')" style="font-size: 10.5px; paddióng: 4px 8px;">
+            <button type="button" class="btn btn-outline btn-sm" onclick="window.app.setNotebookQuickRemark('Tareas completas al 100% y presentación impecable.')" style="font-size: 10.5px; padding: 4px 8px;">
 
               ✓ Al Día 100%
 
             </button>
 
-            <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.setNotebookQuickRemark('Falta desarrollar la tarea de la última sesión. Presentar regularización.')" style="font-size: 10.5px; paddióng: 4px 8px;">
+            <button type="button" class="btn btn-outline btn-sm" onclick="window.app.setNotebookQuickRemark('Falta desarrollar la tarea de la última sesión. Presentar regularización.')" style="font-size: 10.5px; padding: 4px 8px;">
 
               ⚠ Falta Tarea
 
             </button>
 
-            <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.setNotebookQuickRemark('Cuaderno atrasado en2 temas. Debe ponerse al día.')" style="font-size: 10.5px; paddióng: 4px 8px;">
+            <button type="button" class="btn btn-outline btn-sm" onclick="window.app.setNotebookQuickRemark('Cuaderno atrasado en2 temas. Debe ponerse al día.')" style="font-size: 10.5px; padding: 4px 8px;">
 
               ⚠ Atrasado 2 temas
 
             </button>
 
-            <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.setNotebookQuickRemark('Requiere firma de compromiso del padre/apoderado.')" style="font-size: 10.5px; paddióng: 4px 8px;">
+            <button type="button" class="btn btn-outline btn-sm" onclick="window.app.setNotebookQuickRemark('Requiere firma de compromiso del padre/apoderado.')" style="font-size: 10.5px; padding: 4px 8px;">
 
               ✍️ Firma de Padre
 
@@ -26578,9 +26574,9 @@ class IntranetApp {
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-gold" onclick="window.app.confirmRegisterNotebookReview('${data.qrCode}', '${data.studentId}', '${data.studentName}', '${data.grade}', '${data.course}', '${data.teacher || 'Prof. Responsable'}')" style="font-weight: 900; paddióng: 10px 20px;">
+        <button class="btn btn-gold" onclick="window.app.confirmRegisterNotebookReview('${data.qrCode}', '${data.studentId}', '${data.studentName}', '${data.grade}', '${data.course}', '${data.teacher || 'Prof. Responsable'}')" style="font-weight: 900; padding: 10px 20px;">
 
           ★ Guardar Sello Digital & Actualizar Informe
 
@@ -26828,13 +26824,13 @@ class IntranetApp {
 
           <div style="display:flex; align-items:center; gap: 8px;">
 
-            <h3 style="margión: 0; font-size: 16px; font-weight: 900; color: #fde047;">
+            <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">
 
               ⚡ Plancha Oficial de Stickers QR para Cuadernos (Cursos de Boleta)
 
             </h3>
 
-            <spanclas s="status-badge status-approved" style="background:#22c55e; color:#0b132b; font-weight:900; font-size:10px;">
+            <span class="status-badge status-approved" style="background:#22c55e; color:#0b132b; font-weight:900; font-size:10px;">
 
               ${stickers.length} Cursos Oficiales
 
@@ -26842,7 +26838,7 @@ class IntranetApp {
 
           </div>
 
-          <spanstyl e="font-size: 11px; color: rgba(255,255,255,0.85);">
+          <span style="font-size: 11px; color: rgba(255,255,255,0.85);">
 
             I.E.P. El Educador • Generación automtica (Distribución configurable: 3x5 [15 QR] o 3x4 [12 QR])
 
@@ -26850,23 +26846,23 @@ class IntranetApp {
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
 
       </div>
 
 
 
-      <div class="modal-body" style="max-height: 75vh; overflow-y: auto; background: #f8fafc; paddióng: 20px;">
+      <div class="modal-body" style="max-height: 75vh; overflow-y: auto; background: #f8fafc; padding: 20px;">
 
         
 
         <!-- Ficha de Selección del Estudiante y Selector de Distribución -->
 
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; paddióng: 14px; margión-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 14px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
 
           <div>
 
-            <spanstyl e="font-size: 10.5px; font-weight: 800; color: #64748b; text-transform: uppercase;">Estudiante Seleccionado:</span>
+            <span style="font-size: 10.5px; font-weight: 800; color: #64748b; text-transform: uppercase;">Estudiante Seleccionado:</span>
 
             <div style="font-size: 17px; font-weight: 900; color: #0f172a;">${student.studentName}</div>
 
@@ -26884,13 +26880,13 @@ class IntranetApp {
 
             <div>
 
-              <label style="font-size: 11px; font-weight: 700; color: #475569; display: block; margión-bottom: 2px;">Cambiar Estudiante:</label>
+              <label style="font-size: 11px; font-weight: 700; color: #475569; display: block; margin-bottom: 2px;">Cambiar Estudiante:</label>
 
               <select class="form-control" onchange="window.app.openStudentFullBoletaStickersModal(this.value)" style="font-size: 12px; max-width: 220px; border-radius: 16px;">
 
                 ${enrollments.map(e => `
 
-                  <optionvalu e="${e.studentCode || e.dni}" ${(e.studentCode === student.studentCode || e.dni === student.dni) ? 'selected' : ''}>
+                  <option value="${e.studentCode || e.dni}" ${(e.studentCode === student.studentCode || e.dni === student.dni) ? 'selected' : ''}>
 
                     ${e.studentName} (${e.grade})
 
@@ -26906,13 +26902,13 @@ class IntranetApp {
 
             <div>
 
-              <label style="font-size: 11px; font-weight: 700; color: #1e3a8a; display: block; margión-bottom: 2px;">Formato por Hoja A4:</label>
+              <label style="font-size: 11px; font-weight: 700; color: #1e3a8a; display: block; margin-bottom: 2px;">Formato por Hoja A4:</label>
 
               <select id="modal-sticker-layout-select" class="form-control" style="font-size: 12px; font-weight: 800; max-width: 210px; border-radius: 16px; background: #eff6ff; border: 1.5px solid #3b82f6; color: #1e3a8a;">
 
-                <optionvalu e="3x5" selected>3 × 5 (15 QR por Hoja)</option>
+                <option value="3x5" selected>3 × 5 (15 QR por Hoja)</option>
 
-                <optionvalu e="3x4">3 × 4 (12 QR por Hoja)</option>
+                <option value="3x4">3 × 4 (12 QR por Hoja)</option>
 
               </select>
 
@@ -26924,15 +26920,15 @@ class IntranetApp {
 
 
 
-        <div style="margión-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+        <div style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
 
-          <spanstyl e="font-size: 12px; color: #475569; font-weight: 700;">
+          <span style="font-size: 12px; color: #475569; font-weight: 700;">
 
             Mostrando los <strong>${stickers.length} stickers adhesivos</strong> para cada cuaderno curricular de la boleta:
 
           </span>
 
-          <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.printOnlyElement('modal-boleta-stickers-grid', 'Plancha de Boleta')" style="font-weight: 900; paddióng: 8px 18px; border-radius: 18px; box-shadow: 0 4px 12px rgba(15,23,42,0.2);">
+          <button class="btn btn-navy btn-sm" onclick="window.app.printOnlyElement('modal-boleta-stickers-grid', 'Plancha de Boleta')" style="font-weight: 900; padding: 8px 18px; border-radius: 18px; box-shadow: 0 4px 12px rgba(15,23,42,0.2);">
 
             Imprimir Plancha A4
 
@@ -26944,7 +26940,7 @@ class IntranetApp {
 
         <!-- Grilla de Stickers de Todos los Cursos de la Boleta -->
 
-        <div id="modal-boleta-stickers-grid" class="qr-sticker-sheet" style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(270px, 1fr)); gap: 12px;">
+        <div id="modal-boleta-stickers-grid" class="qr-sticker-sheet" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 12px;">
 
           ${stickers.map(st => {
 
@@ -26952,31 +26948,31 @@ class IntranetApp {
 
             return `
 
-              <div class="qr-notebook-sticker" style="border: 2px solid #0f172a; border-radius: 10px; paddióng: 10px 12px; background: #ffffff; display: flex; gap: 10px; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); position: relative; border-left: 5px solid #f59e0b;">
+              <div class="qr-notebook-sticker" style="border: 2px solid #0f172a; border-radius: 10px; padding: 10px 12px; background: #ffffff; display: flex; gap: 10px; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); position: relative; border-left: 5px solid #f59e0b;">
 
                 <div style="flex-shrink: 0; text-align: center; width: 68px;">
 
-                  <div style="width: 68px; height: 68px; border: 1px solid #cbd5e1; border-radius: 6px; paddióng: 2px; background: white; margión: 0 auto;">
+                  <div style="width: 68px; height: 68px; border: 1px solid #cbd5e1; border-radius: 6px; padding: 2px; background: white; margin: 0 auto;">
 
                     ${Components.generateQRSVG(st.qrPayload, 140)}
 
                   </div>
 
-                  <spanstyl e="font-size: 8px; font-weight: 800; color: #475569; display: block; margión-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><code>${st.qrCode}</code></span>
+                  <span style="font-size: 8px; font-weight: 800; color: #475569; display: block; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><code>${st.qrCode}</code></span>
 
                 </div>
 
-                <div style="flex: 1; display: flex; flex-direction: column; gap: 2px; mión-width: 0;">
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0;">
 
                   <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                    <spanstyl e="font-size: 8px; font-weight: 900; color: #dc2626; letter-spacióng: 0.05em; text-transform: uppercase;">
+                    <span style="font-size: 8px; font-weight: 900; color: #dc2626; letter-spacing: 0.05em; text-transform: uppercase;">
 
-                      ★ I.E.P. EL EDUCDOR • SJL
+                      ★ I.E.P. EL EDUCADOR • SJL
 
                     </span>
 
-                    <spanclas s="status-badge" style="font-size: 7.5px; paddióng: 1px 4px; font-weight: 800; background: #eff6ff; color: #1e40af;">
+                    <span class="status-badge" style="font-size: 7.5px; padding: 1px 4px; font-weight: 800; background: #eff6ff; color: #1e40af;">
 
                       ${st.area || 'Oficial'}
 
@@ -27008,9 +27004,9 @@ class IntranetApp {
 
                   </div>
 
-                  <div style="margión-top: 4px;">
+                  <div style="margin-top: 4px;">
 
-                    <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.closeModal(); setTimeout(() => window.app.simulateQRScan('${safePayload}'), 150);" style="font-size: 9.5px; paddióng: 2px 6px; border-radius: 10px; font-weight: 800;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.closeModal(); setTimeout(() => window.app.simulateQRScan('${safePayload}'), 150);" style="font-size: 9.5px; padding: 2px 6px; border-radius: 10px; font-weight: 800;">
 
                       [Cmara] Probar Escaneo
 
@@ -27034,7 +27030,7 @@ class IntranetApp {
 
       <div class="modal-footer" style="display: flex; justify-content: space-between;">
 
-        <spanstyl e="font-size: 12px; color: var(--text-muted);">
+        <span style="font-size: 12px; color: var(--text-muted);">
 
           Total: <strong>${stickers.length} stickers</strong> correspondientes a la Boleta Oficial de Notas.
 
@@ -27042,9 +27038,9 @@ class IntranetApp {
 
         <div style="display: flex; gap: 8px;">
 
-          <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+          <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
-          <buttonclas s="btnbtn-gold" onclick="window.app.printOnlyElement('modal-boleta-stickers-grid', 'Plancha de Boleta')" style="font-weight: 900; paddióng: 8px 18px;">
+          <button class="btn btn-gold" onclick="window.app.printOnlyElement('modal-boleta-stickers-grid', 'Plancha de Boleta')" style="font-weight: 900; padding: 8px 18px;">
 
             Imprimir Plancha A4
 
@@ -27062,7 +27058,7 @@ class IntranetApp {
 
   // =========================================================================
 
-  // VISTÍA DEL INFORME OFICIL N  003 /ED - COORDINCIÓN Y DOCUMENTÍACIÓN  
+  // VISTÍA DEL INFORME OFICIL N003 /ED - COORDINCIÓN Y DOCUMENTÍACIÓN
 
   // =========================================================================
 
@@ -27072,29 +27068,29 @@ class IntranetApp {
 
       <div class="modal-header">
 
-        <h3>INFORME N  003 /ED - COORDINCIÓN Y DOCUMENTÍACIÓN  </h3>
+        <h3>INFORME N003 /ED - COORDINCIÓN Y DOCUMENTÍACIÓN</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
-      <div class="modal-body" style="max-height: 75vh; overflow-y: auto; background: #ffffff; paddióng: 24px;">
+      <div class="modal-body" style="max-height: 75vh; overflow-y: auto; background: #ffffff; padding: 24px;">
 
         
 
-        ${Components.renderOfficialInstitutionalHeader("INFORME- N  003 /ED - COORDINCIÓN Y DOCUMENTÍACIÓN  ", "Informe del da 15/08/2026")}
+        ${Components.renderOfficialInstitutionalHeader("INFORME- N003 /ED - COORDINCIÓN Y DOCUMENTÍACIÓN", "Informe del da 15/08/2026")}
 
 
 
-        <div style="font-size: 13px; color: #0b132b; line-height: 1.6; margión-top: 16px;">
+        <div style="font-size: 13px; color: #0b132b; line-height: 1.6; margin-top: 16px;">
 
           <p><strong>Asunto:</strong> Informe de actualización económica, gestiones administrativas y seguimiento de casos de estudiantes</p>
 
-          <p style="margión-top: 8px;">Por medio del presente, se informa lo siguiente:</p>
+          <p style="margin-top: 8px;">Por medio del presente, se informa lo siguiente:</p>
 
 
 
-          <div style="margión-top: 14px; paddióng-left: 8px; border-left: 3px solid var(--color-yellow-500);">
+          <div style="margin-top: 14px; paddióng-left: 8px; border-left: 3px solid var(--color-yellow-500);">
 
             <strong>1. CNTIDÍAD ACTUL DEL MES DE AGOSTO:</strong><br>
 
@@ -27102,13 +27098,13 @@ class IntranetApp {
 
             <strong style="color: #059669; font-size: 14px;">S/ 25,130.00 (Veinticiónco mil ciento treinta con00/100 soles).</strong><br>
 
-            <spanstyl e="color: var(--text-muted); font-size: 12px;">Lo que normalmente debe ser S/ 24,000.00.</span>
+            <span style="color: var(--text-muted); font-size: 12px;">Lo que normalmente debe ser S/ 24,000.00.</span>
 
           </div>
 
 
 
-          <div style="margión-top: 14px; paddióng-left: 8px; border-left: 3px solid var(--color-navy-700);">
+          <div style="margin-top: 14px; paddióng-left: 8px; border-left: 3px solid var(--color-navy-700);">
 
             <strong>2. GESTIÓN DE RENTÍA DE CURTÍA CTEGORÍA:</strong><br>
 
@@ -27116,7 +27112,7 @@ class IntranetApp {
 
             Asimismo, se está adjuntando el envío al contador de los archivos PDF correspondientes a la Renta de Cuarta Categora realizada al siguiente personal:
 
-            <ul style="margión: 6px 0 6px 20px;">
+            <ul style="margin: 6px 0 6px 20px;">
 
               <li>❖ Arroyo Araujo, Julisa Magali</li>
 
@@ -27130,13 +27126,13 @@ class IntranetApp {
 
 
 
-          <div style="margión-top: 14px; paddióng-left: 8px; border-left: 3px solid var(--color-red-500);">
+          <div style="margin-top: 14px; paddióng-left: 8px; border-left: 3px solid var(--color-red-500);">
 
             <strong>3. ESTUDINTES PENDIEN TES DE MTRÍCULA:</strong><br>
 
             De la revisión realizada, se informa que actualmente se encuentra pendiente de matrícula la siguiente estudiante:
 
-            <div class="table-container" style="margión-top: 8px;">
+            <div class="table-container" style="margin-top: 8px;">
 
               <table class="data-table" style="font-size: 11px;">
 
@@ -27154,7 +27150,7 @@ class IntranetApp {
 
                     <td>5 años</td>
 
-                    <td><spanclas s="status-badge status-pendióng">Pendiente de obtener</span></td>
+                    <td><span class="status-badge status-pendióng">Pendiente de obtener</span></td>
 
                     <td>Pendiente de obtener</td>
 
@@ -27172,13 +27168,13 @@ class IntranetApp {
 
 
 
-          <div style="margión-top: 14px; paddióng-left: 8px; border-left: 3px solid var(--color-navy-700);">
+          <div style="margin-top: 14px; paddióng-left: 8px; border-left: 3px solid var(--color-navy-700);">
 
             <strong>4. CSO DEL CERTIFICDO DE LA EXESTUDINTE:</strong><br>
 
             Se realizó la gestión correspondiente al caso del certificado de la exestudiante:
 
-            <ul style="margión: 6px 0 6px 20px;">
+            <ul style="margin: 6px 0 6px 20px;">
 
               <li>❖ <strong>Daz Chirre, EvelinEstefana</strong></li>
 
@@ -27190,21 +27186,21 @@ class IntranetApp {
 
 
 
-          <div style="margión-top: 14px; paddióng-left: 8px; border-left: 3px solid var(--color-yellow-500);">
+          <div style="margin-top: 14px; paddióng-left: 8px; border-left: 3px solid var(--color-yellow-500);">
 
             <strong>5. COORDINCIÓN Y SEGUIMIENTO DE CSOS DE ESTUDINTES:</strong><br>
 
-            Se ha realizado la coordiónación con el <strong>Prof. Lino</strong> respecto a los casos de estudiantes conregularización documentaria (Urbizagasti y Fabian).
+            Se ha realizado la Coordinación con el <strong>Prof. Lino</strong> respecto a los casos de estudiantes conregularización documentaria (Urbizagasti y Fabian).
 
           </div>
 
 
 
-          <div style="margión-top: 16px; background: #f8fafc; paddióng: 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+          <div style="margin-top: 16px; background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
             <strong>6. CONCLUSION ES:</strong>
 
-            <ul style="margión: 6px 0 0 20px; font-size: 12px;">
+            <ul style="margin: 6px 0 0 20px; font-size: 12px;">
 
               <li>• Al 15 de agosto de 2026, el monto acumulado de recibos generados asciende a <strong>S/ 25,130.00</strong>.</li>
 
@@ -27218,15 +27214,15 @@ class IntranetApp {
 
 
 
-          <div style="text-align: right; margión-top: 36px; paddióng-right: 20px;">
+          <div style="text-align: right; margin-top: 36px; paddióng-right: 20px;">
 
             <div style="display: inline-block; text-align: center; border-top: 1px solid #0b132b; paddióng-top: 6px; width: 200px;">
 
               <strong>Atentamente,</strong><br>
 
-              <spanstyl e="font-weight: 800; color: #0b132b;">Alex Lino</span><br>
+              <span style="font-weight: 800; color: #0b132b;">Alex Lino</span><br>
 
-              <spanstyl e="font-size: 11px; color: var(--text-muted);">Coordiónación y Documentación</span>
+              <span style="font-size: 11px; color: var(--text-muted);">Coordinación y Documentación</span>
 
             </div>
 
@@ -27238,9 +27234,9 @@ class IntranetApp {
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-navy" onclick="window.print()">Imprimir Documento</button>
+        <button class="btn btn-navy" onclick="window.print()">Imprimir Documento</button>
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
       </div>
 
@@ -27258,21 +27254,21 @@ class IntranetApp {
 
         <h3>Esquema SQL Relacional - I.E.P. "El Educador" S.J.L.</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
       <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
 
-        <p style="font-size: 12px; color: var(--text-muted); margión-bottom: 8px;">
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">
 
           Script DDL para inicializar la base de datos relacional en <strong>Supabase</strong>, <strong>PostgreSQL</strong> o <strong>MySQL</strong>:
 
         </p>
 
-        <pre style="background: var(--color-navy-950); color: #f8fafc; paddióng: 12px; border-radius: 8px; font-size: 11px; overflow-x: auto; max-height: 350px;">
+        <pre style="background: var(--color-navy-950); color: #f8fafc; padding: 12px; border-radius: 8px; font-size: 11px; overflow-x: auto; max-height: 350px;">
 
--- TÍABLS DEL SISTEMA EDUCTIVO "EL EDUCDOR" (S.J.L.)
+-- TÍABLS DEL SISTEMA EDUCTIVO "EL EDUCADOR" (S.J.L.)
 
 CRETE TÍABLE tb_usuarios (
 
@@ -27336,7 +27332,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-navy" onclick="window.app.closeModal()">Cerrar</button>
 
       </div>
 
@@ -27688,17 +27684,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div class="fade-in">
 
-          <div class="card" style="paddióng: 24px; border-top: 4px solid var(--color-red-500);">
+          <div class="card" style="padding: 24px; border-top: 4px solid var(--color-red-500);">
 
-            <h3 style="color: var(--color-red-600); margión-bottom: 8px;">⚠️ Aviso de Carga enVista: ${currentView}</h3>
+            <h3 style="color: var(--color-red-600); margin-bottom: 8px;">⚠️ Aviso de Carga enVista: ${currentView}</h3>
 
-            <p style="font-size: 13px; color: var(--text-secondary); margión-bottom: 16px;">
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">
 
               Detalle: ${err.message}
 
             </p>
 
-            <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.navigate('dashboard')">
+            <button class="btn btn-navy btn-sm" onclick="window.app.navigate('dashboard')">
 
               🏠 Regresar al Inicio
 
@@ -27812,7 +27808,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     this.store.toggleNavigationTab(role, tabId, isChecked);
 
-    this.showToast(`Pestaña "${tabId}" ${isChecked ? '<spanclas s="status-dot-green"></span> ACTIVDÍA' : '⚪ OCULTÍADÍA'} para ${role.toUpperCase()}`, isChecked ? "success" : "info");
+    this.showToast(`Pestaña "${tabId}" ${isChecked ? '<span class="status-dot-green"></span> ACTIVDÍA' : '⚪ OCULTÍADÍA'} para ${role.toUpperCase()}`, isChecked ? "success" : "info");
 
     this.updateHeaderUserInfo();
 
@@ -27884,7 +27880,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3>➕ Crear N uevo Usuario & Asignar Perfil</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
@@ -27902,13 +27898,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           </label>
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(110px, 1fr)); gap: 8px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px;">
 
-            <label style="border: 2px solid #e2e8f0; border-radius: 8px; paddióng: 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;" class="role-selector-card" id="card-role-docente">
+            <label style="border: 2px solid #e2e8f0; border-radius: 8px; padding: 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;" class="role-selector-card" id="card-role-docente">
 
-              <input type="radio" name="new-user-role-radio" value="Docente" ${defaultRole === 'Docente' ? 'checked' : ''} onchange="window.app.onUserRoleTypeChange(this.value)" style="margión-bottom: 2px;" />
+              <input type="radio" name="new-user-role-radio" value="Docente" ${defaultRole === 'Docente' ? 'checked' : ''} onchange="window.app.onUserRoleTypeChange(this.value)" style="margin-bottom: 2px;" />
 
-              <spanstyl e="font-size: 16px;">👨‍</span>
+              <span style="font-size: 16px;">👨‍</span>
 
               <strong style="font-size: 12px; color: #1e3a8a;">Docente</strong>
 
@@ -27916,11 +27912,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <label style="border: 2px solid #e2e8f0; border-radius: 8px; paddióng: 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;" class="role-selector-card" id="card-role-auxiliar">
+            <label style="border: 2px solid #e2e8f0; border-radius: 8px; padding: 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;" class="role-selector-card" id="card-role-auxiliar">
 
-              <input type="radio" name="new-user-role-radio" value="Auxiliar" ${defaultRole === 'Auxiliar' ? 'checked' : ''} onchange="window.app.onUserRoleTypeChange(this.value)" style="margión-bottom: 2px;" />
+              <input type="radio" name="new-user-role-radio" value="Auxiliar" ${defaultRole === 'Auxiliar' ? 'checked' : ''} onchange="window.app.onUserRoleTypeChange(this.value)" style="margin-bottom: 2px;" />
 
-              <spanstyl e="font-size: 16px;">👮</span>
+              <span style="font-size: 16px;">👮</span>
 
               <strong style="font-size: 12px; color: #0f766e;">Auxiliar</strong>
 
@@ -27928,11 +27924,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <label style="border: 2px solid #e2e8f0; border-radius: 8px; paddióng: 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;" class="role-selector-card" id="card-role-estudiante">
+            <label style="border: 2px solid #e2e8f0; border-radius: 8px; padding: 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;" class="role-selector-card" id="card-role-estudiante">
 
-              <input type="radio" name="new-user-role-radio" value="Estudiante" ${defaultRole === 'Estudiante' ? 'checked' : ''} onchange="window.app.onUserRoleTypeChange(this.value)" style="margión-bottom: 2px;" />
+              <input type="radio" name="new-user-role-radio" value="Estudiante" ${defaultRole === 'Estudiante' ? 'checked' : ''} onchange="window.app.onUserRoleTypeChange(this.value)" style="margin-bottom: 2px;" />
 
-              <spanstyl e="font-size: 16px;">🎒</span>
+              <span style="font-size: 16px;">🎒</span>
 
               <strong style="font-size: 12px; color: #047857;">Estudiante</strong>
 
@@ -27940,11 +27936,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <label style="border: 2px solid #e2e8f0; border-radius: 8px; paddióng: 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;" class="role-selector-card" id="card-role-apoderado">
+            <label style="border: 2px solid #e2e8f0; border-radius: 8px; padding: 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;" class="role-selector-card" id="card-role-apoderado">
 
-              <input type="radio" name="new-user-role-radio" value="Apoderado" ${defaultRole === 'Apoderado' ? 'checked' : ''} onchange="window.app.onUserRoleTypeChange(this.value)" style="margión-bottom: 2px;" />
+              <input type="radio" name="new-user-role-radio" value="Apoderado" ${defaultRole === 'Apoderado' ? 'checked' : ''} onchange="window.app.onUserRoleTypeChange(this.value)" style="margin-bottom: 2px;" />
 
-              <spanstyl e="font-size: 16px;">👨‍👩‍👧</span>
+              <span style="font-size: 16px;">👨‍👩‍👧</span>
 
               <strong style="font-size: 12px; color: #b45309;">Apoderado</strong>
 
@@ -27952,11 +27948,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <label style="border: 2px solid #e2e8f0; border-radius: 8px; paddióng: 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;" class="role-selector-card" id="card-role-directivo">
+            <label style="border: 2px solid #e2e8f0; border-radius: 8px; padding: 8px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;" class="role-selector-card" id="card-role-directivo">
 
-              <input type="radio" name="new-user-role-radio" value="Directivo" ${defaultRole === 'Directivo' ? 'checked' : ''} onchange="window.app.onUserRoleTypeChange(this.value)" style="margión-bottom: 2px;" />
+              <input type="radio" name="new-user-role-radio" value="Directivo" ${defaultRole === 'Directivo' ? 'checked' : ''} onchange="window.app.onUserRoleTypeChange(this.value)" style="margin-bottom: 2px;" />
 
-              <spanstyl e="font-size: 16px;">️</span>
+              <span style="font-size: 16px;">️</span>
 
               <strong style="font-size: 12px; color: #6b21a8;">Directivo</strong>
 
@@ -27980,7 +27976,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <label class="form-label">N ombre Completo:</label>
 
-            <input type="text" id="new-user-name" class="form-control" placeholder="Ej: Lic. CarmenRosa Huamn" oniónput="window.app.autoGenerateUserCredentials()" />
+            <input type="text" id="new-user-name" class="form-control" placeholder="Ej: Lic. CarmenRosa Huamn" oninput="window.app.autoGenerateUserCredentials()" />
 
           </div>
 
@@ -28030,7 +28026,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div class="form-group" style="display: flex; align-items: flex-end;">
 
-            <buttontyp e="button" class="btnbtn-outline" onclick="window.app.autoGenerateUserCredentials()" style="width: 100%; font-size: 11.5px; font-weight: bold; margión-bottom: 8px;">
+            <button type="button" class="btn btn-outline" onclick="window.app.autoGenerateUserCredentials()" style="width: 100%; font-size: 11.5px; font-weight: bold; margin-bottom: 8px;">
 
               ⚡ Autogenerar Credenciales
 
@@ -28042,9 +28038,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <!-- SECCIÓN DIN  ÁMICA SEGÚN EL ROL -->
+        <!-- SECCIÓN DINÁMICA SEGÚN EL ROL -->
 
-        <div id="dynamic-role-fields-container" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; paddióng: 12px; margión: 12px 0;">
+        <div id="dynamic-role-fields-container" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin: 12px 0;">
 
           ${this.getDynamicRoleFieldsHTML(defaultRole)}
 
@@ -28056,7 +28052,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div class="form-group" id="admin-privilege-checkbox-box">
 
-          <label style="display: flex; align-items: center; gap: 8px; font-weight: bold; color: var(--color-navy-900); cursor: pointer; background: var(--color-yellow-50); paddióng: 10px; border: 1px dashed var(--color-yellow-500); border-radius: 8px; font-size: 12.5px;">
+          <label style="display: flex; align-items: center; gap: 8px; font-weight: bold; color: var(--color-navy-900); cursor: pointer; background: var(--color-yellow-50); padding: 10px; border: 1px dashed var(--color-yellow-500); border-radius: 8px; font-size: 12.5px;">
 
             <input type="checkbox" id="new-user-has-admin" />
 
@@ -28072,9 +28068,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.confirmcreateUser()" style="font-weight: 800;">
+        <button class="btn btn-navy" onclick="window.app.confirmcreateUser()" style="font-weight: 800;">
 
           ✓ Guardar y Registrar enBase de Datos
 
@@ -28264,7 +28260,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           const isSelected = c.toLowerCase() === currentClean || currentClean.includes(c.toLowerCase()) || c.toLowerCase().includes(currentClean);
 
-          return `<optionvalu e="${c}" ${isSelected ? 'selected' : ''}>${c}</option>`;
+          return `<option value="${c}" ${isSelected ? 'selected' : ''}>${c}</option>`;
 
         }).join('')}
 
@@ -28346,11 +28342,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     return `
 
-      <div style="margión-top: 8px;">
+      <div style="margin-top: 8px;">
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 6px; flex-wrap: wrap; gap: 6px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 6px;">
 
-          <label class="form-label" style="font-size: 11.5px; font-weight: 800; color: #1e3a8a; margión: 0;">
+          <label class="form-label" style="font-size: 11.5px; font-weight: 800; color: #1e3a8a; margin: 0;">
 
             Grados a Cargo (Checklist - Marque los grados asignados):
 
@@ -28358,13 +28354,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div style="display: flex; gap: 4px; flex-wrap: wrap;">
 
-            <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.quickSelectGrades('${prefix}', 'secundaria')" style="font-size: 10.5px; paddióng: 2px 6px; font-weight: bold;">+ Toda Secundaria</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="window.app.quickSelectGrades('${prefix}', 'secundaria')" style="font-size: 10.5px; padding: 2px 6px; font-weight: bold;">+ Toda Secundaria</button>
 
-            <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.quickSelectGrades('${prefix}', 'primaria')" style="font-size: 10.5px; paddióng: 2px 6px; font-weight: bold;">+ Toda Primaria</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="window.app.quickSelectGrades('${prefix}', 'primaria')" style="font-size: 10.5px; padding: 2px 6px; font-weight: bold;">+ Toda Primaria</button>
 
-            <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.quickSelectGrades('${prefix}', 'all')" style="font-size: 10.5px; paddióng: 2px 6px; font-weight: bold;">Todos</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="window.app.quickSelectGrades('${prefix}', 'all')" style="font-size: 10.5px; padding: 2px 6px; font-weight: bold;">Todos</button>
 
-            <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.quickSelectGrades('${prefix}', 'clear')" style="font-size: 10.5px; paddióng: 2px 6px; color: var(--color-red-600);">Desmarcar</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="window.app.quickSelectGrades('${prefix}', 'clear')" style="font-size: 10.5px; padding: 2px 6px; color: var(--color-red-600);">Desmarcar</button>
 
           </div>
 
@@ -28372,17 +28368,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(180px, 1fr)); gap: 8px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px;">
 
           ${gradesStructure.map(st => `
 
-            <div style="background: ${st.bg}; border: 1px solid ${st.border}; border-radius: 6px; paddióng: 8px;">
+            <div style="background: ${st.bg}; border: 1px solid ${st.border}; border-radius: 6px; padding: 8px;">
 
-              <div style="font-size: 11px; font-weight: 800; color: ${st.color}; margión-bottom: 6px; text-transform: uppercase; border-bottom: 1px solid ${st.border}; paddióng-bottom: 2px; display: flex; justify-content: space-between; align-items: center;">
+              <div style="font-size: 11px; font-weight: 800; color: ${st.color}; margin-bottom: 6px; text-transform: uppercase; border-bottom: 1px solid ${st.border}; paddióng-bottom: 2px; display: flex; justify-content: space-between; align-items: center;">
 
                 <span>Nivel ${st.level}</span>
 
-                <spanstyl e="font-size: 10px; opacity: 0.8;">(${st.grades.length} Grados)</span>
+                <span style="font-size: 10px; opacity: 0.8;">(${st.grades.length} Grados)</span>
 
               </div>
 
@@ -28394,7 +28390,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                   return `
 
-                    <label style="display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: #1f2937; cursor: pointer; margión: 0; background: rgba(255,255,255,0.7); paddióng: 2px 6px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.05);">
+                    <label style="display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: #1f2937; cursor: pointer; margin: 0; background: rgba(255,255,255,0.7); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.05);">
 
                       <input type="checkbox" name="${prefix}-check" value="${g}" data-level="${st.level.toLowerCase()}" ${chk ? 'checked' : ''} style="cursor: pointer;" />
 
@@ -28660,13 +28656,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     return `
 
-      <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; paddióng: 12px; margión-bottom: 12px;">
+      <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
 
           <div>
 
-            <label class="form-label" style="font-weight: 800; color: #1e3a8a; font-size: 12px; margión-bottom: 0;">
+            <label class="form-label" style="font-weight: 800; color: #1e3a8a; font-size: 12px; margin-bottom: 0;">
 
               📚 Cursos y Asignaturas a Cargo (Seleccione todos los cursos del docente):
 
@@ -28680,9 +28676,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           </div>
 
-          <spanclas s="status-badge" style="background: #dbeafe; color: #1e40af; font-weight: 800; font-size: 11px;" id="${prefix}-count-badge">
+          <span class="status-badge" style="background: #dbeafe; color: #1e40af; font-weight: 800; font-size: 11px;" id="${prefix}-count-badge">
 
-            <spani d="${prefix}-count-val">${selList.length}</span> curso(s) seleccionado(s)
+            <span id="${prefix}-count-val">${selList.length}</span> curso(s) seleccionado(s)
 
           </span>
 
@@ -28692,39 +28688,39 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Botones de Selección Rpida por rea -->
 
-        <div style="display: flex; gap: 4px; flex-wrap: wrap; margión-bottom: 10px;">
+        <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 10px;">
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.quickSelectCourses('${prefix}', 'matematica')" style="font-size: 10.5px; paddióng: 2px 7px; color: #1e40af; border-color: #93c5fd; background: #ffffff; font-weight: bold;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="window.app.quickSelectCourses('${prefix}', 'matematica')" style="font-size: 10.5px; padding: 2px 7px; color: #1e40af; border-color: #93c5fd; background: #ffffff; font-weight: bold;">
 
             + Toda Matemtica
 
           </button>
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.quickSelectCourses('${prefix}', 'comunicacion')" style="font-size: 10.5px; paddióng: 2px 7px; color: #854d0e; border-color: #fde047; background: #ffffff; font-weight: bold;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="window.app.quickSelectCourses('${prefix}', 'comunicacion')" style="font-size: 10.5px; padding: 2px 7px; color: #854d0e; border-color: #fde047; background: #ffffff; font-weight: bold;">
 
             + Toda Comunicación
 
           </button>
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.quickSelectCourses('${prefix}', 'ciencia')" style="font-size: 10.5px; paddióng: 2px 7px; color: #065f46; border-color: #86efac; background: #ffffff; font-weight: bold;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="window.app.quickSelectCourses('${prefix}', 'ciencia')" style="font-size: 10.5px; padding: 2px 7px; color: #065f46; border-color: #86efac; background: #ffffff; font-weight: bold;">
 
             + Toda Ciencia
 
           </button>
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.quickSelectCourses('${prefix}', 'sociales')" style="font-size: 10.5px; paddióng: 2px 7px; color: #581c87; border-color: #d8b4fe; background: #ffffff; font-weight: bold;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="window.app.quickSelectCourses('${prefix}', 'sociales')" style="font-size: 10.5px; padding: 2px 7px; color: #581c87; border-color: #d8b4fe; background: #ffffff; font-weight: bold;">
 
             + Todos Sociales
 
           </button>
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.quickSelectCourses('${prefix}', 'all')" style="font-size: 10.5px; paddióng: 2px 7px; color: #15803d; border-color: #86efac; background: #ffffff; font-weight: bold;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="window.app.quickSelectCourses('${prefix}', 'all')" style="font-size: 10.5px; padding: 2px 7px; color: #15803d; border-color: #86efac; background: #ffffff; font-weight: bold;">
 
             ✓ Todos
 
           </button>
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.quickSelectCourses('${prefix}', 'clear')" style="font-size: 10.5px; paddióng: 2px 7px; color: #dc2626; border-color: #fca5a5; background: #ffffff; font-weight: bold;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="window.app.quickSelectCourses('${prefix}', 'clear')" style="font-size: 10.5px; padding: 2px 7px; color: #dc2626; border-color: #fca5a5; background: #ffffff; font-weight: bold;">
 
             ✕ Desmarcar
 
@@ -28736,13 +28732,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Cuadrícula de Cursos Agrupados por rea -->
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, miónmax(220px, 1fr)); gap: 8px; max-height: 220px; overflow-y: auto; background: #ffffff; paddióng: 10px; border-radius: 6px; border: 1px solid #e2e8f0;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; max-height: 220px; overflow-y: auto; background: #ffffff; padding: 10px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
           ${courseCategories.map(cat => `
 
-            <div style="background: ${cat.bg}; border: 1px solid ${cat.border}; border-radius: 6px; paddióng: 8px;">
+            <div style="background: ${cat.bg}; border: 1px solid ${cat.border}; border-radius: 6px; padding: 8px;">
 
-              <div style="font-size: 11px; font-weight: 800; color: ${cat.color}; margión-bottom: 6px; border-bottom: 1px solid ${cat.border}; paddióng-bottom: 3px;">
+              <div style="font-size: 11px; font-weight: 800; color: ${cat.color}; margin-bottom: 6px; border-bottom: 1px solid ${cat.border}; paddióng-bottom: 3px;">
 
                 ${cat.category}
 
@@ -28756,11 +28752,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                   return `
 
-                    <label style="display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: #1f2937; cursor: pointer; margión: 0; background: rgba(255,255,255,0.8); paddióng: 2px 6px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.05);" onmouseover="this.style.background='#ffffff'" onmouseout="this.style.background='rgba(255,255,255,0.8)'">
+                    <label style="display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: #1f2937; cursor: pointer; margin: 0; background: rgba(255,255,255,0.8); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.05);" onmouseover="this.style.background='#ffffff'" onmouseout="this.style.background='rgba(255,255,255,0.8)'">
 
                       <input type="checkbox" name="${prefix}-check" value="${cName}" ${chk ? 'checked' : ''} onchange="window.app.updateCoursesCounter('${prefix}')" data-area="${cat.category.toLowerCase()}" style="cursor: pointer;" />
 
-                      <spanstyl e="font-weight: 600;">${cName}</span>
+                      <span style="font-weight: 600;">${cName}</span>
 
                     </label>
 
@@ -28974,17 +28970,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     return `
 
-      <div class="card parent-student-row" id="${rowId}" style="paddióng: 12px; margión-bottom: 10px; border: 1px solid #fdba74; background: #fffaf0; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+      <div class="card parent-student-row" id="${rowId}" style="padding: 12px; margin-bottom: 10px; border: 1px solid #fdba74; background: #fffaf0; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 8px; border-bottom: 1px solid #ffedd5; paddióng-bottom: 4px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid #ffedd5; paddióng-bottom: 4px;">
 
-          <spanstyl e="font-size: 12px; font-weight: 800; color: #9a3412;">
+          <span style="font-size: 12px; font-weight: 800; color: #9a3412;">
 
             Estudiante #${index + 1} a Registrar (Hijo / Sobrino / Familiar)
 
           </span>
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.removeParentStudentRow('${prefix}', '${rowId}')" style="font-size: 11px; paddióng: 2px 8px; color: var(--color-red-600); border-color: #fca5a5;" title="Quitar estudiante">
+          <button type="button" class="btn btn-outline btn-sm" onclick="window.app.removeParentStudentRow('${prefix}', '${rowId}')" style="font-size: 11px; padding: 2px 8px; color: var(--color-red-600); border-color: #fca5a5;" title="Quitar estudiante">
 
             🗑️ Quitar
 
@@ -28994,19 +28990,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="display: grid; grid-template-columns: 2fr 1.1fr 1fr 1.2fr; gap: 8px; margión-bottom: 8px;">
+        <div style="display: grid; grid-template-columns: 2fr 1.1fr 1fr 1.2fr; gap: 8px; margin-bottom: 8px;">
 
           <!-- N ombre Completo del Alumno -->
 
-          <div class="form-group" style="margión-bottom: 0;">
+          <div class="form-group" style="margin-bottom: 0;">
 
-            <label class="form-label" style="font-size: 11px; font-weight: 700; margión-bottom: 2px; color: #9a3412;">
+            <label class="form-label" style="font-size: 11px; font-weight: 700; margin-bottom: 2px; color: #9a3412;">
 
               N ombre Completo del Estudiante:
 
             </label>
 
-            <input type="text" class="form-control parent-student-name" placeholder="Ej: Sofía Méndez Flores" value="${currentName}" oniónput="window.app.updateStudentCredentialPreview('${rowId}')" style="font-size: 12px; font-weight: bold; border-color: #ea580c; background: #ffffff;" />
+            <input type="text" class="form-control parent-student-name" placeholder="Ej: Sofía Méndez Flores" value="${currentName}" oninput="window.app.updateStudentCredentialPreview('${rowId}')" style="font-size: 12px; font-weight: bold; border-color: #ea580c; background: #ffffff;" />
 
           </div>
 
@@ -29014,9 +29010,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- DNI -->
 
-          <div class="form-group" style="margión-bottom: 0;">
+          <div class="form-group" style="margin-bottom: 0;">
 
-            <label class="form-label" style="font-size: 11px; font-weight: 700; margión-bottom: 2px; color: #9a3412;">
+            <label class="form-label" style="font-size: 11px; font-weight: 700; margin-bottom: 2px; color: #9a3412;">
 
               DNI (8 dígitos):
 
@@ -29030,21 +29026,21 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Parentesco -->
 
-          <div class="form-group" style="margión-bottom: 0;">
+          <div class="form-group" style="margin-bottom: 0;">
 
-            <label class="form-label" style="font-size: 11px; font-weight: 700; margión-bottom: 2px; color: #9a3412;">Parentesco:</label>
+            <label class="form-label" style="font-size: 11px; font-weight: 700; margin-bottom: 2px; color: #9a3412;">Parentesco:</label>
 
             <select class="form-control parent-student-rel" style="font-size: 11.5px; font-weight: bold;">
 
-              <optionvalu e="Hijo/Hija" ${data.relationship === 'Hijo/Hija' ? 'selected' : ''}>Hijo / Hija</option>
+              <option value="Hijo/Hija" ${data.relationship === 'Hijo/Hija' ? 'selected' : ''}>Hijo / Hija</option>
 
-              <optionvalu e="Sobrino/Sobrina" ${data.relationship === 'Sobrino/Sobrina' ? 'selected' : ''}>Sobrino / Sobrina</option>
+              <option value="Sobrino/Sobrina" ${data.relationship === 'Sobrino/Sobrina' ? 'selected' : ''}>Sobrino / Sobrina</option>
 
-              <optionvalu e="N ieto/N ieta" ${data.relationship === 'N ieto/N ieta' ? 'selected' : ''}>N ieto / N ieta</option>
+              <option value="N ieto/N ieta" ${data.relationship === 'N ieto/N ieta' ? 'selected' : ''}>N ieto / N ieta</option>
 
-              <optionvalu e="Hermano/Hermana" ${data.relationship === 'Hermano/Hermana' ? 'selected' : ''}>Hermano / Hermana</option>
+              <option value="Hermano/Hermana" ${data.relationship === 'Hermano/Hermana' ? 'selected' : ''}>Hermano / Hermana</option>
 
-              <optionvalu e="Familiar / Tutor Legal" ${data.relationship === 'Familiar / Tutor Legal' ? 'selected' : ''}>Familiar / Tutor Legal</option>
+              <option value="Familiar / Tutor Legal" ${data.relationship === 'Familiar / Tutor Legal' ? 'selected' : ''}>Familiar / Tutor Legal</option>
 
             </select>
 
@@ -29054,9 +29050,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Grado / Nivel Desglosable -->
 
-          <div class="form-group" style="margión-bottom: 0;">
+          <div class="form-group" style="margin-bottom: 0;">
 
-            <label class="form-label" style="font-size: 11px; font-weight: 700; margión-bottom: 2px; color: #9a3412;">Grado / Nivel:</label>
+            <label class="form-label" style="font-size: 11px; font-weight: 700; margin-bottom: 2px; color: #9a3412;">Grado / Nivel:</label>
 
             <select class="form-control parent-student-grade" style="font-size: 11.5px; font-weight: bold; border-color: #ea580c;">
 
@@ -29068,7 +29064,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                     const sel = (currentGrade && (currentGrade.toLowerCase().includes(g.toLowerCase()) || g.toLowerCase().includes(currentGrade.toLowerCase())));
 
-                    return `<optionvalu e="${g}" ${sel ? 'selected' : ''}>${g}</option>`;
+                    return `<option value="${g}" ${sel ? 'selected' : ''}>${g}</option>`;
 
                   }).join('')}
 
@@ -29086,19 +29082,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Credenciales Autogeneradas del Estudiante para la Intranet -->
 
-        <div style="display: flex; justify-content: space-between; align-items: center; background: #ecfdf5; paddióng: 6px 12px; border-radius: 6px; border: 1px dashed #a7f3d0; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #ecfdf5; padding: 6px 12px; border-radius: 6px; border: 1px dashed #a7f3d0; flex-wrap: wrap; gap: 8px;">
 
           <div style="display: flex; align-items: center; gap: 8px; font-size: 11px; color: #065f46; font-weight: 700;">
 
             <span>🔑 Acceso Intranet:</span>
 
-            <span>Usuario: <strong class="student-user-preview" style="background: #ffffff; paddióng: 2px 8px; border-radius: 4px; border: 1px solid #6ee7b7; font-family: monospace; color: #047857;">@${initialUser}</strong></span>
+            <span>Usuario: <strong class="student-user-preview" style="background: #ffffff; padding: 2px 8px; border-radius: 4px; border: 1px solid #6ee7b7; font-family: monospace; color: #047857;">@${initialUser}</strong></span>
 
-            <span>Contraseña: <strong style="background: #ffffff; paddióng: 2px 8px; border-radius: 4px; border: 1px solid #6ee7b7; color: #047857;">estudiante2026</strong></span>
+            <span>Contraseña: <strong style="background: #ffffff; padding: 2px 8px; border-radius: 4px; border: 1px solid #6ee7b7; color: #047857;">estudiante2026</strong></span>
 
           </div>
 
-          <spanstyl e="font-size: 11px; color: #047857; font-weight: 800;">
+          <span style="font-size: 11px; color: #047857; font-weight: 800;">
 
             ✓ Perfil de estudiante se creará automticamente
 
@@ -29158,9 +29154,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     return `
 
-      <div style="background: #fff7ed; border: 1px solid #ffedd5; border-radius: 8px; paddióng: 12px; margión-top: 6px;">
+      <div style="background: #fff7ed; border: 1px solid #ffedd5; border-radius: 8px; padding: 12px; margin-top: 6px;">
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
 
           <div>
 
@@ -29178,9 +29174,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           </div>
 
-          <spanclas s="status-badge" style="background: #ffedd5; color: #9a3412; font-weight: 800; font-size: 11px;" id="${prefix}-counter-badge">
+          <span class="status-badge" style="background: #ffedd5; color: #9a3412; font-weight: 800; font-size: 11px;" id="${prefix}-counter-badge">
 
-            🎒 <spani d="${prefix}-count-val">${list.length}</span> / 9 Estudiantes a Crear
+            🎒 <span id="${prefix}-count-val">${list.length}</span> / 9 Estudiantes a Crear
 
           </span>
 
@@ -29196,15 +29192,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margión-top: 10px; paddióng-top: 8px; border-top: 1px dashed #fed7aa; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; paddióng-top: 8px; border-top: 1px dashed #fed7aa; flex-wrap: wrap; gap: 8px;">
 
-          <spanstyl e="font-size: 11px; color: #7c2d12;">
+          <span style="font-size: 11px; color: #7c2d12;">
 
             ℹ️ Puede registrar hasta 9 estudiantes por apoderado concreación instantnea de sus credenciales escolares.
 
           </span>
 
-          <buttontyp e="button" class="btnbtn-navy btn-sm" onclick="window.app.addParentStudentRow('${prefix}')" style="font-size: 11px; font-weight: 800; paddióng: 4px 12px;">
+          <button type="button" class="btn btn-navy btn-sm" onclick="window.app.addParentStudentRow('${prefix}')" style="font-size: 11px; font-weight: 800; padding: 4px 12px;">
 
             ➕ + Agregar y Crear Otro Estudiante (Hasta 9)
 
@@ -29320,7 +29316,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       return `
 
-        <div style="font-size: 12px; font-weight: 800; color: #1e3a8a; margión-bottom: 8px;">
+        <div style="font-size: 12px; font-weight: 800; color: #1e3a8a; margin-bottom: 8px;">
 
           📚 Carga Pedagógica, Asignaturas Curriculares y Horas Semanales:
 
@@ -29332,19 +29328,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div class="form-group" style="margión-bottom: 8px;">
+        <div class="form-group" style="margin-bottom: 8px;">
 
           <label class="form-label" style="font-size: 11.5px; font-weight: 700; color: #1e3a8a;">Carga Horaria Semanal:</label>
 
           <select id="new-user-hours" class="form-control" style="font-size: 12px; font-weight: bold; width: 100%;">
 
-            <optionvalu e="30 hrs (Tiempo Completo)">30 hrs (Tiempo Completo)</option>
+            <option value="30 hrs (Tiempo Completo)">30 hrs (Tiempo Completo)</option>
 
-            <optionvalu e="24 hrs (Jornada Estndar)" selected>24 hrs (Jornada Estndar)</option>
+            <option value="24 hrs (Jornada Estndar)" selected>24 hrs (Jornada Estndar)</option>
 
-            <optionvalu e="18 hrs (Tiempo Parcial)">18 hrs (Tiempo Parcial)</option>
+            <option value="18 hrs (Tiempo Parcial)">18 hrs (Tiempo Parcial)</option>
 
-            <optionvalu e="12 hrs (Por Horas)">12 hrs (Por Horas)</option>
+            <option value="12 hrs (Por Horas)">12 hrs (Por Horas)</option>
 
           </select>
 
@@ -29360,49 +29356,49 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       return `
 
-        <div style="font-size: 12px; font-weight: 800; color: #065f46; margión-bottom: 8px;">🎒 Datos Escolares del Alumno:</div>
+        <div style="font-size: 12px; font-weight: 800; color: #065f46; margin-bottom: 8px;">🎒 Datos Escolares del Alumno:</div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
 
-          <div class="form-group" style="margión-bottom: 6px;">
+          <div class="form-group" style="margin-bottom: 6px;">
 
             <label class="form-label" style="font-size: 11.5px;">Grado / Nivel:</label>
 
             <select id="new-user-grade-select" class="form-control">
 
-              <optionvalu e="Inicial 3 años">Inicial 3 años</option>
+              <option value="Inicial 3 años">Inicial 3 años</option>
 
-              <optionvalu e="Inicial 4 años">Inicial 4 años</option>
+              <option value="Inicial 4 años">Inicial 4 años</option>
 
-              <optionvalu e="Inicial 5 años">Inicial 5 años</option>
+              <option value="Inicial 5 años">Inicial 5 años</option>
 
-              <optionvalu e="1 de Primaria">1 de Primaria</option>
+              <option value="1 de Primaria">1 de Primaria</option>
 
-              <optionvalu e="2 de Primaria">2 de Primaria</option>
+              <option value="2 de Primaria">2 de Primaria</option>
 
-              <optionvalu e="3 de Primaria">3 de Primaria</option>
+              <option value="3 de Primaria">3 de Primaria</option>
 
-              <optionvalu e="4 de Primaria">4 de Primaria</option>
+              <option value="4 de Primaria">4 de Primaria</option>
 
-              <optionvalu e="5 de Primaria">5 de Primaria</option>
+              <option value="5 de Primaria">5 de Primaria</option>
 
-              <optionvalu e="6 de Primaria">6 de Primaria</option>
+              <option value="6 de Primaria">6 de Primaria</option>
 
-              <optionvalu e="1 de Secundaria">1 de Secundaria</option>
+              <option value="1 de Secundaria">1 de Secundaria</option>
 
-              <optionvalu e="2 de Secundaria">2 de Secundaria</option>
+              <option value="2 de Secundaria">2 de Secundaria</option>
 
-              <optionvalu e="3 de Secundaria">3 de Secundaria</option>
+              <option value="3 de Secundaria">3 de Secundaria</option>
 
-              <optionvalu e="4 de Secundaria" selected>4 de Secundaria</option>
+              <option value="4 de Secundaria" selected>4 de Secundaria</option>
 
-              <optionvalu e="5 de Secundaria">5 de Secundaria</option>
+              <option value="5 de Secundaria">5 de Secundaria</option>
 
             </select>
 
           </div>
 
-          <div class="form-group" style="margión-bottom: 6px;">
+          <div class="form-group" style="margin-bottom: 6px;">
 
             <label class="form-label" style="font-size: 11.5px;">Tutor de Aula:</label>
 
@@ -29412,7 +29408,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         </div>
 
-        <div class="form-group" style="margión-bottom: 0;">
+        <div class="form-group" style="margin-bottom: 0;">
 
           <label class="form-label" style="font-size: 11.5px;">Apoderado Responsable:</label>
 
@@ -29426,9 +29422,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       return `
 
-        <div style="font-size: 12px; font-weight: 800; color: #92400e; margión-bottom: 6px;">👨‍👩‍👧 Datos de Contacto y Familia:</div>
+        <div style="font-size: 12px; font-weight: 800; color: #92400e; margin-bottom: 6px;">👨‍👩‍👧 Datos de Contacto y Familia:</div>
 
-        <div class="form-group" style="margión-bottom: 6px;">
+        <div class="form-group" style="margin-bottom: 6px;">
 
           <label class="form-label" style="font-size: 11.5px; font-weight: 700;">Teléfono / Celular de Contacto (9 dígitos):</label>
 
@@ -29446,7 +29442,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       return `
 
-        <div style="font-size: 12px; font-weight: 800; color: #0f766e; margión-bottom: 8px;">
+        <div style="font-size: 12px; font-weight: 800; color: #0f766e; margin-bottom: 8px;">
 
           👮 Asignación de Turno & Zonas de Supervisión:
 
@@ -29454,23 +29450,23 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
 
-          <div class="form-group" style="margión-bottom: 6px;">
+          <div class="form-group" style="margin-bottom: 6px;">
 
             <label class="form-label" style="font-size: 11.5px;">Turno Asignado:</label>
 
             <select id="new-user-shift" class="form-control" style="font-size: 12px;">
 
-              <optionvalu e="Turno Mañana (07:00 AM - 02:30 PM)" selected>Turno Mañana (07:00 AM - 02:30 PM)</option>
+              <option value="Turno Mañana (07:00 AM - 02:30 PM)" selected>Turno Mañana (07:00 AM - 02:30 PM)</option>
 
-              <optionvalu e="Turno Tarde (12:30 PM - 07:00 PM)">Turno Tarde (12:30 PM - 07:00 PM)</option>
+              <option value="Turno Tarde (12:30 PM - 07:00 PM)">Turno Tarde (12:30 PM - 07:00 PM)</option>
 
-              <optionvalu e="Jornada Completa">Jornada Completa</option>
+              <option value="Jornada Completa">Jornada Completa</option>
 
             </select>
 
           </div>
 
-          <div class="form-group" style="margión-bottom: 6px;">
+          <div class="form-group" style="margin-bottom: 6px;">
 
             <label class="form-label" style="font-size: 11.5px;">Zona / Puerta Principal:</label>
 
@@ -29480,7 +29476,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         </div>
 
-        <div style="font-size: 11px; color: #047857; background: #ecfdf5; paddióng: 6px 10px; border-radius: 6px; border: 1px solid #a7f3d0; margión-top: 4px;">
+        <div style="font-size: 11px; color: #047857; background: #ecfdf5; padding: 6px 10px; border-radius: 6px; border: 1px solid #a7f3d0; margin-top: 4px;">
 
           ✓ Este perfil tendrá acceso <strong>exclusivo</strong> al Escner QR de Portera, Generador de Planchas QR, Parte Diario 08:30 AM y Lector de Cuadernos QR.
 
@@ -29492,21 +29488,21 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       return `
 
-        <div style="font-size: 12px; font-weight: 800; color: #581c87; margión-bottom: 8px;">️ Cargo Institucional & Despacho:</div>
+        <div style="font-size: 12px; font-weight: 800; color: #581c87; margin-bottom: 8px;">️ Cargo Institucional & Despacho:</div>
 
-        <div class="form-group" style="margión-bottom: 0;">
+        <div class="form-group" style="margin-bottom: 0;">
 
           <label class="form-label" style="font-size: 11.5px;">Cargo o Dependencia:</label>
 
           <select id="new-user-directivo-pos" class="form-control">
 
-            <optionvalu e="Dirección General">Dirección General</option>
+            <option value="Dirección General">Dirección General</option>
 
-            <optionvalu e="Coordiónación General & Documentación">Coordiónación General & Documentación</option>
+            <option value="Coordinación General & Documentación">Coordinación General & Documentación</option>
 
-            <optionvalu e="Secretara General & Matrículas">Secretara General & Matrículas</option>
+            <option value="Secretara General & Matrículas">Secretara General & Matrículas</option>
 
-            <optionvalu e="Tesorera & Finanzas">Tesorera & Finanzas</option>
+            <option value="Tesorera & Finanzas">Tesorera & Finanzas</option>
 
           </select>
 
@@ -29812,7 +29808,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       const posSel = document.getElementById("new-user-directivo-pos");
 
-      detail = posSel ? posSel.value : "Coordiónación General";
+      detail = posSel ? posSel.value : "Coordinación General";
 
     }
 
@@ -29872,15 +29868,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <h3 style="color: #ffffff;">🎉 ¡Cuentas Creadas Exitosamente!</h3>
 
-          <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
+          <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
 
         </div>
 
         <div class="modal-body" style="max-height: 75vh; overflow-y: auto;">
 
-          <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; paddióng: 12px; margión-bottom: 14px;">
+          <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 12px; margin-bottom: 14px;">
 
-            <div style="font-weight: 800; color: #1e3a8a; font-size: 13px; margión-bottom: 4px;">
+            <div style="font-weight: 800; color: #1e3a8a; font-size: 13px; margin-bottom: 4px;">
 
               👨‍👩‍👧 Cuenta del Apoderado Registrada:
 
@@ -29902,7 +29898,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="font-weight: 800; color: #065f46; font-size: 13px; margión-bottom: 8px;">
+          <div style="font-weight: 800; color: #065f46; font-size: 13px; margin-bottom: 8px;">
 
             🎒 ${createdStudentsList.length} Perfil(es) de Estudiante Creado(s) concceso a Intranet:
 
@@ -29914,19 +29910,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             ${createdStudentsList.map((st, idx) => `
 
-              <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; paddióng: 10px;">
+              <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; padding: 10px;">
 
-                <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
 
                   <strong style="color: #065f46; font-size: 12.5px;">#${idx + 1} ${st.name}</strong>
 
-                  <spanclas s="status-badge status-primary" style="font-size: 11px;">${st.grade} (${st.relationship})</span>
+                  <span class="status-badge status-primary" style="font-size: 11px;">${st.grade} (${st.relationship})</span>
 
                 </div>
 
                 <div style="display: flex; gap: 12px; font-size: 11.5px; color: #1f2937; flex-wrap: wrap;">
 
-                  <span>DNI: <strong>${st.dni || 'N  /A'}</strong></span>
+                  <span>DNI: <strong>${st.dni || 'N/A'}</strong></span>
 
                   <span>Usuario: <strong style="color: #047857;">@${st.username}</strong></span>
 
@@ -29944,7 +29940,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div class="modal-footer">
 
-          <buttonclas s="btnbtn-navy" onclick="window.app.closeModal()" style="font-weight: 800; width: 100%;">
+          <button class="btn btn-navy" onclick="window.app.closeModal()" style="font-weight: 800; width: 100%;">
 
             ✓ Entendido y Guardado enBase de Datos
 
@@ -29992,7 +29988,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3>✏️ Editar Usuario: ${user.name}</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
@@ -30014,13 +30010,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <select id="edit-user-role" class="form-control">
 
-              <optionvalu e="Directivo" ${user.role === 'Directivo' ? 'selected' : ''}>️ Directivo</option>
+              <option value="Directivo" ${user.role === 'Directivo' ? 'selected' : ''}>️ Directivo</option>
 
-              <optionvalu e="Docente" ${user.role === 'Docente' ? 'selected' : ''}>👨‍Docente</option>
+              <option value="Docente" ${user.role === 'Docente' ? 'selected' : ''}>👨‍Docente</option>
 
-              <optionvalu e="Estudiante" ${user.role === 'Estudiante' ? 'selected' : ''}>🎒 Estudiante</option>
+              <option value="Estudiante" ${user.role === 'Estudiante' ? 'selected' : ''}>🎒 Estudiante</option>
 
-              <optionvalu e="Apoderado" ${user.role === 'Apoderado' ? 'selected' : ''}>👨‍👩‍👧 Apoderado</option>
+              <option value="Apoderado" ${user.role === 'Apoderado' ? 'selected' : ''}>👨‍👩‍👧 Apoderado</option>
 
             </select>
 
@@ -30076,7 +30072,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         ${isDocente ? `
 
-          <div class="form-group" style="background: #eff6ff; border: 1px solid #bfdbfe; paddióng: 10px; border-radius: 8px;">
+          <div class="form-group" style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 10px; border-radius: 8px;">
 
             ${this.renderCoursesChecklistHTML("edit-user-courses", existióngCourses)}
 
@@ -30090,7 +30086,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         ${ispoderado ? `
 
-          <div class="form-group" style="margión-bottom: 6px;">
+          <div class="form-group" style="margin-bottom: 6px;">
 
             <label class="form-label" style="font-size: 11.5px; font-weight: 700;">Teléfono / Celular de Contacto:</label>
 
@@ -30116,7 +30112,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div class="form-group">
 
-          <label style="display: flex; align-items: center; gap: 8px; font-weight: bold; color: var(--color-navy-900); cursor: pointer; background: var(--color-yellow-50); paddióng: 10px; border: 1px dashed var(--color-yellow-500); border-radius: 8px;">
+          <label style="display: flex; align-items: center; gap: 8px; font-weight: bold; color: var(--color-navy-900); cursor: pointer; background: var(--color-yellow-50); padding: 10px; border: 1px dashed var(--color-yellow-500); border-radius: 8px;">
 
             <input type="checkbox" id="edit-user-has-admin" ${user.hasdmiónPrivilege ? 'checked' : ''} />
 
@@ -30130,9 +30126,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.confirmUpdateUser('${user.id}')" style="font-weight: 800;">
+        <button class="btn btn-navy" onclick="window.app.confirmUpdateUser('${user.id}')" style="font-weight: 800;">
 
           ✓ Guardar Cambios enServidor
 
@@ -30498,7 +30494,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: #ffffff;">📝 N ueva Matrícula & Ficha Única de Matrícula (FUM 2026)</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
 
       </div>
 
@@ -30508,27 +30504,27 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Pestañas del Formulario FUM -->
 
-        <div style="display: flex; gap: 6px; margión-bottom: 14px; border-bottom: 2px solid #e2e8f0; paddióng-bottom: 8px; flex-wrap: wrap;">
+        <div style="display: flex; gap: 6px; margin-bottom: 14px; border-bottom: 2px solid #e2e8f0; paddióng-bottom: 8px; flex-wrap: wrap;">
 
-          <buttontyp e="button" class="btnbtn-navy btn-sm" id="fum-tab-btn-1" onclick="window.app.switchFUMTab('1')" style="font-weight: 800; font-size: 11px;">
+          <button type="button" class="btn btn-navy btn-sm" id="fum-tab-btn-1" onclick="window.app.switchFUMTab('1')" style="font-weight: 800; font-size: 11px;">
 
             1. Datos del Alumno & SIGIE
 
           </button>
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" id="fum-tab-btn-2" onclick="window.app.switchFUMTab('2')" style="font-weight: 800; font-size: 11px;">
+          <button type="button" class="btn btn-outline btn-sm" id="fum-tab-btn-2" onclick="window.app.switchFUMTab('2')" style="font-weight: 800; font-size: 11px;">
 
             👨‍👩‍👧 2. Apoderado & Emergencia
 
           </button>
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" id="fum-tab-btn-3" onclick="window.app.switchFUMTab('3')" style="font-weight: 800; font-size: 11px;">
+          <button type="button" class="btn btn-outline btn-sm" id="fum-tab-btn-3" onclick="window.app.switchFUMTab('3')" style="font-weight: 800; font-size: 11px;">
 
             🩺 3. Ficha Médica & Salud
 
           </button>
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" id="fum-tab-btn-4" onclick="window.app.switchFUMTab('4')" style="font-weight: 800; font-size: 11px;">
+          <button type="button" class="btn btn-outline btn-sm" id="fum-tab-btn-4" onclick="window.app.switchFUMTab('4')" style="font-weight: 800; font-size: 11px;">
 
             📎 4. Documentos Digitales
 
@@ -30542,9 +30538,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div id="fum-tab-content-1" class="fum-tab-pane">
 
-          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margión-bottom: 10px;">
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 10px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">N ombres y Apellidos Completos:</label>
 
@@ -30552,7 +30548,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">DNI (8 dígitos):</label>
 
@@ -30564,9 +30560,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margión-bottom: 10px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Código SIGIE:</label>
 
@@ -30574,7 +30570,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Fecha de N acimiento:</label>
 
@@ -30582,15 +30578,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Sexo:</label>
 
               <select id="new-matr-gender" class="form-control">
 
-                <optionvalu e="Masculino">Masculino</option>
+                <option value="Masculino">Masculino</option>
 
-                <optionvalu e="Femenióno">Femenióno</option>
+                <option value="Femenino">Femenino</option>
 
               </select>
 
@@ -30600,9 +30596,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margión-bottom: 10px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Nivel & Grado a Matricular:</label>
 
@@ -30610,41 +30606,41 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                 <optgroup label="Secundaria">
 
-                  <optionvalu e="1 de Secundaria">1 de Secundaria</option>
+                  <option value="1 de Secundaria">1 de Secundaria</option>
 
-                  <optionvalu e="2 de Secundaria">2 de Secundaria</option>
+                  <option value="2 de Secundaria">2 de Secundaria</option>
 
-                  <optionvalu e="3 de Secundaria">3 de Secundaria</option>
+                  <option value="3 de Secundaria">3 de Secundaria</option>
 
-                  <optionvalu e="4 de Secundaria" selected>4 de Secundaria</option>
+                  <option value="4 de Secundaria" selected>4 de Secundaria</option>
 
-                  <optionvalu e="5 de Secundaria">5 de Secundaria</option>
+                  <option value="5 de Secundaria">5 de Secundaria</option>
 
                 </optgroup>
 
                 <optgroup label="Primaria">
 
-                  <optionvalu e="1 de Primaria">1 de Primaria</option>
+                  <option value="1 de Primaria">1 de Primaria</option>
 
-                  <optionvalu e="2 de Primaria">2 de Primaria</option>
+                  <option value="2 de Primaria">2 de Primaria</option>
 
-                  <optionvalu e="3 de Primaria">3 de Primaria</option>
+                  <option value="3 de Primaria">3 de Primaria</option>
 
-                  <optionvalu e="4 de Primaria">4 de Primaria</option>
+                  <option value="4 de Primaria">4 de Primaria</option>
 
-                  <optionvalu e="5 de Primaria">5 de Primaria</option>
+                  <option value="5 de Primaria">5 de Primaria</option>
 
-                  <optionvalu e="6 de Primaria">6 de Primaria</option>
+                  <option value="6 de Primaria">6 de Primaria</option>
 
                 </optgroup>
 
                 <optgroup label="Inicial">
 
-                  <optionvalu e="Inicial 3 años">Inicial 3 años</option>
+                  <option value="Inicial 3 años">Inicial 3 años</option>
 
-                  <optionvalu e="Inicial 4 años">Inicial 4 años</option>
+                  <option value="Inicial 4 años">Inicial 4 años</option>
 
-                  <optionvalu e="Inicial 5 años">Inicial 5 años</option>
+                  <option value="Inicial 5 años">Inicial 5 años</option>
 
                 </optgroup>
 
@@ -30652,7 +30648,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Dirección de Residencia:</label>
 
@@ -30670,9 +30666,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div id="fum-tab-content-2" class="fum-tab-pane" style="display: none;">
 
-          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margión-bottom: 10px;">
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 10px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Apoderado / Tutor Legal:</label>
 
@@ -30680,7 +30676,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">DNI del Apoderado:</label>
 
@@ -30692,9 +30688,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margión-bottom: 10px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Teléfono Celular / Whatspp:</label>
 
@@ -30702,7 +30698,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Correo Electrónico:</label>
 
@@ -30714,9 +30710,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; paddióng: 10px;">
+          <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 10px;">
 
-            <div style="font-size: 11.5px; font-weight: 800; color: #92400e; margión-bottom: 6px;">📞 Contacto Secundario de Emergencia:</div>
+            <div style="font-size: 11.5px; font-weight: 800; color: #92400e; margin-bottom: 6px;">📞 Contacto Secundario de Emergencia:</div>
 
             <div style="display: grid; grid-template-columns: 2fr 1.2fr; gap: 10px;">
 
@@ -30736,47 +30732,47 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div id="fum-tab-content-3" class="fum-tab-pane" style="display: none;">
 
-          <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 10px; margión-bottom: 10px;">
+          <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 10px; margin-bottom: 10px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Grupo Sanguíneo & Factor:</label>
 
               <select id="new-matr-blood" class="form-control" style="font-weight: bold;">
 
-                <optionvalu e="O+">O Positivo (O+)</option>
+                <option value="O+">O Positivo (O+)</option>
 
-                <optionvalu e="O-">O N egativo (O-)</option>
+                <option value="O-">O N egativo (O-)</option>
 
-                <optionvalu e="A+">A Positivo (A+)</option>
+                <option value="A+">A Positivo (A+)</option>
 
-                <optionvalu e="A-">A N egativo (A-)</option>
+                <option value="A-">A N egativo (A-)</option>
 
-                <optionvalu e="B+">B Positivo (B+)</option>
+                <option value="B+">B Positivo (B+)</option>
 
-                <optionvalu e="B-">B N egativo (B-)</option>
+                <option value="B-">B N egativo (B-)</option>
 
-                <optionvalu e="AB+">AB Positivo (AB+)</option>
+                <option value="AB+">AB Positivo (AB+)</option>
 
-                <optionvalu e="AB-">AB N egativo (AB-)</option>
+                <option value="AB-">AB N egativo (AB-)</option>
 
               </select>
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Seguro de Salud:</label>
 
               <select id="new-matr-insurance" class="form-control">
 
-                <optionvalu e="EsSalud (Activo)">EsSalud (Activo)</option>
+                <option value="EsSalud (Activo)">EsSalud (Activo)</option>
 
-                <optionvalu e="SIS Escolar (MINSA)">SIS Escolar (MINSA)</option>
+                <option value="SIS Escolar (MINSA)">SIS Escolar (MINSA)</option>
 
-                <optionvalu e="Seguro Particular (Rímac / Pacífico / Mapfre)">Seguro Particular (Rímac / Pacífico / Mapfre)</option>
+                <option value="Seguro Particular (Rímac / Pacífico / Mapfre)">Seguro Particular (Rímac / Pacífico / Mapfre)</option>
 
-                <optionvalu e="SiónSeguro / EnTrmite">SiónSeguro / EnTrmite</option>
+                <option value="SiónSeguro / EnTrmite">SiónSeguro / EnTrmite</option>
 
               </select>
 
@@ -30786,17 +30782,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div class="form-group" style="margión-bottom: 10px;">
+          <div class="form-group" style="margin-bottom: 10px;">
 
             <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Alergias (Medicamentos / Alimentos):</label>
 
-            <input type="text" id="new-matr-allergies" class="form-control" placeholder="Ej: Alergia a la Penicilina / N inguna conocida" value="Siónalergias conocidas" />
+            <input type="text" id="new-matr-allergies" class="form-control" placeholder="Ej: Alergia a la Penicilina / N inguna conocida" value="Sin alergias conocidas" />
 
           </div>
 
 
 
-          <div class="form-group" style="margión-bottom: 0;">
+          <div class="form-group" style="margin-bottom: 0;">
 
             <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Condición Médica / Apto para Educación Física:</label>
 
@@ -30812,7 +30808,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div id="fum-tab-content-4" class="fum-tab-pane" style="display: none;">
 
-          <div style="font-size: 12px; font-weight: 800; color: #1e3a8a; margión-bottom: 8px;">
+          <div style="font-size: 12px; font-weight: 800; color: #1e3a8a; margin-bottom: 8px;">
 
             📎 Checklist de Requisitos Documentarios (UGEL 05 - MINEDU):
 
@@ -30820,11 +30816,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="display: flex; flex-direction: column; gap: 8px; background: #f8fafc; paddióng: 12px; border-radius: 8px; border: 1px solid #cbd5e1;">
+          <div style="display: flex; flex-direction: column; gap: 8px; background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1;">
 
-            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; paddióng: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
-              <spanstyl e="font-size: 12px; font-weight: 700; color: #1e293b;">Copia de DNI del Estudiante</span>
+              <span style="font-size: 12px; font-weight: 700; color: #1e293b;">Copia de DNI del Estudiante</span>
 
               <input type="checkbox" id="chk-doc-dnistudent" checked style="transform: scale(1.2);" />
 
@@ -30832,9 +30828,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; paddióng: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
-              <spanstyl e="font-size: 12px; font-weight: 700; color: #1e293b;">Copia de DNI del Padre / Madre / Apoderado</span>
+              <span style="font-size: 12px; font-weight: 700; color: #1e293b;">Copia de DNI del Padre / Madre / Apoderado</span>
 
               <input type="checkbox" id="chk-doc-dniparent" checked style="transform: scale(1.2);" />
 
@@ -30842,9 +30838,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; paddióng: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
-              <spanstyl e="font-size: 12px; font-weight: 700; color: #1e293b;">Partida / Acta de N acimiento (Origiónal o Copia Legalizada)</span>
+              <span style="font-size: 12px; font-weight: 700; color: #1e293b;">Partida / Acta de N acimiento (Origiónal o Copia Legalizada)</span>
 
               <input type="checkbox" id="chk-doc-birthcert" checked style="transform: scale(1.2);" />
 
@@ -30852,9 +30848,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; paddióng: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
-              <spanstyl e="font-size: 12px; font-weight: 700; color: #1e293b;">Ficha Única de Matrícula SIGIE (Traslado / Contiónuidad)</span>
+              <span style="font-size: 12px; font-weight: 700; color: #1e293b;">Ficha Única de Matrícula SIGIE (Traslado / Contiónuidad)</span>
 
               <input type="checkbox" id="chk-doc-siagiefum" checked style="transform: scale(1.2);" />
 
@@ -30862,9 +30858,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; paddióng: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
-              <spanstyl e="font-size: 12px; font-weight: 700; color: #1e293b;">Certificado de Estudios / Libreta de Notas 2025</span>
+              <span style="font-size: 12px; font-weight: 700; color: #1e293b;">Certificado de Estudios / Libreta de Notas 2025</span>
 
               <input type="checkbox" id="chk-doc-reportcard" checked style="transform: scale(1.2);" />
 
@@ -30872,9 +30868,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; paddióng: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
-              <spanstyl e="font-size: 12px; font-weight: 700; color: #1e293b;">Cartilla de Vacunación Completa (Nivel Inicial/Primaria)</span>
+              <span style="font-size: 12px; font-weight: 700; color: #1e293b;">Cartilla de Vacunación Completa (Nivel Inicial/Primaria)</span>
 
               <input type="checkbox" id="chk-doc-vaccióne" checked style="transform: scale(1.2);" />
 
@@ -30890,9 +30886,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.confirmcreateEnrollment()" style="font-weight: 800; paddióng: 8px 20px;">
+        <button class="btn btn-navy" onclick="window.app.confirmcreateEnrollment()" style="font-weight: 800; padding: 8px 20px;">
 
           ✓ Guardar Matrícula & Generar Ficha FUM
 
@@ -30964,7 +30960,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     const insurance = document.getElementById("new-matr-insurance").value;
 
-    const allergies = document.getElementById("new-matr-allergies").value.trim() || "Siónalergias conocidas";
+    const allergies = document.getElementById("new-matr-allergies").value.trim() || "Sin alergias conocidas";
 
     const medicalCondition = document.getElementById("new-matr-medical").value.trim() || "Apto para actividades escolares";
 
@@ -31060,27 +31056,27 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div>
 
-            <h3 class="modal-title" style="color: white; margión: 0; font-size: 15px;">
+            <h3 class="modal-title" style="color: white; margin: 0; font-size: 15px;">
 
               🎉 ¡Estudiante Matriculado & Código QR Generado Automticamente!
 
             </h3>
 
-            <spanstyl e="font-size: 11px; color: #fde047;">I.E.P. "El Educador" • Año Lectivo 2026</span>
+            <span style="font-size: 11px; color: #fde047;">I.E.P. "El Educador" • Año Lectivo 2026</span>
 
           </div>
 
-          <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+          <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
         </div>
 
 
 
-        <div class="modal-body" style="paddióng: 20px; text-align: center; background: #f8fafc;">
+        <div class="modal-body" style="padding: 20px; text-align: center; background: #f8fafc;">
 
           
 
-          <div style="background: #ecfdf5; border: 1px solid #a7f3d0; paddióng: 8px 12px; border-radius: 6px; margión-bottom: 14px; font-size: 12px; color: #065f46; font-weight: bold;">
+          <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 8px 12px; border-radius: 6px; margin-bottom: 14px; font-size: 12px; color: #065f46; font-weight: bold;">
 
             ✓ El código QR oficial ha sido generado y vinculado al sistema de asistencia enpuerta e informes.
 
@@ -31090,9 +31086,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Tarjeta Oficial de Código QR Escolar (SiónFoto) -->
 
-          <div style="max-width: 300px; margión: 0 auto; background: #ffffff; border: 3px solid #1e3a8a; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+          <div style="max-width: 300px; margin: 0 auto; background: #ffffff; border: 3px solid #1e3a8a; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
 
-            <div style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white; paddióng: 10px; border-bottom: 3px solid #f59e0b;">
+            <div style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white; padding: 10px; border-bottom: 3px solid #f59e0b;">
 
               <div style="display: flex; align-items: center; justify-content: center; gap: 6px;">
 
@@ -31100,7 +31096,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                 <div style="text-align: center;">
 
-                  <div style="font-size: 10.5px; font-weight: 900; color: #fde047;">I.E.P. "EL EDUCDOR"</div>
+                  <div style="font-size: 10.5px; font-weight: 900; color: #fde047;">I.E.P. "EL EDUCADOR"</div>
 
                   <div style="font-size: 8px; opacity: 0.9;">ASISTENCIA & CONVIVEN CIA 2026</div>
 
@@ -31112,9 +31108,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <div style="paddióng: 16px 12px;">
+            <div style="padding: 16px 12px;">
 
-              <div style="width: 155px; height: 155px; margión: 0 auto 12px; border: 2px solid #0b132b; border-radius: 8px; paddióng: 6px; background: white;">
+              <div style="width: 155px; height: 155px; margin: 0 auto 12px; border: 2px solid #0b132b; border-radius: 8px; padding: 6px; background: white;">
 
                 ${Components.generateQRSVG(created.studentCode)}
 
@@ -31122,19 +31118,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-              <div style="font-size: 14px; font-weight: 900; color: #0b132b; text-transform: uppercase; line-height: 1.2; margión-bottom: 4px;">
+              <div style="font-size: 14px; font-weight: 900; color: #0b132b; text-transform: uppercase; line-height: 1.2; margin-bottom: 4px;">
 
                 ${created.studentName}
 
               </div>
 
-              <div style="font-size: 12px; font-weight: 800; color: #1e40af; margión-bottom: 6px;">
+              <div style="font-size: 12px; font-weight: 800; color: #1e40af; margin-bottom: 6px;">
 
                 ${created.grade}
 
               </div>
 
-              <div style="font-size: 10.5px; color: #475569; background: #f1f5f9; paddióng: 3px 8px; border-radius: 4px; display: inline-block;">
+              <div style="font-size: 10.5px; color: #475569; background: #f1f5f9; padding: 3px 8px; border-radius: 4px; display: inline-block;">
 
                 <strong>CÓD:</strong> <code>${created.studentCode}</code> • <strong>DNI:</strong> <code>${created.dni}</code>
 
@@ -31152,23 +31148,23 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
 
-          <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
+          <button class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
 
           <div style="display: flex; gap: 6px;">
 
-            <buttonclas s="btnbtn-navy btn-sm" onclick="window.print()" style="font-weight: 800;">
+            <button class="btn btn-navy btn-sm" onclick="window.print()" style="font-weight: 800;">
 
               Imprimir Tarjeta QR
 
             </button>
 
-            <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.showOfficialFUMPrintModal('${created.id}')" style="font-size: 11px;">
+            <button class="btn btn-outline btn-sm" onclick="window.app.showOfficialFUMPrintModal('${created.id}')" style="font-size: 11px;">
 
               Ver Ficha FUM A4
 
             </button>
 
-            <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.closeModal(); window.app.navigate('attendance'); window.app.setttendanceSubTab('id-cards');" style="font-weight: 800;">
+            <button class="btn btn-gold btn-sm" onclick="window.app.closeModal(); window.app.navigate('attendance'); window.app.setttendanceSubTab('id-cards');" style="font-weight: 800;">
 
               Ir a Plancha de QR
 
@@ -31206,7 +31202,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: #ffffff;">✏️ Expediente FUM & Ficha Médica: ${m.studentName}</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
 
       </div>
 
@@ -31216,27 +31212,27 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Pestañas del Formulario FUM -->
 
-        <div style="display: flex; gap: 6px; margión-bottom: 14px; border-bottom: 2px solid #e2e8f0; paddióng-bottom: 8px; flex-wrap: wrap;">
+        <div style="display: flex; gap: 6px; margin-bottom: 14px; border-bottom: 2px solid #e2e8f0; paddióng-bottom: 8px; flex-wrap: wrap;">
 
-          <buttontyp e="button" class="btnbtn-navy btn-sm" id="edit-fum-tab-btn-1" onclick="window.app.switchEditFUMTab('1')" style="font-weight: 800; font-size: 11px;">
+          <button type="button" class="btn btn-navy btn-sm" id="edit-fum-tab-btn-1" onclick="window.app.switchEditFUMTab('1')" style="font-weight: 800; font-size: 11px;">
 
             1. Datos del Alumno & SIGIE
 
           </button>
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" id="edit-fum-tab-btn-2" onclick="window.app.switchEditFUMTab('2')" style="font-weight: 800; font-size: 11px;">
+          <button type="button" class="btn btn-outline btn-sm" id="edit-fum-tab-btn-2" onclick="window.app.switchEditFUMTab('2')" style="font-weight: 800; font-size: 11px;">
 
             👨‍👩‍👧 2. Apoderado & Emergencia
 
           </button>
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" id="edit-fum-tab-btn-3" onclick="window.app.switchEditFUMTab('3')" style="font-weight: 800; font-size: 11px;">
+          <button type="button" class="btn btn-outline btn-sm" id="edit-fum-tab-btn-3" onclick="window.app.switchEditFUMTab('3')" style="font-weight: 800; font-size: 11px;">
 
             🩺 3. Ficha Médica & Salud
 
           </button>
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" id="edit-fum-tab-btn-4" onclick="window.app.switchEditFUMTab('4')" style="font-weight: 800; font-size: 11px;">
+          <button type="button" class="btn btn-outline btn-sm" id="edit-fum-tab-btn-4" onclick="window.app.switchEditFUMTab('4')" style="font-weight: 800; font-size: 11px;">
 
             📎 4. Documentos Digitales
 
@@ -31250,9 +31246,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div id="edit-fum-tab-content-1" class="fum-tab-pane">
 
-          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margión-bottom: 10px;">
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 10px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">N ombre Completo:</label>
 
@@ -31260,7 +31256,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">DNI:</label>
 
@@ -31272,9 +31268,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margión-bottom: 10px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Código SIGIE:</label>
 
@@ -31282,7 +31278,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Fecha de N acimiento:</label>
 
@@ -31290,15 +31286,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Sexo:</label>
 
               <select id="edit-matr-gender" class="form-control">
 
-                <optionvalu e="Femenióno" ${m.gender === 'Femenióno' ? 'selected' : ''}>Femenióno</option>
+                <option value="Femenino" ${m.gender === 'Femenino' ? 'selected' : ''}>Femenino</option>
 
-                <optionvalu e="Masculino" ${m.gender === 'Masculino' ? 'selected' : ''}>Masculino</option>
+                <option value="Masculino" ${m.gender === 'Masculino' ? 'selected' : ''}>Masculino</option>
 
               </select>
 
@@ -31308,9 +31304,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margión-bottom: 10px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Grado:</label>
 
@@ -31318,7 +31314,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Dirección:</label>
 
@@ -31336,9 +31332,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div id="edit-fum-tab-content-2" class="fum-tab-pane" style="display: none;">
 
-          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margión-bottom: 10px;">
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 10px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Apoderado Titular:</label>
 
@@ -31346,7 +31342,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">DNI Apoderado:</label>
 
@@ -31358,9 +31354,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margión-bottom: 10px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Teléfono Celular:</label>
 
@@ -31368,7 +31364,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Correo:</label>
 
@@ -31380,9 +31376,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; paddióng: 10px;">
+          <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 10px;">
 
-            <div style="font-size: 11.5px; font-weight: 800; color: #92400e; margión-bottom: 6px;">📞 Contacto Secundario de Emergencia:</div>
+            <div style="font-size: 11.5px; font-weight: 800; color: #92400e; margin-bottom: 6px;">📞 Contacto Secundario de Emergencia:</div>
 
             <div style="display: grid; grid-template-columns: 2fr 1.2fr; gap: 10px;">
 
@@ -31402,35 +31398,35 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div id="edit-fum-tab-content-3" class="fum-tab-pane" style="display: none;">
 
-          <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 10px; margión-bottom: 10px;">
+          <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 10px; margin-bottom: 10px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Grupo Sanguíneo:</label>
 
               <select id="edit-matr-blood" class="form-control" style="font-weight: bold;">
 
-                <optionvalu e="O+" ${m.bloodType === 'O+' ? 'selected' : ''}>O Positivo (O+)</option>
+                <option value="O+" ${m.bloodType === 'O+' ? 'selected' : ''}>O Positivo (O+)</option>
 
-                <optionvalu e="O-" ${m.bloodType === 'O-' ? 'selected' : ''}>O N egativo (O-)</option>
+                <option value="O-" ${m.bloodType === 'O-' ? 'selected' : ''}>O N egativo (O-)</option>
 
-                <optionvalu e="A+" ${m.bloodType === 'A+' ? 'selected' : ''}>A Positivo (A+)</option>
+                <option value="A+" ${m.bloodType === 'A+' ? 'selected' : ''}>A Positivo (A+)</option>
 
-                <optionvalu e="A-" ${m.bloodType === 'A-' ? 'selected' : ''}>A N egativo (A-)</option>
+                <option value="A-" ${m.bloodType === 'A-' ? 'selected' : ''}>A N egativo (A-)</option>
 
-                <optionvalu e="B+" ${m.bloodType === 'B+' ? 'selected' : ''}>B Positivo (B+)</option>
+                <option value="B+" ${m.bloodType === 'B+' ? 'selected' : ''}>B Positivo (B+)</option>
 
-                <optionvalu e="B-" ${m.bloodType === 'B-' ? 'selected' : ''}>B N egativo (B-)</option>
+                <option value="B-" ${m.bloodType === 'B-' ? 'selected' : ''}>B N egativo (B-)</option>
 
-                <optionvalu e="AB+" ${m.bloodType === 'AB+' ? 'selected' : ''}>AB Positivo (AB+)</option>
+                <option value="AB+" ${m.bloodType === 'AB+' ? 'selected' : ''}>AB Positivo (AB+)</option>
 
-                <optionvalu e="AB-" ${m.bloodType === 'AB-' ? 'selected' : ''}>AB N egativo (AB-)</option>
+                <option value="AB-" ${m.bloodType === 'AB-' ? 'selected' : ''}>AB N egativo (AB-)</option>
 
               </select>
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Seguro de Salud:</label>
 
@@ -31442,17 +31438,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div class="form-group" style="margión-bottom: 10px;">
+          <div class="form-group" style="margin-bottom: 10px;">
 
             <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Alergias:</label>
 
-            <input type="text" id="edit-matr-allergies" class="form-control" value="${m.allergies || 'Siónalergias conocidas'}" />
+            <input type="text" id="edit-matr-allergies" class="form-control" value="${m.allergies || 'Sin alergias conocidas'}" />
 
           </div>
 
 
 
-          <div class="form-group" style="margión-bottom: 0;">
+          <div class="form-group" style="margin-bottom: 0;">
 
             <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Condición Médica / Actividad Física:</label>
 
@@ -31468,7 +31464,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div id="edit-fum-tab-content-4" class="fum-tab-pane" style="display: none;">
 
-          <div style="font-size: 12px; font-weight: 800; color: #1e3a8a; margión-bottom: 8px;">
+          <div style="font-size: 12px; font-weight: 800; color: #1e3a8a; margin-bottom: 8px;">
 
             📎 Estado de Requisitos y Documentación Sustentatoria:
 
@@ -31476,11 +31472,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="display: flex; flex-direction: column; gap: 8px; background: #f8fafc; paddióng: 12px; border-radius: 8px; border: 1px solid #cbd5e1;">
+          <div style="display: flex; flex-direction: column; gap: 8px; background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1;">
 
-            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; paddióng: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
-              <spanstyl e="font-size: 12px; font-weight: 700;">Copia de DNI del Estudiante</span>
+              <span style="font-size: 12px; font-weight: 700;">Copia de DNI del Estudiante</span>
 
               <input type="checkbox" id="edit-chk-dnistudent" ${docs.dniStudent ? 'checked' : ''} style="transform: scale(1.2);" />
 
@@ -31488,9 +31484,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; paddióng: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
-              <spanstyl e="font-size: 12px; font-weight: 700;">Copia de DNI del Padre / Madre / Apoderado</span>
+              <span style="font-size: 12px; font-weight: 700;">Copia de DNI del Padre / Madre / Apoderado</span>
 
               <input type="checkbox" id="edit-chk-dniparent" ${docs.dniParent ? 'checked' : ''} style="transform: scale(1.2);" />
 
@@ -31498,9 +31494,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; paddióng: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
-              <spanstyl e="font-size: 12px; font-weight: 700;">Partida / Acta de N acimiento</span>
+              <span style="font-size: 12px; font-weight: 700;">Partida / Acta de N acimiento</span>
 
               <input type="checkbox" id="edit-chk-birthcert" ${docs.birthCertificate ? 'checked' : ''} style="transform: scale(1.2);" />
 
@@ -31508,9 +31504,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; paddióng: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
-              <spanstyl e="font-size: 12px; font-weight: 700;">Ficha Única de Matrícula SIGIE</span>
+              <span style="font-size: 12px; font-weight: 700;">Ficha Única de Matrícula SIGIE</span>
 
               <input type="checkbox" id="edit-chk-siagiefum" ${docs.siagieFUM ? 'checked' : ''} style="transform: scale(1.2);" />
 
@@ -31518,9 +31514,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; paddióng: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
-              <spanstyl e="font-size: 12px; font-weight: 700;">Certificado de Estudios / Libreta de Notas</span>
+              <span style="font-size: 12px; font-weight: 700;">Certificado de Estudios / Libreta de Notas</span>
 
               <input type="checkbox" id="edit-chk-reportcard" ${docs.reportCard ? 'checked' : ''} style="transform: scale(1.2);" />
 
@@ -31528,9 +31524,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; paddióng: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+            <label style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
-              <spanstyl e="font-size: 12px; font-weight: 700;">Cartilla de Vacunación</span>
+              <span style="font-size: 12px; font-weight: 700;">Cartilla de Vacunación</span>
 
               <input type="checkbox" id="edit-chk-vaccióne" ${docs.vacciónationCard ? 'checked' : ''} style="transform: scale(1.2);" />
 
@@ -31546,9 +31542,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.confirmUpdateEnrollmentFUM('${m.id}')" style="font-weight: 800; paddióng: 8px 20px;">
+        <button class="btn btn-navy" onclick="window.app.confirmUpdateEnrollmentFUM('${m.id}')" style="font-weight: 800; padding: 8px 20px;">
 
           ✓ Guardar Cambios enFUM
 
@@ -31716,17 +31712,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: #ffffff;">Ficha Única de Matrícula Oficial (F.U.M. 2026)</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
 
       </div>
 
-      <div class="modal-body" style="max-height: 80vh; overflow-y: auto; paddióng: 24px; background: #ffffff;">
+      <div class="modal-body" style="max-height: 80vh; overflow-y: auto; padding: 24px; background: #ffffff;">
 
         
 
         <!-- MEMBRETE OFICIL MINEDU / UGEL 05 -->
 
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0b132b; paddióng-bottom: 12px; margión-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0b132b; paddióng-bottom: 12px; margin-bottom: 16px;">
 
           <div style="display: flex; align-items: center; gap: 12px;">
 
@@ -31734,11 +31730,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <div>
 
-              <div style="font-size: 11px; font-weight: 900; color: #1e3a8a; text-transform: uppercase;">REPÚBLICA DEL PERÚ • MINISTERIO DE EDUCCIÓN  </div>
+              <div style="font-size: 11px; font-weight: 900; color: #1e3a8a; text-transform: uppercase;">REPÚBLICA DEL PERÚ • MINISTERIO DE EDUCCIÓN</div>
 
               <div style="font-size: 10px; color: #64748b;">DRELM • UGEL 05 SNJUN DE LURIGÍANCHO</div>
 
-              <h2 style="font-size: 17px; font-weight: 900; margión: 2px 0; color: #0b132b;">I.E.P. "EL EDUCDOR"</h2>
+              <h2 style="font-size: 17px; font-weight: 900; margin: 2px 0; color: #0b132b;">I.E.P. "EL EDUCADOR"</h2>
 
               <div style="font-size: 10.5px; color: #b45309; font-weight: 700;">"21 años dejando huellas en la formación de líderes"</div>
 
@@ -31756,7 +31752,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <div style="font-size: 10px;">Secundaria: <strong>0729483</strong></div>
 
-            <div style="font-size: 11px; font-weight: 900; color: #1e40af; margión-top: 2px;">AÑO LECTIVO 2026</div>
+            <div style="font-size: 11px; font-weight: 900; color: #1e40af; margin-top: 2px;">AÑO LECTIVO 2026</div>
 
           </div>
 
@@ -31764,15 +31760,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="text-align: center; margión-bottom: 16px;">
+        <div style="text-align: center; margin-bottom: 16px;">
 
-          <h3 style="font-size: 15px; font-weight: 900; color: #0b132b; text-transform: uppercase; letter-spacióng: 0.5px; margión: 0;">
+          <h3 style="font-size: 15px; font-weight: 900; color: #0b132b; text-transform: uppercase; letter-spacing: 0.5px; margin: 0;">
 
-            FICHA ÚN ICA DE MTRÍCULA - F.U.M. N  ${m.studentCode}
+            FICHA ÚN ICA DE MTRÍCULA - F.U.M. N${m.studentCode}
 
           </h3>
 
-          <spanstyl e="font-size: 11px; color: #047857; font-weight: 800; background: #d1fae5; paddióng: 2px 10px; border-radius: 10px; border: 1px solid #a7f3d0; display: inline-block; margión-top: 4px;">
+          <span style="font-size: 11px; color: #047857; font-weight: 800; background: #d1fae5; padding: 2px 10px; border-radius: 10px; border: 1px solid #a7f3d0; display: inline-block; margin-top: 4px;">
 
             ✓ ESTÍADO: MTRICULDO OFICILMENTE ENSIGIE
 
@@ -31784,27 +31780,27 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- SECCIÓN I: DÍATOS DEL ESTUDINTE -->
 
-        <div style="border: 1px solid #cbd5e1; border-radius: 6px; margión-bottom: 12px; overflow: hidden;">
+        <div style="border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 12px; overflow: hidden;">
 
-          <div style="background: #f1f5f9; paddióng: 6px 12px; font-size: 11.5px; font-weight: 900; color: #1e3a8a; border-bottom: 1px solid #cbd5e1;">
+          <div style="background: #f1f5f9; padding: 6px 12px; font-size: 11.5px; font-weight: 900; color: #1e3a8a; border-bottom: 1px solid #cbd5e1;">
 
             I. DÍATOS DE IDENTIFICCIÓN DEL ESTUDINTE
 
           </div>
 
-          <div style="paddióng: 10px 12px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; font-size: 12px;">
+          <div style="padding: 10px 12px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; font-size: 12px;">
 
-            <div><strong>Apellidos y N ombres:</strong> <br><spanstyl e="font-size: 13px; color: #0b132b; font-weight: bold;">${m.studentName}</span></div>
+            <div><strong>Apellidos y N ombres:</strong> <br><span style="font-size: 13px; color: #0b132b; font-weight: bold;">${m.studentName}</span></div>
 
             <div><strong>DNI:</strong> <br><span>${m.dni}</span></div>
 
-            <div><strong>Cód. SIGIE:</strong> <br><spanstyl e="font-family: monospace; font-weight: bold; color: #1e40af;">${m.siagieCode || m.dni}</span></div>
+            <div><strong>Cód. SIGIE:</strong> <br><span style="font-family: monospace; font-weight: bold; color: #1e40af;">${m.siagieCode || m.dni}</span></div>
 
-            <div><strong>Grado y Nivel:</strong> <br><spanstyl e="font-weight: bold;">${m.grade}</span> (${m.level || 'Secundaria'})</div>
+            <div><strong>Grado y Nivel:</strong> <br><span style="font-weight: bold;">${m.grade}</span> (${m.level || 'Secundaria'})</div>
 
             <div><strong>Fecha de N acimiento:</strong> <br><span>${m.birthDate || '14/05/2010'}</span></div>
 
-            <div><strong>Sexo:</strong> <br><span>${m.gender || 'Femenióno'}</span></div>
+            <div><strong>Sexo:</strong> <br><span>${m.gender || 'Femenino'}</span></div>
 
             <div style="grid-column: span3;"><strong>Domicilio Actual:</strong> <br><span>${m.address || 'Av. Próceres de la Independencia 1420, SanJuan de Lurigancho, Lima'}</span></div>
 
@@ -31816,17 +31812,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- SECCIÓN II: DÍATOS DEL APODERÍADO -->
 
-        <div style="border: 1px solid #cbd5e1; border-radius: 6px; margión-bottom: 12px; overflow: hidden;">
+        <div style="border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 12px; overflow: hidden;">
 
-          <div style="background: #f1f5f9; paddióng: 6px 12px; font-size: 11.5px; font-weight: 900; color: #1e3a8a; border-bottom: 1px solid #cbd5e1;">
+          <div style="background: #f1f5f9; padding: 6px 12px; font-size: 11.5px; font-weight: 900; color: #1e3a8a; border-bottom: 1px solid #cbd5e1;">
 
             II. DÍATOS DEL PDRE, MDRE O APODERÍADO LEGÍAL
 
           </div>
 
-          <div style="paddióng: 10px 12px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; font-size: 12px;">
+          <div style="padding: 10px 12px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; font-size: 12px;">
 
-            <div><strong>N ombre del Apoderado:</strong> <br><spanstyl e="font-weight: bold;">${m.guardian}</span></div>
+            <div><strong>N ombre del Apoderado:</strong> <br><span style="font-weight: bold;">${m.guardian}</span></div>
 
             <div><strong>DNI Apoderado:</strong> <br><span>${m.guardianDni || '41982301'}</span></div>
 
@@ -31844,25 +31840,25 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- SECCIÓN III: FICHA MÉDICA Y SLUD -->
 
-        <div style="border: 1px solid #cbd5e1; border-radius: 6px; margión-bottom: 12px; overflow: hidden;">
+        <div style="border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 12px; overflow: hidden;">
 
-          <div style="background: #f1f5f9; paddióng: 6px 12px; font-size: 11.5px; font-weight: 900; color: #1e3a8a; border-bottom: 1px solid #cbd5e1;">
+          <div style="background: #f1f5f9; padding: 6px 12px; font-size: 11.5px; font-weight: 900; color: #1e3a8a; border-bottom: 1px solid #cbd5e1;">
 
             III. ANTECEDEN TES MÉDICOS Y ATENCIÓN DE SLUD ESCOLR
 
           </div>
 
-          <div style="paddióng: 10px 12px; display: grid; grid-template-columns: 1fr 1.5fr 1.5fr; gap: 8px; font-size: 12px;">
+          <div style="padding: 10px 12px; display: grid; grid-template-columns: 1fr 1.5fr 1.5fr; gap: 8px; font-size: 12px;">
 
-            <div><strong>Grupo Sanguíneo:</strong> <br><spanstyl e="font-weight: 900; color: #dc2626; font-size: 13px;">🩸 ${m.bloodType || 'O+'}</span></div>
+            <div><strong>Grupo Sanguíneo:</strong> <br><span style="font-weight: 900; color: #dc2626; font-size: 13px;">🩸 ${m.bloodType || 'O+'}</span></div>
 
             <div><strong>Seguro de Salud:</strong> <br><span>🏥 ${m.insurance || 'EsSalud / SIS'}</span></div>
 
-            <div><strong>Alergias Conocidas:</strong> <br><spanstyl e="color: #b45309; font-weight: bold;">⚠️ ${m.allergies || 'N inguna'}</span></div>
+            <div><strong>Alergias Conocidas:</strong> <br><span style="color: #b45309; font-weight: bold;">⚠️ ${m.allergies || 'N inguna'}</span></div>
 
             <div style="grid-column: span2;"><strong>Condición Médica / Educación Física:</strong> <br><span>${m.medicalCondition || 'Apto para toda actividad física escolar'}</span></div>
 
-            <div><strong>Teléfono de Emergencia:</strong> <br><spanstyl e="font-weight: bold; color: #047857;">📞 ${m.emergencyPhone || m.guardianPhone || '987-654-321'}</span></div>
+            <div><strong>Teléfono de Emergencia:</strong> <br><span style="font-weight: bold; color: #047857;">📞 ${m.emergencyPhone || m.guardianPhone || '987-654-321'}</span></div>
 
           </div>
 
@@ -31872,15 +31868,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- SECCIÓN IV: REQUISITOS Y DOCUMENTOS VERIFICDOS -->
 
-        <div style="border: 1px solid #cbd5e1; border-radius: 6px; margión-bottom: 16px; overflow: hidden;">
+        <div style="border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 16px; overflow: hidden;">
 
-          <div style="background: #f1f5f9; paddióng: 6px 12px; font-size: 11.5px; font-weight: 900; color: #1e3a8a; border-bottom: 1px solid #cbd5e1;">
+          <div style="background: #f1f5f9; padding: 6px 12px; font-size: 11.5px; font-weight: 900; color: #1e3a8a; border-bottom: 1px solid #cbd5e1;">
 
             IV. DOCUMENTÍACIÓN SUSTENTÍATORIA VERIFICDÍA POR SECRETÍARÍA
 
           </div>
 
-          <div style="paddióng: 10px 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 11.5px;">
+          <div style="padding: 10px 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 11.5px;">
 
             <div>${docs.dniStudent ? '☑️' : '⬜'} Copia de DNI del Estudiante</div>
 
@@ -31902,9 +31898,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- SECCIÓN V: COMPROMISO Y FIRMS -->
 
-        <div style="margión-top: 24px; paddióng-top: 12px; border-top: 1px dashed #cbd5e1;">
+        <div style="margin-top: 24px; paddióng-top: 12px; border-top: 1px dashed #cbd5e1;">
 
-          <p style="font-size: 10.5px; color: #475569; text-align: justify; line-height: 1.4; margión-bottom: 28px;">
+          <p style="font-size: 10.5px; color: #475569; text-align: justify; line-height: 1.4; margin-bottom: 28px;">
 
             <strong>DECLRÍACIÓN JURÍADÍA Y COMPROMISO:</strong> El padre de familia o apoderado declara bajo juramento que los datos consignados en la presente Ficha Única de Matrícula sonfidedignos y se compromete a respetar el Reglamento Interno y apoyar el proceso formativo de su menor hijo(a) durante el Año Lectivo 2026.
 
@@ -31916,7 +31912,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <div>
 
-              <div style="border-top: 1px solid #000000; width: 80%; margión: 0 auto 4px;"></div>
+              <div style="border-top: 1px solid #000000; width: 80%; margin: 0 auto 4px;"></div>
 
               <div style="font-size: 11px; font-weight: bold;">${m.guardian}</div>
 
@@ -31928,7 +31924,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <div>
 
-              <div style="border-top: 1px solid #000000; width: 80%; margión: 0 auto 4px;"></div>
+              <div style="border-top: 1px solid #000000; width: 80%; margin: 0 auto 4px;"></div>
 
               <div style="font-size: 11px; font-weight: bold;">Lic. Manuel Cornejo / Prof. Alex Lino</div>
 
@@ -31944,7 +31940,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="display: flex; justify-content: center; margión-top: 20px;">
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
 
           <div style="width: 55px; height: 55px;">${Components.generateQRSVG(`FUM-2026-${m.studentCode}-${m.dni}`)}</div>
 
@@ -31956,9 +31952,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.print()" style="font-weight: 900; paddióng: 8px 24px;">
+        <button class="btn btn-navy" onclick="window.print()" style="font-weight: 900; padding: 8px 24px;">
 
           Imprimir Ficha Única Oficial (A4)
 
@@ -32008,13 +32004,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: #ffffff;">📎 Documentos Digitales & Requisitos: ${m.studentName}</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
 
       </div>
 
       <div class="modal-body" style="max-height: 75vh; overflow-y: auto;">
 
-        <div style="background: #ecfdf5; border: 1px solid #a7f3d0; paddióng: 10px 14px; border-radius: 6px; margión-bottom: 14px; font-size: 12px; color: #065f46;">
+        <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 10px 14px; border-radius: 6px; margin-bottom: 14px; font-size: 12px; color: #065f46;">
 
           Expediente digital oficial de matrícula para <strong>${m.studentName}</strong> (${m.grade}). Marque los documentos recibidos o cargue copias digitales.
 
@@ -32030,21 +32026,21 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             return `
 
-              <div class="card" style="paddióng: 12px 14px; border-left: 4px solid ${isDelivered ? '#10b981' : '#f59e0b'}; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+              <div class="card" style="padding: 12px 14px; border-left: 4px solid ${isDelivered ? '#10b981' : '#f59e0b'}; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
 
                 <div>
 
                   <div style="display: flex; align-items: center; gap: 6px;">
 
-                    <spanstyl e="font-size: 16px;">${req.icon}</span>
+                    <span style="font-size: 16px;">${req.icon}</span>
 
                     <strong style="font-size: 12.5px; color: #0b132b;">${req.label}</strong>
 
-                    ${req.required ? `<spanstyl e="font-size: 10px; color: #dc2626; font-weight: 800;">* Obligatorio</span>` : ''}
+                    ${req.required ? `<span style="font-size: 10px; color: #dc2626; font-weight: 800;">* Obligatorio</span>` : ''}
 
                   </div>
 
-                  <spanstyl e="font-size: 11px; color: ${isDelivered ? '#047857' : '#b45309'}; font-weight: 700; margión-top: 2px; display: block;">
+                  <span style="font-size: 11px; color: ${isDelivered ? '#047857' : '#b45309'}; font-weight: 700; margin-top: 2px; display: block;">
 
                     ${isDelivered ? '✓ Documento recibido y verificado' : '⏳ Pendiente de entrega por el apoderado'}
 
@@ -32056,13 +32052,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                 <div style="display: flex; gap: 6px; align-items: center;">
 
-                  <buttonclas s="btnbtn-sm ${isDelivered ? 'btn-gold' : 'btn-outline'}" onclick="window.app.toggleDocumentItem('${m.id}', '${req.key}', ${!isDelivered})" style="font-size: 11px; font-weight: 800;">
+                  <button class="btn btn-sm ${isDelivered ? 'btn-gold' : 'btn-outline'}" onclick="window.app.toggleDocumentItem('${m.id}', '${req.key}', ${!isDelivered})" style="font-size: 11px; font-weight: 800;">
 
                     ${isDelivered ? '✓ Marcado Conforme' : 'Marcar como Recibido'}
 
                   </button>
 
-                  <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.simulateUploadDocument('${m.id}', '${req.key}', '${req.label}')" style="font-size: 11px;">
+                  <button class="btn btn-navy btn-sm" onclick="window.app.simulateUploadDocument('${m.id}', '${req.key}', '${req.label}')" style="font-size: 11px;">
 
                     📤 Cargar Archivo
 
@@ -32082,7 +32078,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
       </div>
 
@@ -32196,7 +32192,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     if (updated) {
 
-      const icon = newStatus === 'Presente' ? '<spanclas s="status-dot-green"></span>' : newStatus === 'Tardanza' ? '<spanclas s="status-dot-yellow"></span>' : newStatus === 'Falta' ? '<spanclas s="status-dot-red"></span>' : '🔵';
+      const icon = newStatus === 'Presente' ? '<span class="status-dot-green"></span>' : newStatus === 'Tardanza' ? '<span class="status-dot-yellow"></span>' : newStatus === 'Falta' ? '<span class="status-dot-red"></span>' : '🔵';
 
       this.showToast(`${icon} ${updated.studentName} marcado como "${newStatus}"`, "info");
 
@@ -32234,13 +32230,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: #ffffff;">📝 Justificación de Inasistencia / Tardanza</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
 
       </div>
 
       <div class="modal-body">
 
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; paddióng: 10px; margión-bottom: 12px; font-size: 12px;">
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px; margin-bottom: 12px; font-size: 12px;">
 
           Estudiante: <strong>${st.studentName}</strong> • Fecha: <strong>${date}</strong>
 
@@ -32252,35 +32248,35 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Motivo de la Inasistencia:</label>
 
-          <select id="just-reason-type" class="form-control" style="font-weight: bold; margión-bottom: 8px;">
+          <select id="just-reason-type" class="form-control" style="font-weight: bold; margin-bottom: 8px;">
 
-            <optionvalu e="Cita médica peditrica / Tratamiento de salud">Cita médica / Tratamiento de salud</option>
+            <option value="Cita médica peditrica / Tratamiento de salud">Cita médica / Tratamiento de salud</option>
 
-            <optionvalu e="Descanso médico prescrito (Reposo)">Descanso médico prescrito (Reposo)</option>
+            <option value="Descanso médico prescrito (Reposo)">Descanso médico prescrito (Reposo)</option>
 
-            <optionvalu e="Emergencia o calamidad familiar">Emergencia o calamidad familiar</option>
+            <option value="Emergencia o calamidad familiar">Emergencia o calamidad familiar</option>
 
-            <optionvalu e="Representación institucional / Deportiva / Académica">Representación institucional / Académica</option>
+            <option value="Representación institucional / Deportiva / Académica">Representación institucional / Académica</option>
 
-            <optionvalu e="Trmite legal documentario / RENIEC">Trmite documentario / RENIEC</option>
+            <option value="Trmite legal documentario / RENIEC">Trmite documentario / RENIEC</option>
 
           </select>
 
-          <textarea id="just-reason-detail" class="form-control" rows="3" placeholder="Detalle la justificación para conocimiento de Coordiónación y Tutora..."></textarea>
+          <textarea id="just-reason-detail" class="form-control" rows="3" placeholder="Detalle la justificación para conocimiento de Coordinación y Tutora..."></textarea>
 
         </div>
 
 
 
-        <div class="form-group" style="margión-bottom: 0;">
+        <div class="form-group" style="margin-bottom: 0;">
 
           <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Documento Sustentatorio (Constancia Médica / Receta):</label>
 
-          <div style="border: 2px dashed #cbd5e1; border-radius: 6px; paddióng: 12px; text-align: center; background: #f8fafc;">
+          <div style="border: 2px dashed #cbd5e1; border-radius: 6px; padding: 12px; text-align: center; background: #f8fafc;">
 
-            <spanstyl e="font-size: 12px; color: #475569;">Constancia_Medica_Atencion_19082026.pdf</span>
+            <span style="font-size: 12px; color: #475569;">Constancia_Medica_Atencion_19082026.pdf</span>
 
-            <div style="font-size: 10.5px; color: #047857; font-weight: bold; margión-top: 4px;">✓ Documento adjunto verificado</div>
+            <div style="font-size: 10.5px; color: #047857; font-weight: bold; margin-top: 4px;">✓ Documento adjunto verificado</div>
 
           </div>
 
@@ -32290,9 +32286,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.confirmSubmitJustification('${studentId}', '${date}')" style="font-weight: 800;">
+        <button class="btn btn-navy" onclick="window.app.confirmSubmitJustification('${studentId}', '${date}')" style="font-weight: 800;">
 
           ✓ Aprobar y Registrar Justificación
 
@@ -32386,7 +32382,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         return this.doorQrScanner.start(
 
-          { facióngMode: facióng },
+          { facingMode: facióng },
 
           config,
 
@@ -32414,7 +32410,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           if (statusTag) {
 
-            statusTag.innerHTML = "<spanclas s='status-dot-green'></span> CMARÍA ACTIVA";
+            statusTag.innerHTML = "<span class='status-dot-green'></span> CMARÍA ACTIVA";
 
             statusTag.className = "status-badge status-approved";
 
@@ -32492,7 +32488,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <div style="color: white; text-align: center;">
 
-              <div style="font-size: 48px; margión-bottom: 6px;">⚡</div>
+              <div style="font-size: 48px; margin-bottom: 6px;">⚡</div>
 
               <div style="font-size: 12px; font-weight: bold; color: #38bdf8;">Lector QR Activo</div>
 
@@ -32558,7 +32554,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     if (statusTag) {
 
-      statusTag.innerHTML = "<spanstyl e='color:#fde047; font-weight:900;'>⚡ LEYENDO QR...</span>";
+      statusTag.innerHTML = "<span style='color:#fde047; font-weight:900;'>⚡ LEYENDO QR...</span>";
 
       statusTag.className = "status-badge status-pendióng";
 
@@ -32578,7 +32574,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       if (statusTag && this.isDoorCamctive) {
 
-        statusTag.innerHTML = "<spanclas s='status-dot-green'></span> LISTO PRÍA EL SIGUIENTE QR";
+        statusTag.innerHTML = "<span class='status-dot-green'></span> LISTO PRÍA EL SIGUIENTE QR";
 
         statusTag.className = "status-badge status-approved";
 
@@ -32610,13 +32606,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       if (display && result.student) {
 
-        const studentPhoto = result.student.avatar || (result.student.gender === 'Femenióno' ? 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80' : 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80');
+        const studentPhoto = result.student.avatar || (result.student.gender === 'Femenino' ? 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80' : 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80');
 
         display.innerHTML = `
 
-          <div style="background: #fff5f5; border: 2px solid #ef4444; border-radius: 10px; paddióng: 16px; text-align: center; animation: fadeIn0.3s ease;">
+          <div style="background: #fff5f5; border: 2px solid #ef4444; border-radius: 10px; padding: 16px; text-align: center; animation: fadeIn0.3s ease;">
 
-            <div style="display: flex; align-items: center; justify-content: center; gap: 14px; margión-bottom: 12px;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 12px;">
 
               <img src="${studentPhoto}" alt="Foto" style="width: 60px; height: 70px; object-fit: cover; border-radius: 6px; border: 2px solid #dc2626;" />
 
@@ -32628,7 +32624,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                 <div style="font-size: 10.5px; color: #64748b;">DNI: ${result.student.dni} • Código: ${result.student.studentCode}</div>
 
-                <div style="font-size: 10.5px; color: #047857; font-weight: bold; margión-top: 2px;"><spanclas s='status-dot-green'></span> Ingreso registrado hoy a las ${result.previousScanTime}</div>
+                <div style="font-size: 10.5px; color: #047857; font-weight: bold; margin-top: 2px;"><span class='status-dot-green'></span> Ingreso registrado hoy a las ${result.previousScanTime}</div>
 
               </div>
 
@@ -32636,7 +32632,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <div style="background: #fef2f2; border: 1px dashed #f87171; border-radius: 8px; paddióng: 10px; margión-bottom: 12px; font-size: 12px; color: #991b1b;">
+            <div style="background: #fef2f2; border: 1px dashed #f87171; border-radius: 8px; padding: 10px; margin-bottom: 12px; font-size: 12px; color: #991b1b;">
 
               ⚠️ <strong>LECTURÍA QR POSTERIOR AL INGRESO:</strong> El estudiante ya se encuentra dentro del colegio. Seleccione la acción correspondiente:
 
@@ -32644,7 +32640,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.openStudentVirtualgendaModal('${result.student.studentCode}')" style="font-weight: 900; font-size: 12px; paddióng: 8px 14px; background: #1e3a8a; color: white; width: 100%; margión-bottom: 8px;">
+            <button class="btn btn-navy btn-sm" onclick="window.app.openStudentVirtualgendaModal('${result.student.studentCode}')" style="font-weight: 900; font-size: 12px; padding: 8px 14px; background: #1e3a8a; color: white; width: 100%; margin-bottom: 8px;">
 
               📖 Abrir Agenda Virtual & Anotaciones del Estudiante
 
@@ -32652,13 +32648,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
 
-              <buttonclas s="btnbtn-red btn-sm" onclick="window.app.opencreateIncidentModal('${result.student.studentCode}', 'Grave')" style="font-weight: 800; font-size: 11px;">
+              <button class="btn btn-red btn-sm" onclick="window.app.opencreateIncidentModal('${result.student.studentCode}', 'Grave')" style="font-weight: 800; font-size: 11px;">
 
                 ⚠️ Informe de Falta
 
               </button>
 
-              <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.opencreategendaNoteModal('${result.student.studentCode}', 'merito')" style="font-weight: 800; font-size: 11px;">
+              <button class="btn btn-gold btn-sm" onclick="window.app.opencreategendaNoteModal('${result.student.studentCode}', 'merito')" style="font-weight: 800; font-size: 11px;">
 
                 ★ Anotar Mérito
 
@@ -32688,15 +32684,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       const isDoorClosed = result.isDoorClosed;
 
-      const studentPhoto = result.student.avatar || (result.student.gender === 'Femenióno' ? 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80' : 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80');
+      const studentPhoto = result.student.avatar || (result.student.gender === 'Femenino' ? 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80' : 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80');
 
 
 
       display.innerHTML = `
 
-        <div style="background: ${isDoorClosed ? '#fef2f2' : isLate ? '#fffbeb' : '#ecfdf5'}; border: 2px solid ${isDoorClosed ? '#dc2626' : isLate ? '#f59e0b' : '#10b981'}; border-radius: 10px; paddióng: 16px; text-align: center; animation: fadeIn0.3s ease;">
+        <div style="background: ${isDoorClosed ? '#fef2f2' : isLate ? '#fffbeb' : '#ecfdf5'}; border: 2px solid ${isDoorClosed ? '#dc2626' : isLate ? '#f59e0b' : '#10b981'}; border-radius: 10px; padding: 16px; text-align: center; animation: fadeIn0.3s ease;">
 
-          <div style="display: flex; align-items: center; justify-content: center; gap: 14px; margión-bottom: 12px;">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 12px;">
 
             <img src="${studentPhoto}" alt="Foto" style="width: 55px; height: 65px; object-fit: cover; border-radius: 6px; border: 2px solid ${isDoorClosed ? '#991b1b' : isLate ? '#d97706' : '#059669'};" />
 
@@ -32714,19 +32710,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="display: inline-block; paddióng: 6px 14px; border-radius: 20px; font-size: 12.5px; font-weight: 900; background: ${isDoorClosed ? '#dc2626' : isLate ? '#f59e0b' : '#10b981'}; color: white; margión-bottom: 8px;">
+          <div style="display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 12.5px; font-weight: 900; background: ${isDoorClosed ? '#dc2626' : isLate ? '#f59e0b' : '#10b981'}; color: white; margin-bottom: 8px;">
 
-            ${isDoorClosed ? `⛔ PUERTÍA CERRÍADÍA (08:30 AM) • FLTÍA REGISTRÍADÍA` : isLate ? `⚠️ TÍARDÍANZA ENPUERTÍA (+${result.delayMinutes} MIN  )` : `✓ INGRESO PUNTUL`} • ${result.scanTime}
+            ${isDoorClosed ? `⛔ PUERTÍA CERRÍADÍA (08:30 AM) • FLTÍA REGISTRÍADÍA` : isLate ? `⚠️ TÍARDÍANZA ENPUERTÍA (+${result.delayMinutes} MIN)` : `✓ INGRESO PUNTUL`} • ${result.scanTime}
 
           </div>
 
 
 
-          <div style="font-size: 11.5px; color: #475569; margión-bottom: 10px;">
+          <div style="font-size: 11.5px; color: #475569; margin-bottom: 10px;">
 
             ${isDoorClosed ? `
 
-              <spanclas s='status-dot-red'></span> <strong>Corte de Asistencia Aplicado:</strong> N otificando inasistencia al apoderado ${result.guardianName} (${result.guardianPhone}).
+              <span class='status-dot-red'></span> <strong>Corte de Asistencia Aplicado:</strong> N otificando inasistencia al apoderado ${result.guardianName} (${result.guardianPhone}).
 
             ` : isLate ? `
 
@@ -32744,13 +32740,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div style="display: flex; gap: 6px; justify-content: center;">
 
-            <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.openStudentVirtualgendaModal('${result.student.studentCode}')" style="font-size: 11px; font-weight: 800;">
+            <button class="btn btn-navy btn-sm" onclick="window.app.openStudentVirtualgendaModal('${result.student.studentCode}')" style="font-size: 11px; font-weight: 800;">
 
               📖 Agenda Virtual
 
             </button>
 
-            <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.openStudentQRModal('${result.student.studentCode}')" style="font-size: 11px; font-weight: 800;">
+            <button class="btn btn-gold btn-sm" onclick="window.app.openStudentQRModal('${result.student.studentCode}')" style="font-size: 11px; font-weight: 800;">
 
               Ver Fotocheck QR
 
@@ -32808,35 +32804,35 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div>
 
-          <h3 class="modal-title" style="color: white; margión: 0; font-size: 15px;">
+          <h3 class="modal-title" style="color: white; margin: 0; font-size: 15px;">
 
             Tarjeta Oficial de Asistencia QR (SiónFoto)
 
           </h3>
 
-          <spanstyl e="font-size: 11px; color: #fde047;">I.E.P. "El Educador" • Año Lectivo 2026</span>
+          <span style="font-size: 11px; color: #fde047;">I.E.P. "El Educador" • Año Lectivo 2026</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
 
 
-      <div class="modal-body" style="paddióng: 24px; text-align: center; background: #f8fafc;">
+      <div class="modal-body" style="padding: 24px; text-align: center; background: #f8fafc;">
 
         
 
         <!-- Tarjeta Oficial de Código QR Escolar -->
 
-        <div style="max-width: 320px; margión: 0 auto; background: #ffffff; border: 3px solid #1e3a8a; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.12);">
+        <div style="max-width: 320px; margin: 0 auto; background: #ffffff; border: 3px solid #1e3a8a; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.12);">
 
           
 
           <!-- Encabezado -->
 
-          <div style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white; paddióng: 12px; border-bottom: 3px solid #f59e0b;">
+          <div style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white; padding: 12px; border-bottom: 3px solid #f59e0b;">
 
             <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
 
@@ -32844,7 +32840,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               <div style="text-align: center;">
 
-                <div style="font-size: 11px; font-weight: 900; letter-spacióng: 0.05em; color: #fde047;">I.E.P. "EL EDUCDOR"</div>
+                <div style="font-size: 11px; font-weight: 900; letter-spacing: 0.05em; color: #fde047;">I.E.P. "EL EDUCADOR"</div>
 
                 <div style="font-size: 8.5px; opacity: 0.9;">CONTROL DE ASISTENCIA QR 2026 • UGEL 05</div>
 
@@ -32858,13 +32854,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Cuerpo: Código QR Grande + N ombres Completos + Grado (SIÓNFOTO) -->
 
-          <div style="paddióng: 20px 16px;">
+          <div style="padding: 20px 16px;">
 
             
 
             <!-- Código QR Grande enlta Resolución -->
 
-            <div style="width: 175px; height: 175px; margión: 0 auto 14px; border: 3px solid #0b132b; border-radius: 10px; paddióng: 8px; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
+            <div style="width: 175px; height: 175px; margin: 0 auto 14px; border: 3px solid #0b132b; border-radius: 10px; padding: 8px; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
 
               ${Components.generateQRSVG(st.studentCode)}
 
@@ -32874,7 +32870,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <!-- N ombres y Apellidos Completos enMayúsculas y N egrita -->
 
-            <div style="font-size: 14.5px; font-weight: 900; color: #0b132b; text-transform: uppercase; line-height: 1.25; margión-bottom: 6px;">
+            <div style="font-size: 14.5px; font-weight: 900; color: #0b132b; text-transform: uppercase; line-height: 1.25; margin-bottom: 6px;">
 
               ${st.studentName}
 
@@ -32884,7 +32880,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <!-- Grado y Nivel -->
 
-            <div style="font-size: 13px; font-weight: 800; color: #1e40af; margión-bottom: 8px;">
+            <div style="font-size: 13px; font-weight: 800; color: #1e40af; margin-bottom: 8px;">
 
               ${st.grade}
 
@@ -32894,7 +32890,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <!-- Código y DNI -->
 
-            <div style="font-size: 11px; color: #475569; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; paddióng: 4px 10px; display: inline-block; margión-bottom: 12px;">
+            <div style="font-size: 11px; color: #475569; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px 10px; display: inline-block; margin-bottom: 12px;">
 
               <strong>CÓD:</strong> <code>${st.studentCode}</code> • <strong>DNI:</strong> <code>${st.dni}</code>
 
@@ -32902,7 +32898,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <div style="font-size: 10px; color: #64748b; line-height: 1.3; margión-bottom: 12px;">
+            <div style="font-size: 10px; color: #64748b; line-height: 1.3; margin-bottom: 12px;">
 
               Presente este código QR enportera (07:00 a 08:30 AM) para registrar asistencia o ante el auxiliar para incidencias conductuales.
 
@@ -32912,19 +32908,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <!-- Botones de Prueba Rpida de Escaneo -->
 
-            <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; paddióng: 8px; margión-top: 6px;">
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; margin-top: 6px;">
 
-              <div style="font-size: 10.5px; font-weight: bold; color: #1e3a8a; margión-bottom: 6px;">⚡ Probar Marcación QR:</div>
+              <div style="font-size: 10.5px; font-weight: bold; color: #1e3a8a; margin-bottom: 6px;">⚡ Probar Marcación QR:</div>
 
               <div style="display: flex; gap: 6px; justify-content: center;">
 
-                <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.closeModal(); window.app.processSmartQRScan('${st.studentCode}', '07:35 AM')" style="font-size: 10px; font-weight: 800; paddióng: 4px 8px;">
+                <button class="btn btn-gold btn-sm" onclick="window.app.closeModal(); window.app.processSmartQRScan('${st.studentCode}', '07:35 AM')" style="font-size: 10px; font-weight: 800; padding: 4px 8px;">
 
                   Puntual (07:35 AM)
 
                 </button>
 
-                <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.closeModal(); window.app.processSmartQRScan('${st.studentCode}', '08:05 AM')" style="font-size: 10px; font-weight: 800; paddióng: 4px 8px; color: #b45309; border-color: #f59e0b;">
+                <button class="btn btn-outline btn-sm" onclick="window.app.closeModal(); window.app.processSmartQRScan('${st.studentCode}', '08:05 AM')" style="font-size: 10px; font-weight: 800; padding: 4px 8px; color: #b45309; border-color: #f59e0b;">
 
                   Tardanza (08:05 AM)
 
@@ -32942,7 +32938,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Pie de Tarjeta -->
 
-          <div style="background: #0b132b; color: white; paddióng: 6px; font-size: 9px; letter-spacióng: 0.05em; font-weight: bold;">
+          <div style="background: #0b132b; color: white; padding: 6px; font-size: 9px; letter-spacing: 0.05em; font-weight: bold;">
 
             SNJUN DE LURIGÍANCHO • LIMA - PERÚ
 
@@ -32958,23 +32954,23 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
 
-        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
 
         <div style="display: flex; gap: 6px;">
 
-          <buttonclas s="btnbtn-navy btn-sm" onclick="window.print()" style="font-weight: 800;">
+          <button class="btn btn-navy btn-sm" onclick="window.print()" style="font-weight: 800;">
 
             Imprimir Tarjeta
 
           </button>
 
-          <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.downloadStudentQR('${st.studentCode}')" style="font-weight: 800;">
+          <button class="btn btn-gold btn-sm" onclick="window.app.downloadStudentQR('${st.studentCode}')" style="font-weight: 800;">
 
             Descargar QR
 
           </button>
 
-          <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.closeModal(); window.app.openStudentVirtualgendaModal('${st.studentCode}')" style="font-weight: 900; background: #2563eb; color: white;">
+          <button class="btn btn-gold btn-sm" onclick="window.app.closeModal(); window.app.openStudentVirtualgendaModal('${st.studentCode}')" style="font-weight: 900; background: #2563eb; color: white;">
 
             📖 Agenda Virtual
 
@@ -33032,17 +33028,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div>
 
-          <h3 class="modal-title" style="color: white; margión: 0; font-size: 15px;">
+          <h3 class="modal-title" style="color: white; margin: 0; font-size: 15px;">
 
             Registrar N uevo Informe de Incidencia Conductual / Convivencia
 
           </h3>
 
-          <spanstyl e="font-size: 11px; color: #fee2e2;">I.E.P. "El Educador" • Conforme a Ley N  29719</span>
+          <span style="font-size: 11px; color: #fee2e2;">I.E.P. "El Educador" • Conforme a Ley N29719</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
@@ -33050,13 +33046,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <form onsubmit="window.app.saveBehaviorIncident(event)">
 
-        <div class="modal-body" style="max-height: 75vh; overflow-y: auto; paddióng: 18px;">
+        <div class="modal-body" style="max-height: 75vh; overflow-y: auto; padding: 18px;">
 
           
 
           <!-- Selector de Estudiante -->
 
-          <div class="form-group" style="margión-bottom: 12px;">
+          <div class="form-group" style="margin-bottom: 12px;">
 
             <label class="form-label" style="font-weight: 800; font-size: 12px; color: var(--color-navy-900);">
 
@@ -33068,7 +33064,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               ${enrollments.map(st => `
 
-                <optionvalu e="${st.studentCode}" ${st.studentCode === preselectedStudentCode ? 'selected' : ''}>
+                <option value="${st.studentCode}" ${st.studentCode === preselectedStudentCode ? 'selected' : ''}>
 
                   ${st.studentName} (${st.grade}) • Cód: ${st.studentCode} • DNI: ${st.dni}
 
@@ -33082,9 +33078,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margión-bottom: 12px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Fecha del Suceso:</label>
 
@@ -33092,11 +33088,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Hora de la Incidencia:</label>
 
-              <input type="text" name="time" class="form-control" value="${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', miónute: '2-digit' })}" required />
+              <input type="text" name="time" class="form-control" value="${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' })}" required />
 
             </div>
 
@@ -33104,27 +33100,27 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margión-bottom: 12px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Nivel de Gravedad / Tipo:</label>
 
               <select name="severity" class="form-control" style="font-weight: bold;" required>
 
-                <optionvalu e="Leve" ${defaultSeverity === 'Leve' ? 'selected' : ''}><spanclas s='status-dot-yellow'></span> Falta Leve (Uniforme, tardanza a aula)</option>
+                <option value="Leve" ${defaultSeverity === 'Leve' ? 'selected' : ''}><span class='status-dot-yellow'></span> Falta Leve (Uniforme, tardanza a aula)</option>
 
-                <optionvalu e="Grave" ${defaultSeverity === 'Grave' ? 'selected' : ''}><spanclas s='status-dot-red'></span> Falta Grave (Desobediencia, uso de celular)</option>
+                <option value="Grave" ${defaultSeverity === 'Grave' ? 'selected' : ''}><span class='status-dot-red'></span> Falta Grave (Desobediencia, uso de celular)</option>
 
-                <optionvalu e="Muy Grave" ${defaultSeverity === 'Muy Grave' ? 'selected' : ''}>⛔ Muy Grave (Agresión, daño material)</option>
+                <option value="Muy Grave" ${defaultSeverity === 'Muy Grave' ? 'selected' : ''}>⛔ Muy Grave (Agresión, daño material)</option>
 
-                <optionvalu e="Mérito" ${defaultSeverity === 'Mérito' ? 'selected' : ''}>★ Reconocimiento / Mérito Académico</option>
+                <option value="Mérito" ${defaultSeverity === 'Mérito' ? 'selected' : ''}>★ Reconocimiento / Mérito Académico</option>
 
               </select>
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Lugar del Hecho:</label>
 
@@ -33136,7 +33132,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div class="form-group" style="margión-bottom: 12px;">
+          <div class="form-group" style="margin-bottom: 12px;">
 
             <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Categora / Motivo:</label>
 
@@ -33146,7 +33142,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div class="form-group" style="margión-bottom: 12px;">
+          <div class="form-group" style="margin-bottom: 12px;">
 
             <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Docente / Auxiliar que Reporta:</label>
 
@@ -33156,7 +33152,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div class="form-group" style="margión-bottom: 12px;">
+          <div class="form-group" style="margin-bottom: 12px;">
 
             <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Descripción Detallada de los Hechos:</label>
 
@@ -33166,7 +33162,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div class="form-group" style="margión-bottom: 14px;">
+          <div class="form-group" style="margin-bottom: 14px;">
 
             <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Medida Formativa / Pedagógica Aplicada:</label>
 
@@ -33176,11 +33172,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; paddióng: 10px 14px; display: flex; align-items: center; gap: 8px;">
+          <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; gap: 8px;">
 
             <input type="checkbox" id="send-whatsapp-check" name="notifyWhatspp" checked style="width: 18px; height: 18px; cursor: pointer;" />
 
-            <label for="send-whatsapp-check" style="font-size: 12px; font-weight: bold; color: #065f46; cursor: pointer; margión: 0;">
+            <label for="send-whatsapp-check" style="font-size: 12px; font-weight: bold; color: #065f46; cursor: pointer; margin: 0;">
 
               📲 N otificar inmediatamente al Apoderado va Whatspp Oficial
 
@@ -33196,9 +33192,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.closeModal()">Cancelar</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cancelar</button>
 
-          <buttontyp e="submit" class="btnbtn-red btn-sm" style="font-weight: 900; paddióng: 8px 20px;">
+          <button type="submit" class="btn btn-red btn-sm" style="font-weight: 900; padding: 8px 20px;">
 
             💾 Guardar enLibro de Incidencias
 
@@ -33288,7 +33284,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-    const msg = `*COMUNICDO DE CONVIVEN CIA ESCOLR - I.E.P. "EL EDUCDOR"*\n\nEstimado(a) *${guardian}*,\nLe saludamos cordialmente de la Dirección y Coordiónación de Convivencia Escolar.\n\nLe informamos que el da de hoy *${inc.date}* a las *${inc.time}* se ha registrado una incidencia disciplinaria respecto a su menor hijo(a) *${inc.studentName}* (${inc.grade}):\n\n• *Tipo de Falta:* ${inc.severity}\n• *Motivo:* ${inc.category}\n• *Lugar:* ${inc.location}\n• *Reportado por:* ${inc.reportedBy}\n• *Detalle:* ${inc.description}\n• *Medida Pedagógica:* ${inc.correctiveMeasure}\n\nLe agradecemos reforzar las normas de conducta en el hogar para el bienestar y formación integral de su menor hijo(a).\n\ntentamente,\n*Comitééé de Gestión de la Convivencia Escolar*\nI.E.P. "El Educador" - S.J.L. • UGEL 05`;
+    const msg = `*COMUNICDO DE CONVIVEN CIA ESCOLR - I.E.P. "EL EDUCADOR"*\n\nEstimado(a) *${guardian}*,\nLe saludamos cordialmente de la Dirección y Coordinación de Convivencia Escolar.\n\nLe informamos que el da de hoy *${inc.date}* a las *${inc.time}* se ha registrado una incidencia disciplinaria respecto a su menor hijo(a) *${inc.studentName}* (${inc.grade}):\n\n• *Tipo de Falta:* ${inc.severity}\n• *Motivo:* ${inc.category}\n• *Lugar:* ${inc.location}\n• *Reportado por:* ${inc.reportedBy}\n• *Detalle:* ${inc.description}\n• *Medida Pedagógica:* ${inc.correctiveMeasure}\n\nLe agradecemos reforzar las normas de conducta en el hogar para el bienestar y formación integral de su menor hijo(a).\n\ntentamente,\n*Comitééé de Gestión de la Convivencia Escolar*\nI.E.P. "El Educador" - S.J.L. • UGEL 05`;
 
 
 
@@ -33298,19 +33294,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: white; font-size: 15px;">💬 Enviar N otificación de Incidencia por Whatspp</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
       <div class="modal-body">
 
-        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; paddióng: 12px; margión-bottom: 12px;">
+        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
 
           <div style="font-size: 11px; font-weight: bold; color: #166534; text-transform: uppercase;">Apoderado Destiónatario:</div>
 
           <div style="font-size: 13.5px; font-weight: 900; color: #065f46;">${guardian} • Teléfono: ${phone}</div>
 
-          <div style="font-size: 11.5px; color: #15803d; margión-top: 2px;">Estudiante: <strong>${inc.studentName}</strong> (${inc.grade})</div>
+          <div style="font-size: 11.5px; color: #15803d; margin-top: 2px;">Estudiante: <strong>${inc.studentName}</strong> (${inc.grade})</div>
 
         </div>
 
@@ -33328,9 +33324,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
 
-        <buttonclas s="btnbtn-sm" onclick="window.open('https://api.whatsapp.com/send?phone=51${phone.replace(/[^0-9]/g, '')}&text=${encodeURIComponent(msg)}', '_blank'); window.app.closeModal(); window.app.showToast('✓ N otificación enviada a Whatspp', 'success');" style="background: #22c55e; color: white; font-weight: 800; paddióng: 8px 18px;">
+        <button class="btn btn-sm" onclick="window.open('https://api.whatsapp.com/send?phone=51${phone.replace(/[^0-9]/g, '')}&text=${encodeURIComponent(msg)}', '_blank'); window.app.closeModal(); window.app.showToast('✓ N otificación enviada a Whatspp', 'success');" style="background: #22c55e; color: white; font-weight: 800; padding: 8px 18px;">
 
           Abrir Whatspp y Enviar Mensaje
 
@@ -33358,17 +33354,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: white; font-size: 15px;">Acta Oficial de Compromiso y Convivencia Escolar (MINEDU / UGEL 05)</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
-      <div class="modal-body" style="max-height: 80vh; overflow-y: auto; paddióng: 24px; background: white;">
+      <div class="modal-body" style="max-height: 80vh; overflow-y: auto; padding: 24px; background: white;">
 
         
 
         <!-- Membrete Institucional -->
 
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0b132b; paddióng-bottom: 12px; margión-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0b132b; paddióng-bottom: 12px; margin-bottom: 16px;">
 
           <div style="display: flex; align-items: center; gap: 12px;">
 
@@ -33376,9 +33372,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <div>
 
-              <div style="font-size: 10px; font-weight: 800; color: #0b132b; text-transform: uppercase;">REPÚBLICA DEL PERÚ • MINISTERIO DE EDUCCIÓN  • UGEL 05</div>
+              <div style="font-size: 10px; font-weight: 800; color: #0b132b; text-transform: uppercase;">REPÚBLICA DEL PERÚ • MINISTERIO DE EDUCCIÓN• UGEL 05</div>
 
-              <div style="font-size: 18px; font-weight: 900; color: #0b132b; font-family: 'Plus Jakarta Sans', serif;">I.E.P. "EL EDUCDOR"</div>
+              <div style="font-size: 18px; font-weight: 900; color: #0b132b; font-family: 'Plus Jakarta Sans', serif;">I.E.P. "EL EDUCADOR"</div>
 
               <div style="font-size: 10px; color: #dc2626; font-weight: bold;">INICIL - PRIMRIA - SECUNDÍARIA • 21 AÑOS DEJNDO HUELLS</div>
 
@@ -33388,7 +33384,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div style="text-align: right; font-size: 11px;">
 
-            <spanclas s="status-badge status-failed" style="font-size: 11px; font-weight: 900;">ACTÍA N  ${inc.id}</span>
+            <span class="status-badge status-failed" style="font-size: 11px; font-weight: 900;">ACTÍA N${inc.id}</span>
 
           </div>
 
@@ -33396,21 +33392,21 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="text-align: center; margión-bottom: 18px;">
+        <div style="text-align: center; margin-bottom: 18px;">
 
-          <h2 style="font-size: 16px; font-weight: 900; text-decoration: underline; color: #0b132b; margión: 0 0 4px;">
+          <h2 style="font-size: 16px; font-weight: 900; text-decoration: underline; color: #0b132b; margin: 0 0 4px;">
 
             ACTÍA OFICIL DE COMPROMISO Y REGISTRO DE CONVIVEN CIA ESCOLR
 
           </h2>
 
-          <spanstyl e="font-size: 11px; color: #64748b;">Conforme a la Ley N  29719 y D.S. N  004-2018-MINEDU</span>
+          <span style="font-size: 11px; color: #64748b;">Conforme a la Ley N29719 y D.S. N004-2018-MINEDU</span>
 
         </div>
 
 
 
-        <div style="border: 1px solid #cbd5e1; border-radius: 6px; paddióng: 12px; margión-bottom: 14px; font-size: 12px; line-height: 1.6;">
+        <div style="border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; margin-bottom: 14px; font-size: 12px; line-height: 1.6;">
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
 
@@ -33422,7 +33418,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <div><strong>Fecha y Hora:</strong> ${inc.date} - ${inc.time}</div>
 
-            <div><strong>Gravedad:</strong> <spanstyl e="font-weight: 900; color: #dc2626;">${inc.severity}</span></div>
+            <div><strong>Gravedad:</strong> <span style="font-weight: 900; color: #dc2626;">${inc.severity}</span></div>
 
             <div><strong>Lugar:</strong> ${inc.location}</div>
 
@@ -33436,11 +33432,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="margión-bottom: 14px; font-size: 12px;">
+        <div style="margin-bottom: 14px; font-size: 12px;">
 
-          <div style="font-weight: 800; color: #0b132b; margión-bottom: 4px;">I. DESCRIPCIÓN DE LOS HECHOS:</div>
+          <div style="font-weight: 800; color: #0b132b; margin-bottom: 4px;">I. DESCRIPCIÓN DE LOS HECHOS:</div>
 
-          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; paddióng: 10px; line-height: 1.5;">
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px; line-height: 1.5;">
 
             ${inc.description}
 
@@ -33450,11 +33446,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="margión-bottom: 20px; font-size: 12px;">
+        <div style="margin-bottom: 20px; font-size: 12px;">
 
-          <div style="font-weight: 800; color: #0b132b; margión-bottom: 4px;">II. ACUERDOS Y MEDIDÍAS PEDÍAGÓGICS FORMTIVS:</div>
+          <div style="font-weight: 800; color: #0b132b; margin-bottom: 4px;">II. ACUERDOS Y MEDIDÍAS PEDÍAGÓGICS FORMTIVS:</div>
 
-          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; paddióng: 10px; line-height: 1.5;">
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px; line-height: 1.5;">
 
             ${inc.correctiveMeasure}
 
@@ -33464,11 +33460,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; text-align: center; margión-top: 36px; font-size: 10.5px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; text-align: center; margin-top: 36px; font-size: 10.5px;">
 
           <div>
 
-            <div style="border-top: 1px solid #000; width: 85%; margión: 0 auto 4px;"></div>
+            <div style="border-top: 1px solid #000; width: 85%; margin: 0 auto 4px;"></div>
 
             <strong>${inc.studentName}</strong><br>
 
@@ -33478,7 +33474,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div>
 
-            <div style="border-top: 1px solid #000; width: 85%; margión: 0 auto 4px;"></div>
+            <div style="border-top: 1px solid #000; width: 85%; margin: 0 auto 4px;"></div>
 
             <strong>${inc.guardian}</strong><br>
 
@@ -33488,7 +33484,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div>
 
-            <div style="border-top: 1px solid #000; width: 85%; margión: 0 auto 4px;"></div>
+            <div style="border-top: 1px solid #000; width: 85%; margin: 0 auto 4px;"></div>
 
             <strong>${inc.reportedBy}</strong><br>
 
@@ -33504,9 +33500,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between;">
 
-        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
 
-        <buttonclas s="btnbtn-navy btn-sm" onclick="window.print()" style="font-weight: 800;">
+        <button class="btn btn-navy btn-sm" onclick="window.print()" style="font-weight: 800;">
 
           Imprimir Acta Oficial A4
 
@@ -33540,7 +33536,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
   sendTardiónessWhatspp(studentName, arrivalTime, delayMin, phone, guardian) {
 
-    const msg = `Estimado(a) ${guardian || 'Apoderado'},\n\nLe saluda la Dirección de la I.E.P. "El Educador". Le informamos que su menor hijo(a) *${studentName}* registró su ingreso al plantel con *TÍARDÍANZA* el da de hoy a las *${arrivalTime}* (+${delayMin} miónutos de retraso).\n\nLe agradecemos conversar con su menor y tomar las previsiones correspondientes para fomentar el valor de la puntualidad escolar.\n\ntentamente,\n*Coordiónación de Normas y Asistencia*\nI.E.P. "El Educador" - UGEL 05`;
+    const msg = `Estimado(a) ${guardian || 'Apoderado'},\n\nLe saluda la Dirección de la I.E.P. "El Educador". Le informamos que su menor hijo(a) *${studentName}* registró su ingreso al plantel con *TÍARDÍANZA* el da de hoy a las *${arrivalTime}* (+${delayMin} miónutos de retraso).\n\nLe agradecemos conversar con su menor y tomar las previsiones correspondientes para fomentar el valor de la puntualidad escolar.\n\ntentamente,\n*Coordinación de Normas y Asistencia*\nI.E.P. "El Educador" - UGEL 05`;
 
 
 
@@ -33550,13 +33546,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: white;">💬 N otificación de Tardanza por Whatspp</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
       <div class="modal-body">
 
-        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; paddióng: 12px; margión-bottom: 12px;">
+        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
 
           <div style="font-size: 11px; font-weight: bold; color: #166534; text-transform: uppercase;">Destiónatario:</div>
 
@@ -33580,9 +33576,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
-        <buttonclas s="btnbtn-sm" onclick="window.open('https://api.whatsapp.com/send?phone=51${phone.replace(/[^0-9]/g, '')}&text=${encodeURIComponent(msg)}', '_blank'); window.app.closeModal(); window.app.showToast('✓ Mensaje Whatspp enviado al apoderado', 'success');" style="background: #22c55e; color: white; font-weight: 800; paddióng: 8px 16px;">
+        <button class="btn btn-sm" onclick="window.open('https://api.whatsapp.com/send?phone=51${phone.replace(/[^0-9]/g, '')}&text=${encodeURIComponent(msg)}', '_blank'); window.app.closeModal(); window.app.showToast('✓ Mensaje Whatspp enviado al apoderado', 'success');" style="background: #22c55e; color: white; font-weight: 800; padding: 8px 16px;">
 
           Enviar por Whatspp Oficial
 
@@ -33598,7 +33594,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
   sendbsenceWhatspp(studentName, phone, guardian) {
 
-    const msg = `Estimado(a) ${guardian || 'Apoderado'},\n\nLe saluda la Dirección de la I.E.P. "El Educador". Le informamos que su menor hijo(a) *${studentName}* *NO HA REGISTRÍADO INGRESO* al colegio el da de hoy hasta el cierre de puerta.\n\nPor favor confirmar el motivo de la inasistencia o comunicarse a la brevedad con la tutora de aula.\n\ntentamente,\n*Dirección y Coordiónación Pedagógica*\nI.E.P. "El Educador" - S.J.L.`;
+    const msg = `Estimado(a) ${guardian || 'Apoderado'},\n\nLe saluda la Dirección de la I.E.P. "El Educador". Le informamos que su menor hijo(a) *${studentName}* *NO HA REGISTRÍADO INGRESO* al colegio el da de hoy hasta el cierre de puerta.\n\nPor favor confirmar el motivo de la inasistencia o comunicarse a la brevedad con la tutora de aula.\n\ntentamente,\n*Dirección y Coordinación Pedagógica*\nI.E.P. "El Educador" - S.J.L.`;
 
 
 
@@ -33608,13 +33604,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: white;">💬 N otificación de Inasistencia por Whatspp</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
       <div class="modal-body">
 
-        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; paddióng: 12px; margión-bottom: 12px;">
+        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
 
           <div style="font-size: 11px; font-weight: bold; color: #991b1b; text-transform: uppercase;">Destiónatario:</div>
 
@@ -33638,9 +33634,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
-        <buttonclas s="btnbtn-red btn-sm" onclick="window.open('https://api.whatsapp.com/send?phone=51${phone.replace(/[^0-9]/g, '')}&text=${encodeURIComponent(msg)}', '_blank'); window.app.closeModal(); window.app.showToast('✓ Mensaje Whatspp enviado al apoderado', 'success');" style="font-weight: 800; paddióng: 8px 16px;">
+        <button class="btn btn-red btn-sm" onclick="window.open('https://api.whatsapp.com/send?phone=51${phone.replace(/[^0-9]/g, '')}&text=${encodeURIComponent(msg)}', '_blank'); window.app.closeModal(); window.app.showToast('✓ Mensaje Whatspp enviado al apoderado', 'success');" style="font-weight: 800; padding: 8px 16px;">
 
           Enviar Alerta de Inasistencia
 
@@ -33668,21 +33664,21 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: white;">📲 Envío Masivo de Avisos a Apoderados (Whatspp)</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
-      <div class="modal-body" style="text-align: center; paddióng: 20px;">
+      <div class="modal-body" style="text-align: center; padding: 20px;">
 
-        <div style="font-size: 40px; margión-bottom: 8px;">⚡</div>
+        <div style="font-size: 40px; margin-bottom: 8px;">⚡</div>
 
-        <h4 style="font-size: 15px; font-weight: 800; color: #0b132b; margión-bottom: 6px;">
+        <h4 style="font-size: 15px; font-weight: 800; color: #0b132b; margin-bottom: 6px;">
 
           N otificación Automatizada del Parte Diario (${date})
 
         </h4>
 
-        <p style="font-size: 12.5px; color: #475569; margión-bottom: 16px;">
+        <p style="font-size: 12.5px; color: #475569; margin-bottom: 16px;">
 
           Se enviarn ${totalToNotify} mensajes oficiales por la API de Whatspp de la I.E.P. "El Educador":<br>
 
@@ -33694,11 +33690,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; paddióng: 12px; font-size: 11.5px; text-align: left; max-height: 140px; overflow-y: auto;">
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; font-size: 11.5px; text-align: left; max-height: 140px; overflow-y: auto;">
 
-          ${report.tardiónessList.map(t => `<div style="color:#b45309; paddióng:2px 0;"><spanclas s='status-dot-yellow'></span> <strong>${t.studentName}</strong>: Tardanza ${t.arrivalTime} → N otificando a ${t.guardian} (${t.guardianPhone})</div>`).join('')}
+          ${report.tardiónessList.map(t => `<div style="color:#b45309; padding:2px 0;"><span class='status-dot-yellow'></span> <strong>${t.studentName}</strong>: Tardanza ${t.arrivalTime} → N otificando a ${t.guardian} (${t.guardianPhone})</div>`).join('')}
 
-          ${report.absenceList.map(a => `<div style="color:#dc2626; paddióng:2px 0;"><spanclas s='status-dot-red'></span> <strong>${a.studentName}</strong>: Inasistencia → N otificando a ${a.guardian} (${a.guardianPhone})</div>`).join('')}
+          ${report.absenceList.map(a => `<div style="color:#dc2626; padding:2px 0;"><span class='status-dot-red'></span> <strong>${a.studentName}</strong>: Inasistencia → N otificando a ${a.guardian} (${a.guardianPhone})</div>`).join('')}
 
         </div>
 
@@ -33706,9 +33702,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between;">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.closeModal(); window.app.showToast('✓ ${totalToNotify} notificaciones de Whatspp despachadas con éxito a los apoderados', 'success');" style="font-weight: 800;">
+        <button class="btn btn-navy" onclick="window.app.closeModal(); window.app.showToast('✓ ${totalToNotify} notificaciones de Whatspp despachadas con éxito a los apoderados', 'success');" style="font-weight: 800;">
 
           Confirmar y Enviar Todo
 
@@ -33728,7 +33724,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     const st = enrollments.find(e => e.studentCode === studentCode) || enrollments[0];
 
-    const timeNow = new Date().toLocaleTimeString("es-PE", { hour: '2-digit', miónute: '2-digit' });
+    const timeNow = new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' });
 
 
 
@@ -33738,19 +33734,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: #0b132b; font-weight: 900;">Pase Oficial de Tardanza (Portera)</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
-      <div class="modal-body" style="paddióng: 20px; background: white;">
+      <div class="modal-body" style="padding: 20px; background: white;">
 
-        <div style="border: 2px dashed #0b132b; paddióng: 16px; border-radius: 8px;">
+        <div style="border: 2px dashed #0b132b; padding: 16px; border-radius: 8px;">
 
-          <div style="text-align: center; border-bottom: 2px solid #0b132b; paddióng-bottom: 8px; margión-bottom: 12px;">
+          <div style="text-align: center; border-bottom: 2px solid #0b132b; paddióng-bottom: 8px; margin-bottom: 12px;">
 
-            <div style="font-size: 10px; font-weight: 900; letter-spacióng: 0.1em; color: #1e3a8a;">I.E.P. "EL EDUCDOR" • UGEL 05</div>
+            <div style="font-size: 10px; font-weight: 900; letter-spacing: 0.1em; color: #1e3a8a;">I.E.P. "EL EDUCADOR" • UGEL 05</div>
 
-            <h3 style="font-size: 16px; font-weight: 900; margión: 2px 0;">BOLETÍA DE INGRESO CONTÍARDÍAN ZA</h3>
+            <h3 style="font-size: 16px; font-weight: 900; margin: 2px 0;">BOLETÍA DE INGRESO CONTÍARDÍAN ZA</h3>
 
             <div style="font-size: 11px; color: #64748b;">Fecha: <strong>19/08/2026</strong> • Hora de Emisión: <strong>${timeNow}</strong></div>
 
@@ -33758,7 +33754,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="font-size: 12.5px; line-height: 1.6; margión-bottom: 14px;">
+          <div style="font-size: 12.5px; line-height: 1.6; margin-bottom: 14px;">
 
             <div>Estudiante: <strong>${st.studentName}</strong></div>
 
@@ -33774,11 +33770,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: center; margión-top: 24px; font-size: 10.5px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: center; margin-top: 24px; font-size: 10.5px;">
 
             <div>
 
-              <div style="border-top: 1px solid #000; width: 80%; margión: 0 auto 2px;"></div>
+              <div style="border-top: 1px solid #000; width: 80%; margin: 0 auto 2px;"></div>
 
               Auxiliar de Portera
 
@@ -33786,7 +33782,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <div>
 
-              <div style="border-top: 1px solid #000; width: 80%; margión: 0 auto 2px;"></div>
+              <div style="border-top: 1px solid #000; width: 80%; margin: 0 auto 2px;"></div>
 
               Docente de Aula (Recepción)
 
@@ -33800,9 +33796,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between;">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.print()" style="font-weight: 800;">
+        <button class="btn btn-navy" onclick="window.print()" style="font-weight: 800;">
 
           Imprimir Pase de Tardanza
 
@@ -33932,17 +33928,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div>
 
-          <h3 class="modal-title" style="color: white; margión: 0; font-size: 15px;">
+          <h3 class="modal-title" style="color: white; margin: 0; font-size: 15px;">
 
             📖 Registrar Anotación en la Agenda Virtual Escolar
 
           </h3>
 
-          <spanstyl e="font-size: 11px; color: #fde047;">I.E.P. "El Educador" • Enlazado al Código QR de Asistencia</span>
+          <span style="font-size: 11px; color: #fde047;">I.E.P. "El Educador" • Enlazado al Código QR de Asistencia</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
@@ -33950,13 +33946,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <form onsubmit="window.app.savegendaNote(event)">
 
-        <div class="modal-body" style="max-height: 75vh; overflow-y: auto; paddióng: 18px;">
+        <div class="modal-body" style="max-height: 75vh; overflow-y: auto; padding: 18px;">
 
           
 
           <!-- Selector de Estudiante -->
 
-          <div class="form-group" style="margión-bottom: 12px;">
+          <div class="form-group" style="margin-bottom: 12px;">
 
             <label class="form-label" style="font-weight: 800; font-size: 12px; color: var(--color-navy-900);">
 
@@ -33968,7 +33964,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               ${enrollments.map(st => `
 
-                <optionvalu e="${st.studentCode}" ${st.studentCode === preselectedStudentCode ? 'selected' : ''}>
+                <option value="${st.studentCode}" ${st.studentCode === preselectedStudentCode ? 'selected' : ''}>
 
                   ${st.studentName} (${st.grade}) • Cód: ${st.studentCode} • DNI: ${st.dni}
 
@@ -33984,33 +33980,33 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Tipo de Anotación y Asignatura -->
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margión-bottom: 12px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Tipo de Registro:</label>
 
               <select name="type" class="form-control" style="font-weight: bold;" required>
 
-                <optionvalu e="merito" ${defaultType === 'merito' ? 'selected' : ''}>★ Felicitación / Mérito Académico</option>
+                <option value="merito" ${defaultType === 'merito' ? 'selected' : ''}>★ Felicitación / Mérito Académico</option>
 
-                <optionvalu e="pedagogica" ${defaultType === 'pedagogica' ? 'selected' : ''}>📝 Tarea / Material Requerido</option>
+                <option value="pedagogica" ${defaultType === 'pedagogica' ? 'selected' : ''}>📝 Tarea / Material Requerido</option>
 
-                <optionvalu e="conducta" ${defaultType === 'conducta' ? 'selected' : ''}>⚠️ Observación Conductual / Normas</option>
+                <option value="conducta" ${defaultType === 'conducta' ? 'selected' : ''}>⚠️ Observación Conductual / Normas</option>
 
-                <optionvalu e="citacion" ${defaultType === 'citacion' ? 'selected' : ''}>📅 Citación a Entrevista Apoderado</option>
+                <option value="citacion" ${defaultType === 'citacion' ? 'selected' : ''}>📅 Citación a Entrevista Apoderado</option>
 
               </select>
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Asignatura / rea:</label>
 
               <select name="course" class="form-control" style="font-weight: bold;" required>
 
-                ${coursesList.map(c => `<optionvalu e="${c}">${c}</option>`).join('')}
+                ${coursesList.map(c => `<option value="${c}">${c}</option>`).join('')}
 
               </select>
 
@@ -34022,9 +34018,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Fecha y Hora -->
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margión-bottom: 12px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Fecha de Registro:</label>
 
@@ -34032,11 +34028,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Hora de Registro:</label>
 
-              <input type="text" name="time" class="form-control" value="${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', miónute: '2-digit' })}" required />
+              <input type="text" name="time" class="form-control" value="${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' })}" required />
 
             </div>
 
@@ -34046,9 +34042,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Categora y Docente Responsable -->
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margión-bottom: 12px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Categora / Motivo:</label>
 
@@ -34056,7 +34052,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Docente / Tutor que Firma:</label>
 
@@ -34070,7 +34066,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Título Resumen -->
 
-          <div class="form-group" style="margión-bottom: 12px;">
+          <div class="form-group" style="margin-bottom: 12px;">
 
             <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Título de la Anotación:</label>
 
@@ -34082,7 +34078,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Descripción Detallada -->
 
-          <div class="form-group" style="margión-bottom: 12px;">
+          <div class="form-group" style="margin-bottom: 12px;">
 
             <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Detalle Informativo para la Familia:</label>
 
@@ -34094,9 +34090,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Tarea, Material Requerido o Compromiso -->
 
-          <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 10px; margión-bottom: 14px;">
+          <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 10px; margin-bottom: 14px;">
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Tarea / Material / Compromiso / Citación:</label>
 
@@ -34104,7 +34100,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             </div>
 
-            <div class="form-group" style="margión-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
 
               <label class="form-label" style="font-weight: 800; font-size: 11.5px;">Fecha Límite / Cita:</label>
 
@@ -34118,11 +34114,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- N otificación Inmedata por Whatspp -->
 
-          <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; paddióng: 10px 14px; display: flex; align-items: center; gap: 8px;">
+          <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; gap: 8px;">
 
             <input type="checkbox" id="agenda-whatsapp-check" name="notifyWhatspp" checked style="width: 18px; height: 18px; cursor: pointer;" />
 
-            <label for="agenda-whatsapp-check" style="font-size: 12px; font-weight: bold; color: #065f46; cursor: pointer; margión: 0;">
+            <label for="agenda-whatsapp-check" style="font-size: 12px; font-weight: bold; color: #065f46; cursor: pointer; margin: 0;">
 
               📲 N otificar inmediatamente al Apoderado va Whatspp Oficial
 
@@ -34138,9 +34134,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.closeModal()">Cancelar</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cancelar</button>
 
-          <buttontyp e="submit" class="btnbtn-navy btn-sm" style="font-weight: 900; paddióng: 8px 22px;">
+          <button type="submit" class="btn btn-navy btn-sm" style="font-weight: 900; padding: 8px 22px;">
 
             💾 Registrar en la Agenda Virtual
 
@@ -34252,7 +34248,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-    const msg = `*I.E.P. "EL EDUCDOR" - AGENDÍA VIRTUL OFICIL 2026*\n\nEstimado(a) *${guardian}*,\nLe saludamos cordialmente. Le comunicamos la siguiente anotación en la *Agenda Virtual Escolar* de su menor hijo(a) *${note.studentName}* (${note.grade}):\n\n• *Tipo:* ${typeTag}\n• *Curso:* ${note.course}\n• *Docente:* ${note.teacher}\n• *Fecha y Hora:* ${note.date} a las ${note.time}\n• *Asunto:* ${note.title}\n• *Detalle:* ${note.description}\n${note.taskOrMaterial && note.taskOrMaterial !== 'Ninguno' ? `• *Compromiso / Requerimiento:* ${note.taskOrMaterial}\n• *Fecha Límite:* ${note.dueDate}\n` : ''}\nPor favor ingrese a la intranet escolar para revisar el detalle y registrar su *Firma Digital de Enterado(a)*:\n🌐 https://el-educador-intranet.vercel.app\n\ntentamente,\n*Coordiónación Pedagógica & Tutora*\nI.E.P. "El Educador" - S.J.L. • UGEL 05`;
+    const msg = `*I.E.P. "EL EDUCADOR" - AGENDÍA VIRTUL OFICIL 2026*\n\nEstimado(a) *${guardian}*,\nLe saludamos cordialmente. Le comunicamos la siguiente anotación en la *Agenda Virtual Escolar* de su menor hijo(a) *${note.studentName}* (${note.grade}):\n\n• *Tipo:* ${typeTag}\n• *Curso:* ${note.course}\n• *Docente:* ${note.teacher}\n• *Fecha y Hora:* ${note.date} a las ${note.time}\n• *Asunto:* ${note.title}\n• *Detalle:* ${note.description}\n${note.taskOrMaterial && note.taskOrMaterial !== 'Ninguno' ? `• *Compromiso / Requerimiento:* ${note.taskOrMaterial}\n• *Fecha Límite:* ${note.dueDate}\n` : ''}\nPor favor ingrese a la intranet escolar para revisar el detalle y registrar su *Firma Digital de Enterado(a)*:\n🌐 https://el-educador-intranet.vercel.app\n\ntentamente,\n*Coordinación Pedagógica & Tutora*\nI.E.P. "El Educador" - S.J.L. • UGEL 05`;
 
 
 
@@ -34262,19 +34258,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: white; font-size: 15px;">💬 Enviar N otificación de Agenda Virtual por Whatspp</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
       <div class="modal-body">
 
-        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; paddióng: 12px; margión-bottom: 12px;">
+        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
 
           <div style="font-size: 11px; font-weight: bold; color: #166534; text-transform: uppercase;">Apoderado(a) Destiónatario:</div>
 
           <div style="font-size: 13.5px; font-weight: 900; color: #065f46;">${guardian} • Teléfono: ${phone}</div>
 
-          <div style="font-size: 11.5px; color: #15803d; margión-top: 2px;">Estudiante: <strong>${note.studentName}</strong> (${note.grade})</div>
+          <div style="font-size: 11.5px; color: #15803d; margin-top: 2px;">Estudiante: <strong>${note.studentName}</strong> (${note.grade})</div>
 
         </div>
 
@@ -34292,9 +34288,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
 
-        <buttonclas s="btnbtn-sm" onclick="window.open('https://api.whatsapp.com/send?phone=51${phone.replace(/[^0-9]/g, '')}&text=${encodeURIComponent(msg)}', '_blank'); window.app.closeModal(); window.app.showToast('✓ Mensaje de Whatspp despachado', 'success');" style="background: #22c55e; color: white; font-weight: 800; paddióng: 8px 18px;">
+        <button class="btn btn-sm" onclick="window.open('https://api.whatsapp.com/send?phone=51${phone.replace(/[^0-9]/g, '')}&text=${encodeURIComponent(msg)}', '_blank'); window.app.closeModal(); window.app.showToast('✓ Mensaje de Whatspp despachado', 'success');" style="background: #22c55e; color: white; font-weight: 800; padding: 8px 18px;">
 
           Abrir Whatspp y Enviar Mensaje
 
@@ -34316,21 +34312,21 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div>
 
-          <h3 style="color: white; margión: 0; font-size: 15px;">📹 Escanear Fotocheck QR del Estudiante</h3>
+          <h3 style="color: white; margin: 0; font-size: 15px;">📹 Escanear Fotocheck QR del Estudiante</h3>
 
-          <spanstyl e="font-size: 11px; color: #fde047;">Acceso directo a la Agenda Virtual y Anotaciones</span>
+          <span style="font-size: 11px; color: #fde047;">Acceso directo a la Agenda Virtual y Anotaciones</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closegendaScannerModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closegendaScannerModal()" style="color: white;">✕</button>
 
       </div>
 
 
 
-      <div class="modal-body" style="paddióng: 20px; text-align: center; background: #f8fafc;">
+      <div class="modal-body" style="padding: 20px; text-align: center; background: #f8fafc;">
 
-        <div id="agenda-modal-qr-feed" style="width: 280px; height: 280px; margión: 0 auto 16px; background: #000; border-radius: 12px; overflow: hidden; border: 3px solid #1e3a8a; display: flex; align-items: center; justify-content: center; color: white;">
+        <div id="agenda-modal-qr-feed" style="width: 280px; height: 280px; margin: 0 auto 16px; background: #000; border-radius: 12px; overflow: hidden; border: 3px solid #1e3a8a; display: flex; align-items: center; justify-content: center; color: white;">
 
           <span>Iniciando cmara...</span>
 
@@ -34338,7 +34334,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="font-size: 12px; color: #475569; margión-bottom: 12px;">
+        <div style="font-size: 12px; color: #475569; margin-bottom: 12px;">
 
           Apunta la cmara al <strong>código QR del fotocheck</strong> o carnet escolar del estudiante para abrir su Agenda Virtual.
 
@@ -34348,25 +34344,25 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Selector Rpido de Prueba -->
 
-        <div style="background: white; border: 1px solid #cbd5e1; border-radius: 8px; paddióng: 10px; margión-top: 10px;">
+        <div style="background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; margin-top: 10px;">
 
-          <div style="font-size: 11px; font-weight: bold; color: #1e3a8a; margión-bottom: 6px;">O seleccione unestudiante para simular escaneo QR:</div>
+          <div style="font-size: 11px; font-weight: bold; color: #1e3a8a; margin-bottom: 6px;">O seleccione unestudiante para simular escaneo QR:</div>
 
           <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
 
-            <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.processgendaQRScan('EST-2026-055')">
+            <button class="btn btn-outline btn-sm" onclick="window.app.processgendaQRScan('EST-2026-055')">
 
               Salim Cceres (5 Prim)
 
             </button>
 
-            <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.processgendaQRScan('EST-2026-042')">
+            <button class="btn btn-outline btn-sm" onclick="window.app.processgendaQRScan('EST-2026-042')">
 
               Sofía Méndez (4 Sec)
 
             </button>
 
-            <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.processgendaQRScan('EST-2026-011')">
+            <button class="btn btn-outline btn-sm" onclick="window.app.processgendaQRScan('EST-2026-011')">
 
               Carlos Benítez (4 Sec)
 
@@ -34382,7 +34378,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.closegendaScannerModal()">Cerrar Cmara</button>
+        <button class="btn btn-outline btn-sm" onclick="window.app.closegendaScannerModal()">Cerrar Cmara</button>
 
       </div>
 
@@ -34402,7 +34398,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           this.agendaModalScanner.start(
 
-            { facióngMode: "environment" },
+            { facingMode: "environment" },
 
             { fps: 15, qrbox: { width: 220, height: 220 } },
 
@@ -34506,27 +34502,27 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div>
 
-          <h3 class="modal-title" style="color: white; margión: 0; font-size: 15px;">
+          <h3 class="modal-title" style="color: white; margin: 0; font-size: 15px;">
 
             📖 Agenda Virtual: ${student.studentName}
 
           </h3>
 
-          <spanstyl e="font-size: 11px; color: #fde047;">${student.grade} • Código: ${student.studentCode} • DNI: ${student.dni}</span>
+          <span style="font-size: 11px; color: #fde047;">${student.grade} • Código: ${student.studentCode} • DNI: ${student.dni}</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
 
 
-      <div class="modal-body" style="max-height: 75vh; overflow-y: auto; paddióng: 18px; background: #f8fafc;">
+      <div class="modal-body" style="max-height: 75vh; overflow-y: auto; padding: 18px; background: #f8fafc;">
 
         
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 14px; background: white; paddióng: 12px; border-radius: 8px; border: 1px solid #cbd5e1;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; background: white; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1;">
 
           <div>
 
@@ -34536,7 +34532,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           </div>
 
-          <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.closeModal(); window.app.opencreategendaNoteModal('${student.studentCode}')" style="font-weight: 800;">
+          <button class="btn btn-gold btn-sm" onclick="window.app.closeModal(); window.app.opencreategendaNoteModal('${student.studentCode}')" style="font-weight: 800;">
 
             ➕ N ueva Anotación
 
@@ -34546,7 +34542,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <h4 style="font-size: 13px; font-weight: 800; color: #0b132b; margión-bottom: 10px;">
+        <h4 style="font-size: 13px; font-weight: 800; color: #0b132b; margin-bottom: 10px;">
 
           Historial de Anotaciones en la Agenda (${notes.length}):
 
@@ -34558,23 +34554,23 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           ${notes.length > 0 ? notes.map(n => `
 
-            <div style="background: white; border-radius: 8px; paddióng: 12px; border-left: 5px solid ${n.type === 'merito' ? '#10b981' : n.type === 'pedagogica' ? '#3b82f6' : n.type === 'conducta' ? '#f59e0b' : '#8b5cf6'}; border: 1px solid #e2e8f0; border-left-width: 5px;">
+            <div style="background: white; border-radius: 8px; padding: 12px; border-left: 5px solid ${n.type === 'merito' ? '#10b981' : n.type === 'pedagogica' ? '#3b82f6' : n.type === 'conducta' ? '#f59e0b' : '#8b5cf6'}; border: 1px solid #e2e8f0; border-left-width: 5px;">
 
-              <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 4px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
 
-                <spanclas s="status-badge" style="font-size: 10px; font-weight: bold;">${n.typeLabel || n.type} • ${n.course}</span>
+                <span class="status-badge" style="font-size: 10px; font-weight: bold;">${n.typeLabel || n.type} • ${n.course}</span>
 
-                <spanstyl e="font-size: 10.5px; color: #64748b;">${n.date} ${n.time}</span>
+                <span style="font-size: 10.5px; color: #64748b;">${n.date} ${n.time}</span>
 
               </div>
 
               <div style="font-size: 13px; font-weight: bold; color: #0b132b;">${n.title}</div>
 
-              <div style="font-size: 11.5px; color: #475569; margión: 4px 0;">${n.description}</div>
+              <div style="font-size: 11.5px; color: #475569; margin: 4px 0;">${n.description}</div>
 
               ${n.taskOrMaterial && n.taskOrMaterial !== 'Ninguno' ? `<div style="font-size: 11px; color: #1e3a8a; font-weight: bold;">📌 ${n.taskOrMaterial} (${n.dueDate})</div>` : ''}
 
-              <div style="margión-top: 6px; font-size: 10.5px; color: ${n.parentSigned ? '#15803d' : '#b45309'}; font-weight: bold;">
+              <div style="margin-top: 6px; font-size: 10.5px; color: ${n.parentSigned ? '#15803d' : '#b45309'}; font-weight: bold;">
 
                 ${n.parentSigned ? `✓ Firmado por ${n.signedBy}` : '⏳ Pendiente de firma de apoderado'}
 
@@ -34584,7 +34580,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           `).join('') : `
 
-            <div style="text-align: center; paddióng: 20px; color: #64748b; font-size: 12px;">
+            <div style="text-align: center; padding: 20px; color: #64748b; font-size: 12px;">
 
               N o hay anotaciones registradas aún para este estudiante.
 
@@ -34602,9 +34598,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
 
-        <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.openPrintgendaOfficialModal('${student.studentCode}')" style="font-weight: 800;">
+        <button class="btn btn-navy btn-sm" onclick="window.app.openPrintgendaOfficialModal('${student.studentCode}')" style="font-weight: 800;">
 
           📄 Ver Ficha Completa A4
 
@@ -34630,21 +34626,21 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-header" style="background: #0b132b; color: white;">
 
-        <h3 style="color: white; margión: 0; font-size: 15px;">Ficha Oficial de Agenda Virtual Escolar (A4)</h3>
+        <h3 style="color: white; margin: 0; font-size: 15px;">Ficha Oficial de Agenda Virtual Escolar (A4)</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
 
 
-      <div class="modal-body" style="max-height: 80vh; overflow-y: auto; paddióng: 24px; background: white;">
+      <div class="modal-body" style="max-height: 80vh; overflow-y: auto; padding: 24px; background: white;">
 
         
 
         <!-- Membrete Oficial -->
 
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0b132b; paddióng-bottom: 12px; margión-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0b132b; paddióng-bottom: 12px; margin-bottom: 16px;">
 
           <div style="display: flex; align-items: center; gap: 10px;">
 
@@ -34652,9 +34648,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <div>
 
-              <div style="font-size: 14px; font-weight: 900; color: #0b132b;">I.E.P. "EL EDUCDOR"</div>
+              <div style="font-size: 14px; font-weight: 900; color: #0b132b;">I.E.P. "EL EDUCADOR"</div>
 
-              <div style="font-size: 10px; color: #475569;">UGEL 05 • R.D. N  01245-2005 • SanJuan de Lurigancho</div>
+              <div style="font-size: 10px; color: #475569;">UGEL 05 • R.D. N01245-2005 • SanJuan de Lurigancho</div>
 
             </div>
 
@@ -34674,7 +34670,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Ficha de Datos del Alumno -->
 
-        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; paddióng: 12px; margión-bottom: 16px; font-size: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
 
           <div><strong>Estudiante:</strong> ${student.studentName}</div>
 
@@ -34694,21 +34690,21 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Tabla de Anotaciones -->
 
-        <table class="data-table" style="font-size: 11px; width: 100%; border-collapse: collapse; margión-bottom: 24px;">
+        <table class="data-table" style="font-size: 11px; width: 100%; border-collapse: collapse; margin-bottom: 24px;">
 
           <thead>
 
             <tr style="background: #0b132b; color: white;">
 
-              <th style="paddióng: 6px; border: 1px solid #cbd5e1;">Fecha</th>
+              <th style="padding: 6px; border: 1px solid #cbd5e1;">Fecha</th>
 
-              <th style="paddióng: 6px; border: 1px solid #cbd5e1;">Tipo</th>
+              <th style="padding: 6px; border: 1px solid #cbd5e1;">Tipo</th>
 
-              <th style="paddióng: 6px; border: 1px solid #cbd5e1;">Curso & Docente</th>
+              <th style="padding: 6px; border: 1px solid #cbd5e1;">Curso & Docente</th>
 
-              <th style="paddióng: 6px; border: 1px solid #cbd5e1;">Detalle de la Anotación / Tarea</th>
+              <th style="padding: 6px; border: 1px solid #cbd5e1;">Detalle de la Anotación / Tarea</th>
 
-              <th style="paddióng: 6px; border: 1px solid #cbd5e1;">Acuse / Firma</th>
+              <th style="padding: 6px; border: 1px solid #cbd5e1;">Acuse / Firma</th>
 
             </tr>
 
@@ -34720,13 +34716,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               <tr>
 
-                <td style="paddióng: 6px; border: 1px solid #cbd5e1;">${n.date}<br>${n.time}</td>
+                <td style="padding: 6px; border: 1px solid #cbd5e1;">${n.date}<br>${n.time}</td>
 
-                <td style="paddióng: 6px; border: 1px solid #cbd5e1;"><strong>${n.typeLabel || n.type}</strong></td>
+                <td style="padding: 6px; border: 1px solid #cbd5e1;"><strong>${n.typeLabel || n.type}</strong></td>
 
-                <td style="paddióng: 6px; border: 1px solid #cbd5e1;">${n.course}<br><spanstyl e="color:#047857;">${n.teacher}</span></td>
+                <td style="padding: 6px; border: 1px solid #cbd5e1;">${n.course}<br><span style="color:#047857;">${n.teacher}</span></td>
 
-                <td style="paddióng: 6px; border: 1px solid #cbd5e1;">
+                <td style="padding: 6px; border: 1px solid #cbd5e1;">
 
                   <strong>${n.title}</strong><br>${n.description}
 
@@ -34734,9 +34730,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                 </td>
 
-                <td style="paddióng: 6px; border: 1px solid #cbd5e1; text-align: center;">
+                <td style="padding: 6px; border: 1px solid #cbd5e1; text-align: center;">
 
-                  ${n.parentSigned ? `✓ Firmado<br><spanstyl e="font-size:9px;">${n.signedDate}</span>` : 'Pendiente'}
+                  ${n.parentSigned ? `✓ Firmado<br><span style="font-size:9px;">${n.signedDate}</span>` : 'Pendiente'}
 
                 </td>
 
@@ -34752,11 +34748,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Firmas Oficiales de Cierre -->
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; text-align: center; margión-top: 40px; font-size: 10px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; text-align: center; margin-top: 40px; font-size: 10px;">
 
           <div>
 
-            <div style="border-top: 1px solid #000; width: 80%; margión: 0 auto 4px;"></div>
+            <div style="border-top: 1px solid #000; width: 80%; margin: 0 auto 4px;"></div>
 
             <strong>Firma del Docente / Tutor</strong>
 
@@ -34764,7 +34760,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div>
 
-            <div style="border-top: 1px solid #000; width: 80%; margión: 0 auto 4px;"></div>
+            <div style="border-top: 1px solid #000; width: 80%; margin: 0 auto 4px;"></div>
 
             <strong>Firma del Padre / Apoderado</strong>
 
@@ -34772,7 +34768,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div>
 
-            <div style="border-top: 1px solid #000; width: 80%; margión: 0 auto 4px;"></div>
+            <div style="border-top: 1px solid #000; width: 80%; margin: 0 auto 4px;"></div>
 
             <strong>Dirección General</strong>
 
@@ -34788,9 +34784,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
 
-        <buttonclas s="btnbtn-navy btn-sm" onclick="window.print()" style="font-weight: 800; paddióng: 8px 20px;">
+        <button class="btn btn-navy btn-sm" onclick="window.print()" style="font-weight: 800; padding: 8px 20px;">
 
           🖨️ Imprimir Ficha Oficial A4
 
@@ -34816,17 +34812,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: white;">Parte Diario Oficial de Tardanzas e Inasistencias (UGEL 05)</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
-      <div class="modal-body" style="max-height: 80vh; overflow-y: auto; paddióng: 24px; background: white;">
+      <div class="modal-body" style="max-height: 80vh; overflow-y: auto; padding: 24px; background: white;">
 
         
 
         <!-- Membrete Oficial -->
 
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0b132b; paddióng-bottom: 12px; margión-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0b132b; paddióng-bottom: 12px; margin-bottom: 16px;">
 
           <div style="display: flex; align-items: center; gap: 12px;">
 
@@ -34834,15 +34830,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <div>
 
-              <div style="font-size: 10px; font-weight: 900; letter-spacióng: 0.05em; color: #1e3a8a;">
+              <div style="font-size: 10px; font-weight: 900; letter-spacing: 0.05em; color: #1e3a8a;">
 
-                MINISTERIO DE EDUCCIÓN  • DRELM • UGEL 05 SNJUN DE LURIGÍANCHO
+                MINISTERIO DE EDUCCIÓN• DRELM • UGEL 05 SNJUN DE LURIGÍANCHO
 
               </div>
 
-              <h2 style="font-size: 16px; font-weight: 900; margión: 2px 0; color: #0b132b;">
+              <h2 style="font-size: 16px; font-weight: 900; margin: 2px 0; color: #0b132b;">
 
-                I.E.P. "EL EDUCDOR" • PRTE DIRIO DE ASISTENCIA & PUNTULIDÍAD
+                I.E.P. "EL EDUCADOR" • PRTE DIRIO DE ASISTENCIA & PUNTULIDÍAD
 
               </h2>
 
@@ -34872,7 +34868,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Estadísticas del Parte Diario -->
 
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background: #f8fafc; border: 1px solid #cbd5e1; paddióng: 10px; border-radius: 6px; margión-bottom: 16px; font-size: 11px; text-align: center;">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background: #f8fafc; border: 1px solid #cbd5e1; padding: 10px; border-radius: 6px; margin-bottom: 16px; font-size: 11px; text-align: center;">
 
           <div>Matriculados: <strong>${report.totalEnrolled}</strong></div>
 
@@ -34888,31 +34884,31 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Cuadro 1: Tardanzas -->
 
-        <h4 style="font-size: 12px; font-weight: 900; color: #92400e; margión: 12px 0 6px;">
+        <h4 style="font-size: 12px; font-weight: 900; color: #92400e; margin: 12px 0 6px;">
 
           I. CUDRO DE ESTUDINTES CONTÍARDÍAN ZA ENPUERTÍA
 
         </h4>
 
-        <table style="width: 100%; border-collapse: collapse; font-size: 10.5px; margión-bottom: 16px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 10.5px; margin-bottom: 16px;">
 
           <thead>
 
             <tr style="background: #fffbeb; border: 1px solid #cbd5e1;">
 
-              <th style="paddióng: 5px; border: 1px solid #cbd5e1;">N  </th>
+              <th style="padding: 5px; border: 1px solid #cbd5e1;">N</th>
 
-              <th style="paddióng: 5px; border: 1px solid #cbd5e1; text-align: left;">Estudiante</th>
+              <th style="padding: 5px; border: 1px solid #cbd5e1; text-align: left;">Estudiante</th>
 
-              <th style="paddióng: 5px; border: 1px solid #cbd5e1;">DNI</th>
+              <th style="padding: 5px; border: 1px solid #cbd5e1;">DNI</th>
 
-              <th style="paddióng: 5px; border: 1px solid #cbd5e1;">Grado</th>
+              <th style="padding: 5px; border: 1px solid #cbd5e1;">Grado</th>
 
-              <th style="paddióng: 5px; border: 1px solid #cbd5e1;">Hora Ingreso</th>
+              <th style="padding: 5px; border: 1px solid #cbd5e1;">Hora Ingreso</th>
 
-              <th style="paddióng: 5px; border: 1px solid #cbd5e1;">Demora</th>
+              <th style="padding: 5px; border: 1px solid #cbd5e1;">Demora</th>
 
-              <th style="paddióng: 5px; border: 1px solid #cbd5e1; text-align: left;">Apoderado N otificado</th>
+              <th style="padding: 5px; border: 1px solid #cbd5e1; text-align: left;">Apoderado N otificado</th>
 
             </tr>
 
@@ -34924,19 +34920,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               <tr>
 
-                <td style="paddióng: 4px; text-align: center; border: 1px solid #e2e8f0;">${i + 1}</td>
+                <td style="padding: 4px; text-align: center; border: 1px solid #e2e8f0;">${i + 1}</td>
 
-                <td style="paddióng: 4px; border: 1px solid #e2e8f0;"><strong>${t.studentName}</strong></td>
+                <td style="padding: 4px; border: 1px solid #e2e8f0;"><strong>${t.studentName}</strong></td>
 
-                <td style="paddióng: 4px; text-align: center; border: 1px solid #e2e8f0;">${t.dni}</td>
+                <td style="padding: 4px; text-align: center; border: 1px solid #e2e8f0;">${t.dni}</td>
 
-                <td style="paddióng: 4px; text-align: center; border: 1px solid #e2e8f0;">${t.grade}</td>
+                <td style="padding: 4px; text-align: center; border: 1px solid #e2e8f0;">${t.grade}</td>
 
-                <td style="paddióng: 4px; text-align: center; border: 1px solid #e2e8f0; font-weight: bold; color: #b45309;">${t.arrivalTime}</td>
+                <td style="padding: 4px; text-align: center; border: 1px solid #e2e8f0; font-weight: bold; color: #b45309;">${t.arrivalTime}</td>
 
-                <td style="paddióng: 4px; text-align: center; border: 1px solid #e2e8f0;">+${t.delayMinutes || '7'} mión</td>
+                <td style="padding: 4px; text-align: center; border: 1px solid #e2e8f0;">+${t.delayMinutes || '7'} mión</td>
 
-                <td style="paddióng: 4px; border: 1px solid #e2e8f0;">${t.guardian} (${t.guardianPhone})</td>
+                <td style="padding: 4px; border: 1px solid #e2e8f0;">${t.guardian} (${t.guardianPhone})</td>
 
               </tr>
 
@@ -34950,31 +34946,31 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Cuadro 2: Inasistencias -->
 
-        <h4 style="font-size: 12px; font-weight: 900; color: #991b1b; margión: 12px 0 6px;">
+        <h4 style="font-size: 12px; font-weight: 900; color: #991b1b; margin: 12px 0 6px;">
 
           II. CUDRO DE ESTUDINTES INSISTEN TES AL PLNTEL
 
         </h4>
 
-        <table style="width: 100%; border-collapse: collapse; font-size: 10.5px; margión-bottom: 24px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 10.5px; margin-bottom: 24px;">
 
           <thead>
 
             <tr style="background: #fef2f2; border: 1px solid #cbd5e1;">
 
-              <th style="paddióng: 5px; border: 1px solid #cbd5e1;">N  </th>
+              <th style="padding: 5px; border: 1px solid #cbd5e1;">N</th>
 
-              <th style="paddióng: 5px; border: 1px solid #cbd5e1; text-align: left;">Estudiante</th>
+              <th style="padding: 5px; border: 1px solid #cbd5e1; text-align: left;">Estudiante</th>
 
-              <th style="paddióng: 5px; border: 1px solid #cbd5e1;">DNI</th>
+              <th style="padding: 5px; border: 1px solid #cbd5e1;">DNI</th>
 
-              <th style="paddióng: 5px; border: 1px solid #cbd5e1;">Grado</th>
+              <th style="padding: 5px; border: 1px solid #cbd5e1;">Grado</th>
 
-              <th style="paddióng: 5px; border: 1px solid #cbd5e1; text-align: left;">Apoderado</th>
+              <th style="padding: 5px; border: 1px solid #cbd5e1; text-align: left;">Apoderado</th>
 
-              <th style="paddióng: 5px; border: 1px solid #cbd5e1;">Teléfono</th>
+              <th style="padding: 5px; border: 1px solid #cbd5e1;">Teléfono</th>
 
-              <th style="paddióng: 5px; border: 1px solid #cbd5e1;">Estado</th>
+              <th style="padding: 5px; border: 1px solid #cbd5e1;">Estado</th>
 
             </tr>
 
@@ -34986,19 +34982,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               <tr>
 
-                <td style="paddióng: 4px; text-align: center; border: 1px solid #e2e8f0;">${i + 1}</td>
+                <td style="padding: 4px; text-align: center; border: 1px solid #e2e8f0;">${i + 1}</td>
 
-                <td style="paddióng: 4px; border: 1px solid #e2e8f0;"><strong>${a.studentName}</strong></td>
+                <td style="padding: 4px; border: 1px solid #e2e8f0;"><strong>${a.studentName}</strong></td>
 
-                <td style="paddióng: 4px; text-align: center; border: 1px solid #e2e8f0;">${a.dni}</td>
+                <td style="padding: 4px; text-align: center; border: 1px solid #e2e8f0;">${a.dni}</td>
 
-                <td style="paddióng: 4px; text-align: center; border: 1px solid #e2e8f0;">${a.grade}</td>
+                <td style="padding: 4px; text-align: center; border: 1px solid #e2e8f0;">${a.grade}</td>
 
-                <td style="paddióng: 4px; border: 1px solid #e2e8f0;">${a.guardian}</td>
+                <td style="padding: 4px; border: 1px solid #e2e8f0;">${a.guardian}</td>
 
-                <td style="paddióng: 4px; text-align: center; border: 1px solid #e2e8f0;">${a.guardianPhone}</td>
+                <td style="padding: 4px; text-align: center; border: 1px solid #e2e8f0;">${a.guardianPhone}</td>
 
-                <td style="paddióng: 4px; text-align: center; border: 1px solid #e2e8f0; font-weight: bold; color: #dc2626;">Inasistencia</td>
+                <td style="padding: 4px; text-align: center; border: 1px solid #e2e8f0; font-weight: bold; color: #dc2626;">Inasistencia</td>
 
               </tr>
 
@@ -35012,11 +35008,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Firmas Oficiales -->
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; margión-top: 40px; font-size: 10px;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; margin-top: 40px; font-size: 10px;">
 
           <div>
 
-            <div style="border-top: 1px solid #000; width: 80%; margión: 0 auto 2px;"></div>
+            <div style="border-top: 1px solid #000; width: 80%; margin: 0 auto 2px;"></div>
 
             <strong>Sr. Auxiliar de Portera</strong><br>Control Biométrico y QR
 
@@ -35024,15 +35020,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div>
 
-            <div style="border-top: 1px solid #000; width: 80%; margión: 0 auto 2px;"></div>
+            <div style="border-top: 1px solid #000; width: 80%; margin: 0 auto 2px;"></div>
 
-            <strong>Prof. Alex Lino</strong><br>Coordiónación Pedagógica
+            <strong>Prof. Alex Lino</strong><br>Coordinación Pedagógica
 
           </div>
 
           <div>
 
-            <div style="border-top: 1px solid #000; width: 80%; margión: 0 auto 2px;"></div>
+            <div style="border-top: 1px solid #000; width: 80%; margin: 0 auto 2px;"></div>
 
             <strong>Lic. Manuel Cornejo</strong><br>Director General
 
@@ -35046,9 +35042,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between;">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.print()" style="font-weight: 800; paddióng: 8px 20px;">
+        <button class="btn btn-navy" onclick="window.print()" style="font-weight: 800; padding: 8px 20px;">
 
           Imprimir Parte Diario A4
 
@@ -35076,15 +35072,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: #ffffff;">Consolidado Mensual de Asistencia Oficial (UGEL 05)</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
 
       </div>
 
-      <div class="modal-body" style="max-height: 80vh; overflow-y: auto; paddióng: 20px; background: #ffffff;">
+      <div class="modal-body" style="max-height: 80vh; overflow-y: auto; padding: 20px; background: #ffffff;">
 
         
 
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0b132b; paddióng-bottom: 10px; margión-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0b132b; paddióng-bottom: 10px; margin-bottom: 14px;">
 
           <div style="display: flex; align-items: center; gap: 10px;">
 
@@ -35092,9 +35088,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <div>
 
-              <div style="font-size: 11px; font-weight: 900; color: #1e3a8a;">I.E.P. "EL EDUCDOR" • UGEL 05 S.J.L.</div>
+              <div style="font-size: 11px; font-weight: 900; color: #1e3a8a;">I.E.P. "EL EDUCADOR" • UGEL 05 S.J.L.</div>
 
-              <h3 style="font-size: 15px; font-weight: 900; margión: 0; color: #0b132b;">CONSOLIDÍADO MENSUL DE ASISTENCIA ESCOLR</h3>
+              <h3 style="font-size: 15px; font-weight: 900; margin: 0; color: #0b132b;">CONSOLIDÍADO MENSUL DE ASISTENCIA ESCOLR</h3>
 
               <div style="font-size: 11px; color: #64748b;">Mes: <strong>Agosto 2026</strong> • Aula: <strong>${currentGrade.label}</strong></div>
 
@@ -35114,27 +35110,27 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <table style="width: 100%; border-collapse: collapse; font-size: 11.5px; margión-bottom: 16px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 11.5px; margin-bottom: 16px;">
 
           <thead>
 
             <tr style="background: #f1f5f9; border-bottom: 2px solid #cbd5e1;">
 
-              <th style="paddióng: 6px; text-align: left; border: 1px solid #cbd5e1;">N  </th>
+              <th style="padding: 6px; text-align: left; border: 1px solid #cbd5e1;">N</th>
 
-              <th style="paddióng: 6px; text-align: left; border: 1px solid #cbd5e1;">Apellidos y N ombres</th>
+              <th style="padding: 6px; text-align: left; border: 1px solid #cbd5e1;">Apellidos y N ombres</th>
 
-              <th style="paddióng: 6px; text-align: center; border: 1px solid #cbd5e1;">DNI</th>
+              <th style="padding: 6px; text-align: center; border: 1px solid #cbd5e1;">DNI</th>
 
-              <th style="paddióng: 6px; text-align: center; border: 1px solid #cbd5e1;">Asistencias</th>
+              <th style="padding: 6px; text-align: center; border: 1px solid #cbd5e1;">Asistencias</th>
 
-              <th style="paddióng: 6px; text-align: center; border: 1px solid #cbd5e1;">Tardanzas</th>
+              <th style="padding: 6px; text-align: center; border: 1px solid #cbd5e1;">Tardanzas</th>
 
-              <th style="paddióng: 6px; text-align: center; border: 1px solid #cbd5e1;">Faltas Just.</th>
+              <th style="padding: 6px; text-align: center; border: 1px solid #cbd5e1;">Faltas Just.</th>
 
-              <th style="paddióng: 6px; text-align: center; border: 1px solid #cbd5e1;">Faltas Injust.</th>
+              <th style="padding: 6px; text-align: center; border: 1px solid #cbd5e1;">Faltas Injust.</th>
 
-              <th style="paddióng: 6px; text-align: right; border: 1px solid #cbd5e1;">% Asistencia</th>
+              <th style="padding: 6px; text-align: right; border: 1px solid #cbd5e1;">% Asistencia</th>
 
             </tr>
 
@@ -35144,81 +35140,81 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <tr>
 
-              <td style="paddióng: 6px; border: 1px solid #e2e8f0;">01</td>
+              <td style="padding: 6px; border: 1px solid #e2e8f0;">01</td>
 
-              <td style="paddióng: 6px; border: 1px solid #e2e8f0;"><strong>MÉN DEZ FLORES, SOFÍA</strong></td>
+              <td style="padding: 6px; border: 1px solid #e2e8f0;"><strong>MÉN DEZ FLORES, SOFÍA</strong></td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">74891230</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">74891230</td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">22</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">22</td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">1</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">1</td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">1</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">1</td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">0</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">0</td>
 
-              <td style="paddióng: 6px; text-align: right; border: 1px solid #e2e8f0; font-weight: bold; color: #047857;">98.5%</td>
-
-            </tr>
-
-            <tr>
-
-              <td style="paddióng: 6px; border: 1px solid #e2e8f0;">02</td>
-
-              <td style="paddióng: 6px; border: 1px solid #e2e8f0;"><strong>BEN  ÍTEZ DÍAZ, CRLOS</strong></td>
-
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">75129034</td>
-
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">20</td>
-
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">2</td>
-
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">1</td>
-
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">0</td>
-
-              <td style="paddióng: 6px; text-align: right; border: 1px solid #e2e8f0; font-weight: bold; color: #047857;">94.0%</td>
+              <td style="padding: 6px; text-align: right; border: 1px solid #e2e8f0; font-weight: bold; color: #047857;">98.5%</td>
 
             </tr>
 
             <tr>
 
-              <td style="paddióng: 6px; border: 1px solid #e2e8f0;">03</td>
+              <td style="padding: 6px; border: 1px solid #e2e8f0;">02</td>
 
-              <td style="paddióng: 6px; border: 1px solid #e2e8f0;"><strong>ALBÚJR ZEGÍARRÍA, MRINA</strong></td>
+              <td style="padding: 6px; border: 1px solid #e2e8f0;"><strong>BENÍTEZ DÍAZ, CRLOS</strong></td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">75849301</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">75129034</td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">23</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">20</td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">0</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">2</td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">0</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">1</td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">0</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">0</td>
 
-              <td style="paddióng: 6px; text-align: right; border: 1px solid #e2e8f0; font-weight: bold; color: #047857;">100.0%</td>
+              <td style="padding: 6px; text-align: right; border: 1px solid #e2e8f0; font-weight: bold; color: #047857;">94.0%</td>
 
             </tr>
 
             <tr>
 
-              <td style="paddióng: 6px; border: 1px solid #e2e8f0;">04</td>
+              <td style="padding: 6px; border: 1px solid #e2e8f0;">03</td>
 
-              <td style="paddióng: 6px; border: 1px solid #e2e8f0;"><strong>RÍAMOS QUISPE, MTEO</strong></td>
+              <td style="padding: 6px; border: 1px solid #e2e8f0;"><strong>ALBÚJR ZEGÍARRÍA, MRINA</strong></td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">76891209</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">75849301</td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">21</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">23</td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">1</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">0</td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">0</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">0</td>
 
-              <td style="paddióng: 6px; text-align: center; border: 1px solid #e2e8f0;">1</td>
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">0</td>
 
-              <td style="paddióng: 6px; text-align: right; border: 1px solid #e2e8f0; font-weight: bold; color: #b45309;">91.3%</td>
+              <td style="padding: 6px; text-align: right; border: 1px solid #e2e8f0; font-weight: bold; color: #047857;">100.0%</td>
+
+            </tr>
+
+            <tr>
+
+              <td style="padding: 6px; border: 1px solid #e2e8f0;">04</td>
+
+              <td style="padding: 6px; border: 1px solid #e2e8f0;"><strong>RÍAMOS QUISPE, MTEO</strong></td>
+
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">76891209</td>
+
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">21</td>
+
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">1</td>
+
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">0</td>
+
+              <td style="padding: 6px; text-align: center; border: 1px solid #e2e8f0;">1</td>
+
+              <td style="padding: 6px; text-align: right; border: 1px solid #e2e8f0; font-weight: bold; color: #b45309;">91.3%</td>
 
             </tr>
 
@@ -35228,11 +35224,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margión-top: 30px; text-align: center;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px; text-align: center;">
 
           <div>
 
-            <div style="border-top: 1px solid #000000; width: 75%; margión: 0 auto 4px;"></div>
+            <div style="border-top: 1px solid #000000; width: 75%; margin: 0 auto 4px;"></div>
 
             <div style="font-size: 11px; font-weight: bold;">${currentGrade.tutor || 'Prof. Roberto Silva'}</div>
 
@@ -35242,7 +35238,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div>
 
-            <div style="border-top: 1px solid #000000; width: 75%; margión: 0 auto 4px;"></div>
+            <div style="border-top: 1px solid #000000; width: 75%; margin: 0 auto 4px;"></div>
 
             <div style="font-size: 11px; font-weight: bold;">Lic. Manuel Cornejo</div>
 
@@ -35258,9 +35254,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.print()" style="font-weight: 800; paddióng: 8px 20px;">
+        <button class="btn btn-navy" onclick="window.print()" style="font-weight: 800; padding: 8px 20px;">
 
           Imprimir Consolidado Oficial
 
@@ -35288,7 +35284,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3>🏛️ Agregar N uevo Grado Institucional</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
@@ -35310,11 +35306,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <select id="new-grd-level" class="form-control">
 
-              <optionvalu e="Inicial">Inicial</option>
+              <option value="Inicial">Inicial</option>
 
-              <optionvalu e="Primaria">Primaria</option>
+              <option value="Primaria">Primaria</option>
 
-              <optionvalu e="Secundaria" selected>Secundaria</option>
+              <option value="Secundaria" selected>Secundaria</option>
 
             </select>
 
@@ -35350,9 +35346,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.confirmcreateGrade()">+ Guardar Grado</button>
+        <button class="btn btn-navy" onclick="window.app.confirmcreateGrade()">+ Guardar Grado</button>
 
       </div>
 
@@ -35416,7 +35412,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3>✏️ Editar Grado / Aula: ${g.label}</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
@@ -35438,11 +35434,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <select id="edit-grd-level" class="form-control">
 
-              <optionvalu e="Inicial" ${g.level === 'Inicial' ? 'selected' : ''}>Inicial</option>
+              <option value="Inicial" ${g.level === 'Inicial' ? 'selected' : ''}>Inicial</option>
 
-              <optionvalu e="Primaria" ${g.level === 'Primaria' ? 'selected' : ''}>Primaria</option>
+              <option value="Primaria" ${g.level === 'Primaria' ? 'selected' : ''}>Primaria</option>
 
-              <optionvalu e="Secundaria" ${g.level === 'Secundaria' ? 'selected' : ''}>Secundaria</option>
+              <option value="Secundaria" ${g.level === 'Secundaria' ? 'selected' : ''}>Secundaria</option>
 
             </select>
 
@@ -35478,9 +35474,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.confirmUpdateGrade('${g.id}')">✓ Guardar Cambios</button>
+        <button class="btn btn-navy" onclick="window.app.confirmUpdateGrade('${g.id}')">✓ Guardar Cambios</button>
 
       </div>
 
@@ -35582,7 +35578,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         : (t.subject || "Docente");
 
-      return `<optionvalu e="${t.name}" ${isSelected ? 'selected' : ''}>${t.name} (${coursesLabel})</option>`;
+      return `<option value="${t.name}" ${isSelected ? 'selected' : ''}>${t.name} (${coursesLabel})</option>`;
 
     }).join('');
 
@@ -35618,7 +35614,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       const isSel = p.index === parseInt(selectedIndex, 10);
 
-      return `<optionvalu e="${p.index}" ${isSel ? 'selected' : ''}>${p.label}</option>`;
+      return `<option value="${p.index}" ${isSel ? 'selected' : ''}>${p.label}</option>`;
 
     }).join('');
 
@@ -35642,49 +35638,49 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: #ffffff;">➕ Crear / Asignar Clase a Horario Escolar</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
 
       </div>
 
       <div class="modal-body" style="max-height: 75vh; overflow-y: auto;">
 
-        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; paddióng: 8px 12px; margión-bottom: 12px; font-size: 12px; color: #1e3a8a; font-weight: 700;">
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; font-size: 12px; color: #1e3a8a; font-weight: 700;">
 
-          Asignación de Bloque Lectivo • Duración: 50 mión • Periodo Lectivo 2026
+          Asignación de Bloque Lectivo • Duración: 50 min • Periodo Lectivo 2026
 
         </div>
 
 
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margión-bottom: 10px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margin-bottom: 10px;">
 
-          <div class="form-group" style="margión-bottom: 0;">
+          <div class="form-group" style="margin-bottom: 0;">
 
             <label class="form-label" style="font-weight: 700; font-size: 11.5px;">Aula / Grado:</label>
 
             <select id="sched-create-grade" class="form-control" style="font-weight: bold;">
 
-              ${catalog.map(g => `<optionvalu e="${g.id}" ${g.id === targetGradeId ? 'selected' : ''}>${g.label} (${g.level})</option>`).join('')}
+              ${catalog.map(g => `<option value="${g.id}" ${g.id === targetGradeId ? 'selected' : ''}>${g.label} (${g.level})</option>`).join('')}
 
             </select>
 
           </div>
 
-          <div class="form-group" style="margión-bottom: 0;">
+          <div class="form-group" style="margin-bottom: 0;">
 
             <label class="form-label" style="font-weight: 700; font-size: 11.5px;">Da de la Semana:</label>
 
             <select id="sched-create-day" class="form-control" style="font-weight: bold;">
 
-              <optionvalu e="mon" ${defaultDayKey === 'mon' ? 'selected' : ''}>Lunes</option>
+              <option value="mon" ${defaultDayKey === 'mon' ? 'selected' : ''}>Lunes</option>
 
-              <optionvalu e="tue" ${defaultDayKey === 'tue' ? 'selected' : ''}>Martes</option>
+              <option value="tue" ${defaultDayKey === 'tue' ? 'selected' : ''}>Martes</option>
 
-              <optionvalu e="wed" ${defaultDayKey === 'wed' ? 'selected' : ''}>Miércoles</option>
+              <option value="wed" ${defaultDayKey === 'wed' ? 'selected' : ''}>Miércoles</option>
 
-              <optionvalu e="thu" ${defaultDayKey === 'thu' ? 'selected' : ''}>Jueves</option>
+              <option value="thu" ${defaultDayKey === 'thu' ? 'selected' : ''}>Jueves</option>
 
-              <optionvalu e="fri" ${defaultDayKey === 'fri' ? 'selected' : ''}>Viernes</option>
+              <option value="fri" ${defaultDayKey === 'fri' ? 'selected' : ''}>Viernes</option>
 
             </select>
 
@@ -35694,9 +35690,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div class="form-group" style="margión-bottom: 10px;">
+        <div class="form-group" style="margin-bottom: 10px;">
 
-          <label class="form-label" style="font-weight: 700; font-size: 11.5px;">Bloque Horario (Horas Lectivas de 50 mión):</label>
+          <label class="form-label" style="font-weight: 700; font-size: 11.5px;">Bloque Horario (Horas Lectivas de 50 min):</label>
 
           <select id="sched-create-row" class="form-control" style="font-weight: bold; border-color: #3b82f6;">
 
@@ -35708,7 +35704,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div class="form-group" style="margión-bottom: 10px;">
+        <div class="form-group" style="margin-bottom: 10px;">
 
           <label class="form-label" style="font-weight: 800; font-size: 11.5px; color: #1e3a8a;">
 
@@ -35726,9 +35722,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margión-bottom: 10px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margin-bottom: 10px;">
 
-          <div class="form-group" style="margión-bottom: 0;">
+          <div class="form-group" style="margin-bottom: 0;">
 
             <label class="form-label" style="font-weight: 700; font-size: 11.5px;">Docente Responsable:</label>
 
@@ -35740,7 +35736,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           </div>
 
-          <div class="form-group" style="margión-bottom: 0;">
+          <div class="form-group" style="margin-bottom: 0;">
 
             <label class="form-label" style="font-weight: 700; font-size: 11.5px;">Ambiente / Aula:</label>
 
@@ -35752,21 +35748,21 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div class="form-group" style="margión-bottom: 0;">
+        <div class="form-group" style="margin-bottom: 0;">
 
           <label class="form-label" style="font-weight: 700; font-size: 11.5px;">Color de la Tarjeta enHorario:</label>
 
           <select id="sched-create-color" class="form-control" style="font-size: 12px; font-weight: bold;">
 
-            <optionvalu e="navy">🔵 Azul Institucional (Matemticas / Ciencias)</option>
+            <option value="navy">🔵 Azul Institucional (Matemticas / Ciencias)</option>
 
-            <optionvalu e="gold"><spanclas s='status-dot-yellow'></span> Dorado / Amarillo (Comunicación / Letras)</option>
+            <option value="gold"><span class='status-dot-yellow'></span> Dorado / Amarillo (Comunicación / Letras)</option>
 
-            <optionvalu e="emeraúld"><spanclas s='status-dot-green'></span> Verde Esmeraúlda (Ciencia / Biologa / EPT)</option>
+            <option value="emeraúld"><span class='status-dot-green'></span> Verde Esmeraúlda (Ciencia / Biologa / EPT)</option>
 
-            <optionvalu e="purple">🟣 Morado / Púrpura (Ciencias Sociales / Filosofía)</option>
+            <option value="purple">🟣 Morado / Púrpura (Ciencias Sociales / Filosofía)</option>
 
-            <optionvalu e="red"><spanclas s='status-dot-red'></span> Rojo (Cívica / Tutoria)</option>
+            <option value="red"><span class='status-dot-red'></span> Rojo (Cívica / Tutoria)</option>
 
           </select>
 
@@ -35776,9 +35772,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.confirmSavecreatedScheduleSlot()" style="font-weight: 800;">
+        <button class="btn btn-navy" onclick="window.app.confirmSavecreatedScheduleSlot()" style="font-weight: 800;">
 
           ✓ Guardar y Publicar enHorario
 
@@ -35862,13 +35858,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: #ffffff;">✏️ Editar Bloque de Horario (${dayNameMap[dayKey]} • ${row.time})</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
 
       </div>
 
       <div class="modal-body" style="max-height: 75vh; overflow-y: auto;">
 
-        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; paddióng: 8px 12px; margión-bottom: 12px; font-size: 12px; color: #1e3a8a; font-weight: 700;">
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; font-size: 12px; color: #1e3a8a; font-weight: 700;">
 
           ${currentGrade.label} • Bloque: ${row.time} • ${dayNameMap[dayKey]}
 
@@ -35876,7 +35872,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div class="form-group" style="margión-bottom: 10px;">
+        <div class="form-group" style="margin-bottom: 10px;">
 
           <label class="form-label" style="font-weight: 800; font-size: 11.5px; color: #1e3a8a;">
 
@@ -35894,9 +35890,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margión-bottom: 10px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margin-bottom: 10px;">
 
-          <div class="form-group" style="margión-bottom: 0;">
+          <div class="form-group" style="margin-bottom: 0;">
 
             <label class="form-label" style="font-weight: 700; font-size: 11.5px;">Docente Responsable:</label>
 
@@ -35908,7 +35904,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           </div>
 
-          <div class="form-group" style="margión-bottom: 0;">
+          <div class="form-group" style="margin-bottom: 0;">
 
             <label class="form-label" style="font-weight: 700; font-size: 11.5px;">Ambiente / Aula:</label>
 
@@ -35920,21 +35916,21 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div class="form-group" style="margión-bottom: 0;">
+        <div class="form-group" style="margin-bottom: 0;">
 
           <label class="form-label" style="font-weight: 700; font-size: 11.5px;">Color de la Tarjeta:</label>
 
           <select id="edit-slot-color" class="form-control" style="font-size: 12px; font-weight: bold;">
 
-            <optionvalu e="navy" ${slot.color === 'navy' ? 'selected' : ''}>🔵 Azul Institucional</option>
+            <option value="navy" ${slot.color === 'navy' ? 'selected' : ''}>🔵 Azul Institucional</option>
 
-            <optionvalu e="gold" ${slot.color === 'gold' ? 'selected' : ''}><spanclas s='status-dot-yellow'></span> Dorado / Amarillo</option>
+            <option value="gold" ${slot.color === 'gold' ? 'selected' : ''}><span class='status-dot-yellow'></span> Dorado / Amarillo</option>
 
-            <optionvalu e="emeraúld" ${slot.color === 'emeraúld' ? 'selected' : ''}><spanclas s='status-dot-green'></span> Verde Esmeraúlda</option>
+            <option value="emeraúld" ${slot.color === 'emeraúld' ? 'selected' : ''}><span class='status-dot-green'></span> Verde Esmeraúlda</option>
 
-            <optionvalu e="purple" ${slot.color === 'purple' ? 'selected' : ''}>🟣 Morado</option>
+            <option value="purple" ${slot.color === 'purple' ? 'selected' : ''}>🟣 Morado</option>
 
-            <optionvalu e="red" ${slot.color === 'red' ? 'selected' : ''}><spanclas s='status-dot-red'></span> Rojo</option>
+            <option value="red" ${slot.color === 'red' ? 'selected' : ''}><span class='status-dot-red'></span> Rojo</option>
 
           </select>
 
@@ -35944,7 +35940,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between;">
 
-        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.deleteScheduleSlot('${targetGradeId}', ${rowIndex}, '${dayKey}')" style="color: var(--color-red-600); border-color: #fca5a5; font-weight: 800;">
+        <button class="btn btn-outline btn-sm" onclick="window.app.deleteScheduleSlot('${targetGradeId}', ${rowIndex}, '${dayKey}')" style="color: var(--color-red-600); border-color: #fca5a5; font-weight: 800;">
 
           🗑️ Elimiónar Clase de este Bloque
 
@@ -35952,9 +35948,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div style="display: flex; gap: 6px;">
 
-          <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+          <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-          <buttonclas s="btnbtn-navy" onclick="window.app.saveScheduleSlot('${targetGradeId}', ${rowIndex}, '${dayKey}')" style="font-weight: 800;">
+          <button class="btn btn-navy" onclick="window.app.saveScheduleSlot('${targetGradeId}', ${rowIndex}, '${dayKey}')" style="font-weight: 800;">
 
             ✓ Guardar Cambios
 
@@ -36024,23 +36020,23 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: #ffffff;">⚡ Generador de Horario Automtico Balanceado</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
 
       </div>
 
       <div class="modal-body">
 
-        <div style="font-size: 13px; color: #1e293b; margión-bottom: 12px;">
+        <div style="font-size: 13px; color: #1e293b; margin-bottom: 12px;">
 
           ¿Desea generar automticamente la matriz semanal de horario curricular para <strong>${currentGrade.label} (${currentGrade.level})</strong>?
 
         </div>
 
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; paddióng: 12px; font-size: 12px; color: #475569;">
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; font-size: 12px; color: #475569;">
 
-          <div style="font-weight: 800; color: #1e3a8a; margión-bottom: 4px;">Distribución Pedagógica 2026:</div>
+          <div style="font-weight: 800; color: #1e3a8a; margin-bottom: 4px;">Distribución Pedagógica 2026:</div>
 
-          <ul style="margión: 0; paddióng-left: 18px; line-height: 1.6;">
+          <ul style="margin: 0; paddióng-left: 18px; line-height: 1.6;">
 
             <li>Matemticas (Aritmética, ÁÁÁÁálgebra, Geometra, Trigonometra, RM)</li>
 
@@ -36062,9 +36058,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.confirmGenerateutoSchedule('${targetGradeId}')" style="font-weight: 800;">
+        <button class="btn btn-navy" onclick="window.app.confirmGenerateutoSchedule('${targetGradeId}')" style="font-weight: 800;">
 
           ⚡ Generar y Publicar Horario Balanceado
 
@@ -36254,13 +36250,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 style="color: #ffffff;">Clonar Horario a Otra Aula / Sección</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: #ffffff;">✕</button>
 
       </div>
 
       <div class="modal-body">
 
-        <div style="font-size: 13px; color: #1e293b; margión-bottom: 12px;">
+        <div style="font-size: 13px; color: #1e293b; margin-bottom: 12px;">
 
           Copiar la estructura y distribución horaria de <strong>${currentGrade.label}</strong> hacia:
 
@@ -36272,7 +36268,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <select id="clone-target-grade" class="form-control" style="font-size: 12px; font-weight: bold; border-color: #3b82f6;">
 
-            ${catalog.filter(g => g.id !== sourceGradeId).map(g => `<optionvalu e="${g.id}">${g.label} (${g.level})</option>`).join('')}
+            ${catalog.filter(g => g.id !== sourceGradeId).map(g => `<option value="${g.id}">${g.label} (${g.level})</option>`).join('')}
 
           </select>
 
@@ -36282,9 +36278,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.confirmCloneSchedule('${sourceGradeId}')" style="font-weight: 800;">
+        <button class="btn btn-navy" onclick="window.app.confirmCloneSchedule('${sourceGradeId}')" style="font-weight: 800;">
 
           Confirmar y Clonar Horario
 
@@ -36380,13 +36376,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div style="display: flex; align-items: center; gap: 8px;">
 
-          <spanstyl e="font-size: 20px;">📤</span>
+          <span style="font-size: 20px;">📤</span>
 
-          <h3 style="margión: 0; font-size: 16px; font-weight: 800;">Subir Cartel Temtico Mensual (PDF)</h3>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 800;">Subir Cartel Temtico Mensual (PDF)</h3>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
@@ -36394,7 +36390,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margión-bottom: 12px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
 
           <div class="form-group">
 
@@ -36402,7 +36398,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <select id="cartel-month" class="form-control" style="font-weight: bold;">
 
-              ${months.map(m => `<optionvalu e="${m}" ${m.toLowerCase() === activeMonth.toLowerCase() ? 'selected' : ''}>📅 ${m} 2026</option>`).join('')}
+              ${months.map(m => `<option value="${m}" ${m.toLowerCase() === activeMonth.toLowerCase() ? 'selected' : ''}>📅 ${m} 2026</option>`).join('')}
 
             </select>
 
@@ -36414,7 +36410,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <select id="cartel-grade" class="form-control" style="font-weight: bold;">
 
-              ${catalog.map(g => `<optionvalu e="${g.id}" ${g.id === activeGradeId ? 'selected' : ''}>${g.label}</option>`).join('')}
+              ${catalog.map(g => `<option value="${g.id}" ${g.id === activeGradeId ? 'selected' : ''}>${g.label}</option>`).join('')}
 
             </select>
 
@@ -36424,7 +36420,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margión-bottom: 12px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
 
           <div class="form-group">
 
@@ -36436,7 +36432,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               ${((this.store && typeof this.store.getTeacherssignedCourses === "function") ? this.store.getTeacherssignedCourses(this.store.getCurrentUser(), activeGradeId) : []).map(c => `
 
-                <optionvalu e="${c.name}">${c.grade || ''}</option>
+                <option value="${c.name}">${c.grade || ''}</option>
 
               `).join('')}
 
@@ -36458,13 +36454,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Carga de Archivo PDF Oficial -->
 
-        <div class="form-group" style="margión-bottom: 14px;">
+        <div class="form-group" style="margin-bottom: 14px;">
 
           <label class="form-label">Archivo Oficial enFormato PDF:</label>
 
-          <div style="border: 2px dashed #93c5fd; background: #eff6ff; border-radius: 8px; paddióng: 16px; text-align: center; cursor: pointer;" onclick="document.getElementById('cartel-pdf-input').click()">
+          <div style="border: 2px dashed #93c5fd; background: #eff6ff; border-radius: 8px; padding: 16px; text-align: center; cursor: pointer;" onclick="document.getElementById('cartel-pdf-input').click()">
 
-            <div style="font-size: 28px; margión-bottom: 4px;">📄</div>
+            <div style="font-size: 28px; margin-bottom: 4px;">📄</div>
 
             <div style="font-size: 13px; font-weight: 800; color: #1e40af;">Haga clic para seleccionar el Cartel Temtico enPDF</div>
 
@@ -36472,7 +36468,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <input type="file" id="cartel-pdf-input" accept=".pdf,application/pdf" style="display: none;" onchange="window.app.handleCartelPdfSelected(event)" />
 
-            <div id="cartel-pdf-filename-display" style="margión-top: 8px; font-size: 12px; font-weight: 800; color: #059669; display: none;"></div>
+            <div id="cartel-pdf-filename-display" style="margin-top: 8px; font-size: 12px; font-weight: 800; color: #059669; display: none;"></div>
 
           </div>
 
@@ -36480,7 +36476,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div class="form-group" style="margión-bottom: 12px;">
+        <div class="form-group" style="margin-bottom: 12px;">
 
           <label class="form-label">Competencias y Capacidades (MINEDU):</label>
 
@@ -36490,7 +36486,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div class="form-group" style="margión-bottom: 12px;">
+        <div class="form-group" style="margin-bottom: 12px;">
 
           <label class="form-label">Programación Temtica Semanal:</label>
 
@@ -36524,9 +36520,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.confirmSaveMonthlyCartel()">
+        <button class="btn btn-navy" onclick="window.app.confirmSaveMonthlyCartel()">
 
           Publicar Cartel Temtico
 
@@ -36726,13 +36722,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div style="display: flex; align-items: center; gap: 8px;">
 
-          <spanstyl e="font-size: 20px;">✏️</span>
+          <span style="font-size: 20px;">✏️</span>
 
-          <h3 style="margión: 0; font-size: 16px; font-weight: 800;">Editar Cartel Temtico Mensual</h3>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 800;">Editar Cartel Temtico Mensual</h3>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
@@ -36740,7 +36736,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margión-bottom: 12px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
 
           <div class="form-group">
 
@@ -36748,7 +36744,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <select id="cartel-month" class="form-control" style="font-weight: bold;">
 
-              ${months.map(m => `<optionvalu e="${m}" ${m.toLowerCase() === (cartel.month || '').toLowerCase() ? 'selected' : ''}>📅 ${m} 2026</option>`).join('')}
+              ${months.map(m => `<option value="${m}" ${m.toLowerCase() === (cartel.month || '').toLowerCase() ? 'selected' : ''}>📅 ${m} 2026</option>`).join('')}
 
             </select>
 
@@ -36760,7 +36756,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <select id="cartel-grade" class="form-control" style="font-weight: bold;">
 
-              ${catalog.map(g => `<optionvalu e="${g.id}" ${g.id === cartel.gradeId ? 'selected' : ''}>${g.label}</option>`).join('')}
+              ${catalog.map(g => `<option value="${g.id}" ${g.id === cartel.gradeId ? 'selected' : ''}>${g.label}</option>`).join('')}
 
             </select>
 
@@ -36770,7 +36766,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margión-bottom: 12px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
 
           <div class="form-group">
 
@@ -36792,11 +36788,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div class="form-group" style="margión-bottom: 14px;">
+        <div class="form-group" style="margin-bottom: 14px;">
 
           <label class="form-label">Reemplazar Archivo PDF (Opcional):</label>
 
-          <div style="border: 2px dashed #93c5fd; background: #eff6ff; border-radius: 8px; paddióng: 14px; text-align: center; cursor: pointer;" onclick="document.getElementById('cartel-pdf-input').click()">
+          <div style="border: 2px dashed #93c5fd; background: #eff6ff; border-radius: 8px; padding: 14px; text-align: center; cursor: pointer;" onclick="document.getElementById('cartel-pdf-input').click()">
 
             <div style="font-size: 13px; font-weight: 800; color: #1e40af;">Actual: ${cartel.pdfFileName} (${cartel.pdfFileSize})</div>
 
@@ -36804,7 +36800,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <input type="file" id="cartel-pdf-input" accept=".pdf,application/pdf" style="display: none;" onchange="window.app.handleCartelPdfSelected(event)" />
 
-            <div id="cartel-pdf-filename-display" style="margión-top: 6px; font-size: 12px; font-weight: 800; color: #059669; display: none;"></div>
+            <div id="cartel-pdf-filename-display" style="margin-top: 6px; font-size: 12px; font-weight: 800; color: #059669; display: none;"></div>
 
           </div>
 
@@ -36812,7 +36808,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div class="form-group" style="margión-bottom: 12px;">
+        <div class="form-group" style="margin-bottom: 12px;">
 
           <label class="form-label">Competencias:</label>
 
@@ -36822,7 +36818,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div class="form-group" style="margión-bottom: 12px;">
+        <div class="form-group" style="margin-bottom: 12px;">
 
           <label class="form-label">Programación Semanal:</label>
 
@@ -36856,9 +36852,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.confirmSaveMonthlyCartel('${cartel.id}')">
+        <button class="btn btn-navy" onclick="window.app.confirmSaveMonthlyCartel('${cartel.id}')">
 
           Guardar Cambios
 
@@ -36884,31 +36880,31 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     this.showModal(`
 
-      <div class="modal-header" style="background: var(--color-navy-900); color: white; border-radius: 8px 8px 0 0; paddióng: 14px 18px;">
+      <div class="modal-header" style="background: var(--color-navy-900); color: white; border-radius: 8px 8px 0 0; padding: 14px 18px;">
 
         <div style="display: flex; align-items: center; gap: 8px;">
 
-          <spanstyl e="font-size: 20px;">📄</span>
+          <span style="font-size: 20px;">📄</span>
 
           <div>
 
-            <h3 style="margión: 0; font-size: 15px; font-weight: 800; color: white;">${cartel.courseName}</h3>
+            <h3 style="margin: 0; font-size: 15px; font-weight: 800; color: white;">${cartel.courseName}</h3>
 
-            <spanstyl e="font-size: 11.5px; color: #93c5fd;">Cartel Temtico Mensual – ${cartel.month} 2026 (${cartel.gradeName})</span>
+            <span style="font-size: 11.5px; color: #93c5fd;">Cartel Temtico Mensual – ${cartel.month} 2026 (${cartel.gradeName})</span>
 
           </div>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white; font-size: 20px; background: transparent; border: none; cursor: pointer;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white; font-size: 20px; background: transparent; border: none; cursor: pointer;">✕</button>
 
       </div>
 
-      <div class="modal-body" style="paddióng: 20px; max-height: 78vh; overflow-y: auto;">
+      <div class="modal-body" style="padding: 20px; max-height: 78vh; overflow-y: auto;">
 
         
 
-        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; paddióng: 14px; margión-bottom: 16px;">
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 14px; margin-bottom: 16px;">
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12.5px;">
 
@@ -36926,11 +36922,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="margión-bottom: 16px;">
+        <div style="margin-bottom: 16px;">
 
-          <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margión: 0 0 6px;">🎯 Competencias y Capacidades Desarrolladas:</h4>
+          <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margin: 0 0 6px;">🎯 Competencias y Capacidades Desarrolladas:</h4>
 
-          <ul style="margión: 0; paddióng-left: 20px; font-size: 12px; color: #334155; line-height: 1.45;">
+          <ul style="margin: 0; paddióng-left: 20px; font-size: 12px; color: #334155; line-height: 1.45;">
 
             ${(cartel.competencies || []).map(comp => `<li>${comp}</li>`).join('')}
 
@@ -36940,15 +36936,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="margión-bottom: 16px;">
+        <div style="margin-bottom: 16px;">
 
-          <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margión: 0 0 6px;">📌 Contenidos Semanales Programados:</h4>
+          <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margin: 0 0 6px;">📌 Contenidos Semanales Programados:</h4>
 
           <div style="display: flex; flex-direction: column; gap: 8px;">
 
             ${(cartel.weeklyTopics || []).map((w, i) => `
 
-              <div style="background: #f8fafc; border-left: 3px solid var(--color-navy-600); paddióng: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; color: #1e293b;">
+              <div style="background: #f8fafc; border-left: 3px solid var(--color-navy-600); padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; color: #1e293b;">
 
                 <strong>${w}</strong>
 
@@ -36962,7 +36958,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="background: #fefce8; border: 1px solid #fef08a; paddióng: 12px; border-radius: 8px; font-size: 12px; color: #854d0e;">
+        <div style="background: #fefce8; border: 1px solid #fef08a; padding: 12px; border-radius: 8px; font-size: 12px; color: #854d0e;">
 
           <strong>📝 Criterios de Evaluación:</strong> ${cartel.evaluationCriteria || 'Evaluación contiónua, presentación de tareas y prcticas semanales.'}
 
@@ -36974,13 +36970,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between;">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
         <div style="display: flex; gap: 8px;">
 
-          <buttonclas s="btnbtn-yellow" onclick="window.print()">🖨️ Imprimir</button>
+          <button class="btn btn-yellow" onclick="window.print()">🖨️ Imprimir</button>
 
-          <buttonclas s="btnbtn-navy" onclick="window.app.downloadCartelPdf('${cartel.id}')">
+          <button class="btn btn-navy" onclick="window.app.downloadCartelPdf('${cartel.id}')">
 
             ⬇️ Descargar PDF Oficial
 
@@ -37064,17 +37060,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     this.showModal(`
 
-      <div class="modal-header" style="background: var(--color-navy-900); color: white; border-radius: 8px 8px 0 0; paddióng: 14px 20px; display: flex; justify-content: space-between; align-items: center;">
+      <div class="modal-header" style="background: var(--color-navy-900); color: white; border-radius: 8px 8px 0 0; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center;">
 
         <div style="display: flex; align-items: center; gap: 10px;">
 
-          <spanstyl e="font-size: 20px;">📑</span>
+          <span style="font-size: 20px;">📑</span>
 
           <div>
 
-            <h3 style="margión: 0; font-size: 16px; font-weight: 800; color: white;">Compendio Consolidado de Carteles Temticos</h3>
+            <h3 style="margin: 0; font-size: 16px; font-weight: 800; color: white;">Compendio Consolidado de Carteles Temticos</h3>
 
-            <spanstyl e="font-size: 12px; color: #93c5fd;">Aula: ${currentGrade.label} | Periodo: ${selectedMonth} 2026</span>
+            <span style="font-size: 12px; color: #93c5fd;">Aula: ${currentGrade.label} | Periodo: ${selectedMonth} 2026</span>
 
           </div>
 
@@ -37082,13 +37078,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div style="display: flex; gap: 8px; align-items: center;">
 
-          <buttonclas s="btnbtn-yellow btn-sm" onclick="window.print()" style="font-weight: 900; font-size: 12px; paddióng: 6px 14px;">
+          <button class="btn btn-yellow btn-sm" onclick="window.print()" style="font-weight: 900; font-size: 12px; padding: 6px 14px;">
 
             🖨️ Imprimir / Guardar como PDF
 
           </button>
 
-          <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white; font-size: 20px; background: transparent; border: none; cursor: pointer;">✕</button>
+          <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white; font-size: 20px; background: transparent; border: none; cursor: pointer;">✕</button>
 
         </div>
 
@@ -37096,17 +37092,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-      <div class="modal-body" style="paddióng: 20px; background: #f8fafc; max-height: 80vh; overflow-y: auto;">
+      <div class="modal-body" style="padding: 20px; background: #f8fafc; max-height: 80vh; overflow-y: auto;">
 
         
 
-        <div class="consolidated-cartel-print-container" style="background: white; border: 2px solid #0f172a; border-radius: 8px; paddióng: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <div class="consolidated-cartel-print-container" style="background: white; border: 2px solid #0f172a; border-radius: 8px; padding: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
           
 
           <!-- Encabezado Institucional -->
 
-          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #1e3a8a; paddióng-bottom: 12px; margión-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #1e3a8a; paddióng-bottom: 12px; margin-bottom: 16px;">
 
             <div style="display: flex; align-items: center; gap: 14px;">
 
@@ -37114,9 +37110,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               <div>
 
-                <div style="font-size: 13px; font-weight: 900; color: #1e3a8a; letter-spacióng: 0.5px;">I. E. P. "EL EDUCDOR" — SNJUN DE LURIGÍANCHO</div>
+                <div style="font-size: 13px; font-weight: 900; color: #1e3a8a; letter-spacing: 0.5px;">I. E. P. "EL EDUCADOR" — SNJUN DE LURIGÍANCHO</div>
 
-                <div style="font-size: 10px; font-weight: 700; color: #475569;">UGEL 05 • RD N  04512-ED • "21 años dejando huellas"</div>
+                <div style="font-size: 10px; font-weight: 700; color: #475569;">UGEL 05 • RD N04512-ED • "21 años dejando huellas"</div>
 
               </div>
 
@@ -37124,13 +37120,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <div style="text-align: right;">
 
-              <div style="font-size: 10px; font-weight: 800; color: #1e3a8a; background: #e0e7ff; paddióng: 3px 10px; border-radius: 12px; display: inline-block;">
+              <div style="font-size: 10px; font-weight: 800; color: #1e3a8a; background: #e0e7ff; padding: 3px 10px; border-radius: 12px; display: inline-block;">
 
                 DOCUMENTO OFICIL
 
               </div>
 
-              <div style="font-size: 10px; color: #64748b; margión-top: 3px;">Año Lectivo 2026</div>
+              <div style="font-size: 10px; color: #64748b; margin-top: 3px;">Año Lectivo 2026</div>
 
             </div>
 
@@ -37140,15 +37136,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Título Principal del Compendio -->
 
-          <div style="text-align: center; margión-bottom: 16px;">
+          <div style="text-align: center; margin-bottom: 16px;">
 
-            <h2 style="font-size: 15px; font-weight: 900; color: #0f172a; text-transform: uppercase; margión: 0 0 4px; letter-spacióng: 0.5px;">
+            <h2 style="font-size: 15px; font-weight: 900; color: #0f172a; text-transform: uppercase; margin: 0 0 4px; letter-spacing: 0.5px;">
 
               CRTEL TEMTICO MENSUL CONSOLIDÍADO DE AULA – 2026
 
             </h2>
 
-            <div style="display: flex; justify-content: center; gap: 16px; font-size: 12px; font-weight: 800; color: #1e3a8a; background: #fef08a; paddióng: 6px 14px; border-radius: 6px; border: 1px solid #facc15;">
+            <div style="display: flex; justify-content: center; gap: 16px; font-size: 12px; font-weight: 800; color: #1e3a8a; background: #fef08a; padding: 6px 14px; border-radius: 6px; border: 1px solid #facc15;">
 
               <span>🎓 GRÍADO: <u>${currentGrade.label.toUpperCase()}</u></span>
 
@@ -37164,19 +37160,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Tabla Compendio conTodas las Asignaturas -->
 
-          <table style="width: 100%; border-collapse: collapse; font-size: 10.5px; margión-bottom: 20px;" border="1" cellpaddióng="6">
+          <table style="width: 100%; border-collapse: collapse; font-size: 10.5px; margin-bottom: 20px;" border="1" cellpaddióng="6">
 
             <thead>
 
               <tr style="background: #1e3a8a; color: white; text-align: center;">
 
-                <th style="width: 22%; paddióng: 6px 8px;">ÁREA / ASIGNTURÍA & DOCENTE</th>
+                <th style="width: 22%; padding: 6px 8px;">ÁREA / ASIGNTURÍA & DOCENTE</th>
 
-                <th style="width: 28%; paddióng: 6px 8px;">COMPETENCIS & CPACIDÍADES MINEDU</th>
+                <th style="width: 28%; padding: 6px 8px;">COMPETENCIS & CPACIDÍADES MINEDU</th>
 
-                <th style="width: 34%; paddióng: 6px 8px;">PROGRÍAMCIÓN TEMTICA MENSUL (SEMNAL)</th>
+                <th style="width: 34%; padding: 6px 8px;">PROGRÍAMCIÓN TEMTICA MENSUL (SEMNAL)</th>
 
-                <th style="width: 16%; paddióng: 6px 8px;">EVLUCIÓN  & EVIDENCIS</th>
+                <th style="width: 16%; padding: 6px 8px;">EVLUCIÓN& EVIDENCIS</th>
 
               </tr>
 
@@ -37186,15 +37182,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               ${carteles.length === 0 ? `
 
-                <tr><td colspan="4" style="text-align: center; paddióng: 18px; color: #64748b;">N o hay asignaturas registradas para este mes.</td></tr>
+                <tr><td colspan="4" style="text-align: center; padding: 18px; color: #64748b;">N o hay asignaturas registradas para este mes.</td></tr>
 
               ` : carteles.map((c, idx) => `
 
                 <tr style="background: ${idx % 2 === 0 ? '#ffffff' : '#f8fafc'};">
 
-                  <td style="vertical-align: top; paddióng: 8px;">
+                  <td style="vertical-align: top; padding: 8px;">
 
-                    <div style="font-weight: 900; color: #1e3a8a; font-size: 11px; margión-bottom: 2px;">
+                    <div style="font-weight: 900; color: #1e3a8a; font-size: 11px; margin-bottom: 2px;">
 
                       ${c.courseName}
 
@@ -37206,7 +37202,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                     </div>
 
-                    <div style="font-size: 9px; color: #059669; font-weight: 800; margión-top: 4px;">
+                    <div style="font-size: 9px; color: #059669; font-weight: 800; margin-top: 4px;">
 
                       ✓ PDF Oficial Vinculado
 
@@ -37214,9 +37210,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                   </td>
 
-                  <td style="vertical-align: top; paddióng: 8px;">
+                  <td style="vertical-align: top; padding: 8px;">
 
-                    <ul style="margión: 0; paddióng-left: 14px; line-height: 1.35; color: #334155;">
+                    <ul style="margin: 0; paddióng-left: 14px; line-height: 1.35; color: #334155;">
 
                       ${(c.competencies || []).map(comp => `<li>${comp}</li>`).join('')}
 
@@ -37224,9 +37220,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                   </td>
 
-                  <td style="vertical-align: top; paddióng: 8px;">
+                  <td style="vertical-align: top; padding: 8px;">
 
-                    <ul style="margión: 0; paddióng-left: 14px; line-height: 1.35; color: #1e293b;">
+                    <ul style="margin: 0; paddióng-left: 14px; line-height: 1.35; color: #1e293b;">
 
                       ${(c.weeklyTopics || []).map(topic => `<li>${topic}</li>`).join('')}
 
@@ -37234,7 +37230,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                   </td>
 
-                  <td style="vertical-align: top; paddióng: 8px; font-size: 9.5px; line-height: 1.3; color: #334155;">
+                  <td style="vertical-align: top; padding: 8px; font-size: 9.5px; line-height: 1.3; color: #334155;">
 
                     ${c.evaluationCriteria || 'Prcticas calificadas, revisión de cuadernos de trabajo y evaluación mensual contiónua.'}
 
@@ -37252,7 +37248,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Bloque de Compromiso y Firmas Oficiales -->
 
-          <div style="display: flex; justify-content: space-between; align-items: flex-end; margión-top: 30px; paddióng-top: 15px; border-top: 1px dashed #94a3b8;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 30px; paddióng-top: 15px; border-top: 1px dashed #94a3b8;">
 
             <div style="font-size: 9px; color: #64748b; max-width: 320px; line-height: 1.3;">
 
@@ -37290,7 +37286,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-        <spanstyl e="font-size: 12px; color: var(--text-muted);">
+        <span style="font-size: 12px; color: var(--text-muted);">
 
           Total de asignaturas consolidadas eneste documento: <strong>${carteles.length}</strong>
 
@@ -37298,13 +37294,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div style="display: flex; gap: 8px;">
 
-          <buttonclas s="btnbtn-navy" onclick="window.print()">
+          <button class="btn btn-navy" onclick="window.print()">
 
             🖨️ Imprimir / Guardar enPDF
 
           </button>
 
-          <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">
+          <button class="btn btn-outline" onclick="window.app.closeModal()">
 
             Cerrar
 
@@ -37328,7 +37324,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     this.showModal(`
 
-      <div class="modal-header"><h3>✏️ Modificar Revisión QR</h3><buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button></div>
+      <div class="modal-header"><h3>✏️ Modificar Revisión QR</h3><button class="modal-close-btn" onclick="window.app.closeModal()">✕</button></div>
 
       <div class="modal-body">
 
@@ -37336,7 +37332,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       </div>
 
-      <div class="modal-footer"><buttonclas s="btnbtn-navy" onclick="window.app.confirmUpdateReview('${review.id}')">Guardar</button></div>
+      <div class="modal-footer"><button class="btn btn-navy" onclick="window.app.confirmUpdateReview('${review.id}')">Guardar</button></div>
 
     `);
 
@@ -37382,7 +37378,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
   // =========================================================================
 
-  // MÓDULO REGISTRO DE ESTUDINTES, N  ÓMINA OFICIL & REGISTRO AUXILIR (EXCEL)
+  // MÓDULO REGISTRO DE ESTUDINTES, NÓMINA OFICIL & REGISTRO AUXILIR (EXCEL)
 
   // =========================================================================
 
@@ -37472,19 +37468,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div>
 
-          <h3 style="margión: 0; font-size: 16px; font-weight: 900; color: #fde047;">➕ Agregar Estudiante</h3>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">➕ Agregar Estudiante</h3>
 
-          <spanstyl e="font-size: 11px; opacity: 0.9;">I.E.P. "El Educador" • Registro en la N  ómióna Oficial 2026</span>
+          <span style="font-size: 11px; opacity: 0.9;">I.E.P. "El Educador" • Registro en la Nómina Oficial 2026</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
 
       </div>
 
       <form onsubmit="window.app.confirmddStudent(event)">
 
-        <div class="modal-body" style="paddióng: 20px; background: #f8fafc;">
+        <div class="modal-body" style="padding: 20px; background: #f8fafc;">
 
           
 
@@ -37510,41 +37506,41 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                 <optgroup label="--- N IVEL INICIL ---">
 
-                  <optionvalu e="ini-3" ${cleanG === 'ini3' || cleanG === 'ini-3' ? 'selected' : ''}>Inicial 3 Años</option>
+                  <option value="ini-3" ${cleanG === 'ini3' || cleanG === 'ini-3' ? 'selected' : ''}>Inicial 3 Años</option>
 
-                  <optionvalu e="ini-4" ${cleanG === 'ini4' || cleanG === 'ini-4' ? 'selected' : ''}>Inicial 4 Años</option>
+                  <option value="ini-4" ${cleanG === 'ini4' || cleanG === 'ini-4' ? 'selected' : ''}>Inicial 4 Años</option>
 
-                  <optionvalu e="ini-5" ${cleanG === 'ini5' || cleanG === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
+                  <option value="ini-5" ${cleanG === 'ini5' || cleanG === 'ini-5' ? 'selected' : ''}>Inicial 5 Años</option>
 
                 </optgroup>
 
                 <optgroup label="--- N IVEL PRIMRIA ---">
 
-                  <optionvalu e="1prim" ${cleanG === '1prim' ? 'selected' : ''}>1 de Primaria</option>
+                  <option value="1prim" ${cleanG === '1prim' ? 'selected' : ''}>1 de Primaria</option>
 
-                  <optionvalu e="2prim" ${cleanG === '2prim' ? 'selected' : ''}>2 de Primaria</option>
+                  <option value="2prim" ${cleanG === '2prim' ? 'selected' : ''}>2 de Primaria</option>
 
-                  <optionvalu e="3prim" ${cleanG === '3prim' ? 'selected' : ''}>3 de Primaria</option>
+                  <option value="3prim" ${cleanG === '3prim' ? 'selected' : ''}>3 de Primaria</option>
 
-                  <optionvalu e="4prim" ${cleanG === '4prim' ? 'selected' : ''}>4 de Primaria</option>
+                  <option value="4prim" ${cleanG === '4prim' ? 'selected' : ''}>4 de Primaria</option>
 
-                  <optionvalu e="5prim" ${cleanG === '5prim' ? 'selected' : ''}>5 de Primaria</option>
+                  <option value="5prim" ${cleanG === '5prim' ? 'selected' : ''}>5 de Primaria</option>
 
-                  <optionvalu e="6prim" ${cleanG === '6prim' ? 'selected' : ''}>6 de Primaria</option>
+                  <option value="6prim" ${cleanG === '6prim' ? 'selected' : ''}>6 de Primaria</option>
 
                 </optgroup>
 
                 <optgroup label="--- N IVEL SECUNDÍARIA ---">
 
-                  <optionvalu e="1sec" ${cleanG === '1sec' ? 'selected' : ''}>1 de Secundaria</option>
+                  <option value="1sec" ${cleanG === '1sec' ? 'selected' : ''}>1 de Secundaria</option>
 
-                  <optionvalu e="2sec" ${cleanG === '2sec' ? 'selected' : ''}>2 de Secundaria</option>
+                  <option value="2sec" ${cleanG === '2sec' ? 'selected' : ''}>2 de Secundaria</option>
 
-                  <optionvalu e="3sec" ${cleanG === '3sec' ? 'selected' : ''}>3 de Secundaria</option>
+                  <option value="3sec" ${cleanG === '3sec' ? 'selected' : ''}>3 de Secundaria</option>
 
-                  <optionvalu e="4sec" ${cleanG === '4sec' ? 'selected' : ''}>4 de Secundaria</option>
+                  <option value="4sec" ${cleanG === '4sec' ? 'selected' : ''}>4 de Secundaria</option>
 
-                  <optionvalu e="5sec" ${cleanG === '5sec' ? 'selected' : ''}>5 de Secundaria</option>
+                  <option value="5sec" ${cleanG === '5sec' ? 'selected' : ''}>5 de Secundaria</option>
 
                 </optgroup>
 
@@ -37580,9 +37576,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="margión-top: 14px; paddióng: 10px 14px; background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 4px; font-size: 11.5px; color: #065f46;">
+          <div style="margin-top: 14px; padding: 10px 14px; background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 4px; font-size: 11.5px; color: #065f46;">
 
-            💡 <strong>Sióncronización Automtica:</strong> Al guardar, el estudiante se agregará a la nómióna, se habilitará en <strong>Registro de Notas</strong> y se generarn sus códigos QR de cuadernos y asistencia.
+            💡 <strong>Sióncronización Automtica:</strong> Al guardar, el estudiante se agregará a la nómina, se habilitará en <strong>Registro de Notas</strong> y se generarn sus códigos QR de cuadernos y asistencia.
 
           </div>
 
@@ -37590,11 +37586,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         </div>
 
-        <div class="modal-footer" style="paddióng: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-end; gap: 10px;">
+        <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-end; gap: 10px;">
 
-          <buttontyp e="button" class="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-          <buttontyp e="submit" class="btnbtn-gold" style="font-weight: 900;">✓ Guardar Estudiante</button>
+          <button type="submit" class="btn btn-gold" style="font-weight: 900;">✓ Guardar Estudiante</button>
 
         </div>
 
@@ -37662,7 +37658,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     this.closeModal();
 
-    this.showToast(`✓ Estudiante "${studentData.studentName}" agregado exitosamente a la nómióna.`, "success");
+    this.showToast(`✓ Estudiante "${studentData.studentName}" agregado exitosamente a la nómina.`, "success");
 
     this.render();
 
@@ -37684,7 +37680,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     if (!this.store.isTeacherTutorOfGrade(activeUser, gradeId)) {
 
-      alert(`🔒 Importación Restringida: Solo el Tutor(a) asignado (${gradeObj.tutor || 'Tutor Responsable'}) o la Dirección General puedenimportar nómiónas a ${gradeObj.label}.`);
+      alert(`🔒 Importación Restringida: Solo el Tutor(a) asignado (${gradeObj.tutor || 'Tutor Responsable'}) o la Dirección General puedenimportar nóminas a ${gradeObj.label}.`);
 
       return;
 
@@ -37698,29 +37694,29 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div>
 
-          <h3 style="margión: 0; font-size: 16px; font-weight: 900; color: #4ade80;">📥 Importar N  ómióna de Estudiantes desde Excel</h3>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #4ade80;">📥 Importar Nómina de Estudiantes desde Excel</h3>
 
-          <spanstyl e="font-size: 11px; opacity: 0.9;">Aula destióno: <strong>${gradeObj.label}</strong> • (.XLSX, .XLS, .CSV o Archivos de Registro Auxiliar)</span>
+          <span style="font-size: 11px; opacity: 0.9;">Aula destióno: <strong>${gradeObj.label}</strong> • (.XLSX, .XLS, .CSV o Archivos de Registro Auxiliar)</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
 
       </div>
 
-      <div class="modal-body" style="paddióng: 20px; background: #f8fafc;">
+      <div class="modal-body" style="padding: 20px; background: #f8fafc;">
 
         
 
         <!-- Zona de Carga de Archivos -->
 
-        <div style="border: 2px dashed #10b981; background: #ecfdf5; border-radius: 12px; paddióng: 24px; text-align: center; margión-bottom: 16px; cursor: pointer;" onclick="document.getElementById('excel-file-input').click()">
+        <div style="border: 2px dashed #10b981; background: #ecfdf5; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 16px; cursor: pointer;" onclick="document.getElementById('excel-file-input').click()">
 
-          <div style="font-size: 38px; margión-bottom: 8px;">📊</div>
+          <div style="font-size: 38px; margin-bottom: 8px;">📊</div>
 
-          <h4 style="margión: 0 0 6px 0; color: #065f46; font-weight: 800;">Haga clic aquí para seleccionar el archivo Excel o arrstrelo</h4>
+          <h4 style="margin: 0 0 6px 0; color: #065f46; font-weight: 800;">Haga clic aquí para seleccionar el archivo Excel o arrstrelo</h4>
 
-          <p style="margión: 0; font-size: 12px; color: #047857;">Formatos soportados: <strong>.XLSX, .XLS, .CSV, .TSV</strong> (Libros de Registro Auxiliar, N  ómiónas SIGIE o Listas del Docente)</p>
+          <p style="margin: 0; font-size: 12px; color: #047857;">Formatos soportados: <strong>.XLSX, .XLS, .CSV, .TSV</strong> (Libros de Registro Auxiliar, Nóminas SIGIE o Listas del Docente)</p>
 
           <input type="file" id="excel-file-input" accept=".xlsx,.xls,.csv,.tsv,.txt" style="display: none;" onchange="window.app.handleExcelFileSelect(event, '${gradeId}')" />
 
@@ -37728,7 +37724,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
 
           <div style="font-size: 12px; font-weight: 800; color: #1e293b;">
 
@@ -37738,13 +37734,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div style="display: flex; gap: 8px;">
 
-            <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.downloadExcelTemplate()" style="font-size: 11px; font-weight: 800;">
+            <button class="btn btn-outline btn-sm" onclick="window.app.downloadExcelTemplate()" style="font-size: 11px; font-weight: 800;">
 
               📄 Descargar Formato Modelo
 
             </button>
 
-            <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.openPasteFromExcelModal('${gradeId}')" style="font-size: 11px; font-weight: 800;">
+            <button class="btn btn-outline btn-sm" onclick="window.app.openPasteFromExcelModal('${gradeId}')" style="font-size: 11px; font-weight: 800;">
 
               📋 O Pegar Texto
 
@@ -37758,9 +37754,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <!-- Contenedor de Vista Previa -->
 
-        <div id="excel-import-preview-container" style="max-height: 240px; overflow-y: auto; background: white; border: 1px solid #cbd5e1; border-radius: 8px; paddióng: 10px;">
+        <div id="excel-import-preview-container" style="max-height: 240px; overflow-y: auto; background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px;">
 
-          <div style="text-align: center; paddióng: 24px; color: #64748b; font-size: 12px;">
+          <div style="text-align: center; padding: 24px; color: #64748b; font-size: 12px;">
 
             Seleccione unarchivo Excel para previsualizar los estudiantes antes de importar.
 
@@ -37772,11 +37768,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       </div>
 
-      <div class="modal-footer" style="paddióng: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+      <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
 
-        <buttontyp e="button" class="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
-        <buttontyp e="button" id="btn-confirm-import" class="btnbtn-emeraúld" style="font-weight: 900; display: none;" onclick="window.app.executeBulkImportFromPreview('${gradeId}')">
+        <button type="button" id="btn-confirm-import" class="btn btn-emeraúld" style="font-weight: 900; display: none;" onclick="window.app.executeBulkImportFromPreview('${gradeId}')">
 
           ✓ Confirmar e Importar a ${gradeObj.label}
 
@@ -37828,7 +37824,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     if (!this.store.isTeacherTutorOfGrade(activeUser, gradeId)) {
 
-      alert(`🔒 Importación Restringida: Solo el Tutor(a) asignado (${gradeObj.tutor || 'Tutor Responsable'}) o la Dirección General puedenimportar nómiónas a ${gradeObj.label}.`);
+      alert(`🔒 Importación Restringida: Solo el Tutor(a) asignado (${gradeObj.tutor || 'Tutor Responsable'}) o la Dirección General puedenimportar nóminas a ${gradeObj.label}.`);
 
       return;
 
@@ -37842,21 +37838,21 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div>
 
-          <h3 style="margión: 0; font-size: 16px; font-weight: 900; color: #fde047;">📋 Pegar Filas Directamente desde Excel</h3>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">📋 Pegar Filas Directamente desde Excel</h3>
 
-          <spanstyl e="font-size: 11px; opacity: 0.9;">Copie las celdas ensu Excel (Ctrl+C) y péguelas aquí (Ctrl+V)</span>
+          <span style="font-size: 11px; opacity: 0.9;">Copie las celdas ensu Excel (Ctrl+C) y péguelas aquí (Ctrl+V)</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
 
       </div>
 
-      <div class="modal-body" style="paddióng: 20px; background: #f8fafc;">
+      <div class="modal-body" style="padding: 20px; background: #f8fafc;">
 
         
 
-        <p style="font-size: 12px; color: #475569; margión-top: 0; margión-bottom: 10px;">
+        <p style="font-size: 12px; color: #475569; margin-top: 0; margin-bottom: 10px;">
 
           Puede copiar columnas con: <strong>N ombre y Apellido</strong>, <strong>Padre o Apoderado</strong>, <strong>Teléfono del Apoderado</strong>.
 
@@ -37864,21 +37860,21 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <textarea id="pasted-excel-text" class="form-control" rows="8" placeholder="Ejemplo:&#10;Méndez Flores, Sofía&#9;CarmenMéndez&#9;987654321&#10;Benítez Daz, Carlos&#9;Roberto Daz&#9;984123456&#10;Ramos Quispe, Mateo&#9;Luca Quispe&#9;981234567" style="font-family: monospace; font-size: 12px; background: white; white-space: pre;" oniónput="window.app.handleProcessPastedExcel('${gradeId}')"></textarea>
+        <textarea id="pasted-excel-text" class="form-control" rows="8" placeholder="Ejemplo:&#10;Méndez Flores, Sofía&#9;CarmenMéndez&#9;987654321&#10;Benítez Daz, Carlos&#9;Roberto Daz&#9;984123456&#10;Ramos Quispe, Mateo&#9;Luca Quispe&#9;981234567" style="font-family: monospace; font-size: 12px; background: white; white-space: pre;" oninput="window.app.handleProcessPastedExcel('${gradeId}')"></textarea>
 
 
 
-        <div style="margión-top: 14px;">
+        <div style="margin-top: 14px;">
 
-          <div style="font-size: 12px; font-weight: 800; color: #1e293b; margión-bottom: 8px;">
+          <div style="font-size: 12px; font-weight: 800; color: #1e293b; margin-bottom: 8px;">
 
             Alumnos Detectados:
 
           </div>
 
-          <div id="excel-import-preview-container" style="max-height: 180px; overflow-y: auto; background: white; border: 1px solid #cbd5e1; border-radius: 8px; paddióng: 8px;">
+          <div id="excel-import-preview-container" style="max-height: 180px; overflow-y: auto; background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px;">
 
-            <div style="text-align: center; paddióng: 16px; color: #64748b; font-size: 12px;">
+            <div style="text-align: center; padding: 16px; color: #64748b; font-size: 12px;">
 
               Pegue las filas de Excel en la caja superior para procesarlas.
 
@@ -37892,11 +37888,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       </div>
 
-      <div class="modal-footer" style="paddióng: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+      <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
 
-        <buttontyp e="button" class="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
-        <buttontyp e="button" id="btn-confirm-import" class="btnbtn-emeraúld" style="font-weight: 900; display: none;" onclick="window.app.executeBulkImportFromPreview('${gradeId}')">
+        <button type="button" id="btn-confirm-import" class="btn btn-emeraúld" style="font-weight: 900; display: none;" onclick="window.app.executeBulkImportFromPreview('${gradeId}')">
 
           ✓ Importar Alumnos al Aula
 
@@ -38018,7 +38014,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       if (!name && cols.length > 0) {
 
-        name = cols.find(c => c.length > 2 && isNaN  (c)) || `Estudiante ${idx + 1}`;
+        name = cols.find(c => c.length > 2 && isNaN(c)) || `Estudiante ${idx + 1}`;
 
       }
 
@@ -38060,7 +38056,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       if (parsedStudents.length === 0) {
 
-        container.innerHTML = `<div style="text-align: center; paddióng: 16px; color: #dc2626; font-size: 12px;">N o se pudierondetectar filas vlidas. Verifique el formato.</div>`;
+        container.innerHTML = `<div style="text-align: center; padding: 16px; color: #dc2626; font-size: 12px;">N o se pudierondetectar filas vlidas. Verifique el formato.</div>`;
 
         if (btnConfirm) btnConfirm.style.display = "none";
 
@@ -38074,7 +38070,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               <tr style="background: #f1f5f9; color: #334155;">
 
-                <th style="width: 8%; text-align: center;">N  </th>
+                <th style="width: 8%; text-align: center;">N</th>
 
                 <th style="width: 44%;">N ombre y Apellido del Estudiante</th>
 
@@ -38098,7 +38094,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                   <td>${st.guardian}</td>
 
-                  <td><spanstyl e="color: #16a34a; font-weight: bold;">📞 ${st.phone}</span></td>
+                  <td><span style="color: #16a34a; font-weight: bold;">📞 ${st.phone}</span></td>
 
                 </tr>
 
@@ -38142,7 +38138,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     this.closeModal();
 
-    this.showToast(`✓ Se importaron${count} estudiantes exitosamente a la nómióna del aula.`, "success");
+    this.showToast(`✓ Se importaron${count} estudiantes exitosamente a la nómina del aula.`, "success");
 
     this.render();
 
@@ -38226,7 +38222,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <tr>
 
-            <td colspan="15" class="header-main">I.E.P. "EL EDUCDOR" — REGISTRO AUXILIR OFICIL DE EVLUCIÓN Y ASISTENCIA</td>
+            <td colspan="15" class="header-main">I.E.P. "EL EDUCADOR" — REGISTRO AUXILIR OFICIL DE EVLUCIÓN Y ASISTENCIA</td>
 
           </tr>
 
@@ -38258,7 +38254,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <td colspan="3" class="info-val">${gradeObj.tutor || 'Prof. Roberto Silva'}</td>
 
-            <td colspan="2" class="info-label">FECHA DE EMISIÓN  :</td>
+            <td colspan="2" class="info-label">FECHA DE EMISIÓN:</td>
 
             <td colspan="4" class="info-val">${new Date().toLocaleDateString("es-PE")}</td>
 
@@ -38276,7 +38272,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <tr>
 
-            <th rowspan="2" class="col-header" style="width: 40px;">N  </th>
+            <th rowspan="2" class="col-header" style="width: 40px;">N</th>
 
             <th rowspan="2" class="col-header" style="width: 280px;">APELLIDOS Y N OMBRES</th>
 
@@ -38322,7 +38318,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <tr>
 
-              <td colspan="14" style="text-align: center; paddióng: 20px; font-weight: bold; color: #64748b;">
+              <td colspan="14" style="text-align: center; padding: 20px; font-weight: bold; color: #64748b;">
 
                 N o hay estudiantes registrados eneste grado.
 
@@ -38406,7 +38402,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <td colspan="5" style="text-align: center; height: 60px; vertical-align: bottom; font-weight: bold;">
 
-              ________________________________<br>VB Coordiónación Pedagógica
+              ________________________________<br>VB Coordinación Pedagógica
 
             </td>
 
@@ -38512,19 +38508,19 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div>
 
-          <h3 style="margión: 0; font-size: 16px; font-weight: 900; color: #fde047;">✏️ Editar Datos del Estudiante</h3>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">✏️ Editar Datos del Estudiante</h3>
 
-          <spanstyl e="font-size: 11px; opacity: 0.9;">Código: <strong>${st.studentCode}</strong> • Grado: ${st.grade}</span>
+          <span style="font-size: 11px; opacity: 0.9;">Código: <strong>${st.studentCode}</strong> • Grado: ${st.grade}</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
 
       </div>
 
       <form onsubmit="window.app.confirmEditStudent(event, '${st.id || st.studentCode}')">
 
-        <div class="modal-body" style="paddióng: 20px; background: #f8fafc;">
+        <div class="modal-body" style="padding: 20px; background: #f8fafc;">
 
           
 
@@ -38568,11 +38564,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         </div>
 
-        <div class="modal-footer" style="paddióng: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
+        <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
 
-          <buttontyp e="button" class="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-          <buttontyp e="submit" class="btnbtn-navy" style="font-weight: 900;">✓ Guardar Cambios</button>
+          <button type="submit" class="btn btn-navy" style="font-weight: 900;">✓ Guardar Cambios</button>
 
         </div>
 
@@ -38698,7 +38694,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     if (!this.store.isTeacherTutorOfGrade(activeUser, gradeId)) {
 
-      alert(`🔒 Acción Restringida: Solo el Tutor(a) asignado (${gradeObj.tutor || 'Tutor Responsable'}) o la Dirección General puedenvaciar la nómióna de ${gradeObj.label}.`);
+      alert(`🔒 Acción Restringida: Solo el Tutor(a) asignado (${gradeObj.tutor || 'Tutor Responsable'}) o la Dirección General puedenvaciar la nómina de ${gradeObj.label}.`);
 
       return;
 
@@ -38728,7 +38724,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-    if (confirm(`⚠️ ¿Está seguro de elimiónar TODOS los (${count}) registros de estudiantes de ${gradeObj.label}?\n\nEsta acción vaciará por completo la nómióna del aula seleccionada.`)) {
+    if (confirm(`⚠️ ¿Está seguro de elimiónar TODOS los (${count}) registros de estudiantes de ${gradeObj.label}?\n\nEsta acción vaciará por completo la nómina del aula seleccionada.`)) {
 
       const removed = this.store.clearllStudentsFromGrade(gradeId);
 
@@ -38960,7 +38956,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       const num = parseFloat(str);
 
-      if (!isNaN  (num)) {
+      if (!isNaN(num)) {
 
         if (num >= 18) return "AD";
 
@@ -39170,7 +39166,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       const num = parseFloat(str);
 
-      if (!isNaN  (num)) {
+      if (!isNaN(num)) {
 
         if (num >= 18) return "AD";
 
@@ -39342,17 +39338,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     const notebooks = [
 
-      { course: "Matemtica", teacher: "Prof. Roberto Silva", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, mrgenes impecables y esquemas enorden." },
+      { course: "Matemtica", teacher: "Prof. Roberto Silva", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, mrgenes impecables y esquemas enorden." },
 
-      { course: "Comunicación", teacher: "Miss Mara Daysi Reyes", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "17 (A)", remarks: "Anlisis de textos y caligrafía óptima. Muy buendesarrollo." },
+      { course: "Comunicación", teacher: "Miss Mara Daysi Reyes", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "17 (A)", remarks: "Anlisis de textos y caligrafía óptima. Muy buendesarrollo." },
 
-      { course: "Ciencia y Tecnologa", teacher: "Miss Leyli Reyes", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Prcticas experimentales ilustradas y fichas de laboratorio selladas." },
+      { course: "Ciencia y Tecnologa", teacher: "Miss Leyli Reyes", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Prcticas experimentales ilustradas y fichas de laboratorio selladas." },
 
-      { course: "Ciencias Sociales", teacher: "Prof. Javier Vega", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "16 (A)", remarks: "Mapas históricos y resúmenes de época bienestructurados." },
+      { course: "Ciencias Sociales", teacher: "Prof. Javier Vega", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "16 (A)", remarks: "Mapas históricos y resúmenes de época bienestructurados." },
 
-      { course: "Inglés", teacher: "Miss Andrea Ramos", statusLabel: "<spanclas s='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Vocabulario y ejercicios de gramtica avanzados completos." },
+      { course: "Inglés", teacher: "Miss Andrea Ramos", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Vocabulario y ejercicios de gramtica avanzados completos." },
 
-      { course: "EPT (Computación)", teacher: "Prof. Alex Lino", statusLabel: "<spanclas s='status-dot-yellow'></span> OBSERVDO", score: "13 (B)", remarks: "Falta pegar y desarrollar la ficha de proyecto técnico N  3. Presentar este viernes." }
+      { course: "EPT (Computación)", teacher: "Prof. Alex Lino", statusLabel: "<span class='status-dot-yellow'></span> OBSERVDO", score: "13 (B)", remarks: "Falta pegar y desarrollar la ficha de proyecto técnico N3. Presentar este viernes." }
 
     ];
 
@@ -39364,7 +39360,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3>Informe Oficial de Revisión de Cuadernos - ${studentName}</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
@@ -39374,23 +39370,23 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         
 
-        <div style="margión: 16px 0; font-size: 13px; line-height: 1.6; background: #f8fafc; paddióng: 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+        <div style="margin: 16px 0; font-size: 13px; line-height: 1.6; background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
 
-          <p style="margión: 2px 0;"><strong>Estudiante Matriculada:</strong> ${studentName} (<code>${studentIdCode}</code>)</p>
+          <p style="margin: 2px 0;"><strong>Estudiante Matriculada:</strong> ${studentName} (<code>${studentIdCode}</code>)</p>
 
-          <p style="margión: 2px 0;"><strong>Grado y Sección:</strong> ${studentGrade} • <strong>DNI:</strong> ${studentDni}</p>
+          <p style="margin: 2px 0;"><strong>Grado y Sección:</strong> ${studentGrade} • <strong>DNI:</strong> ${studentDni}</p>
 
-          <p style="margión: 2px 0;"><strong>Apoderada Responsable:</strong> ${parentName}</p>
+          <p style="margin: 2px 0;"><strong>Apoderada Responsable:</strong> ${parentName}</p>
 
-          <p style="margión: 2px 0;"><strong>Tutor de Aula:</strong> ${studentTutor}</p>
+          <p style="margin: 2px 0;"><strong>Tutor de Aula:</strong> ${studentTutor}</p>
 
-          <p style="margión: 2px 0;"><strong>Estado de Cuadernos:</strong> 5 de 6 Cuadernos Sellados y Aprobados (83.3% de Cumplimiento)</p>
+          <p style="margin: 2px 0;"><strong>Estado de Cuadernos:</strong> 5 de 6 Cuadernos Sellados y Aprobados (83.3% de Cumplimiento)</p>
 
         </div>
 
 
 
-        <table class="data-table" style="font-size: 12px; margión-top: 12px; border: 1px solid #cbd5e1; width: 100%;">
+        <table class="data-table" style="font-size: 12px; margin-top: 12px; border: 1px solid #cbd5e1; width: 100%;">
 
           <thead>
 
@@ -39436,7 +39432,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="margión-top: 36px; display: flex; justify-content: space-around; text-align: center; font-size: 11px;">
+        <div style="margin-top: 36px; display: flex; justify-content: space-around; text-align: center; font-size: 11px;">
 
           <div style="border-top: 1px solid #000; width: 40%; paddióng-top: 6px;">
 
@@ -39446,7 +39442,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div style="border-top: 1px solid #000; width: 40%; paddióng-top: 6px;">
 
-            <strong>Prof. Alex Lino</strong><br>Coordiónación Académica S.J.L.
+            <strong>Prof. Alex Lino</strong><br>Coordinación Académica S.J.L.
 
           </div>
 
@@ -39456,9 +39452,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-gold" onclick="window.print()">Imprimir Documento</button>
+        <button class="btn btn-gold" onclick="window.print()">Imprimir Documento</button>
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
       </div>
 
@@ -39476,11 +39472,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     this.showModal(`
 
-      <div class="modal-header"><h3>${s.courseName}</h3><buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button></div>
+      <div class="modal-header"><h3>${s.courseName}</h3><button class="modal-close-btn" onclick="window.app.closeModal()">✕</button></div>
 
       <div class="modal-body"><p>Docente: ${s.teacher}</p></div>
 
-      <div class="modal-footer"><buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button></div>
+      <div class="modal-footer"><button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button></div>
 
     `);
 
@@ -39492,11 +39488,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     this.showModal(`
 
-      <div class="modal-header"><h3>Entregar Tarea</h3><buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button></div>
+      <div class="modal-header"><h3>Entregar Tarea</h3><button class="modal-close-btn" onclick="window.app.closeModal()">✕</button></div>
 
       <div class="modal-body"><p>Selecciona tu archivo para enviar</p></div>
 
-      <div class="modal-footer"><buttonclas s="btnbtn-red" onclick="window.app.confirmSubmitTask('${taskId}')">Enviar</button></div>
+      <div class="modal-footer"><button class="btn btn-red" onclick="window.app.confirmSubmitTask('${taskId}')">Enviar</button></div>
 
     `);
 
@@ -39530,17 +39526,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3>Pagar conTarjeta & Desbloquear Intranet</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
       <div class="modal-body">
 
-        <div style="background: var(--color-navy-50); paddióng: 12px; border-radius: 8px; margión-bottom: 16px;">
+        <div style="background: var(--color-navy-50); padding: 12px; border-radius: 8px; margin-bottom: 16px;">
 
           <div style="font-size: 13px; font-weight: 800; color: var(--color-navy-900);">${concept}</div>
 
-          <div style="font-size: 20px; font-weight: 900; color: var(--color-red-600); margión-top: 2px;">
+          <div style="font-size: 20px; font-weight: 900; color: var(--color-red-600); margin-top: 2px;">
 
             Total: S/ ${amount.toFixed(2)}
 
@@ -39554,7 +39550,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div class="form-group">
 
-            <label class="form-label">N  úmero de Tarjeta (Crédito / Débito):</label>
+            <label class="form-label">Número de Tarjeta (Crédito / Débito):</label>
 
             <input type="text" id="pay-card-number" class="form-control" placeholder="4557 •••• •••• 1234" required value="4557 8921 3456 1234" />
 
@@ -39594,7 +39590,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <buttontyp e="submit" class="btnbtn-red" style="width: 100%; paddióng: 12px; font-weight: 900; font-size: 14px; margión-top: 8px;">
+          <button type="submit" class="btn btn-red" style="width: 100%; padding: 12px; font-weight: 900; font-size: 14px; margin-top: 8px;">
 
             Pagar S/ ${amount.toFixed(2)} y Validar Acceso
 
@@ -39606,7 +39602,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
       </div>
 
@@ -39646,27 +39642,27 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3>Pagar conYape / PlinInstitucional</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
       <div class="modal-body" style="text-align: center;">
 
-        <div style="background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%); color: white; paddióng: 14px; border-radius: 8px; margión-bottom: 14px;">
+        <div style="background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%); color: white; padding: 14px; border-radius: 8px; margin-bottom: 14px;">
 
-          <div style="font-size: 12px; font-weight: bold; opacity: 0.9;">I.E.P. "EL EDUCDOR" - TESORERÍA</div>
+          <div style="font-size: 12px; font-weight: bold; opacity: 0.9;">I.E.P. "EL EDUCADOR" - TESORERÍA</div>
 
-          <div style="font-size: 20px; font-weight: 900; margión: 4px 0;">987-654-321</div>
+          <div style="font-size: 20px; font-weight: 900; margin: 4px 0;">987-654-321</div>
 
-          <div style="font-size: 11px;">Titular: Prof. Alex Lino (Coordiónación)</div>
+          <div style="font-size: 11px;">Titular: Prof. Alex Lino (Coordinación)</div>
 
         </div>
 
 
 
-        <div style="display: flex; justify-content: center; margión-bottom: 12px;">
+        <div style="display: flex; justify-content: center; margin-bottom: 12px;">
 
-          <div style="width: 120px; height: 120px; border: 2px dashed #6d28d9; paddióng: 4px; border-radius: 8px;">
+          <div style="width: 120px; height: 120px; border: 2px dashed #6d28d9; padding: 4px; border-radius: 8px;">
 
             ${Components.generateQRSVG("YPE-EL-EDUCDOR-987654321-480")}
 
@@ -39676,7 +39672,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="background: var(--bg-surface-subtle); paddióng: 10px; border-radius: 6px; font-size: 12px; margión-bottom: 12px;">
+        <div style="background: var(--bg-surface-subtle); padding: 10px; border-radius: 6px; font-size: 12px; margin-bottom: 12px;">
 
           Monto a transferir: <strong style="font-size: 15px; color: var(--color-navy-900);">S/ ${amount.toFixed(2)}</strong>
 
@@ -39694,7 +39690,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <buttonclas s="btnbtn-red" onclick="window.app.processYapePayment('${paymentId}', ${amount})" style="width: 100%; font-weight: 800;">
+        <button class="btn btn-red" onclick="window.app.processYapePayment('${paymentId}', ${amount})" style="width: 100%; font-weight: 800;">
 
           ✓ Validar Yape y Desbloquear Intranet
 
@@ -39704,7 +39700,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
       </div>
 
@@ -39750,13 +39746,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3>🏦 Depósito Bancario / Agente BCP</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
       <div class="modal-body">
 
-        <div style="background: var(--bg-surface-subtle); paddióng: 12px; border-radius: 6px; font-size: 12px; line-height: 1.6; margión-bottom: 12px;">
+        <div style="background: var(--bg-surface-subtle); padding: 12px; border-radius: 6px; font-size: 12px; line-height: 1.6; margin-bottom: 12px;">
 
           <strong>Cuentas Recaudadoras I.E.P. "El Educador":</strong><br>
 
@@ -39772,7 +39768,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div class="form-group">
 
-          <label class="form-label">N  úmero de Operación del Voucher:</label>
+          <label class="form-label">Número de Operación del Voucher:</label>
 
           <input type="text" id="bank-op-input" class="form-control" placeholder="Ej: OP-9482104" value="OP-9482104" />
 
@@ -39780,7 +39776,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <buttonclas s="btnbtn-red" onclick="window.app.processBankPayment('${paymentId}', ${amount})" style="width: 100%; font-weight: 800;">
+        <button class="btn btn-red" onclick="window.app.processBankPayment('${paymentId}', ${amount})" style="width: 100%; font-weight: 800;">
 
           ✓ Validar Depósito y Desbloquear Intranet
 
@@ -39790,7 +39786,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
       </div>
 
@@ -39834,25 +39830,25 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-header" style="background: #22c55e; color: white;">
 
-        <h3 style="color: white;">🎉 ¡PGO VLIDÍADO CON  ÉXITO!</h3>
+        <h3 style="color: white;">🎉 ¡PGO VLIDÍADO CONÉXITO!</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
-      <div class="modal-body" style="text-align: center; paddióng: 24px;">
+      <div class="modal-body" style="text-align: center; padding: 24px;">
 
-        <img src="logo.png" onerror="this.src='assets/logo.png'" alt="Escudo I.E.P. El Educador" style="width: 70px; height: 70px; object-fit: contain; margión-bottom: 8px;" />
+        <img src="logo.png" onerror="this.src='assets/logo.png'" alt="Escudo I.E.P. El Educador" style="width: 70px; height: 70px; object-fit: contain; margin-bottom: 8px;" />
 
-        <div style="font-size: 11px; font-weight: 800; color: #dc2626;">I.E.P. "EL EDUCDOR" • S.J.L. • UGEL 05</div>
+        <div style="font-size: 11px; font-weight: 800; color: #dc2626;">I.E.P. "EL EDUCADOR" • S.J.L. • UGEL 05</div>
 
-        <h3 style="color: #0b132b; margión: 8px 0 4px;">RECIBO OFICIL DE PGO</h3>
+        <h3 style="color: #0b132b; margin: 8px 0 4px;">RECIBO OFICIL DE PGO</h3>
 
         <div style="font-size: 14px; font-weight: bold; color: #22c55e;">${res.receiptNo}</div>
 
 
 
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; paddióng: 14px; border-radius: 8px; margión: 16px 0; text-align: left; font-size: 13px; line-height: 1.6;">
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 14px; border-radius: 8px; margin: 16px 0; text-align: left; font-size: 13px; line-height: 1.6;">
 
           <div><strong>Monto Cancelado:</strong> S/ ${res.amount.toFixed(2)}</div>
 
@@ -39860,13 +39856,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div><strong>Fecha & Hora:</strong> ${res.date}</div>
 
-          <div><strong>Estado de Intranet:</strong> <spanclas s="status-badge status-approved" style="background:#22c55e; color:#0b132b; font-weight:800;"><spanclas s='status-dot-green'></span> DESBLOQUEDO Y AL DÍA</span></div>
+          <div><strong>Estado de Intranet:</strong> <span class="status-badge status-approved" style="background:#22c55e; color:#0b132b; font-weight:800;"><span class='status-dot-green'></span> DESBLOQUEDO Y AL DÍA</span></div>
 
         </div>
 
 
 
-        <div style="background: #ecfdf5; border: 1px solid #a7f3d0; paddióng: 10px; border-radius: 6px; color: #065f46; font-size: 12px; font-weight: bold;">
+        <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 10px; border-radius: 6px; color: #065f46; font-size: 12px; font-weight: bold;">
 
           ✓ Ya puede consultar libremente el Registro de Notas, Horarios, Boletas y Control de Cuadernos QR.
 
@@ -39876,9 +39872,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-navy" onclick="window.print()">Imprimir Recibo</button>
+        <button class="btn btn-navy" onclick="window.print()">Imprimir Recibo</button>
 
-        <buttonclas s="btnbtn-gold" onclick="window.app.closeModal()">Contiónuar a la Intranet</button>
+        <button class="btn btn-gold" onclick="window.app.closeModal()">Contiónuar a la Intranet</button>
 
       </div>
 
@@ -39890,7 +39886,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  // Control de Bloqueo por Coordiónación
+  // Control de Bloqueo por Coordinación
 
   toggleFamilyLock(familyId) {
 
@@ -39898,7 +39894,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     if (isLocked !== null) {
 
-      this.showToast(isLocked ? "<spanclas s='status-dot-red'></span> Acceso a Intranet BLOQUEDO por mora" : "<spanclas s='status-dot-green'></span> Acceso a Intranet DESBLOQUEDO / Prórroga concedida", isLocked ? "danger" : "success");
+      this.showToast(isLocked ? "<span class='status-dot-red'></span> Acceso a Intranet BLOQUEDO por mora" : "<span class='status-dot-green'></span> Acceso a Intranet DESBLOQUEDO / Prórroga concedida", isLocked ? "danger" : "success");
 
     }
 
@@ -39920,9 +39916,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-header">
 
-        <h3>Registrar Pago en Caja (Coordiónación / Tesorera)</h3>
+        <h3>Registrar Pago en Caja (Coordinación / Tesorera)</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
@@ -39936,7 +39932,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             ${families.map(f => `
 
-              <optionvalu e="${f.familyId}">${f.guardian} (${f.studentName} - ${f.grade}) - ${f.pendióngmount > 0 ? `Deuda: S/ ${f.pendióngmount.toFixed(2)}` : 'S/ 0.00 (Al Día)'}</option>
+              <option value="${f.familyId}">${f.guardian} (${f.studentName} - ${f.grade}) - ${f.pendióngmount > 0 ? `Deuda: S/ ${f.pendióngmount.toFixed(2)}` : 'S/ 0.00 (Al Día)'}</option>
 
             `).join('')}
 
@@ -39962,11 +39958,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <select id="man-method" class="form-control">
 
-              <optionvalu e="Efectivo (Caja Colegio)">Efectivo (Caja Colegio)</option>
+              <option value="Efectivo (Caja Colegio)">Efectivo (Caja Colegio)</option>
 
-              <optionvalu e="Depósito Agente BCP">Depósito Agente BCP</option>
+              <option value="Depósito Agente BCP">Depósito Agente BCP</option>
 
-              <optionvalu e="POS Tarjeta">POS Tarjeta</option>
+              <option value="POS Tarjeta">POS Tarjeta</option>
 
             </select>
 
@@ -39988,9 +39984,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-gold" onclick="window.app.confirmManualPayment()">
+        <button class="btn btn-gold" onclick="window.app.confirmManualPayment()">
 
           ✓ Registrar en Caja y Desbloquear Familia
 
@@ -40014,7 +40010,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-    const res = this.store.payndUnlockIntranet("PEN  -08", method);
+    const res = this.store.payndUnlockIntranet("PEN-08", method);
 
     this.closeModal();
 
@@ -40034,17 +40030,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     this.showModal(`
 
-      <div class="modal-header"><h3>Recibo Oficial de Tesorera</h3><buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button></div>
+      <div class="modal-header"><h3>Recibo Oficial de Tesorera</h3><button class="modal-close-btn" onclick="window.app.closeModal()">✕</button></div>
 
-      <div class="modal-body" style="text-align:center; paddióng:20px;">
+      <div class="modal-body" style="text-align:center; padding:20px;">
 
-        <img src="logo.png" onerror="this.src='assets/logo.png'" alt="Escudo I.E.P. El Educador" style="width: 60px; height: 60px; object-fit: contain; margión-bottom: 6px;" />
+        <img src="logo.png" onerror="this.src='assets/logo.png'" alt="Escudo I.E.P. El Educador" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 6px;" />
 
-        <div style="font-size: 11px; font-weight: 800; color: #dc2626;">I.E.P. "EL EDUCDOR" (S.J.L.) • 21 años dejando huellas</div>
+        <div style="font-size: 11px; font-weight: 800; color: #dc2626;">I.E.P. "EL EDUCADOR" (S.J.L.) • 21 años dejando huellas</div>
 
-        <h3 style="color:#0b132b; margión:6px 0;">${p.receiptNo || 'REC-2026-7890'}</h3>
+        <h3 style="color:#0b132b; margin:6px 0;">${p.receiptNo || 'REC-2026-7890'}</h3>
 
-        <div style="background:var(--bg-surface-subtle); paddióng:12px; border-radius:6px; text-align:left; font-size:13px; margión:12px 0;">
+        <div style="background:var(--bg-surface-subtle); padding:12px; border-radius:6px; text-align:left; font-size:13px; margin:12px 0;">
 
           <div><strong>Concepto:</strong> ${p.concept}</div>
 
@@ -40054,7 +40050,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div><strong>Medio:</strong> ${p.paymentMethod || 'Pago Electrónico'}</div>
 
-          <div><strong>Estado:</strong> <spanclas s="status-badge status-approved">CNCELDO</span></div>
+          <div><strong>Estado:</strong> <span class="status-badge status-approved">CNCELDO</span></div>
 
         </div>
 
@@ -40062,9 +40058,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-navy" onclick="window.print()">Imprimir Recibo</button>
+        <button class="btn btn-navy" onclick="window.print()">Imprimir Recibo</button>
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cerrar</button>
 
       </div>
 
@@ -40078,11 +40074,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     this.showModal(`
 
-      <div class="modal-header"><h3>Justificar Inasistencia</h3><buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button></div>
+      <div class="modal-header"><h3>Justificar Inasistencia</h3><button class="modal-close-btn" onclick="window.app.closeModal()">✕</button></div>
 
       <div class="modal-body"><textarea id="just-reason-input" class="form-control" placeholder="Motivo..."></textarea></div>
 
-      <div class="modal-footer"><buttonclas s="btnbtn-gold" onclick="window.app.confirmJustification()">Enviar</button></div>
+      <div class="modal-footer"><button class="btn btn-gold" onclick="window.app.confirmJustification()">Enviar</button></div>
 
     `);
 
@@ -40106,17 +40102,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     this.showModal(`
 
-      <div class="modal-header"><h3>Publicar Aviso</h3><buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button></div>
+      <div class="modal-header"><h3>Publicar Aviso</h3><button class="modal-close-btn" onclick="window.app.closeModal()">✕</button></div>
 
       <div class="modal-body">
 
-        <input type="text" id="ann-title-input" class="form-control" placeholder="Título" style="margión-bottom:8px;" />
+        <input type="text" id="ann-title-input" class="form-control" placeholder="Título" style="margin-bottom:8px;" />
 
         <textarea id="ann-content-input" class="form-control" placeholder="Contenido..."></textarea>
 
       </div>
 
-      <div class="modal-footer"><buttonclas s="btnbtn-red" onclick="window.app.confirmddnnouncement()">Publicar</button></div>
+      <div class="modal-footer"><button class="btn btn-red" onclick="window.app.confirmddnnouncement()">Publicar</button></div>
 
     `);
 
@@ -40156,13 +40152,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3>✏️ Modificar Registro de Notas: ${course.name}</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
       <div class="modal-body">
 
-        <div style="display:flex; justify-content:space-between; margión-bottom: 12px; font-size: 13px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom: 12px; font-size: 13px;">
 
           <div><strong>Docente:</strong> ${course.teacher}</div>
 
@@ -40184,7 +40180,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div>
 
-            <spanstyl e="font-size:11px; font-weight:bold; color:var(--text-muted);">1 Bim</span>
+            <span style="font-size:11px; font-weight:bold; color:var(--text-muted);">1 Bim</span>
 
             <input type="number" mión="0" max="20" id="edit-b1" class="form-control" value="${course.b1}" />
 
@@ -40192,7 +40188,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div>
 
-            <spanstyl e="font-size:11px; font-weight:bold; color:var(--text-muted);">2 Bim</span>
+            <span style="font-size:11px; font-weight:bold; color:var(--text-muted);">2 Bim</span>
 
             <input type="number" mión="0" max="20" id="edit-b2" class="form-control" value="${course.b2}" />
 
@@ -40200,7 +40196,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div>
 
-            <spanstyl e="font-size:11px; font-weight:bold; color:var(--text-muted);">3 Bim</span>
+            <span style="font-size:11px; font-weight:bold; color:var(--text-muted);">3 Bim</span>
 
             <input type="number" mión="0" max="20" id="edit-b3" class="form-control" value="${course.b3}" />
 
@@ -40208,7 +40204,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div>
 
-            <spanstyl e="font-size:11px; font-weight:bold; color:var(--text-muted);">4 Bim</span>
+            <span style="font-size:11px; font-weight:bold; color:var(--text-muted);">4 Bim</span>
 
             <input type="number" mión="0" max="20" id="edit-b4" class="form-control" value="${course.b4}" />
 
@@ -40220,9 +40216,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-navy" onclick="window.app.confirmUpdateCourse('${course.id}')">Guardar enBase de Datos</button>
+        <button class="btn btn-navy" onclick="window.app.confirmUpdateCourse('${course.id}')">Guardar enBase de Datos</button>
 
       </div>
 
@@ -40272,7 +40268,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
   // =========================================================================
 
-  // CONTROLDORES DE AULA VIRTUL Y EVLUCIONES DIN  ÁMICS (10 PREGUNTÍAS)
+  // CONTROLDORES DE AULA VIRTUL Y EVLUCIONES DINÁMICS (10 PREGUNTÍAS)
 
   // =========================================================================
 
@@ -40376,13 +40372,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div>
 
-          <h3 class="modal-title" style="color: white; margión: 0; font-size: 16px;">
+          <h3 class="modal-title" style="color: white; margin: 0; font-size: 16px;">
 
             📂 Subir Archivo de Clase & Analizar conIA
 
           </h3>
 
-          <spanstyl e="font-size: 11px; color: var(--color-yellow-400);">
+          <span style="font-size: 11px; color: var(--color-yellow-400);">
 
             Soporta PDF, Word (.docx), PowerPoint (.pptx), Texto (.txt), Imgenes de Pizarra y Excel
 
@@ -40390,7 +40386,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
@@ -40398,15 +40394,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <form onsubmit="window.app.confirmUploadMaterial(event)">
 
-        <div class="modal-body" style="max-height: 75vh; overflow-y: auto; paddióng: 18px;">
+        <div class="modal-body" style="max-height: 75vh; overflow-y: auto; padding: 18px;">
 
           
 
           <!-- Selector Dinmico de Asignatura Asignada -->
 
-          <div style="background: #eff6ff; border-left: 4px solid #3b82f6; paddióng: 12px 14px; border-radius: 6px; margión-bottom: 16px;">
+          <div style="background: #eff6ff; border-left: 4px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 16px;">
 
-            <label style="font-size: 12px; font-weight: 800; color: #1e40af; display: block; margión-bottom: 4px;">
+            <label style="font-size: 12px; font-weight: 800; color: #1e40af; display: block; margin-bottom: 4px;">
 
               Seleccione la Asignatura / Aula para Publicar Material:
 
@@ -40416,7 +40412,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               ${courses.map(c => `
 
-                <optionvalu e="${c.id}" ${c.id === course.id ? 'selected' : ''}>
+                <option value="${c.id}" ${c.id === course.id ? 'selected' : ''}>
 
                   ${c.icon || '📚'} ${c.name} (${c.grade || 'Secundaria'}) - ${c.teacher || (currentUser ? currentUser.name : 'Docente')}
 
@@ -40434,9 +40430,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- ZONA DE CRGÍA DE ARCHIVO INTELIGEN TE -->
 
-          <div style="margión-bottom: 18px;">
+          <div style="margin-bottom: 18px;">
 
-            <label style="font-size: 12.5px; font-weight: 900; color: var(--color-navy-900); display: block; margión-bottom: 6px;">
+            <label style="font-size: 12.5px; font-weight: 900; color: var(--color-navy-900); display: block; margin-bottom: 6px;">
 
               1. Seleccione o Arrastre el Archivo de su Elección (El sistema lo analizará entiempo real):
 
@@ -40446,11 +40442,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <!-- Dropzone Interactivo -->
 
-            <div id="ai-dropzone" class="smart-dropzone" onclick="document.getElementById('smart-file-input').click()" style="border: 2px dashed #3b82f6; background: #f8fafc; border-radius: 8px; paddióng: 22px 16px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
+            <div id="ai-dropzone" class="smart-dropzone" onclick="document.getElementById('smart-file-input').click()" style="border: 2px dashed #3b82f6; background: #f8fafc; border-radius: 8px; padding: 22px 16px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
 
-              <div style="font-size: 36px; margión-bottom: 6px;">📁 ⚡ </div>
+              <div style="font-size: 36px; margin-bottom: 6px;">📁 ⚡ </div>
 
-              <div style="font-weight: 800; font-size: 13.5px; color: #1e3a8a; margión-bottom: 4px;">
+              <div style="font-weight: 800; font-size: 13.5px; color: #1e3a8a; margin-bottom: 4px;">
 
                 Haga clic para seleccionar archivo o arrstrelo aquí
 
@@ -40472,11 +40468,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <!-- Indicador de Carga y Anlisis IA -->
 
-            <div id="ai-analysis-indicator" style="display: none; background: #f1f5f9; border: 2px solid #3b82f6; border-radius: 8px; paddióng: 18px; text-align: center; margión-top: 10px;">
+            <div id="ai-analysis-indicator" style="display: none; background: #f1f5f9; border: 2px solid #3b82f6; border-radius: 8px; padding: 18px; text-align: center; margin-top: 10px;">
 
-              <div style="font-size: 26px; margión-bottom: 6px;" class="scannióng-pulse">🤖 ⚡ 🧠</div>
+              <div style="font-size: 26px; margin-bottom: 6px;" class="scannióng-pulse">🤖 ⚡ 🧠</div>
 
-              <div id="ai-step-text" style="font-weight: 800; font-size: 12.5px; color: #1e40af; margión-bottom: 8px;">
+              <div id="ai-step-text" style="font-weight: 800; font-size: 12.5px; color: #1e40af; margin-bottom: 8px;">
 
                 Iniciando anlisis semntico del documento...
 
@@ -40494,23 +40490,23 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             <!-- Botones de Archivos de Demostración Rpida -->
 
-            <div style="margión-top: 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+            <div style="margin-top: 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
 
-              <spanstyl e="font-size: 11px; font-weight: 700; color: #64748b;">O probar condocumento de muestra:</span>
+              <span style="font-size: 11px; font-weight: 700; color: #64748b;">O probar condocumento de muestra:</span>
 
-              <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.loadDemoFileFornalysis('Guia_Trigonometria_Angulos_Dobles.pdf', '${course.id}')" style="font-size: 10.5px; paddióng: 3px 8px; font-weight: 700;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="window.app.loadDemoFileFornalysis('Guia_Trigonometria_Angulos_Dobles.pdf', '${course.id}')" style="font-size: 10.5px; padding: 3px 8px; font-weight: 700;">
 
                 📕 Guía_Trigonometria.pdf
 
               </button>
 
-              <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.loadDemoFileFornalysis('Sesion_Arduino_Servomotores_S3.pptx', '${course.id}')" style="font-size: 10.5px; paddióng: 3px 8px; font-weight: 700;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="window.app.loadDemoFileFornalysis('Sesion_Arduino_Servomotores_S3.pptx', '${course.id}')" style="font-size: 10.5px; padding: 3px 8px; font-weight: 700;">
 
                 Arduino_Robótica.pptx
 
               </button>
 
-              <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.loadDemoFileFornalysis('Laboratorio_Leyes_Termodiónamica_Carnot.docx', '${course.id}')" style="font-size: 10.5px; paddióng: 3px 8px; font-weight: 700;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="window.app.loadDemoFileFornalysis('Laboratorio_Leyes_Termodiónamica_Carnot.docx', '${course.id}')" style="font-size: 10.5px; padding: 3px 8px; font-weight: 700;">
 
                 📘 Termodiónamica_Carnot.docx
 
@@ -40524,17 +40520,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <!-- Alerta de Éxito de Anlisis -->
 
-          <div id="ai-success-alert" style="display: none; background: #ecfdf5; border-left: 4px solid #10b981; paddióng: 12px 14px; border-radius: 6px; font-size: 12px; color: #065f46; margión-bottom: 16px;">
+          <div id="ai-success-alert" style="display: none; background: #ecfdf5; border-left: 4px solid #10b981; padding: 12px 14px; border-radius: 6px; font-size: 12px; color: #065f46; margin-bottom: 16px;">
 
           </div>
 
 
 
-          <!-- 2. CMPOS EDITÍABLES RESULTÍANTES DEL AN  ÁLISIS -->
+          <!-- 2. CMPOS EDITÍABLES RESULTÍANTES DEL ANÁLISIS -->
 
           <div style="border-top: 1px solid #e2e8f0; paddióng-top: 14px;">
 
-            <div style="font-size: 12.5px; font-weight: 900; color: var(--color-navy-900); margión-bottom: 10px;">
+            <div style="font-size: 12.5px; font-weight: 900; color: var(--color-navy-900); margin-bottom: 10px;">
 
               2. Revisión de Contenido y Parmetros Semanales:
 
@@ -40542,11 +40538,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margión-bottom: 14px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
 
               <div>
 
-                <label style="font-size: 11.5px; font-weight: 800; display: block; margión-bottom: 4px;">N  úmero de Semana:</label>
+                <label style="font-size: 11.5px; font-weight: 800; display: block; margin-bottom: 4px;">Número de Semana:</label>
 
                 <input type="number" name="weekNumber" id="field-material-week" value="${nextWeek}" mión="1" max="40" class="form-control" required />
 
@@ -40554,7 +40550,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
               <div>
 
-                <label style="font-size: 11.5px; font-weight: 800; display: block; margión-bottom: 4px;">Fecha de la Sesión:</label>
+                <label style="font-size: 11.5px; font-weight: 800; display: block; margin-bottom: 4px;">Fecha de la Sesión:</label>
 
                 <input type="text" name="sessionDate" value="${new Date().toLocaleDateString('es-PE')}" class="form-control" required />
 
@@ -40564,9 +40560,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <div style="margión-bottom: 14px;">
+            <div style="margin-bottom: 14px;">
 
-              <label style="font-size: 11.5px; font-weight: 800; display: block; margión-bottom: 4px;">Título del Tema Detectado:</label>
+              <label style="font-size: 11.5px; font-weight: 800; display: block; margin-bottom: 4px;">Título del Tema Detectado:</label>
 
               <input type="text" name="title" id="field-material-title" placeholder="Ej. Raízones Trigonométricas de ÁááÁÁngulos Compuestos" class="form-control" required />
 
@@ -40574,9 +40570,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <div style="margión-bottom: 14px;">
+            <div style="margin-bottom: 14px;">
 
-              <label style="font-size: 11.5px; font-weight: 800; display: block; margión-bottom: 4px;">Resumendel Trabajo Realizado en el Aula:</label>
+              <label style="font-size: 11.5px; font-weight: 800; display: block; margin-bottom: 4px;">Resumendel Trabajo Realizado en el Aula:</label>
 
               <textarea name="summary" id="field-material-summary" rows="4" class="form-control" placeholder="El sistema extraerá automticamente el resumenpedagógico del archivo cargado..." required></textarea>
 
@@ -40584,9 +40580,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <div style="margión-bottom: 14px;">
+            <div style="margin-bottom: 14px;">
 
-              <label style="font-size: 11.5px; font-weight: 800; display: block; margión-bottom: 4px;">Conceptos Clave Identificados (Separados por coma):</label>
+              <label style="font-size: 11.5px; font-weight: 800; display: block; margin-bottom: 4px;">Conceptos Clave Identificados (Separados por coma):</label>
 
               <input type="text" name="keyConcepts" id="field-material-concepts" placeholder="Ej. Identidades fundamentales, ÁáÁngulo doble, Teorema de Cardano" class="form-control" />
 
@@ -40594,9 +40590,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <div style="margión-bottom: 14px;">
+            <div style="margin-bottom: 14px;">
 
-              <label style="font-size: 11.5px; font-weight: 800; display: block; margión-bottom: 4px;">Archivo Principal Vinculado:</label>
+              <label style="font-size: 11.5px; font-weight: 800; display: block; margin-bottom: 4px;">Archivo Principal Vinculado:</label>
 
               <input type="text" name="attachmentName" id="field-material-attachment" value="Guía_Sesion_Semanal_${nextWeek}.pdf" class="form-control" />
 
@@ -40604,7 +40600,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <div style="background: #fefce8; border: 1px solid #fef08a; paddióng: 10px; border-radius: 6px; font-size: 11.5px; color: #854d0e;">
+            <div style="background: #fefce8; border: 1px solid #fef08a; padding: 10px; border-radius: 6px; font-size: 11.5px; color: #854d0e;">
 
               ⚡ <strong>Generación Automtica:</strong> Al guardar, el sistema dejará formulada la evaluación diónmica de 10 preguntas basada en el archivo analizado.
 
@@ -40620,9 +40616,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.closeModal()">Cancelar</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cancelar</button>
 
-          <buttontyp e="submit" class="btnbtn-navy btn-sm" style="font-weight: 800; paddióng: 8px 20px;">
+          <button type="submit" class="btn btn-navy btn-sm" style="font-weight: 800; padding: 8px 20px;">
 
             💾 Publicar Sesión & Activar Evaluación (10 Preguntas)
 
@@ -40906,7 +40902,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 class="modal-title">✏️ Editar Sesión Semanal</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
@@ -40914,25 +40910,25 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div class="modal-body" style="max-height: 75vh; overflow-y: auto;">
 
-          <div style="margión-bottom: 14px;">
+          <div style="margin-bottom: 14px;">
 
-            <label style="font-size: 12px; font-weight: 800; display: block; margión-bottom: 4px;">Título de la Sesión:</label>
+            <label style="font-size: 12px; font-weight: 800; display: block; margin-bottom: 4px;">Título de la Sesión:</label>
 
             <input type="text" name="title" value="${material.title}" class="form-control" required />
 
           </div>
 
-          <div style="margión-bottom: 14px;">
+          <div style="margin-bottom: 14px;">
 
-            <label style="font-size: 12px; font-weight: 800; display: block; margión-bottom: 4px;">Resumendel Trabajo en el Aula:</label>
+            <label style="font-size: 12px; font-weight: 800; display: block; margin-bottom: 4px;">Resumendel Trabajo en el Aula:</label>
 
             <textarea name="summary" rows="5" class="form-control" required>${material.summary}</textarea>
 
           </div>
 
-          <div style="margión-bottom: 14px;">
+          <div style="margin-bottom: 14px;">
 
-            <label style="font-size: 12px; font-weight: 800; display: block; margión-bottom: 4px;">Conceptos Clave (Separados por coma):</label>
+            <label style="font-size: 12px; font-weight: 800; display: block; margin-bottom: 4px;">Conceptos Clave (Separados por coma):</label>
 
             <input type="text" name="keyConcepts" value="${(material.keyConcepts || []).join(', ')}" class="form-control" />
 
@@ -40942,9 +40938,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div class="modal-footer">
 
-          <buttontyp e="button" class="btnbtn-outline btn-sm" onclick="window.app.closeModal()">Cancelar</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cancelar</button>
 
-          <buttontyp e="submit" class="btnbtn-navy btn-sm" style="font-weight: 800;">💾 Guardar Cambios</button>
+          <button type="submit" class="btn btn-navy btn-sm" style="font-weight: 800;">💾 Guardar Cambios</button>
 
         </div>
 
@@ -41022,15 +41018,15 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <h3 class="modal-title">⚡ Generador Inteligente de Evaluaciones (10 Preguntas)</h3>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
 
       </div>
 
       <div class="modal-body">
 
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; paddióng: 14px; margión-bottom: 16px;">
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin-bottom: 16px;">
 
-          <div style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margión-bottom: 4px;">
+          <div style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margin-bottom: 4px;">
 
             ${material.title} (Semana ${material.weekNumber})
 
@@ -41046,7 +41042,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <p style="font-size: 12.5px; color: #334155; line-height: 1.5; margión-bottom: 14px;">
+        <p style="font-size: 12.5px; color: #334155; line-height: 1.5; margin-bottom: 14px;">
 
           El motor pedagógico analizará el resumende clase, los <strong>conceptos clave</strong> (${(material.keyConcepts || []).join(', ')}) y formulará <strong>10 preguntas de opción múltiple</strong> calibradas conalternativas verosímiles, claves exactas y retroalimentación explicativa para los estudiantes.
 
@@ -41054,7 +41050,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <div style="background: #f0fdf4; border-left: 4px solid #16a34a; paddióng: 10px 14px; border-radius: 4px; font-size: 12px; color: #166534; margión-bottom: 16px;">
+        <div style="background: #f0fdf4; border-left: 4px solid #16a34a; padding: 10px 14px; border-radius: 4px; font-size: 12px; color: #166534; margin-bottom: 16px;">
 
           ✓ Ponderación oficial: 2 puntos por pregunta (Total 20 puntos).<br>
 
@@ -41068,9 +41064,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.closeModal()">Cancelar</button>
+        <button class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cancelar</button>
 
-        <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.confirmGenerateQuiz('${material.id}')" style="font-weight: 900;">
+        <button class="btn btn-gold btn-sm" onclick="window.app.confirmGenerateQuiz('${material.id}')" style="font-weight: 900;">
 
           Iniciar Generación de 10 Preguntas
 
@@ -41148,23 +41144,23 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div>
 
-          <h3 class="modal-title" style="color: white; margión: 0; font-size: 16px;">
+          <h3 class="modal-title" style="color: white; margin: 0; font-size: 16px;">
 
             Previsualización: ${evalObj.title}
 
           </h3>
 
-          <spanstyl e="font-size: 11px; color: var(--color-yellow-400);">10 Preguntas Generadas Dinmicamente • 2 Puntos c/u (Total 20 Pts)</span>
+          <span style="font-size: 11px; color: var(--color-yellow-400);">10 Preguntas Generadas Dinmicamente • 2 Puntos c/u (Total 20 Pts)</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
-      <div class="modal-body" style="max-height: 75vh; overflow-y: auto; paddióng: 18px;">
+      <div class="modal-body" style="max-height: 75vh; overflow-y: auto; padding: 18px;">
 
-        <div style="margión-bottom: 16px; font-size: 12px; color: #64748b;">
+        <div style="margin-bottom: 16px; font-size: 12px; color: #64748b;">
 
           Estas sonlas 10 preguntas formuladas sobre el material de la <strong>Semana ${material.weekNumber} (${material.title})</strong>. Cada pregunta incluye su clave oficial y retroalimentación pedagógica.
 
@@ -41174,17 +41170,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         ${questions.map((q, idx) => `
 
-          <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; paddióng: 14px; margión-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+          <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
 
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margión-bottom: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
 
-              <spanstyl e="font-weight: 900; font-size: 13px; color: var(--color-navy-900);">
+              <span style="font-weight: 900; font-size: 13px; color: var(--color-navy-900);">
 
                 Pregunta ${q.id || (idx + 1)}:
 
               </span>
 
-              <spanclas s="status-badge status-approved" style="font-size: 10px; font-weight: 800;">
+              <span class="status-badge status-approved" style="font-size: 10px; font-weight: 800;">
 
                 2 Puntos
 
@@ -41194,7 +41190,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             
 
-            <div style="font-size: 13px; font-weight: 700; color: #1e293b; margión-bottom: 10px; line-height: 1.4;">
+            <div style="font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 10px; line-height: 1.4;">
 
               ${q.question}
 
@@ -41202,11 +41198,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margión-bottom: 10px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
 
               ${q.options.map((opt, oIdx) => `
 
-                <div style="font-size: 12px; paddióng: 8px 10px; border-radius: 6px; border: 1px solid ${oIdx === q.correctIndex ? '#10b981' : '#e2e8f0'}; background: ${oIdx === q.correctIndex ? '#ecfdf5' : '#f8fafc'}; color: ${oIdx === q.correctIndex ? '#065f46' : '#334155'}; font-weight: ${oIdx === q.correctIndex ? '800' : 'normal'};">
+                <div style="font-size: 12px; padding: 8px 10px; border-radius: 6px; border: 1px solid ${oIdx === q.correctIndex ? '#10b981' : '#e2e8f0'}; background: ${oIdx === q.correctIndex ? '#ecfdf5' : '#f8fafc'}; color: ${oIdx === q.correctIndex ? '#065f46' : '#334155'}; font-weight: ${oIdx === q.correctIndex ? '800' : 'normal'};">
 
                   <strong>${String.fromCharCode(65 + oIdx)})</strong> ${opt} ${oIdx === q.correctIndex ? '✓ (Clave Correcta)' : ''}
 
@@ -41218,7 +41214,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-            <div style="background: #f1f5f9; paddióng: 8px 12px; border-radius: 6px; font-size: 11px; color: #475569; border-left: 3px solid #3b82f6;">
+            <div style="background: #f1f5f9; padding: 8px 12px; border-radius: 6px; font-size: 11px; color: #475569; border-left: 3px solid #3b82f6;">
 
               <strong>Explicación Formativa:</strong> ${q.explanation}
 
@@ -41232,9 +41228,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
+        <button class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cerrar</button>
 
-        <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.closeModal(); window.app.showToast('✓ Evaluación aprobada y disponible para los estudiantes.', 'success');">
+        <button class="btn btn-navy btn-sm" onclick="window.app.closeModal(); window.app.showToast('✓ Evaluación aprobada y disponible para los estudiantes.', 'success');">
 
           ✓ Aprobar y Publicar Evaluación
 
@@ -41278,37 +41274,37 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           <div>
 
-            <h3 class="modal-title" style="color: white; margión: 0; font-size: 16px;">
+            <h3 class="modal-title" style="color: white; margin: 0; font-size: 16px;">
 
               📝 ${evalObj.title}
 
             </h3>
 
-            <spanstyl e="font-size: 11px; color: #fef08a;">10 Preguntas • Ponderación: 2 Pts c/u • Total: 20 Puntos</span>
+            <span style="font-size: 11px; color: #fef08a;">10 Preguntas • Ponderación: 2 Pts c/u • Total: 20 Puntos</span>
 
           </div>
 
-          <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+          <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
         </div>
 
 
 
-        <div class="modal-body" style="max-height: 75vh; overflow-y: auto; paddióng: 20px;">
+        <div class="modal-body" style="max-height: 75vh; overflow-y: auto; padding: 20px;">
 
           <!-- Barra de Estado y Progreso del Cuestionario -->
 
-          <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; paddióng: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; margión-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
 
             <div style="font-size: 12px; font-weight: 800; color: var(--color-navy-900);">
 
-              Preguntas Respondidas: <spani d="quiz-answered-count" style="color: #2563eb;">${answeredCount}</span> de 10
+              Preguntas Respondidas: <span id="quiz-answered-count" style="color: #2563eb;">${answeredCount}</span> de 10
 
             </div>
 
-            <div style="font-size: 12px; font-weight: 800; color: #047857; background: #d1fae5; paddióng: 3px 10px; border-radius: 12px;">
+            <div style="font-size: 12px; font-weight: 800; color: #047857; background: #d1fae5; padding: 3px 10px; border-radius: 12px;">
 
-              ⏱️ Tiempo Restante: 20:00 mión
+              ⏱️ Tiempo Restante: 20:00 min
 
             </div>
 
@@ -41324,17 +41320,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
             return `
 
-              <div style="background: #ffffff; border: 2px solid ${selectedOpt !== undefined ? '#3b82f6' : '#e2e8f0'}; border-radius: 10px; paddióng: 16px; margión-bottom: 18px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+              <div style="background: #ffffff; border: 2px solid ${selectedOpt !== undefined ? '#3b82f6' : '#e2e8f0'}; border-radius: 10px; padding: 16px; margin-bottom: 18px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
 
-                <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
 
-                  <spanstyl e="font-weight: 900; font-size: 13.5px; color: var(--color-navy-900);">
+                  <span style="font-weight: 900; font-size: 13.5px; color: var(--color-navy-900);">
 
                     Pregunta ${q.id || (qIdx + 1)} de 10:
 
                   </span>
 
-                  <spanstyl e="font-size: 10.5px; font-weight: 800; background: #e0e7ff; color: #3730a3; paddióng: 2px 8px; border-radius: 10px;">
+                  <span style="font-size: 10.5px; font-weight: 800; background: #e0e7ff; color: #3730a3; padding: 2px 8px; border-radius: 10px;">
 
                     2 Puntos
 
@@ -41344,7 +41340,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-                <div style="font-size: 13.5px; font-weight: 700; color: #1e293b; margión-bottom: 12px; line-height: 1.45;">
+                <div style="font-size: 13.5px; font-weight: 700; color: #1e293b; margin-bottom: 12px; line-height: 1.45;">
 
                   ${q.question}
 
@@ -41360,11 +41356,11 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                     return `
 
-                      <label style="display: flex; align-items: center; gap: 10px; paddióng: 10px 14px; border-radius: 8px; border: 2px solid ${isSelected ? '#2563eb' : '#cbd5e1'}; background: ${isSelected ? '#eff6ff' : '#f8fafc'}; cursor: pointer; transition: all 0.15s ease;" onclick="window.app.selectStudentQuiznswer('${material.id}', ${q.id}, ${oIdx})">
+                      <label style="display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; border: 2px solid ${isSelected ? '#2563eb' : '#cbd5e1'}; background: ${isSelected ? '#eff6ff' : '#f8fafc'}; cursor: pointer; transition: all 0.15s ease;" onclick="window.app.selectStudentQuiznswer('${material.id}', ${q.id}, ${oIdx})">
 
                         <input type="radio" name="q_${q.id}" value="${oIdx}" ${isSelected ? 'checked' : ''} style="cursor: pointer; width: 16px; height: 16px;" />
 
-                        <spanstyl e="font-size: 12.5px; font-weight: ${isSelected ? '800' : '500'}; color: ${isSelected ? '#1e40af' : '#334155'};">
+                        <span style="font-size: 12.5px; font-weight: ${isSelected ? '800' : '500'}; color: ${isSelected ? '#1e40af' : '#334155'};">
 
                           <strong>${String.fromCharCode(65 + oIdx)})</strong> ${opt}
 
@@ -41390,9 +41386,9 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
 
-          <buttonclas s="btnbtn-outline btn-sm" onclick="window.app.closeModal()">Cancelar Examen</button>
+          <button class="btn btn-outline btn-sm" onclick="window.app.closeModal()">Cancelar Examen</button>
 
-          <buttonclas s="btnbtn-gold btn-sm" onclick="window.app.submitStudentQuiz('${material.id}')" style="font-weight: 900; font-size: 13px; paddióng: 8px 24px;">
+          <button class="btn btn-gold btn-sm" onclick="window.app.submitStudentQuiz('${material.id}')" style="font-weight: 900; font-size: 13px; padding: 8px 24px;">
 
             Finalizar y Enviar Evaluación
 
@@ -41522,37 +41518,37 @@ CRETE TÍABLE tb_cuadernos_qr (
 
         <div>
 
-          <h3 class="modal-title" style="color: white; margión: 0; font-size: 16px;">
+          <h3 class="modal-title" style="color: white; margin: 0; font-size: 16px;">
 
             Resultados Oficiales de la Evaluación
 
           </h3>
 
-          <spanstyl e="font-size: 11px; opacity: 0.9;">Estudiante: ${attempt.studentName} • Fecha: ${attempt.date}</span>
+          <span style="font-size: 11px; opacity: 0.9;">Estudiante: ${attempt.studentName} • Fecha: ${attempt.date}</span>
 
         </div>
 
-        <buttonclas s="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
+        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color: white;">✕</button>
 
       </div>
 
 
 
-      <div class="modal-body" style="max-height: 75vh; overflow-y: auto; paddióng: 20px;">
+      <div class="modal-body" style="max-height: 75vh; overflow-y: auto; padding: 20px;">
 
         <!-- Banner de Calificación y Logro -->
 
-        <div style="background: #ffffff; border: 2px solid ${attempt.score >= 14 ? '#10b981' : '#f43f5e'}; border-radius: 10px; paddióng: 18px; margión-bottom: 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+        <div style="background: #ffffff; border: 2px solid ${attempt.score >= 14 ? '#10b981' : '#f43f5e'}; border-radius: 10px; padding: 18px; margin-bottom: 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
 
-          <spanstyl e="font-size: 12px; font-weight: 800; text-transform: uppercase; color: #64748b;">Calificación Final Obtenida:</span>
+          <span style="font-size: 12px; font-weight: 800; text-transform: uppercase; color: #64748b;">Calificación Final Obtenida:</span>
 
-          <div style="font-size: 38px; font-weight: 900; color: ${attempt.score >= 14 ? '#047857' : '#be123c'}; margión: 4px 0;">
+          <div style="font-size: 38px; font-weight: 900; color: ${attempt.score >= 14 ? '#047857' : '#be123c'}; margin: 4px 0;">
 
             ${attempt.score} / 20
 
           </div>
 
-          <spanclas s="status-badge ${attempt.score >= 14 ? 'status-approved' : 'status-failed'}" style="font-size: 12px; font-weight: 900; paddióng: 4px 14px;">
+          <span class="status-badge ${attempt.score >= 14 ? 'status-approved' : 'status-failed'}" style="font-size: 12px; font-weight: 900; padding: 4px 14px;">
 
             ${attempt.status} (${attempt.correctCount} de 10 preguntas correctas)
 
@@ -41560,7 +41556,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-          <div style="background: #f8fafc; border-left: 4px solid #3b82f6; paddióng: 12px 14px; border-radius: 6px; font-size: 12.5px; color: #334155; margión-top: 14px; text-align: left; line-height: 1.5;">
+          <div style="background: #f8fafc; border-left: 4px solid #3b82f6; padding: 12px 14px; border-radius: 6px; font-size: 12.5px; color: #334155; margin-top: 14px; text-align: left; line-height: 1.5;">
 
             <strong>Retroalimentación Pedagógica del Sistema:</strong><br>
 
@@ -41572,7 +41568,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-        <h4 style="font-size: 14px; font-weight: 900; color: var(--color-navy-900); margión-bottom: 12px;">
+        <h4 style="font-size: 14px; font-weight: 900; color: var(--color-navy-900); margin-bottom: 12px;">
 
           Desglose Ítem por Ítem conRespuestas y Explicaciones:
 
@@ -41590,17 +41586,17 @@ CRETE TÍABLE tb_cuadernos_qr (
 
           return `
 
-            <div style="background: #ffffff; border: 2px solid ${isCorrect ? '#10b981' : '#f43f5e'}; border-radius: 8px; paddióng: 14px; margión-bottom: 14px;">
+            <div style="background: #ffffff; border: 2px solid ${isCorrect ? '#10b981' : '#f43f5e'}; border-radius: 8px; padding: 14px; margin-bottom: 14px;">
 
-              <div style="display: flex; justify-content: space-between; align-items: center; margión-bottom: 6px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
 
-                <spanstyl e="font-weight: 900; font-size: 13px; color: var(--color-navy-900);">
+                <span style="font-weight: 900; font-size: 13px; color: var(--color-navy-900);">
 
                   Pregunta ${q.id || (idx + 1)}:
 
                 </span>
 
-                <spanclas s="status-badge ${isCorrect ? 'status-approved' : 'status-failed'}" style="font-size: 11px; font-weight: 800;">
+                <span class="status-badge ${isCorrect ? 'status-approved' : 'status-failed'}" style="font-size: 11px; font-weight: 800;">
 
                   ${isCorrect ? '✓ Correcto (+2 pts)' : '✕ Incorrecto (0 pts)'}
 
@@ -41610,7 +41606,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-              <div style="font-size: 13px; font-weight: 700; color: #1e293b; margión-bottom: 10px;">
+              <div style="font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 10px;">
 
                 ${q.question}
 
@@ -41618,7 +41614,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margión-bottom: 10px;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px;">
 
                 ${q.options.map((opt, oIdx) => {
 
@@ -41628,7 +41624,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
                   return `
 
-                    <div style="font-size: 11.5px; paddióng: 6px 10px; border-radius: 6px; border: 1px solid ${isTheCorrectOne ? '#10b981' : (wasSelected ? '#f43f5e' : '#e2e8f0')}; background: ${isTheCorrectOne ? '#ecfdf5' : (wasSelected ? '#fff1f2' : '#f8fafc')}; color: ${isTheCorrectOne ? '#065f46' : (wasSelected ? '#9f1239' : '#475569')}; font-weight: ${isTheCorrectOne || wasSelected ? '800' : 'normal'};">
+                    <div style="font-size: 11.5px; padding: 6px 10px; border-radius: 6px; border: 1px solid ${isTheCorrectOne ? '#10b981' : (wasSelected ? '#f43f5e' : '#e2e8f0')}; background: ${isTheCorrectOne ? '#ecfdf5' : (wasSelected ? '#fff1f2' : '#f8fafc')}; color: ${isTheCorrectOne ? '#065f46' : (wasSelected ? '#9f1239' : '#475569')}; font-weight: ${isTheCorrectOne || wasSelected ? '800' : 'normal'};">
 
                       ${String.fromCharCode(65 + oIdx)}) ${opt}
 
@@ -41646,7 +41642,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-              <div style="background: #f1f5f9; paddióng: 8px 12px; border-radius: 6px; font-size: 11.5px; color: #475569; border-left: 3px solid #3b82f6;">
+              <div style="background: #f1f5f9; padding: 8px 12px; border-radius: 6px; font-size: 11.5px; color: #475569; border-left: 3px solid #3b82f6;">
 
                 <strong>Por qué es correcta:</strong> ${q.explanation}
 
@@ -41664,7 +41660,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div class="modal-footer">
 
-        <buttonclas s="btnbtn-navy btn-sm" onclick="window.app.closeModal()" style="font-weight: 800;">
+        <button class="btn btn-navy btn-sm" onclick="window.app.closeModal()" style="font-weight: 800;">
 
           Entendido / Cerrar Reporte
 
@@ -41780,39 +41776,39 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap');
 
-    body { font-family: 'Plus Jakarta Sans', sans-serif; paddióng: 30px; color: #1e293b; background: #f8fafc; line-height: 1.6; margión: 0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; padding: 30px; color: #1e293b; background: #f8fafc; line-height: 1.6; margin: 0; }
 
-    .container { max-width: 800px; margión: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; paddióng: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .container { max-width: 800px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
-    .header { border-bottom: 3px solid #1e3a8a; paddióng-bottom: 16px; margión-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .header { border-bottom: 3px solid #1e3a8a; paddióng-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
 
-    .school-title { font-size: 20px; font-weight: 900; color: #0b132b; margión: 0; }
+    .school-title { font-size: 20px; font-weight: 900; color: #0b132b; margin: 0; }
 
     .school-tag { font-size: 11.5px; color: #b45309; font-weight: 800; }
 
-    .badge { background: #fef3c7; color: #92400e; paddióng: 5px 14px; border-radius: 16px; font-weight: 800; font-size: 12px; border: 1px solid #fde68a; }
+    .badge { background: #fef3c7; color: #92400e; padding: 5px 14px; border-radius: 16px; font-weight: 800; font-size: 12px; border: 1px solid #fde68a; }
 
-    .hero-box { background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white; paddióng: 22px 25px; border-radius: 10px; margión-bottom: 24px; }
+    .hero-box { background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white; padding: 22px 25px; border-radius: 10px; margin-bottom: 24px; }
 
-    .hero-box h1 { font-size: 20px; margión: 0 0 8px; font-weight: 900; color: #fde047; }
+    .hero-box h1 { font-size: 20px; margin: 0 0 8px; font-weight: 900; color: #fde047; }
 
     .hero-meta { font-size: 12.5px; opacity: 0.95; }
 
-    .section-title { font-size: 14px; font-weight: 800; color: #1e3a8a; border-bottom: 2px solid #e2e8f0; paddióng-bottom: 6px; margión-top: 24px; display: flex; align-items: center; gap: 8px; }
+    .section-title { font-size: 14px; font-weight: 800; color: #1e3a8a; border-bottom: 2px solid #e2e8f0; paddióng-bottom: 6px; margin-top: 24px; display: flex; align-items: center; gap: 8px; }
 
-    .summary-box { background: #f1f5f9; border-left: 4px solid #1e3a8a; paddióng: 16px 18px; border-radius: 6px; font-size: 13.5px; color: #334155; margión-top: 10px; }
+    .summary-box { background: #f1f5f9; border-left: 4px solid #1e3a8a; padding: 16px 18px; border-radius: 6px; font-size: 13.5px; color: #334155; margin-top: 10px; }
 
-    ul { paddióng-left: 22px; margión-top: 10px; }
+    ul { paddióng-left: 22px; margin-top: 10px; }
 
-    li { margión-bottom: 8px; font-size: 13.5px; }
+    li { margin-bottom: 8px; font-size: 13.5px; }
 
-    .practice-box { background: #f0fdf4; border: 1.5px dashed #86efac; paddióng: 18px; border-radius: 8px; margión-top: 12px; font-size: 13px; color: #166534; }
+    .practice-box { background: #f0fdf4; border: 1.5px dashed #86efac; padding: 18px; border-radius: 8px; margin-top: 12px; font-size: 13px; color: #166534; }
 
-    .footer { margión-top: 35px; border-top: 1px solid #e2e8f0; paddióng-top: 16px; font-size: 11px; color: #94a3b8; text-align: center; }
+    .footer { margin-top: 35px; border-top: 1px solid #e2e8f0; paddióng-top: 16px; font-size: 11px; color: #94a3b8; text-align: center; }
 
-    .btn-print { background: #1e3a8a; color: white; border: none; paddióng: 8px 18px; border-radius: 20px; font-weight: 800; cursor: pointer; margión-bottom: 20px; }
+    .btn-print { background: #1e3a8a; color: white; border: none; padding: 8px 18px; border-radius: 20px; font-weight: 800; cursor: pointer; margin-bottom: 20px; }
 
-    @media print { .btn-print { display: none; } body { paddióng: 0; background: #fff; } .container { border: none; box-shadow: none; paddióng: 0; } }
+    @media print { .btn-print { display: none; } body { padding: 0; background: #fff; } .container { border: none; box-shadow: none; padding: 0; } }
 
   </style>
 
@@ -41826,13 +41822,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
       <div>
 
-        <h2 class="school-title">I.E.P. "EL EDUCDOR" — S.J.L.</h2>
+        <h2 class="school-title">I.E.P. "EL EDUCADOR" — S.J.L.</h2>
 
         <div class="school-tag">21 años dejando huellas • UGEL 05 • Aula Virtual 2026</div>
 
       </div>
 
-      <spanclas s="badge">${week} • ${sessionDate}</span>
+      <span class="badge">${week} • ${sessionDate}</span>
 
     </div>
 
@@ -41848,7 +41844,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-    <buttonclas s="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar como PDF</button>
+    <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar como PDF</button>
 
 
 
@@ -41868,13 +41864,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     <div class="practice-box">
 
-      <p style="margión: 0 0 8px;"><strong>Indicaciones para el Estudiante:</strong></p>
+      <p style="margin: 0 0 8px;"><strong>Indicaciones para el Estudiante:</strong></p>
 
-      <p style="margión: 0 0 6px;">1. Lea conatención el resumeny revise los esquemas desarrollados enclase.</p>
+      <p style="margin: 0 0 6px;">1. Lea conatención el resumeny revise los esquemas desarrollados enclase.</p>
 
-      <p style="margión: 0 0 6px;">2. Desarrolle ensu cuaderno los ejercicios de aplicación prctica del libro de trabajo.</p>
+      <p style="margin: 0 0 6px;">2. Desarrolle ensu cuaderno los ejercicios de aplicación prctica del libro de trabajo.</p>
 
-      <p style="margión: 0;">3. Ingrese al <strong>Aula Virtual</strong> de la Intranet para rendir la Evaluación Dinmica Semanal (10 preguntas) y registrar su puntaje.</p>
+      <p style="margin: 0;">3. Ingrese al <strong>Aula Virtual</strong> de la Intranet para rendir la Evaluación Dinmica Semanal (10 preguntas) y registrar su puntaje.</p>
 
     </div>
 
