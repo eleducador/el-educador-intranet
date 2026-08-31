@@ -24732,7 +24732,7 @@ const Components = {
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
                       <div>
                         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
-                          <span class="status-badge" style="background: #1e3a8a; color: white; font-weight: 800; font-size: 11px;">
+          <span class="status-badge" style="background: #1e3a8a; color: white; font-weight: 800; font-size: 11px;">
                             ${c.code || 'CIRCULAR OFICIAL'}
                           </span>
                           <span class="status-badge" style="background: #eff6ff; color: #1e40af; font-weight: bold; font-size: 11px; border: 1px solid #bfdbfe;">
@@ -24781,7 +24781,74 @@ const Components = {
 
   // Pagos y Panel de Tesorera
 
-    renderPayments(state) {
+    
+  // PANTALLA DE BLOQUEO DE INTRANET POR PENSIÓN PENDIENTE
+  renderLockedAccessScreen(state, user) {
+    const debtAmount = (user && (user.pendingDebtAmount || user.pendióngDebtmount)) || 480.00;
+    const concept = (user && (user.pendingConcept || user.pendióngConcept)) || "Pensión Escolar - Agosto 2026";
+    const userName = (user && user.name) || "Padre / Estudiante";
+
+    return `
+      <div class="fade-in" style="max-width: 720px; margin: 20px auto; padding: var(--space-4);">
+        <div class="card" style="border: 2px solid #ef4444; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.12); border-radius: 14px; overflow: hidden; background: #ffffff;">
+          
+          <!-- Encabezado de Alerta Institucional -->
+          <div style="background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%); color: white; padding: 28px 24px; text-align: center;">
+            <img src="logo.png" onerror="this.src='assets/logo.png'" alt="Escudo I.E.P. El Educador" style="width: 80px; height: 80px; object-fit: contain; margin-bottom: 10px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));" />
+            <div style="font-size: 12px; font-weight: 800; letter-spacing: 0.1em; color: var(--color-yellow-300); text-transform: uppercase;">
+              I.E.P. "EL EDUCADOR" • 21 AÑOS DEJANDO HUELLAS (S.J.L.)
+            </div>
+            <h2 style="font-size: 22px; font-weight: 900; margin: 8px 0 4px; color: #ffffff;">
+              ACCESO A LA INTRANET RESTRINGIDO
+            </h2>
+            <p style="font-size: 13px; color: #fecaca; margin: 0;">
+              Validación de Pensión Escolar Requerida
+            </p>
+          </div>
+
+          <div style="padding: 28px 24px;">
+            <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;">
+              <div style="font-weight: 800; color: #991b1b; font-size: 14.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                ⚠️ Notificación de Coordinación y Tesorería
+              </div>
+              <p style="font-size: 13.5px; color: #7f1d1d; margin: 0; line-height: 1.6;">
+                Estimado(a) <strong>${userName}</strong>, el acceso a las notas bimestrales, horario de clases, control de cuadernos QR y aula virtual se encuentra temporalmente restringido debido a una cuota pendiente de pago.
+              </p>
+            </div>
+
+            <!-- Resumen de Cuenta Pendiente -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; background: #f8fafc; border: 1px solid #e2e8f0; padding: 18px; border-radius: 10px; margin-bottom: 24px;">
+              <div>
+                <span style="font-size: 11px; color: #64748b; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 4px;">Concepto Pendiente</span>
+                <div style="font-size: 14px; font-weight: 800; color: #0f172a;">${concept}</div>
+              </div>
+              <div>
+                <span style="font-size: 11px; color: #64748b; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 4px;">Monto a Regularizar</span>
+                <div style="font-size: 22px; font-weight: 900; color: #dc2626;">S/ ${debtAmount.toFixed(2)}</div>
+              </div>
+              <div>
+                <span style="font-size: 11px; color: #64748b; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 4px;">Estado Actual</span>
+                <div><span class="status-badge status-failed" style="font-weight: bold; background: #fee2e2; color: #991b1b; border: 1px solid #f87171;"><span class='status-dot-red'></span> Bloqueado por Mora</span></div>
+              </div>
+            </div>
+
+            <!-- Indicación Institucional -->
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 16px 20px; text-align: center;">
+              <div style="font-weight: 800; color: #166534; font-size: 13.5px; margin-bottom: 4px;">
+                🏛️ Para regularizar su estado o solicitar prórroga:
+              </div>
+              <p style="font-size: 12.5px; color: #15803d; margin: 0; line-height: 1.5;">
+                Por favor, acérquese a la oficina de <strong>Coordinación / Tesorería</strong> de la institución educativa o comuníquese con la dirección para habilitar su acceso.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  renderPayments(state) {
     const role = (state.currentRole || "").toLowerCase();
     const isAdmin = role === "admin" || role === "director";
     const paymentConfig = (window.appStore && typeof window.appStore.getPaymentConfig === 'function')
@@ -25189,6 +25256,79 @@ class IntranetApp {
     this.render();
     this.updateHeaderUserInfo();
   }
+
+  handleLogin(event) {
+    if (event) event.preventDefault();
+    const usernameInput = document.getElementById("login-username");
+    const passwordInput = document.getElementById("login-password");
+    
+    if (!usernameInput || !passwordInput) return;
+    
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (!username || !password) {
+      this.showToast("Por favor complete su usuario y contraseña.", "warning");
+      return;
+    }
+
+    const result = this.store.login(username, password);
+    if (result && result.success) {
+      this.loginErrorMessage = null;
+      this.showToast(`¡Bienvenido(a) ${result.user.name || username}!`, "success");
+      this.render();
+      this.updateHeaderUserInfo();
+    } else {
+      this.loginErrorMessage = (result && result.error) || "Credenciales incorrectas. Verifique su usuario y contraseña.";
+      this.showToast(this.loginErrorMessage, "danger");
+      this.render();
+    }
+  }
+
+  handleLogout() {
+    this.store.logout();
+    this.loginErrorMessage = null;
+    this.render();
+    this.showToast("Sesión cerrada correctamente", "info");
+  }
+
+  togglePasswordVisibility() {
+    const passwordInput = document.getElementById("login-password");
+    if (passwordInput) {
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+      } else {
+        passwordInput.type = "password";
+      }
+    }
+  }
+
+  openForgotPasswordModal() {
+    const modal = document.getElementById("app-modal-overlay");
+    if (!modal) return;
+    modal.innerHTML = `
+      <div class="modal-card" style="max-width: 480px; width: 90%;">
+        <div class="modal-header" style="background: var(--color-navy-900); color: white; padding: 18px;">
+          <h3 style="font-size: 16px; margin: 0; color: white;">🔑 Recuperación de Contraseña</h3>
+          <button class="btn btn-outline btn-sm" onclick="window.app.closeModal()" style="color: white; border-color: rgba(255,255,255,0.4);">✕</button>
+        </div>
+        <div style="padding: 20px;">
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+            Por motivos de seguridad institucional, para restablecer o recuperar su contraseña de acceso debe comunicarse con la Oficina de <strong>Coordinación General & Dirección</strong>.
+          </p>
+          <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 14px; margin-bottom: 16px;">
+            <div style="font-weight: 800; color: #1e40af; font-size: 13px;">📞 Contacto de Soporte Institucional:</div>
+            <div style="font-size: 12.5px; color: #1e3a8a; margin-top: 4px;">• <strong>Coordinación:</strong> Prof. Alex Lino</div>
+            <div style="font-size: 12.5px; color: #1e3a8a;">• <strong>Teléfono / WhatsApp:</strong> (01) 987-654-321</div>
+            <div style="font-size: 12.5px; color: #1e3a8a;">• <strong>Horario:</strong> Lunes a Viernes 08:00 AM - 02:00 PM</div>
+          </div>
+          <button class="btn btn-navy" onclick="window.app.closeModal()" style="width: 100%;">Entendido</button>
+        </div>
+      </div>
+    `;
+    modal.classList.add("open");
+  }
+
 
   setFinanceAdminTab(tab) {
     this.store.state.financeAdminTab = tab;
