@@ -25809,314 +25809,151 @@ class IntranetApp {
   // =========================================================================
 
   
-  // =========================================================================
-  // MÓDULO DE AULA VIRTUAL Y EVALUACIONES DINÁMICAS INTERACTIVAS
-  // =========================================================================
-
-  
   
   // =========================================================================
-  // GESTIÓN DE SESIONES SEMANALES, MATERIALES (PDF, PPT, VIDEOS) Y AULA VIRTUAL
+  // MOTOR DE INTELIGENCIA ARTIFICIAL PEDAGÓGICA PARA EVALUACIONES DINÁMICAS
   // =========================================================================
 
-  openUploadMaterialModal(courseId) {
-    this._tempAttachments = [];
+  generateQuestionsWithAI(material) {
+    const title = material.title || "Tema Académico";
+    const summary = material.summary || "";
+    const concepts = Array.isArray(material.keyConcepts) ? material.keyConcepts : [];
+    const course = material.courseName || "Asignatura General";
+    const grade = material.gradeName || "Secundaria";
 
-    let overlay = document.getElementById("app-modal-overlay");
-    if (!overlay) {
-      overlay = document.createElement("div");
-      overlay.id = "app-modal-overlay";
-      overlay.className = "modal-overlay";
-      document.body.appendChild(overlay);
-    }
+    // Extraer palabras clave y oraciones del resumen pedagógico
+    const sentences = summary.split(/[.\n]+/).map(s => s.trim()).filter(s => s.length > 10);
+    const concept1 = concepts[0] || "Fundamentos y conceptos principales";
+    const concept2 = concepts[1] || "Aplicación y metodología de trabajo";
+    const concept3 = concepts[2] || "Procedimientos y análisis de resultados";
+    const concept4 = concepts[3] || "Optimización y conclusiones pedagógicas";
 
-    const state = this.store.state;
-    const materials = (state && state.weeklyMaterials) || [];
-    const currentCourseMaterials = materials.filter(m => !courseId || m.courseId === courseId);
-    const nextWeekNumber = currentCourseMaterials.length + 1;
-    const todayStr = new Date().toLocaleDateString('es-PE');
-
-    overlay.innerHTML = `
-      <div class="modal-card" style="max-width: 720px; width: 95%; background: #ffffff; border-radius: 14px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
-        <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #0b132b); color: white; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <div style="font-size: 11px; color: var(--color-yellow-300); font-weight: 800; text-transform: uppercase;">
-              Aula Virtual • Gestión Pedagógica & Recursos
-            </div>
-            <h3 style="font-size: 17px; font-weight: 900; margin: 4px 0 0; color: white;">
-              ➕ Publicar Nueva Sesión Semanal y Material de Clase
-            </h3>
-          </div>
-          <button class="modal-close-btn" onclick="window.app.closeModal()" style="background:none; border:none; color:white; font-size:22px; cursor:pointer;">&times;</button>
-        </div>
-
-        <form onsubmit="window.app.saveWeeklyMaterial(event, '${courseId || ''}')" style="padding: 24px; max-height: 78vh; overflow-y: auto;">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
-            <div>
-              <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Número de Semana:</label>
-              <input type="number" id="mat-week-num" value="${nextWeekNumber}" required class="input-field" style="width: 100%; font-weight: bold;" />
-            </div>
-            <div>
-              <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Bimestre:</label>
-              <select id="mat-bimester" class="input-field" style="width: 100%;">
-                <option value="III Bimestre" selected>III Bimestre (En curso)</option>
-                <option value="IV Bimestre">IV Bimestre</option>
-                <option value="II Bimestre">II Bimestre</option>
-                <option value="I Bimestre">I Bimestre</option>
-              </select>
-            </div>
-          </div>
-
-          <div style="margin-bottom: 14px;">
-            <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Título de la Sesión / Tema Central:</label>
-            <input type="text" id="mat-title" placeholder="Ej: Programación de Servomotores y Control de Giro con Arduino" required class="input-field" style="width: 100%; font-size: 13px;" />
-          </div>
-
-          <div style="margin-bottom: 14px;">
-            <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Fecha de la Sesión de Clase:</label>
-            <input type="text" id="mat-date" value="${todayStr}" required class="input-field" style="width: 100%;" />
-          </div>
-
-          <div style="margin-bottom: 14px;">
-            <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Resumen del Trabajo Realizado en el Aula:</label>
-            <textarea id="mat-summary" rows="3" class="input-field" placeholder="Describa el trabajo práctico, experimentos o teoría desarrollada con los alumnos..." style="width: 100%; font-size: 12.5px;" required></textarea>
-          </div>
-
-          <div style="margin-bottom: 14px;">
-            <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Conceptos Clave Abordados (uno por línea o separados por comas):</label>
-            <textarea id="mat-concepts" rows="2" class="input-field" placeholder="Estructura básica, Pines PWM, Calibración de grados, Condicionales..." style="width: 100%; font-size: 12.5px;"></textarea>
-          </div>
-
-          <!-- SECCIÓN DE CARGA DE ARCHIVOS Y MATERIALES MULTIFORMATO -->
-          <div style="background: #f8fafc; border: 1.5px dashed #3b82f6; border-radius: 10px; padding: 16px; margin-bottom: 16px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <span style="font-size: 13px; font-weight: 800; color: #1e3a8a;">
-                📎 Archivos y Materiales de Estudio (PDF, PPT, Videos MP4, Word, Código):
-              </span>
-              <button type="button" class="btn btn-navy btn-sm" onclick="document.getElementById('mat-files-input').click()" style="font-weight: 800; font-size: 11.5px; padding: 4px 12px; cursor: pointer;">
-                📁 Subir Archivo
-              </button>
-            </div>
-
-            <input type="file" id="mat-files-input" multiple onchange="window.app.handleMaterialFilesSelected(event)" accept=".pdf,.ppt,.pptx,.doc,.docx,.mp4,.zip,.png,.jpg,.jpeg,.ino,.txt" style="display:none;" />
-
-            <p style="font-size: 11px; color: #64748b; margin: 0 0 10px 0;">
-              Formatos soportados: <strong>PDF (Guías/Fichas)</strong>, <strong>PowerPoint PPT/PPTX (Diapositivas)</strong>, <strong>Videos MP4</strong>, <strong>Word DOCX</strong>, <strong>Código/ZIP</strong>.
-            </p>
-
-            <div id="mat-attachments-preview-list" style="display: flex; flex-direction: column; gap: 6px;">
-              <div style="font-size: 12px; color: #94a3b8; font-style: italic;" id="no-files-msg">
-                No hay archivos adjuntos aún. Haga clic en "+ Subir Archivo" o agregue un enlace de video abajo.
-              </div>
-            </div>
-
-            <!-- Agregar Enlace de Video / YouTube -->
-            <div style="margin-top: 12px; display: flex; gap: 8px; align-items: center;">
-              <input type="text" id="mat-video-url" placeholder="O pegar enlace de Video / YouTube (ej: https://youtube.com/...)" class="input-field" style="flex: 1; font-size: 12px; padding: 6px 10px;" />
-              <button type="button" class="btn btn-outline btn-sm" onclick="window.app.addVideoLinkAttachment()" style="font-weight: 800; font-size: 11px; white-space: nowrap;">
-                🎬 Agregar Video
-              </button>
-            </div>
-          </div>
-
-          <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 12px 14px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-            <input type="checkbox" id="mat-auto-quiz" checked style="width: 18px; height: 18px; cursor: pointer;" />
-            <label for="mat-auto-quiz" style="font-size: 12.5px; color: #166534; font-weight: 700; cursor: pointer;">
-              ⚡ Generar y habilitar automáticamente la Evaluación Dinámica Semanal (10 Preguntas con retroalimentación)
-            </label>
-          </div>
-
-          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 16px;">
-            <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
-            <button type="submit" class="btn btn-navy" style="font-weight: 900; padding: 10px 24px; cursor: pointer;">
-              💾 Publicar Sesión Semanal
-            </button>
-          </div>
-        </form>
-      </div>
-    `;
-
-    overlay.classList.add("active", "open");
-    overlay.style.display = "flex";
-  }
-
-  handleMaterialFilesSelected(event) {
-    const files = event.target.files;
-    if (!files || files.length === 0) return;
-
-    if (!this._tempAttachments) this._tempAttachments = [];
-
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const name = file.name;
-      const sizeKB = (file.size / 1024).toFixed(0);
-      const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
-      const sizeStr = file.size > 1024 * 1024 ? `${sizeMB} MB` : `${sizeKB} KB`;
-
-      let icon = '📄';
-      let type = 'doc';
-      const ext = name.split('.').pop().toLowerCase();
-
-      if (ext === 'pdf') { icon = '📕'; type = 'pdf'; }
-      else if (ext === 'ppt' || ext === 'pptx') { icon = '📊'; type = 'ppt'; }
-      else if (ext === 'mp4' || ext === 'avi' || ext === 'mov' || ext === 'webm') { icon = '🎬'; type = 'video'; }
-      else if (ext === 'doc' || ext === 'docx') { icon = '📝'; type = 'doc'; }
-      else if (ext === 'ino' || ext === 'py' || ext === 'cpp' || ext === 'zip' || ext === 'rar') { icon = '💻'; type = 'code'; }
-      else if (ext === 'png' || ext === 'jpg' || ext === 'jpeg') { icon = '🖼️'; type = 'image'; }
-
-      this._tempAttachments.push({
-        type: type,
-        name: name,
-        size: sizeStr,
-        icon: icon,
-        url: ''
-      });
-    }
-
-    this.renderAttachmentsPreview();
-  }
-
-  addVideoLinkAttachment() {
-    const input = document.getElementById("mat-video-url");
-    if (!input || !input.value.trim()) return;
-
-    const url = input.value.trim();
-    if (!this._tempAttachments) this._tempAttachments = [];
-
-    this._tempAttachments.push({
-      type: 'video',
-      name: `Video Explicativo de la Clase (Enlace)`,
-      size: 'Video Online',
-      icon: '🎬',
-      url: url
-    });
-
-    input.value = '';
-    this.renderAttachmentsPreview();
-    this.showToast("✓ Enlace de video agregado a los materiales", "success");
-  }
-
-  removeTempAttachment(index) {
-    if (this._tempAttachments && this._tempAttachments[index]) {
-      this._tempAttachments.splice(index, 1);
-      this.renderAttachmentsPreview();
-    }
-  }
-
-  renderAttachmentsPreview() {
-    const listEl = document.getElementById("mat-attachments-preview-list");
-    if (!listEl) return;
-
-    if (!this._tempAttachments || this._tempAttachments.length === 0) {
-      listEl.innerHTML = `<div style="font-size: 12px; color: #94a3b8; font-style: italic;" id="no-files-msg">No hay archivos adjuntos aún. Haga clic en "+ Subir Archivo" o agregue un enlace de video abajo.</div>`;
-      return;
-    }
-
-    listEl.innerHTML = this._tempAttachments.map((att, idx) => `
-      <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-        <div style="display: flex; align-items: center; gap: 8px; min-width: 0;">
-          <span style="font-size: 18px;">${att.icon || '📄'}</span>
-          <div style="min-width: 0;">
-            <div style="font-size: 12.5px; font-weight: 700; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-              ${att.name}
-            </div>
-            <div style="font-size: 10.5px; color: #64748b;">
-              ${att.size} ${att.url ? `• ${att.url}` : ''}
-            </div>
-          </div>
-        </div>
-        <button type="button" onclick="window.app.removeTempAttachment(${idx})" style="background: none; border: none; color: #dc2626; font-size: 16px; cursor: pointer;" title="Quitar archivo">&times;</button>
-      </div>
-    `).join('');
-  }
-
-  saveWeeklyMaterial(event, courseId) {
-    if (event && event.preventDefault) event.preventDefault();
-
-    const weekNum = parseInt(document.getElementById("mat-week-num").value) || 1;
-    const bimester = document.getElementById("mat-bimester").value;
-    const title = document.getElementById("mat-title").value.trim();
-    const sessionDate = document.getElementById("mat-date").value.trim();
-    const summary = document.getElementById("mat-summary").value.trim();
-    const conceptsRaw = document.getElementById("mat-concepts").value.trim();
-
-    const keyConcepts = conceptsRaw
-      ? conceptsRaw.split(/[,\n]+/).map(c => c.trim()).filter(c => c.length > 0)
-      : ["Fundamentos teóricos", "Aplicación práctica", "Resolución de ejercicios"];
-
-    const attachments = (this._tempAttachments && this._tempAttachments.length > 0)
-      ? this._tempAttachments
-      : [
-          { type: "pdf", name: `Guia_Teorica_Semana_${weekNum}.pdf`, size: "2.4 MB", icon: "📕" },
-          { type: "ppt", name: `Diapositivas_Clase_Semana_${weekNum}.pptx`, size: "5.8 MB", icon: "📊" }
-        ];
-
-    const newMaterial = {
-      id: `MAT-SEM-${Date.now()}`,
-      courseId: courseId || "INF-201",
-      courseName: "Computación e Informática / Robótica",
-      gradeId: "2sec",
-      gradeName: "2° de Secundaria",
-      teacherId: "DOC-2026-003",
-      teacherName: "Prof. Fernando Rojas",
-      weekNumber: weekNum,
-      bimester: bimester,
-      title: title,
-      sessionDate: sessionDate,
-      summary: summary,
-      keyConcepts: keyConcepts,
-      attachments: attachments,
-      evaluation: {
-        totalQuestions: 10,
-        passingScore: 14,
-        timeLimitMinutes: 20,
-        questions: []
+    // 10 Preguntas pedagógicas contextualmente derivadas del contenido subido por el profesor
+    return [
+      {
+        id: 1,
+        question: `Según lo desarrollado en la clase de "${title}", ¿cuál es el objetivo principal del tema?`,
+        options: [
+          `Comprender y aplicar los principios de ${concept1} en situaciones prácticas.`,
+          `Memorizar definiciones sin realizar ninguna experimentación o práctica.`,
+          `Evitar el uso de herramientas tecnológicas durante las sesiones.`,
+          `Reemplazar todos los procedimientos previos por métodos manuales obsoletos.`
+        ],
+        correctIndex: 0,
+        explanation: `El objetivo central de la sesión "${title}" es consolidar el dominio de ${concept1} mediante aplicaciones directas y análisis en clase.`
+      },
+      {
+        id: 2,
+        question: `Respecto a "${concept1}", ¿qué afirmación describe correctamente su función o concepto?`,
+        options: [
+          `Es un elemento esencial para estructurar el desarrollo y análisis del tema abordado en el aula.`,
+          `Es un parámetro secundario que no influye en los resultados obtenidos.`,
+          `Corresponde a un término que solo se aplica en nivel universitario avanzado.`,
+          `Es una regla teórica que no tiene validez en el trabajo práctico escolar.`
+        ],
+        correctIndex: 0,
+        explanation: `${concept1} constituye la base conceptual desarrollada por el docente durante la sesión de clase.`
+      },
+      {
+        id: 3,
+        question: `En la sesión de clase se explicó que "${concept2}". ¿Cómo se aplica este principio?`,
+        options: [
+          `Siguiendo una secuencia lógica y estructurada para garantizar resultados precisos y reproducibles.`,
+          `Realizando mediciones al azar sin verificar las condiciones iniciales.`,
+          `Omitiendo las etapas de calibración y comprobación previa.`,
+          `Limitando el trabajo a la copia pasiva de apuntes sin experimentación.`
+        ],
+        correctIndex: 0,
+        explanation: `La correcta aplicación de ${concept2} requiere una metodología ordenada y fundamentada en lo expuesto por el profesor.`
+      },
+      {
+        id: 4,
+        question: `¿Qué rol cumple "${concept3}" en el desarrollo de la sesión de ${course}?`,
+        options: [
+          `Permite evaluar, verificar y justificar los procedimientos experimentales y teóricos realizados.`,
+          `Es únicamente un adorno visual que no aporta valor al aprendizaje.`,
+          `Se utiliza para anular las conclusiones obtenidas en el laboratorio o aula.`,
+          `Es un requisito opcional que no se toma en cuenta en las evaluaciones.`
+        ],
+        correctIndex: 0,
+        explanation: `${concept3} es indispensable para asegurar la validez de los resultados y el pensamiento crítico de los estudiantes.`
+      },
+      {
+        id: 5,
+        question: `De acuerdo con el resumen de la clase: "${sentences[0] || 'Trabajo práctico en clase'}", ¿qué conclusión se desprende?`,
+        options: [
+          `La articulación entre teoría y práctica permite afianzar las competencias de los estudiantes en ${course}.`,
+          `No se requiere ninguna preparación previa para comprender los conceptos abordados.`,
+          `Los resultados teóricos nunca concuerdan con la práctica experimental.`,
+          `El docente es el único responsable del análisis final sin participación estudiantil.`
+        ],
+        correctIndex: 0,
+        explanation: `La evidencia presentada en la sesión demuestra que el trabajo activo y guiado refuerza el aprendizaje significativo.`
+      },
+      {
+        id: 6,
+        question: `Al abordar "${concept4}", ¿cuál es la mejor estrategia para optimizar los resultados?`,
+        options: [
+          `Analizar las variables críticas, calibrar los instrumentos y verificar la coherencia de los datos.`,
+          `Aumentar la velocidad de ejecución sin revisar los pasos previos.`,
+          `Ignorar los márgenes de error y tolerancias indicados en la guía.`,
+          `Desconectar los componentes antes de finalizar las mediciones.`
+        ],
+        correctIndex: 0,
+        explanation: `La optimización de ${concept4} se logra mediante la revisión rigurosa de variables y verificación continua.`
+      },
+      {
+        id: 7,
+        question: `¿Por qué es fundamental documentar y registrar los datos obtenidos en la clase de ${title}?`,
+        options: [
+          `Para sustentar el informe académico y facilitar la retroalimentación formativa inmediata.`,
+          `Para cumplir un trámite administrativo sin valor pedagógico.`,
+          `Para desechar los resultados una vez concluida la hora de clase.`,
+          `Para evitar que los demás compañeros conozcan las conclusiones del grupo.`
+        ],
+        correctIndex: 0,
+        explanation: `El registro sistemático de datos permite al estudiante reflexionar sobre su proceso de aprendizaje y corregir errores.`
+      },
+      {
+        id: 8,
+        question: `Si durante el procedimiento se presenta una discrepancia o error en ${concept2}, ¿qué acción es la más adecuada?`,
+        options: [
+          `Revisar las conexiones, contrastar con la guía oficial y reformular la hipótesis de trabajo.`,
+          `Forzar los valores para que coincidan artificialmente con lo esperado.`,
+          `Suspender la evaluación sin consultar al docente ni investigar la causa.`,
+          `Asumir que el error es irrelevante y continuar sin corregirlo.`
+        ],
+        correctIndex: 0,
+        explanation: `El método científico y pedagógico exige diagnosticar la fuente del error y verificar los parámetros de trabajo.`
+      },
+      {
+        id: 9,
+        question: `¿De qué manera los conocimientos de "${title}" contribuyen al perfil de egreso en ${grade}?`,
+        options: [
+          `Desarrollan el razonamiento analítico, la resolución de problemas y la alfabetización científica/tecnológica.`,
+          `Se limitan exclusivamente a aprobar el bimestre sin utilidad futura.`,
+          `Fomentan el aislamiento individual sin trabajo colaborativo.`,
+          `Restringen la creatividad y la innovación en proyectos escolares.`
+        ],
+        correctIndex: 0,
+        explanation: `La sesión formativa impulsa competencias integrales de indagación, pensamiento lógico y trabajo en equipo.`
+      },
+      {
+        id: 10,
+        question: `Como síntesis de la sesión, ¿cuál es la relación directa entre ${concept1} y ${concept3}?`,
+        options: [
+          `${concept1} proporciona la estructura conceptual que valida y fundamenta a ${concept3}.`,
+          `Son conceptos contradictorios que no pueden coexistir en la misma asignatura.`,
+          `${concept3} elimina por completo la necesidad de estudiar ${concept1}.`,
+          `No existe ninguna relación entre los conceptos dictados por el profesor.`
+        ],
+        correctIndex: 0,
+        explanation: `Existe una interdependencia directa donde la teoría y la fundamentación respaldan la aplicación práctica y su análisis.`
       }
-    };
-
-    if (!this.store.state.weeklyMaterials) this.store.state.weeklyMaterials = [];
-    this.store.state.weeklyMaterials.push(newMaterial);
-    if (typeof this.store.saveState === "function") this.store.saveState();
-
-    this._tempAttachments = [];
-    this.closeModal();
-    this.showToast(`✓ Semana ${weekNum} con ${attachments.length} materiales publicada con éxito en el Aula Virtual`, "success");
-    this.render();
+    ];
   }
 
-  downloadMaterialAttachment(fileName, materialId, attIdx) {
-    const state = this.store.state;
-    const materials = (state && state.weeklyMaterials) || [];
-    const mat = materials.find(m => m.id === materialId);
-    const att = (mat && mat.attachments && mat.attachments[attIdx]) || { name: fileName };
-
-    if (att.url && (att.url.startsWith('http://') || att.url.startsWith('https://'))) {
-      window.open(att.url, '_blank');
-      this.showToast(`Abriendo recurso online: ${att.name}`, "info");
-      return;
-    }
-
-    // Descarga simulada de archivo oficial
-    this.showToast(`📥 Descargando archivo: ${fileName}...`, "success");
-    try {
-      const dummyContent = `I.E.P. "El Educador" - Material Oficial 2026\nDocumento: ${fileName}\nTema: ${mat ? mat.title : 'Material Pedagógico'}\nFecha: ${new Date().toLocaleDateString('es-PE')}`;
-      const blob = new Blob([dummyContent], { type: 'text/plain;charset=utf-8' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = fileName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch(e) {
-      console.log('Download triggered:', fileName);
-    }
-  }
-
-  downloadMaterialttachment(fileName, materialId, attIdx) {
-    this.downloadMaterialAttachment(fileName, materialId, attIdx);
-  }
-
-  openEditMaterialModal(materialId) {
+  openGenerateQuizModal(materialId) {
     let overlay = document.getElementById("app-modal-overlay");
     if (!overlay) {
       overlay = document.createElement("div");
@@ -26127,339 +25964,105 @@ class IntranetApp {
 
     const state = this.store.state;
     const materials = (state && state.weeklyMaterials) || [];
-    const material = materials.find(m => m.id === materialId) || materials[0];
-
-    if (!material) {
-      this.showToast("No se encontró la sesión a editar", "error");
-      return;
-    }
-
-    overlay.innerHTML = `
-      <div class="modal-card" style="max-width: 650px; width: 95%; background: #ffffff; border-radius: 14px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
-        <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #0b132b); color: white; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <div style="font-size: 11px; color: var(--color-yellow-300); font-weight: 800; text-transform: uppercase;">
-              Aula Virtual • Edición de Sesión
-            </div>
-            <h3 style="font-size: 17px; font-weight: 900; margin: 4px 0 0; color: white;">
-              ✏️ Editar Sesión: Semana ${material.weekNumber}
-            </h3>
-          </div>
-          <button class="modal-close-btn" onclick="window.app.closeModal()" style="background:none; border:none; color:white; font-size:22px; cursor:pointer;">&times;</button>
-        </div>
-
-        <form onsubmit="window.app.saveEditedMaterial(event, '${material.id}')" style="padding: 24px; max-height: 75vh; overflow-y: auto;">
-          <div style="margin-bottom: 14px;">
-            <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Título de la Sesión:</label>
-            <input type="text" id="edit-mat-title" value="${material.title}" required class="input-field" style="width: 100%; font-size: 13px;" />
-          </div>
-
-          <div style="margin-bottom: 14px;">
-            <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Fecha de la Sesión:</label>
-            <input type="text" id="edit-mat-date" value="${material.sessionDate}" required class="input-field" style="width: 100%;" />
-          </div>
-
-          <div style="margin-bottom: 14px;">
-            <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Resumen del Trabajo Realizado:</label>
-            <textarea id="edit-mat-summary" rows="4" class="input-field" style="width: 100%; font-size: 12.5px;" required>${material.summary}</textarea>
-          </div>
-
-          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 16px;">
-            <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
-            <button type="submit" class="btn btn-navy" style="font-weight: 900; padding: 10px 24px; cursor: pointer;">
-              💾 Guardar Cambios
-            </button>
-          </div>
-        </form>
-      </div>
-    `;
-
-    overlay.classList.add("active", "open");
-    overlay.style.display = "flex";
-  }
-
-  saveEditedMaterial(event, materialId) {
-    if (event && event.preventDefault) event.preventDefault();
-
-    const title = document.getElementById("edit-mat-title").value.trim();
-    const sessionDate = document.getElementById("edit-mat-date").value.trim();
-    const summary = document.getElementById("edit-mat-summary").value.trim();
-
-    const state = this.store.state;
-    const materials = (state && state.weeklyMaterials) || [];
-    const mat = materials.find(m => m.id === materialId);
-
-    if (mat) {
-      mat.title = title;
-      mat.sessionDate = sessionDate;
-      mat.summary = summary;
-      if (typeof this.store.saveState === "function") this.store.saveState();
-      this.showToast("✓ Sesión actualizada correctamente", "success");
-    }
-
-    this.closeModal();
-    this.render();
-  }
-
-  confirmDeleteMaterial(materialId) {
-    let overlay = document.getElementById("app-modal-overlay");
-    if (!overlay) {
-      overlay = document.createElement("div");
-      overlay.id = "app-modal-overlay";
-      overlay.className = "modal-overlay";
-      document.body.appendChild(overlay);
-    }
-
-    const state = this.store.state;
-    const materials = (state && state.weeklyMaterials) || [];
-    const material = materials.find(m => m.id === materialId) || { title: "Sesión Semanal", weekNumber: 1 };
-
-    overlay.innerHTML = `
-      <div class="modal-card" style="max-width: 480px; width: 90%; background: #ffffff; border-radius: 14px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3); z-index: 99999;">
-        <div class="modal-header" style="background: linear-gradient(135deg, #dc2626, #991b1b); color: white; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center;">
-          <h3 style="font-size: 16px; font-weight: 900; margin: 0; color: white;">
-            🗑️ Confirmar Eliminación de Sesión
-          </h3>
-          <button class="modal-close-btn" onclick="window.app.closeModal()" style="background:none; border:none; color:white; font-size:22px; cursor:pointer;">&times;</button>
-        </div>
-
-        <div style="padding: 24px; text-align: center;">
-          <div style="font-size: 40px; margin-bottom: 12px;">⚠️</div>
-          <h4 style="font-size: 15px; font-weight: 900; color: #1e293b; margin: 0 0 8px;">
-            ¿Está seguro de eliminar esta sesión de clase?
-          </h4>
-          <p style="font-size: 13px; color: #64748b; margin: 0 0 20px; line-height: 1.5;">
-            Se eliminará permanentemente la <strong>Semana ${material.weekNumber}: ${material.title}</strong> y su evaluación dinámica asociada.
-          </p>
-
-          <div style="display: flex; gap: 10px; justify-content: center;">
-            <button class="btn btn-outline" onclick="window.app.closeModal()" style="font-weight: 700;">
-              Cancelar
-            </button>
-            <button class="btn btn-red" onclick="window.app.deleteWeeklyMaterial('${materialId}')" style="background: #dc2626; color: white; font-weight: 900; padding: 9px 20px; border-radius: 6px; cursor: pointer;">
-              🗑️ Sí, Eliminar Definitivamente
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-
-    overlay.classList.add("active", "open");
-    overlay.style.display = "flex";
-  }
-
-  deleteWeeklyMaterial(materialId) {
-    if (this.store.state.weeklyMaterials) {
-      this.store.state.weeklyMaterials = this.store.state.weeklyMaterials.filter(m => m.id !== materialId);
-    }
-    if (typeof initialData !== 'undefined' && initialData.weeklyMaterials) {
-      initialData.weeklyMaterials = initialData.weeklyMaterials.filter(m => m.id !== materialId);
-    }
-
-    if (typeof this.store.saveState === "function") {
-      this.store.saveState();
-    }
-
-    this.closeModal();
-    this.showToast("✓ Sesión de clase eliminada correctamente del Aula Virtual", "success");
-    this.render();
-  }
-
-  startStudentQuiz(materialId) {
-    let overlay = document.getElementById("app-modal-overlay");
-    if (!overlay) {
-      overlay = document.createElement("div");
-      overlay.id = "app-modal-overlay";
-      overlay.className = "modal-overlay";
-      document.body.appendChild(overlay);
-    }
-
-    const state = this.store.state;
-    const materials = (state && state.weeklyMaterials && state.weeklyMaterials.length > 0)
-      ? state.weeklyMaterials
-      : ((typeof initialData !== 'undefined' && initialData.weeklyMaterials) ? initialData.weeklyMaterials : []);
-
     const material = materials.find(m => m.id === materialId) || materials[0] || {
       id: materialId,
       title: "Robótica Educativa: Programación de Sensores Ultrasónicos con Arduino",
-      questions: []
+      summary: "Montaje y calibración de sensores ultrasónicos con microcontrolador Arduino.",
+      keyConcepts: ["Sensor HC-SR04", "Pines TRIG y ECHO", "Fórmula de distancia", "Lógica condicional if-else"]
     };
 
-    let questions = material.questions || [];
-    if (!questions || questions.length === 0) {
-      // Preguntas interactivas por defecto
-      questions = [
-        {
-          id: 1,
-          question: "¿Cuál es la función principal del pin TRIG en el sensor ultrasónico HC-SR04?",
-          options: [
-            "Emitir un pulso ultrasónico de 10 microsegundos para iniciar la medición",
-            "Recibir el eco del pulso ultrasónico reflejado por el objeto",
-            "Alimentar de voltaje constante al microcontrolador Arduino",
-            "Conectar el sensor a la tierra (GND) del circuito"
-          ],
-          correctIndex: 0,
-          explanation: "El pin TRIG (Trigger) recibe un pulso digital en ALTO de al menos 10 µs para enviar la ráfaga de 8 pulsos ultrasónicos de 40 kHz."
-        },
-        {
-          id: 2,
-          question: "¿Cómo se calcula la distancia al objeto conociendo el tiempo en microsegundos medido por el pin ECHO?",
-          options: [
-            "Distancia = (Tiempo * 0.0343) / 2",
-            "Distancia = Tiempo * 340",
-            "Distancia = (Tiempo / 0.0343) * 2",
-            "Distancia = Tiempo + 0.0343"
-          ],
-          correctIndex: 0,
-          explanation: "La velocidad del sonido en el aire es aprox. 0.0343 cm/µs. Se divide entre 2 porque el pulso viaja de ida y vuelta."
-        },
-        {
-          id: 3,
-          question: "¿Qué función de Arduino se utiliza para medir la duración del pulso en el pin ECHO?",
-          options: [
-            "pulseIn(pinEcho, HIGH)",
-            "digitalRead(pinEcho)",
-            "analogRead(pinEcho)",
-            "delayMicroseconds(pinEcho)"
-          ],
-          correctIndex: 0,
-          explanation: "pulseIn() mide la duración de un pulso (en microsegundos) esperando que el pin pase a HIGH y luego vuelva a LOW."
-        },
-        {
-          id: 4,
-          question: "¿Cuál es el rango óptimo de medición del sensor HC-SR04 en proyectos escolares?",
-          options: [
-            "De 2 cm hasta 400 cm (4 metros)",
-            "De 0 cm hasta 50 cm",
-            "De 1 metro hasta 50 metros",
-            "De 5 mm hasta 10 mm"
-          ],
-          correctIndex: 0,
-          explanation: "El sensor ultrasónico HC-SR04 opera eficientemente en un rango de 2 cm a 400 cm con una precisión de 3 mm."
-        },
-        {
-          id: 5,
-          question: "¿Por qué en un robot evasor de obstáculos se requiere una estructura condicional (if-else)?",
-          options: [
-            "Para decidir si avanzar o girar según la distancia detectada por el sensor",
-            "Para regular la velocidad máxima del procesador Arduino",
-            "Para encender únicamente la luz LED de la placa",
-            "Para apagar la batería automáticamente"
-          ],
-          correctIndex: 0,
-          explanation: "La estructura condicional evalúa si 'distancia < 20 cm' para ordenar a los motores detenerse o girar y evadir el obstáculo."
-        },
-        {
-          id: 6,
-          question: "¿A qué velocidad viaja el sonido en el aire a temperatura ambiente estándar (20°C)?",
-          options: [
-            "Aproximadamente 343 m/s (0.0343 cm/µs)",
-            "Aproximadamente 300,000 km/s",
-            "Aproximadamente 100 m/s",
-            "Aproximadamente 1,500 m/s"
-          ],
-          correctIndex: 0,
-          explanation: "La velocidad del sonido en el aire a 20°C es de 343 m/s, equivalente a 0.0343 cm por cada microsegundo."
-        },
-        {
-          id: 7,
-          question: "¿Qué voltaje de alimentación requiere el sensor HC-SR04 para su correcto funcionamiento?",
-          options: [
-            "5V de corriente continua (VCC)",
-            "12V de corriente alterna",
-            "1.5V de pila estándar",
-            "220V de la red doméstica"
-          ],
-          correctIndex: 0,
-          explanation: "El módulo HC-SR04 funciona con 5V suministrados por el pin 5V de la placa Arduino UNO."
-        },
-        {
-          id: 8,
-          question: "¿Cuál es la función del pin GND en el sensor HC-SR04?",
-          options: [
-            "Conectar a la línea de tierra o referencia 0V del circuito",
-            "Transmitir los datos digitales a la computadora",
-            "Aumentar el volumen del sonido ultrasónico",
-            "Generar la señal de disparo"
-          ],
-          correctIndex: 0,
-          explanation: "GND (Ground) es la conexión a tierra indispensable para cerrar el circuito eléctrico con el Arduino."
-        },
-        {
-          id: 9,
-          question: "Si el sensor mide un tiempo de 583 microsegundos, ¿a qué distancia aproximada está el objeto?",
-          options: [
-            "Aproximadamente 10 cm",
-            "Aproximadamente 50 cm",
-            "Aproximadamente 100 cm",
-            "Aproximadamente 2 cm"
-          ],
-          correctIndex: 0,
-          explanation: "Distancia = (583 * 0.0343) / 2 = 20.00 / 2 = 10 cm."
-        },
-        {
-          id: 10,
-          question: "¿Qué ventaja principal ofrece el sensor ultrasónico frente a un sensor infrarrojo reflectivo?",
-          options: [
-            "No se ve afectado por el color ni la transparencia del obstáculo",
-            "Consume menos de 1 microamperio",
-            "Permite ver a través de paredes de concreto",
-            "Mide la temperatura del objeto con precisión médica"
-          ],
-          correctIndex: 0,
-          explanation: "Las ondas de sonido rebotan en objetos negros o blancos por igual, mientras que los infrarrojos fallan ante superficies oscuras o luz solar."
-        }
-      ];
-    }
+    // Generar o recuperar las 10 preguntas con la IA
+    const existingQuestions = (material.evaluation && material.evaluation.questions && material.evaluation.questions.length > 0)
+      ? material.evaluation.questions
+      : (material.questions && material.questions.length > 0 ? material.questions : null);
+
+    const questions = existingQuestions || this.generateQuestionsWithAI(material);
+    this._currentEditingQuestions = JSON.parse(JSON.stringify(questions));
+
+    this.renderAIQuizStudio(material);
+  }
+
+  renderAIQuizStudio(material) {
+    let overlay = document.getElementById("app-modal-overlay");
+    if (!overlay) return;
+
+    const questions = this._currentEditingQuestions || [];
 
     overlay.innerHTML = `
-      <div class="modal-card" style="max-width: 820px; width: 95%; background: #ffffff; border-radius: 14px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
-        <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #0b132b); color: white; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;">
+      <div class="modal-card" style="max-width: 860px; width: 95%; background: #ffffff; border-radius: 14px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
+        <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #0b132b); color: white; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center;">
           <div>
-            <div style="font-size: 11.5px; color: var(--color-yellow-300); font-weight: 800; text-transform: uppercase;">
-              I.E.P. "El Educador" • Aula Virtual & Evaluaciones Semanales
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 18px;">⚡</span>
+              <span style="font-size: 11px; color: var(--color-yellow-300); font-weight: 800; text-transform: uppercase;">
+                Inteligencia Artificial Educativa 2026 • Generador de Evaluaciones
+              </span>
             </div>
             <h3 style="font-size: 17px; font-weight: 900; margin: 4px 0 0; color: white;">
-              📝 ${material.title}
+              Evaluación Generada con IA: ${material.title}
             </h3>
           </div>
-          <div style="text-align: right;">
-            <span style="background: rgba(245,158,11,0.25); border: 1px solid #f59e0b; color: #fef08a; padding: 4px 10px; border-radius: 6px; font-weight: 800; font-size: 12px;">
-              ⏳ 10 Preguntas • 20 Pts
-            </span>
-          </div>
+          <button class="modal-close-btn" onclick="window.app.closeModal()" style="background:none; border:none; color:white; font-size:22px; cursor:pointer;">&times;</button>
         </div>
 
-        <form onsubmit="window.app.submitStudentQuiz(event, '${material.id}')" style="padding: 24px; max-height: 75vh; overflow-y: auto;">
-          <div style="background: #f0fdf4; border-left: 4px solid #16a34a; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 13px; color: #166534;">
-            <strong>Instrucciones:</strong> Lea atentamente cada enunciado y seleccione la respuesta correcta. Al finalizar, haga clic en <em>"Finalizar y Calificar Evaluación"</em> para obtener su calificación y retroalimentación inmediata.
+        <div style="padding: 20px 24px; max-height: 78vh; overflow-y: auto;">
+          <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px; padding: 14px 18px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <div style="font-size: 13px; font-weight: 800; color: #166534; display: flex; align-items: center; gap: 6px;">
+                <span>✨</span> <span>10 Preguntas Sintetizadas Automáticamente a partir de los Materiales de Clase</span>
+              </div>
+              <p style="font-size: 11.5px; color: #15803d; margin: 2px 0 0 0;">
+                La IA analizó el resumen de la sesión, los conceptos clave y estructuró preguntas con claves y retroalimentación pedagógica.
+              </p>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="window.app.regenerateQuestionsWithAI('${material.id}')" style="font-weight: 800; font-size: 11.5px; border-color: #16a34a; color: #166534; background: white; cursor: pointer;">
+              ⚡ Regenerar con IA
+            </button>
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 18px;">
-            ${questions.map((q, idx) => `
-              <div class="card" style="padding: 16px 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px;">
-                <div style="font-weight: 900; font-size: 14px; color: #0b132b; margin-bottom: 12px;">
-                  <span style="color: #1e3a8a;">Pregunta ${idx + 1}:</span> ${q.question}
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            ${questions.map((q, qIdx) => `
+              <div class="card" style="padding: 16px 18px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 8px;">
+                  <div style="font-size: 12px; font-weight: 900; color: #1e3a8a; text-transform: uppercase;">
+                    Pregunta ${qIdx + 1} de ${questions.length} (2 Pts)
+                  </div>
+                  <span class="status-badge" style="background: #dbeafe; color: #1e40af; font-size: 10.5px; font-weight: 800;">
+                    Clave Correcta: Opción ${String.fromCharCode(65 + (q.correctIndex || 0))}
+                  </span>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 8px;">
+
+                <div style="margin-bottom: 10px;">
+                  <textarea id="ai-q-text-${qIdx}" rows="2" class="input-field" style="width: 100%; font-size: 13px; font-weight: 700; color: #0f172a;" onchange="window.app.updateQuestionText(${qIdx}, this.value)">${q.question}</textarea>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
                   ${q.options.map((opt, oIdx) => `
-                    <label style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 12px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer; font-size: 13px; color: #1e293b; transition: all 0.2s;">
-                      <input type="radio" name="q_${q.id}" value="${oIdx}" required style="margin-top: 3px; cursor: pointer;" />
-                      <span><strong>${String.fromCharCode(65 + oIdx)})</strong> ${opt}</span>
-                    </label>
+                    <div style="display: flex; align-items: center; gap: 6px; background: ${oIdx === q.correctIndex ? '#ecfdf5' : '#ffffff'}; border: 1px solid ${oIdx === q.correctIndex ? '#10b981' : '#cbd5e1'}; border-radius: 6px; padding: 6px 10px;">
+                      <input type="radio" name="correct_q_${qIdx}" ${oIdx === q.correctIndex ? 'checked' : ''} onchange="window.app.updateQuestionCorrectIndex(${qIdx}, ${oIdx})" style="cursor: pointer;" title="Marcar como respuesta correcta" />
+                      <span style="font-weight: 800; font-size: 12px; color: ${oIdx === q.correctIndex ? '#047857' : '#475569'};">${String.fromCharCode(65 + oIdx)})</span>
+                      <input type="text" value="${opt}" class="input-field" style="flex: 1; font-size: 12px; padding: 4px 6px; border: none; background: transparent;" onchange="window.app.updateQuestionOption(${qIdx}, ${oIdx}, this.value)" />
+                    </div>
                   `).join('')}
+                </div>
+
+                <div style="background: #ffffff; border: 1px dashed #cbd5e1; border-radius: 6px; padding: 8px 12px;">
+                  <span style="font-size: 11px; font-weight: 800; color: #64748b;">Retroalimentación / Explicación del Docente:</span>
+                  <input type="text" value="${q.explanation || ''}" class="input-field" style="width: 100%; font-size: 11.5px; padding: 4px 8px; margin-top: 2px;" onchange="window.app.updateQuestionExplanation(${qIdx}, this.value)" />
                 </div>
               </div>
             `).join('')}
           </div>
 
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; border-top: 1px solid #e2e8f0; padding-top: 16px;">
-            <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar / Salir</button>
-            <button type="submit" class="btn btn-gold" style="font-weight: 900; font-size: 14px; padding: 10px 28px; box-shadow: 0 4px 14px rgba(245,158,11,0.4); cursor: pointer;">
-              ✅ Finalizar y Calificar Evaluación
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; border-top: 1px solid #e2e8f0; padding-top: 16px; flex-wrap: wrap; gap: 10px;">
+            <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">
+              Cerrar sin Guardar
+            </button>
+            <button type="button" class="btn btn-gold" onclick="window.app.saveAndPublishAIQuiz('${material.id}')" style="font-weight: 900; font-size: 14px; padding: 10px 24px; box-shadow: 0 4px 14px rgba(245,158,11,0.4); cursor: pointer;">
+              💾 Guardar y Publicar Evaluación para Alumnos (10 Preguntas)
             </button>
           </div>
-        </form>
+        </div>
       </div>
     `;
 
@@ -26467,105 +26070,89 @@ class IntranetApp {
     overlay.style.display = "flex";
   }
 
-  submitStudentQuiz(event, materialId) {
-    if (event && typeof event.preventDefault === "function") event.preventDefault();
+  regenerateQuestionsWithAI(materialId) {
+    const state = this.store.state;
+    const materials = (state && state.weeklyMaterials) || [];
+    const material = materials.find(m => m.id === materialId) || materials[0];
 
-    const currentUser = this.store.getCurrentUser();
-    const studentName = (currentUser && (currentUser.name || currentUser.studentName)) || "Estudiante";
-
-    // Calificar evaluación (10 preguntas = 20 pts)
-    let score = 20; // 10/10 correctas por defecto
-    const evaluationRecord = {
-      id: `EVAL-${Date.now()}`,
-      materialId: materialId,
-      studentName: studentName,
-      studentCode: (currentUser && currentUser.code) || 'EST-2026-001',
-      grade: '2° de Secundaria',
-      score: 20,
-      maxScore: 20,
-      percentage: '100%',
-      status: 'Aprobado con Distinción',
-      feedback: '¡Excelente desempeño! Demostraste un dominio sobresaliente en la programación de sensores ultrasónicos y lógica condicional con Arduino.',
-      submittedAt: new Date().toLocaleString('es-PE')
-    };
-
-    // Guardar en store
-    if (!this.store.state.evaluations) this.store.state.evaluations = [];
-    this.store.state.evaluations.push(evaluationRecord);
-    if (typeof this.store.saveState === 'function') this.store.saveState();
-
-    this.closeModal();
-    this.showToast("🎉 ¡Evaluación completada con éxito! Calificación: 20 / 20", "success");
-    this.render();
-
-    // Mostrar modal de felicitaciones y resultados
-    this.openQuizResultsModal(materialId, evaluationRecord);
+    this._currentEditingQuestions = this.generateQuestionsWithAI(material);
+    this.showToast("⚡ ¡10 Preguntas regeneradas con IA basadas en el contenido de la clase!", "success");
+    this.renderAIQuizStudio(material);
   }
 
-  openQuizResultsModal(materialId, record) {
-    let overlay = document.getElementById("app-modal-overlay");
-    if (!overlay) {
-      overlay = document.createElement("div");
-      overlay.id = "app-modal-overlay";
-      overlay.className = "modal-overlay";
-      document.body.appendChild(overlay);
+  updateQuestionText(qIdx, text) {
+    if (this._currentEditingQuestions && this._currentEditingQuestions[qIdx]) {
+      this._currentEditingQuestions[qIdx].question = text.trim();
+    }
+  }
+
+  updateQuestionOption(qIdx, oIdx, text) {
+    if (this._currentEditingQuestions && this._currentEditingQuestions[qIdx] && this._currentEditingQuestions[qIdx].options) {
+      this._currentEditingQuestions[qIdx].options[oIdx] = text.trim();
+    }
+  }
+
+  updateQuestionCorrectIndex(qIdx, oIdx) {
+    if (this._currentEditingQuestions && this._currentEditingQuestions[qIdx]) {
+      this._currentEditingQuestions[qIdx].correctIndex = oIdx;
+      const state = this.store.state;
+      const materials = (state && state.weeklyMaterials) || [];
+      const mat = materials[0];
+      if (mat) this.renderAIQuizStudio(mat);
+    }
+  }
+
+  updateQuestionExplanation(qIdx, text) {
+    if (this._currentEditingQuestions && this._currentEditingQuestions[qIdx]) {
+      this._currentEditingQuestions[qIdx].explanation = text.trim();
+    }
+  }
+
+  saveAndPublishAIQuiz(materialId) {
+    const questions = this._currentEditingQuestions;
+    if (!questions || questions.length === 0) {
+      this.showToast("No hay preguntas para guardar", "error");
+      return;
     }
 
-    const evaluation = record || (this.store.state.evaluations || []).find(e => e.materialId === materialId) || {
-      score: 20,
-      maxScore: 20,
-      status: 'Aprobado con Distinción',
-      feedback: '¡Excelente desempeño! Demostraste un dominio sobresaliente de los conceptos de robótica y sensores ultrasónicos.',
-      submittedAt: new Date().toLocaleString('es-PE')
-    };
+    let materials = this.store.state.weeklyMaterials;
+    if (!materials || materials.length === 0) {
+      materials = (typeof initialData !== 'undefined' && initialData.weeklyMaterials) ? initialData.weeklyMaterials : [];
+      this.store.state.weeklyMaterials = materials;
+    }
 
-    overlay.innerHTML = `
-      <div class="modal-card" style="max-width: 580px; width: 90%; background: #ffffff; border-radius: 14px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3); z-index: 99999;">
-        <div class="modal-header" style="background: linear-gradient(135deg, #15803d, #166534); color: white; padding: 20px 24px; text-align: center;">
-          <div style="font-size: 38px; margin-bottom: 4px;">🏆</div>
-          <h3 style="font-size: 18px; font-weight: 900; margin: 0; color: white;">¡Evaluación Calificada con Éxito!</h3>
-          <span style="font-size: 12px; color: #bbf7d0;">I.E.P. "El Educador" • Aula Virtual 2026</span>
-        </div>
+    let material = materials.find(m => m.id === materialId);
+    if (!material && materials.length > 0) {
+      material = materials[0];
+    }
 
-        <div style="padding: 24px; text-align: center;">
-          <div style="background: #f0fdf4; border: 2px solid #86efac; border-radius: 12px; padding: 20px; margin-bottom: 18px;">
-            <span style="font-size: 12px; font-weight: 800; color: #166534; text-transform: uppercase;">Nota Obtenida</span>
-            <div style="font-size: 40px; font-weight: 900; color: #15803d; margin: 4px 0;">
-              ${evaluation.score} / ${evaluation.maxScore}
-            </div>
-            <span class="status-badge" style="background: #16a34a; color: white; font-weight: 800; font-size: 12px;">
-              ✓ ${evaluation.status}
-            </span>
-          </div>
+    if (material) {
+      material.questions = questions;
+      material.evaluation = {
+        totalQuestions: questions.length,
+        passingScore: 14,
+        timeLimitMinutes: 20,
+        questions: questions
+      };
 
-          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; text-align: left; margin-bottom: 20px; font-size: 13px; color: #334155; line-height: 1.6;">
-            <strong>Retroalimentación del Docente & Sistema:</strong><br>
-            ${evaluation.feedback}
-          </div>
+      if (typeof this.store.saveState === "function") {
+        this.store.saveState();
+      }
+    }
 
-          <button class="btn btn-navy" onclick="window.app.closeModal()" style="width: 100%; font-weight: 800; padding: 10px; cursor: pointer;">
-            Entendido / Volver al Aula Virtual
-          </button>
-        </div>
-      </div>
-    `;
-
-    overlay.classList.add("active", "open");
-    overlay.style.display = "flex";
+    this.closeModal();
+    this.showToast("🎉 ¡Evaluación de 10 preguntas generada con IA y publicada exitosamente para los alumnos!", "success");
+    this.render();
   }
 
   openPreviewQuizModal(materialId) {
-    this.startStudentQuiz(materialId);
-  }
-
-  openGenerateQuizModal(materialId) {
-    this.startStudentQuiz(materialId);
+    this.openGenerateQuizModal(materialId);
   }
 
   confirmRegenerateQuiz(materialId) {
-    this.showToast("⚡ Cuestionario interactivo regenerado con IA.", "success");
-    this.startStudentQuiz(materialId);
+    this.openGenerateQuizModal(materialId);
   }
+
 
   closeModal() {
     const overlay = document.getElementById("app-modal-overlay");
