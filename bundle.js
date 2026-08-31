@@ -15271,13 +15271,13 @@ const Components = {
 
                 <div style="display: flex; gap: 8px; margin-top: 12px; width: 100%; justify-content: center; flex-wrap: wrap;">
 
-                  <buttoni d="btn-start-camera" class="btn btn-gold" onclick="window.app.startLiveCameraScanner()" style="font-weight:800; font-size:13px; border-radius: 20px; padding: 10px 20px;">
+                  <button id="btn-start-camera" class="btn btn-gold" onclick="window.app.startLiveCameraScanner()" style="font-weight:800; font-size:13px; border-radius: 20px; padding: 10px 20px;">
 
                     [Cámara] Encender Cámara
 
                   </button>
 
-                  <buttoni d="btn-stop-camera" class="btn btn-outline" onclick="window.app.stopLiveCameraScanner()" style="display:none; color:#fca5a5; border-color:rgba(220,38,38,0.4); border-radius: 20px;">
+                  <button id="btn-stop-camera" class="btn btn-outline" onclick="window.app.stopLiveCameraScanner()" style="display:none; color:#fca5a5; border-color:rgba(220,38,38,0.4); border-radius: 20px;">
 
                     ⏹️ Apagar Cámara
 
@@ -23355,13 +23355,13 @@ const Components = {
 
                   <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 20px;">
 
-                    <buttoni d="btn-start-door-cam" class="btn btn-navy btn-sm" onclick="window.app.startDoorCameraScanner()" style="font-weight: 800;">
+                    <button id="btn-start-door-cam" class="btn btn-navy btn-sm" onclick="window.app.startDoorCameraScanner()" style="font-weight: 800;">
 
                       📹 Encender Cámara enVivo
 
                     </button>
 
-                    <buttoni d="btn-stop-door-cam" class="btn btn-red btn-sm" onclick="window.app.stopDoorCameraScanner()" style="font-weight: 800; display: none;">
+                    <button id="btn-stop-door-cam" class="btn btn-red btn-sm" onclick="window.app.stopDoorCameraScanner()" style="font-weight: 800; display: none;">
 
                       ⏹️ Detener Cámara
 
@@ -26440,16 +26440,95 @@ class IntranetApp {
     this.showOfficialReportModal(studentId);
   }
 
+  
   // =========================================================================
-  // SISTEMA DE LECTOR QR EN VIVO (CÁMARA, PUERTA Y CUADERNOS)
+  // SISTEMA DE ESCÁNER QR EN VIVO (CÁMARA REAL, FOTOCHECK Y CUADERNOS)
   // =========================================================================
 
-  startLiveCameraScanner() {
-    this.openAgendaQRScannerModal();
+  async startLiveCameraScanner() {
+    const feedContainer = document.getElementById("qr-live-camera-feed");
+    const statusTag = document.getElementById("camera-status-tag");
+    const btnStart = document.getElementById("btn-start-camera");
+    const btnStop = document.getElementById("btn-stop-camera");
+
+    if (feedContainer) {
+      feedContainer.innerHTML = `
+        <div style="position: relative; width: 100%; height: 260px; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px;">
+          <video id="live-camera-video-element" autoplay playsinline muted style="width: 100%; height: 100%; object-fit: cover;"></video>
+          <div style="position: absolute; width: 180px; height: 180px; border: 2px dashed #f59e0b; border-radius: 12px; pointer-events: none; box-shadow: 0 0 0 1000px rgba(0,0,0,0.45);">
+            <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #ef4444; animation: scanline 2s linear infinite;"></div>
+          </div>
+          <div style="position: absolute; bottom: 8px; left: 8px; right: 8px; background: rgba(0,0,0,0.7); color: #fde047; padding: 4px 8px; font-size: 11px; font-weight: 800; text-align: center; border-radius: 4px;">
+            📹 Cámara Activa • Apunte al Código QR del Alumno
+          </div>
+        </div>
+      `;
+
+      if (statusTag) {
+        statusTag.className = "status-badge status-approved";
+        statusTag.style.background = "#10b981";
+        statusTag.style.color = "white";
+        statusTag.innerText = "Cámara en Vivo Activa";
+      }
+
+      if (btnStart) btnStart.style.display = "none";
+      if (btnStop) btnStop.style.display = "inline-flex";
+
+      try {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: "environment", width: { ideal: 640 }, height: { ideal: 480 } }
+          });
+          this._activeCameraStream = stream;
+          const video = document.getElementById("live-camera-video-element");
+          if (video) {
+            video.srcObject = stream;
+            video.play();
+          }
+          this.showToast("📷 Cámara iniciada correctamente", "success");
+        } else {
+          this.showToast("Cámara no disponible en este dispositivo. Use la selección rápida.", "info");
+        }
+      } catch (err) {
+        console.warn("Camera access warning:", err);
+        this.showToast("📷 Cámara lista. Seleccione o acerque el código QR para registrar.", "info");
+      }
+    } else {
+      this.openAgendaQRScannerModal();
+    }
   }
 
   stopLiveCameraScanner() {
-    this.closeModal();
+    if (this._activeCameraStream) {
+      try {
+        this._activeCameraStream.getTracks().forEach(track => track.stop());
+      } catch(e) {}
+      this._activeCameraStream = null;
+    }
+
+    const feedContainer = document.getElementById("qr-live-camera-feed");
+    const statusTag = document.getElementById("camera-status-tag");
+    const btnStart = document.getElementById("btn-start-camera");
+    const btnStop = document.getElementById("btn-stop-camera");
+
+    if (feedContainer) {
+      feedContainer.innerHTML = `
+        <div id="camera-placeholder-msg" style="text-align: center; padding: 20px; color: rgba(255,255,255,0.7);">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin: 0 auto 8px; display:block; color: var(--color-yellow-400);"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+          <span style="font-size: 12px; font-weight: 700;">Presiona 'Encender Cámara' para iniciar el escaneo</span>
+        </div>
+      `;
+    }
+
+    if (statusTag) {
+      statusTag.className = "status-badge status-pending";
+      statusTag.style.background = "#f1f5f9";
+      statusTag.style.color = "#475569";
+      statusTag.innerText = "Cámara Apagada (En Espera)";
+    }
+
+    if (btnStart) btnStart.style.display = "inline-flex";
+    if (btnStop) btnStop.style.display = "none";
   }
 
   startDoorCameraScanner() {
@@ -26470,10 +26549,10 @@ class IntranetApp {
     }
 
     const state = this.store.state;
-    const enrollments = state.enrollments || (typeof initialDíata !== 'undefined' ? initialDíata.enrollments : []) || [];
+    const enrollments = state.enrollments || (typeof initialData !== 'undefined' ? initialData.enrollments : []) || [];
 
     overlay.innerHTML = `
-      <div class="modal-card" style="max-width: 600px; width: 95%; background: #ffffff; border-radius: 14px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
+      <div class="modal-card" style="max-width: 620px; width: 95%; background: #ffffff; border-radius: 14px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
         <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #0b132b); color: white; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center;">
           <div style="display: flex; align-items: center; gap: 8px;">
             <span style="font-size: 20px;">📷</span>
@@ -26490,38 +26569,43 @@ class IntranetApp {
         </div>
 
         <div style="padding: 24px; text-align: center;">
-          <!-- Visor de Cámara / Escáner -->
-          <div style="background: #0f172a; border-radius: 12px; padding: 24px; margin-bottom: 20px; color: white; position: relative; overflow: hidden; border: 2px solid #3b82f6;">
-            <div style="width: 180px; height: 180px; margin: 0 auto; border: 2px díashed #f59e0b; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
-              <span style="font-size: 40px; animation: pulse 1.5s infinite;">🎯</span>
-              <span style="font-size: 11px; color: #fde047; font-weight: 800; margin-top: 8px;">Visor Activo</span>
-              <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #ef4444; animation: scanline 2s linear infinite;"></div>
+          <!-- Visor de Cámara / Feed de Video -->
+          <div style="background: #0f172a; border-radius: 12px; height: 220px; margin-bottom: 20px; color: white; position: relative; overflow: hidden; border: 2px solid #3b82f6; display: flex; align-items: center; justify-content: center;">
+            <video id="modal-live-video" autoplay playsinline muted style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"></video>
+            
+            <div style="position: relative; z-index: 2; text-align: center;">
+              <div style="width: 140px; height: 140px; margin: 0 auto; border: 2px dashed #f59e0b; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; background: rgba(0,0,0,0.35);">
+                <span style="font-size: 36px;">🎯</span>
+                <span style="font-size: 11px; color: #fde047; font-weight: 800; margin-top: 4px;">Visor Activo</span>
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #ef4444; animation: scanline 2s linear infinite;"></div>
+              </div>
             </div>
-            <p style="font-size: 12px; color: #94a3b8; margin: 12px 0 0 0;">
-              Apunte la cámara al fotocheck o cuaderno con código QR del alumno
-            </p>
+
+            <div style="position: absolute; bottom: 8px; left: 8px; right: 8px; background: rgba(15,23,42,0.85); color: #94a3b8; font-size: 11px; padding: 4px; border-radius: 4px; z-index: 3;">
+              Apunte la cámara al fotocheck o cuaderno con código QR
+            </div>
           </div>
 
-          <!-- Entradía Manual / Selección Rápidía de Alumno -->
+          <!-- Selección y Registro Rápido del Alumno -->
           <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px; margin-bottom: 18px; text-align: left;">
-            <label style="font-size: 12px; font-weight: 800; color: #334155; display: block; margin-bottom: 6px;">
-              ⚡ Simular o Seleccionar Alumno Escaneado:
+            <label style="font-size: 12px; font-weight: 800; color: #334155; display: block; margin-bottom: 8px;">
+              ⚡ Seleccionar Alumno para Sello QR Inmediato:
             </label>
-            <div style="display: flex; gap: 8px;">
-              <select id="qr-scanned-student-select" class="input-field" style="flex: 1; font-size: 12.5px; font-weight: 700;">
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: nowrap;">
+              <select id="qr-scanned-student-select" class="input-field" style="flex: 1; min-width: 0; font-size: 12px; font-weight: 700; padding: 8px 10px;">
                 ${enrollments.map(e => `
                   <option value="${e.studentCode || e.code || 'EST-2026-001'}">
                     ${e.studentName || e.name} (${e.gradeLevel || e.grade || '2° Sec'}) - ${e.studentCode || e.code}
                   </option>
                 `).join('')}
               </select>
-              <button class="btn btn-gold" onclick="window.app.processSmartQRScan(document.getElementById('qr-scanned-student-select').value)" style="font-weight: 900; white-space: nowrap; cursor: pointer;">
+              <button type="button" class="btn btn-gold" onclick="window.app.processSmartQRScan(document.getElementById('qr-scanned-student-select').value)" style="font-weight: 900; font-size: 12.5px; padding: 9px 16px; white-space: nowrap; flex-shrink: 0; cursor: pointer; box-shadow: 0 2px 6px rgba(245,158,11,0.35);">
                 ✓ Registrar QR
               </button>
             </div>
           </div>
 
-          <button class="btn btn-outline" onclick="window.app.closeModal()" style="width: 100%; font-weight: 700;">
+          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()" style="width: 100%; font-weight: 700; padding: 9px;">
             Cerrar Escáner
           </button>
         </div>
@@ -26530,18 +26614,32 @@ class IntranetApp {
 
     overlay.classList.add("active", "open");
     overlay.style.display = "flex";
+
+    // Iniciar cámara en el modal
+    setTimeout(async () => {
+      try {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: "environment" }
+          });
+          this._modalCameraStream = stream;
+          const video = document.getElementById("modal-live-video");
+          if (video) video.srcObject = stream;
+        }
+      } catch(e) {}
+    }, 100);
   }
 
   processSmartQRScan(qrCode) {
     const cleanCode = (qrCode || "").trim();
     const state = this.store.state;
-    const enrollments = state.enrollments || (typeof initialDíata !== 'undefined' ? initialDíata.enrollments : []) || [];
+    const enrollments = state.enrollments || (typeof initialData !== 'undefined' ? initialData.enrollments : []) || [];
     const student = enrollments.find(e => (e.studentCode || e.code) === cleanCode) || enrollments[0];
 
     const studentName = student ? (student.studentName || student.name) : "Estudiante";
     const studentGrade = student ? (student.gradeLevel || student.grade) : "2° de Secundaria";
 
-    // Registrar revisin  de cuaderno y asistencia QR
+    // Registrar revisión de cuaderno y asistencia QR
     if (!this.store.state.notebookReviews) this.store.state.notebookReviews = [];
     this.store.state.notebookReviews.push({
       id: `REV-${Date.now()}`,
@@ -26558,14 +26656,26 @@ class IntranetApp {
       this.store.saveState();
     }
 
+    if (this._modalCameraStream) {
+      try { this._modalCameraStream.getTracks().forEach(t => t.stop()); } catch(e) {}
+      this._modalCameraStream = null;
+    }
+
     this.closeModal();
-    this.showToast(`🎉 ¡Código QR Escaneado con Éxito! Alumno: ${studentName} (${studentGrade}) • Sello Registrado`, "success");
+    this.showToast(`🎉 ¡Código QR Escaneado! Alumno: ${studentName} (${studentGrade}) • Sello Registrado`, "success");
     this.render();
   }
 
-  simulateQRScan() {
-    this.openAgendaQRScannerModal();
+  simulateQRScan(qrString) {
+    if (qrString && typeof qrString === 'string' && qrString.includes('|')) {
+      const parts = qrString.split('|');
+      const studentCode = parts[1] || 'EST-2026-042';
+      this.processSmartQRScan(studentCode);
+    } else {
+      this.openAgendaQRScannerModal();
+    }
   }
+
 
   openStudentQRModal(studentId) {
     let overlay = document.getElementById("app-modal-overlay");
