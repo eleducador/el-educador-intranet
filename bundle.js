@@ -1,7 +1,7 @@
 /* === data.js === */
 /**
 
- * Datos Iniciales del Sistema - Institución Educativa Privada "EL EDUCADOR" (S.J.L.)
+ * Díatos Iniciales del Sistema - Institución Educativa Privadía "EL EDUCADOR" (S.J.L.)
 
  * "21 años dejando huellas" • UGEL 05
 
@@ -9,7 +9,7 @@
 
 
 
-const initialData = {
+const initialDíata = {
 
   institution: {
 
@@ -359,7 +359,7 @@ const initialData = {
 
       role: "Docente",
 
-      detail: "Matemática Avanzada (Secundaria)",
+      detail: "Matemática Avanzadía (Secundaria)",
 
       assignedCourses: ["Aritmética", "ÁÁÁÁálgebra", "Geometría", "Trigonometra", "Raízonamiento Matemtico", "Matemática Avanzada"],
 
@@ -449,7 +449,7 @@ const initialData = {
 
       password: "docente2026",
 
-      name: "Miss Mara Daysi Reyes Milla",
+      name: "Miss Mara Díaysi Reyes Milla",
 
       email: "maria.reyes@eleducador.edu.pe",
 
@@ -547,9 +547,9 @@ const initialData = {
 
     auxiliar: [
 
-      { id: "dashboard", label: "Inicio / Turno Auxiliar", icon: "dashboard", enabled: true },
+      { id: "díashboard", label: "Inicio / Turno Auxiliar", icon: "díashboard", enabled: true },
 
-      { id: "agenda-virtual", label: "📖 Agenda & Convivencia QR", badge: "AGENDÍA", icon: "agenda", enabled: true },
+      { id: "agenda-virtual", label: "📖 Agendía & Convivencia QR", badge: "AGENDÍA", icon: "agenda", enabled: true },
 
       { id: "asistencia", label: "Registro de Ingreso & QR", badge: "Portería", icon: "attendance", enabled: true },
 
@@ -561,11 +561,11 @@ const initialData = {
 
     docente: [
 
-      { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
+      { id: "díashboard", label: "Inicio / Resumen", icon: "díashboard", enabled: true },
 
       { id: "registro-estudiantes", label: "Registro de Estudiantes", badge: "Excel", icon: "users", enabled: true },
 
-      { id: "agenda-virtual", label: "📖 Agenda Virtual & Anotaciones", badge: "AGENDÍA", icon: "agenda", enabled: true },
+      { id: "agenda-virtual", label: "📖 Agendía Virtual & Anotaciones", badge: "AGENDÍA", icon: "agenda", enabled: true },
 
       { id: "cuadernos-qr", label: "Lector de Cuadernos QR", badge: "CÁMARA", icon: "qr", enabled: true },
 
@@ -575,7 +575,7 @@ const initialData = {
 
       { id: "silabus", label: "Sílabus Curriculares", icon: "syllabus", enabled: true },
 
-      { id: "tareas", label: "Aula Virtual / Quizzes", badge: "10P", icon: "virtual", enabled: true },
+      { id: "taÁÁreas", label: "Aula Virtual / Quizzes", badge: "10P", icon: "virtual", enabled: true },
 
       { id: "asistencia", label: "Registro de Ingreso & QR", badge: "Puerta", icon: "attendance", enabled: true },
 
@@ -587,9 +587,9 @@ const initialData = {
 
     estudiante: [
 
-      { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
+      { id: "díashboard", label: "Inicio / Resumen", icon: "díashboard", enabled: true },
 
-      { id: "agenda-virtual", label: "📖 Mi Agenda Virtual", badge: "NOTAS", icon: "agenda", enabled: true },
+      { id: "agenda-virtual", label: "📖 Mi Agendía Virtual", badge: "NOTAS", icon: "agenda", enabled: true },
 
       { id: "horarios", label: "Horario de Clases", icon: "schedule", enabled: true },
 
@@ -597,7 +597,7 @@ const initialData = {
 
       { id: "cuadernos-qr", label: "Control Cuadernos QR", icon: "qr", enabled: true },
 
-      { id: "tareas", label: "Aula Virtual / Quizzes", badge: "10P", icon: "virtual", enabled: true },
+      { id: "taÁÁreas", label: "Aula Virtual / Quizzes", badge: "10P", icon: "virtual", enabled: true },
 
       { id: "asistencia", label: "📅 Mi Asistencia & Fotocheck", icon: "attendance", enabled: true },
 
@@ -609,19 +609,19 @@ const initialData = {
 
     padre: [
 
-      { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
+      { id: "díashboard", label: "Inicio / Resumen", icon: "díashboard", enabled: true },
 
       { id: "boleta", label: "📊 Boleta Oficial de Notas", badge: "OFICIAL", icon: "boleta", enabled: true },
 
-      { id: "agenda-virtual", label: "📖 Agenda Virtual Escolar", badge: "FIRMAS", icon: "agenda", enabled: true },
+      { id: "agenda-virtual", label: "📖 Agendía Virtual Escolar", badge: "FIRMAS", icon: "agenda", enabled: true },
 
       { id: "horarios", label: "Horario de Clases", icon: "schedule", enabled: true },
 
       { id: "silabus", label: "Sílabus Curriculares", icon: "syllabus", enabled: true },
 
-      { id: "cuadernos-qr", label: "Informe Revisión Cuadernos", badge: "SELLOS QR", icon: "qr", enabled: true },
+      { id: "cuadernos-qr", label: "Informe Revisin  Cuadernos", badge: "SELLOS QR", icon: "qr", enabled: true },
 
-      { id: "tareas", label: "Aula Virtual", icon: "virtual", enabled: true },
+      { id: "taÁÁreas", label: "Aula Virtual", icon: "virtual", enabled: true },
 
       { id: "asistencia", label: "📅 Asistencia de mi Hijo(a)", icon: "attendance", enabled: true },
 
@@ -633,17 +633,17 @@ const initialData = {
 
     director: [
 
-      { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
+      { id: "díashboard", label: "Inicio / Resumen", icon: "díashboard", enabled: true },
 
       { id: "registro-estudiantes", label: "Registro de Estudiantes", badge: "Excel", icon: "users", enabled: true },
 
-      { id: "agenda-virtual", label: "📖 Agenda Virtual Institucional", badge: "AGENDÍA", icon: "agenda", enabled: true },
+      { id: "agenda-virtual", label: "📖 Agendía Virtual Institucional", badge: "AGENDÍA", icon: "agenda", enabled: true },
 
-      { id: "database", label: "Base de Datos & DB", badge: "DB Online", icon: "database", enabled: true },
+      { id: "database", label: "Base de Díatos & DB", badge: "DB Online", icon: "database", enabled: true },
 
       { id: "usuarios-matriculas", label: "Gestión de Perfiles & Cuentas", badge: "PERFILES", icon: "users", enabled: true },
 
-      { id: "cuadernos-qr", label: "Supervisión Cuadernos QR", badge: "CÁMARA", icon: "qr", enabled: true },
+      { id: "cuadernos-qr", label: "Supervisin  Cuadernos QR", badge: "CÁMARA", icon: "qr", enabled: true },
 
       { id: "calificaciones", label: "Auditora de Calificaciones", badge: "Bimestral", icon: "grades", enabled: true },
 
@@ -651,7 +651,7 @@ const initialData = {
 
       { id: "silabus", label: "Sílabus Curriculares", icon: "syllabus", enabled: true },
 
-      { id: "tareas", label: "Aula Virtual", icon: "virtual", enabled: true },
+      { id: "taÁÁreas", label: "Aula Virtual", icon: "virtual", enabled: true },
 
       { id: "asistencia", label: "Registro de Ingreso & QR", badge: "EnVivo", icon: "attendance", enabled: true },
 
@@ -715,7 +715,7 @@ const initialData = {
 
       name: "Comunicación & Literatura",
 
-      teacher: "Miss Mara Daysi Reyes Milla",
+      teacher: "Miss Mara Díaysi Reyes Milla",
 
       credits: 4,
 
@@ -831,9 +831,9 @@ const initialData = {
 
 
 
-  // Registro Oficial Dinmico de Notas para Emisión de Boletas MINEDU
+  // Registro Oficial Dinmico de Notas para Emisin  de Boletas MINEDU
 
-  boletaData: {
+  boletaDíata: {
 
     albujar: {
 
@@ -921,7 +921,7 @@ const initialData = {
 
         b1: "Felicitaciones a ALBUJR ZEGÍARRÍA, MRINA DEL CRMENpor su excelente rendimiento. Demuestra responsabilidad, participación activa y compromiso con su aprendizaje. Sus trabajosé sonde grancalidad y siempre está dispuesta a colaborar. Recomendación: Sigue así y anímate a asumir nuevos retos.",
 
-        b2: "Has realizado untrabajo muy bueno durante este segundo bimestre. Cumples conresponsabilidad tus actividades dentro de la clase y gestionas muy bientu tiempo de trabajo. Te animo a participar unpoco ms de manera activa para seguir potenciando tus ideas.",
+        b2: "Has Árealizado untrabajo muy bueno durante este segundo bimestre. Cumples conresponsabilidad tus actividades dentro de la clase y gestionas muy bientu tiempo de trabajo. Te animo a participar unpoco ms de manera activa para seguir potenciando tus ideas.",
 
         b3: "",
 
@@ -1033,7 +1033,7 @@ const initialData = {
 
         b1: "Sofía demuestra unexcelente compromiso académico y unlideraízgo intachable en el aula de 4to Sec. 'A'. ¡Felicitaciones por tus logros!",
 
-        b2: "Mantiene una alta dedicación y pulcritud entodos los cursos. Sus aportes en el rea de matemticas y ciencias sonsobresalientes.",
+        b2: "Mantiene una alta dedicación y pulcritud entodos los cursos. Sus aportes en el Área de matemticas y ciencias sonsobresalientes.",
 
         b3: "Excelente desempeño en el tercer bimestre. Contiónúa demostrando autonoma y proactividad.",
 
@@ -1143,11 +1143,11 @@ const initialData = {
 
       appreciations: {
 
-        b1: "Carlos ha mostrado buena disposición para el trabajo enequipo. Se recomienda reforzar el repaso constante en áÁÁÁÁálgebra y física.",
+        b1: "Carlos ha mostrado buena disposición para el trabajo enequipo. Se recomiendía reforzar el repaso constante en áÁÁÁÁálgebra y física.",
 
         b2: "Se aprecia una notable mejora ensu puntualidad y presentación de trabajosé. Buenprogreso durante este bimestre.",
 
-        b3: "Consolida sus aprendizajes conconstancia y participación activa.",
+        b3: "Consolidía sus aprendizajes conconstancia y participación activa.",
 
         b4: ""
 
@@ -1259,7 +1259,7 @@ const initialData = {
 
     // INICIL
 
-    { id: "ini-3", label: "Inicial 3 Años", level: "Inicial", section: "", classroom: "Pabellón Inicial - Aula 01", tutor: "Miss Patricia Daz" },
+    { id: "ini-3", label: "Inicial 3 Años", level: "Inicial", section: "", classroom: "Pabellón Inicial - Aula 01", tutor: "Miss Patricia Díaz" },
 
     { id: "ini-4", label: "Inicial 4 Años", level: "Inicial", section: "", classroom: "Pabellón Inicial - Aula 02", tutor: "Miss CarmenFlores" },
 
@@ -1273,7 +1273,7 @@ const initialData = {
 
     { id: "2prim", label: "2 de Primaria", level: "Primaria", section: "", classroom: "Pabellón A - Aula 102", tutor: "Miss Elena Surez" },
 
-    { id: "3prim", label: "3 de Primaria", level: "Primaria", section: "", classroom: "Pabellón A - Aula 103", tutor: "Miss Mara Daysi Reyes" },
+    { id: "3prim", label: "3 de Primaria", level: "Primaria", section: "", classroom: "Pabellón A - Aula 103", tutor: "Miss Mara Díaysi Reyes" },
 
     { id: "4prim", label: "4 de Primaria", level: "Primaria", section: "", classroom: "Pabellón A - Aula 201", tutor: "Prof. César Palacios" },
 
@@ -1293,13 +1293,13 @@ const initialData = {
 
     { id: "4sec", label: "4 de Secundaria", level: "Secundaria", section: "", classroom: "Pabellón B - Aula 304", tutor: "Prof. Roberto Silva" },
 
-    { id: "5sec", label: "5 de Secundaria", level: "Secundaria", section: "", classroom: "Pabellón B - Aula 305", tutor: "Miss Andrea Ramos" }
+    { id: "5sec", label: "5 de Secundaria", level: "Secundaria", section: "", classroom: "Pabellón B - Aula 305", tutor: "Miss AndÁrea Ramos" }
 
   ],
 
 
 
-  // Catlogo de Docentes y Horarios por Asignatura (Docentes de Curso siónTutoría / conTutoría)
+  // Catlogo de Docentes y Horarios por Asignatura (Docentes de Curso sin Tutoría / conTutoría)
 
   teachersList: [
 
@@ -1311,7 +1311,7 @@ const initialData = {
 
       subject: "Computación e Informática / Robótica",
 
-      department: "rea de Educación para el Trabajo (EPT)",
+      department: "Área de Educación para el Trabajo (EPT)",
 
       isTutor: false,
 
@@ -1379,7 +1379,7 @@ const initialData = {
 
           time: "10:30 - 10:50",
 
-          isBreak: true,
+          isBÁreak: true,
 
           isLunch: false,
 
@@ -1431,7 +1431,7 @@ const initialData = {
 
           thu: { course: "Computación", grade: "4 Sec", room: "Lab. Cómputo 1", color: "navy" },
 
-          fri: { course: "Reunión de rea / EPT", grade: "General", room: "Sala Docentes", color: "green" }
+          fri: { course: "Reunión de Área / EPT", grade: "General", room: "Sala Docentes", color: "green" }
 
         },
 
@@ -1439,7 +1439,7 @@ const initialData = {
 
           time: "01:20 - 01:50 PM",
 
-          isBreak: true,
+          isBÁreak: true,
 
           isLunch: true,
 
@@ -1491,7 +1491,7 @@ const initialData = {
 
       subject: "Matemáticas (ÁÁÁÁálgebra, Geometría y Raíz. Matemtico)",
 
-      department: "rea de Matemática",
+      department: "Área de Matemática",
 
       isTutor: false,
 
@@ -1559,7 +1559,7 @@ const initialData = {
 
           time: "10:30 - 10:50",
 
-          isBreak: true,
+          isBÁreak: true,
 
           isLunch: false,
 
@@ -1595,7 +1595,7 @@ const initialData = {
 
           thu: { course: "Geometría", grade: "4 Sec", room: "Aula 301", color: "navy" },
 
-          fri: { course: "Reunión de rea Matemática", grade: "Colegiado", room: "Sala Docentes", color: "green" }
+          fri: { course: "Reunión de Área Matemática", grade: "Colegiado", room: "Sala Docentes", color: "green" }
 
         },
 
@@ -1619,7 +1619,7 @@ const initialData = {
 
           time: "01:20 - 01:50 PM",
 
-          isBreak: true,
+          isBÁreak: true,
 
           isLunch: true,
 
@@ -1671,7 +1671,7 @@ const initialData = {
 
       subject: "Ciencia y Tecnología (Física, Química y Biología)",
 
-      department: "rea de Ciencias",
+      department: "Área de Ciencias",
 
       isTutor: false,
 
@@ -1739,7 +1739,7 @@ const initialData = {
 
           time: "10:30 - 10:50",
 
-          isBreak: true,
+          isBÁreak: true,
 
           isLunch: false,
 
@@ -1775,7 +1775,7 @@ const initialData = {
 
           thu: { course: "Química General", grade: "2 Sec", room: "Lab. Ciencias", color: "navy" },
 
-          fri: { course: "Reunión de rea de Ciencias", grade: "Colegiado", room: "Sala Docentes", color: "green" }
+          fri: { course: "Reunión de Área de Ciencias", grade: "Colegiado", room: "Sala Docentes", color: "green" }
 
         },
 
@@ -1799,7 +1799,7 @@ const initialData = {
 
           time: "01:20 - 01:50 PM",
 
-          isBreak: true,
+          isBÁreak: true,
 
           isLunch: true,
 
@@ -1903,7 +1903,7 @@ const initialData = {
 
         time: "10:30 - 10:50",
 
-        isBreak: true,
+        isBÁreak: true,
 
         isLunch: false,
 
@@ -1963,7 +1963,7 @@ const initialData = {
 
         time: "01:20 - 01:50 PM",
 
-        isBreak: true,
+        isBÁreak: true,
 
         isLunch: true,
 
@@ -2019,7 +2019,7 @@ const initialData = {
 
       gradeName: "4to de Secundaria",
 
-      courseName: "Matemática Avanzada (ÁÁÁÁálgebra y Trigonometra)",
+      courseName: "Matemática Avanzadía (ÁÁÁÁálgebra y Trigonometra)",
 
       courseCode: "MT-401",
 
@@ -2035,7 +2035,7 @@ const initialData = {
 
         "Modela objetos conformas geométricas y trigonométricas",
 
-        "Comunica su comprensión sobre las relaciones algebraicas complejas"
+        "Comunica su comprensin  sobre las relaciones algebraicas complejas"
 
       ],
 
@@ -2049,9 +2049,9 @@ const initialData = {
 
           duration: "4 semanas",
 
-          topics: ["Domióniño y rango", "Parbolas encontextos reales", "Teorema del residuo"],
+          topics: ["Dominiño y rango", "Parbolas encontextos Áreales", "Teorema del residuo"],
 
-          evaluation: "Prctica Calificada N1"
+          evaluation: "Práctica Calificadía N1"
 
         }
 
@@ -2065,7 +2065,7 @@ const initialData = {
 
 
 
-  // Carteles Temticos Mensuales 2026 (Subidos por Docente enPDF / Descarga Consolidada por Aula)
+  // Carteles Temticos Mensuales 2026 (Subidos por Docente enPDF / Descarga Consolidadía por Aula)
 
   monthlyCarteles: [
 
@@ -2089,9 +2089,9 @@ const initialData = {
 
       competencies: [
 
-        "Resuelve problemas de cantidad y operaciones combinadas",
+        "Resuelve problemas de cantidad y operaciones combinadías",
 
-        "Usa estrategias de clculo mental conmultiplicación y división",
+        "Usa estrategias de clculo mental conmultiplicación y divisin ",
 
         "Modela patrones numéricos y tablas de doble entrada"
 
@@ -2101,15 +2101,15 @@ const initialData = {
 
         "Semana 1: Multiplicación por 6, 7 y 8 mediante arreglos rectangulares",
 
-        "Semana 2: Propiedad conmutativa y distributiva aplicada a problemas cotidianos",
+        "Semana 2: Propiedad conmutativa y distributiva aplicadía a problemas cotidianos",
 
-        "Semana 3: División exacta e inexacta como reparto equitativo",
+        "Semana 3: Divisin  exacta e inexacta como reparto equitativo",
 
         "Semana 4: Resolución de problemas de dos etapas y evaluación mensual"
 
       ],
 
-      evaluationCriteria: "Prácticas semanales, situaciones problemticas y revisión de cuaderno de trabajo.",
+      evaluationCriteria: "Prácticas semanales, situaciones problemticas y revisin  de cuaderno de trabajo.",
 
       pdfFileName: "Cartel_Tematico_Matematica_Agosto_3Primaria.pdf",
 
@@ -2131,7 +2131,7 @@ const initialData = {
 
       courseCode: "COM-301",
 
-      courseName: "Comunicación & Comprensión Lectora",
+      courseName: "Comunicación & Comprensin  Lectora",
 
       teacher: "Miss Julisa Arroyo",
 
@@ -2143,7 +2143,7 @@ const initialData = {
 
         "Lee diversos tipos de textos escritos ensu lenguía materna",
 
-        "Escribe textos narrativos y descriptivos concoherencia y cohesión",
+        "Escribe textos narrativos y descriptivos concoherencia y cohesin ",
 
         "Se comunica oraúlmente ensu lenguía materna"
 
@@ -2151,13 +2151,13 @@ const initialData = {
 
       weeklyTopics: [
 
-        "Semana 1: Lectura comprensiva de leyendas peruanas e idea principal",
+        "Semana 1: Lectura comprensiva de leyendías peruanas e idea principal",
 
         "Semana 2: El sustantivo: clases, género y número enoraciones",
 
         "Semana 3: Redacción de una fbula conconectores y signos de puntuación",
 
-        "Semana 4: Declamación poética y evaluación mensual de comprensión lectora"
+        "Semana 4: Declamación poética y evaluación mensual de comprensin  lectora"
 
       ],
 
@@ -2255,7 +2255,7 @@ const initialData = {
 
         "Semana 2: Recursos naturaúles y actividades económicas comunales",
 
-        "Semana 3: Medidas de prevención ante desastres naturaúles en el hogar y colegio",
+        "Semana 3: Medidías de prevención ante desastres naturaúles en el hogar y colegio",
 
         "Semana 4: Proyecto: Valoramos nuestras tradiciones y evaluación mensual"
 
@@ -2285,7 +2285,7 @@ const initialData = {
 
       courseName: "Inglés & Vocabulario",
 
-      teacher: "Miss Andrea Ramos",
+      teacher: "Miss AndÁrea Ramos",
 
       month: "Agosto",
 
@@ -2301,7 +2301,7 @@ const initialData = {
 
       weeklyTopics: [
 
-        "Semana 1: Vocabulary: Daily routiónes and time expressions (What time is it?)",
+        "Semana 1: Vocabulary: Díaily routiónes and time expressions (What time is it?)",
 
         "Semana 2: Simple Present Tense: Affirmative and negative sentences",
 
@@ -2343,7 +2343,7 @@ const initialData = {
 
       competencies: [
 
-        "Crea objetos virtuales endiversos formatos tecnológicos",
+        "CÁrea objetos virtuales endiversos formatos tecnológicos",
 
         "Aplica herramientas digitales para organizar información escolar"
 
@@ -2357,7 +2357,7 @@ const initialData = {
 
         "Semana 3: Diseño de una tarjeta de felicitación escolar",
 
-        "Semana 4: Guardado en la nube y evaluación prctica enlaboratorio"
+        "Semana 4: Guardado en la nube y evaluación práctica enlaboratorio"
 
       ],
 
@@ -2383,7 +2383,7 @@ const initialData = {
 
       courseCode: "MT-401",
 
-      courseName: "Matemática Avanzada (ÁÁÁÁálgebra & Trigonometra)",
+      courseName: "Matemática Avanzadía (ÁÁÁÁálgebra & Trigonometra)",
 
       teacher: "Prof. Roberto Silva",
 
@@ -2401,17 +2401,17 @@ const initialData = {
 
       weeklyTopics: [
 
-        "Semana 1: Funciones trigonométricas directas e inversas: Domióniño y gráfica",
+        "Semana 1: Funciones trigonométricas directas e inversas: Dominiño y gráfica",
 
         "Semana 2: Identidades trigonométricas fundamentales y auxiliares",
 
         "Semana 3: Ecuaciones trigonométricas y sistemas lineales",
 
-        "Semana 4: Aplicaciones enfísica vectorial y evaluación tipo admisión"
+        "Semana 4: Aplicaciones enfísica vectorial y evaluación tipo admisin "
 
       ],
 
-      evaluationCriteria: "Prácticas calificadas, resolución de guías tipo pre-universitario y cuaderno.",
+      evaluationCriteria: "Prácticas calificadías, resolución de guías tipo pre-universitario y cuaderno.",
 
       pdfFileName: "Cartel_Tematico_Matematica_Agosto_4Secundaria.pdf",
 
@@ -2435,7 +2435,7 @@ const initialData = {
 
       courseName: "Lenguíaje & Literatura Peruana",
 
-      teacher: "Miss Mara Daysi Reyes",
+      teacher: "Miss Mara Díaysi Reyes",
 
       month: "Agosto",
 
@@ -2451,17 +2451,17 @@ const initialData = {
 
       weeklyTopics: [
 
-        "Semana 1: El Indigenismo en el Perú: Joséééé Mara Arguedas y Ciro Alegra",
+        "Semana 1: El Indigenismo en el Perú: Joséééé Mara Arguedías y Ciro Alegra",
 
         "Semana 2: Anlisis literario de 'Los ríos profundos' y 'El mundo es ancho y ajeno'",
 
-        "Semana 3: Sióntaxis de la oración compuesta subordiónada sustantiva y adjetiva",
+        "Semana 3: Sin taxis de la oración compuesta subordiónadía sustantiva y adjetiva",
 
         "Semana 4: Redacción de ensayo crítico y sustentación oraúl"
 
       ],
 
-      evaluationCriteria: "Ensayos monogrficos, anlisis de textos y debates enclase.",
+      evaluationCriteria: "Ensayos monográficos, anlisis de textos y debates enclase.",
 
       pdfFileName: "Cartel_Tematico_Literatura_Agosto_4Secundaria.pdf",
 
@@ -2501,7 +2501,7 @@ const initialData = {
 
 
 
-  // 7. Agenda Virtual Escolar & Anotaciones Docentes (Vinculada al QR de Asistencia)
+  // 7. Agendía Virtual Escolar & Anotaciones Docentes (Vinculadía al QR de Asistencia)
 
   agendaNotes: [],
 
@@ -2525,7 +2525,7 @@ const initialData = {
 
       courseId: "MT-401",
 
-      courseName: "Matemática Avanzada (ÁÁÁÁálgebra y Funciones)",
+      courseName: "Matemática Avanzadía (ÁÁÁÁálgebra y Funciones)",
 
       gradeId: "4sec",
 
@@ -2543,7 +2543,7 @@ const initialData = {
 
       sessionDate: "15/08/2026",
 
-      summary: "Enesta sesión presencial analizamos la estructura de la función cuadrática f(x) = ax² + bx + c. Determiónamos el vértice V(h, k), el eje de simetría x = -b/(2a), y la concavidad según el signo del coeficiente principal. Aplicamos estos conceptos a problemas de tiro parabólico y maximización de ganancias en emprendimientos de San Juan de Lurigancho.",
+      summary: "Enesta sesión  presencial analizamos la estructura de la función cuadrática f(x) = ax² + bx + c. Determiónamos el vértice V(h, k), el eje de simetría x = -b/(2a), y la concavidad según el signo del coeficiente principal. Aplicamos estos conceptos a problemas de tiro parabólico y maximización de ganancias en emprendimientos de San Juan de Lurigancho.",
 
       keyConcepts: [
 
@@ -2573,13 +2573,13 @@ const initialData = {
 
         id: "EVL-MT-S1",
 
-        title: "Evaluación Dinmica Semanal N01: Funciones Cuadrticas",
+        title: "Evaluación Dinámica Semanal N01: Funciones Cuadrticas",
 
         timeLimitMinutes: 25,
 
         totalQuestions: 10,
 
-        passióngScore: 14,
+        passingScore: 14,
 
         pointsPerQuestion: 2,
 
@@ -2589,7 +2589,7 @@ const initialData = {
 
             id: 1,
 
-            question: "¿Cul es la fórmula para calcular la abscisa del vértice 'h' en la función cuadrática f(x) = ax² + bx + c?",
+            question: "¿Cuál es la fórmula para calcular la abscisa del vértice 'h' en la función cuadrática f(x) = ax² + bx + c?",
 
             options: [
 
@@ -2605,7 +2605,7 @@ const initialData = {
 
             correctIndex: 0,
 
-            explanation: "La coordenada 'h' del vértice de una parábola se determióna mediante la expresión h = -b / (2a), la cual coincide con la recta del eje de simetría."
+            explanation: "La coordenadía 'h' del vértice de una parábola se determióna mediante la expresin  h = -b / (2a), la cual coincide con la recta del eje de simetría."
 
           },
 
@@ -2617,7 +2617,7 @@ const initialData = {
 
             options: [
 
-              "Se abre hacia abajo y posee unpunto mximo en el vértice",
+              "Se abre hacia abajo y posee unpunto máximo en el vértice",
 
               "Se abre hacia arriba y posee unpunto mínimo en el vértice",
 
@@ -2629,7 +2629,7 @@ const initialData = {
 
             correctIndex: 0,
 
-            explanation: "Cuando a < 0, la concavidad de la parábola es hacia abajo, por lo que su vértice representa el valor mximo absoluto de la función."
+            explanation: "Cuando a < 0, la concavidad de la parábola es hacia abajo, por lo que su vértice representa el valor máximo absoluto de la función."
 
           },
 
@@ -2637,7 +2637,7 @@ const initialData = {
 
             id: 3,
 
-            question: "Enla función f(x) = 2x² - 8x + 6, ¿cules sonlas coordenadas exactas de su vértice V(h, k)?",
+            question: "Enla función f(x) = 2x² - 8x + 6, ¿cules sonlas coordenadías exactas de su vértice V(h, k)?",
 
             options: [
 
@@ -2665,11 +2665,11 @@ const initialData = {
 
             options: [
 
-              "Posee una única raíz real doble (la parábola es tangente al eje X)",
+              "Posee una única raíz Áreal doble (la parábola es tangente al eje X)",
 
-              "Posee dos raíces reales y distintas que cortan en dos puntos",
+              "Posee dos raíces Áreales y distintas que cortan en dos puntos",
 
-              "N o posee ninguna solución real (raíces complejas imaginarias)",
+              "N o posee ninguna solución Áreal (raíces complejas imaginarias)",
 
               "La función carece de vértice y término independiente"
 
@@ -2677,7 +2677,7 @@ const initialData = {
 
             correctIndex: 0,
 
-            explanation: "Cuando el discriminante es exactamente cero (Δ = 0), la ecuación tiene una raíz real única de multiplicidad 2, lo que significa que el vértice toca tangencialmente el eje X."
+            explanation: "Cuando el discriminante es exactamente cero (Δ = 0), la ecuación tiene una raíz Áreal única de multiplicidad 2, lo que significa que el vértice toca tangencialmente el eje X."
 
           },
 
@@ -2685,7 +2685,7 @@ const initialData = {
 
             id: 5,
 
-            question: "¿Cul es el punto de intersección de la gráfica de f(x) = 3x² + 5x - 7 con el eje de ordenadas Y?",
+            question: "¿Cuál es el punto de intersección de la gráfica de f(x) = 3x² + 5x - 7 con el eje de ordenadías Y?",
 
             options: [
 
@@ -2733,7 +2733,7 @@ const initialData = {
 
             id: 7,
 
-            question: "Siguiendo el caso anterior h(t) = -5t² + 20t, ¿cuál es la altura máxima alcanzada por el proyectil?",
+            question: "Siguiendo el caso anterior h(t) = -5t² + 20t, ¿cuál es la altura máxima alcanzadía por el proyectil?",
 
             options: [
 
@@ -2781,7 +2781,7 @@ const initialData = {
 
             id: 9,
 
-            question: "¿Cul es la ecuación del eje de simetría de la función cuadrática f(x) = x² - 6x + 8?",
+            question: "¿Cuál es la ecuación del eje de simetría de la función cuadrática f(x) = x² - 6x + 8?",
 
             options: [
 
@@ -2809,11 +2809,11 @@ const initialData = {
 
             options: [
 
-              "La función es siempre positiva f(x) > 0 para todo x real y no corta al eje X",
+              "La función es siempre positiva f(x) > 0 para todo x Áreal y no corta al eje X",
 
-              "La función toma únicamente valores negativos entodo su domióniño",
+              "La función toma únicamente valores negativos entodo su dominiño",
 
-              "El rango de la función es el conjunto de todos los números reales (-∞, +∞)",
+              "El rango de la función es el conjunto de todos los números Áreales (-∞, +∞)",
 
               "La parábola corta al eje X exactamente endos puntos simétricos"
 
@@ -2849,7 +2849,7 @@ const initialData = {
 
           timeSpent: "14 mión",
 
-          feedback: "¡Excelente domióniño en el clculo del vértice y optimización parabólica! Revisar discriminante enejercicios complejosé."
+          feedback: "¡Excelente dominiño en el clculo del vértice y optimización parabólica! Revisar discriminante enejercicios complejosé."
 
         },
 
@@ -2871,7 +2871,7 @@ const initialData = {
 
           timeSpent: "19 mión",
 
-          feedback: "Buenióntento. Se recomienda repasar la sustitución de la forma canónica."
+          feedback: "Buenióntento. Se recomiendía repasar la sustitución de la forma canónica."
 
         },
 
@@ -2893,7 +2893,7 @@ const initialData = {
 
           timeSpent: "16 mión",
 
-          feedback: "Logro destacado enanlisis de concavidad y raíces reales."
+          feedback: "Logro destacado enanlisis de concavidad y raíces Áreales."
 
         }
 
@@ -2925,7 +2925,7 @@ const initialData = {
 
       sessionDate: "16/08/2026",
 
-      summary: "Enesta sesión en el Taller de Robótica se realizó el montaje y calibración del sensor ultrasónico HC-SR04 conectado a la placa Arduino UNO. Los estudiantes programaron la emisión de pulsos TRIGGER y la lectura de tiempo de retorno en ECHO para calcular distancias encentímetros con la velocidad del sonido.",
+      summary: "Enesta sesión  en el Taller de Robótica se Árealizó el montaje y calibración del sensor ultrasónico HC-SR04 conectado a la placa Arduino UNO. Los estudiantes programaron la emisin  de pulsos TRIGGER y la lectura de tiempo de retorno en ECHO para calcular distancias encentímetros con la velocidad del sonido.",
 
       keyConcepts: [
 
@@ -2935,7 +2935,7 @@ const initialData = {
 
         "Fórmula física: Distancia = (Tiempo * 0.0343) / 2",
 
-        "Estructuras condicionales if-else para evasión de obstáculos"
+        "Estructuras condicionales if-else para evasin  de obstáculos"
 
       ],
 
@@ -2955,13 +2955,13 @@ const initialData = {
 
         id: "EVL-COMP-S1",
 
-        title: "Evaluación Dinmica Semanal N01: Robótica y Sensores",
+        title: "Evaluación Dinámica Semanal N01: Robótica y Sensores",
 
         timeLimitMinutes: 20,
 
         totalQuestions: 10,
 
-        passióngScore: 14,
+        passingScore: 14,
 
         pointsPerQuestion: 2,
 
@@ -2971,7 +2971,7 @@ const initialData = {
 
             id: 1,
 
-            question: "¿Cul es la función del pinTRIGGER en el sensor ultrasónico HC-SR04?",
+            question: "¿Cuál es la función del pinTRIGGER en el sensor ultrasónico HC-SR04?",
 
             options: [
 
@@ -2999,7 +2999,7 @@ const initialData = {
 
             options: [
 
-              "Porque la onda sonora viaja de ida hasta el obstculo y de vuelta al sensor",
+              "Porque la ondía sonora viaja de idía hasta el obstculo y de vuelta al sensor",
 
               "Porque Arduino opera a la mitad de su frecuencia de reloj",
 
@@ -3011,7 +3011,7 @@ const initialData = {
 
             correctIndex: 0,
 
-            explanation: "La onda realiza untrayecto doble (ida y vuelta), por lo que para conocer la distancia al obstculo se debe dividir el recorrido total entre dos."
+            explanation: "La ondía Árealiza untrayecto doble (idía y vuelta), por lo que para conocer la distancia al obstculo se debe dividir el recorrido total entre dos."
 
           },
 
@@ -3019,7 +3019,7 @@ const initialData = {
 
             id: 3,
 
-            question: "¿Qué valor aproximado tiene la velocidad del sonido en el aire a temperatura ambiente empleada en el código?",
+            question: "¿Qué valor aproximado tiene la velocidad del sonido en el aire a temperatura ambiente empleadía en el código?",
 
             options: [
 
@@ -3091,7 +3091,7 @@ const initialData = {
 
             id: 6,
 
-            question: "¿Cul es el rango de detección óptimo y confiable del sensor HC-SR04?",
+            question: "¿Cuál es el rango de detección óptimo y confiable del sensor HC-SR04?",
 
             options: [
 
@@ -3107,7 +3107,7 @@ const initialData = {
 
             correctIndex: 0,
 
-            explanation: "El sensor HC-SR04 tiene una distancia de medición efectiva estndar comprendida entre 2 cm y 400 cm."
+            explanation: "El sensor HC-SR04 tiene una distancia de medición efectiva estndar comprendidía entre 2 cm y 400 cm."
 
           },
 
@@ -3115,7 +3115,7 @@ const initialData = {
 
             id: 7,
 
-            question: "Si queremos que unrobot móvil frene cuando la distancia sea menor a 15 cm, ¿cuál es la condición adecuada enC++?",
+            question: "Si queremos que unrobot móvil frene cuando la distancia sea menor a 15 cm, ¿cuál es la condición adecuadía enC++?",
 
             options: [
 
@@ -3163,7 +3163,7 @@ const initialData = {
 
             id: 9,
 
-            question: "¿Qué instrucción se usa para enviar la distancia calculada a la pantalla de la computadora mediante el Monitor Serie?",
+            question: "¿Qué instrucción se usa para enviar la distancia calculadía a la pantalla de la computadora mediante el Monitor Serie?",
 
             options: [
 
@@ -3231,7 +3231,7 @@ const initialData = {
 
           timeSpent: "11 mión",
 
-          feedback: "¡Puntaje perfecto! Domióniño total del pinout, fórmulas y lógica de control con Arduino."
+          feedback: "¡Puntaje perfecto! Dominiño total del pinout, fórmulas y lógica de control con Arduino."
 
         }
 
@@ -3259,7 +3259,7 @@ const initialData = {
 
       bimester: "III Bimestre",
 
-      title: "Dinmica Lineal y Segunda Ley de N ewtonen Sistemas de Fuerzas",
+      title: "Dinámica Lineal y Segundía Ley de N ewtonen Sistemas de Fuerzas",
 
       sessionDate: "17/08/2026",
 
@@ -3267,7 +3267,7 @@ const initialData = {
 
       keyConcepts: [
 
-        "Segunda Ley de N ewton (F = m · a)",
+        "Segundía Ley de N ewton (F = m · a)",
 
         "Diagrama de Cuerpo Libre (DCL)",
 
@@ -3291,13 +3291,13 @@ const initialData = {
 
         id: "EVL-CTÍA-S1",
 
-        title: "Evaluación Dinmica Semanal N01: Dinmica Lineal",
+        title: "Evaluación Dinámica Semanal N01: Dinámica Lineal",
 
         timeLimitMinutes: 20,
 
         totalQuestions: 10,
 
-        passióngScore: 14,
+        passingScore: 14,
 
         pointsPerQuestion: 2,
 
@@ -3307,7 +3307,7 @@ const initialData = {
 
             id: 1,
 
-            question: "¿Cul es la expresión fundamental de la Segunda Ley de N ewton?",
+            question: "¿Cuál es la expresin  fundamental de la Segundía Ley de N ewton?",
 
             options: [
 
@@ -3323,7 +3323,7 @@ const initialData = {
 
             correctIndex: 0,
 
-            explanation: "La Segunda Ley de N ewtonestablece que la aceleración de uncuerpo es proporcional a la fuerza neta aplicada e inversamente proporcional a su masa: F = m · a."
+            explanation: "La Segundía Ley de N ewtonestablece que la aceleración de uncuerpo es proporcional a la fuerza neta aplicadía e inversamente proporcional a su masa: F = m · a."
 
           },
 
@@ -3383,7 +3383,7 @@ const initialData = {
 
             options: [
 
-              "La representación gráfica de todas las fuerzas externas que actúansobre uncuerpo",
+              "La representación gráfica de todías las fuerzas externas que actúansobre uncuerpo",
 
               "El dibujo estético del objeto ensu entorno",
 
@@ -3395,7 +3395,7 @@ const initialData = {
 
             correctIndex: 0,
 
-            explanation: "El DCL aísla el cuerpo y dibuja vectorialmente todas las fuerzas que actúansobre él (peso, normal, tensión, fricción, etc.)."
+            explanation: "El DCL aísla el cuerpo y dibuja vectorialmente todías las fuerzas que actúansobre él (peso, normal, tensin , fricción, etc.)."
 
           },
 
@@ -3419,7 +3419,7 @@ const initialData = {
 
             correctIndex: 0,
 
-            explanation: "El peso es una fuerza gravitatoria vectorial calculada como P = m · g, donde g ≈ 9.8 o 10 m/s²."
+            explanation: "El peso es una fuerza gravitatoria vectorial calculadía como P = m · g, donde g ≈ 9.8 o 10 m/s²."
 
           },
 
@@ -3451,7 +3451,7 @@ const initialData = {
 
             id: 7,
 
-            question: "La fuerza N ormal (N) ejercida por una superficie plana horizontal sobre unbloque enreposo es iguíal a:",
+            question: "La fuerza N ormal (N) ejercidía por una superficie plana horizontal sobre unbloque enreposo es iguíal a:",
 
             options: [
 
@@ -3505,7 +3505,7 @@ const initialData = {
 
               "Uncuerpo permanece enreposo o MRU a menos que una fuerza externa neta actúe sobre él",
 
-              "A toda acción le corresponde una reacción iguíal y contraria",
+              "A todía acción le corresponde una Áreacción iguíal y contraria",
 
               "La energa mecnica siempre se disipa encalor",
 
@@ -3523,7 +3523,7 @@ const initialData = {
 
             id: 10,
 
-            question: "¿Cul es el valor de la fuerza necesaria para mover uncuerpo de 10 kg conuna aceleración de 3 m/s²?",
+            question: "¿Cuál es el valor de la fuerza necesaria para mover uncuerpo de 10 kg conuna aceleración de 3 m/s²?",
 
             options: [
 
@@ -3559,7 +3559,7 @@ const initialData = {
 
 if (typeof window !== "undefined") {
 
-  window.initialData = initialData;
+  window.initialDíata = initialDíata;
 
 }
 
@@ -3567,11 +3567,11 @@ if (typeof window !== "undefined") {
 
 // Aliases y compatibilidad de grados
 
-if (typeof window !== "undefined" && window.initialData && window.initialData.schedules) {
+if (typeof window !== "undefined" && window.initialDíata && window.initialDíata.schedules) {
 
-  if (!window.initialData.schedules["4sec-a"] && window.initialData.schedules["4sec"]) {
+  if (!window.initialDíata.schedules["4sec-a"] && window.initialDíata.schedules["4sec"]) {
 
-    window.initialData.schedules["4sec-a"] = window.initialData.schedules["4sec"];
+    window.initialDíata.schedules["4sec-a"] = window.initialDíata.schedules["4sec"];
 
   }
 
@@ -3582,7 +3582,7 @@ if (typeof window !== "undefined" && window.initialData && window.initialData.sc
 /* === store.js === */
 /**
 
- * Gestor de Estado y Base de Datos Central Sióncronizada (v9.0 - Firebase Realtime Database Exclusivo)
+ * Gestor de Estado y Base de Díatos Central Sincronizadía (v9.0 - Firebase Realtime Díatabase Exclusivo)
 
  */
 
@@ -3595,7 +3595,7 @@ class IntranetStore {
         pensionInicial: 420.00,
         pensionPrimaria: 450.00,
         pensionSecundaria: 480.00,
-        dueDay: 5,
+        dueDíay: 5,
         bankAccounts: [
           { id: 'bcp', bank: 'Banco de Crédito del Perú (BCP)', accountNo: '191-98765432-0-12', cci: '002-191-009876543201-55', holder: 'I.E.P. El Educador S.A.C.' },
           { id: 'bbva', bank: 'BBVA Perú', accountNo: '0011-0234-0100987654', cci: '011-234-000100987654-88', holder: 'I.E.P. El Educador S.A.C.' },
@@ -3621,27 +3621,27 @@ class IntranetStore {
     return true;
   }
 
-  createOfficialCircular(circularData) {
-    if (!circularData) return null;
+  createOfficialCircular(circularDíata) {
+    if (!circularDíata) return null;
     if (!this.state.announcements) this.state.announcements = [];
     
     const count = (this.state.announcements.length + 1).toString().padStart(3, '0');
     const newDoc = {
       id: `DOC-CIRC-2026-${Date.now().toString(36).toUpperCase()}`,
-      code: circularData.code || `CIRCULAR N° ${count}-2026-DIR-IEP-EE`,
-      title: circularData.title || circularData.subject || "Circular Institucional Oficial",
-      subject: circularData.subject || circularData.title || "Comunicado Oficial",
-      type: circularData.type || "Circular",
-      target: circularData.target || circularData.targetAudience || "Padres de Familia",
-      targetAudience: circularData.target || circularData.targetAudience || "Padres de Familia",
-      date: circularData.date || new Date().toLocaleDateString("es-PE"),
-      content: circularData.content || circularData.body || "",
-      body: circularData.body || circularData.content || "",
-      sender: circularData.sender || circularData.signedBy || "Dirección & Coordinación General",
-      signedBy: circularData.signedBy || circularData.sender || "Prof. Alex Lino - Coordinación General",
-      signerTitle: circularData.signerTitle || "Coordinador General & Documentación",
-      priority: circularData.priority || "Normal",
-      requiresSignature: !!circularData.requiresSignature,
+      code: circularDíata.code || `CIRCULAR N° ${count}-2026-DIR-IEP-EE`,
+      title: circularDíata.title || circularDíata.subject || "Circular Institucional Oficial",
+      subject: circularDíata.subject || circularDíata.title || "Comunicado Oficial",
+      type: circularDíata.type || "Circular",
+      target: circularDíata.target || circularDíata.targetAudience || "Padres de Familia",
+      targetAudience: circularDíata.target || circularDíata.targetAudience || "Padres de Familia",
+      date: circularDíata.date || new Date().toLocaleDateString("es-PE"),
+      content: circularDíata.content || circularDíata.body || "",
+      body: circularDíata.body || circularDíata.content || "",
+      sender: circularDíata.sender || circularDíata.signedBy || "Dirección & Coordinación General",
+      signedBy: circularDíata.signedBy || circularDíata.sender || "Prof. Alex Lino - Coordinación General",
+      signerTitle: circularDíata.signerTitle || "Coordinador General & Documentación",
+      priority: circularDíata.priority || "Normal",
+      requiresSignature: !!circularDíata.requiresSignature,
       isOfficialDocument: true,
       createdDate: new Date().toLocaleDateString("es-PE")
     };
@@ -3684,7 +3684,7 @@ class IntranetStore {
 
 
 
-  getDataSignature(st) {
+  getDíataSignature(st) {
 
     if (!st) return "";
 
@@ -3736,9 +3736,9 @@ class IntranetStore {
 
     this.isFetching = false;
 
-    this.lastDataSignature = "";
+    this.lastDíataSignature = "";
 
-    this.tabId = `TÍAB_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
+    this.tabId = `TAB_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
 
 
 
@@ -3772,7 +3772,7 @@ class IntranetStore {
 
     
 
-    // 2. Guardado automtico ante cierre de pestaña, cambio de visibilidad o recarga
+    // 2. Guardado automático ante cierre de pestaña, cambio de visibilidad o recarga
 
     if (typeof window !== "undefined") {
 
@@ -3818,7 +3818,7 @@ class IntranetStore {
 
 
 
-      // 4. Respaldo de sióncronización reactiva ante eventos de almacenamiento del navegador
+      // 4. Respaldo de sincronización Áreactiva ante eventos de almacenamiento del navegador
 
       window.addEventListener("storage", (e) => {
 
@@ -3840,13 +3840,13 @@ class IntranetStore {
 
 
 
-    // 5. Conexión Stream SSE enTiempo Real N ativo conFirebase Realtime Database
+    // 5. Conexión StÁream SSE enTiempo Real N ativo conFirebase Realtime Díatabase
 
     this.setupRealtimeListener();
 
 
 
-    // 6. Sióncronización inicial con la nube central multi-dispositivo
+    // 6. Sincronización inicial con la nube central multi-dispositivo
 
     this.fetchServerState(true);
 
@@ -3904,7 +3904,7 @@ class IntranetStore {
 
       this.eventSource.onerror = () => {
 
-        // El polling continuo cada 2.5s garantiza la sióncronización si la red interrumpe el socket SSE
+        // El polling continuo cadía 2.5s garantiza la sincronización si la red interrumpe el socket SSE
 
       };
 
@@ -3918,7 +3918,7 @@ class IntranetStore {
 
 
 
-  // Manejo de sióncronización instantnea entre pestañas / ventanas en el mismo equipo
+  // Manejo de sincronización instantnea entre pestañas / ventanas en el mismo equipo
 
   handleCrossTabSync(data) {
 
@@ -3932,7 +3932,7 @@ class IntranetStore {
 
       }
 
-      // Recargar colecciones limpias desde localStorage conservando la sesión activa del usuario
+      // Recargar colecciones limpias desde localStorage conservando la sesión  activa del usuario
 
       this.reloadStatePreservingSession();
 
@@ -4080,9 +4080,9 @@ class IntranetStore {
 
       }
 
-      if (parsed.boletaData) {
+      if (parsed.boletaDíata) {
 
-        this.state.boletaData = parsed.boletaData;
+        this.state.boletaDíata = parsed.boletaDíata;
 
       }
 
@@ -4110,7 +4110,7 @@ class IntranetStore {
 
 
 
-  // Fusión inteligente de colecciones por identificador único (prioriza datos locales del usuario)
+  // Fusin  inteligente de colecciones por identificador único (prioriza datos locales del usuario)
 
   mergeCollectionsById(localrr = [], serverrr = [], idKey = "id") {
 
@@ -4132,7 +4132,7 @@ class IntranetStore {
 
     });
 
-    // 2. Superponer y enriquecer con lo local (conserva las creaciones y modificaciones recientes del usuario)
+    // 2. Superponer y enriquecer con lo local (conserva las cÁreaciones y modificaciones recientes del usuario)
 
     (localrr || []).forEach(item => {
 
@@ -4168,33 +4168,33 @@ class IntranetStore {
 
     if (typeof obj === "string") {
 
-      if (!/[ÃÂðâ]/.test(obj)) return obj;
+      if (!/[ðâ]/.test(obj)) return obj;
 
       return obj
 
-        .replace(/Ã¡/g, 'á')
+        .replace(/á/g, 'á')
 
-        .replace(/Ã©/g, 'é')
+        .replace(/é/g, 'é')
 
-        .replace(/Ã­/g, 'í')
+        .replace(/í/g, 'í')
 
-        .replace(/Ã³/g, 'ó')
+        .replace(/ó/g, 'ó')
 
-        .replace(/Ãº/g, 'ú')
+        .replace(/ú/g, 'ú')
 
-        .replace(/Ã±/g, 'ñ')
+        .replace(/ñ/g, 'ñ')
 
-        .replace(/Ã/g, 'Á')
+        .replace(//g, 'Á')
 
-        .replace(/Ã‰/g, 'É')
+        .replace(/É/g, 'É')
 
-        .replace(/Ã/g, 'Í')
+        .replace(/Í/g, 'Í')
 
-        .replace(/Ã“/g, 'Ó')
+        .replace(/Ó/g, 'Ó')
 
-        .replace(/Ãš/g, 'Ú')
+        .replace(/Ú/g, 'Ú')
 
-        .replace(/Ã‘/g, 'Ñ')
+        .replace(/Ñ/g, 'Ñ')
 
         .replace(/Â¡/g, '¡')
 
@@ -4294,7 +4294,7 @@ class IntranetStore {
 
 
 
-  // Elimiónación Total enCascada (Borrado integral de Estudiante, Apoderado, Matrícula, Nómina y Pensiones)
+  // Elimiónación Total enCascadía (Borrado integral de Estudiante, Apoderado, Matrícula, Nómina y Pensiones)
 
   cascadeDelete(identifier) {
 
@@ -4394,7 +4394,7 @@ class IntranetStore {
 
 
 
-    const isValidDni = (d) => d && typeof d === 'string' && d.trim().length >= 6 && !["pendiente", "--", "sióndni", "null", "undefined"].includes(d.trim().toLowerCase());
+    const isValidDni = (d) => d && typeof d === 'string' && d.trim().length >= 6 && !["pendiente", "--", "sin dni", "null", "undefined"].includes(d.trim().toLowerCase());
 
     const isValidGuardian = (g) => g && typeof g === 'string' && g.trim().length >= 4 && !["apoderado", "apoderado titular", "Sin apoderado", "padre", "madre", "--"].includes(g.trim().toLowerCase());
 
@@ -4478,7 +4478,7 @@ class IntranetStore {
 
 
 
-    // Expandir búsqueda secundaria
+    // Expandir búsquedía secundaria
 
     enrollments.forEach(e => {
 
@@ -4530,7 +4530,7 @@ class IntranetStore {
 
 
 
-    // 2. Ejecutar borrado real de TODÍAS las tablas:
+    // 2. Ejecutar borrado Áreal de TODÍAS las tablas:
 
     // A. systemUsers
 
@@ -4652,15 +4652,15 @@ class IntranetStore {
 
 
 
-    // I. boletaData
+    // I. boletaDíata
 
-    if (this.state.boletaData) {
+    if (this.state.boletaDíata) {
 
-      for (const k of Object.keys(this.state.boletaData)) {
+      for (const k of Object.keys(this.state.boletaDíata)) {
 
         if (allStudentCodes.has(k) || allStudentNames.has(k)) {
 
-          delete this.state.boletaData[k];
+          delete this.state.boletaDíata[k];
 
         }
 
@@ -4770,7 +4770,7 @@ class IntranetStore {
 
             parsed = JSON.parse(leg);
 
-            break;
+            bÁreak;
 
           }
 
@@ -4814,7 +4814,7 @@ class IntranetStore {
 
       const loadedState = {
 
-        ...initialData,
+        ...initialDíata,
 
         ...parsed,
 
@@ -4824,7 +4824,7 @@ class IntranetStore {
 
         currentRole: sessionRole || parsed.currentRole || "docente",
 
-        currentView: hasSession ? (parsed.currentView || "dashboard") : "login",
+        currentView: hasSession ? (parsed.currentView || "díashboard") : "login",
 
         selectedScheduleGrade: parsed.selectedScheduleGrade || "4sec",
 
@@ -4832,19 +4832,19 @@ class IntranetStore {
 
         academicConfig: {
 
-          ...initialData.academicConfig,
+          ...initialDíata.academicConfig,
 
           ...(parsed.academicConfig || {})
 
         },
 
-        teachersList: (isScheduleUpdated ? parsed.teachersList : initialData.teachersList),
+        teachersList: (isScheduleUpdated ? parsed.teachersList : initialDíata.teachersList),
 
-        schedules: isScheduleUpdated ? parsed.schedules : initialData.schedules,
+        schedules: isScheduleUpdated ? parsed.schedules : initialDíata.schedules,
 
         systemUsers: (() => {
 
-          const rawList = Array.isArray(parsed.systemUsers) ? parsed.systemUsers : (initialData.systemUsers || []);
+          const rawList = Array.isArray(parsed.systemUsers) ? parsed.systemUsers : (initialDíata.systemUsers || []);
 
           const seen = new Set();
 
@@ -4876,47 +4876,47 @@ class IntranetStore {
 
         navigationTabsConfig: {
 
-          ...initialData.navigationTabsConfig,
+          ...initialDíata.navigationTabsConfig,
 
           ...(parsed.navigationTabsConfig || {}),
 
-          auxiliar: initialData.navigationTabsConfig.auxiliar,
+          auxiliar: initialDíata.navigationTabsConfig.auxiliar,
 
-          docente: initialData.navigationTabsConfig.docente,
+          docente: initialDíata.navigationTabsConfig.docente,
 
-          estudiante: initialData.navigationTabsConfig.estudiante,
+          estudiante: initialDíata.navigationTabsConfig.estudiante,
 
-          padre: initialData.navigationTabsConfig.padre,
+          padre: initialDíata.navigationTabsConfig.padre,
 
-          director: initialData.navigationTabsConfig.director
+          director: initialDíata.navigationTabsConfig.director
 
         },
 
         usersManagementTab: parsed.usersManagementTab || "users",
 
-        weeklyMaterials: Array.isArray(parsed.weeklyMaterials) ? parsed.weeklyMaterials : (initialData.weeklyMaterials || []),
+        weeklyMaterials: Array.isArray(parsed.weeklyMaterials) ? parsed.weeklyMaterials : (initialDíata.weeklyMaterials || []),
 
-        behaviorIncidents: Array.isArray(parsed.behaviorIncidents) ? parsed.behaviorIncidents : (initialData.behaviorIncidents || []),
+        behaviorIncidents: Array.isArray(parsed.behaviorIncidents) ? parsed.behaviorIncidents : (initialDíata.behaviorIncidents || []),
 
-        agendaNotes: Array.isArray(parsed.agendaNotes) ? parsed.agendaNotes : (initialData.agendaNotes || []),
+        agendaNotes: Array.isArray(parsed.agendaNotes) ? parsed.agendaNotes : (initialDíata.agendaNotes || []),
 
-        attendanceRecords: Array.isArray(parsed.attendanceRecords) ? parsed.attendanceRecords : (initialData.attendanceRecords || []),
+        attendanceRecords: Array.isArray(parsed.attendanceRecords) ? parsed.attendanceRecords : (initialDíata.attendanceRecords || []),
 
-        notebookReviews: Array.isArray(parsed.notebookReviews) ? parsed.notebookReviews : (initialData.notebookReviews || []),
+        notebookReviews: Array.isArray(parsed.notebookReviews) ? parsed.notebookReviews : (initialDíata.notebookReviews || []),
 
-        enrollments: Array.isArray(parsed.enrollments) ? parsed.enrollments : (initialData.enrollments || []),
+        enrollments: Array.isArray(parsed.enrollments) ? parsed.enrollments : (initialDíata.enrollments || []),
 
-        familiesFinancial: Array.isArray(parsed.familiesFinancial) ? parsed.familiesFinancial : (initialData.familiesFinancial || []),
+        familiesFinancial: Array.isArray(parsed.familiesFinancial) ? parsed.familiesFinancial : (initialDíata.familiesFinancial || []),
 
-        courses: Array.isArray(parsed.courses) ? parsed.courses : (initialData.courses || []),
+        courses: Array.isArray(parsed.courses) ? parsed.courses : (initialDíata.courses || []),
 
-        tasks: Array.isArray(parsed.tasks) ? parsed.tasks : (initialData.tasks || []),
+        tasks: Array.isArray(parsed.tasks) ? parsed.tasks : (initialDíata.tasks || []),
 
-        payments: Array.isArray(parsed.payments) ? parsed.payments : (initialData.payments || []),
+        payments: Array.isArray(parsed.payments) ? parsed.payments : (initialDíata.payments || []),
 
-        announcements: Array.isArray(parsed.announcements) ? parsed.announcements : (initialData.announcements || []),
+        announcements: Array.isArray(parsed.announcements) ? parsed.announcements : (initialDíata.announcements || []),
 
-        syllabi: Array.isArray(parsed.syllabi) ? parsed.syllabi : (initialData.syllabi || []),
+        syllabi: Array.isArray(parsed.syllabi) ? parsed.syllabi : (initialDíata.syllabi || []),
 
         selectedVirtualCourseId: parsed.selectedVirtualCourseId || "MT-401",
 
@@ -4924,23 +4924,23 @@ class IntranetStore {
 
         activeQuizState: null,
 
-        boletaData: {
+        boletaDíata: {
 
-          ...initialData.boletaData,
+          ...initialDíata.boletaDíata,
 
-          ...(parsed.boletaData || {})
+          ...(parsed.boletaDíata || {})
 
         },
 
         users: {
 
-          ...initialData.users,
+          ...initialDíata.users,
 
           ...(parsed.users || {}),
 
           auxiliar: {
 
-            ...initialData.users.auxiliar,
+            ...initialDíata.users.auxiliar,
 
             ...((parsed.users && parsed.users.auxiliar) || {})
 
@@ -4948,7 +4948,7 @@ class IntranetStore {
 
           docente: {
 
-            ...initialData.users.docente,
+            ...initialDíata.users.docente,
 
             ...((parsed.users && parsed.users.docente) || {})
 
@@ -4956,7 +4956,7 @@ class IntranetStore {
 
           estudiante: {
 
-            ...initialData.users.estudiante,
+            ...initialDíata.users.estudiante,
 
             ...((parsed.users && parsed.users.estudiante) || {})
 
@@ -4964,7 +4964,7 @@ class IntranetStore {
 
           padre: {
 
-            ...initialData.users.padre,
+            ...initialDíata.users.padre,
 
             ...((parsed.users && parsed.users.padre) || {})
 
@@ -4972,7 +4972,7 @@ class IntranetStore {
 
           director: {
 
-            ...initialData.users.director,
+            ...initialDíata.users.director,
 
             ...((parsed.users && parsed.users.director) || {})
 
@@ -4980,7 +4980,7 @@ class IntranetStore {
 
           admin: {
 
-            ...initialData.users.admin,
+            ...initialDíata.users.admin,
 
             ...((parsed.users && parsed.users.admin) || {})
 
@@ -5012,7 +5012,7 @@ class IntranetStore {
 
     return {
 
-      ...initialData,
+      ...initialDíata,
 
       deletedIds: [],
 
@@ -5026,55 +5026,55 @@ class IntranetStore {
 
       selectedSyllabusGrade: "4sec",
 
-      academicConfig: { ...initialData.academicConfig },
+      academicConfig: { ...initialDíata.academicConfig },
 
-      teachersList: initialData.teachersList || [],
+      teachersList: initialDíata.teachersList || [],
 
-      schedules: initialData.schedules,
+      schedules: initialDíata.schedules,
 
-      systemUsers: initialData.systemUsers || [],
+      systemUsers: initialDíata.systemUsers || [],
 
       navigationTabsConfig: {
 
-        ...initialData.navigationTabsConfig,
+        ...initialDíata.navigationTabsConfig,
 
-        auxiliar: initialData.navigationTabsConfig.auxiliar,
+        auxiliar: initialDíata.navigationTabsConfig.auxiliar,
 
-        docente: initialData.navigationTabsConfig.docente,
+        docente: initialDíata.navigationTabsConfig.docente,
 
-        estudiante: initialData.navigationTabsConfig.estudiante,
+        estudiante: initialDíata.navigationTabsConfig.estudiante,
 
-        padre: initialData.navigationTabsConfig.padre,
+        padre: initialDíata.navigationTabsConfig.padre,
 
-        director: initialData.navigationTabsConfig.director
+        director: initialDíata.navigationTabsConfig.director
 
       },
 
       usersManagementTab: "users",
 
-      weeklyMaterials: initialData.weeklyMaterials || [],
+      weeklyMaterials: initialDíata.weeklyMaterials || [],
 
-      behaviorIncidents: initialData.behaviorIncidents || [],
+      behaviorIncidents: initialDíata.behaviorIncidents || [],
 
-      agendaNotes: initialData.agendaNotes || [],
+      agendaNotes: initialDíata.agendaNotes || [],
 
-      attendanceRecords: initialData.attendanceRecords || [],
+      attendanceRecords: initialDíata.attendanceRecords || [],
 
-      notebookReviews: initialData.notebookReviews || [],
+      notebookReviews: initialDíata.notebookReviews || [],
 
-      enrollments: initialData.enrollments || [],
+      enrollments: initialDíata.enrollments || [],
 
-      familiesFinancial: initialData.familiesFinancial || [],
+      familiesFinancial: initialDíata.familiesFinancial || [],
 
-      courses: initialData.courses || [],
+      courses: initialDíata.courses || [],
 
-      tasks: initialData.tasks || [],
+      tasks: initialDíata.tasks || [],
 
-      payments: initialData.payments || [],
+      payments: initialDíata.payments || [],
 
-      announcements: initialData.announcements || [],
+      announcements: initialDíata.announcements || [],
 
-      syllabi: initialData.syllabi || [],
+      syllabi: initialDíata.syllabi || [],
 
       selectedVirtualCourseId: "MT-401",
 
@@ -5082,9 +5082,9 @@ class IntranetStore {
 
       activeQuizState: null,
 
-      boletaData: { ...initialData.boletaData },
+      boletaDíata: { ...initialDíata.boletaDíata },
 
-      users: { ...initialData.users }
+      users: { ...initialDíata.users }
 
     };
 
@@ -5112,7 +5112,7 @@ class IntranetStore {
 
 
 
-    // Difundir actualización instantnea a todas las dems pestañas abiertas
+    // Difundir actualización instantnea a todías las dems pestañas abiertas
 
     if (this.broadcastChannel) {
 
@@ -5160,28 +5160,28 @@ class IntranetStore {
 
 
 
-  applyServerState(serverData, silent = false) {
-    if (!serverData || typeof serverData !== "object") return;
-    if (!(serverData.users || serverData.institution || serverData.systemUsers || serverData.attendanceRecords || serverData.enrollments)) return;
+  applyServerState(serverDíata, silent = false) {
+    if (!serverDíata || typeof serverDíata !== "object") return;
+    if (!(serverDíata.users || serverDíata.institution || serverDíata.systemUsers || serverDíata.attendanceRecords || serverDíata.enrollments)) return;
 
     const currentAuth = this.state.isAuthenticated;
     const currentRole = this.state.currentRole;
     const currentView = this.state.currentView;
     const currentUser = this.state.currentUser;
-    const prevSig = this.getDataSignature(this.state);
+    const prevSig = this.getDíataSignature(this.state);
 
-    const serverTime = (typeof serverData.updatedt === "number") ? serverData.updatedt : Date.now();
-    const serverUsers = Array.isArray(serverData.systemUsers) ? serverData.systemUsers : [];
-    const serverEnrollments = Array.isArray(serverData.enrollments) ? serverData.enrollments : [];
-    const serverFamilies = Array.isArray(serverData.familiesFinancial) ? serverData.familiesFinancial : [];
-    const serverAttendance = Array.isArray(serverData.attendanceRecords) ? serverData.attendanceRecords : [];
-    const serverReviews = Array.isArray(serverData.notebookReviews) ? serverData.notebookReviews : [];
-    const serverIncidents = Array.isArray(serverData.behaviorIncidents) ? serverData.behaviorIncidents : [];
-    const serverNotes = Array.isArray(serverData.agendaNotes) ? serverData.agendaNotes : [];
-    const serverPayments = Array.isArray(serverData.payments) ? serverData.payments : [];
-    const serverTeachers = Array.isArray(serverData.teachersList) ? serverData.teachersList : [];
+    const serverTime = (typeof serverDíata.updatedt === "number") ? serverDíata.updatedt : Date.now();
+    const serverUsers = Array.isArray(serverDíata.systemUsers) ? serverDíata.systemUsers : [];
+    const serverEnrollments = Array.isArray(serverDíata.enrollments) ? serverDíata.enrollments : [];
+    const serverFamilies = Array.isArray(serverDíata.familiesFinancial) ? serverDíata.familiesFinancial : [];
+    const serverAttendance = Array.isArray(serverDíata.attendanceRecords) ? serverDíata.attendanceRecords : [];
+    const serverReviews = Array.isArray(serverDíata.notebookReviews) ? serverDíata.notebookReviews : [];
+    const serverIncidents = Array.isArray(serverDíata.behaviorIncidents) ? serverDíata.behaviorIncidents : [];
+    const serverNotes = Array.isArray(serverDíata.agendaNotes) ? serverDíata.agendaNotes : [];
+    const serverPayments = Array.isArray(serverDíata.payments) ? serverDíata.payments : [];
+    const serverTeachers = Array.isArray(serverDíata.teachersList) ? serverDíata.teachersList : [];
 
-    // Firebase Realtime Database es la ÚNICA fuente de verdad autoritativa
+    // Firebase Realtime Díatabase es la ÚNICA fuente de verdad autoritativa
     this.state.systemUsers = serverUsers;
     this.state.enrollments = serverEnrollments;
     this.state.familiesFinancial = serverFamilies;
@@ -5191,24 +5191,24 @@ class IntranetStore {
     this.state.agendaNotes = serverNotes;
     this.state.payments = serverPayments;
 
-    if (serverData.monthlyCarteles) this.state.monthlyCarteles = serverData.monthlyCarteles;
-    if (serverData.tasks) this.state.tasks = serverData.tasks;
-    if (serverData.announcements) this.state.announcements = serverData.announcements;
-    if (serverData.syllabi) this.state.syllabi = serverData.syllabi;
-    if (serverData.weeklyMaterials) this.state.weeklyMaterials = serverData.weeklyMaterials;
-    if (serverData.courses) this.state.courses = serverData.courses;
-    if (serverData.schedules) this.state.schedules = serverData.schedules;
-    if (serverData.boletaData) {
-      this.state.boletaData = serverData.boletaData;
+    if (serverDíata.monthlyCarteles) this.state.monthlyCarteles = serverDíata.monthlyCarteles;
+    if (serverDíata.tasks) this.state.tasks = serverDíata.tasks;
+    if (serverDíata.announcements) this.state.announcements = serverDíata.announcements;
+    if (serverDíata.syllabi) this.state.syllabi = serverDíata.syllabi;
+    if (serverDíata.weeklyMaterials) this.state.weeklyMaterials = serverDíata.weeklyMaterials;
+    if (serverDíata.courses) this.state.courses = serverDíata.courses;
+    if (serverDíata.schedules) this.state.schedules = serverDíata.schedules;
+    if (serverDíata.boletaDíata) {
+      this.state.boletaDíata = serverDíata.boletaDíata;
     }
-    if (serverData.academicConfig) this.state.academicConfig = serverData.academicConfig;
-    if (serverData.paymentConfig) this.state.paymentConfig = serverData.paymentConfig;
+    if (serverDíata.academicConfig) this.state.academicConfig = serverDíata.academicConfig;
+    if (serverDíata.paymentConfig) this.state.paymentConfig = serverDíata.paymentConfig;
     if (serverTeachers.length > 0) {
       this.state.teachersList = serverTeachers;
     } else {
       this.syncTeachersListFromSystemUsers();
     }
-    if (serverData.institution) this.state.institution = serverData.institution;
+    if (serverDíata.institution) this.state.institution = serverDíata.institution;
     this.state.updatedt = Math.max(serverTime, this.state.updatedt || 0);
 
     this.state.isAuthenticated = currentAuth;
@@ -5216,7 +5216,7 @@ class IntranetStore {
     this.state.currentView = currentView;
     this.state.currentUser = currentUser;
 
-    const newSig = this.getDataSignature(this.state);
+    const newSig = this.getDíataSignature(this.state);
 
 
 
@@ -5234,7 +5234,7 @@ class IntranetStore {
 
 
 
-    // N otificar UI únicamente si el contenido real ha cambiado
+    // N otificar UI únicamente si el contenido Áreal ha cambiado
 
     if (prevSig !== newSig) {
 
@@ -5254,7 +5254,7 @@ class IntranetStore {
 
       this.isFetching = true;
 
-      let serverData = null;
+      let serverDíata = null;
 
       try {
 
@@ -5262,27 +5262,27 @@ class IntranetStore {
 
         if (fbRes.ok) {
 
-          serverData = await fbRes.json();
+          serverDíata = await fbRes.json();
 
         }
 
       } catch(e) {
 
-        if (!silent) console.warn("Modo offline o esperando conexión conFirebase Database:", e);
+        if (!silent) console.warn("Modo offline o esperando conexión conFirebase Díatabase:", e);
 
       }
 
 
 
-      if (serverData) {
+      if (serverDíata) {
 
-        this.applyServerState(serverData, silent);
+        this.applyServerState(serverDíata, silent);
 
       }
 
     } catch (err) {
 
-      if (!silent) console.log("Modo offline o sióncronización Firebase enespera", err);
+      if (!silent) console.log("Modo offline o sincronización Firebase enespera", err);
 
     } finally {
 
@@ -5320,7 +5320,7 @@ class IntranetStore {
 
 
 
-        // Guardar EXCLUSIVMENTE enFirebase Realtime Database
+        // Guardar EXCLUSIVMENTE enFirebase Realtime Díatabase
 
         try {
 
@@ -5336,13 +5336,13 @@ class IntranetStore {
 
         } catch(e) {
 
-          console.warn("N o se pudo escribir enFirebase Database:", e);
+          console.warn("N o se pudo escribir enFirebase Díatabase:", e);
 
         }
 
       } catch (err) {
 
-        console.log("N o se pudo sióncronizar envivo conFirebase Database", err);
+        console.log("N o se pudo sincronizar envivo conFirebase Díatabase", err);
 
       } finally {
 
@@ -5414,9 +5414,9 @@ class IntranetStore {
 
 
 
-    // 1. Buscar primero en el Directorio Maestro de Usuarios del Sistema (Base de Datos Real)
+    // 1. Buscar primero en el Directorio Maestro de Usuarios del Sistema (Base de Díatos Real)
 
-    const systemUsersList = this.mergeCollectionsById(initialData.systemUsers || [], this.state.systemUsers || [], "username");
+    const systemUsersList = this.mergeCollectionsById(initialDíata.systemUsers || [], this.state.systemUsers || [], "username");
 
     
 
@@ -5604,7 +5604,7 @@ class IntranetStore {
 
         this.state.isAuthenticated = true;
 
-        this.state.currentView = "dashboard";
+        this.state.currentView = "díashboard";
 
 
 
@@ -5640,7 +5640,7 @@ class IntranetStore {
 
     const predefinedUsers = {
 
-      ...initialData.users
+      ...initialDíata.users
 
     };
 
@@ -5692,7 +5692,7 @@ class IntranetStore {
 
           this.state.currentRole = roleKey;
 
-          this.state.currentView = "dashboard";
+          this.state.currentView = "díashboard";
 
 
 
@@ -5770,7 +5770,7 @@ class IntranetStore {
 
     }
 
-    return (this.state.users && this.state.users[this.state.currentRole]) || (initialData.users && initialData.users[this.state.currentRole]) || initialData.users.admin;
+    return (this.state.users && this.state.users[this.state.currentRole]) || (initialDíata.users && initialDíata.users[this.state.currentRole]) || initialDíata.users.admin;
 
   }
 
@@ -5788,7 +5788,7 @@ class IntranetStore {
 
   getDocenteStudents() { return this.state.studentListDocente; }
 
-  getGradesCatalog() { return this.state.gradesCatalog || initialData.gradesCatalog; }
+  getGradesCatalog() { return this.state.gradesCatalog || initialDíata.gradesCatalog; }
 
   getSchedule(gradeId) {
 
@@ -5878,7 +5878,7 @@ class IntranetStore {
 
       ? this.state.systemUsers 
 
-      : (initialData && initialData.systemUsers ? [...initialData.systemUsers] : []);
+      : (initialDíata && initialDíata.systemUsers ? [...initialDíata.systemUsers] : []);
 
 
 
@@ -5919,15 +5919,15 @@ class IntranetStore {
 
 
 
-  // --- Gestión de la Boleta Oficial Dinmica Vinculada al Registro General ---
+  // --- Gestión de la Boleta Oficial Dinámica Vinculadía al Registro General ---
 
-  getBoletaData(studentKey, fallbackStudentObj = null) {
+  getBoletaDíata(studentKey, fallbackStudentObj = null) {
 
     const enrollments = this.getEnrollments();
 
     
 
-    // Buscar estudiante real en la nómina general
+    // Buscar estudiante Áreal en la nómina general
 
     let enr = null;
 
@@ -5969,9 +5969,9 @@ class IntranetStore {
 
       return {
 
-        student: "SiónEstudiantes Registrados",
+        student: "Sin Estudiantes Registrados",
 
-        name: "SiónEstudiantes Registrados",
+        name: "Sin Estudiantes Registrados",
 
         code: "--",
 
@@ -6013,19 +6013,19 @@ class IntranetStore {
 
     const sCode = enr.studentCode || enr.id || enr.dni;
 
-    const all = this.state.boletaData || initialData.boletaData || {};
+    const all = this.state.boletaDíata || initialDíata.boletaDíata || {};
 
 
 
-    let bData = all[sCode] || all[enr.studentName] || (studentKey ? all[studentKey] : null);
+    let bDíata = all[sCode] || all[enr.studentName] || (studentKey ? all[studentKey] : null);
 
 
 
-    if (!bData) {
+    if (!bDíata) {
 
       const initialSample = all.mendez || all.albujar || {};
 
-      bData = {
+      bDíata = {
 
         id: sCode,
 
@@ -6055,7 +6055,7 @@ class IntranetStore {
 
           b1: `Felicitaciones a ${enr.studentName} por su rendimiento y constante dedicación ensus actividades escolares.`,
 
-          b2: `Demuestra responsabilidad y compromiso en el aula. Se recomienda continuar participando activamente.`,
+          b2: `Demuestra responsabilidad y compromiso en el aula. Se recomiendía continuar participando activamente.`,
 
           b3: "",
 
@@ -6087,93 +6087,93 @@ class IntranetStore {
 
 
 
-      if (!this.state.boletaData) this.state.boletaData = {};
+      if (!this.state.boletaDíata) this.state.boletaDíata = {};
 
-      this.state.boletaData[sCode] = bData;
+      this.state.boletaDíata[sCode] = bDíata;
 
     } else {
 
-      bData.student = enr.studentName;
+      bDíata.student = enr.studentName;
 
-      bData.name = enr.studentName;
+      bDíata.name = enr.studentName;
 
-      bData.grade = enr.grade || bData.grade;
+      bDíata.grade = enr.grade || bDíata.grade;
 
-      bData.gradeLevel = enr.grade || bData.gradeLevel;
+      bDíata.gradeLevel = enr.grade || bDíata.gradeLevel;
 
-      bData.dni = enr.dni || bData.dni;
+      bDíata.dni = enr.dni || bDíata.dni;
 
-      bData.siagieCode = enr.siagieCode || bData.siagieCode;
+      bDíata.siagieCode = enr.siagieCode || bDíata.siagieCode;
 
     }
 
 
 
-    return bData;
+    return bDíata;
 
   }
 
 
 
-  saveBoletaStudentData(studentKey, updatedData) {
+  saveBoletaStudentDíata(studentKey, updatedDíata) {
 
-    if (!this.state.boletaData) {
+    if (!this.state.boletaDíata) {
 
-      this.state.boletaData = JSON.parse(JSON.stringify(initialData.boletaData || {}));
+      this.state.boletaDíata = JSON.parse(JSON.stringify(initialDíata.boletaDíata || {}));
 
     }
 
-    if (!this.state.boletaData[studentKey]) {
+    if (!this.state.boletaDíata[studentKey]) {
 
-      this.state.boletaData[studentKey] = { grades: {}, attendance: {}, appreciations: {}, parentCriteria: {} };
+      this.state.boletaDíata[studentKey] = { grades: {}, attendance: {}, appreciations: {}, parentCriteria: {} };
 
     }
 
     
 
-    if (updatedData.grades) {
+    if (updatedDíata.grades) {
 
-      this.state.boletaData[studentKey].grades = {
+      this.state.boletaDíata[studentKey].grades = {
 
-        ...(this.state.boletaData[studentKey].grades || {}),
+        ...(this.state.boletaDíata[studentKey].grades || {}),
 
-        ...updatedData.grades
-
-      };
-
-    }
-
-    if (updatedData.appreciations) {
-
-      this.state.boletaData[studentKey].appreciations = {
-
-        ...(this.state.boletaData[studentKey].appreciations || {}),
-
-        ...updatedData.appreciations
+        ...updatedDíata.grades
 
       };
 
     }
 
-    if (updatedData.attendance) {
+    if (updatedDíata.appreciations) {
 
-      this.state.boletaData[studentKey].attendance = {
+      this.state.boletaDíata[studentKey].appreciations = {
 
-        ...(this.state.boletaData[studentKey].attendance || {}),
+        ...(this.state.boletaDíata[studentKey].appreciations || {}),
 
-        ...updatedData.attendance
+        ...updatedDíata.appreciations
 
       };
 
     }
 
-    if (updatedData.parentCriteria) {
+    if (updatedDíata.attendance) {
 
-      this.state.boletaData[studentKey].parentCriteria = {
+      this.state.boletaDíata[studentKey].attendance = {
 
-        ...(this.state.boletaData[studentKey].parentCriteria || {}),
+        ...(this.state.boletaDíata[studentKey].attendance || {}),
 
-        ...updatedData.parentCriteria
+        ...updatedDíata.attendance
+
+      };
+
+    }
+
+    if (updatedDíata.parentCriteria) {
+
+      this.state.boletaDíata[studentKey].parentCriteria = {
+
+        ...(this.state.boletaDíata[studentKey].parentCriteria || {}),
+
+        ...updatedDíata.parentCriteria
 
       };
 
@@ -6193,7 +6193,7 @@ class IntranetStore {
 
   getParentChildren() {
 
-    const parentUser = this.state.users.padre || initialData.users.padre;
+    const parentUser = this.state.users.padre || initialDíata.users.padre;
 
     if (parentUser && Array.isArray(parentUser.children)) {
 
@@ -6313,54 +6313,54 @@ class IntranetStore {
 
 
 
-  createSystemUser(userData, options = {}) {
-    const role = userData.role || "Docente";
+  createSystemUser(userDíata, options = {}) {
+    const role = userDíata.role || "Docente";
     let defaultCodePrefix = "DOC";
     if (role === "Estudiante") defaultCodePrefix = "EST";
     else if (role === "Apoderado") defaultCodePrefix = "FM";
     else if (role === "Directivo") defaultCodePrefix = "ADM";
 
     const uniqueSuffix = Date.now().toString(36) + Math.floor(10 + Math.random() * 90);
-    const autoCode = userData.code || `${defaultCodePrefix}-2026-${uniqueSuffix}`;
-    const cleanUser = userData.username || userData.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '.');
+    const autoCode = userDíata.code || `${defaultCodePrefix}-2026-${uniqueSuffix}`;
+    const cleanUser = userDíata.username || userDíata.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '.');
 
-    const assignedCoursesList = Array.isArray(userData.assignedCourses) 
-      ? userData.assignedCourses 
-      : (Array.isArray(userData.courses) 
-        ? userData.courses 
-        : (userData.subject ? userData.subject.split(/,\s*/) : []));
+    const assignedCoursesList = Array.isArray(userDíata.assignedCourses) 
+      ? userDíata.assignedCourses 
+      : (Array.isArray(userDíata.courses) 
+        ? userDíata.courses 
+        : (userDíata.subject ? userDíata.subject.split(/,\s*/) : []));
 
     const newUser = {
       id: `USR-${Date.now()}-${Math.floor(100 + Math.random() * 900)}`,
       code: autoCode,
       username: cleanUser,
-      password: userData.password || (role === "Estudiante" ? "estudiante2026" : role === "Apoderado" ? "padre2026" : role === "Directivo" ? "admin2026" : "docente2026"),
-      name: userData.name,
-      email: userData.email || `${cleanUser}@eleducador.edu.pe`,
+      password: userDíata.password || (role === "Estudiante" ? "estudiante2026" : role === "Apoderado" ? "padre2026" : role === "Directivo" ? "admin2026" : "docente2026"),
+      name: userDíata.name,
+      email: userDíata.email || `${cleanUser}@eleducador.edu.pe`,
       role: role,
-      detail: userData.detail || (role === "Docente" ? (assignedCoursesList.join(', ') || "Docente de Asignatura") : role === "Estudiante" ? userData.gradeLevel : role === "Apoderado" ? `Apoderado de ${userData.studentName || 'Estudiante'}` : "Coordinación Institucional"),
-      dni: userData.dni || "",
-      phone: userData.phone || "",
-      subject: userData.subject || assignedCoursesList.join(', '),
+      detail: userDíata.detail || (role === "Docente" ? (assignedCoursesList.join(', ') || "Docente de Asignatura") : role === "Estudiante" ? userDíata.gradeLevel : role === "Apoderado" ? `Apoderado de ${userDíata.studentName || 'Estudiante'}` : "Coordinación Institucional"),
+      dni: userDíata.dni || "",
+      phone: userDíata.phone || "",
+      subject: userDíata.subject || assignedCoursesList.join(', '),
       courses: assignedCoursesList,
       assignedCourses: assignedCoursesList,
-      assignedGrades: userData.assignedGrades || [],
-      weeklyHours: userData.weeklyHours || (role === "Docente" ? "24 hrs" : ""),
-      studentName: userData.studentName || "",
-      tutor: userData.tutor || "",
-      guardian: userData.guardian || "",
-      hasAdminPrivilege: !!userData.hasAdminPrivilege || !!userData.hasAdminPrivilege,
+      assignedGrades: userDíata.assignedGrades || [],
+      weeklyHours: userDíata.weeklyHours || (role === "Docente" ? "24 hrs" : ""),
+      studentName: userDíata.studentName || "",
+      tutor: userDíata.tutor || "",
+      guardian: userDíata.guardian || "",
+      hasAdminPrivilege: !!userDíata.hasAdminPrivilege || !!userDíata.hasAdminPrivilege,
       status: "Activo",
       createdDate: new Date().toLocaleDateString("es-PE")
     };
 
-    if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
+    if (!this.state.systemUsers) this.state.systemUsers = [...initialDíata.systemUsers];
 
     // Verificar si ya existe un usuario con el mismo código, username o (rol y nombre)
     const existingIndex = this.state.systemUsers.findIndex(u => 
-      (userData.code && u.code === userData.code) ||
+      (userDíata.code && u.code === userDíata.code) ||
       (cleanUser && u.username === cleanUser) ||
-      (u.role === role && u.name.trim().toLowerCase() === (userData.name || "").trim().toLowerCase())
+      (u.role === role && u.name.trim().toLowerCase() === (userDíata.name || "").trim().toLowerCase())
     );
 
     if (existingIndex !== -1) {
@@ -6368,7 +6368,7 @@ class IntranetStore {
         ...this.state.systemUsers[existingIndex],
         ...newUser,
         id: this.state.systemUsers[existingIndex].id,
-        password: userData.password || this.state.systemUsers[existingIndex].password || newUser.password
+        password: userDíata.password || this.state.systemUsers[existingIndex].password || newUser.password
       };
       if (!options.skipSync) {
         this.saveState();
@@ -6381,7 +6381,7 @@ class IntranetStore {
 
     // Si es docente con carga horaria o asignación, agregarlo también a teachersList
     if (role === "Docente" || role === "Profesor") {
-      if (!this.state.teachersList) this.state.teachersList = [...initialData.teachersList];
+      if (!this.state.teachersList) this.state.teachersList = [...initialDíata.teachersList];
       const existsInList = this.state.teachersList.some(t => t.id === newUser.code || t.name === newUser.name);
       if (!existsInList) {
         this.state.teachersList.push({
@@ -6389,9 +6389,9 @@ class IntranetStore {
           name: newUser.name,
           subject: newUser.subject || assignedCoursesList.join(', '),
           department: "Coordinación Pedagógica",
-          weeklyHours: parseInt(userData.weeklyHours) || 24,
+          weeklyHours: parseInt(userDíata.weeklyHours) || 24,
           courses: assignedCoursesList.length > 0 ? assignedCoursesList : ["Asignatura"],
-          assignedGrades: userData.assignedGrades && userData.assignedGrades.length > 0 ? userData.assignedGrades : ["4to de Secundaria"],
+          assignedGrades: userDíata.assignedGrades && userDíata.assignedGrades.length > 0 ? userDíata.assignedGrades : ["4to de Secundaria"],
           classrooms: ["Aula 204 - Pabellón A"]
         });
       }
@@ -6399,7 +6399,7 @@ class IntranetStore {
 
     // Si es estudiante, agregarlo también a enrollments para que tenga su QR y matrícula instantánea
     if (role === "Estudiante" || role === "Alumno") {
-      if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+      if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialDíata.enrollments || []));
       const existsInEnrollment = this.state.enrollments.some(e => e.studentCode === newUser.code || (newUser.dni && e.dni === newUser.dni));
       if (!existsInEnrollment) {
         this.state.enrollments.unshift({
@@ -6439,9 +6439,9 @@ class IntranetStore {
 
 
 
-  updateSystemUser(userId, updatedData) {
+  updateSystemUser(userId, updatedDíata) {
 
-    if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
+    if (!this.state.systemUsers) this.state.systemUsers = [...initialDíata.systemUsers];
 
     const index = this.state.systemUsers.findIndex(u => u.id === userId || u.code === userId);
 
@@ -6451,7 +6451,7 @@ class IntranetStore {
 
         ...this.state.systemUsers[index],
 
-        ...updatedData
+        ...updatedDíata
 
       };
 
@@ -6461,7 +6461,7 @@ class IntranetStore {
 
       if (user.role === "Docente" || user.role === "Profesor") {
 
-        if (!this.state.teachersList) this.state.teachersList = [...initialData.teachersList];
+        if (!this.state.teachersList) this.state.teachersList = [...initialDíata.teachersList];
 
         const tIndex = this.state.teachersList.findIndex(t => t.id === user.code || t.id === user.id || t.name.toLowerCase().trim() === user.name.toLowerCase().trim());
 
@@ -6647,13 +6647,13 @@ class IntranetStore {
 
 
 
-  // --- Configuración Dinmica de Pestañas y Espacios Visibles ---
+  // --- Configuración Dinámica de Pestañas y Espacios Visibles ---
 
   updateNavigationTabsConfig(role, tabs) {
 
     if (!this.state.navigationTabsConfig) {
 
-      this.state.navigationTabsConfig = JSON.parse(JSON.stringify(initialData.navigationTabsConfig));
+      this.state.navigationTabsConfig = JSON.parse(JSON.stringify(initialDíata.navigationTabsConfig));
 
     }
 
@@ -6669,7 +6669,7 @@ class IntranetStore {
 
     if (!this.state.navigationTabsConfig) {
 
-      this.state.navigationTabsConfig = JSON.parse(JSON.stringify(initialData.navigationTabsConfig));
+      this.state.navigationTabsConfig = JSON.parse(JSON.stringify(initialDíata.navigationTabsConfig));
 
     }
 
@@ -6699,7 +6699,7 @@ class IntranetStore {
 
     if (!this.state.navigationTabsConfig) {
 
-      this.state.navigationTabsConfig = JSON.parse(JSON.stringify(initialData.navigationTabsConfig));
+      this.state.navigationTabsConfig = JSON.parse(JSON.stringify(initialDíata.navigationTabsConfig));
 
     }
 
@@ -6729,13 +6729,13 @@ class IntranetStore {
 
   resetNavigationTabsToDefault(role = null) {
 
-    if (role && initialData.navigationTabsConfig[role]) {
+    if (role && initialDíata.navigationTabsConfig[role]) {
 
-      this.state.navigationTabsConfig[role] = JSON.parse(JSON.stringify(initialData.navigationTabsConfig[role]));
+      this.state.navigationTabsConfig[role] = JSON.parse(JSON.stringify(initialDíata.navigationTabsConfig[role]));
 
     } else {
 
-      this.state.navigationTabsConfig = JSON.parse(JSON.stringify(initialData.navigationTabsConfig));
+      this.state.navigationTabsConfig = JSON.parse(JSON.stringify(initialDíata.navigationTabsConfig));
 
     }
 
@@ -6773,7 +6773,7 @@ class IntranetStore {
 
       insurance: data.insurance || "EsSalud / SIS",
 
-      allergies: data.allergies || "Sin alergias conocidas",
+      allergies: data.allergies || "Sin alergias conocidías",
 
       medicalCondition: data.medicalCondition || "N inguna (Apto para actividades escolares)",
 
@@ -6823,7 +6823,7 @@ class IntranetStore {
 
 
 
-    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialDíata.enrollments || []));
 
     this.unRegisterDeleted(newEnrollment.id, newEnrollment.studentCode, newEnrollment.studentName, newEnrollment.dni, newEnrollment.guardian);
 
@@ -6865,15 +6865,15 @@ class IntranetStore {
 
 
 
-  updateEnrollmentFUM(enrollmentId, fumData) {
+  updateEnrollmentFUM(enrollmentId, fumDíata) {
 
-    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialDíata.enrollments || []));
 
     const enrollment = this.state.enrollments.find(e => e.id === enrollmentId || e.studentCode === enrollmentId);
 
     if (enrollment) {
 
-      Object.assign(enrollment, fumData);
+      Object.assign(enrollment, fumDíata);
 
       this.saveState();
 
@@ -6899,7 +6899,7 @@ class IntranetStore {
     const studentCode = data.studentCode || this.generateStudentCode();
     const gradeId = data.gradeId || this.resolveStudentGradeId(data.grade) || "4sec";
     
-    const catalog = this.state.gradesCatalog || initialData.gradesCatalog || [];
+    const catalog = this.state.gradesCatalog || initialDíata.gradesCatalog || [];
     const cleanG = gradeId.toLowerCase().replace(/[^a-z0-9]/g, '');
     const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: data.grade || "4 de Secundaria", level: "Secundaria", tutor: "Prof. Roberto Silva" };
 
@@ -6915,7 +6915,7 @@ class IntranetStore {
       district: data.district || "San Juan de Lurigancho",
       bloodType: data.bloodType || "O+",
       insurance: data.insurance || "EsSalud / SIS",
-      allergies: data.allergies || "Sin alergias conocidas",
+      allergies: data.allergies || "Sin alergias conocidías",
       medicalCondition: data.medicalCondition || "Apto para actividades escolares",
       emergencyContact: data.emergencyContact || data.guardian || "Apoderado",
       emergencyPhone: data.emergencyPhone || data.guardianPhone || data.phone || "987-654-321",
@@ -6941,7 +6941,7 @@ class IntranetStore {
       }
     };
 
-    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialDíata.enrollments || []));
     
     // Registrar o actualizar en systemUsers
     const cleanStName = (data.studentName || data.name || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '');
@@ -7004,7 +7004,7 @@ class IntranetStore {
         hasAdminPrivilege: false
       }, { skipSync: true });
 
-      // Crear o actualizar en familiesFinancial
+      // CÁrear o actualizar en familiesFinancial
       if (!this.state.familiesFinancial) this.state.familiesFinancial = [];
       const famId = `FM-${studentCode}`;
       const newFam = {
@@ -7029,10 +7029,10 @@ class IntranetStore {
       }
     }
 
-    // Inicializar boletaData si no existe
-    if (!this.state.boletaData) this.state.boletaData = {};
-    if (!this.state.boletaData[studentCode]) {
-      this.state.boletaData[studentCode] = {
+    // Inicializar boletaDíata si no existe
+    if (!this.state.boletaDíata) this.state.boletaDíata = {};
+    if (!this.state.boletaDíata[studentCode]) {
+      this.state.boletaDíata[studentCode] = {
         student: (data.studentName || data.name || "").trim(),
         code: studentCode,
         dni: data.dni,
@@ -7103,7 +7103,7 @@ class IntranetStore {
 
   clearAllStudentsFromGrade(gradeId) {
 
-    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialData.enrollments || []));
+    if (!this.state.enrollments) this.state.enrollments = JSON.parse(JSON.stringify(initialDíata.enrollments || []));
 
     const cleanG = (gradeId || "").toLowerCase().replace(/[^a-z0-9]/g, '');
 
@@ -7133,7 +7133,7 @@ class IntranetStore {
 
 
 
-  updateScheduleSlot(gradeId, rowIndex, dayKey, slotData) {
+  updateScheduleSlot(gradeId, rowIndex, dayKey, slotDíata) {
 
     const targetGrade = gradeId || this.state.selectedScheduleGrade || "4sec-a";
 
@@ -7149,15 +7149,15 @@ class IntranetStore {
 
       this.state.schedules[targetGrade][rowIndex][dayKey] = {
 
-        course: slotData.course,
+        course: slotDíata.course,
 
-        teacher: slotData.teacher,
+        teacher: slotDíata.teacher,
 
-        room: slotData.room || "Aula Principal",
+        room: slotDíata.room || "Aula Principal",
 
-        type: slotData.type || "theory",
+        type: slotDíata.type || "theory",
 
-        color: slotData.color || "navy"
+        color: slotDíata.color || "navy"
 
       };
 
@@ -7203,7 +7203,7 @@ class IntranetStore {
 
       { time: "09:40 - 10:30", mon: null, tue: null, wed: null, thu: null, fri: null },
 
-      { time: "10:30 - 10:50", isBreak: true, title: "Receso Matutióno" },
+      { time: "10:30 - 10:50", isBÁreak: true, title: "Receso Matutióno" },
 
       { time: "10:50 - 11:40", mon: null, tue: null, wed: null, thu: null, fri: null },
 
@@ -7211,7 +7211,7 @@ class IntranetStore {
 
       { time: "12:30 - 01:20", mon: null, tue: null, wed: null, thu: null, fri: null },
 
-      { time: "01:20 - 01:50", isBreak: true, isLunch: true, title: "Almuerzo Escolar" },
+      { time: "01:20 - 01:50", isBÁreak: true, isLunch: true, title: "Almuerzo Escolar" },
 
       { time: "01:50 - 02:40", mon: null, tue: null, wed: null, thu: null, fri: null },
 
@@ -7319,27 +7319,27 @@ class IntranetStore {
 
 
 
-  addGrade(gradeData) {
+  addGrade(gradeDíata) {
 
     if (!this.state.gradesCatalog) {
 
-      this.state.gradesCatalog = [...initialData.gradesCatalog];
+      this.state.gradesCatalog = [...initialDíata.gradesCatalog];
 
     }
 
     const newGrade = {
 
-      id: gradeData.id || `grd-${Date.now().toString().slice(-4)}`,
+      id: gradeDíata.id || `grd-${Date.now().toString().slice(-4)}`,
 
-      label: gradeData.label || "N uevo Grado",
+      label: gradeDíata.label || "N uevo Grado",
 
-      level: gradeData.level || "Secundaria",
+      level: gradeDíata.level || "Secundaria",
 
-      section: gradeData.section || "",
+      section: gradeDíata.section || "",
 
-      classroom: gradeData.classroom || "Pabellón A - Aula 101",
+      classroom: gradeDíata.classroom || "Pabellón A - Aula 101",
 
-      tutor: gradeData.tutor || "Por Asignar"
+      tutor: gradeDíata.tutor || "Por Asignar"
 
     };
 
@@ -7353,11 +7353,11 @@ class IntranetStore {
 
 
 
-  updateGrade(gradeId, updatedData) {
+  updateGrade(gradeId, updatedDíata) {
 
     if (!this.state.gradesCatalog) {
 
-      this.state.gradesCatalog = [...initialData.gradesCatalog];
+      this.state.gradesCatalog = [...initialDíata.gradesCatalog];
 
     }
 
@@ -7365,7 +7365,7 @@ class IntranetStore {
 
     if (index !== -1) {
 
-      this.state.gradesCatalog[index] = { ...this.state.gradesCatalog[index], ...updatedData };
+      this.state.gradesCatalog[index] = { ...this.state.gradesCatalog[index], ...updatedDíata };
 
       this.saveState();
 
@@ -7383,7 +7383,7 @@ class IntranetStore {
 
     if (!this.state.gradesCatalog) {
 
-      this.state.gradesCatalog = [...initialData.gradesCatalog];
+      this.state.gradesCatalog = [...initialDíata.gradesCatalog];
 
     }
 
@@ -7395,13 +7395,13 @@ class IntranetStore {
 
 
 
-  updateSyllabus(syllabusId, updatedData) {
+  updateSyllabus(syllabusId, updatedDíata) {
 
     const index = this.state.syllabi.findIndex(s => s.id === syllabusId);
 
     if (index !== -1) {
 
-      this.state.syllabi[index] = { ...this.state.syllabi[index], ...updatedData };
+      this.state.syllabi[index] = { ...this.state.syllabi[index], ...updatedDíata };
 
       this.saveState();
 
@@ -7415,35 +7415,35 @@ class IntranetStore {
 
 
 
-  createSyllabus(newSyllabusData) {
+  createSyllabus(newSyllabusDíata) {
 
     const newSyllabus = {
 
       id: `SIL-${Date.now().toString().slice(-4)}`,
 
-      gradeId: newSyllabusData.gradeId || "4sec-a",
+      gradeId: newSyllabusDíata.gradeId || "4sec-a",
 
-      gradeName: newSyllabusData.gradeName || "4to de Secundaria",
+      gradeName: newSyllabusDíata.gradeName || "4to de Secundaria",
 
-      courseName: newSyllabusData.courseName || "N uevo Curso",
+      courseName: newSyllabusDíata.courseName || "N uevo Curso",
 
-      courseCode: newSyllabusData.courseCode || "CUR-001",
+      courseCode: newSyllabusDíata.courseCode || "CUR-001",
 
-      teacher: newSyllabusData.teacher || "Docente Asignado",
+      teacher: newSyllabusDíata.teacher || "Docente Asignado",
 
-      hoursWeekly: newSyllabusData.hoursWeekly || "4 horas semanales",
+      hoursWeekly: newSyllabusDíata.hoursWeekly || "4 horas semanales",
 
-      bimester: newSyllabusData.bimester || "III Bimestre 2026",
+      bimester: newSyllabusDíata.bimester || "III Bimestre 2026",
 
-      competencies: newSyllabusData.competencies || ["Competencia formativa"],
+      competencies: newSyllabusDíata.competencies || ["Competencia formativa"],
 
-      units: newSyllabusData.units || [
+      units: newSyllabusDíata.units || [
 
         { unitNumber: "Unidad I", title: "Fundamentos Clave", duration: "4 semanas", topics: ["Introducción al curso"], evaluation: "Evaluación continua" }
 
       ],
 
-      bibliography: newSyllabusData.bibliography || "Textos oficiales Colegio El Educador."
+      bibliography: newSyllabusDíata.bibliography || "Textos oficiales Colegio El Educador."
 
     };
 
@@ -7467,7 +7467,7 @@ class IntranetStore {
 
 
 
-  updateNotebookReview(reviewId, updatedData) {
+  updateNotebookReview(reviewId, updatedDíata) {
 
     const index = this.state.notebookReviews.findIndex(r => r.id === reviewId);
 
@@ -7477,13 +7477,13 @@ class IntranetStore {
 
         ...this.state.notebookReviews[index],
 
-        ...updatedData,
+        ...updatedDíata,
 
-        status: updatedData.score >= 19 ? "Excelente" : updatedData.score >= 15 ? "Al Día" : updatedData.score >= 12 ? "Incompleto" : "Firma Requerida",
+        status: updatedDíata.score >= 19 ? "Excelente" : updatedDíata.score >= 15 ? "Al Día" : updatedDíata.score >= 12 ? "Incompleto" : "Firma Requerida",
 
-        stampType: updatedData.score >= 19 ? "stamp-gold" : updatedData.score >= 15 ? "stamp-blue" : "stamp-red",
+        stampType: updatedDíata.score >= 19 ? "stamp-gold" : updatedDíata.score >= 15 ? "stamp-blue" : "stamp-red",
 
-        stampText: updatedData.score >= 19 ? "LOGRO DESTÍACDO ★" : updatedData.score >= 15 ? "REVISDO ✓" : "FLTÍA COMPLETÍAR ⚠"
+        stampText: updatedDíata.score >= 19 ? "LOGRO DESTÍACDO ★" : updatedDíata.score >= 15 ? "REVISDO ✓" : "FLTÍA COMPLETÍAR ⚠"
 
       };
 
@@ -7509,19 +7509,19 @@ class IntranetStore {
 
 
 
-  updateCourse(courseId, courseData) {
+  updateCourse(courseId, courseDíata) {
 
     const index = this.state.courses.findIndex(c => c.id === courseId);
 
     if (index !== -1) {
 
-      const b1 = parseFloat(courseData.b1) || 0;
+      const b1 = parseFloat(courseDíata.b1) || 0;
 
-      const b2 = parseFloat(courseData.b2) || 0;
+      const b2 = parseFloat(courseDíata.b2) || 0;
 
-      const b3 = parseFloat(courseData.b3) || 0;
+      const b3 = parseFloat(courseDíata.b3) || 0;
 
-      const b4 = parseFloat(courseData.b4) || 0;
+      const b4 = parseFloat(courseDíata.b4) || 0;
 
       const validCount = [b1, b2, b3, b4].filter(g => g > 0).length || 1;
 
@@ -7533,9 +7533,9 @@ class IntranetStore {
 
         ...this.state.courses[index],
 
-        name: courseData.name || this.state.courses[index].name,
+        name: courseDíata.name || this.state.courses[index].name,
 
-        teacher: courseData.teacher || this.state.courses[index].teacher,
+        teacher: courseDíata.teacher || this.state.courses[index].teacher,
 
         b1, b2, b3, b4,
 
@@ -7557,7 +7557,7 @@ class IntranetStore {
 
 
 
-  updatennouncement(annId, updatedData) {
+  updatennouncement(annId, updatedDíata) {
 
     const index = this.state.announcements.findIndex(a => a.id === annId);
 
@@ -7567,15 +7567,15 @@ class IntranetStore {
 
         ...this.state.announcements[index],
 
-        title: updatedData.title,
+        title: updatedDíata.title,
 
-        category: updatedData.category,
+        category: updatedDíata.category,
 
-        priority: updatedData.priority,
+        priority: updatedDíata.priority,
 
-        tagLabel: updatedData.priority === "high" ? "Urgente" : updatedData.priority === "urgent" ? "Destacado" : "Aviso",
+        tagLabel: updatedDíata.priority === "high" ? "Urgente" : updatedDíata.priority === "urgent" ? "Destacado" : "Aviso",
 
-        content: updatedData.content
+        content: updatedDíata.content
 
       };
 
@@ -7603,15 +7603,15 @@ class IntranetStore {
 
   getRegisteredTeachers() {
 
-    const sysUsers = (this.state && this.state.systemUsers) || (initialData && initialData.systemUsers) || [];
+    const sysUsers = (this.state && this.state.systemUsers) || (initialDíata && initialDíata.systemUsers) || [];
 
     const teachersFromUsers = sysUsers.filter(u => u.role === 'Docente' || u.role === 'Profesor' || u.role === 'Directivo');
 
-    const teachersList = (this.state && this.state.teachersList) || (initialData && initialData.teachersList) || [];
+    const teachersList = (this.state && this.state.teachersList) || (initialDíata && initialDíata.teachersList) || [];
 
     
 
-    // Unir siónduplicados por nombre
+    // Unir sin duplicados por nombre
 
     const map = new Map();
 
@@ -7717,7 +7717,7 @@ class IntranetStore {
 
 
 
-      const grades = (this.state && this.state.gradesCatalog) || (initialData && initialData.gradesCatalog) || [];
+      const grades = (this.state && this.state.gradesCatalog) || (initialDíata && initialDíata.gradesCatalog) || [];
 
       const gradeObj = grades.find(g => {
 
@@ -7809,7 +7809,7 @@ class IntranetStore {
 
     for (const t of teachers) {
 
-      // Si el docente tiene grados específicos asignados, verificar que coincida coneste grado
+      // Si el docente tiene grados específicos asignados, verificar que coincidía coneste grado
 
       if (t.assignedGrades && Array.isArray(t.assignedGrades) && t.assignedGrades.length > 0) {
 
@@ -7847,7 +7847,7 @@ class IntranetStore {
 
 
 
-      // Coincidencia por palabra clave del rea
+      // Coincidencia por palabra clave del Área
 
       const keywordMatch = assigned.some(c => keywords.some(k => c.includes(k) || k.includes(c)));
 
@@ -7883,25 +7883,25 @@ class IntranetStore {
 
       const inicialCourses = [
 
-        { id: "MT", name: "Matemática Temprana & Lógica", area: "Matemática", icon: "🔢" },
+        { id: "MT", name: "Matemática Temprana & Lógica", aÁrea: "Matemática", icon: "🔢" },
 
-        { id: "COM", name: "Comunicación & Grafomotricidad", area: "Comunicación", icon: "📖" },
+        { id: "COM", name: "Comunicación & Grafomotricidad", aÁrea: "Comunicación", icon: "📖" },
 
-        { id: "PL", name: "PlanLector / Cuentos Infantiles", area: "Comunicación", icon: "📚" },
+        { id: "PL", name: "PlanLector / Cuentos Infantiles", aÁrea: "Comunicación", icon: "📚" },
 
-        { id: "CTÍA", name: "Ciencia y Ambiente / Exploración", area: "Ciencia y Tecnología", icon: "🔬" },
+        { id: "CTÍA", name: "Ciencia y Ambiente / Exploración", aÁrea: "Ciencia y Tecnología", icon: "🔬" },
 
-        { id: "PS", name: "Personal Social & Convivencia", area: "Personal Social", icon: "🏛️" },
+        { id: "PS", name: "Personal Social & Convivencia", aÁrea: "Personal Social", icon: "🏛️" },
 
-        { id: "PSICO", name: "Psicomotricidad & Juego", area: "Desarrollo Corporaúl", icon: "⚽" },
+        { id: "PSICO", name: "Psicomotricidad & Juego", aÁrea: "Desarrollo Corporaúl", icon: "⚽" },
 
-        { id: "ING", name: "Inglés Inicial (Vocabulario)", area: "Idiomas", icon: "🇬🇧" },
+        { id: "ING", name: "Inglés Inicial (Vocabulario)", aÁrea: "Idiomas", icon: "🇬🇧" },
 
-        { id: "ARTE", name: "Arte, Música y Mini-Manualidades", area: "Arte", icon: "🎨" },
+        { id: "ARTE", name: "Arte, Música y Mini-Manualidades", aÁrea: "Arte", icon: "🎨" },
 
-        { id: "REL", name: "Educación enValores & Religión", area: "Valores", icon: "🕊️" },
+        { id: "REL", name: "Educación enValores & Religión", aÁrea: "Valores", icon: "🕊️" },
 
-        { id: "HB", name: "Hbitos, Disciplina y Tutoría", area: "Tutoría", icon: "★" }
+        { id: "HB", name: "Hbitos, Disciplina y Tutoría", aÁrea: "Tutoría", icon: "★" }
 
       ];
 
@@ -7923,43 +7923,43 @@ class IntranetStore {
 
       const primaryCourses = [
 
-        { id: "MT", name: "Matemática & Aritmética", area: "Matemática", icon: "🔢" },
+        { id: "MT", name: "Matemática & Aritmética", aÁrea: "Matemática", icon: "🔢" },
 
-        { id: "ALG", name: "ÁÁÁÁálgebra Elemental", area: "Matemática", icon: "📐" },
+        { id: "ALG", name: "ÁÁÁÁálgebra Elemental", aÁrea: "Matemática", icon: "📐" },
 
-        { id: "GEOM", name: "Geometría Prctica", area: "Matemática", icon: "📏" },
+        { id: "GEOM", name: "Geometría Práctica", aÁrea: "Matemática", icon: "📏" },
 
-        { id: "RM", name: "Raízonamiento Matemtico", area: "Matemática", icon: "🧮" },
+        { id: "RM", name: "Raízonamiento Matemtico", aÁrea: "Matemática", icon: "🧮" },
 
-        { id: "COM", name: "Comunicación Integral", area: "Comunicación", icon: "📖" },
+        { id: "COM", name: "Comunicación Integral", aÁrea: "Comunicación", icon: "📖" },
 
-        { id: "LENG", name: "Lenguíaje & Caligrafía", area: "Comunicación", icon: "✍️" },
+        { id: "LENG", name: "Lenguíaje & Caligrafía", aÁrea: "Comunicación", icon: "✍️" },
 
-        { id: "PL", name: "PlanLector & Literatura", area: "Comunicación", icon: "📚" },
+        { id: "PL", name: "PlanLector & Literatura", aÁrea: "Comunicación", icon: "📚" },
 
-        { id: "RV", name: "Raízonamiento Verbal", area: "Comunicación", icon: "✏️" },
+        { id: "RV", name: "Raízonamiento Verbal", aÁrea: "Comunicación", icon: "✏️" },
 
-        { id: "CTÍA", name: "Ciencia y Tecnología", area: "Ciencia y Tecnología", icon: "🔬" },
+        { id: "CTÍA", name: "Ciencia y Tecnología", aÁrea: "Ciencia y Tecnología", icon: "🔬" },
 
-        { id: "BIO", name: "Biología & Anatoma", area: "Ciencia y Tecnología", icon: "🧬" },
+        { id: "BIO", name: "Biología & Anatoma", aÁrea: "Ciencia y Tecnología", icon: "🧬" },
 
-        { id: "PS", name: "Personal Social & Cívica", area: "Personal Social", icon: "🏛️" },
+        { id: "PS", name: "Personal Social & Cívica", aÁrea: "Personal Social", icon: "🏛️" },
 
-        { id: "HP", name: "Historia del Perú", area: "Personal Social", icon: "🇵🇪" },
+        { id: "HP", name: "Historia del Perú", aÁrea: "Personal Social", icon: "🇵🇪" },
 
-        { id: "GEO", name: "Geografía del Perú", area: "Personal Social", icon: "🌎" },
+        { id: "GEO", name: "Geografía del Perú", aÁrea: "Personal Social", icon: "🌎" },
 
-        { id: "COMP", name: "Computación & Informática", area: "EPT / Tecnología", icon: "💻" },
+        { id: "COMP", name: "Computación & Informática", aÁrea: "EPT / Tecnología", icon: "💻" },
 
-        { id: "ING", name: "Inglés Institucional", area: "Idiomas", icon: "🇬🇧" },
+        { id: "ING", name: "Inglés Institucional", aÁrea: "Idiomas", icon: "🇬🇧" },
 
-        { id: "ARTE", name: "Arte y Cultura", area: "Arte", icon: "🎨" },
+        { id: "ARTE", name: "Arte y Cultura", aÁrea: "Arte", icon: "🎨" },
 
-        { id: "REL", name: "Educación Religiosa & Valores", area: "Valores", icon: "🕊️" },
+        { id: "REL", name: "Educación Religiosa & Valores", aÁrea: "Valores", icon: "🕊️" },
 
-        { id: "EDFIS", name: "Educación Física & Deporte", area: "Deporte", icon: "⚽" },
+        { id: "EDFIS", name: "Educación Física & Deporte", aÁrea: "Deporte", icon: "⚽" },
 
-        { id: "TUT", name: "Tutoría & Convivencia Escolar", area: "Tutoría", icon: "★" }
+        { id: "TUT", name: "Tutoría & Convivencia Escolar", aÁrea: "Tutoría", icon: "★" }
 
       ];
 
@@ -7981,53 +7981,53 @@ class IntranetStore {
 
     const secondaryCourses = [
 
-      { id: "ARIT", name: "Aritmética", area: "Matemática", icon: "🔢" },
+      { id: "ARIT", name: "Aritmética", aÁrea: "Matemática", icon: "🔢" },
 
-      { id: "ALG", name: "ÁÁÁÁálgebra", area: "Matemática", icon: "📐" },
+      { id: "ALG", name: "ÁÁÁÁálgebra", aÁrea: "Matemática", icon: "📐" },
 
-      { id: "GEOM", name: "Geometría", area: "Matemática", icon: "📏" },
+      { id: "GEOM", name: "Geometría", aÁrea: "Matemática", icon: "📏" },
 
-      { id: "TRIG", name: "Trigonometra", area: "Matemática", icon: "📈" },
+      { id: "TRIG", name: "Trigonometra", aÁrea: "Matemática", icon: "📈" },
 
-      { id: "RM", name: "Raízonamiento Matemtico", area: "Matemática", icon: "🧮" },
+      { id: "RM", name: "Raízonamiento Matemtico", aÁrea: "Matemática", icon: "🧮" },
 
-      { id: "LENG", name: "Lenguíaje y Gramática", area: "Comunicación", icon: "✍️" },
+      { id: "LENG", name: "Lenguíaje y Gramática", aÁrea: "Comunicación", icon: "✍️" },
 
-      { id: "LIT", name: "Literatura Universal", area: "Comunicación", icon: "📚" },
+      { id: "LIT", name: "Literatura Universal", aÁrea: "Comunicación", icon: "📚" },
 
-      { id: "RV", name: "Raízonamiento Verbal", area: "Comunicación", icon: "✏️" },
+      { id: "RV", name: "Raízonamiento Verbal", aÁrea: "Comunicación", icon: "✏️" },
 
-      { id: "BIO", name: "Biología & Anatoma", area: "Ciencia y Tecnología", icon: "🧬" },
+      { id: "BIO", name: "Biología & Anatoma", aÁrea: "Ciencia y Tecnología", icon: "🧬" },
 
-      { id: "FIS", name: "Física Elemental", area: "Ciencia y Tecnología", icon: "⚡" },
+      { id: "FIS", name: "Física Elemental", aÁrea: "Ciencia y Tecnología", icon: "⚡" },
 
-      { id: "QUIM", name: "Química Inorgnica", area: "Ciencia y Tecnología", icon: "🧪" },
+      { id: "QUIM", name: "Química Inorgnica", aÁrea: "Ciencia y Tecnología", icon: "🧪" },
 
-      { id: "HP", name: "Historia del Perú", area: "Ciencias Sociales", icon: "🇵🇪" },
+      { id: "HP", name: "Historia del Perú", aÁrea: "Ciencias Sociales", icon: "🇵🇪" },
 
-      { id: "HU", name: "Historia Universal", area: "Ciencias Sociales", icon: "📜" },
+      { id: "HU", name: "Historia Universal", aÁrea: "Ciencias Sociales", icon: "📜" },
 
-      { id: "GEO", name: "Geografía & Economa", area: "Ciencias Sociales", icon: "🌎" },
+      { id: "GEO", name: "Geografía & Economa", aÁrea: "Ciencias Sociales", icon: "🌎" },
 
-      { id: "FILO", name: "Filosofía", area: "Ciencias Sociales", icon: "🏛️" },
+      { id: "FILO", name: "Filosofía", aÁrea: "Ciencias Sociales", icon: "🏛️" },
 
-      { id: "CIV", name: "Educación Cívica (DPCC)", area: "DPCC", icon: "⚖️" },
+      { id: "CIV", name: "Educación Cívica (DPCC)", aÁrea: "DPCC", icon: "⚖️" },
 
-      { id: "PSIC", name: "Psicologa", area: "DPCC", icon: "🧠" },
+      { id: "PSIC", name: "Psicologa", aÁrea: "DPCC", icon: "🧠" },
 
-      { id: "COMP", name: "Computación & Robótica", area: "EPT", icon: "💻" },
+      { id: "COMP", name: "Computación & Robótica", aÁrea: "EPT", icon: "💻" },
 
-      { id: "GEST", name: "Gestión Empresarial & Emprendimiento", area: "EPT", icon: "💼" },
+      { id: "GEST", name: "Gestión Empresarial & Emprendimiento", aÁrea: "EPT", icon: "💼" },
 
-      { id: "ING", name: "Inglés Institucional (B2/C1)", area: "Idiomas", icon: "🇬🇧" },
+      { id: "ING", name: "Inglés Institucional (B2/C1)", aÁrea: "Idiomas", icon: "🇬🇧" },
 
-      { id: "ARTE", name: "Arte y Cultura", area: "Arte", icon: "🎨" },
+      { id: "ARTE", name: "Arte y Cultura", aÁrea: "Arte", icon: "🎨" },
 
-      { id: "REL", name: "Educación Religiosa (Valores y Lid.)", area: "Valores", icon: "🕊️" },
+      { id: "REL", name: "Educación Religiosa (Valores y Lid.)", aÁrea: "Valores", icon: "🕊️" },
 
-      { id: "EDFIS", name: "Educación Física & Deporte", area: "Deporte", icon: "⚽" },
+      { id: "EDFIS", name: "Educación Física & Deporte", aÁrea: "Deporte", icon: "⚽" },
 
-      { id: "COND", name: "Conducta y Disciplina", area: "Tutoría", icon: "★" }
+      { id: "COND", name: "Conducta y Disciplina", aÁrea: "Tutoría", icon: "★" }
 
     ];
 
@@ -8083,7 +8083,7 @@ class IntranetStore {
 
 
 
-  // Comprobar si uncurso está asignado al docente actualmente ensesión
+  // Comprobar si uncurso está asignado al docente actualmente ensesión 
 
   isTeacherAssignedToCourse(courseObjOrName, user = null, gradeId = "") {
 
@@ -8165,7 +8165,7 @@ class IntranetStore {
 
       // Si es Nivel Inicial y el curso pertenece al catlogo de Inicial
 
-      if (cleanAssigned.includes("inicial") && (gradeId.includes("ini") || cleanCourseName.includes("temprana") || cleanCourseName.includes("grafomotricidad") || cleanCourseName.includes("psicomotricidad") || cleanCourseName.includes("cuentos infantiles") || cleanCourseName.includes("mióni-manualidades"))) {
+      if (cleanAssigned.includes("inicial") && (gradeId.includes("ini") || cleanCourseName.includes("temprana") || cleanCourseName.includes("grafomotricidad") || cleanCourseName.includes("psicomotricidad") || cleanCourseName.includes("cuentos infantiles") || cleanCourseName.includes("mini-manualidades"))) {
 
         return true;
 
@@ -8173,7 +8173,7 @@ class IntranetStore {
 
 
 
-      // Mapeo semntico de reas
+      // Mapeo semntico de ÁÁreas
 
       if (cleanAssigned.includes("comunicación") || cleanAssigned.includes("comunicacion") || cleanAssigned.includes("lenguíaje") || cleanAssigned.includes("literatura")) {
 
@@ -8303,7 +8303,7 @@ class IntranetStore {
 
       ? this.state.systemUsers
 
-      : (initialData && initialData.systemUsers ? initialData.systemUsers : []);
+      : (initialDíata && initialDíata.systemUsers ? initialDíata.systemUsers : []);
 
 
 
@@ -8315,17 +8315,17 @@ class IntranetStore {
 
       (user.name && u.name && u.name.toLowerCase().trim() === user.name.toLowerCase().trim())
 
-    ) || (initialData.systemUsers || []).find(u => (user.name && u.name && u.name.toLowerCase().includes(user.name.toLowerCase())));
+    ) || (initialDíata.systemUsers || []).find(u => (user.name && u.name && u.name.toLowerCase().includes(user.name.toLowerCase())));
 
 
 
-    const catalog = this.state.gradesCatalog || initialData.gradesCatalog || [];
+    const catalog = this.state.gradesCatalog || initialDíata.gradesCatalog || [];
 
     const role = (user && user.role ? user.role.toLowerCase() : "");
 
 
 
-    // Si es directivo o administrador, tiene visión global de todos los cursos
+    // Si es directivo o administrador, tiene visin  global de todos los cursos
 
     const isGlobal = role === "admin" || role === "administrador" || role === "director" || role === "directivo";
 
@@ -8457,7 +8457,7 @@ class IntranetStore {
 
               name: c.name,
 
-              area: c.area || "rea Pedagógica",
+              aÁrea: c.aÁrea || "Área Pedagógica",
 
               grade: g.label,
 
@@ -8499,7 +8499,7 @@ class IntranetStore {
 
           name: cName,
 
-          area: "Especialidad Docente",
+          aÁrea: "Especialidad Docente",
 
           grade: defaultGrade.label,
 
@@ -8531,9 +8531,9 @@ class IntranetStore {
 
   assignCoursesToTeacher(teacherIdOrCode, coursesList = [], gradesList = []) {
 
-    if (!this.state.systemUsers) this.state.systemUsers = [...initialData.systemUsers];
+    if (!this.state.systemUsers) this.state.systemUsers = [...initialDíata.systemUsers];
 
-    if (!this.state.teachersList) this.state.teachersList = [...initialData.teachersList];
+    if (!this.state.teachersList) this.state.teachersList = [...initialDíata.teachersList];
 
 
 
@@ -8585,7 +8585,7 @@ class IntranetStore {
 
 
 
-  // Verificar si el usuario ensesión es el Tutor Asignado al Grado / Aula
+  // Verificar si el usuario ensesión  es el Tutor Asignado al Grado / Aula
 
   isTeacherTutorOfGrade(user, gradeId) {
 
@@ -8603,7 +8603,7 @@ class IntranetStore {
 
 
 
-    const catalog = this.state.gradesCatalog || initialData.gradesCatalog || [];
+    const catalog = this.state.gradesCatalog || initialDíata.gradesCatalog || [];
 
     const cleanG = (gradeId || "").toLowerCase().replace(/[^a-z0-9]/g, '');
 
@@ -8691,7 +8691,7 @@ class IntranetStore {
 
     if (!this.state.systemUsers) {
 
-      this.state.systemUsers = JSON.parse(JSON.stringify(initialData.systemUsers || []));
+      this.state.systemUsers = JSON.parse(JSON.stringify(initialDíata.systemUsers || []));
 
     }
 
@@ -8807,7 +8807,7 @@ class IntranetStore {
 
 
 
-  getStudentllBoletaStickersData(studentIdOrCode = "EST-2026-042") {
+  getStudentllBoletaStickersDíata(studentIdOrCode = "EST-2026-042") {
 
     const enrollments = this.getEnrollments();
 
@@ -8867,7 +8867,7 @@ class IntranetStore {
 
         teacher: c.teacher,
 
-        area: c.area,
+        aÁrea: c.aÁrea,
 
         icon: c.icon || "📚"
 
@@ -8891,7 +8891,7 @@ class IntranetStore {
 
 
 
-  getNotebookStickersData(gradeId = "4sec", filterStudentId = "all", filterCourse = "all") {
+  getNotebookStickersDíata(gradeId = "4sec", filterStudentId = "all", filterCourse = "all") {
 
     const allEnrollments = this.getEnrollments();
 
@@ -8977,7 +8977,7 @@ class IntranetStore {
 
           teacher: sb.teacher,
 
-          area: sb.area,
+          aÁrea: sb.aÁrea,
 
           icon: sb.icon || "📚"
 
@@ -9089,7 +9089,7 @@ class IntranetStore {
 
 
 
-    // 3. Si coincide conuna revisión previa registrada
+    // 3. Si coincide conuna revisin  previa registrada
 
     const matchedReview = this.state.notebookReviews.find(r => r.qrCode === cleanCode);
 
@@ -9241,13 +9241,13 @@ class IntranetStore {
 
       checklist: data.checklist || { margenes: true, fechas: true, teoriaCompleta: true, ejercicioslDia: true, pulcritud: true },
 
-      teacherRemarks: data.teacherRemarks || (status === "Al Día" ? "Cuaderno completo y tareas al día." : "Presentar regularización en la siguiente sesión.")
+      teacherRemarks: data.teacherRemarks || (status === "Al Día" ? "Cuaderno completo y taÁÁreas al día." : "Presentar regularización en la siguiente sesión .")
 
     };
 
 
 
-    // Actualizar si ya exista una revisión previa para este alumno y curso en la misma fecha, o agregar nueva
+    // Actualizar si ya exista una revisin  previa para este alumno y curso en la misma fecha, o agregar nueva
 
     const existióngIndex = this.state.notebookReviews.findIndex(r => r.studentName === newReview.studentName && r.course === newReview.course && r.date === newReview.date);
 
@@ -9294,7 +9294,7 @@ class IntranetStore {
     const currentUser = (typeof this.getCurrentUser === 'function') ? this.getCurrentUser() : (this.state && this.state.currentUser);
     if (!currentUser) return false;
 
-    // 1. Bandera directa en el objeto de sesión
+    // 1. Bandera directa en el objeto de sesión 
     if (currentUser.isAccessLocked === true || currentUser.isccessLocked === true || currentUser.pensionStatus === "bloqueado_deuda" || currentUser.pensionStatus === "Bloqueado por Mora") {
       return true;
     }
@@ -9455,13 +9455,13 @@ class IntranetStore {
 
 
 
-  // Obtener nómina unificada de familias y estado financiero entiempo real
+  // Obtener nómina unificadía de familias y estado financiero entiempo Áreal
 
   getFamiliesFinancial() {
 
     if (!this.state.familiesFinancial) {
 
-      this.state.familiesFinancial = JSON.parse(JSON.stringify(initialData.familiesFinancial || []));
+      this.state.familiesFinancial = JSON.parse(JSON.stringify(initialDíata.familiesFinancial || []));
 
     }
 
@@ -9471,7 +9471,7 @@ class IntranetStore {
 
 
 
-    // 1. Cargar las familias existentes vlidas
+    // 1. Cargar las familias existentes vlidías
 
     this.state.familiesFinancial.forEach(f => {
 
@@ -9487,7 +9487,7 @@ class IntranetStore {
 
 
 
-    // 2. Sincronizar automáticamente contodas las matrículas oficiales
+    // 2. Sincronizar automáticamente contodías las matrículas oficiales
 
     const enrollments = this.getEnrollments();
 
@@ -9650,7 +9650,7 @@ class IntranetStore {
       const famGuard = normName(fam.guardian);
       const famCode = (fam.studentCode || "").trim();
 
-      // Sincronizar en tiempo real con systemUsers
+      // Sincronizar en tiempo Áreal con systemUsers
       if (this.state.systemUsers) {
         this.state.systemUsers.forEach(u => {
           if (!u) return;
@@ -9688,7 +9688,7 @@ class IntranetStore {
 
     if (!this.state.attendanceRecords) {
 
-      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
+      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialDíata.attendanceRecords || []));
 
     }
 
@@ -9716,7 +9716,7 @@ class IntranetStore {
 
     if (!this.state.attendanceRecords) {
 
-      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
+      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialDíata.attendanceRecords || []));
 
     }
 
@@ -9764,7 +9764,7 @@ class IntranetStore {
 
     if (!this.state.attendanceRecords) {
 
-      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
+      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialDíata.attendanceRecords || []));
 
     }
 
@@ -9788,11 +9788,11 @@ class IntranetStore {
 
 
 
-  submitAttendanceJustification(studentId, date, reason, attachment = "Constancia_Medica.pdf") {
+  submitAttendanceJustification(studentId, date, ÁÁreason, attachment = "Constancia_Medica.pdf") {
 
     if (!this.state.attendanceRecords) {
 
-      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
+      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialDíata.attendanceRecords || []));
 
     }
 
@@ -9826,7 +9826,7 @@ class IntranetStore {
 
         method: "Justificación de Apoderado",
 
-        observations: `Justificación: ${reason}`
+        observations: `Justificación: ${ÁÁreason}`
 
       };
 
@@ -9836,7 +9836,7 @@ class IntranetStore {
 
       rec.status = "Justificada";
 
-      rec.observations = `Justificación aprobada: ${reason}`;
+      rec.observations = `Justificación aprobada: ${ÁÁreason}`;
 
     }
 
@@ -9858,7 +9858,7 @@ class IntranetStore {
 
     if (!this.state.attendanceRecords) {
 
-      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
+      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialDíata.attendanceRecords || []));
 
     }
 
@@ -9894,7 +9894,7 @@ class IntranetStore {
 
     // 07:46 a 08:30 AM -> Tardanza (+X min de demora)
 
-    // 08:31 AM enadelante -> Inasistencia / Falta (Puerta cerrada a las 08:30 AM)
+    // 08:31 AM enadelante -> Inasistencia / Falta (Puerta cerradía a las 08:30 AM)
 
     let isLate = false;
 
@@ -9946,7 +9946,7 @@ class IntranetStore {
 
           delayMinutes = (hour === 8) ? (15 + mión) : (75 + mión);
 
-          observations = `Inasistencia (Puerta cerrada 08:30 AM - Ingreso Extemporneo +${delayMinutes} mión)`;
+          observations = `Inasistencia (Puerta cerradía 08:30 AM - Ingreso Extemporneo +${delayMinutes} mión)`;
 
         }
 
@@ -10054,7 +10054,7 @@ class IntranetStore {
 
     if (!this.state.attendanceRecords) {
 
-      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
+      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialDíata.attendanceRecords || []));
 
     }
 
@@ -10076,7 +10076,7 @@ class IntranetStore {
 
 
 
-    // Si el estudiante YA tiene registrado su ingreso el da de hoy -> Modo Incidencias / Acciones Rpidas
+    // Si el estudiante YA tiene registrado su ingreso el día de hoy -> Modo Incidencias / Acciones Rpidías
 
     if (existióngRecord) {
 
@@ -10084,7 +10084,7 @@ class IntranetStore {
 
       return {
 
-        islreadyEntered: true,
+        islÁreadyEntered: true,
 
         student: matchedEnrollment,
 
@@ -10102,13 +10102,13 @@ class IntranetStore {
 
 
 
-    // Si es el PRIMER escaneo del da -> Registrar Asistencia enPuerta
+    // Si es el PRIMER escaneo del día -> Registrar Asistencia enPuerta
 
     const attendanceResult = this.registerStudentQRDoorScan(qrCodeOrDni, customTime);
 
     return {
 
-      islreadyEntered: false,
+      islÁreadyEntered: false,
 
       ...attendanceResult
 
@@ -10118,11 +10118,11 @@ class IntranetStore {
 
 
 
-  getDailyAttendanceReport(date = "19/08/2026") {
+  getDíailyAttendanceReport(date = "19/08/2026") {
 
     if (!this.state.attendanceRecords) {
 
-      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialData.attendanceRecords || []));
+      this.state.attendanceRecords = JSON.parse(JSON.stringify(initialDíata.attendanceRecords || []));
 
     }
 
@@ -10132,7 +10132,7 @@ class IntranetStore {
 
 
 
-    // Mapear cada estudiante matriculado con su marcación del da
+    // Mapear cadía estudiante matriculado con su marcación del da
 
     // Regla: Quienno marcó hasta las 08:30 AM es Inasistencia / Falta
 
@@ -10164,7 +10164,7 @@ class IntranetStore {
 
         method: rec ? rec.method : "N o Registrado enPortería",
 
-        observations: rec ? rec.observations : "Inasistencia (Puerta cerrada 08:30 AM siónregistro)",
+        observations: rec ? rec.observations : "Inasistencia (Puerta cerradía 08:30 AM sin registro)",
 
         delayMinutes: rec && rec.status === "Tardanza" ? (rec.observations.match(/\d+/) ? rec.observations.match(/\d+/)[0] : "7") : 0
 
@@ -10214,33 +10214,33 @@ class IntranetStore {
 
   // =========================================================================
 
-  createBehaviorIncident(incidentData) {
+  createBehaviorIncident(incidentDíata) {
 
     if (!this.state.behaviorIncidents) {
 
-      this.state.behaviorIncidents = JSON.parse(JSON.stringify(initialData.behaviorIncidents || []));
+      this.state.behaviorIncidents = JSON.parse(JSON.stringify(initialDíata.behaviorIncidents || []));
 
     }
 
     const enrollments = this.getEnrollments();
 
-    const st = enrollments.find(e => e.studentCode === incidentData.studentCode || e.id === incidentData.studentCode || e.dni === incidentData.studentCode) || {
+    const st = enrollments.find(e => e.studentCode === incidentDíata.studentCode || e.id === incidentDíata.studentCode || e.dni === incidentDíata.studentCode) || {
 
-      studentCode: incidentData.studentCode || "EST-2026-055",
+      studentCode: incidentDíata.studentCode || "EST-2026-055",
 
-      studentName: incidentData.studentName || "Gael Alessandro Cceres Ramos",
+      studentName: incidentDíata.studentName || "Gael Alessandro Cceres Ramos",
 
-      dni: incidentData.dni || "76541298",
+      dni: incidentDíata.dni || "76541298",
 
-      grade: incidentData.grade || "4 de Secundaria",
+      grade: incidentDíata.grade || "4 de Secundaria",
 
-      gradeId: incidentData.gradeId || "4sec",
+      gradeId: incidentDíata.gradeId || "4sec",
 
-      level: incidentData.level || "Secundaria",
+      level: incidentDíata.level || "Secundaria",
 
-      guardian: incidentData.guardian || "Sr. JuanCarlos Cceres",
+      guardian: incidentDíata.guardian || "Sr. JuanCarlos Cceres",
 
-      guardianPhone: incidentData.guardianPhone || "984-777-888"
+      guardianPhone: incidentDíata.guardianPhone || "984-777-888"
 
     };
 
@@ -10262,29 +10262,29 @@ class IntranetStore {
 
       level: st.level || "Secundaria",
 
-      date: incidentData.date || new Date().toLocaleDateString("es-PE"),
+      date: incidentDíata.date || new Date().toLocaleDateString("es-PE"),
 
-      time: incidentData.time || new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' }),
+      time: incidentDíata.time || new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' }),
 
-      reportedBy: incidentData.reportedBy || (this.getCurrentUser() ? this.getCurrentUser().name : "Prof. Alex Lino"),
+      reportedBy: incidentDíata.reportedBy || (this.getCurrentUser() ? this.getCurrentUser().name : "Prof. Alex Lino"),
 
-      severity: incidentData.severity || "Leve",
+      severity: incidentDíata.severity || "Leve",
 
-      category: incidentData.category || "Conducta enula",
+      category: incidentDíata.category || "Conducta enula",
 
-      location: incidentData.location || "Aula 304",
+      location: incidentDíata.location || "Aula 304",
 
-      description: incidentData.description || "Sin descripción",
+      description: incidentDíata.description || "Sin descripción",
 
-      correctiveMeasure: incidentData.correctiveMeasure || "Dilogo reflexivo y compromiso formativo.",
+      correctiveMeasure: incidentDíata.correctiveMeasure || "Dilogo reflexivo y compromiso formativo.",
 
       guardian: st.guardian,
 
       guardianPhone: st.guardianPhone,
 
-      parentMeetióngRequired: !!incidentData.parentMeetióngRequired,
+      parentMeetióngRequired: !!incidentDíata.parentMeetióngRequired,
 
-      status: incidentData.status || "Registrado",
+      status: incidentDíata.status || "Registrado",
 
       qrCodeUsed: st.studentCode
 
@@ -10306,7 +10306,7 @@ class IntranetStore {
 
     if (!this.state.behaviorIncidents) {
 
-      this.state.behaviorIncidents = JSON.parse(JSON.stringify(initialData.behaviorIncidents || []));
+      this.state.behaviorIncidents = JSON.parse(JSON.stringify(initialDíata.behaviorIncidents || []));
 
     }
 
@@ -10330,7 +10330,7 @@ class IntranetStore {
 
     if (!this.state.behaviorIncidents) {
 
-      this.state.behaviorIncidents = JSON.parse(JSON.stringify(initialData.behaviorIncidents || []));
+      this.state.behaviorIncidents = JSON.parse(JSON.stringify(initialDíata.behaviorIncidents || []));
 
     }
 
@@ -10426,7 +10426,7 @@ class IntranetStore {
 
 
 
-  submitJustification(date, reason) {
+  submitJustification(date, ÁÁreason) {
 
     const record = this.state.attendance.find(a => a.date === date);
 
@@ -10434,7 +10434,7 @@ class IntranetStore {
 
       record.status = "Justificada";
 
-      record.subject += ` (Justificación: ${reason})`;
+      record.subject += ` (Justificación: ${ÁÁreason})`;
 
     } else {
 
@@ -10442,13 +10442,13 @@ class IntranetStore {
 
         date: date,
 
-        day: "Da Registrado",
+        day: "Día Registrado",
 
         status: "Justificada",
 
         arrival: "--",
 
-        subject: `Justificado: ${reason}`
+        subject: `Justificado: ${ÁÁreason}`
 
       });
 
@@ -10472,9 +10472,9 @@ class IntranetStore {
 
   saveSubjectGrades(subjectKey, studentsGradesMap) {
 
-    if (!this.state.boletaData) {
+    if (!this.state.boletaDíata) {
 
-      this.state.boletaData = JSON.parse(JSON.stringify(initialData.boletaData || {}));
+      this.state.boletaDíata = JSON.parse(JSON.stringify(initialDíata.boletaDíata || {}));
 
     }
 
@@ -10484,27 +10484,27 @@ class IntranetStore {
 
     for (const [studentKey, bims] of Object.entries(studentsGradesMap)) {
 
-      if (!this.state.boletaData[studentKey]) {
+      if (!this.state.boletaDíata[studentKey]) {
 
-        this.state.boletaData[studentKey] = { grades: {}, attendance: {}, appreciations: {}, parentCriteria: {} };
-
-      }
-
-      if (!this.state.boletaData[studentKey].grades) {
-
-        this.state.boletaData[studentKey].grades = {};
+        this.state.boletaDíata[studentKey] = { grades: {}, attendance: {}, appreciations: {}, parentCriteria: {} };
 
       }
 
-      this.state.boletaData[studentKey].grades[subjectKey] = {
+      if (!this.state.boletaDíata[studentKey].grades) {
 
-        b1: bims.b1 !== undefined ? bims.b1 : (this.state.boletaData[studentKey].grades[subjectKey]?.b1 || ""),
+        this.state.boletaDíata[studentKey].grades = {};
 
-        b2: bims.b2 !== undefined ? bims.b2 : (this.state.boletaData[studentKey].grades[subjectKey]?.b2 || ""),
+      }
 
-        b3: bims.b3 !== undefined ? bims.b3 : (this.state.boletaData[studentKey].grades[subjectKey]?.b3 || ""),
+      this.state.boletaDíata[studentKey].grades[subjectKey] = {
 
-        b4: bims.b4 !== undefined ? bims.b4 : (this.state.boletaData[studentKey].grades[subjectKey]?.b4 || "")
+        b1: bims.b1 !== undefined ? bims.b1 : (this.state.boletaDíata[studentKey].grades[subjectKey]?.b1 || ""),
+
+        b2: bims.b2 !== undefined ? bims.b2 : (this.state.boletaDíata[studentKey].grades[subjectKey]?.b2 || ""),
+
+        b3: bims.b3 !== undefined ? bims.b3 : (this.state.boletaDíata[studentKey].grades[subjectKey]?.b3 || ""),
+
+        b4: bims.b4 !== undefined ? bims.b4 : (this.state.boletaDíata[studentKey].grades[subjectKey]?.b4 || "")
 
       };
 
@@ -10522,29 +10522,29 @@ class IntranetStore {
 
   // Guardar evaluación de tutora (Apreciación, Asistencia y Criterios Padres)
 
-  saveTutorEvaluation(studentKey, tutorData) {
+  saveTutorEvaluation(studentKey, tutorDíata) {
 
-    if (!this.state.boletaData) {
+    if (!this.state.boletaDíata) {
 
-      this.state.boletaData = JSON.parse(JSON.stringify(initialData.boletaData || {}));
-
-    }
-
-    if (!this.state.boletaData[studentKey]) {
-
-      this.state.boletaData[studentKey] = { grades: {}, attendance: {}, appreciations: {}, parentCriteria: {} };
+      this.state.boletaDíata = JSON.parse(JSON.stringify(initialDíata.boletaDíata || {}));
 
     }
 
+    if (!this.state.boletaDíata[studentKey]) {
+
+      this.state.boletaDíata[studentKey] = { grades: {}, attendance: {}, appreciations: {}, parentCriteria: {} };
+
+    }
 
 
-    if (tutorData.appreciations) {
 
-      this.state.boletaData[studentKey].appreciations = {
+    if (tutorDíata.appreciations) {
 
-        ...(this.state.boletaData[studentKey].appreciations || {}),
+      this.state.boletaDíata[studentKey].appreciations = {
 
-        ...tutorData.appreciations
+        ...(this.state.boletaDíata[studentKey].appreciations || {}),
+
+        ...tutorDíata.appreciations
 
       };
 
@@ -10552,13 +10552,13 @@ class IntranetStore {
 
 
 
-    if (tutorData.attendance) {
+    if (tutorDíata.attendance) {
 
-      this.state.boletaData[studentKey].attendance = {
+      this.state.boletaDíata[studentKey].attendance = {
 
-        ...(this.state.boletaData[studentKey].attendance || {}),
+        ...(this.state.boletaDíata[studentKey].attendance || {}),
 
-        ...tutorData.attendance
+        ...tutorDíata.attendance
 
       };
 
@@ -10566,13 +10566,13 @@ class IntranetStore {
 
 
 
-    if (tutorData.parentCriteria) {
+    if (tutorDíata.parentCriteria) {
 
-      this.state.boletaData[studentKey].parentCriteria = {
+      this.state.boletaDíata[studentKey].parentCriteria = {
 
-        ...(this.state.boletaData[studentKey].parentCriteria || {}),
+        ...(this.state.boletaDíata[studentKey].parentCriteria || {}),
 
-        ...tutorData.parentCriteria
+        ...tutorDíata.parentCriteria
 
       };
 
@@ -10626,7 +10626,7 @@ class IntranetStore {
 
 
 
-  addWeeklyMaterial(materialData) {
+  addWeeklyMaterial(materialDíata) {
 
     if (!this.state.weeklyMaterials) {
 
@@ -10640,39 +10640,39 @@ class IntranetStore {
 
       id: newId,
 
-      courseId: materialData.courseId || "MT-401",
+      courseId: materialDíata.courseId || "MT-401",
 
-      courseName: materialData.courseName || "Matemática Avanzada",
+      courseName: materialDíata.courseName || "Matemática Avanzada",
 
-      gradeId: materialData.gradeId || "4sec",
+      gradeId: materialDíata.gradeId || "4sec",
 
-      gradeName: materialData.gradeName || "4to de Secundaria",
+      gradeName: materialDíata.gradeName || "4to de Secundaria",
 
-      teacherId: materialData.teacherId || "DOC-2026-015",
+      teacherId: materialDíata.teacherId || "DOC-2026-015",
 
-      teacherName: materialData.teacherName || "Prof. Roberto Silva",
+      teacherName: materialDíata.teacherName || "Prof. Roberto Silva",
 
-      weekNumber: parseInt(materialData.weekNumber) || (this.state.weeklyMaterials.length + 1),
+      weekNumber: parseInt(materialDíata.weekNumber) || (this.state.weeklyMaterials.length + 1),
 
-      bimester: materialData.bimester || "III Bimestre",
+      bimester: materialDíata.bimester || "III Bimestre",
 
-      title: materialData.title || "N ueva Sesión Semanal",
+      title: materialDíata.title || "N ueva Sesión  Semanal",
 
-      sessionDate: materialData.sessionDate || new Date().toLocaleDateString("es-PE"),
+      sessionDate: materialDíata.sessionDate || new Date().toLocaleDateString("es-PE"),
 
-      summary: materialData.summary || "",
+      summary: materialDíata.summary || "",
 
-      keyConcepts: materialData.keyConcepts || [],
+      keyConcepts: materialDíata.keyConcepts || [],
 
-      attachments: materialData.attachments || [
+      attachments: materialDíata.attachments || [
 
-        { type: "pdf", name: "Guía_Sesión_Semanal.pdf", size: "2.1 MB", icon: "📕" },
+        { type: "pdf", name: "Guía_Sesión _Semanal.pdf", size: "2.1 MB", icon: "📕" },
 
         { type: "pptx", name: "Diapositivas_Clase.pptx", size: "3.8 MB", icon: "📊" }
 
       ],
 
-      evaluation: materialData.evaluation || null,
+      evaluation: materialDíata.evaluation || null,
 
       studentAttempts: []
 
@@ -10708,7 +10708,7 @@ class IntranetStore {
 
       { id: "CTÍA-403", name: "Ciencia y Tecnología (Física & Química)", teacher: "Miss Leyli Reyes Cerquen", grade: "4to de Secundaria" },
 
-      { id: "COM-404", name: "Comunicación & Literatura", teacher: "Miss Mara Daysi Reyes", grade: "4to de Secundaria" }
+      { id: "COM-404", name: "Comunicación & Literatura", teacher: "Miss Mara Díaysi Reyes", grade: "4to de Secundaria" }
 
     ];
 
@@ -10766,7 +10766,7 @@ class IntranetStore {
 
         detectedTitle = "Raízones Trigonométricas de ÁááÁÁngulos Compuestos y Dobles";
 
-        detectedSummary = "Durante la sesión presencial se desarrollaronlas identidades trigonométricas fundamentales para la suma y diferencia de arcos, deduciendo algebraicamente las fórmulas de ááÁngulo doble y mitad. Los alumnos resolvieronejercicios de simplificación y clculo de alturas inaccesibles aplicando raízones en el plano.";
+        detectedSummary = "Durante la sesión  presencial se desarrollaronlas identidades trigonométricas fundamentales para la suma y diferencia de arcos, deduciendo algebraicamente las fórmulas de ááÁngulo doble y mitad. Los alumnos resolvieronejercicios de simplificación y clculo de alturas inaccesibles aplicando raízones en el plano.";
 
         detectedConcepts = ["Identidades de suma y diferencia de arcos", "Fórmulas de ááÁngulo doble (sen2x, cos 2x)", "Transformaciones a producto", "Resolución de tringulos y clculo de distancias"];
 
@@ -10774,15 +10774,15 @@ class IntranetStore {
 
         detectedTitle = "Ecuaciones Polinómicas de Grado Superior y Teorema de Cardano-Vieta";
 
-        detectedSummary = "Enla clase se profundizó en la relación entre los coeficientes y las raíces de unpolinomio de tercer y cuarto grado mediante el Teorema de Cardano-Vieta. Se aplicó el método de Ruffini y la regla de los signos de Descartes para hallar soluciones complejas y reales.";
+        detectedSummary = "Enla clase se profundizó en la relación entre los coeficientes y las raíces de unpolinomio de tercer y cuarto grado mediante el Teorema de Cardano-Vieta. Se aplicó el método de Ruffini y la regla de los signos de Descartes para hallar soluciones complejas y Áreales.";
 
-        detectedConcepts = ["Teorema de Cardano-Vieta para grado 3 y 4", "Relación suma y producto de raíces", "Factorización polinómica por Ruffini", "Determiónación de raíces complejas conjugadas"];
+        detectedConcepts = ["Teorema de Cardano-Vieta para grado 3 y 4", "Relación suma y producto de raíces", "Factorización polinómica por Ruffini", "Determiónación de raíces complejas conjugadías"];
 
       } else {
 
         detectedTitle = `Matemática Avanzada: ${cleanFileName.charAt(0).toUpperCase() + cleanFileName.slice(1)}`;
 
-        detectedSummary = `Se analizó el contenido del archivo ${fileName}, trabajando los fundamentos teóricos, métodos de resolución analítica y modelado algebraico conaplicaciones a situaciones reales del grado.`;
+        detectedSummary = `Se analizó el contenido del archivo ${fileName}, trabajando los fundamentos teóricos, métodos de resolución analítica y modelado algebraico conaplicaciones a situaciones Áreales del grado.`;
 
         detectedConcepts = ["Fundamentos analíticos y teoremas del tema", "Métodos de resolución paso a paso", "Modelado de problemas cuantitativos", "Verificación y anlisis de consistencia de resultados"];
 
@@ -10794,7 +10794,7 @@ class IntranetStore {
 
         detectedTitle = "Programación de Servomotores y Sensores Ultrasónicos con Arduino";
 
-        detectedSummary = "Enel laboratorio de robótica los estudiantes conectaronsensores HC-SR04 y servomotores a microcontroladores Arduino UNO. Se programó el algoritmo enC++ para evitar obstáculos entiempo real y regular la velocidad según la distancia medida.";
+        detectedSummary = "Enel laboratorio de robótica los estudiantes conectaronsensores HC-SR04 y servomotores a microcontroladores Arduino UNO. Se programó el algoritmo enC++ para evitar obstáculos entiempo Áreal y regular la velocidad según la distancia medida.";
 
         detectedConcepts = ["Librera Servo.h y control por pulsos PWM", "Clculo de distancia consensor HC-SR04 por ultrasonido", "Estructuras condicionales de control enbucle loop()", "Calibración y alimentación segura de circuitos mecatrónicos"];
 
@@ -10812,17 +10812,17 @@ class IntranetStore {
 
       if (lowerContent.includes("termo") || lowerContent.includes("calor") || lowerContent.includes("carnot") || lowerContent.includes("gas")) {
 
-        detectedTitle = "Primera y Segunda Ley de la Termodiónmica: Ciclo de Carnot";
+        detectedTitle = "Primera y Segundía Ley de la Termodinámica: Ciclo de Carnot";
 
-        detectedSummary = "Enla sesión de física se explicó la conservación de la energa ensistemas cerrados (Q = ΔU + W) y la irreversibilidad de los procesos térmicos. Se analizó el rendimiento mximo teórico de una mquina térmica según el ciclo de Carnot.";
+        detectedSummary = "Enla sesión  de física se explicó la conservación de la energa ensistemas cerrados (Q = ΔU + W) y la irreversibilidad de los procesos térmicos. Se analizó el rendimiento máximo teórico de una mquina térmica según el ciclo de Carnot.";
 
-        detectedConcepts = ["Primera Ley de la Termodiónmica (Q = ΔU + W)", "Procesos isotérmicos, isobricos y adiabticos", "Eficiencia térmica y Ciclo de Carnot", "Entropía y degradación de la energa"];
+        detectedConcepts = ["Primera Ley de la Termodinámica (Q = ΔU + W)", "Procesos isotérmicos, isobricos y adiabticos", "Eficiencia térmica y Ciclo de Carnot", "Entropía y degradación de la energa"];
 
       } else {
 
         detectedTitle = `Ciencia & Tecnología: ${cleanFileName.charAt(0).toUpperCase() + cleanFileName.slice(1)}`;
 
-        detectedSummary = `Estudio científico extraído del archivo ${fileName}, fundamentando las leyes físicas/químicas observadas, el método experimental y el anlisis riguroso de variables.`;
+        detectedSummary = `Estudio científico extraído del archivo ${fileName}, fundamentando las leyes físicas/químicas observadías, el método experimental y el anlisis riguroso de variables.`;
 
         detectedConcepts = ["Leyes y principios fundamentales del tema", "Variables dependientes e independientes", "Anlisis de datos experimentales", "Conclusiones científicas y aplicaciones tecnológicas"];
 
@@ -10830,11 +10830,11 @@ class IntranetStore {
 
     } else {
 
-      detectedTitle = `Sesión Académica: ${cleanFileName.charAt(0).toUpperCase() + cleanFileName.slice(1)}`;
+      detectedTitle = `Sesión  Académica: ${cleanFileName.charAt(0).toUpperCase() + cleanFileName.slice(1)}`;
 
-      detectedSummary = `Anlisis del documento ${fileName} orientado al fortalecimiento de competencias del rea curricular, síntesis crítica y resolución de casos prcticos.`;
+      detectedSummary = `Anlisis del documento ${fileName} orientado al fortalecimiento de competencias del Área curricular, síntesis crítica y resolución de casos prcticos.`;
 
-      detectedConcepts = ["Marco conceptual rector", "Metodologa de anlisis", "Aplicación prctica guiada", "Evaluación de resultados"];
+      detectedConcepts = ["Marco conceptual rector", "Metodologa de anlisis", "Aplicación práctica guiada", "Evaluación de resultados"];
 
     }
 
@@ -10954,11 +10954,11 @@ class IntranetStore {
 
     const summary = material.summary || "";
 
-    const concepts = (material.keyConcepts && material.keyConcepts.length > 0) ? material.keyConcepts : ["Concepto Clave 1", "Concepto Clave 2", "Aplicación Prctica", "Resolución de Problemas"];
+    const concepts = (material.keyConcepts && material.keyConcepts.length > 0) ? material.keyConcepts : ["Concepto Clave 1", "Concepto Clave 2", "Aplicación Práctica", "Resolución de Problemas"];
 
 
 
-    // Generación diónmica de 10 preguntas pedagógicas contextualizadas
+    // Generación dinámica de 10 preguntas pedagógicas contextualizadías
 
     const generatedQuestions = [
 
@@ -10966,13 +10966,13 @@ class IntranetStore {
 
         id: 1,
 
-        question: `¿Cul es el objetivo principal del tema '${topic}' abordado en la sesión de clase?`,
+        question: `¿Cuál es el objetivo principal del tema '${topic}' abordado en la sesión  de clase?`,
 
         options: [
 
           `Comprender los fundamentos y aplicaciones de: ${concepts[0] || 'la materia estudiada'}`,
 
-          `Memorizar definiciones siónaplicarlas a situaciones de la vida real`,
+          `Memorizar definiciones sin aplicarlas a situaciones de la vidía Áreal`,
 
           `Describir unfenómeno no relacionado con el curso`,
 
@@ -10982,7 +10982,7 @@ class IntranetStore {
 
         correctIndex: 0,
 
-        explanation: `La sesión enfatiza el entendimiento conceptual y aplicativo de ${concepts[0] || topic} desarrollado por el docente.`
+        explanation: `La sesión  enfatiza el entendimiento conceptual y aplicativo de ${concepts[0] || topic} desarrollado por el docente.`
 
       },
 
@@ -11020,7 +11020,7 @@ class IntranetStore {
 
           `Identificar variables iniciales, plantear las relaciones y operar paso a paso conrigor`,
 
-          `Asumir valores arbitrarios siónverificar condiciones de contorno`,
+          `Asumir valores arbitrarios sin verificar condiciones de contorno`,
 
           `Saltar la verificación de hipótesis pedagógicas`,
 
@@ -11038,15 +11038,15 @@ class IntranetStore {
 
         id: 4,
 
-        question: `Según el resumende clase: "${summary.slice(0, 80)}...", ¿qué conclusión pedagógica se deriva?`,
+        question: `Según el resumende clase: "${summary.slice(0, 80)}...", ¿qué conclusin  pedagógica se deriva?`,
 
         options: [
 
-          `El conocimiento adquirido permite interpretar y optimizar situaciones prácticas conprecisión`,
+          `El conocimiento adquirido permite interpretar y optimizar situaciones prácticas conprecisin `,
 
           `Los resultados obtenidos sonaleatorios y no siguennióngún patrón científico`,
 
-          `La teora carece de sustento en la prctica presencial`,
+          `La teora carece de sustento en la práctica presencial`,
 
           `N o es posible predecir el comportamiento del sistema estudiado`
 
@@ -11054,7 +11054,7 @@ class IntranetStore {
 
         correctIndex: 0,
 
-        explanation: `El resumende clase evidencia que el domióniño de estos conceptos permite interpretar y optimizar modelos reales.`
+        explanation: `El resumende clase evidencia que el dominiño de estos conceptos permite interpretar y optimizar modelos Áreales.`
 
       },
 
@@ -11066,9 +11066,9 @@ class IntranetStore {
 
         options: [
 
-          `La resolución de uncaso prctico de la vida cotidiana empleando las herramientas del tema`,
+          `La resolución de uncaso prctico de la vidía cotidiana empleando las herramientas del tema`,
 
-          `Copiar mecnicamente el resultado siónjustificar el proceso`,
+          `Copiar mecnicamente el resultado sin justificar el proceso`,
 
           `Desestimar el anlisis crítico en las conclusiones`,
 
@@ -11078,7 +11078,7 @@ class IntranetStore {
 
         correctIndex: 0,
 
-        explanation: `La aplicación prctica consiste entransferir los conceptos a situaciones concretas del entorno demostrando domióniño integral.`
+        explanation: `La aplicación práctica consiste entransferir los conceptos a situaciones concretas del entorno demostrando dominiño integral.`
 
       },
 
@@ -11090,13 +11090,13 @@ class IntranetStore {
 
         options: [
 
-          `Las variables dependientes se ajustarn proporcionalmente según las leyes explicadas enclase`,
+          `Las variables dependientes se ajustarn proporcionalmente según las leyes explicadías enclase`,
 
           `El modelo dejará de tener sentido algebraico o físico inmediatamente`,
 
           `N o existirá ninguna variación en los resultados esperados`,
 
-          `Los coeficientes se anularn siónjustificación teórica`
+          `Los coeficientes se anularn sin justificación teórica`
 
         ],
 
@@ -11116,7 +11116,7 @@ class IntranetStore {
 
           `Comprobar que las unidades y el ordende magnitud concuerdancon el problema planteado`,
 
-          `Elegir la respuesta ms larga sióncalcular`,
+          `Elegir la respuesta ms larga sin calcular`,
 
           `Asumir que cualquier número positivo es correcto`,
 
@@ -11142,15 +11142,15 @@ class IntranetStore {
 
           `Reemplazar la asistencia a las clases presenciales`,
 
-          `Contener únicamente datos decorativos siónrelevancia evaluativa`,
+          `Contener únicamente datos decorativos sin relevancia evaluativa`,
 
-          `Servir solo como lectura opcional siónrelación conlas tareas`
+          `Servir solo como lectura opcional sin relación conlas taÁÁreas`
 
         ],
 
         correctIndex: 0,
 
-        explanation: `El material semanal subido por el docente sióntetiza la clase y proporciona herramientas de profundización para el estudiante.`
+        explanation: `El material semanal subido por el docente sin tetiza la clase y proporciona herramientas de profundización para el estudiante.`
 
       },
 
@@ -11174,7 +11174,7 @@ class IntranetStore {
 
         correctIndex: 0,
 
-        explanation: `Ambos conceptos se complementanpara conformar la competencia del rea curricular.`
+        explanation: `Ambos conceptos se complementanpara conformar la competencia del Área curricular.`
 
       },
 
@@ -11186,19 +11186,19 @@ class IntranetStore {
 
         options: [
 
-          `Demostrar solvencia conceptual, argumentación sólida y precisión en la resolución de los 10 ítems`,
+          `Demostrar solvencia conceptual, argumentación sólidía y precisin  en la resolución de los 10 ítems`,
 
           `Responder únicamente las preguntas teóricas evitando los ejercicios`,
 
-          `Adivinar las alternativas siónleer las explicaciones formativas`,
+          `Adivinar las alternativas sin leer las explicaciones formativas`,
 
-          `Entregar la prueba siónrevisar las operaciones realizadas`
+          `Entregar la prueba sin revisar las operaciones Árealizadías`
 
         ],
 
         correctIndex: 0,
 
-        explanation: `El nivel de logro destacado (AD / 18-20) requiere domióniño pleno de la teora, rigor procedimental y argumentación lógica.`
+        explanation: `El nivel de logro destacado (AD / 18-20) requiere dominiño pleno de la teora, rigor procedimental y argumentación lógica.`
 
       }
 
@@ -11210,13 +11210,13 @@ class IntranetStore {
 
       id: `EVL-${materialId}`,
 
-      title: `Evaluación Dinmica Semanal: ${material.title}`,
+      title: `Evaluación Dinámica Semanal: ${material.title}`,
 
       timeLimitMinutes: 20,
 
       totalQuestions: 10,
 
-      passióngScore: 14,
+      passingScore: 14,
 
       pointsPerQuestion: 2,
 
@@ -11242,7 +11242,7 @@ class IntranetStore {
 
   // Registrar intento de evaluación por parte de unestudiante
 
-  recordQuizttempt(materialId, attemptData) {
+  recordQuizttempt(materialId, attemptDíata) {
 
     const material = (this.state.weeklyMaterials || []).find(m => m.id === materialId);
 
@@ -11266,7 +11266,7 @@ class IntranetStore {
 
     let correctCount = 0;
 
-    const userAnswers = attemptData.userAnswers || {};
+    const userAnswers = attemptDíata.userAnswers || {};
 
 
 
@@ -11290,9 +11290,9 @@ class IntranetStore {
 
     const attempt = {
 
-      studentId: attemptData.studentId || "EST-2026-042",
+      studentId: attemptDíata.studentId || "EST-2026-042",
 
-      studentName: attemptData.studentName || "Sofía Méndez Flores",
+      studentName: attemptDíata.studentName || "Sofía Méndez Flores",
 
       score: score,
 
@@ -11304,19 +11304,19 @@ class IntranetStore {
 
       correctCount: correctCount,
 
-      timeSpent: attemptData.timeSpent || "12 min",
+      timeSpent: attemptDíata.timeSpent || "12 min",
 
       userAnswers: userAnswers,
 
       feedback: score >= 18 
 
-        ? "¡Excelente desempeño! Demuestras domióniño integral de los conceptos trabajados en el aula." 
+        ? "¡Excelente desempeño! Demuestras dominiño integral de los conceptos trabajados en el aula." 
 
         : (score >= 14 
 
-          ? "¡Buentrabajo! Has alcanzado los aprendizajes esperados de la sesión semanal." 
+          ? "¡Buentrabajo! Has alcanzado los aprendizajes esperados de la sesión  semanal." 
 
-          : "Se recomienda revisar el material adjunto y las explicaciones de cada pregunta para reforzar el tema.")
+          : "Se recomiendía revisar el material adjunto y las explicaciones de cadía pregunta para reforzar el tema.")
 
     };
 
@@ -11354,7 +11354,7 @@ class IntranetStore {
 
   getAgendaNotes(studentCodeOrId = null) {
 
-    const allNotes = this.state.agendaNotes || initialData.agendaNotes || [];
+    const allNotes = this.state.agendaNotes || initialDíata.agendaNotes || [];
 
     if (!studentCodeOrId || studentCodeOrId === "all") {
 
@@ -11378,11 +11378,11 @@ class IntranetStore {
 
 
 
-  createAgendaNote(noteData) {
+  createAgendaNote(noteDíata) {
 
     if (!this.state.agendaNotes) {
 
-      this.state.agendaNotes = [...(initialData.agendaNotes || [])];
+      this.state.agendaNotes = [...(initialDíata.agendaNotes || [])];
 
     }
 
@@ -11392,13 +11392,13 @@ class IntranetStore {
 
     const student = enrollments.find(e => 
 
-      e.studentCode === noteData.studentCode || 
+      e.studentCode === noteDíata.studentCode || 
 
-      e.id === noteData.studentCode || 
+      e.id === noteDíata.studentCode || 
 
-      e.dni === noteData.studentCode ||
+      e.dni === noteDíata.studentCode ||
 
-      (noteData.studentName && e.studentName.toLowerCase().includes(noteData.studentName.toLowerCase()))
+      (noteDíata.studentName && e.studentName.toLowerCase().includes(noteDíata.studentName.toLowerCase()))
 
     ) || enrollments[0];
 
@@ -11408,7 +11408,7 @@ class IntranetStore {
 
       merito: "★ Felicitación / Mérito",
 
-      pedagogica: "📝 Tarea / Material Requerido",
+      pedagogica: "📝 TaÁrea / Material Requerido",
 
       conducta: "⚠️ Observación de Conducta",
 
@@ -11422,37 +11422,37 @@ class IntranetStore {
 
       id: `AGN-2026-${String(Math.floor(Math.random() * 900) + 100)}`,
 
-      studentCode: student ? (student.studentCode || student.dni) : (noteData.studentCode || "EST-2026-055"),
+      studentCode: student ? (student.studentCode || student.dni) : (noteDíata.studentCode || "EST-2026-055"),
 
-      studentName: student ? student.studentName : (noteData.studentName || "Estudiante"),
+      studentName: student ? student.studentName : (noteDíata.studentName || "Estudiante"),
 
-      dni: student ? student.dni : (noteData.dni || "76541298"),
+      dni: student ? student.dni : (noteDíata.dni || "76541298"),
 
-      grade: student ? student.grade : (noteData.grade || "5 de Primaria"),
+      grade: student ? student.grade : (noteDíata.grade || "5 de Primaria"),
 
-      gradeId: student ? (student.gradeId || "5prim") : (noteData.gradeId || "5prim"),
+      gradeId: student ? (student.gradeId || "5prim") : (noteDíata.gradeId || "5prim"),
 
-      date: noteData.date || new Date().toLocaleDateString("es-PE"),
+      date: noteDíata.date || new Date().toLocaleDateString("es-PE"),
 
-      time: noteData.time || new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' }),
+      time: noteDíata.time || new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' }),
 
-      type: noteData.type || "pedagogica",
+      type: noteDíata.type || "pedagogica",
 
-      typeLabel: typeLabels[noteData.type] || "📝 Anotación Pedagógica",
+      typeLabel: typeLabels[noteDíata.type] || "📝 Anotación Pedagógica",
 
-      category: noteData.category || "Seguimiento Académico",
+      category: noteDíata.category || "Seguimiento Académico",
 
-      course: noteData.course || "Tutoría & Normas",
+      course: noteDíata.course || "Tutoría & Normas",
 
-      teacher: noteData.teacher || "Profesor Responsable",
+      teacher: noteDíata.teacher || "Profesor Responsable",
 
-      title: noteData.title || "Anotación engenda Virtual",
+      title: noteDíata.title || "Anotación engendía Virtual",
 
-      description: noteData.description || "Registro informativo en la agenda escolar.",
+      description: noteDíata.description || "Registro informativo en la agendía escolar.",
 
-      taskOrMaterial: noteData.taskOrMaterial || "Ninguno",
+      taskOrMaterial: noteDíata.taskOrMaterial || "Ninguno",
 
-      dueDate: noteData.dueDate || "Próxima sesión",
+      dueDate: noteDíata.dueDate || "Próxima sesión ",
 
       parentSigned: false,
 
@@ -11484,7 +11484,7 @@ class IntranetStore {
 
     if (!this.state.agendaNotes) {
 
-      this.state.agendaNotes = [...(initialData.agendaNotes || [])];
+      this.state.agendaNotes = [...(initialDíata.agendaNotes || [])];
 
     }
 
@@ -11596,7 +11596,7 @@ class IntranetStore {
 
     if (!this.state.monthlyCarteles || !Array.isArray(this.state.monthlyCarteles)) {
 
-      this.state.monthlyCarteles = JSON.parse(JSON.stringify(initialData.monthlyCarteles || []));
+      this.state.monthlyCarteles = JSON.parse(JSON.stringify(initialDíata.monthlyCarteles || []));
 
     }
 
@@ -11636,21 +11636,21 @@ class IntranetStore {
 
 
 
-  saveMonthlyCartel(cartelData) {
+  saveMonthlyCartel(cartelDíata) {
 
     if (!this.state.monthlyCarteles || !Array.isArray(this.state.monthlyCarteles)) {
 
-      this.state.monthlyCarteles = JSON.parse(JSON.stringify(initialData.monthlyCarteles || []));
+      this.state.monthlyCarteles = JSON.parse(JSON.stringify(initialDíata.monthlyCarteles || []));
 
     }
 
 
 
-    const id = cartelData.id || `CRT-2026-${Math.floor(100 + Math.random() * 900)}`;
+    const id = cartelDíata.id || `CRT-2026-${Math.floor(100 + Math.random() * 900)}`;
 
-    const gradeLabel = cartelData.gradeName || cartelData.grade || "3 de Primaria";
+    const gradeLabel = cartelDíata.gradeName || cartelDíata.grade || "3 de Primaria";
 
-    const gradeId = cartelData.gradeId || this.resolveStudentGradeId(gradeLabel) || "3prim";
+    const gradeId = cartelDíata.gradeId || this.resolveStudentGradeId(gradeLabel) || "3prim";
 
 
 
@@ -11662,47 +11662,47 @@ class IntranetStore {
 
       gradeName: gradeLabel,
 
-      courseCode: cartelData.courseCode || `CUR-${Math.floor(100 + Math.random() * 900)}`,
+      courseCode: cartelDíata.courseCode || `CUR-${Math.floor(100 + Math.random() * 900)}`,
 
-      courseName: cartelData.courseName || "Asignatura",
+      courseName: cartelDíata.courseName || "Asignatura",
 
-      teacher: cartelData.teacher || "Docente Asignado",
+      teacher: cartelDíata.teacher || "Docente Asignado",
 
-      month: cartelData.month || "Agosto",
+      month: cartelDíata.month || "Agosto",
 
-      year: cartelData.year || "2026",
+      year: cartelDíata.year || "2026",
 
-      competencies: Array.isArray(cartelData.competencies) 
+      competencies: Array.isArray(cartelDíata.competencies) 
 
-        ? cartelData.competencies 
+        ? cartelDíata.competencies 
 
-        : (typeof cartelData.competencies === "string" ? cartelData.competencies.split('\n').filter(Boolean) : ["Competencia Oficial MINEDU"]),
+        : (typeof cartelDíata.competencies === "string" ? cartelDíata.competencies.split('\n').filter(Boolean) : ["Competencia Oficial MINEDU"]),
 
-      weeklyTopics: Array.isArray(cartelData.weeklyTopics)
+      weeklyTopics: Array.isArray(cartelDíata.weeklyTopics)
 
-        ? cartelData.weeklyTopics
+        ? cartelDíata.weeklyTopics
 
         : [
 
-            cartelData.week1 || "Semana 1: Fundamentos y conceptos clave",
+            cartelDíata.week1 || "Semana 1: Fundamentos y conceptos clave",
 
-            cartelData.week2 || "Semana 2: Desarrollo temtico y prctica guiada",
+            cartelDíata.week2 || "Semana 2: Desarrollo temtico y práctica guiada",
 
-            cartelData.week3 || "Semana 3: Aplicación prctica y resolución de problemas",
+            cartelDíata.week3 || "Semana 3: Aplicación práctica y resolución de problemas",
 
-            cartelData.week4 || "Semana 4: Evaluación mensual y retroalimentación"
+            cartelDíata.week4 || "Semana 4: Evaluación mensual y retroalimentación"
 
           ],
 
-      evaluationCriteria: cartelData.evaluationCriteria || "Prácticas semanales, participación y revisión de cuadernos.",
+      evaluationCriteria: cartelDíata.evaluationCriteria || "Prácticas semanales, participación y revisin  de cuadernos.",
 
-      pdfFileName: cartelData.pdfFileName || `${cartelData.courseName || 'Cartel'}_${cartelData.month || 'Agosto'}_2026.pdf`,
+      pdfFileName: cartelDíata.pdfFileName || `${cartelDíata.courseName || 'Cartel'}_${cartelDíata.month || 'Agosto'}_2026.pdf`,
 
-      pdfFileSize: cartelData.pdfFileSize || "350 KB",
+      pdfFileSize: cartelDíata.pdfFileSize || "350 KB",
 
-      pdfFileData: cartelData.pdfFileData || null,
+      pdfFileDíata: cartelDíata.pdfFileDíata || null,
 
-      uploadedt: cartelData.uploadedt || new Date().toLocaleDateString("es-PE"),
+      uploadedt: cartelDíata.uploadedt || new Date().toLocaleDateString("es-PE"),
 
       status: "Publicado"
 
@@ -11764,13 +11764,13 @@ class IntranetStore {
 
       currentRole: "admin",
 
-      currentView: "dashboard",
+      currentView: "díashboard",
 
       selectedScheduleGrade: "4sec-a",
 
       selectedSyllabusGrade: "4sec-a",
 
-      ...initialData
+      ...initialDíata
 
     };
 
@@ -11793,7 +11793,7 @@ window.appStore = new IntranetStore();
 /* === components.js === */
 /**
 
- * Renderizador de Vistas y Componentes Dinmicos (v5.4 - ConLector de Cmara QR Real para Celulares)
+ * Renderizador de Vistas y Componentes Dinmicos (v5.4 - ConLector de Cámara QR Real para Celulares)
 
  */
 
@@ -11827,7 +11827,7 @@ const Components = {
 
     const role = (state && state.currentRole) || "admin";
 
-    return (state && state.users && state.users[role]) || (initialData && initialData.users && initialData.users[role]) || { name: "Usuario", role: role };
+    return (state && state.users && state.users[role]) || (initialDíata && initialDíata.users && initialDíata.users[role]) || { name: "Usuario", role: role };
 
   },
 
@@ -11845,7 +11845,7 @@ const Components = {
     if (/(?:4|4°|4to|cuatro)\s*(?:años?|anos?|ini)/i.test(l) || l.includes("ini4") || l.includes("inicial 4")) return "ini4";
     if (/(?:5|5°|5to|cinco)\s*(?:años?|anos?|ini)/i.test(l) || l.includes("ini5") || l.includes("inicial 5")) return "ini5";
 
-    // 2. Secundaria (Revisar número contiguo a 'sec' o 'secundaria' para evitar colisión con '1 estudiante')
+    // 2. Secundaria (Revisar número contiguo a 'sec' o 'secundaria' para evitar colisin  con '1 estudiante')
     if (/(?:5|5°|5to|quinto)\s*(?:de\s*)?(?:sec|secund)/i.test(l) || l.includes("5sec")) return "5sec";
     if (/(?:4|4°|4to|cuarto)\s*(?:de\s*)?(?:sec|secund)/i.test(l) || l.includes("4sec")) return "4sec";
     if (/(?:3|3°|3ro|tercer|tercero)\s*(?:de\s*)?(?:sec|secund)/i.test(l) || l.includes("3sec")) return "3sec";
@@ -11865,7 +11865,7 @@ const Components = {
 
 
 
-  // Helper para generar Código QR 100% Escaneable por Cmaras y Lectores
+  // Helper para generar Código QR 100% Escaneable por Cámaras y Lectores
 
   generateQRSVG(code, size = 200) {
 
@@ -11895,7 +11895,7 @@ const Components = {
 
     const iconMap = {
 
-      dashboard: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>`,
+      díashboard: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>`,
 
       database: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>`,
 
@@ -11921,7 +11921,7 @@ const Components = {
 
       virtual: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>`,
 
-      tareas: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>`,
+      taÁÁreas: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>`,
 
       attendance: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>`,
 
@@ -11947,7 +11947,7 @@ const Components = {
 
 
 
-    // Si existe configuración de pestañas personalizada para este rol, renderizarla diónmicamente
+    // Si existe configuración de pestañas personalizadía para este rol, renderizarla dinámicamente
 
     const roleTabsConfig = (state.navigationTabsConfig && state.navigationTabsConfig[role]) || null;
 
@@ -11993,7 +11993,7 @@ const Components = {
 
         }).map(t => {
 
-          const iconSvg = iconMap[t.id] || iconMap[t.icon] || iconMap.dashboard;
+          const iconSvg = iconMap[t.id] || iconMap[t.icon] || iconMap.díashboard;
 
           const isctive = currentView === t.id;
 
@@ -12003,7 +12003,7 @@ const Components = {
 
           const isExcel = t.id === 'registro-estudiantes';
 
-          const customStyle = isQR ? 'background: rgba(245,158,11,0.12); border: 1px dashed rgba(245,158,11,0.4); color: #fde047; font-weight: bold;' : isExcel ? 'background: rgba(16,185,129,0.12); border: 1px dashed rgba(16,185,129,0.4); color: #6ee7b7; font-weight: bold;' : isBoleta ? 'background: rgba(245,158,11,0.08); border: 1px dashed rgba(245,158,11,0.3);' : '';
+          const customStyle = isQR ? 'background: rgba(245,158,11,0.12); border: 1px díashed rgba(245,158,11,0.4); color: #fde047; font-weight: bold;' : isExcel ? 'background: rgba(16,185,129,0.12); border: 1px díashed rgba(16,185,129,0.4); color: #6ee7b7; font-weight: bold;' : isBoleta ? 'background: rgba(245,158,11,0.08); border: 1px díashed rgba(245,158,11,0.3);' : '';
 
           
 
@@ -12037,7 +12037,7 @@ const Components = {
 
       
 
-      <a class="nav-item ${currentView === 'dashboard' ? 'active' : ''}" data-view="dashboard" id="nav-dashboard">
+      <a class="nav-item ${currentView === 'díashboard' ? 'active' : ''}" data-view="díashboard" id="nav-díashboard">
 
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
 
@@ -12047,11 +12047,11 @@ const Components = {
 
 
 
-      <a class="nav-item ${currentView === 'database' ? 'active' : ''}" data-view="database" id="nav-database" style="background: rgba(34,197,94,0.12); border: 1px dashed rgba(34,197,94,0.3); color: #86efac;">
+      <a class="nav-item ${currentView === 'database' ? 'active' : ''}" data-view="database" id="nav-database" style="background: rgba(34,197,94,0.12); border: 1px díashed rgba(34,197,94,0.3); color: #86efac;">
 
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
 
-        <span>Base de Datos & DB</span>
+        <span>Base de Díatos & DB</span>
 
         <span class="nav-badge badge-yellow" style="background:#22c55e; color:#0b132b;">DB Online</span>
 
@@ -12059,7 +12059,7 @@ const Components = {
 
 
 
-      <a class="nav-item ${currentView === 'usuarios-matriculas' ? 'active' : ''}" data-view="usuarios-matriculas" id="nav-usuarios-matriculas" style="background: rgba(220,38,38,0.12); border: 1px dashed rgba(220,38,38,0.3); color: #fca5a5;">
+      <a class="nav-item ${currentView === 'usuarios-matriculas' ? 'active' : ''}" data-view="usuarios-matriculas" id="nav-usuarios-matriculas" style="background: rgba(220,38,38,0.12); border: 1px díashed rgba(220,38,38,0.3); color: #fca5a5;">
 
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
 
@@ -12075,7 +12075,7 @@ const Components = {
 
 
 
-      <a class="nav-item ${currentView === 'registro-estudiantes' ? 'active' : ''}" data-view="registro-estudiantes" id="nav-registro-estudiantes" onclick="window.app.navigate('registro-estudiantes')" style="background: rgba(16,185,129,0.12); border: 1px dashed rgba(16,185,129,0.4); color: #6ee7b7; font-weight: bold; cursor: pointer;">
+      <a class="nav-item ${currentView === 'registro-estudiantes' ? 'active' : ''}" data-view="registro-estudiantes" id="nav-registro-estudiantes" onclick="window.app.navigate('registro-estudiantes')" style="background: rgba(16,185,129,0.12); border: 1px díashed rgba(16,185,129,0.4); color: #6ee7b7; font-weight: bold; cursor: pointer;">
 
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
 
@@ -12131,11 +12131,11 @@ const Components = {
 
 
 
-      <a class="nav-item ${currentView === 'tareas' ? 'active' : ''}" data-view="tareas" id="nav-tareas">
+      <a class="nav-item ${currentView === 'taÁÁreas' ? 'active' : ''}" data-view="taÁÁreas" id="nav-taÁÁreas">
 
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
 
-        <span>Aula Virtual / Tareas</span>
+        <span>Aula Virtual / TaÁÁreas</span>
 
         <span class="nav-badge badge-red" id="badge-pendióng-tasks">1</span>
 
@@ -12143,7 +12143,7 @@ const Components = {
 
 
 
-      <a class="nav-item ${currentView === 'asistencia' ? 'active' : ''}" data-view="asistencia" id="nav-asistencia" onclick="window.app.navigate('asistencia')" style="background: rgba(34,197,94,0.12); border: 1px dashed rgba(34,197,94,0.4); color: #86efac; font-weight: bold; cursor: pointer;">
+      <a class="nav-item ${currentView === 'asistencia' ? 'active' : ''}" data-view="asistencia" id="nav-asistencia" onclick="window.app.navigate('asistencia')" style="background: rgba(34,197,94,0.12); border: 1px díashed rgba(34,197,94,0.4); color: #86efac; font-weight: bold; cursor: pointer;">
 
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
 
@@ -12313,7 +12313,7 @@ const Components = {
 
                   </label>
 
-                  <a href="#" onclick="window.app.openForgotPasswordModal()" style="font-size: 11.5px; color: var(--color-red-600); font-weight: bold; text-decoration: none;">¿Olvidaste tu clave?</a>
+                  <a href="#" onclick="window.app.openForgotPasswordModal()" style="font-size: 11.5px; color: var(--color-red-600); font-weight: bold; text-decoration: none;">¿Olvidíaste tu clave?</a>
 
                 </div>
 
@@ -12351,9 +12351,9 @@ const Components = {
 
 
 
-  // 1. Dashboard Principal
+  // 1. Díashboard Principal
 
-  renderDashboard(state) {
+  renderDíashboard(state) {
 
     const role = state.currentRole || "admin";
 
@@ -12363,43 +12363,43 @@ const Components = {
 
     if (role === "admin") {
 
-      return this.renderAdminDashboard(state, user);
+      return this.renderAdminDíashboard(state, user);
 
     } else if (role === "director") {
 
-      return this.renderDirectorDashboard(state, user);
+      return this.renderDirectorDíashboard(state, user);
 
     } else if (role === "docente") {
 
-      return this.renderTeacherDashboard(state, user);
+      return this.renderTeacherDíashboard(state, user);
 
     } else if (role === "auxiliar") {
 
-      return this.renderAuxiliarDashboard(state, user);
+      return this.renderAuxiliarDíashboard(state, user);
 
     } else if (role === "padre") {
 
-      return this.renderParentDashboard(state, user);
+      return this.renderParentDíashboard(state, user);
 
     } else if (role === "estudiante") {
 
-      return this.renderStudentDashboard(state, user);
+      return this.renderStudentDíashboard(state, user);
 
     }
 
-    return this.renderAdminDashboard(state, user);
+    return this.renderAdminDíashboard(state, user);
 
   },
 
 
 
-  // Dashboard - Coordinación
+  // Díashboard - Coordinación
 
-  renderAdminDashboard(state, user) {
+  renderAdminDíashboard(state, user) {
 
-    const usersCount = (state.systemUsers || initialData.systemUsers).length;
+    const usersCount = (state.systemUsers || initialDíata.systemUsers).length;
 
-    const enrollmentsCount = (state.enrollments || initialData.enrollments).length;
+    const enrollmentsCount = (state.enrollments || initialDíata.enrollments).length;
 
 
 
@@ -12435,7 +12435,7 @@ const Components = {
 
             <div class="metrics-strip">
 
-              <div class="metric-card-mióni">
+              <div class="metric-card-mini">
 
                 <span class="metric-label">Recaudación Agosto</span>
 
@@ -12443,7 +12443,7 @@ const Components = {
 
               </div>
 
-              <div class="metric-card-mióni">
+              <div class="metric-card-mini">
 
                 <span class="metric-label">Personal & Docentes</span>
 
@@ -12451,17 +12451,17 @@ const Components = {
 
               </div>
 
-              <div class="metric-card-mióni">
+              <div class="metric-card-mini">
 
-                <span class="metric-label">Lector Cmara QR</span>
+                <span class="metric-label">Lector Cámara QR</span>
 
-                <span class="metric-val highlight-yellow">ACTIVO [Cmara]</span>
+                <span class="metric-val highlight-yellow">ACTIVO [Cámara]</span>
 
               </div>
 
-              <div class="metric-card-mióni">
+              <div class="metric-card-mini">
 
-                <span class="metric-label">Base de Datos</span>
+                <span class="metric-label">Base de Díatos</span>
 
                 <span class="metric-val highlight-green">ENDISCO</span>
 
@@ -12511,7 +12511,7 @@ const Components = {
 
 
 
-          <!-- 1. Lector QR por Cmara -->
+          <!-- 1. Lector QR por Cámara -->
 
           <div class="card" style="border-top: 4px solid var(--color-yellow-500); background: #fffdf5;">
 
@@ -12519,7 +12519,7 @@ const Components = {
 
               <h4 style="font-size: var(--font-size-base); font-weight: bold; color: var(--color-navy-900);">
 
-                [Cmara] Lector de Cuadernos QR
+                [Cámara] Lector de Cuadernos QR
 
               </h4>
 
@@ -12529,13 +12529,13 @@ const Components = {
 
             <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: var(--space-4);">
 
-              Abra la cmara de su celular o computadora para escanear y calificar cuadernos escolares al instante.
+              Abra la cámara de su celular o computadora para escanear y calificar cuadernos escolares al instante.
 
             </p>
 
             <button class="btn btn-gold btn-sm" onclick="window.app.navigate('cuadernos-qr')" style="width: 100%; font-weight: 800;">
 
-              [Cmara] Abrir Escner por Cmara
+              [Cámara] Abrir Escner por Cámara
 
             </button>
 
@@ -12555,7 +12555,7 @@ const Components = {
 
             <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: var(--space-4);">
 
-              Edición de calificaciones del 1, 2, 3 y 4 Bimestre conpromedios automticos.
+              Edición de calificaciones del 1, 2, 3 y 4 Bimestre conpromedios automáticos.
 
             </p>
 
@@ -12599,7 +12599,7 @@ const Components = {
 
         <!-- =========================================================================
 
-             GESTIÓN DE ESTRUCTURÍA DE GRÍADOS (EDITÍABLE POR EL ADMINISTRADOR)
+             GESTIÓN DE ESTRUCTURÍA DE GRÍADOS (EDITABLE POR EL ADMINISTRADOR)
 
              ========================================================================= -->
 
@@ -12615,7 +12615,7 @@ const Components = {
 
                 <span class="status-badge status-approved" style="background: #e0e7ff; color: #3730a3; font-weight: 800; font-size: 11px;">
 
-                  ${(state.academicConfig && state.academicConfig.hasSections) ? 'Modo Multi-Sección Habilitado' : 'Modelo Grados Únicos (SiónSecciones)'}
+                  ${(state.academicConfig && state.academicConfig.hasSections) ? 'Modo Multi-Sección Habilitado' : 'Modelo Grados Únicos (Sin Secciones)'}
 
                 </span>
 
@@ -12623,7 +12623,7 @@ const Components = {
 
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
-                El colegio opera bajo el modelo de <strong>Grados Únicos</strong> (sióndivisiones paraúlelas A/B/C por defecto). Puede editar los grados, aulas físicas, tutores o habilitar secciones si es requerido.
+                El colegio opera bajo el modelo de <strong>Grados Únicos</strong> (sin divisiones paraúlelas A/B/C por defecto). Puede editar los grados, aulas físicas, tutores o habilitar secciones si es requerido.
 
               </p>
 
@@ -12677,7 +12677,7 @@ const Components = {
 
               <tbody>
 
-                ${(state.gradesCatalog || initialData.gradesCatalog).map(g => `
+                ${(state.gradesCatalog || initialDíata.gradesCatalog).map(g => `
 
                   <tr>
 
@@ -12697,7 +12697,7 @@ const Components = {
 
                       <span style="color: ${g.section ? 'var(--color-navy-900)' : 'var(--text-muted)'}; font-weight: ${g.section ? '800' : 'normal'};">
 
-                        ${g.section ? g.section : ((state.academicConfig && state.academicConfig.hasSections) ? 'Sin asignar' : 'Única')}
+                        ${g.section ? g.section : ((state.academicConfig && state.academicConfig.hasSections) ? 'sin asignar' : 'Única')}
 
                       </span>
 
@@ -12755,7 +12755,7 @@ const Components = {
 
               <tbody>
 
-                ${(state.systemUsers || initialData.systemUsers).filter(u => u.role === 'Docente').map(u => `
+                ${(state.systemUsers || initialDíata.systemUsers).filter(u => u.role === 'Docente').map(u => `
 
                   <tr>
 
@@ -12835,7 +12835,7 @@ const Components = {
 
       ? state.gradesCatalog
 
-      : ((initialData && initialData.gradesCatalog) || []);
+      : ((initialDíata && initialDíata.gradesCatalog) || []);
 
 
 
@@ -12921,7 +12921,7 @@ const Components = {
 
 
 
-    const activeUser = (state.currentUser && state.currentUser.name) ? state.currentUser : ((state.users && state.users[state.currentRole]) || initialData.users[state.currentRole] || {});
+    const activeUser = (state.currentUser && state.currentUser.name) ? state.currentUser : ((state.users && state.users[state.currentRole]) || initialDíata.users[state.currentRole] || {});
 
     const isTutor = (window.appStore && typeof window.appStore.isTeacherTutorOfGrade === 'function') 
 
@@ -13005,7 +13005,7 @@ const Components = {
 
               ` : `
 
-                <div style="font-size: 11.5px; color: #f8fafc; background: rgba(0,0,0,0.3); padding: 6px 12px; border-radius: 6px; border: 1px dashed rgba(255,255,255,0.4);">
+                <div style="font-size: 11.5px; color: #f8fafc; background: rgba(0,0,0,0.3); padding: 6px 12px; border-radius: 6px; border: 1px díashed rgba(255,255,255,0.4);">
 
                   🔒 Matrícula restringida: Solo el Tutor(a) <strong>${currentGradeObj.tutor || 'Asignado'}</strong> o Dirección.
 
@@ -13025,7 +13025,7 @@ const Components = {
 
 
 
-          <!-- Métricas Rpidas del Aula -->
+          <!-- Métricas Rpidías del Aula -->
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; padding: 14px 20px; background: rgba(0,0,0,0.15);">
 
@@ -13059,7 +13059,7 @@ const Components = {
 
 
 
-        <!-- Barra de Control, Filtrado y Búsqueda -->
+        <!-- Barra de Control, Filtrado y Búsquedía -->
 
         <div class="card" style="margin-bottom: var(--space-4); padding: 16px; background: #ffffff;">
 
@@ -13301,7 +13301,7 @@ const Components = {
 
                         <div style="font-size: 12px; color: #64748b;">
 
-                          🔒 La matrícula y gestión de nómina está reservada para el Tutor(a) <strong>${currentGradeObj.tutor || 'Asignado'}</strong> o Dirección.
+                          🔒 La matrícula y gestión de nómina está reservadía para el Tutor(a) <strong>${currentGradeObj.tutor || 'Asignado'}</strong> o Dirección.
 
                         </div>
 
@@ -13343,7 +13343,7 @@ const Components = {
 
                     <td>
 
-                      <div style="font-size: 12px; color: #16a34a; font-weight: 800;">📞 ${st.guardianPhone || st.emergencyPhone || st.phone || 'Siónteléfono'}</div>
+                      <div style="font-size: 12px; color: #16a34a; font-weight: 800;">📞 ${st.guardianPhone || st.emergencyPhone || st.phone || 'Sin teléfono'}</div>
 
                     </td>
 
@@ -13427,19 +13427,19 @@ const Components = {
 
 
 
-  // Dashboard - Auxiliar de Educación & Portería
+  // Díashboard - Auxiliar de Educación & Portería
 
-  renderAuxiliarDashboard(state, user) {
+  renderAuxiliarDíashboard(state, user) {
 
-    const records = state.attendanceRecords || (initialData && initialData.attendanceRecords) || [];
+    const records = state.attendanceRecords || (initialDíata && initialDíata.attendanceRecords) || [];
 
-    const reviews = state.notebookReviews || (initialData && initialData.notebookReviews) || [];
+    const reviews = state.notebookReviews || (initialDíata && initialDíata.notebookReviews) || [];
 
-    const incidents = state.behaviorIncidents || (initialData && initialData.behaviorIncidents) || [];
+    const incidents = state.behaviorIncidents || (initialDíata && initialDíata.behaviorIncidents) || [];
 
-    const dayReport = (window.appStore && typeof window.appStore.getDailyAttendanceReport === 'function')
+    const dayReport = (window.appStore && typeof window.appStore.getDíailyAttendanceReport === 'function')
 
-      ? window.appStore.getDailyAttendanceReport("19/08/2026")
+      ? window.appStore.getDíailyAttendanceReport("19/08/2026")
 
       : { presentList: [], tardiónessList: [], absenceList: [] };
 
@@ -13481,7 +13481,7 @@ const Components = {
 
             <p class="welcome-subtitle">
 
-              Módulo exclusivo para <strong>Registro Biométrico / QR enPortería</strong> y <strong>Revisión y Sellado de Cuadernos Escolares</strong>.
+              Módulo exclusivo para <strong>Registro Biométrico / QR enPortería</strong> y <strong>Revisin  y Sellado de Cuadernos Escolares</strong>.
 
             </p>
 
@@ -13489,7 +13489,7 @@ const Components = {
 
             <div class="metrics-strip">
 
-              <div class="metric-card-mióni">
+              <div class="metric-card-mini">
 
                 <span class="metric-label">Ingresos enPuerta</span>
 
@@ -13497,7 +13497,7 @@ const Components = {
 
               </div>
 
-              <div class="metric-card-mióni">
+              <div class="metric-card-mini">
 
                 <span class="metric-label">Tardanzas Hoy</span>
 
@@ -13505,7 +13505,7 @@ const Components = {
 
               </div>
 
-              <div class="metric-card-mióni">
+              <div class="metric-card-mini">
 
                 <span class="metric-label">Cuadernos Sellados</span>
 
@@ -13513,9 +13513,9 @@ const Components = {
 
               </div>
 
-              <div class="metric-card-mióni">
+              <div class="metric-card-mini">
 
-                <span class="metric-label">Incidencias Reportadas</span>
+                <span class="metric-label">Incidencias Reportadías</span>
 
                 <span class="metric-val highlight-red">${incidents.length}</span>
 
@@ -13553,7 +13553,7 @@ const Components = {
 
             <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px;">
 
-              Escaneo óptico de fotochecks QR enpuerta, control automtico de tolerancia (07:45 AM), inasistencias (08:30 AM) y libro de incidencias.
+              Escaneo óptico de fotochecks QR enpuerta, control automático de tolerancia (07:45 AM), inasistencias (08:30 AM) y libro de incidencias.
 
             </p>
 
@@ -13561,7 +13561,7 @@ const Components = {
 
               <button class="btn btn-sm" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('door-scanner');" style="background: #047857; color: white; font-weight: 800; padding: 10px 8px; font-size: 12px;">
 
-                [Cmara] Escner enPuerta
+                [Cámara] Escner enPuerta
 
               </button>
 
@@ -13601,7 +13601,7 @@ const Components = {
 
             <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px;">
 
-              Supervisión de cuadernos escolares, sellado digital mediante lectura de código QR, verificación de tareas completas y registro de observaciones.
+              Supervisin  de cuadernos escolares, sellado digital mediante lectura de código QR, verificación de taÁÁreas completas y registro de observaciones.
 
             </p>
 
@@ -13609,7 +13609,7 @@ const Components = {
 
               <button class="btn btn-gold btn-sm" onclick="window.app.navigate('cuadernos-qr')" style="font-weight: 900; padding: 10px; font-size: 13px;">
 
-                [Cmara] Iniciar Lector de Cuadernos QR
+                [Cámara] Iniciar Lector de Cuadernos QR
 
               </button>
 
@@ -13681,7 +13681,7 @@ const Components = {
 
               <tbody>
 
-                ${(state.gradesCatalog || initialData.gradesCatalog).map(g => `
+                ${(state.gradesCatalog || initialDíata.gradesCatalog).map(g => `
 
                   <tr>
 
@@ -13747,7 +13747,7 @@ const Components = {
 
       ? window.appStore.getAgendaNotes("all") 
 
-      : (state.agendaNotes || initialData.agendaNotes || []);
+      : (state.agendaNotes || initialDíata.agendaNotes || []);
 
 
 
@@ -13755,11 +13755,11 @@ const Components = {
 
       ? window.appStore.getEnrollments() 
 
-      : (state.enrollments || initialData.enrollments);
+      : (state.enrollments || initialDíata.enrollments);
 
 
 
-    const catalogGrades = state.gradesCatalog || initialData.gradesCatalog || [];
+    const catalogGrades = state.gradesCatalog || initialDíata.gradesCatalog || [];
 
 
 
@@ -13941,7 +13941,7 @@ const Components = {
 
                 <button class="btn btn-gold btn-sm" onclick="window.app.openPrintgendaOfficialModal('${studentCode}')" style="font-weight: 800; padding: 8px 16px; border-radius: 20px;">
 
-                  📄 Imprimir Agenda A4 / PDF
+                  📄 Imprimir Agendía A4 / PDF
 
                 </button>
 
@@ -13957,9 +13957,9 @@ const Components = {
 
 
 
-            <!-- ResumenEstadístico de Anotaciones en la Agenda -->
+            <!-- ResumenEstadístico de Anotaciones en la Agendía -->
 
-            <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-bottom: var(--space-5);">
+            <div class="díashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-bottom: var(--space-5);">
 
               <div class="card metric-card" style="border-top: 4px solid #10b981; cursor: pointer;" onclick="window.app.setgendaFilter('merito')">
 
@@ -13973,7 +13973,7 @@ const Components = {
 
               <div class="card metric-card" style="border-top: 4px solid #3b82f6; cursor: pointer;" onclick="window.app.setgendaFilter('pedagogica')">
 
-                <span class="metric-title">📝 Tareas & Materiales</span>
+                <span class="metric-title">📝 TaÁÁreas & Materiales</span>
 
                 <div class="metric-value highlight-navy">${pedagogicasCount}</div>
 
@@ -14007,7 +14007,7 @@ const Components = {
 
                 <div class="metric-value" style="color: ${pendióngSignCount > 0 ? '#dc2626' : '#15803d'};">${pendióngSignCount}</div>
 
-                <span class="metric-trend" style="font-size: 11px; color: ${pendióngSignCount > 0 ? '#dc2626' : '#047857'};">${pendióngSignCount > 0 ? 'Requierenfirma de apoderado' : 'Todas firmadas al día'}</span>
+                <span class="metric-trend" style="font-size: 11px; color: ${pendióngSignCount > 0 ? '#dc2626' : '#047857'};">${pendióngSignCount > 0 ? 'Requierenfirma de apoderado' : 'Todías firmadías al día'}</span>
 
               </div>
 
@@ -14015,7 +14015,7 @@ const Components = {
 
 
 
-            <!-- Barra de Filtros de la Agenda -->
+            <!-- Barra de Filtros de la Agendía -->
 
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; border-bottom: 2px solid #e2e8f0; paddióng-bottom: 12px;">
 
@@ -14023,7 +14023,7 @@ const Components = {
 
                 <button class="btn btn-sm ${activeFilter === 'all' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setgendaFilter('all')" style="font-weight: 800; font-size: 11.5px; border-radius: 16px;">
 
-                  Todas (${totalCount})
+                  Todías (${totalCount})
 
                 </button>
 
@@ -14035,7 +14035,7 @@ const Components = {
 
                 <button class="btn btn-sm ${activeFilter === 'pedagogica' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setgendaFilter('pedagogica')" style="font-weight: 800; font-size: 11.5px; border-radius: 16px; color: #1e40af;">
 
-                  📝 Tareas (${pedagogicasCount})
+                  📝 TaÁÁreas (${pedagogicasCount})
 
                 </button>
 
@@ -14071,7 +14071,7 @@ const Components = {
 
 
 
-            <!-- Línea de Tiempo de Anotaciones de la Agenda Virtual -->
+            <!-- Línea de Tiempo de Anotaciones de la Agendía Virtual -->
 
             <div style="display: flex; flex-direction: column; gap: 14px;">
 
@@ -14149,7 +14149,7 @@ const Components = {
 
 
 
-                    <!-- Requerimiento, Tarea o Compromiso -->
+                    <!-- Requerimiento, TaÁrea o Compromiso -->
 
                     ${note.taskOrMaterial && note.taskOrMaterial !== 'Ninguno' ? `
 
@@ -14157,7 +14157,7 @@ const Components = {
 
                         <strong style="color: ${badgeColor}; display: block; margin-bottom: 2px;">
 
-                          📌 ${isCitacion ? 'Fecha y Lugar de Citación:' : isConducta ? 'Compromiso Suscrito:' : 'Tarea / Material Requerido:'}
+                          📌 ${isCitacion ? 'Fecha y Lugar de Citación:' : isConducta ? 'Compromiso Suscrito:' : 'TaÁrea / Material Requerido:'}
 
                         </strong>
 
@@ -14173,7 +14173,7 @@ const Components = {
 
                     <!-- Pie de la Anotación: Firma de Apoderado & N otificación -->
 
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-top: 1px dashed #e2e8f0; paddióng-top: 10px; margin-top: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-top: 1px díashed #e2e8f0; paddióng-top: 10px; margin-top: 8px;">
 
                       <div>
 
@@ -14235,25 +14235,25 @@ const Components = {
 
               }).join('') : `
 
-                <div class="card" style="text-align: center; padding: 36px 20px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px;">
+                <div class="card" style="text-align: center; padding: 36px 20px; background: #f8fafc; border: 1px díashed #cbd5e1; border-radius: 10px;">
 
                   <div style="font-size: 36px; margin-bottom: 8px;">📖</div>
 
                   <h3 style="font-size: 15px; font-weight: 800; color: #0b132b; margin: 0 0 4px 0;">
 
-                    N o hay anotaciones registradas bajo este filtro
+                    N o hay anotaciones registradías bajo este filtro
 
                   </h3>
 
                   <p style="font-size: 12px; color: #64748b; margin: 0 0 12px 0;">
 
-                    Las anotaciones, tareas y felicitaciones de los profesores aparecern aquí enorden cronológico.
+                    Las anotaciones, taÁÁreas y felicitaciones de los profesores aparecern aquí enorden cronológico.
 
                   </p>
 
                   <button class="btn btn-outline btn-sm" onclick="window.app.setgendaFilter('all')">
 
-                    Ver Todas las Anotaciones
+                    Ver Todías las Anotaciones
 
                   </button>
 
@@ -14271,7 +14271,7 @@ const Components = {
 
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
 
-              <span><strong>Reglamento de Convivencia:</strong> La Agenda Virtual es el canal oficial de comunicación diaria entre la I.E.P. "El Educador" y la familia. Todo acuse de recibo firmado queda respaldado consello digital y fecha en los servidores escolares.</span>
+              <span><strong>Reglamento de Convivencia:</strong> La Agendía Virtual es el canal oficial de comunicación diaria entre la I.E.P. "El Educador" y la familia. Todo acuse de recibo firmado quedía respaldado consello digital y fecha en los servidores escolares.</span>
 
             </div>
 
@@ -14349,7 +14349,7 @@ const Components = {
 
                 <h2 class="card-title" style="font-size: var(--font-size-xl); margin: 0; color: var(--color-navy-900);">
 
-                  📖 Agenda Virtual Escolar & Control de Convivencia
+                  📖 Agendía Virtual Escolar & Control de Convivencia
 
                 </h2>
 
@@ -14361,7 +14361,7 @@ const Components = {
 
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
-                I.E.P. "El Educador" • Registro entiempo real de felicitaciones, requerimientos pedagógicos, observaciones de conducta y citaciones vinculadas al código QR del estudiante.
+                I.E.P. "El Educador" • Registro entiempo Áreal de felicitaciones, requerimientos pedagógicos, observaciones de conducta y citaciones vinculadías al código QR del estudiante.
 
               </p>
 
@@ -14373,11 +14373,11 @@ const Components = {
 
               <button class="btn btn-navy btn-sm" onclick="window.app.openAgendaQRScannerModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px;">
 
-                <span>📹</span> Escanear Fotocheck conCmara
+                <span>📹</span> Escanear Fotocheck conCámara
 
               </button>
 
-              <button class="btn btn-gold btn-sm" onclick="window.app.openCreateAgendaNoteModal()" style="font-weight: 900; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(245,158,11,0.3);">
+              <button class="btn btn-gold btn-sm" onclick="window.app.openCÁreateAgendaNoteModal()" style="font-weight: 900; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(245,158,11,0.3);">
 
                 <span>➕</span> N ueva Anotación engenda
 
@@ -14443,7 +14443,7 @@ const Components = {
 
                 <option value="merito" ${selectedType === 'merito' ? 'selected' : ''}>★ Mérito / Felicitación (${meritosTotal})</option>
 
-                <option value="pedagogica" ${selectedType === 'pedagogica' ? 'selected' : ''}>📝 Tarea / Material (${pedagogicasTotal})</option>
+                <option value="pedagogica" ${selectedType === 'pedagogica' ? 'selected' : ''}>📝 TaÁrea / Material (${pedagogicasTotal})</option>
 
                 <option value="conducta" ${selectedType === 'conducta' ? 'selected' : ''}>⚠️ Observación de Conducta (${conductasTotal})</option>
 
@@ -14459,7 +14459,7 @@ const Components = {
 
           <!-- Métricas Generales del Panel Docente -->
 
-          <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-bottom: 16px;">
+          <div class="díashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-bottom: 16px;">
 
             <div class="card metric-card" style="border-top: 4px solid #10b981;">
 
@@ -14473,7 +14473,7 @@ const Components = {
 
             <div class="card metric-card" style="border-top: 4px solid #3b82f6;">
 
-              <span class="metric-title">📝 Tareas & Materiales</span>
+              <span class="metric-title">📝 TaÁÁreas & Materiales</span>
 
               <div class="metric-value highlight-navy">${pedagogicasTotal}</div>
 
@@ -14505,13 +14505,13 @@ const Components = {
 
 
 
-          <!-- Tabla de Anotaciones Registradas -->
+          <!-- Tabla de Anotaciones Registradías -->
 
           <div class="card-header" style="margin-bottom: 8px; paddióng-bottom: 8px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
 
             <h3 class="card-title" style="font-size: var(--font-size-base); margin: 0;">
 
-              📋 Expediente de Anotaciones en la Agenda Virtual (${filteredNotes.length} Registros)
+              📋 Expediente de Anotaciones en la Agendía Virtual (${filteredNotes.length} Registros)
 
             </h3>
 
@@ -14653,7 +14653,7 @@ const Components = {
 
                           </button>
 
-                          <button class="btn btn-outline btn-sm" onclick="window.app.openPrintgendaOfficialModal('${note.studentCode}')" style="font-size: 10.5px; padding: 3px 8px;" title="Ver Ficha Agenda A4">
+                          <button class="btn btn-outline btn-sm" onclick="window.app.openPrintgendaOfficialModal('${note.studentCode}')" style="font-size: 10.5px; padding: 3px 8px;" title="Ver Ficha Agendía A4">
 
                             Ficha A4
 
@@ -14673,7 +14673,7 @@ const Components = {
 
                     <td colspan="8" style="text-align: center; padding: 24px; color: #64748b;">
 
-                      N o hay registros de agenda para los filtros seleccionados.
+                      N o hay registros de agendía para los filtros seleccionados.
 
                     </td>
 
@@ -14709,7 +14709,7 @@ const Components = {
 
     const role = state.currentRole;
 
-    const reviews = state.notebookReviews || initialData.notebookReviews;
+    const reviews = state.notebookReviews || initialDíata.notebookReviews;
 
 
 
@@ -14791,7 +14791,7 @@ const Components = {
 
 
 
-      // Buscar revisiones registradas entiempo real para este estudiante
+      // Buscar revisiones registradías entiempo Áreal para este estudiante
 
       const studentReviews = reviews.filter(r => 
 
@@ -14805,29 +14805,29 @@ const Components = {
 
       const defaultNotebooks = isPrimaria ? [
 
-        { course: "Matemática & Raízonamiento", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, mrgenes impecables y esquemas enorden." },
+        { course: "Matemática & Raízonamiento", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "TaÁÁreas completas al 100%, mrgenes impecables y esquemas enorden." },
 
-        { course: "Comunicación Integral & Lectura", teacher: "Miss Julisa Magali Arroyo", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Caligrafía prolija y lecturas analizadas conclaridad." },
+        { course: "Comunicación Integral & Lectura", teacher: "Miss Julisa Magali Arroyo", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Caligrafía prolija y lecturas analizadías conclaridad." },
 
         { course: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Fichas de experimentos y dibujosé científicos completos." },
 
         { course: "Personal Social & Valores", teacher: "Miss Julisa Magali Arroyo", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Resúmenes ordenados y participación constante." },
 
-        { course: "Inglés Técnico", teacher: "Miss Andrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "17 (A)", remarks: "Ejercicios de vocabulario al día." },
+        { course: "Inglés Técnico", teacher: "Miss AndÁrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "17 (A)", remarks: "Ejercicios de vocabulario al día." },
 
         { course: "Computación & Informática", teacher: "Prof. Fernando Rojas", lastDate: "10/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Prácticas de laboratorio técnico enorden." }
 
       ] : [
 
-        { course: "Matemática Avanzada (ÁÁÁÁálgebra / Geometría)", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, mrgenes impecables y esquemas enorden." },
+        { course: "Matemática Avanzadía (ÁÁÁÁálgebra / Geometría)", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "TaÁÁreas completas al 100%, mrgenes impecables y esquemas enorden." },
 
-        { course: "Comunicación & Literatura", teacher: "Miss Mara Daysi Reyes", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "17 (A)", remarks: "Anlisis de textos y caligrafía óptima. Muy buendesarrollo." },
+        { course: "Comunicación & Literatura", teacher: "Miss Mara Díaysi Reyes", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "17 (A)", remarks: "Anlisis de textos y caligrafía óptima. Muy buendesarrollo." },
 
-        { course: "Ciencia y Tecnología (Física / Química)", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Prácticas experimentales ilustradas y fichas de laboratorio selladas." },
+        { course: "Ciencia y Tecnología (Física / Química)", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Prácticas experimentales ilustradías y fichas de laboratorio selladías." },
 
         { course: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "16 (A)", remarks: "Mapas históricos y resúmenes de época bienestructurados." },
 
-        { course: "Inglés Institucional", teacher: "Miss Andrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Vocabulario y ejercicios de gramtica avanzados completos." },
+        { course: "Inglés Institucional", teacher: "Miss AndÁrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Vocabulario y ejercicios de gramtica avanzados completos." },
 
         { course: "EPT (Computación / Robótica)", teacher: "Prof. Alex Lino", lastDate: "10/08/2026", status: "observado", statusLabel: "<span class='status-dot-yellow'></span> OBSERVDO", score: "13 (B)", remarks: "Falta pegar y desarrollar la ficha de proyecto técnico N3. Presentar este viernes." }
 
@@ -14913,11 +14913,11 @@ const Components = {
 
             <!-- ResumenEstadístico de Sellos -->
 
-            <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: var(--space-6);">
+            <div class="díashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: var(--space-6);">
 
               <div class="card metric-card" style="border-top: 4px solid #22c55e;">
 
-                <span class="metric-title">Cuadernos al Da</span>
+                <span class="metric-title">Cuadernos al Día</span>
 
                 <div class="metric-value highlight-green">${alDiaTotal} / ${displayNotebooks.length}</div>
 
@@ -14959,7 +14959,7 @@ const Components = {
 
               </h3>
 
-              <span class="status-badge status-approved">Actualizado al Da</span>
+              <span class="status-badge status-approved">Actualizado al Día</span>
 
             </div>
 
@@ -14977,7 +14977,7 @@ const Components = {
 
                     <th>Docente Responsable</th>
 
-                    <th>Último Sello QR</th>
+                    <th>Úúltimo Sello QR</th>
 
                     <th>Estado del Cuaderno</th>
 
@@ -15023,7 +15023,7 @@ const Components = {
 
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
 
-              <span><strong>Información Oficial:</strong> Los sellos QR sonregistrados entiempo real por el Auxiliar y los Docentes tras escanear el sticker físico adherido al cuaderno. Todo cuaderno observado cuenta conplazo para regularización.</span>
+              <span><strong>Información Oficial:</strong> Los sellos QR sonregistrados entiempo Áreal por el Auxiliar y los Docentes tras escanear el sticker físico adherido al cuaderno. Todo cuaderno observado cuenta conplazo para regularización.</span>
 
             </div>
 
@@ -15043,7 +15043,7 @@ const Components = {
 
     const hasAdminEditPower = state.currentRole === "admin" || state.currentRole === "director" || (state.currentRole === "docente" && state.users.docente && state.users.docente.hasAdminPrivileges);
 
-    const isDocenteOrdmión = state.currentRole === "docente" || state.currentRole === "auxiliar" || state.currentRole === "admin" || state.currentRole === "director";
+    const isDocenteOradmin = state.currentRole === "docente" || state.currentRole === "auxiliar" || state.currentRole === "admin" || state.currentRole === "director";
 
 
 
@@ -15061,11 +15061,11 @@ const Components = {
 
       ? window.appStore.getEnrollments() 
 
-      : (state.enrollments || initialData.enrollments);
+      : (state.enrollments || initialDíata.enrollments);
 
 
 
-    const catalogGrades = state.gradesCatalog || initialData.gradesCatalog;
+    const catalogGrades = state.gradesCatalog || initialDíata.gradesCatalog;
 
     const boletaCoursesCatalog = (window.appStore && typeof window.appStore.getStudentBoletaCoursesCatalog === "function")
 
@@ -15073,9 +15073,9 @@ const Components = {
 
       : [];
 
-    const stickersData = (window.appStore && typeof window.appStore.getNotebookStickersData === "function")
+    const stickersDíata = (window.appStore && typeof window.appStore.getNotebookStickersDíata === "function")
 
-      ? window.appStore.getNotebookStickersData(selectedGrade, selectedStudentId, selectedCourseFilter)
+      ? window.appStore.getNotebookStickersDíata(selectedGrade, selectedStudentId, selectedCourseFilter)
 
       : [];
 
@@ -15137,7 +15137,7 @@ const Components = {
 
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
-                I.E.P. "El Educador" • Escaneo óptico de stickers de cuadernos. <strong>Varios profesores puedenescanear simultneamente desde sus celulares</strong> siónsobreescritura de datos.
+                I.E.P. "El Educador" • Escaneo óptico de stickers de cuadernos. <strong>Varios profesores puedenescanear simultneamente desde sus celulares</strong> sin sobreescritura de datos.
 
               </p>
 
@@ -15157,7 +15157,7 @@ const Components = {
 
               <button class="btn btn-sm ${activeSubTab === 'scanner' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setNotebookActiveSubTab('scanner')" style="font-weight: 800;">
 
-                [Cmara] 1. Escner enVivo
+                [Cámara] 1. Escner enVivo
 
               </button>
 
@@ -15169,7 +15169,7 @@ const Components = {
 
               <button class="btn btn-sm ${activeSubTab === 'report' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setNotebookActiveSubTab('report')" style="font-weight: 800;">
 
-                3. Informe de Supervisión
+                3. Informe de Supervisin 
 
               </button>
 
@@ -15189,7 +15189,7 @@ const Components = {
 
             
 
-            <!-- Banner de Escaneo Protegido Bajo Demanda y Multi-Dispositivo -->
+            <!-- Banner de Escaneo Protegido Bajo Demandía y Multi-Dispositivo -->
 
             <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1.5px solid #93c5fd; border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
 
@@ -15201,13 +15201,13 @@ const Components = {
 
                   <div style="font-size: 13px; font-weight: 900; color: #1e3a8a;">
 
-                    Modo Bajo Demanda & Concurrencia Multi-Dispositivo
+                    Modo Bajo Demandía & Concurrencia Multi-Dispositivo
 
                   </div>
 
                   <div style="font-size: 11.5px; color: #334155;">
 
-                    La cmara solo se activa cuando presionas <strong>Encender Cmara</strong> para ahorrar batera y evitar lecturas accidentales. Los sellos de todos los docentes se combinanen tiempo real.
+                    La cámara solo se activa cuando presionas <strong>Encender Cámara</strong> para ahorrar batera y evitar lecturas accidentales. Los sellos de todos los docentes se combinanen tiempo Áreal.
 
                   </div>
 
@@ -15225,11 +15225,11 @@ const Components = {
 
 
 
-            <div class="dashboard-grid" style="margin-bottom: var(--space-6); align-items: stretch;">
+            <div class="díashboard-grid" style="margin-bottom: var(--space-6); align-items: stretch;">
 
               
 
-              <!-- Visor de Cmara Real para Celulares / PC -->
+              <!-- Visor de Cámara Real para Celulares / PC -->
 
               <div class="card" style="background: var(--color-navy-950); color: white; border: 2px solid var(--color-yellow-500); padding: var(--space-4); display:flex; flex-direction:column; align-items:center;">
 
@@ -15243,7 +15243,7 @@ const Components = {
 
                   <span id="camera-status-tag" class="status-badge status-pendióng" style="font-size:10px;">
 
-                    Cmara Apagada (EnEspera)
+                    Cámara Apagadía (EnEspera)
 
                   </span>
 
@@ -15253,13 +15253,13 @@ const Components = {
 
                 <!-- Contenedor del Feed de Video de Html5Qrcode -->
 
-                <div id="qr-live-camera-feed" style="width: 100%; max-width: 320px; mión-height: 240px; background: #000; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; border: 1px dashed rgba(255,255,255,0.2);">
+                <div id="qr-live-camera-feed" style="width: 100%; max-width: 320px; mión-height: 240px; background: #000; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; border: 1px díashed rgba(255,255,255,0.2);">
 
                   <div id="camera-placeholder-msg" style="text-align: center; padding: 20px; color: rgba(255,255,255,0.7);">
 
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin: 0 auto 8px; display:block; color: var(--color-yellow-400);"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
 
-                    <span style="font-size: 12px; font-weight: 700;">Presiona 'Encender Cmara' para iniciar el escaneo</span>
+                    <span style="font-size: 12px; font-weight: 700;">Presiona 'Encender Cámara' para iniciar el escaneo</span>
 
                   </div>
 
@@ -15267,19 +15267,19 @@ const Components = {
 
 
 
-                <!-- Botones de Control de Cmara -->
+                <!-- Botones de Control de Cámara -->
 
                 <div style="display: flex; gap: 8px; margin-top: 12px; width: 100%; justify-content: center; flex-wrap: wrap;">
 
                   <buttoni d="btn-start-camera" class="btn btn-gold" onclick="window.app.startLiveCameraScanner()" style="font-weight:800; font-size:13px; border-radius: 20px; padding: 10px 20px;">
 
-                    [Cmara] Encender Cmara
+                    [Cámara] Encender Cámara
 
                   </button>
 
                   <buttoni d="btn-stop-camera" class="btn btn-outline" onclick="window.app.stopLiveCameraScanner()" style="display:none; color:#fca5a5; border-color:rgba(220,38,38,0.4); border-radius: 20px;">
 
-                    ⏹️ Apagar Cmara
+                    ⏹️ Apagar Cámara
 
                   </button>
 
@@ -15289,7 +15289,7 @@ const Components = {
 
 
 
-              <!-- Atajosé de Búsqueda Rpida / Simulación conlumno + Curso + Docente -->
+              <!-- Atajosé de Búsquedía Rpidía / Simulación conlumno + Curso + Docente -->
 
               <div class="card" style="background-color: var(--bg-surface-subtle); display:flex; flex-direction:column; justify-content:space-between;">
 
@@ -15317,13 +15317,13 @@ const Components = {
 
                   <div style="display: flex; flex-direction:column; gap: 6px; margin-bottom: 12px;">
 
-                    <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Matemática Avanzada (ÁÁÁÁálgebra / Geometría)|Prof. Roberto Silva')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; padding: 8px 12px;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Matemática Avanzadía (ÁÁÁÁálgebra / Geometría)|Prof. Roberto Silva')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; padding: 8px 12px;">
 
                       <div>
 
                         <strong style="color:var(--color-navy-900); font-size: 12px;">Sofía Méndez Flores</strong>
 
-                        <div style="font-size: 10.5px; color: #047857;">Matemática Avanzada • Docente: Prof. Roberto Silva</div>
+                        <div style="font-size: 10.5px; color: #047857;">Matemática Avanzadía • Docente: Prof. Roberto Silva</div>
 
                       </div>
 
@@ -15333,13 +15333,13 @@ const Components = {
 
 
 
-                    <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Comunicación & Literatura|Miss Mara Daysi Reyes Milla')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; padding: 8px 12px;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Comunicación & Literatura|Miss Mara Díaysi Reyes Milla')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; padding: 8px 12px;">
 
                       <div>
 
                         <strong style="color:var(--color-navy-900); font-size: 12px;">Sofía Méndez Flores</strong>
 
-                        <div style="font-size: 10.5px; color: #1e3a8a;">Comunicación & Literatura • Docente: Miss Mara Daysi Reyes</div>
+                        <div style="font-size: 10.5px; color: #1e3a8a;">Comunicación & Literatura • Docente: Miss Mara Díaysi Reyes</div>
 
                       </div>
 
@@ -15391,7 +15391,7 @@ const Components = {
 
                   <div style="display:flex; gap: 8px;">
 
-                    <input type="text" id="manual-qr-input" class="form-control" value="QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Matemática Avanzada (ÁÁÁÁálgebra / Geometría)|Prof. Roberto Silva" style="font-size: 11.5px; border-radius: 16px;" />
+                    <input type="text" id="manual-qr-input" class="form-control" value="QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Matemática Avanzadía (ÁÁÁÁálgebra / Geometría)|Prof. Roberto Silva" style="font-size: 11.5px; border-radius: 16px;" />
 
                     <button class="btn btn-navy btn-sm" onclick="window.app.simulateQRScan(document.getElementById('manual-qr-input').value)" style="border-radius: 16px; font-weight: 800;">
 
@@ -15411,13 +15411,13 @@ const Components = {
 
 
 
-            <!-- Tabla de Revisiones Recientes del Da -->
+            <!-- Tabla de Revisiones Recientes del Día -->
 
             <div class="card-header" style="margin-bottom: 8px; paddióng-bottom: 8px; border-bottom: 1px solid var(--border-subtle);">
 
               <h3 class="card-title" style="font-size: var(--font-size-base);">
 
-                📑 Últimos Cuadernos Sellados eneste Turno
+                📑 Úúúltimos Cuadernos Sellados eneste Turno
 
               </h3>
 
@@ -15643,7 +15643,7 @@ const Components = {
 
             <div id="printable-stickers-sheet" class="qr-sticker-sheet" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
 
-              ${stickersData.map(st => {
+              ${stickersDíata.map(st => {
 
                 const safePayload = st.qrPayload.replace(/'/g, "\\'");
 
@@ -15675,7 +15675,7 @@ const Components = {
 
                         <span class="status-badge" style="font-size: 8px; padding: 1px 4px; font-weight: 800; background: #eff6ff; color: #1e40af;">
 
-                          ${st.area || 'Oficial'}
+                          ${st.aÁrea || 'Oficial'}
 
                         </span>
 
@@ -15709,7 +15709,7 @@ const Components = {
 
                         <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('${safePayload}')" style="font-size: 9.5px; padding: 2px 7px; border-radius: 12px; font-weight: 800;">
 
-                          [Cmara] Probar Escaneo
+                          [Cámara] Probar Escaneo
 
                         </button>
 
@@ -15757,7 +15757,7 @@ const Components = {
 
                   <p style="font-size: 12px; color: var(--text-secondary); margin: 0;">
 
-                    Consolidado de cumplimiento de tareas, cuadernos observados y sellos otorgados por el Auxiliar y Docentes.
+                    Consolidado de cumplimiento de taÁÁreas, cuadernos observados y sellos otorgados por el Auxiliar y Docentes.
 
                   </p>
 
@@ -15777,11 +15777,11 @@ const Components = {
 
               <!-- Tarjetas de Métricas del Informe -->
 
-              <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: 16px;">
+              <div class="díashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: 16px;">
 
                 <div class="card metric-card" style="border-top: 4px solid #10b981;">
 
-                  <span class="metric-title">Cuadernos al Da</span>
+                  <span class="metric-title">Cuadernos al Día</span>
 
                   <div class="metric-value highlight-green">${alDiaCount}</div>
 
@@ -15823,7 +15823,7 @@ const Components = {
 
 
 
-              <!-- Filtro de Búsqueda en el Informe -->
+              <!-- Filtro de Búsquedía en el Informe -->
 
               <div style="display:flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;">
 
@@ -15835,15 +15835,15 @@ const Components = {
 
                     <option value="all">-- Todos los Cursos --</option>
 
-                    <option value="Matemática Avanzada" ${selectedCourseFilter === 'Matemática Avanzada' ? 'selected' : ''}>Matemática Avanzada (Prof. Roberto Silva)</option>
+                    <option value="Matemática Avanzada" ${selectedCourseFilter === 'Matemática Avanzada' ? 'selected' : ''}>Matemática Avanzadía (Prof. Roberto Silva)</option>
 
-                    <option value="Comunicación & Literatura" ${selectedCourseFilter === 'Comunicación & Literatura' ? 'selected' : ''}>Comunicación & Literatura (Miss Mara Daysi Reyes)</option>
+                    <option value="Comunicación & Literatura" ${selectedCourseFilter === 'Comunicación & Literatura' ? 'selected' : ''}>Comunicación & Literatura (Miss Mara Díaysi Reyes)</option>
 
                     <option value="Ciencia y Tecnología" ${selectedCourseFilter === 'Ciencia y Tecnología' ? 'selected' : ''}>Ciencia y Tecnología (Miss Leyli Reyes)</option>
 
                     <option value="Ciencias Sociales" ${selectedCourseFilter === 'Ciencias Sociales' ? 'selected' : ''}>Ciencias Sociales (Prof. Javier Vega)</option>
 
-                    <option value="Inglés Institucional" ${selectedCourseFilter === 'Inglés Institucional' ? 'selected' : ''}>Inglés Institucional (Miss Andrea Ramos)</option>
+                    <option value="Inglés Institucional" ${selectedCourseFilter === 'Inglés Institucional' ? 'selected' : ''}>Inglés Institucional (Miss AndÁrea Ramos)</option>
 
                     <option value="EPT (Computación)" ${selectedCourseFilter === 'EPT (Computación)' ? 'selected' : ''}>EPT (Computación) (Prof. Fernando Rojas)</option>
 
@@ -16041,19 +16041,19 @@ const Components = {
 
 
 
-  // Base de Datos
+  // Base de Díatos
 
-  renderDatabaseManagement(state) {
+  renderDíatabaseManagement(state) {
 
-    const usersCount = (state.systemUsers || initialData.systemUsers).length;
+    const usersCount = (state.systemUsers || initialDíata.systemUsers).length;
 
-    const enrollmentsCount = (state.enrollments || initialData.enrollments).length;
+    const enrollmentsCount = (state.enrollments || initialDíata.enrollments).length;
 
-    const reviewsCount = (state.notebookReviews || initialData.notebookReviews).length;
+    const reviewsCount = (state.notebookReviews || initialDíata.notebookReviews).length;
 
-    const coursesCount = (state.courses || initialData.courses).length;
+    const coursesCount = (state.courses || initialDíata.courses).length;
 
-    const announcementsCount = (state.announcements || initialData.announcements).length;
+    const announcementsCount = (state.announcements || initialDíata.announcements).length;
 
 
 
@@ -16069,7 +16069,7 @@ const Components = {
 
               <div style="display: flex; align-items: center; gap: 8px;">
 
-                <h2 class="card-title" style="font-size: var(--font-size-xl);">☁️ Base de Datos en la N ube - Firebase Realtime Database (Google Cloud)</h2>
+                <h2 class="card-title" style="font-size: var(--font-size-xl);">☁️ Base de Díatos en la N ube - Firebase Realtime Díatabase (Google Cloud)</h2>
 
                 <span class="status-badge status-approved"><span class='status-dot-green'></span> Firebase Cloud 100% Activo</span>
 
@@ -16077,7 +16077,7 @@ const Components = {
 
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
-                I.E.P. "El Educador" • S.J.L. • UGEL 05 • Sióncronización multiusuario entiempo real siónservidores locales.
+                I.E.P. "El Educador" • S.J.L. • UGEL 05 • Sincronización multiusuario entiempo Áreal sin servidores locales.
 
               </p>
 
@@ -16107,11 +16107,11 @@ const Components = {
 
             <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-green-500); background: #f8faf9;">
 
-              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Estado de Sióncronización</span>
+              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Estado de Sincronización</span>
 
               <div style="font-size: 18px; font-weight: 800; color: var(--color-green-600); margin-top: 2px;"><span class='status-dot-green'></span> Tiempo Real Activo</div>
 
-              <span style="font-size: 10px; color: var(--text-muted);">Sióncronización multi-dispositivo</span>
+              <span style="font-size: 10px; color: var(--text-muted);">Sincronización multi-dispositivo</span>
 
             </div>
 
@@ -16119,11 +16119,11 @@ const Components = {
 
             <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-navy-700); background: var(--bg-surface-subtle);">
 
-              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Motor de Base de Datos</span>
+              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Motor de Base de Díatos</span>
 
               <div style="font-size: 17px; font-weight: 800; color: var(--color-navy-900); margin-top: 2px;">Firebase RTDB (Google Cloud)</div>
 
-              <span style="font-size: 10px; color: var(--text-muted);">Sióndependencia de servidor local</span>
+              <span style="font-size: 10px; color: var(--text-muted);">Sin dependencia de servidor local</span>
 
             </div>
 
@@ -16159,7 +16159,7 @@ const Components = {
 
                 <tr><td><code>tb_calificaciones</code></td><td>Notas y Actas Oficiales 2026</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${coursesCount}</strong></td><td><span class="status-badge status-approved">EnVivo</span></td></tr>
 
-                <tr><td><code>tb_pensiones</code></td><td>Recaudación acumulada (S/ 25,130.00)</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${state.payments.length}</strong></td><td><span class="status-badge status-approved">EnVivo</span></td></tr>
+                <tr><td><code>tb_pensiones</code></td><td>Recaudación acumuladía (S/ 25,130.00)</td><td>Google Cloud Firebase</td><td style="text-align:center;"><strong>${state.payments.length}</strong></td><td><span class="status-badge status-approved">EnVivo</span></td></tr>
 
               </tbody>
 
@@ -16199,11 +16199,11 @@ const Components = {
 
           <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
 
-            Solo el personal directivo o de administración general tiene autorización para crear, editar o elimiónar usuarios y expedientes de matrícula.
+            Solo el personal directivo o de administración general tiene autorización para cÁrear, editar o elimiónar usuarios y expedientes de matrícula.
 
           </p>
 
-          <button class="btn btn-navy" onclick="window.app.navigate('dashboard')" style="font-weight: 800; padding: 10px 24px;">
+          <button class="btn btn-navy" onclick="window.app.navigate('díashboard')" style="font-weight: 800; padding: 10px 24px;">
 
             Volver al Inicio
 
@@ -16217,15 +16217,15 @@ const Components = {
 
 
 
-    const allUsers = state.systemUsers || initialData.systemUsers || [];
+    const allUsers = state.systemUsers || initialDíata.systemUsers || [];
 
-    const enrollments = state.enrollments || initialData.enrollments || [];
+    const enrollments = state.enrollments || initialDíata.enrollments || [];
 
     const activeTab = state.usersManagementTab || "users";
 
     const roleFilter = state.usersRoleFilter || "all";
 
-    const navConfigs = state.navigationTabsConfig || initialData.navigationTabsConfig || {};
+    const navConfigs = state.navigationTabsConfig || initialDíata.navigationTabsConfig || {};
 
 
 
@@ -16263,7 +16263,7 @@ const Components = {
 
     const targetNavRole = state.selectedNavConfigRole || "docente";
 
-    const currentRoleTabs = navConfigs[targetNavRole] || initialData.navigationTabsConfig[targetNavRole] || [];
+    const currentRoleTabs = navConfigs[targetNavRole] || initialDíata.navigationTabsConfig[targetNavRole] || [];
 
 
 
@@ -16299,7 +16299,7 @@ const Components = {
 
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
-                I.E.P. "El Educador" • UGEL 05 • Creación de cuentas institucionales, asignación de roles y control de menús visibles.
+                I.E.P. "El Educador" • UGEL 05 • CÁreación de cuentas institucionales, asignación de roles y control de menús visibles.
 
               </p>
 
@@ -16309,7 +16309,7 @@ const Components = {
 
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
 
-              <button class="btn btn-gold btn-sm" onclick="window.app.opendmiónddStudentWithParentModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px; padding: 8px 14px;">
+              <button class="btn btn-gold btn-sm" onclick="window.app.openadminddStudentWithParentModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px; padding: 8px 14px;">
 
                 <span>➕</span> Matricular Estudiante & Apoderado
 
@@ -16317,7 +16317,7 @@ const Components = {
 
               <button class="btn btn-navy btn-sm" onclick="window.app.opencreateUserModal()" style="font-weight: 800; display: flex; align-items: center; gap: 6px; padding: 8px 14px;">
 
-                <span>👤</span> Crear Usuario Manual
+                <span>👤</span> CÁrear Usuario Manual
 
               </button>
 
@@ -16405,7 +16405,7 @@ const Components = {
 
             <div>
 
-              <!-- Barra de Filtros por Rol y Búsqueda -->
+              <!-- Barra de Filtros por Rol y Búsquedía -->
 
               <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
 
@@ -16667,7 +16667,7 @@ const Components = {
 
                     <p style="font-size: 12px; color: #1e40af; margin: 0;">
 
-                      Active, desactive o renombre los espacios y accesos directos que cada perfil (Docente, Estudiante, Padre de Familia, Director) puede visualizar en la barra lateral.
+                      Active, desactive o renombre los espacios y accesos directos que cadía perfil (Docente, Estudiante, Padre de Familia, Director) puede visualizar en la barra lateral.
 
                     </p>
 
@@ -16761,7 +16761,7 @@ const Components = {
 
                       <div style="margin-top: 8px; text-align: right;">
 
-                        <button class="btn btn-outline btn-sm" onclick="window.app.saveSióngleNavTab('${targetNavRole}', '${tab.id}')" style="font-size: 11px; padding: 2px 10px; font-weight: bold;">
+                        <button class="btn btn-outline btn-sm" onclick="window.app.savepassingleNavTab('${targetNavRole}', '${tab.id}')" style="font-size: 11px; padding: 2px 10px; font-weight: bold;">
 
                           ✓ Guardar Texto
 
@@ -16813,9 +16813,9 @@ const Components = {
 
 
 
-  // Dashboard - Director General
+  // Díashboard - Director General
 
-  renderDirectorDashboard(state, user) {
+  renderDirectorDíashboard(state, user) {
 
     return `
 
@@ -16827,19 +16827,19 @@ const Components = {
 
             <h1 class="welcome-title">Dirección General: <span>${user.name}</span></h1>
 
-            <p class="welcome-subtitle">Supervisión pedagógica institucional • I.E.P. "El Educador" (S.J.L. - 21 años dejando huellas).</p>
+            <p class="welcome-subtitle">Supervisin  pedagógica institucional • I.E.P. "El Educador" (S.J.L. - 21 años dejando huellas).</p>
 
 
 
             <div class="metrics-strip">
 
-              <div class="metric-card-mióni"><span class="metric-label">Matrícula Total</span><span class="metric-val highlight-yellow">${user.totalStudents}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Matrícula Total</span><span class="metric-val highlight-yellow">${user.totalStudents}</span></div>
 
-              <div class="metric-card-mióni"><span class="metric-label">Plana Docente</span><span class="metric-val highlight-green">${user.totalTeachers}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Plana Docente</span><span class="metric-val highlight-green">${user.totalTeachers}</span></div>
 
-              <div class="metric-card-mióni"><span class="metric-label">Asistencia Promedio</span><span class="metric-val highlight-green">${user.avgttendance}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Asistencia Promedio</span><span class="metric-val highlight-green">${user.avgttendance}</span></div>
 
-              <div class="metric-card-mióni"><span class="metric-label">Recaudación Agosto</span><span class="metric-val highlight-green">S/ 25,130.00</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Recaudación Agosto</span><span class="metric-val highlight-green">S/ 25,130.00</span></div>
 
             </div>
 
@@ -16849,7 +16849,7 @@ const Components = {
 
 
 
-        <div class="dashboard-grid">
+        <div class="díashboard-grid">
 
           <div class="section-column">
 
@@ -16889,7 +16889,7 @@ const Components = {
 
             <div class="card">
 
-              <div class="card-header"><h3 class="card-title">Supervisión Académica</h3></div>
+              <div class="card-header"><h3 class="card-title">Supervisin  Académica</h3></div>
 
               <div style="display:flex; flex-direction:column; gap: 8px;">
 
@@ -16905,7 +16905,7 @@ const Components = {
 
                   <span>📷</span>
 
-                  <span>[Cmara] Escner Cuadernos QR</span>
+                  <span>[Cámara] Escner Cuadernos QR</span>
 
                 </button>
 
@@ -16949,9 +16949,9 @@ const Components = {
 
 
 
-  // Dashboard - Docente
+  // Díashboard - Docente
 
-  renderTeacherDashboard(state, user) {
+  renderTeacherDíashboard(state, user) {
 
     const hasAdminPrivilege = !!user.hasAdminPrivileges || !!user.hasAdminPrivilege;
 
@@ -17035,13 +17035,13 @@ const Components = {
 
             <div class="metrics-strip">
 
-              <div class="metric-card-mióni"><span class="metric-label">Cursos Asignados</span><span class="metric-val highlight-yellow">${userCoursesList.length}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Cursos Asignados</span><span class="metric-val highlight-yellow">${userCoursesList.length}</span></div>
 
-              <div class="metric-card-mióni"><span class="metric-label">Grados a Cargo</span><span class="metric-val highlight-green">${userGradesList.length}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Grados a Cargo</span><span class="metric-val highlight-green">${userGradesList.length}</span></div>
 
-              <div class="metric-card-mióni"><span class="metric-label">Alumnos Matriculados</span><span class="metric-val highlight-yellow">${enrollments.length}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Alumnos Matriculados</span><span class="metric-val highlight-yellow">${enrollments.length}</span></div>
 
-              <div class="metric-card-mióni"><span class="metric-label">Cuadernos Hoy</span><span class="metric-val highlight-green">${user.scannedNotebooksToday || 18}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Cuadernos Hoy</span><span class="metric-val highlight-green">${user.scannedNotebooksToday || 18}</span></div>
 
             </div>
 
@@ -17061,7 +17061,7 @@ const Components = {
 
               <div style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase;">
 
-                📚 Mis Asignaturas Asignadas en la Intranet:
+                📚 Mis Asignaturas Asignadías en la Intranet:
 
               </div>
 
@@ -17085,7 +17085,7 @@ const Components = {
 
               <div style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase;">
 
-                🏫 Grados / Aulas Asignadas:
+                🏫 Grados / Aulas Asignadías:
 
               </div>
 
@@ -17113,11 +17113,11 @@ const Components = {
 
         <div style="display: flex; gap: 10px; margin-bottom: var(--space-6); flex-wrap: wrap; align-items: center;">
 
-          <button class="btn btn-navy" onclick="window.app.navigate('tareas')" style="font-weight: 800;">
+          <button class="btn btn-navy" onclick="window.app.navigate('taÁÁreas')" style="font-weight: 800;">
 
             <span>💻</span>
 
-            <span>Mi Aula Virtual & Tareas</span>
+            <span>Mi Aula Virtual & TaÁÁreas</span>
 
           </button>
 
@@ -17271,11 +17271,11 @@ const Components = {
 
 
 
-  // Dashboard - Padre
+  // Díashboard - Padre
 
-  renderParentDashboard(state, user) {
+  renderParentDíashboard(state, user) {
 
-    const announcements = state.announcements || initialData.announcements || [];
+    const announcements = state.announcements || initialDíata.announcements || [];
 
     const activeUser = user || this.getCurrentUser(state);
 
@@ -17299,11 +17299,11 @@ const Components = {
 
             <div class="metrics-strip">
 
-              <div class="metric-card-mióni"><span class="metric-label">Estudiante</span><span class="metric-val highlight-yellow">${studentName}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Estudiante</span><span class="metric-val highlight-yellow">${studentName}</span></div>
 
-              <div class="metric-card-mióni"><span class="metric-label">Cuadernos QR</span><span class="metric-val highlight-green">5/6 Al Día</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Cuadernos QR</span><span class="metric-val highlight-green">5/6 Al Día</span></div>
 
-              <div class="metric-card-mióni"><span class="metric-label">Asistencia</span><span class="metric-val highlight-green">98.5%</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Asistencia</span><span class="metric-val highlight-green">98.5%</span></div>
 
             </div>
 
@@ -17319,7 +17319,7 @@ const Components = {
 
             <h4 style="font-size:14px; color:#1e3a8a; margin:0 0 2px;">📊 Boleta Oficial de Notas</h4>
 
-            <span style="font-size:12px; color:#2563eb; font-weight: bold;">Formato oficial MINEDU e impresión</span>
+            <span style="font-size:12px; color:#2563eb; font-weight: bold;">Formato oficial MINEDU e impresin </span>
 
           </div>
 
@@ -17371,7 +17371,7 @@ const Components = {
 
           <div class="card-header">
 
-            <h3 class="card-title">Últimos Informes y Circulares Institucionales</h3>
+            <h3 class="card-title">Úúúltimos Informes y Circulares Institucionales</h3>
 
             <button class="btn btn-outline btn-sm" onclick="window.app.navigate('comunicados')">Ver Todos</button>
 
@@ -17405,17 +17405,17 @@ const Components = {
 
 
 
-  // Dashboard - Estudiante
+  // Díashboard - Estudiante
 
-  renderStudentDashboard(state, user) {
+  renderStudentDíashboard(state, user) {
 
     const activeUser = user || this.getCurrentUser(state);
 
     const userGrade = activeUser.gradeLevel || activeUser.detail || activeUser.grade || "5 de Primaria";
 
-    const courses = state.courses || initialData.courses || [];
+    const courses = state.courses || initialDíata.courses || [];
 
-    const announcements = state.announcements || initialData.announcements || [];
+    const announcements = state.announcements || initialDíata.announcements || [];
 
 
 
@@ -17433,13 +17433,13 @@ const Components = {
 
             <div class="metrics-strip">
 
-              <div class="metric-card-mióni"><span class="metric-label">Grado Escolar</span><span class="metric-val highlight-yellow">${userGrade}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Grado Escolar</span><span class="metric-val highlight-yellow">${userGrade}</span></div>
 
-              <div class="metric-card-mióni"><span class="metric-label">Asistencia</span><span class="metric-val highlight-green">${activeUser.attendanceRate || '100%'}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Asistencia</span><span class="metric-val highlight-green">${activeUser.attendanceRate || '100%'}</span></div>
 
-              <div class="metric-card-mióni"><span class="metric-label">Cuadernos QR</span><span class="metric-val highlight-green">${activeUser.notebooksUpToDate || 'Al Día'}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">Cuadernos QR</span><span class="metric-val highlight-green">${activeUser.notebooksUpToDate || 'Al Día'}</span></div>
 
-              <div class="metric-card-mióni"><span class="metric-label">Tareas</span><span class="metric-val highlight-red">${activeUser.pendióngTasksCount || 0}</span></div>
+              <div class="metric-card-mini"><span class="metric-label">TaÁÁreas</span><span class="metric-val highlight-red">${activeUser.pendióngTasksCount || 0}</span></div>
 
             </div>
 
@@ -17495,7 +17495,7 @@ const Components = {
 
 
 
-        <div class="dashboard-grid">
+        <div class="díashboard-grid">
 
           <div class="section-column">
 
@@ -17507,7 +17507,7 @@ const Components = {
 
                 ${courses.slice(0, 4).map(c => `
 
-                  <div class="grade-pill-card" style="cursor: pointer;" onclick="window.app.navigate('tareas')">
+                  <div class="grade-pill-card" style="cursor: pointer;" onclick="window.app.navigate('taÁÁreas')">
 
                     <span class="course-name" style="font-weight: 800; color: var(--color-navy-900);">${c.name}</span>
 
@@ -17589,7 +17589,7 @@ const Components = {
 
           </p>
 
-          <button class="btn btn-navy" onclick="window.app.navigate('dashboard')" style="font-weight: 800; padding: 10px 24px;">
+          <button class="btn btn-navy" onclick="window.app.navigate('díashboard')" style="font-weight: 800; padding: 10px 24px;">
 
             Volver al Inicio
 
@@ -17605,7 +17605,7 @@ const Components = {
 
     const activeTab = state.activeGradesTab || "subject";
 
-    const allBoletas = state.boletaData || initialData.boletaData || {};
+    const allBoletas = state.boletaDíata || initialDíata.boletaDíata || {};
 
     const selectedGradióngGrade = state.selectedGradióngGrade || "4sec";
 
@@ -17617,7 +17617,7 @@ const Components = {
 
       ? state.gradesCatalog
 
-      : ((initialData && initialData.gradesCatalog) || []);
+      : ((initialDíata && initialDíata.gradesCatalog) || []);
 
 
 
@@ -17631,7 +17631,7 @@ const Components = {
 
 
 
-    // Lista oficial y diónmica de asignaturas y sus docentes reales en la Base de Datos según el grado seleccionado
+    // Lista oficial y dinámica de asignaturas y sus docentes Áreales en la Base de Díatos según el grado seleccionado
 
     const boletaCourses = (window.appStore && typeof window.appStore.getStudentBoletaCoursesCatalog === "function")
 
@@ -17715,7 +17715,7 @@ const Components = {
 
       "ÁÁÁÁálgebra Elemental": "algebra",
 
-      "Geometría Prctica": "geometria",
+      "Geometría Práctica": "geometria",
 
       "Comunicación Integral": "lenguíaje",
 
@@ -17771,7 +17771,7 @@ const Components = {
 
         name: c.name,
 
-        area: c.area,
+        aÁrea: c.aÁrea,
 
         teacher: c.teacher || "(Docente por asignar)",
 
@@ -17863,17 +17863,17 @@ const Components = {
 
     const currentTutorStudent = classroomStudents.find(s => s.key === selectedStudentKey) || (classroomStudents.length > 0 ? classroomStudents[0] : null);
 
-    const tutorStudentData = (window.appStore && typeof window.appStore.getBoletaData === "function")
+    const tutorStudentDíata = (window.appStore && typeof window.appStore.getBoletaDíata === "function")
 
-      ? window.appStore.getBoletaData(selectedStudentKey, currentTutorStudent)
+      ? window.appStore.getBoletaDíata(selectedStudentKey, currentTutorStudent)
 
       : { name: currentTutorStudent ? currentTutorStudent.name : "", appreciations: {}, attendance: {}, parentCriteria: {} };
 
-    const tutorpp = tutorStudentData.appreciations || {};
+    const tutorpp = tutorStudentDíata.appreciations || {};
 
-    const tutortt = tutorStudentData.attendance || {};
+    const tutortt = tutorStudentDíata.attendance || {};
 
-    const tutorPc = tutorStudentData.parentCriteria || {};
+    const tutorPc = tutorStudentDíata.parentCriteria || {};
 
 
 
@@ -17895,7 +17895,7 @@ const Components = {
 
                 <h2 class="card-title" style="font-size: var(--font-size-xl);">Sistema Descentralizado de Calificaciones</h2>
 
-                <span class="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-700);">Periodo Lectivo 2026</span>
+                <span class="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-700);">Período Lectivo 2026</span>
 
               </div>
 
@@ -17937,7 +17937,7 @@ const Components = {
 
             <button class="btn btn-sm ${activeTab === 'overview' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesActiveTab('overview')" style="font-weight: 800;">
 
-              3. Sbana Consolidada del Aula
+              3. Sbana Consolidadía del Aula
 
             </button>
 
@@ -18057,7 +18057,7 @@ const Components = {
 
 
 
-              <!-- Info del Curso & Aula Seleccionada -->
+              <!-- Info del Curso & Aula Seleccionadía -->
 
               <div style="font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 4px;">
 
@@ -18065,7 +18065,7 @@ const Components = {
 
                 <span><strong>Docente Responsable:</strong> <span style="color: var(--color-navy-900); font-weight: bold;">${currentSubject.teacher}</span></span>
 
-                <span><strong>rea Curricular:</strong> ${currentSubject.area}</span>
+                <span><strong>Área Curricular:</strong> ${currentSubject.aÁrea}</span>
 
                 <span class="status-badge status-primary" style="font-size: 11px;">👥 ${classroomStudents.length} Alumno(s) eneste Grado</span>
 
@@ -18281,7 +18281,7 @@ const Components = {
 
                     ${classroomStudents.length === 0 ? `
 
-                      <option value="">Siónestudiantes eneste grado</option>
+                      <option value="">Sin estudiantes eneste grado</option>
 
                     ` : classroomStudents.map(st => `
 
@@ -18297,7 +18297,7 @@ const Components = {
 
                 ${classroomStudents.length > 0 ? `
 
-                  <button type="button" class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${tutorStudentData.code || tutorStudentData.id || selectedStudentKey}')" style="font-weight: 900; font-size: 11.5px; padding: 6px 14px; border-radius: 16px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #0b132b;">
+                  <button type="button" class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${tutorStudentDíata.code || tutorStudentDíata.id || selectedStudentKey}')" style="font-weight: 900; font-size: 11.5px; padding: 6px 14px; border-radius: 16px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #0b132b;">
 
                     ⚡ Stickers QR de Boleta
 
@@ -18331,7 +18331,7 @@ const Components = {
 
                     <label style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); display: block; margin-bottom: 4px;">I BIMESTRE:</label>
 
-                    <textarea class="form-control" name="app_b1" rows="3" placeholder="Apreciación del 1er Bimestre...">${tutorpp.b1 || ''}</textarea>
+                    <textaÁrea class="form-control" name="app_b1" rows="3" placeholder="Apreciación del 1er Bimestre...">${tutorpp.b1 || ''}</textaÁrea>
 
                   </div>
 
@@ -18339,7 +18339,7 @@ const Components = {
 
                     <label style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); display: block; margin-bottom: 4px;">II BIMESTRE:</label>
 
-                    <textarea class="form-control" name="app_b2" rows="3" placeholder="Apreciación del 2do Bimestre...">${tutorpp.b2 || ''}</textarea>
+                    <textaÁrea class="form-control" name="app_b2" rows="3" placeholder="Apreciación del 2do Bimestre...">${tutorpp.b2 || ''}</textaÁrea>
 
                   </div>
 
@@ -18347,7 +18347,7 @@ const Components = {
 
                     <label style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); display: block; margin-bottom: 4px;">III BIMESTRE:</label>
 
-                    <textarea class="form-control" name="app_b3" rows="3" placeholder="Apreciación del 3er Bimestre...">${tutorpp.b3 || ''}</textarea>
+                    <textaÁrea class="form-control" name="app_b3" rows="3" placeholder="Apreciación del 3er Bimestre...">${tutorpp.b3 || ''}</textaÁrea>
 
                   </div>
 
@@ -18355,7 +18355,7 @@ const Components = {
 
                     <label style="font-size: 12px; font-weight: 800; color: var(--color-navy-900); display: block; margin-bottom: 4px;">IV BIMESTRE:</label>
 
-                    <textarea class="form-control" name="app_b4" rows="3" placeholder="Apreciación del 4to Bimestre...">${tutorpp.b4 || ''}</textarea>
+                    <textaÁrea class="form-control" name="app_b4" rows="3" placeholder="Apreciación del 4to Bimestre...">${tutorpp.b4 || ''}</textaÁrea>
 
                   </div>
 
@@ -18393,13 +18393,13 @@ const Components = {
 
                       <tr style="background: #1e293b; color: white;">
 
-                        <th style="text-align:center;">Justificadas</th>
+                        <th style="text-align:center;">Justificadías</th>
 
-                        <th style="text-align:center;">Injustificadas</th>
+                        <th style="text-align:center;">Injustificadías</th>
 
-                        <th style="text-align:center;">Justificadas</th>
+                        <th style="text-align:center;">Justificadías</th>
 
-                        <th style="text-align:center;">Injustificadas</th>
+                        <th style="text-align:center;">Injustificadías</th>
 
                       </tr>
 
@@ -18531,7 +18531,7 @@ const Components = {
 
                   <button type="submit" class="btn btn-red" style="font-weight: 800; padding: 12px 24px;">
 
-                    💾 Guardar Evaluación de Tutoría de ${tutorStudentData.name || 'Estudiante'}
+                    💾 Guardar Evaluación de Tutoría de ${tutorStudentDíata.name || 'Estudiante'}
 
                   </button>
 
@@ -18563,11 +18563,11 @@ const Components = {
 
               <div>
 
-                <h3 class="card-title">Sbana Consolidada de Calificaciones - ${currentGradeObj.label || selectedGradióngGrade}</h3>
+                <h3 class="card-title">Sbana Consolidadía de Calificaciones - ${currentGradeObj.label || selectedGradióngGrade}</h3>
 
                 <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
 
-                  Consolidado automtico de calificaciones de los estudiantes matriculados en <strong>${currentGradeObj.label || selectedGradióngGrade}</strong>.
+                  Consolidado automático de calificaciones de los estudiantes matriculados en <strong>${currentGradeObj.label || selectedGradióngGrade}</strong>.
 
                 </p>
 
@@ -18737,7 +18737,7 @@ const Components = {
 
     const role = state.currentRole;
 
-    const currentUser = (state.currentUser && state.currentUser.name) ? state.currentUser : ((state.users && state.users[role]) || initialData.users[role] || {});
+    const currentUser = (state.currentUser && state.currentUser.name) ? state.currentUser : ((state.users && state.users[role]) || initialDíata.users[role] || {});
 
     const enrollments = (window.appStore && typeof window.appStore.getEnrollments === "function") 
 
@@ -18837,9 +18837,9 @@ const Components = {
 
 
 
-    const student = (window.appStore && typeof window.appStore.getBoletaData === "function")
+    const student = (window.appStore && typeof window.appStore.getBoletaDíata === "function")
 
-      ? window.appStore.getBoletaData(selectedStudentKey, currentEnrollment)
+      ? window.appStore.getBoletaDíata(selectedStudentKey, currentEnrollment)
 
       : {
 
@@ -18937,7 +18937,7 @@ const Components = {
 
 
 
-    // Promedios por reas
+    // Promedios por ÁÁreas
 
     const comB1 = calcvg(["lenguíaje", "literatura", "raíz_verbal"], "b1");
 
@@ -19019,7 +19019,7 @@ const Components = {
 
           <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
 
-            <button class="btn btn-outline btn-sm" onclick="window.app.navigate('${isParentOrStudent ? 'dashboard' : 'calificaciones'}')">
+            <button class="btn btn-outline btn-sm" onclick="window.app.navigate('${isParentOrStudent ? 'díashboard' : 'calificaciones'}')">
 
               ← ${isParentOrStudent ? 'Volver al Inicio' : 'Volver al Registro de Notas'}
 
@@ -19105,7 +19105,7 @@ const Components = {
 
             
 
-            <!-- Columna Izquierda: Tabla de Calificaciones por reas -->
+            <!-- Columna Izquierda: Tabla de Calificaciones por ÁÁreas -->
 
             <div>
 
@@ -19403,7 +19403,7 @@ const Components = {
 
                     <div>
 
-                      ${app.b2 || `Has realizado untrabajo muy bueno durante este segundo bimestre. Cumples conresponsabilidad tus actividades dentro de la clase.`}
+                      ${app.b2 || `Has Árealizado untrabajo muy bueno durante este segundo bimestre. Cumples conresponsabilidad tus actividades dentro de la clase.`}
 
                     </div>
 
@@ -19453,7 +19453,7 @@ const Components = {
 
                   <strong style="color: #1e3a8a;">A &nbsp; LOGRO ESPERÍADO:</strong><br>
 
-                  Cuando el estudiante evidencia el nivel esperado respecto a la competencia, demostrando manejo satisfactorio entodas las tareas propuestas y en el tiempo programado.
+                  Cuando el estudiante evidencia el nivel esperado respecto a la competencia, demostrando manejo satisfactorio entodías las taÁÁreas propuestas y en el tiempo programado.
 
                 </div>
 
@@ -19469,7 +19469,7 @@ const Components = {
 
                   <strong style="color: #1e3a8a;">C &nbsp; ENIN ICIO:</strong><br>
 
-                  Cuando el estudiante muestra unprogreso mínimo enuna competencia de acuerdo al nivel esperado. Evidencia confrecuencia dificultades en el desarrollo de las tareas, por lo que necesita mayor tiempo de acompañamiento e intervención del docente.
+                  Cuando el estudiante muestra unprogreso mínimo enuna competencia de acuerdo al nivel esperado. Evidencia confrecuencia dificultades en el desarrollo de las taÁÁreas, por lo que necesita mayor tiempo de acompañamiento e intervención del docente.
 
                 </div>
 
@@ -19655,7 +19655,7 @@ const Components = {
 
                   <strong style="color: #1e3a8a; display: block; margin-bottom: 2px;">COMPROMISO DEL APODERÍADO:</strong>
 
-                  El padre o tutor legal se compromete a acompañar el desarrollo formativo y académico de su menor hijo(a), velando por su puntualidad y asistiendo a las reuniñones pedagógicas convocadas por la Institución.
+                  El padre o tutor legal se compromete a acompañar el desarrollo formativo y académico de su menor hijo(a), velando por su puntualidad y asistiendo a las reuniñones pedagógicas convocadías por la Institución.
 
                 </div>
 
@@ -19775,7 +19775,7 @@ const Components = {
 
   // Horarios
 
-  // Generador Completo y Sincronizado de Docentes y Horarios Semanales (Siónautorrellenado)
+  // Generador Completo y Sincronizado de Docentes y Horarios Semanales (Sin autorrellenado)
 
   getComprehensiveTeachersList(state) {
 
@@ -19783,11 +19783,11 @@ const Components = {
 
       ? JSON.parse(JSON.stringify(state.teachersList))
 
-      : (JSON.parse(JSON.stringify((initialData && initialData.teachersList) || [])));
+      : (JSON.parse(JSON.stringify((initialDíata && initialDíata.teachersList) || [])));
 
 
 
-    const systemDocentes = ((state.systemUsers && Array.isArray(state.systemUsers)) ? state.systemUsers : ((initialData && initialData.systemUsers) || []))
+    const systemDocentes = ((state.systemUsers && Array.isArray(state.systemUsers)) ? state.systemUsers : ((initialDíata && initialDíata.systemUsers) || []))
 
       .filter(u => u.role === 'Docente' || u.role === 'Profesor');
 
@@ -19835,7 +19835,7 @@ const Components = {
 
           subject: doc.subject || docCourses.join(', '),
 
-          department: "rea Pedagógica",
+          department: "Área Pedagógica",
 
           isTutor: false,
 
@@ -19859,9 +19859,9 @@ const Components = {
 
 
 
-    const allSchedules = (state.schedules && typeof state.schedules === 'object') ? state.schedules : ((initialData && initialData.schedules) || {});
+    const allSchedules = (state.schedules && typeof state.schedules === 'object') ? state.schedules : ((initialDíata && initialDíata.schedules) || {});
 
-    const gradesCatalog = (state.gradesCatalog && state.gradesCatalog.length > 0) ? state.gradesCatalog : ((initialData && initialData.gradesCatalog) || []);
+    const gradesCatalog = (state.gradesCatalog && state.gradesCatalog.length > 0) ? state.gradesCatalog : ((initialDíata && initialDíata.gradesCatalog) || []);
 
     
 
@@ -19893,7 +19893,7 @@ const Components = {
 
     rawTeachers.forEach(t => {
 
-      // Plantilla base limpia con8 bloques lectivos de 50 miny 2 recesos (Sin clases inventadas)
+      // Plantilla base limpia con8 bloques lectivos de 50 miny 2 recesos (Sin clases inventadías)
 
       t.schedule = [
 
@@ -19903,7 +19903,7 @@ const Components = {
 
         { time: "09:40 - 10:30", mon: null, tue: null, wed: null, thu: null, fri: null },
 
-        { time: "10:30 - 10:50", isBreak: true, title: "Receso Pedagógico (10:30 - 10:50 AM)" },
+        { time: "10:30 - 10:50", isBÁreak: true, title: "Receso Pedagógico (10:30 - 10:50 AM)" },
 
         { time: "10:50 - 11:40", mon: null, tue: null, wed: null, thu: null, fri: null },
 
@@ -19911,7 +19911,7 @@ const Components = {
 
         { time: "12:30 - 01:20", mon: null, tue: null, wed: null, thu: null, fri: null },
 
-        { time: "01:20 - 01:50", isBreak: true, isLunch: true, title: "Almuerzo Escolar (01:20 - 01:50 PM)" },
+        { time: "01:20 - 01:50", isBÁreak: true, isLunch: true, title: "Almuerzo Escolar (01:20 - 01:50 PM)" },
 
         { time: "01:50 - 02:40", mon: null, tue: null, wed: null, thu: null, fri: null },
 
@@ -19937,7 +19937,7 @@ const Components = {
 
 
 
-      // Escanear exclusivamente las clases reales asignadas por el administrador en las aulas
+      // Escanear exclusivamente las clases Áreales asignadías por el administrador en las aulas
 
       Object.keys(allSchedules).forEach(gradeKey => {
 
@@ -19951,7 +19951,7 @@ const Components = {
 
           gRows.forEach((gRow, rIdx) => {
 
-            if (!gRow.isBreak && t.schedule[rIdx] && !t.schedule[rIdx].isBreak) {
+            if (!gRow.isBÁreak && t.schedule[rIdx] && !t.schedule[rIdx].isBÁreak) {
 
               days.forEach(dayKey => {
 
@@ -20045,7 +20045,7 @@ const Components = {
 
       t.assignedSlotCount = assignedCount;
 
-      t.calculatedHours = assignedCount > 0 ? `${(assignedCount * 50 / 60).toFixed(1)} hrs (${assignedCount} bloques)` : "0 hrs (Sin clases asignadas)";
+      t.calculatedHours = assignedCount > 0 ? `${(assignedCount * 50 / 60).toFixed(1)} hrs (${assignedCount} bloques)` : "0 hrs (Sin clases asignadías)";
 
       t.scheduledCourses = Array.from(scheduledCoursesSet);
 
@@ -20079,7 +20079,7 @@ const Components = {
 
         ? state.gradesCatalog 
 
-        : ((initialData && initialData.gradesCatalog) || []);
+        : ((initialDíata && initialDíata.gradesCatalog) || []);
 
         
 
@@ -20089,11 +20089,11 @@ const Components = {
 
       // Vista dual para docentes y directivos: Por defecto "classroom" para Administrador y "personal" para Docente
 
-      const isTeacherOrdmión = role === "docente" || role === "admin" || role === "director";
+      const isTeacherOradmin = role === "docente" || role === "admin" || role === "director";
 
       const defaultTab = (role === "admin" || role === "director") ? "classroom" : "personal";
 
-      const activeTab = isTeacherOrdmión ? (state.teacherScheduleTab || defaultTab) : "classroom";
+      const activeTab = isTeacherOradmin ? (state.teacherScheduleTab || defaultTab) : "classroom";
 
 
 
@@ -20137,7 +20137,7 @@ const Components = {
 
         ? currentTeacher.scheduledGrades
 
-        : ((currentTeacher.assignedGrades && currentTeacher.assignedGrades.length > 0) ? currentTeacher.assignedGrades : ["Sin asignar"]);
+        : ((currentTeacher.assignedGrades && currentTeacher.assignedGrades.length > 0) ? currentTeacher.assignedGrades : ["sin asignar"]);
 
 
 
@@ -20221,7 +20221,7 @@ const Components = {
 
         ? state.schedules 
 
-        : ((initialData && initialData.schedules) || {});
+        : ((initialDíata && initialDíata.schedules) || {});
 
 
 
@@ -20233,7 +20233,7 @@ const Components = {
 
         { time: "09:40 - 10:30", mon: null, tue: null, wed: null, thu: null, fri: null },
 
-        { time: "10:30 - 10:50", isBreak: true, title: "Receso Pedagógico (10:30 - 10:50 AM)" },
+        { time: "10:30 - 10:50", isBÁreak: true, title: "Receso Pedagógico (10:30 - 10:50 AM)" },
 
         { time: "10:50 - 11:40", mon: null, tue: null, wed: null, thu: null, fri: null },
 
@@ -20241,7 +20241,7 @@ const Components = {
 
         { time: "12:30 - 01:20", mon: null, tue: null, wed: null, thu: null, fri: null },
 
-        { time: "01:20 - 01:50", isBreak: true, isLunch: true, title: "Almuerzo Escolar (01:20 - 01:50 PM)" },
+        { time: "01:20 - 01:50", isBÁreak: true, isLunch: true, title: "Almuerzo Escolar (01:20 - 01:50 PM)" },
 
         { time: "01:50 - 02:40", mon: null, tue: null, wed: null, thu: null, fri: null },
 
@@ -20283,7 +20283,7 @@ const Components = {
 
                   <span style="font-size: 24px;">📅</span>
 
-                  <h2 style="font-size: 18px; font-weight: 900; margin: 0; color: #ffffff;">Gestión y Creación de Horarios Escolares</h2>
+                  <h2 style="font-size: 18px; font-weight: 900; margin: 0; color: #ffffff;">Gestión y CÁreación de Horarios Escolares</h2>
 
                   <span class="status-badge" style="background: #f59e0b; color: #78350f; font-weight: 900; font-size: 11px;">
 
@@ -20347,9 +20347,9 @@ const Components = {
 
 
 
-          <!-- Pestañas de Navegación Segmentada Dual (Mxima Claridad) -->
+          <!-- Pestañas de Navegación Segmentadía Dual (Mxima Claridad) -->
 
-          ${isTeacherOrdmión ? `
+          ${isTeacherOradmin ? `
 
             <div style="display: flex; gap: 8px; margin-bottom: 16px; background: #f1f5f9; padding: 6px; border-radius: 10px; border: 1px solid #cbd5e1; flex-wrap: wrap;">
 
@@ -20401,7 +20401,7 @@ const Components = {
 
                   <p style="font-size: 12.5px; opacity: 0.95; margin: 4px 0 0 0;">
 
-                    ${currentTeacher.department || 'rea Pedagógica'} • Especialidad: <strong>${currentTeacher.subject || teacherCourses.join(', ')}</strong>
+                    ${currentTeacher.department || 'Área Pedagógica'} • Especialidad: <strong>${currentTeacher.subject || teacherCourses.join(', ')}</strong>
 
                   </p>
 
@@ -20447,7 +20447,7 @@ const Components = {
 
 
 
-              <!-- ResumenMétrico de Carga Horaria Real Asignada -->
+              <!-- ResumenMétrico de Carga Horaria Real Asignadía -->
 
               <div class="teacher-stat-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px;">
 
@@ -20465,7 +20465,7 @@ const Components = {
 
                 <div class="teacher-stat-card" style="background: #ecfdf5; border-left: 4px solid #10b981; padding: 12px 14px; border-radius: 6px; border: 1px solid #a7f3d0;">
 
-                  <span class="teacher-stat-lbl" style="font-size: 11px; font-weight: 700; color: #065f46; display: block;">📚 Asignaturas Dictadas</span>
+                  <span class="teacher-stat-lbl" style="font-size: 11px; font-weight: 700; color: #065f46; display: block;">📚 Asignaturas Dictadías</span>
 
                   <span class="teacher-stat-val" style="font-size: 18px; font-weight: 900; color: #047857; display: block; margin: 2px 0;">${teacherCourses.length} Cursos</span>
 
@@ -20523,7 +20523,7 @@ const Components = {
 
                 <div style="font-size: 11.5px; color: #047857; font-weight: 700; background: #d1fae5; padding: 4px 12px; border-radius: 12px; border: 1px solid #a7f3d0;">
 
-                  ✓ Mostrando únicamente las clases programadas por el Administrador • Periodo 2026
+                  ✓ Mostrando únicamente las clases programadías por el Administrador • Periodo 2026
 
                 </div>
 
@@ -20561,11 +20561,11 @@ const Components = {
 
                     ${teacherSchedule.map((row, rIdx) => {
 
-                      if (row.isBreak) {
+                      if (row.isBÁreak) {
 
                         const isLunch = row.isLunch || (row.time && row.time.includes("01:20"));
 
-                        const rowClass = isLunch ? "schedule-lunch-row" : "schedule-break-row";
+                        const rowClass = isLunch ? "schedule-lunch-row" : "schedule-bÁreak-row";
 
                         const icon = isLunch ? "🍽️" : "☕";
 
@@ -20589,7 +20589,7 @@ const Components = {
 
                                 <td style="background:#fafafa; padding: 4px;">
 
-                                  <div class="empty-schedule-slot" onclick="window.app.opencreateScheduleModal('${currentGradeId}', ${rIdx}, '${dayKey}')" style="border: 1px dashed #cbd5e1; border-radius: 6px; padding: 10px 4px; text-align: center; cursor: pointer; color: #94a3b8; font-size: 11px; font-weight: 700; transition: all 0.2s;" onmouseover="this.style.borderColor='#3b82f6'; this.style.color='#1e40af'; this.style.background='#eff6ff';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#94a3b8'; this.style.background='transparent';">
+                                  <div class="empty-schedule-slot" onclick="window.app.opencreateScheduleModal('${currentGradeId}', ${rIdx}, '${dayKey}')" style="border: 1px díashed #cbd5e1; border-radius: 6px; padding: 10px 4px; text-align: center; cursor: pointer; color: #94a3b8; font-size: 11px; font-weight: 700; transition: all 0.2s;" onmouseover="this.style.borderColor='#3b82f6'; this.style.color='#1e40af'; this.style.background='#eff6ff';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#94a3b8'; this.style.background='transparent';">
 
                                     ➕ Asignar Clase
 
@@ -20687,7 +20687,7 @@ const Components = {
 
               <div class="schedule-filter-bar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
 
-                ${isTeacherOrdmión ? `
+                ${isTeacherOradmin ? `
 
                   <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
 
@@ -20729,7 +20729,7 @@ const Components = {
 
                     <button class="btn btn-navy btn-sm" onclick="window.app.opencreateScheduleModal('${currentGradeId}')" style="font-weight: 800; font-size: 11.5px; background: #1e3a8a;">
 
-                      ➕ + Crear / Asignar Clase
+                      ➕ + CÁrear / Asignar Clase
 
                     </button>
 
@@ -20769,11 +20769,11 @@ const Components = {
 
                     ${scheduleRows.map((row, rowIndex) => {
 
-                      if (row.isBreak) {
+                      if (row.isBÁreak) {
 
                         const isLunch = row.isLunch || (row.time && row.time.includes("01:20"));
 
-                        const rowClass = isLunch ? "schedule-lunch-row" : "schedule-break-row";
+                        const rowClass = isLunch ? "schedule-lunch-row" : "schedule-bÁreak-row";
 
                         const icon = isLunch ? "🍽️" : "☕";
 
@@ -20797,7 +20797,7 @@ const Components = {
 
                                 <td style="background:#fafafa; padding: 4px;">
 
-                                  <div class="empty-schedule-slot" onclick="window.app.opencreateScheduleModal('${currentGradeId}', ${rowIndex}, '${dayKey}')" style="border: 1px dashed #cbd5e1; border-radius: 6px; padding: 10px 4px; text-align: center; cursor: pointer; color: #94a3b8; font-size: 11px; font-weight: 700; transition: all 0.2s;" onmouseover="this.style.borderColor='#3b82f6'; this.style.color='#1e40af'; this.style.background='#eff6ff';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#94a3b8'; this.style.background='transparent';">
+                                  <div class="empty-schedule-slot" onclick="window.app.opencreateScheduleModal('${currentGradeId}', ${rowIndex}, '${dayKey}')" style="border: 1px díashed #cbd5e1; border-radius: 6px; padding: 10px 4px; text-align: center; cursor: pointer; color: #94a3b8; font-size: 11px; font-weight: 700; transition: all 0.2s;" onmouseover="this.style.borderColor='#3b82f6'; this.style.color='#1e40af'; this.style.background='#eff6ff';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#94a3b8'; this.style.background='transparent';">
 
                                     ➕ Asignar Clase
 
@@ -20867,7 +20867,7 @@ const Components = {
 
           <h3 style="color: #9f1239; margin-bottom: 8px;">⚠️ Restableciendo visualización de Horarios</h3>
 
-          <p style="color: #4b5563; font-size: 13px;">Se ha detectado una actualización en la estructura de horarios. Pulse el botón inferior para sióncronizar:</p>
+          <p style="color: #4b5563; font-size: 13px;">Se ha detectado una actualización en la estructura de horarios. Pulse el botón inferior para sincronizar:</p>
 
           <button class="btn btn-navy" onclick="window.app.render()" style="font-weight: 800; margin-top: 10px;">
 
@@ -20891,9 +20891,9 @@ const Components = {
 
     const role = state.currentRole;
 
-    const isTeacherOrdmión = role === "admin" || role === "docente" || role === "director";
+    const isTeacherOradmin = role === "admin" || role === "docente" || role === "director";
 
-    const catalog = state.gradesCatalog || initialData.gradesCatalog || [];
+    const catalog = state.gradesCatalog || initialDíata.gradesCatalog || [];
 
     
 
@@ -20969,7 +20969,7 @@ const Components = {
 
     const isEstudiante = role === "estudiante";
 
-    const canBrowsellGrades = isTeacherOrdmión;
+    const canBrowsellGrades = isTeacherOradmin;
 
 
 
@@ -21001,7 +21001,7 @@ const Components = {
 
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin: 0;">
 
-                Subida de carteles enPDF por cada docente y consulta/descarga consolidada para padres de familia.
+                Subidía de carteles enPDF por cadía docente y consulta/descarga consolidadía para padres de familia.
 
               </p>
 
@@ -21009,7 +21009,7 @@ const Components = {
 
 
 
-            <!-- Controles Superiores: Filtro de Grado y Botón de Subida -->
+            <!-- Controles Superiores: Filtro de Grado y Botón de Subidía -->
 
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
 
@@ -21051,7 +21051,7 @@ const Components = {
 
 
 
-        <!-- Banner Exclusivo para Padres de Familia: Descarga Consolidada Todo enUno -->
+        <!-- Banner Exclusivo para Padres de Familia: Descarga Consolidadía Todo enUno -->
 
         <div class="card" style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: white; padding: 22px 24px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
 
@@ -21071,7 +21071,7 @@ const Components = {
 
             <p style="margin: 0; font-size: 13px; color: #cbd5e1; line-height: 1.45;">
 
-              Vea, descargue e imprima <strong>todas las materias y temas mensuales de ${gradeLabel} enun solo documento PDF unificado</strong> para la carpeta pedagógica familiar.
+              Vea, descargue e imprima <strong>todías las materias y temas mensuales de ${gradeLabel} enun solo documento PDF unificado</strong> para la carpeta pedagógica familiar.
 
             </p>
 
@@ -21135,7 +21135,7 @@ const Components = {
 
             </p>
 
-            ${isTeacherOrdmión ? `
+            ${isTeacherOradmin ? `
 
               <button class="btn btn-navy" onclick="window.app.openUploadMonthlyCartelModal('', '${currentGradeId}', '${selectedMonth}')">
 
@@ -21237,7 +21237,7 @@ const Components = {
 
                   </button>
 
-                  ${isTeacherOrdmión ? `
+                  ${isTeacherOradmin ? `
 
                     <div style="display: flex; gap: 4px;">
 
@@ -21279,7 +21279,7 @@ const Components = {
 
     const role = state.currentRole;
 
-    const isTeacherOrdmión = role === 'admin' || role === 'docente' || role === 'director';
+    const isTeacherOradmin = role === 'admin' || role === 'docente' || role === 'director';
 
     const isEstudiante = role === 'estudiante';
 
@@ -21287,7 +21287,7 @@ const Components = {
 
 
 
-    const materials = state.weeklyMaterials || initialData.weeklyMaterials || [];
+    const materials = state.weeklyMaterials || initialDíata.weeklyMaterials || [];
 
     const currentUser = this.getCurrentUser(state);
 
@@ -21295,7 +21295,7 @@ const Components = {
 
 
 
-    const catalog = (window.appStore && window.appStore.state.gradesCatalog) || initialData.gradesCatalog || [];
+    const catalog = (window.appStore && window.appStore.state.gradesCatalog) || initialDíata.gradesCatalog || [];
 
     const selectedGradeId = state.selectedVirtualGradeId || (isEstudiante ? ((currentUser.gradeLevel || currentUser.grade || "5prim").toLowerCase().includes("sec") ? "4sec" : "5prim") : "4sec");
 
@@ -21305,7 +21305,7 @@ const Components = {
 
     let availableGrades = [];
 
-    if (isTeacherOrdmión) {
+    if (isTeacherOradmin) {
 
       if (role === 'admin' || role === 'director') {
 
@@ -21349,15 +21349,15 @@ const Components = {
 
       availableCourses = [
 
-        { id: "MT-401", courseCode: "MT-401", name: "Matemática Avanzada (ÁÁÁÁálgebra y Geometría)", teacher: "Prof. Roberto Silva", grade: "4to de Secundaria", gradeId: "4sec", icon: "📐", color: "blue", level: "Secundaria" },
+        { id: "MT-401", courseCode: "MT-401", name: "Matemática Avanzadía (ÁÁÁÁálgebra y Geometría)", teacher: "Prof. Roberto Silva", grade: "4to de Secundaria", gradeId: "4sec", icon: "📐", color: "blue", level: "Secundaria" },
 
-        { id: "COM-404", courseCode: "COM-404", name: "Comunicación & Literatura", teacher: "Miss Mara Daysi Reyes", grade: "4to de Secundaria", gradeId: "4sec", icon: "📚", color: "navy", level: "Secundaria" },
+        { id: "COM-404", courseCode: "COM-404", name: "Comunicación & Literatura", teacher: "Miss Mara Díaysi Reyes", grade: "4to de Secundaria", gradeId: "4sec", icon: "📚", color: "navy", level: "Secundaria" },
 
         { id: "CTÍA-403", courseCode: "CTÍA-403", name: "Ciencia y Tecnología (Física & Química)", teacher: "Miss Leyli Reyes Cerquen", grade: "4to de Secundaria", gradeId: "4sec", icon: "🔬", color: "green", level: "Secundaria" },
 
         { id: "EPT-402", courseCode: "EPT-402", name: "Computación e Informática / Robótica", teacher: "Prof. Fernando Rojas", grade: "4to de Secundaria", gradeId: "4sec", icon: "💻", color: "yellow", level: "Secundaria" },
 
-        { id: "ING-405", courseCode: "ING-405", name: "Inglés Técnico & Gramática", teacher: "Miss Andrea Ramos", grade: "4to de Secundaria", gradeId: "4sec", icon: "🇬🇧", color: "blue", level: "Secundaria" },
+        { id: "ING-405", courseCode: "ING-405", name: "Inglés Técnico & Gramática", teacher: "Miss AndÁrea Ramos", grade: "4to de Secundaria", gradeId: "4sec", icon: "🇬🇧", color: "blue", level: "Secundaria" },
 
         { id: "CS-406", courseCode: "CS-406", name: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", grade: "4to de Secundaria", gradeId: "4sec", icon: "🌎", color: "yellow", level: "Secundaria" }
 
@@ -21473,11 +21473,11 @@ const Components = {
 
                 <span class="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-800); font-weight: 800;">
 
-                  Periodo Lectivo 2026 • III Bimestre
+                  Período Lectivo 2026 • III Bimestre
 
                 </span>
 
-                ${isTeacherOrdmión ? `<span class="status-badge" style="background:#dbeafe; color:#1e40af; font-weight:800;">👨‍🏫 Modo Gestión Docente</span>` : ''}
+                ${isTeacherOradmin ? `<span class="status-badge" style="background:#dbeafe; color:#1e40af; font-weight:800;">👨‍🏫 Modo Gestión Docente</span>` : ''}
 
                 ${isEstudiante ? `<span class="status-badge" style="background:#dcfce7; color:#166534; font-weight:800;">Alumno(a): ${studentDisplayName} (${studentDisplayGrade})</span>` : ''}
 
@@ -21485,7 +21485,7 @@ const Components = {
 
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
-                I.E.P. "El Educador" • Publicación continua del trabajo realizado en el aula y generación automática de evaluaciones dinámicas de 10 preguntas con retroalimentación inmediata.
+                I.E.P. "El Educador" • Publicación continua del trabajo Árealizado en el aula y generación automática de evaluaciones dinámicas de 10 preguntas con retroalimentación inmediata.
 
               </p>
 
@@ -21495,7 +21495,7 @@ const Components = {
 
             <!-- Botones de Acción para el Docente -->
 
-            ${isTeacherOrdmión ? `
+            ${isTeacherOradmin ? `
 
               <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
 
@@ -21529,7 +21529,7 @@ const Components = {
 
             <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
 
-              ${isTeacherOrdmión && availableGrades.length > 0 ? `
+              ${isTeacherOradmin && availableGrades.length > 0 ? `
 
                 <div style="display: flex; align-items: center; gap: 6px;">
 
@@ -21577,7 +21577,7 @@ const Components = {
 
 
 
-              <!-- Píldoras Rpidas de Cursos del Grado Seleccionado -->
+              <!-- Píldoras Rpidías de Cursos del Grado Seleccionado -->
 
               <div style="display: flex; gap: 5px; flex-wrap: wrap; max-width: 580px;">
 
@@ -21609,9 +21609,9 @@ const Components = {
 
 
 
-        <!-- Panel de Métricas Rpidas del Curso (Visible para Docente y Admin) -->
+        <!-- Panel de Métricas Rpidías del Curso (Visible para Docente y Admin) -->
 
-        ${isTeacherOrdmión ? `
+        ${isTeacherOradmin ? `
 
           <div class="teacher-stat-grid" style="margin-bottom: var(--space-6);">
 
@@ -21637,7 +21637,7 @@ const Components = {
 
             <div class="teacher-stat-card" style="border-left: 4px solid #10b981;">
 
-              <span class="teacher-stat-lbl">👥 Evaluaciones Rendidas</span>
+              <span class="teacher-stat-lbl">👥 Evaluaciones Rendidías</span>
 
               <span class="teacher-stat-val" style="color: #065f46;">${allttemptsInCourse} Intentos</span>
 
@@ -21677,9 +21677,9 @@ const Components = {
 
           `).join('')}
 
-          ${isTeacherOrdmión ? `
+          ${isTeacherOradmin ? `
 
-            <button class="btn btn-sm btn-outline" onclick="window.app.openUploadMaterialModal('${selectedCourseId}')" style="font-weight: 800; font-size: 12px; white-space: nowrap; border-style: dashed;">
+            <button class="btn btn-sm btn-outline" onclick="window.app.openUploadMaterialModal('${selectedCourseId}')" style="font-weight: 800; font-size: 12px; white-space: nowrap; border-style: díashed;">
 
               + N ueva Semana
 
@@ -21697,15 +21697,15 @@ const Components = {
 
             <div style="font-size: 40px; margin-bottom: 10px;">📚</div>
 
-            <h3 style="font-size: 18px; color: var(--color-navy-900); font-weight: 800;">N o hay sesiones registradas aún eneste curso</h3>
+            <h3 style="font-size: 18px; color: var(--color-navy-900); font-weight: 800;">N o hay sesiones registradías aún eneste curso</h3>
 
             <p style="font-size: 13px; color: var(--text-muted); max-width: 500px; margin: 0 auto 16px;">
 
-              El docente responsable publicará cada semana el resumende la clase presencial, diapositivas y la evaluación diónmica de 10 preguntas.
+              El docente responsable publicará cadía semana el resumende la clase presencial, diapositivas y la evaluación dinámica de 10 preguntas.
 
             </p>
 
-            ${isTeacherOrdmión ? `
+            ${isTeacherOradmin ? `
 
               <button class="btn btn-navy" onclick="window.app.openUploadMaterialModal('${selectedCourseId}')">
 
@@ -21765,17 +21765,17 @@ const Components = {
 
 
 
-                  ${isTeacherOrdmión ? `
+                  ${isTeacherOradmin ? `
 
                     <div style="display: flex; gap: 6px;">
 
-                      <button class="btn btn-outline btn-sm" onclick="window.app.openEditMaterialModal('${activeMaterial.id}')" title="Editar Sesión" style="padding: 4px 8px; font-size: 11px;">
+                      <button class="btn btn-outline btn-sm" onclick="window.app.openEditMaterialModal('${activeMaterial.id}')" title="Editar Sesión " style="padding: 4px 8px; font-size: 11px;">
 
                         ✏️ Editar
 
                       </button>
 
-                      <button class="btn btn-red btn-sm" onclick="window.app.confirmDeleteMaterial('${activeMaterial.id}')" title="Elimiónar Sesión" style="padding: 4px 8px; font-size: 11px;">
+                      <button class="btn btn-red btn-sm" onclick="window.app.confirmDeleteMaterial('${activeMaterial.id}')" title="Elimiónar Sesión " style="padding: 4px 8px; font-size: 11px;">
 
                         🗑️
 
@@ -21925,7 +21925,7 @@ const Components = {
 
                       <h3 style="font-size: 15px; font-weight: 900; margin: 0; color: ${activeMaterial.evaluation ? '#ffffff' : '#0b132b'};">
 
-                        Evaluación Dinmica Semanal
+                        Evaluación Dinámica Semanal
 
                       </h3>
 
@@ -21957,7 +21957,7 @@ const Components = {
 
                       </p>
 
-                      ${isTeacherOrdmión ? `
+                      ${isTeacherOradmin ? `
 
                         <button class="btn btn-gold btn-sm" onclick="window.app.openGenerateQuizModal('${activeMaterial.id}')" style="width: 100%; font-weight: 800;">
 
@@ -22085,7 +22085,7 @@ const Components = {
 
                     <!-- ESTÍADO PRÍA EL DOCENTE O ADMINISTRADOR -->
 
-                    ${isTeacherOrdmión ? `
+                    ${isTeacherOradmin ? `
 
                       <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
 
@@ -22275,13 +22275,13 @@ const Components = {
 
     const role = state.currentRole;
 
-    const isTeacherOrdmión = role === "admin" || role === "director" || role === "docente" || role === "auxiliar";
+    const isTeacherOradmin = role === "admin" || role === "director" || role === "docente" || role === "auxiliar";
 
     const isPadre = role === "padre";
 
     const isEstudiante = role === "estudiante";
 
-    const catalog = state.gradesCatalog || initialData.gradesCatalog;
+    const catalog = state.gradesCatalog || initialDíata.gradesCatalog;
 
 
 
@@ -22289,7 +22289,7 @@ const Components = {
 
     let selectedDate = state.selectedttendanceDate || "19/08/2026";
 
-    let activeSubTab = state.attendancectiveSubTab || (isTeacherOrdmión ? "door-scanner" : "student-history");
+    let activeSubTab = state.attendancectiveSubTab || (isTeacherOradmin ? "door-scanner" : "student-history");
 
 
 
@@ -22359,9 +22359,9 @@ const Components = {
 
     const currentGrade = (catalog && catalog.find(g => g && (g.id === selectedGradeId))) || (catalog && catalog[0]) || { id: "5prim", label: "5 de Primaria", level: "Primaria", tutor: "Prof. Roberto Silva", classroom: "Aula 501" };
 
-    const records = (state && state.attendanceRecords) || (initialData && initialData.attendanceRecords) || [];
+    const records = (state && state.attendanceRecords) || (initialDíata && initialDíata.attendanceRecords) || [];
 
-    const enrollments = (state && state.enrollments) || (initialData && initialData.enrollments) || [];
+    const enrollments = (state && state.enrollments) || (initialDíata && initialDíata.enrollments) || [];
 
     
 
@@ -22399,13 +22399,13 @@ const Components = {
 
     // Reporte Diario Global de Tardanzas e Inasistencias
 
-    let dayReport = (window.appStore && typeof window.appStore.getDailyAttendanceReport === 'function') 
+    let dayReport = (window.appStore && typeof window.appStore.getDíailyAttendanceReport === 'function') 
 
-      ? window.appStore.getDailyAttendanceReport(selectedDate) 
+      ? window.appStore.getDíailyAttendanceReport(selectedDate) 
 
-      : ((window.app && window.app.store && typeof window.app.store.getDailyAttendanceReport === 'function')
+      : ((window.app && window.app.store && typeof window.app.store.getDíailyAttendanceReport === 'function')
 
-        ? window.app.store.getDailyAttendanceReport(selectedDate)
+        ? window.app.store.getDíailyAttendanceReport(selectedDate)
 
         : {
 
@@ -22495,13 +22495,13 @@ const Components = {
 
             <h1 class="welcome-title">
 
-              ${isTeacherOrdmión ? 'Control de Asistencia Escolar & Estación de Portería' : (isPadre ? 'Récord de Asistencia de mi Hijo(a)' : 'Mi Historial de Asistencia & Fotocheck')}
+              ${isTeacherOradmin ? 'Control de Asistencia Escolar & Estación de Portería' : (isPadre ? 'Récord de Asistencia de mi Hijo(a)' : 'Mi Historial de Asistencia & Fotocheck')}
 
             </h1>
 
             <p class="welcome-subtitle">
 
-              ${isTeacherOrdmión 
+              ${isTeacherOradmin 
 
                 ? 'Módulo exclusivo de Auxiliares y Docentes para registro biométrico/QR enpuerta, parte diario de inasistencias y reportes oficiales.' 
 
@@ -22515,7 +22515,7 @@ const Components = {
 
 
 
-        ${isTeacherOrdmión ? `
+        ${isTeacherOradmin ? `
 
           <!-- =========================================================================
 
@@ -22565,7 +22565,7 @@ const Components = {
 
               <span style="background: #dc2626; color: white; border-radius: 10px; padding: 1px 6px; font-size: 10px; font-weight: 900; margin-left: 4px;">
 
-                ${(state.behaviorIncidents || initialData.behaviorIncidents || []).length}
+                ${(state.behaviorIncidents || initialDíata.behaviorIncidents || []).length}
 
               </span>
 
@@ -22651,7 +22651,7 @@ const Components = {
 
                   <button class="btn btn-navy btn-sm" onclick="window.app.setttendanceSubTab('door-scanner')" style="font-weight: 800; font-size: 11.5px;">
 
-                    [Cmara] Escanear QR enPuerta
+                    [Cámara] Escanear QR enPuerta
 
                   </button>
 
@@ -22717,7 +22717,7 @@ const Components = {
 
                 <div style="font-size: 22px; font-weight: 900; color: #dc2626; margin: 2px 0;">${absentCount}</div>
 
-                <span style="font-size: 10px; color: #dc2626;">Siónregistro biométrico</span>
+                <span style="font-size: 10px; color: #dc2626;">Sin registro biométrico</span>
 
               </div>
 
@@ -22737,7 +22737,7 @@ const Components = {
 
 
 
-            <!-- TÍABLA INTERÍACTIVA DE TOMA DE ASISTENCIA -->
+            <!-- TABLA INTERÍACTIVA DE TOMA DE ASISTENCIA -->
 
             <div class="card">
 
@@ -22865,7 +22865,7 @@ const Components = {
 
                           <span style="font-size: 11px; color: #64748b;">
 
-                            ${r.observations || 'Siónobservaciones'}
+                            ${r.observations || 'Sin observaciones'}
 
                           </span>
 
@@ -22941,7 +22941,7 @@ const Components = {
 
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
 
-                  <button class="btn btn-navy btn-sm" onclick="window.app.openOfficialDailyReportPrintModal('${selectedDate}')" style="font-weight: 800; font-size: 12px;">
+                  <button class="btn btn-navy btn-sm" onclick="window.app.openOfficialDíailyReportPrintModal('${selectedDate}')" style="font-weight: 800; font-size: 12px;">
 
                     Imprimir Parte Diario A4 (UGEL 05)
 
@@ -22995,7 +22995,7 @@ const Components = {
 
                 <div style="font-size: 24px; font-weight: 900; color: #dc2626; margin: 2px 0;">${dayReport.absenceList.length} Alumnos</div>
 
-                <span style="font-size: 10.5px; color: #dc2626;">Siónmarcación de ingreso</span>
+                <span style="font-size: 10.5px; color: #dc2626;">Sin marcación de ingreso</span>
 
               </div>
 
@@ -23015,7 +23015,7 @@ const Components = {
 
 
 
-            <!-- SECCIÓN A: TÍABLA DE TÍARDÍANZS -->
+            <!-- SECCIÓN A: TABLA DE TÍARDÍANZS -->
 
             <div class="card" style="margin-bottom: var(--space-5); border: 1px solid #fde68a;">
 
@@ -23147,7 +23147,7 @@ const Components = {
 
 
 
-            <!-- SECCIÓN B: TÍABLA DE INSISTEN CIS -->
+            <!-- SECCIÓN B: TABLA DE INSISTEN CIS -->
 
             <div class="card" style="border: 1px solid #fecaca;">
 
@@ -23161,13 +23161,13 @@ const Components = {
 
                     <h3 style="font-size: 14px; font-weight: 900; color: #991b1b; margin: 0;">
 
-                      2. Registro de Inasistencias del Da (${dayReport.absenceList.length} casos)
+                      2. Registro de Inasistencias del Día (${dayReport.absenceList.length} casos)
 
                     </h3>
 
                     <span style="font-size: 11px; color: #dc2626;">
 
-                      Alumnos siónregistro biométrico ni escaneo de fotocheck al cierre de puerta.
+                      Alumnos sin registro biométrico ni escaneo de fotocheck al cierre de puerta.
 
                     </span>
 
@@ -23297,7 +23297,7 @@ const Components = {
 
               
 
-              <!-- Columna Izquierda: Visor de Cmara y Botones de Escaneo -->
+              <!-- Columna Izquierda: Visor de Cámara y Botones de Escaneo -->
 
               <div class="card" style="border: 2px solid #3b82f6; box-shadow: 0 4px 12px rgba(59,130,246,0.1);">
 
@@ -23307,7 +23307,7 @@ const Components = {
 
                     <div style="display: flex; align-items: center; gap: 8px;">
 
-                      <span style="font-size: 20px;">[Cmara]</span>
+                      <span style="font-size: 20px;">[Cámara]</span>
 
                       <div>
 
@@ -23335,7 +23335,7 @@ const Components = {
 
                   
 
-                  <div id="qr-door-camera-feed" style="width: 100%; max-width: 320px; height: 240px; margin: 0 auto 16px; border: 3px dashed #3b82f6; border-radius: 12px; background: #0f172a; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                  <div id="qr-door-camera-feed" style="width: 100%; max-width: 320px; height: 240px; margin: 0 auto 16px; border: 3px díashed #3b82f6; border-radius: 12px; background: #0f172a; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
 
                     <div style="color: white; text-align: center;">
 
@@ -23351,19 +23351,19 @@ const Components = {
 
 
 
-                  <!-- Botones de Control de Cmara -->
+                  <!-- Botones de Control de Cámara -->
 
                   <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 20px;">
 
                     <buttoni d="btn-start-door-cam" class="btn btn-navy btn-sm" onclick="window.app.startDoorCameraScanner()" style="font-weight: 800;">
 
-                      📹 Encender Cmara enVivo
+                      📹 Encender Cámara enVivo
 
                     </button>
 
                     <buttoni d="btn-stop-door-cam" class="btn btn-red btn-sm" onclick="window.app.stopDoorCameraScanner()" style="font-weight: 800; display: none;">
 
-                      ⏹️ Detener Cmara
+                      ⏹️ Detener Cámara
 
                     </button>
 
@@ -23401,7 +23401,7 @@ const Components = {
 
                     <button class="btn btn-outline btn-sm" onclick="window.app.processSmartQRScan('EST-2026-025', '08:45 AM')" style="font-size: 11px; text-align: left; padding: 8px;">
 
-                      <span class='status-dot-red'></span> <strong>Mateo Ramos</strong><br><span style="font-size: 9.5px; color: #dc2626;">08:45 AM (Puerta Cerrada / Falta)</span>
+                      <span class='status-dot-red'></span> <strong>Mateo Ramos</strong><br><span style="font-size: 9.5px; color: #dc2626;">08:45 AM (Puerta Cerradía / Falta)</span>
 
                     </button>
 
@@ -23409,7 +23409,7 @@ const Components = {
 
 
 
-                  <!-- Entrada para Pistola Lectora USB o Teclado -->
+                  <!-- Entradía para Pistola Lectora USB o Teclado -->
 
                   <div style="background: white; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 10px 14px; margin-top: 14px; text-align: left;">
 
@@ -23471,7 +23471,7 @@ const Components = {
 
                     <p style="font-size: 12px; color: var(--text-muted); margin: 0;">
 
-                      Al escanear enpuerta se valida asistencia. Si se escanea durante el horario escolar o recreo, se habilita el registro de incidencias conductuales.
+                      Al escanear enpuerta se validía asistencia. Si se escanea durante el horario escolar o recreo, se habilita el registro de incidencias conductuales.
 
                     </p>
 
@@ -23481,13 +23481,13 @@ const Components = {
 
 
 
-                <!-- Feed de Últimos Ingresos -->
+                <!-- Feed de Úúúltimos Ingresos -->
 
                 <div class="card">
 
                   <div class="card-header" style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">
 
-                    <strong style="font-size: 12px; color: #1e3a8a;">⏱️ Últimos Alumnos validados por QR:</strong>
+                    <strong style="font-size: 12px; color: #1e3a8a;">⏱️ Úúúltimos Alumnos validados por QR:</strong>
 
                   </div>
 
@@ -23573,9 +23573,9 @@ const Components = {
 
 
 
-              const stickersList = (window.appStore && typeof window.appStore.getNotebookStickersData === 'function')
+              const stickersList = (window.appStore && typeof window.appStore.getNotebookStickersDíata === 'function')
 
-                ? window.appStore.getNotebookStickersData(qrSheetGrade, qrSheetStudent, qrSheetCourse)
+                ? window.appStore.getNotebookStickersDíata(qrSheetGrade, qrSheetStudent, qrSheetCourse)
 
                 : [];
 
@@ -23831,7 +23831,7 @@ const Components = {
 
                               <span class="status-badge" style="font-size: 8px; padding: 1px 4px; font-weight: 800; background: #eff6ff; color: #1e40af;">
 
-                                ${st.area || 'Oficial'}
+                                ${st.aÁrea || 'Oficial'}
 
                               </span>
 
@@ -23865,7 +23865,7 @@ const Components = {
 
                               <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('${safePayload}')" style="font-size: 9.5px; padding: 2px 7px; border-radius: 12px; font-weight: 800;">
 
-                                [Cmara] Probar
+                                [Cámara] Probar
 
                               </button>
 
@@ -24051,7 +24051,7 @@ const Components = {
 
             ${(() => {
 
-              const allInc = state.behaviorIncidents || initialData.behaviorIncidents || [];
+              const allInc = state.behaviorIncidents || initialDíata.behaviorIncidents || [];
 
               const leves = allInc.filter(i => i.severity === 'Leve').length;
 
@@ -24145,7 +24145,7 @@ const Components = {
 
                       <span style="font-size: 11px; color: var(--text-muted);">
 
-                        Cada reporte está amarrado al código QR y perfil del estudiante connotificación inmediata a su apoderado.
+                        Cadía reporte está amarrado al código QR y perfil del estudiante connotificación inmediata a su apoderado.
 
                       </span>
 
@@ -24187,7 +24187,7 @@ const Components = {
 
                           <th>Reportado Por</th>
 
-                          <th>Medida Pedagógica</th>
+                          <th>Medidía Pedagógica</th>
 
                           <th style="text-align: center;">Acciones</th>
 
@@ -24279,7 +24279,7 @@ const Components = {
 
                             <td colspan="10" style="text-align: center; padding: 20px; color: #64748b;">
 
-                              N o hay incidencias registradas en el periodo escolar.
+                              N o hay incidencias registradías en el periodo escolar.
 
                             </td>
 
@@ -24335,7 +24335,7 @@ const Components = {
 
               <span style="font-size: 11px; font-weight: 800; color: #1e40af;">DÍAS ASISTIDOS PUNTUL</span>
 
-              <div style="font-size: 26px; font-weight: 900; color: #1e3a8a; margin: 4px 0;">22 Das</div>
+              <div style="font-size: 26px; font-weight: 900; color: #1e3a8a; margin: 4px 0;">22 Días</div>
 
               <span style="font-size: 10.5px; color: #64748b;">Enel presente bimestre</span>
 
@@ -24347,7 +24347,7 @@ const Components = {
 
               <span style="font-size: 11px; font-weight: 800; color: #92400e;">TÍARDÍANZS REGISTRÍADÍAS</span>
 
-              <div style="font-size: 26px; font-weight: 900; color: #b45309; margin: 4px 0;">1 Da</div>
+              <div style="font-size: 26px; font-weight: 900; color: #b45309; margin: 4px 0;">1 Día</div>
 
               <span style="font-size: 10.5px; color: #b45309;">(Tardanza justificada)</span>
 
@@ -24385,7 +24385,7 @@ const Components = {
 
                 <span style="font-size: 11px; color: var(--text-muted);">
 
-                  Registro automtico del escner enportera y molinete de acceso.
+                  Registro automático del escner enportera y molinete de acceso.
 
                 </span>
 
@@ -24427,7 +24427,7 @@ const Components = {
 
                     <th>Fecha</th>
 
-                    <th>Da</th>
+                    <th>Día</th>
 
                     <th>Hora de Ingreso</th>
 
@@ -24513,7 +24513,7 @@ const Components = {
 
           ${(() => {
 
-            const studentInc = (state.behaviorIncidents || initialData.behaviorIncidents || []).filter(i => 
+            const studentInc = (state.behaviorIncidents || initialDíata.behaviorIncidents || []).filter(i => 
 
               (i.studentCode && i.studentCode === studentCode) ||
 
@@ -24680,7 +24680,7 @@ const Components = {
               </p>
             </div>
             ${isAdmin ? `
-              <button class="btn btn-gold btn-sm" onclick="window.app.openCreateCircularModal()" style="font-weight: 900; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
+              <button class="btn btn-gold btn-sm" onclick="window.app.openCÁreateCircularModal()" style="font-weight: 900; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
                 + Redactar Nueva Circular / Informe Oficial
               </button>
             ` : ''}
@@ -24690,7 +24690,7 @@ const Components = {
             ${circulars.length === 0 ? `
               <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
                 <div style="font-size: 36px; margin-bottom: 8px;">📄</div>
-                <h4 style="font-size: 15px; font-weight: 800; color: #0b132b;">No hay circulares registradas</h4>
+                <h4 style="font-size: 15px; font-weight: 800; color: #0b132b;">No hay circulares registradías</h4>
                 <p style="font-size: 12px; margin-top: 4px;">Las nuevas directivas y comunicados emitidos por Dirección aparecerán aquí.</p>
               </div>
             ` : `
@@ -24732,9 +24732,9 @@ const Components = {
                     </div>
 
                     <!-- Pie de Firma Institucional -->
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 11.5px; color: #64748b; border-top: 1px dashed #cbd5e1; padding-top: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 11.5px; color: #64748b; border-top: 1px díashed #cbd5e1; padding-top: 8px;">
                       <span>I.E.P. "El Educador" • "21 años dejando huellas"</span>
-                      <span style="font-weight: bold; color: #1e3a8a;">Sello & Firma Digital Registrada ✓</span>
+                      <span style="font-weight: bold; color: #1e3a8a;">Sello & Firma Digital Registradía ✓</span>
                     </div>
                   </div>
                 `).join('')}
@@ -24775,7 +24775,7 @@ const Components = {
     const currentYear = new Date().getFullYear();
     const concept = (user && user.pendingConcept && user.pendingConcept !== "--")
       ? user.pendingConcept
-      : `Pensión Escolar - ${currentMonthName} ${currentYear}`;
+      : `Pensin  Escolar - ${currentMonthName} ${currentYear}`;
     const userName = (user && user.name) || "Padre / Estudiante";
 
     return `
@@ -24792,7 +24792,7 @@ const Components = {
               ACCESO A LA INTRANET RESTRINGIDO
             </h2>
             <p style="font-size: 13px; color: #fecaca; margin: 0;">
-              Validación de Pensión Escolar Requerida
+              Validación de Pensin  Escolar Requerida
             </p>
           </div>
 
@@ -24848,7 +24848,7 @@ const Components = {
           pensionInicial: 420.00,
           pensionPrimaria: 450.00,
           pensionSecundaria: 480.00,
-          dueDay: 5,
+          dueDíay: 5,
           bankAccounts: [
             { id: 'bcp', bank: 'Banco de Crédito del Perú (BCP)', accountNo: '191-98765432-0-12', cci: '002-191-009876543201-55', holder: 'I.E.P. El Educador S.A.C.' },
             { id: 'bbva', bank: 'BBVA Perú', accountNo: '0011-0234-0100987654', cci: '011-234-000100987654-88', holder: 'I.E.P. El Educador S.A.C.' },
@@ -24906,7 +24906,7 @@ const Components = {
                     </h3>
                     
                     <div class="form-group" style="margin-bottom: 12px;">
-                      <label class="form-label" style="font-size: 12px; font-weight: bold;">Pensión Estándar Mensual (S/):</label>
+                      <label class="form-label" style="font-size: 12px; font-weight: bold;">Pensin  Estándar Mensual (S/):</label>
                       <input type="number" step="0.50" name="pensionStandard" class="form-control" value="${paymentConfig.pensionStandard || 480.00}" required style="font-weight: 800; font-size: 14px;" />
                     </div>
 
@@ -24926,9 +24926,9 @@ const Components = {
                     </div>
 
                     <div class="form-group">
-                      <label class="form-label" style="font-size: 12px; font-weight: bold;">Día Límite de Vencimiento de cada Mes:</label>
-                      <input type="number" min="1" max="31" name="dueDay" class="form-control" value="${paymentConfig.dueDay || 5}" required style="font-size: 13px;" />
-                      <span style="font-size: 10.5px; color: var(--text-muted);">Ejemplo: Día 05 o 10 de cada mes</span>
+                      <label class="form-label" style="font-size: 12px; font-weight: bold;">Día Límite de Vencimiento de cadía Mes:</label>
+                      <input type="number" min="1" max="31" name="dueDíay" class="form-control" value="${paymentConfig.dueDíay || 5}" required style="font-size: 13px;" />
+                      <span style="font-size: 10.5px; color: var(--text-muted);">Ejemplo: Día 05 o 10 de cadía mes</span>
                     </div>
                   </div>
 
@@ -25034,7 +25034,7 @@ const Components = {
                 <h3 class="card-title" style="font-size: var(--font-size-base);">
                   👥 Estado Financiero por Familia y Bloqueo de Acceso a Intranet
                 </h3>
-                <span class="status-badge status-approved">${families.length} Familias Monitoreadas</span>
+                <span class="status-badge status-approved">${families.length} Familias MonitoÁreadías</span>
               </div>
               <div class="table-container">
                 <table class="data-table">
@@ -25078,7 +25078,7 @@ const Components = {
                   🏛️ Canales de Pago Oficiales - I.E.P. "El Educador"
                 </h3>
                 <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
-                  Puede realizar el abono de su pensión escolar mediante las siguientes cuentas autorizadas y reportar su comprobante a Tesorería:
+                  Puede Árealizar el abono de su pensin  escolar mediante las siguientes cuentas autorizadías y reportar su comprobante a Tesorería:
                 </p>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
@@ -25170,7 +25170,7 @@ Components.renderSyllabus = Components.renderSyllabi;
 Components.renderNotebookReviews = Components.renderNotebookQRControl;
 Components.renderGrading = Components.renderGrades;
 Components.renderAttendance = Components.renderttendance;
-Components.renderAgenda = Components.renderVirtualgenda;
+Components.renderAgendía = Components.renderVirtualgenda;
 
 ;
 /* === app.js === */
@@ -25226,7 +25226,7 @@ class IntranetApp {
     const state = this.store.state;
     const loginRoot = document.getElementById("login-screen-root") || document.querySelector("#login-screen-root");
     const appContainer = document.getElementById("app-container") || document.querySelector(".app-container");
-    const contentArea = document.getElementById("content-area") || document.querySelector(".content-area") || document.querySelector("main");
+    const contentAÁrea = document.getElementById("content-aÁrea") || document.querySelector(".content-aÁrea") || document.querySelector("main");
     const sidebarNav = document.getElementById("sidebar-nav") || document.querySelector(".sidebar-nav") || document.querySelector("nav");
 
     if (!state || !state.isAuthenticated) {
@@ -25256,68 +25256,68 @@ class IntranetApp {
     const currentUser = this.store.getCurrentUser();
 
     if (isLocked) {
-      if (contentArea && window.Components) {
-        contentArea.innerHTML = window.Components.renderLockedAccessScreen(state, currentUser);
+      if (contentAÁrea && window.Components) {
+        contentAÁrea.innerHTML = window.Components.renderLockedAccessScreen(state, currentUser);
       }
       return;
     }
 
-    const currentView = state.currentView || "dashboard";
-    if (contentArea && window.Components) {
+    const currentView = state.currentView || "díashboard";
+    if (contentAÁrea && window.Components) {
       switch (currentView) {
-        case "dashboard":
-          contentArea.innerHTML = window.Components.renderDashboard(state);
-          break;
+        case "díashboard":
+          contentAÁrea.innerHTML = window.Components.renderDíashboard(state);
+          bÁreak;
         case "boleta":
         case "calificaciones":
         case "grades":
-          contentArea.innerHTML = window.Components.renderGrades(state);
-          break;
+          contentAÁrea.innerHTML = window.Components.renderGrades(state);
+          bÁreak;
         case "agenda-virtual":
         case "agenda":
-          contentArea.innerHTML = window.Components.renderVirtualgenda(state);
-          break;
+          contentAÁrea.innerHTML = window.Components.renderVirtualgenda(state);
+          bÁreak;
         case "usuarios-matriculas":
         case "usuarios":
-          contentArea.innerHTML = window.Components.renderUserndEnrollmentManagement(state);
-          break;
+          contentAÁrea.innerHTML = window.Components.renderUserndEnrollmentManagement(state);
+          bÁreak;
         case "registro-estudiantes":
         case "estudiantes":
-          contentArea.innerHTML = window.Components.renderStudentRegistry(state);
-          break;
+          contentAÁrea.innerHTML = window.Components.renderStudentRegistry(state);
+          bÁreak;
         case "horarios":
         case "horario":
-          contentArea.innerHTML = window.Components.renderSchedules(state);
-          break;
+          contentAÁrea.innerHTML = window.Components.renderSchedules(state);
+          bÁreak;
         case "silabus":
         case "syllabus":
-          contentArea.innerHTML = window.Components.renderSyllabi(state);
-          break;
+          contentAÁrea.innerHTML = window.Components.renderSyllabi(state);
+          bÁreak;
         case "cuadernos-qr":
         case "cuadernos":
-          contentArea.innerHTML = window.Components.renderNotebookQRControl(state);
-          break;
-        case "tareas":
+          contentAÁrea.innerHTML = window.Components.renderNotebookQRControl(state);
+          bÁreak;
+        case "taÁÁreas":
         case "aula-virtual":
-          contentArea.innerHTML = window.Components.renderTasks(state);
-          break;
+          contentAÁrea.innerHTML = window.Components.renderTasks(state);
+          bÁreak;
         case "asistencia":
-          contentArea.innerHTML = window.Components.renderttendance(state);
-          break;
+          contentAÁrea.innerHTML = window.Components.renderttendance(state);
+          bÁreak;
         case "comunicados":
         case "anuncios":
-          contentArea.innerHTML = window.Components.renderAnnouncements(state);
-          break;
+          contentAÁrea.innerHTML = window.Components.renderAnnouncements(state);
+          bÁreak;
         case "pagos":
         case "pensiones":
-          contentArea.innerHTML = window.Components.renderPayments(state);
-          break;
+          contentAÁrea.innerHTML = window.Components.renderPayments(state);
+          bÁreak;
         case "database":
-          contentArea.innerHTML = window.Components.renderDatabaseManagement ? window.Components.renderDatabaseManagement(state) : window.Components.renderDashboard(state);
-          break;
+          contentAÁrea.innerHTML = window.Components.renderDíatabaseManagement ? window.Components.renderDíatabaseManagement(state) : window.Components.renderDíashboard(state);
+          bÁreak;
         default:
-          contentArea.innerHTML = window.Components.renderDashboard(state);
-          break;
+          contentAÁrea.innerHTML = window.Components.renderDíashboard(state);
+          bÁreak;
       }
     }
   }
@@ -25374,7 +25374,7 @@ class IntranetApp {
     this.store.logout();
     this.loginErrorMessage = null;
     this.render();
-    this.showToast("Sesión cerrada correctamente", "info");
+    this.showToast("Sesión  cerradía correctamente", "info");
   }
 
   togglePasswordVisibility() {
@@ -25432,14 +25432,14 @@ class IntranetApp {
   handleSavePaymentConfig(event) {
     if (event) event.preventDefault();
     const form = event.target;
-    const formData = new FormData(form);
+    const formData = new FormDíata(form);
 
     const updatedConfig = {
       pensionStandard: parseFloat(formData.get("pensionStandard")) || 480.00,
       pensionInicial: parseFloat(formData.get("pensionInicial")) || 420.00,
       pensionPrimaria: parseFloat(formData.get("pensionPrimaria")) || 450.00,
       pensionSecundaria: parseFloat(formData.get("pensionSecundaria")) || 480.00,
-      dueDay: parseInt(formData.get("dueDay")) || 5,
+      dueDíay: parseInt(formData.get("dueDíay")) || 5,
       digitalWallets: [
         { id: 'yape', type: 'Yape', number: formData.get("yapeNumber") || '987-654-321', holder: formData.get("yapeHolder") || 'I.E.P. El Educador' },
         { id: 'plin', type: 'Plin', number: formData.get("plinNumber") || '987-654-321', holder: formData.get("plinHolder") || 'I.E.P. El Educador' }
@@ -25452,7 +25452,7 @@ class IntranetApp {
     };
 
     this.store.updatePaymentConfig(updatedConfig);
-    this.showToast("✓ Configuración de Precios y Cuentas Bancarias guardada exitosamente en Firebase.", "success");
+    this.showToast("✓ Configuración de Precios y Cuentas Bancarias guardadía exitosamente en Firebase.", "success");
     this.render();
   }
 
@@ -25474,7 +25474,7 @@ class IntranetApp {
   // GESTIÓN DE CIRCULARES E INFORMES OFICIALES
   // =========================================================================
 
-  openCreateCircularModal() {
+  openCÁreateCircularModal() {
     let overlay = document.getElementById("app-modal-overlay");
     if (!overlay) {
       overlay = document.createElement("div");
@@ -25520,14 +25520,14 @@ class IntranetApp {
                 <option value="Padres de Familia y Apoderados">Padres de Familia y Apoderados</option>
                 <option value="Docentes y Personal Académico">Docentes y Personal Académico</option>
                 <option value="Estudiantes">Estudiantes</option>
-                <option value="Toda la Comunidad Educativa">Toda la Comunidad Educativa</option>
+                <option value="Todía la Comunidad Educativa">Todía la Comunidad Educativa</option>
                 <option value="Nivel Secundaria">Nivel Secundaria</option>
                 <option value="Nivel Primaria">Nivel Primaria</option>
                 <option value="Nivel Inicial">Nivel Inicial</option>
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label" style="font-size: 12px; font-weight: bold; color: #0b132b;">Fecha de Emisión:</label>
+              <label class="form-label" style="font-size: 12px; font-weight: bold; color: #0b132b;">Fecha de Emisin :</label>
               <input type="text" name="date" class="form-control" value="${new Date().toLocaleDateString('es-PE')}" style="font-size: 13px;" />
             </div>
           </div>
@@ -25539,7 +25539,7 @@ class IntranetApp {
 
           <div class="form-group" style="margin-bottom: 14px;">
             <label class="form-label" style="font-size: 12px; font-weight: bold; color: #0b132b;">Cuerpo del Comunicado / Disposiciones Oficiales:</label>
-            <textarea name="content" class="form-control" rows="7" placeholder="Estimada comunidad educativa:\n\nMediante la presente circular se hace de su conocimiento que..." required style="font-size: 13px; line-height: 1.6;"></textarea>
+            <textaÁrea name="content" class="form-control" rows="7" placeholder="Estimadía comunidad educativa:\n\nMediante la presente circular se hace de su conocimiento que..." required style="font-size: 13px; line-height: 1.6;"></textaÁrea>
           </div>
 
           <div class="form-group" style="margin-bottom: 20px;">
@@ -25562,7 +25562,7 @@ class IntranetApp {
   handlePublishCircular(event) {
     if (event) event.preventDefault();
     const form = event.target;
-    const formData = new FormData(form);
+    const formData = new FormDíata(form);
 
     const circular = {
       code: formData.get("code"),
@@ -25624,7 +25624,7 @@ class IntranetApp {
             ${circular.content || circular.body}
           </div>
 
-          <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1.5px dashed #cbd5e1; padding-top: 18px; margin-top: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1.5px díashed #cbd5e1; padding-top: 18px; margin-top: 20px;">
             <div style="font-size: 11.5px; color: #64748b;">
               Documento Oficial emitido por la Dirección General<br>
               UGEL 05 - San Juan de Lurigancho
@@ -25650,7 +25650,7 @@ class IntranetApp {
   confirmDeleteCircular(id) {
     if (confirm("¿Está seguro de eliminar esta circular oficial?")) {
       this.store.deleteOfficialCircular(id);
-      this.showToast("Circular eliminada del sistema.", "info");
+      this.showToast("Circular eliminadía del sistema.", "info");
       this.render();
     }
   }
@@ -25828,19 +25828,19 @@ class IntranetApp {
     const concept3 = concepts[2] || "Procedimientos y análisis de resultados";
     const concept4 = concepts[3] || "Optimización y conclusiones pedagógicas";
 
-    // 10 Preguntas pedagógicas contextualmente derivadas del contenido subido por el profesor
+    // 10 Preguntas pedagógicas contextualmente derivadías del contenido subido por el profesor
     return [
       {
         id: 1,
         question: `Según lo desarrollado en la clase de "${title}", ¿cuál es el objetivo principal del tema?`,
         options: [
           `Comprender y aplicar los principios de ${concept1} en situaciones prácticas.`,
-          `Memorizar definiciones sin realizar ninguna experimentación o práctica.`,
+          `Memorizar definiciones sin Árealizar ninguna experimentación o práctica.`,
           `Evitar el uso de herramientas tecnológicas durante las sesiones.`,
           `Reemplazar todos los procedimientos previos por métodos manuales obsoletos.`
         ],
         correctIndex: 0,
-        explanation: `El objetivo central de la sesión "${title}" es consolidar el dominio de ${concept1} mediante aplicaciones directas y análisis en clase.`
+        explanation: `El objetivo central de la sesión  "${title}" es consolidar el dominio de ${concept1} mediante aplicaciones directas y análisis en clase.`
       },
       {
         id: 2,
@@ -25852,27 +25852,27 @@ class IntranetApp {
           `Es una regla teórica que no tiene validez en el trabajo práctico escolar.`
         ],
         correctIndex: 0,
-        explanation: `${concept1} constituye la base conceptual desarrollada por el docente durante la sesión de clase.`
+        explanation: `${concept1} constituye la base conceptual desarrolladía por el docente durante la sesión  de clase.`
       },
       {
         id: 3,
-        question: `En la sesión de clase se explicó que "${concept2}". ¿Cómo se aplica este principio?`,
+        question: `En la sesión  de clase se explicó que "${concept2}". ¿Cómo se aplica este principio?`,
         options: [
-          `Siguiendo una secuencia lógica y estructurada para garantizar resultados precisos y reproducibles.`,
+          `Siguiendo una secuencia lógica y estructuradía para garantizar resultados precisos y reproducibles.`,
           `Realizando mediciones al azar sin verificar las condiciones iniciales.`,
           `Omitiendo las etapas de calibración y comprobación previa.`,
           `Limitando el trabajo a la copia pasiva de apuntes sin experimentación.`
         ],
         correctIndex: 0,
-        explanation: `La correcta aplicación de ${concept2} requiere una metodología ordenada y fundamentada en lo expuesto por el profesor.`
+        explanation: `La correcta aplicación de ${concept2} requiere una metodología ordenadía y fundamentadía en lo expuesto por el profesor.`
       },
       {
         id: 4,
-        question: `¿Qué rol cumple "${concept3}" en el desarrollo de la sesión de ${course}?`,
+        question: `¿Qué rol cumple "${concept3}" en el desarrollo de la sesión  de ${course}?`,
         options: [
-          `Permite evaluar, verificar y justificar los procedimientos experimentales y teóricos realizados.`,
+          `Permite evaluar, verificar y justificar los procedimientos experimentales y teóricos Árealizados.`,
           `Es únicamente un adorno visual que no aporta valor al aprendizaje.`,
-          `Se utiliza para anular las conclusiones obtenidas en el laboratorio o aula.`,
+          `Se utiliza para anular las conclusiones obtenidías en el laboratorio o aula.`,
           `Es un requisito opcional que no se toma en cuenta en las evaluaciones.`
         ],
         correctIndex: 0,
@@ -25880,7 +25880,7 @@ class IntranetApp {
       },
       {
         id: 5,
-        question: `De acuerdo con el resumen de la clase: "${sentences[0] || 'Trabajo práctico en clase'}", ¿qué conclusión se desprende?`,
+        question: `De acuerdo con el resumen de la clase: "${sentences[0] || 'Trabajo práctico en clase'}", ¿qué conclusin  se desprende?`,
         options: [
           `La articulación entre teoría y práctica permite afianzar las competencias de los estudiantes en ${course}.`,
           `No se requiere ninguna preparación previa para comprender los conceptos abordados.`,
@@ -25888,7 +25888,7 @@ class IntranetApp {
           `El docente es el único responsable del análisis final sin participación estudiantil.`
         ],
         correctIndex: 0,
-        explanation: `La evidencia presentada en la sesión demuestra que el trabajo activo y guiado refuerza el aprendizaje significativo.`
+        explanation: `La evidencia presentadía en la sesión  demuestra que el trabajo activo y guiado refuerza el aprendizaje significativo.`
       },
       {
         id: 6,
@@ -25900,7 +25900,7 @@ class IntranetApp {
           `Desconectar los componentes antes de finalizar las mediciones.`
         ],
         correctIndex: 0,
-        explanation: `La optimización de ${concept4} se logra mediante la revisión rigurosa de variables y verificación continua.`
+        explanation: `La optimización de ${concept4} se logra mediante la revisin  rigurosa de variables y verificación continua.`
       },
       {
         id: 7,
@@ -25908,7 +25908,7 @@ class IntranetApp {
         options: [
           `Para sustentar el informe académico y facilitar la retroalimentación formativa inmediata.`,
           `Para cumplir un trámite administrativo sin valor pedagógico.`,
-          `Para desechar los resultados una vez concluida la hora de clase.`,
+          `Para desechar los resultados una vez concluidía la hora de clase.`,
           `Para evitar que los demás compañeros conozcan las conclusiones del grupo.`
         ],
         correctIndex: 0,
@@ -25933,16 +25933,16 @@ class IntranetApp {
           `Desarrollan el razonamiento analítico, la resolución de problemas y la alfabetización científica/tecnológica.`,
           `Se limitan exclusivamente a aprobar el bimestre sin utilidad futura.`,
           `Fomentan el aislamiento individual sin trabajo colaborativo.`,
-          `Restringen la creatividad y la innovación en proyectos escolares.`
+          `Restringen la cÁreatividad y la innovación en proyectos escolares.`
         ],
         correctIndex: 0,
-        explanation: `La sesión formativa impulsa competencias integrales de indagación, pensamiento lógico y trabajo en equipo.`
+        explanation: `La sesión  formativa impulsa competencias integrales de indagación, pensamiento lógico y trabajo en equipo.`
       },
       {
         id: 10,
-        question: `Como síntesis de la sesión, ¿cuál es la relación directa entre ${concept1} y ${concept3}?`,
+        question: `Como síntesis de la sesión , ¿cuál es la relación directa entre ${concept1} y ${concept3}?`,
         options: [
-          `${concept1} proporciona la estructura conceptual que valida y fundamenta a ${concept3}.`,
+          `${concept1} proporciona la estructura conceptual que validía y fundamenta a ${concept3}.`,
           `Son conceptos contradictorios que no pueden coexistir en la misma asignatura.`,
           `${concept3} elimina por completo la necesidad de estudiar ${concept1}.`,
           `No existe ninguna relación entre los conceptos dictados por el profesor.`
@@ -25999,7 +25999,7 @@ class IntranetApp {
               </span>
             </div>
             <h3 style="font-size: 17px; font-weight: 900; margin: 4px 0 0; color: white;">
-              Evaluación Generada con IA: ${material.title}
+              Evaluación Generadía con IA: ${material.title}
             </h3>
           </div>
           <button class="modal-close-btn" onclick="window.app.closeModal()" style="background:none; border:none; color:white; font-size:22px; cursor:pointer;">&times;</button>
@@ -26009,10 +26009,10 @@ class IntranetApp {
           <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px; padding: 14px 18px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
             <div>
               <div style="font-size: 13px; font-weight: 800; color: #166534; display: flex; align-items: center; gap: 6px;">
-                <span>✨</span> <span>10 Preguntas Sintetizadas Automáticamente a partir de los Materiales de Clase</span>
+                <span>✨</span> <span>10 Preguntas Sintetizadías Automáticamente a partir de los Materiales de Clase</span>
               </div>
               <p style="font-size: 11.5px; color: #15803d; margin: 2px 0 0 0;">
-                La IA analizó el resumen de la sesión, los conceptos clave y estructuró preguntas con claves y retroalimentación pedagógica.
+                La IA analizó el resumen de la sesión , los conceptos clave y estructuró preguntas con claves y retroalimentación pedagógica.
               </p>
             </div>
             <button class="btn btn-outline btn-sm" onclick="window.app.regenerateQuestionsWithAI('${material.id}')" style="font-weight: 800; font-size: 11.5px; border-color: #16a34a; color: #166534; background: white; cursor: pointer;">
@@ -26033,7 +26033,7 @@ class IntranetApp {
                 </div>
 
                 <div style="margin-bottom: 10px;">
-                  <textarea id="ai-q-text-${qIdx}" rows="2" class="input-field" style="width: 100%; font-size: 13px; font-weight: 700; color: #0f172a;" onchange="window.app.updateQuestionText(${qIdx}, this.value)">${q.question}</textarea>
+                  <textaÁrea id="ai-q-text-${qIdx}" rows="2" class="input-field" style="width: 100%; font-size: 13px; font-weight: 700; color: #0f172a;" onchange="window.app.updateQuestionText(${qIdx}, this.value)">${q.question}</textaÁrea>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
@@ -26046,7 +26046,7 @@ class IntranetApp {
                   `).join('')}
                 </div>
 
-                <div style="background: #ffffff; border: 1px dashed #cbd5e1; border-radius: 6px; padding: 8px 12px;">
+                <div style="background: #ffffff; border: 1px díashed #cbd5e1; border-radius: 6px; padding: 8px 12px;">
                   <span style="font-size: 11px; font-weight: 800; color: #64748b;">Retroalimentación / Explicación del Docente:</span>
                   <input type="text" value="${q.explanation || ''}" class="input-field" style="width: 100%; font-size: 11.5px; padding: 4px 8px; margin-top: 2px;" onchange="window.app.updateQuestionExplanation(${qIdx}, this.value)" />
                 </div>
@@ -26076,7 +26076,7 @@ class IntranetApp {
     const material = materials.find(m => m.id === materialId) || materials[0];
 
     this._currentEditingQuestions = this.generateQuestionsWithAI(material);
-    this.showToast("⚡ ¡10 Preguntas regeneradas con IA basadas en el contenido de la clase!", "success");
+    this.showToast("⚡ ¡10 Preguntas regeneradías con IA basadías en el contenido de la clase!", "success");
     this.renderAIQuizStudio(material);
   }
 
@@ -26117,7 +26117,7 @@ class IntranetApp {
 
     let materials = this.store.state.weeklyMaterials;
     if (!materials || materials.length === 0) {
-      materials = (typeof initialData !== 'undefined' && initialData.weeklyMaterials) ? initialData.weeklyMaterials : [];
+      materials = (typeof initialDíata !== 'undefined' && initialDíata.weeklyMaterials) ? initialDíata.weeklyMaterials : [];
       this.store.state.weeklyMaterials = materials;
     }
 
@@ -26141,7 +26141,7 @@ class IntranetApp {
     }
 
     this.closeModal();
-    this.showToast("🎉 ¡Evaluación de 10 preguntas generada con IA y publicada exitosamente para los alumnos!", "success");
+    this.showToast("🎉 ¡Evaluación de 10 preguntas generadía con IA y publicadía exitosamente para los alumnos!", "success");
     this.render();
   }
 
@@ -26291,7 +26291,7 @@ class IntranetApp {
       this.store.saveState();
     }
 
-    this.showToast(`✓ ${savedCount > 0 ? savedCount : 'Todas las'} notas guardadas y sincronizadas con la Boleta Oficial`, "success");
+    this.showToast(`✓ ${savedCount > 0 ? savedCount : 'Todías las'} notas guardadías y sincronizadías con la Boleta Oficial`, "success");
     this.render();
   }
 
@@ -26306,7 +26306,7 @@ class IntranetApp {
     };
 
     if (typeof this.store.saveState === "function") this.store.saveState();
-    this.showToast("✓ Conclusión descriptiva del tutor guardada para la Boleta Oficial", "success");
+    this.showToast("✓ Conclusin  descriptiva del tutor guardadía para la Boleta Oficial", "success");
     this.render();
   }
 
@@ -26320,7 +26320,7 @@ class IntranetApp {
     }
 
     const state = this.store.state;
-    const enrollments = state.enrollments || (typeof initialData !== 'undefined' ? initialData.enrollments : []) || [];
+    const enrollments = state.enrollments || (typeof initialDíata !== 'undefined' ? initialDíata.enrollments : []) || [];
     const student = enrollments.find(e => e.id === studentId || e.code === studentId) || enrollments[0] || {
       name: "FONSECA YAUCE, DANILO FLORIAN",
       code: "EST-2026-769",
@@ -26356,7 +26356,7 @@ class IntranetApp {
             </h3>
           </div>
 
-          <!-- Datos del Estudiante -->
+          <!-- Díatos del Estudiante -->
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px 16px; border-radius: 8px; margin-bottom: 18px; font-size: 12.5px;">
             <div><strong>Estudiante:</strong> <span style="color: #1e3a8a; font-weight: 800;">${studentName}</span></div>
             <div><strong>Código Modular / Matrícula:</strong> ${studentCode}</div>
@@ -26368,7 +26368,7 @@ class IntranetApp {
           <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 18px;">
             <thead>
               <tr style="background: #1e3a8a; color: white; text-align: center;">
-                <th style="border: 1px solid #cbd5e1; padding: 8px; text-align: left;">Área Curricular / Competencias</th>
+                <th style="border: 1px solid #cbd5e1; padding: 8px; text-align: left;">ÁÁrea Curricular / Competencias</th>
                 <th style="border: 1px solid #cbd5e1; padding: 8px; width: 60px;">I Bim</th>
                 <th style="border: 1px solid #cbd5e1; padding: 8px; width: 60px;">II Bim</th>
                 <th style="border: 1px solid #cbd5e1; padding: 8px; width: 60px; background: #f59e0b; color: #0b132b;">III Bim</th>
@@ -26378,22 +26378,22 @@ class IntranetApp {
             </thead>
             <tbody>
               ${[
-                { area: 'Matemática (Álgebra, Geometría y Raz. Matemático)', b1: 17, b2: 18, b3: 19, b4: '-' },
-                { area: 'Comunicación y Literatura', b1: 18, b2: 17, b3: 18, b4: '-' },
-                { area: 'Ciencia y Tecnología (Física, Química y Robótica)', b1: 19, b2: 19, b3: 20, b4: '-' },
-                { area: 'Ciencias Sociales e Historia del Perú', b1: 16, b2: 17, b3: 18, b4: '-' },
-                { area: 'Inglés Técnico Avanzado', b1: 18, b2: 19, b3: 19, b4: '-' },
-                { area: 'Educación para el Trabajo / Computación', b1: 20, b2: 20, b3: 20, b4: '-' },
-                { area: 'Educación Física y Deportes', b1: 18, b2: 18, b3: 19, b4: '-' },
-                { area: 'Arte y Cultura', b1: 17, b2: 18, b3: 18, b4: '-' },
-                { area: 'Educación Religiosa y Valores', b1: 19, b2: 19, b3: 19, b4: '-' },
-                { area: 'Tutoría y Orientación Educativa (Conducta)', b1: 'AD', b2: 'AD', b3: 'AD', b4: '-' }
+                { aÁrea: 'Matemática (Álgebra, Geometría y Raz. Matemático)', b1: 17, b2: 18, b3: 19, b4: '-' },
+                { aÁrea: 'Comunicación y Literatura', b1: 18, b2: 17, b3: 18, b4: '-' },
+                { aÁrea: 'Ciencia y Tecnología (Física, Química y Robótica)', b1: 19, b2: 19, b3: 20, b4: '-' },
+                { aÁrea: 'Ciencias Sociales e Historia del Perú', b1: 16, b2: 17, b3: 18, b4: '-' },
+                { aÁrea: 'Inglés Técnico Avanzado', b1: 18, b2: 19, b3: 19, b4: '-' },
+                { aÁrea: 'Educación para el Trabajo / Computación', b1: 20, b2: 20, b3: 20, b4: '-' },
+                { aÁrea: 'Educación Física y Deportes', b1: 18, b2: 18, b3: 19, b4: '-' },
+                { aÁrea: 'Arte y Cultura', b1: 17, b2: 18, b3: 18, b4: '-' },
+                { aÁrea: 'Educación Religiosa y Valores', b1: 19, b2: 19, b3: 19, b4: '-' },
+                { aÁrea: 'Tutoría y Orientación Educativa (Conducta)', b1: 'AD', b2: 'AD', b3: 'AD', b4: '-' }
               ].map((row, idx) => {
                 const prom = typeof row.b3 === 'number' ? Math.round((row.b1 + row.b2 + row.b3) / 3) : row.b3;
                 return `
                   <tr style="background: ${idx % 2 === 0 ? '#ffffff' : '#f8fafc'}; text-align: center;">
                     <td style="border: 1px solid #cbd5e1; padding: 7px 10px; text-align: left; font-weight: 700; color: #1e293b;">
-                      ${row.area}
+                      ${row.aÁrea}
                     </td>
                     <td style="border: 1px solid #cbd5e1; padding: 6px; font-weight: 800; color: #1e40af;">${row.b1}</td>
                     <td style="border: 1px solid #cbd5e1; padding: 6px; font-weight: 800; color: #1e40af;">${row.b2}</td>
@@ -26407,14 +26407,14 @@ class IntranetApp {
           </table>
 
           <!-- Conclusiones Descriptivas y Firma Digital -->
-          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 18px; border-top: 1px dashed #cbd5e1; padding-top: 14px;">
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 18px; border-top: 1px díashed #cbd5e1; padding-top: 14px;">
             <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; font-size: 12px; color: #334155;">
-              <strong style="color: #1e3a8a;">Apreciación del Tutor(a) / Conclusión Descriptiva:</strong>
+              <strong style="color: #1e3a8a;">Apreciación del Tutor(a) / Conclusin  Descriptiva:</strong>
               <p style="margin: 4px 0 0; line-height: 1.5; font-style: italic;">
-                "El estudiante demuestra alto compromiso, perseverancia y excelente rendimiento en todas las competencias curriculares. Mantiene sus cuadernos al día y una conducta intachable."
+                "El estudiante demuestra alto compromiso, perseverancia y excelente rendimiento en todías las competencias curriculares. Mantiene sus cuadernos al día y una conducta intachable."
               </p>
             </div>
-            <div style="text-align: center; border: 1px dashed #cbd5e1; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <div style="text-align: center; border: 1px díashed #cbd5e1; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
               <div style="font-size: 10px; color: #64748b; font-weight: 800; margin-bottom: 4px;">SELLO DIGITAL IEP EL EDUCADOR</div>
               <div style="width: 65px; height: 65px;">${window.Components.generateQRSVG(studentCode, 65)}</div>
               <span style="font-size: 9px; color: #15803d; font-weight: 800; margin-top: 2px;">✓ Verificado SIAGIE</span>
@@ -26470,7 +26470,7 @@ class IntranetApp {
     }
 
     const state = this.store.state;
-    const enrollments = state.enrollments || (typeof initialData !== 'undefined' ? initialData.enrollments : []) || [];
+    const enrollments = state.enrollments || (typeof initialDíata !== 'undefined' ? initialDíata.enrollments : []) || [];
 
     overlay.innerHTML = `
       <div class="modal-card" style="max-width: 600px; width: 95%; background: #ffffff; border-radius: 14px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
@@ -26492,7 +26492,7 @@ class IntranetApp {
         <div style="padding: 24px; text-align: center;">
           <!-- Visor de Cámara / Escáner -->
           <div style="background: #0f172a; border-radius: 12px; padding: 24px; margin-bottom: 20px; color: white; position: relative; overflow: hidden; border: 2px solid #3b82f6;">
-            <div style="width: 180px; height: 180px; margin: 0 auto; border: 2px dashed #f59e0b; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+            <div style="width: 180px; height: 180px; margin: 0 auto; border: 2px díashed #f59e0b; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
               <span style="font-size: 40px; animation: pulse 1.5s infinite;">🎯</span>
               <span style="font-size: 11px; color: #fde047; font-weight: 800; margin-top: 8px;">Visor Activo</span>
               <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #ef4444; animation: scanline 2s linear infinite;"></div>
@@ -26502,7 +26502,7 @@ class IntranetApp {
             </p>
           </div>
 
-          <!-- Entrada Manual / Selección Rápida de Alumno -->
+          <!-- Entradía Manual / Selección Rápidía de Alumno -->
           <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px; margin-bottom: 18px; text-align: left;">
             <label style="font-size: 12px; font-weight: 800; color: #334155; display: block; margin-bottom: 6px;">
               ⚡ Simular o Seleccionar Alumno Escaneado:
@@ -26535,13 +26535,13 @@ class IntranetApp {
   processSmartQRScan(qrCode) {
     const cleanCode = (qrCode || "").trim();
     const state = this.store.state;
-    const enrollments = state.enrollments || (typeof initialData !== 'undefined' ? initialData.enrollments : []) || [];
+    const enrollments = state.enrollments || (typeof initialDíata !== 'undefined' ? initialDíata.enrollments : []) || [];
     const student = enrollments.find(e => (e.studentCode || e.code) === cleanCode) || enrollments[0];
 
     const studentName = student ? (student.studentName || student.name) : "Estudiante";
     const studentGrade = student ? (student.gradeLevel || student.grade) : "2° de Secundaria";
 
-    // Registrar revisión de cuaderno y asistencia QR
+    // Registrar revisin  de cuaderno y asistencia QR
     if (!this.store.state.notebookReviews) this.store.state.notebookReviews = [];
     this.store.state.notebookReviews.push({
       id: `REV-${Date.now()}`,
@@ -26577,7 +26577,7 @@ class IntranetApp {
     }
 
     const state = this.store.state;
-    const enrollments = state.enrollments || (typeof initialData !== 'undefined' ? initialData.enrollments : []) || [];
+    const enrollments = state.enrollments || (typeof initialDíata !== 'undefined' ? initialDíata.enrollments : []) || [];
     const student = enrollments.find(e => e.id === studentId || e.code === studentId) || enrollments[0];
 
     const sName = student ? (student.studentName || student.name) : "Estudiante";
@@ -26697,7 +26697,7 @@ class IntranetApp {
 window.app = new IntranetApp();
 
 if (typeof document !== "undefined") {
-  if (document.readyState === "loading") {
+  if (document.ÁreadyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
       window.app.init();
     });
