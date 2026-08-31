@@ -25814,11 +25814,14 @@ class IntranetApp {
   // =========================================================================
 
   
+  
   // =========================================================================
-  // GESTIÓN DE SESIONES SEMANALES, MATERIALES Y ELIMINACIÓN EN AULA VIRTUAL
+  // GESTIÓN DE SESIONES SEMANALES, MATERIALES (PDF, PPT, VIDEOS) Y AULA VIRTUAL
   // =========================================================================
 
   openUploadMaterialModal(courseId) {
+    this._tempAttachments = [];
+
     let overlay = document.getElementById("app-modal-overlay");
     if (!overlay) {
       overlay = document.createElement("div");
@@ -25834,11 +25837,11 @@ class IntranetApp {
     const todayStr = new Date().toLocaleDateString('es-PE');
 
     overlay.innerHTML = `
-      <div class="modal-card" style="max-width: 650px; width: 95%; background: #ffffff; border-radius: 14px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
+      <div class="modal-card" style="max-width: 720px; width: 95%; background: #ffffff; border-radius: 14px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
         <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #0b132b); color: white; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center;">
           <div>
             <div style="font-size: 11px; color: var(--color-yellow-300); font-weight: 800; text-transform: uppercase;">
-              Aula Virtual • Gestión Pedagógica
+              Aula Virtual • Gestión Pedagógica & Recursos
             </div>
             <h3 style="font-size: 17px; font-weight: 900; margin: 4px 0 0; color: white;">
               ➕ Publicar Nueva Sesión Semanal y Material de Clase
@@ -25847,7 +25850,7 @@ class IntranetApp {
           <button class="modal-close-btn" onclick="window.app.closeModal()" style="background:none; border:none; color:white; font-size:22px; cursor:pointer;">&times;</button>
         </div>
 
-        <form onsubmit="window.app.saveWeeklyMaterial(event, '${courseId || ''}')" style="padding: 24px; max-height: 75vh; overflow-y: auto;">
+        <form onsubmit="window.app.saveWeeklyMaterial(event, '${courseId || ''}')" style="padding: 24px; max-height: 78vh; overflow-y: auto;">
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
             <div>
               <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Número de Semana:</label>
@@ -25884,6 +25887,38 @@ class IntranetApp {
             <textarea id="mat-concepts" rows="2" class="input-field" placeholder="Estructura básica, Pines PWM, Calibración de grados, Condicionales..." style="width: 100%; font-size: 12.5px;"></textarea>
           </div>
 
+          <!-- SECCIÓN DE CARGA DE ARCHIVOS Y MATERIALES MULTIFORMATO -->
+          <div style="background: #f8fafc; border: 1.5px dashed #3b82f6; border-radius: 10px; padding: 16px; margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 13px; font-weight: 800; color: #1e3a8a;">
+                📎 Archivos y Materiales de Estudio (PDF, PPT, Videos MP4, Word, Código):
+              </span>
+              <button type="button" class="btn btn-navy btn-sm" onclick="document.getElementById('mat-files-input').click()" style="font-weight: 800; font-size: 11.5px; padding: 4px 12px; cursor: pointer;">
+                📁 Subir Archivo
+              </button>
+            </div>
+
+            <input type="file" id="mat-files-input" multiple onchange="window.app.handleMaterialFilesSelected(event)" accept=".pdf,.ppt,.pptx,.doc,.docx,.mp4,.zip,.png,.jpg,.jpeg,.ino,.txt" style="display:none;" />
+
+            <p style="font-size: 11px; color: #64748b; margin: 0 0 10px 0;">
+              Formatos soportados: <strong>PDF (Guías/Fichas)</strong>, <strong>PowerPoint PPT/PPTX (Diapositivas)</strong>, <strong>Videos MP4</strong>, <strong>Word DOCX</strong>, <strong>Código/ZIP</strong>.
+            </p>
+
+            <div id="mat-attachments-preview-list" style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="font-size: 12px; color: #94a3b8; font-style: italic;" id="no-files-msg">
+                No hay archivos adjuntos aún. Haga clic en "+ Subir Archivo" o agregue un enlace de video abajo.
+              </div>
+            </div>
+
+            <!-- Agregar Enlace de Video / YouTube -->
+            <div style="margin-top: 12px; display: flex; gap: 8px; align-items: center;">
+              <input type="text" id="mat-video-url" placeholder="O pegar enlace de Video / YouTube (ej: https://youtube.com/...)" class="input-field" style="flex: 1; font-size: 12px; padding: 6px 10px;" />
+              <button type="button" class="btn btn-outline btn-sm" onclick="window.app.addVideoLinkAttachment()" style="font-weight: 800; font-size: 11px; white-space: nowrap;">
+                🎬 Agregar Video
+              </button>
+            </div>
+          </div>
+
           <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 12px 14px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
             <input type="checkbox" id="mat-auto-quiz" checked style="width: 18px; height: 18px; cursor: pointer;" />
             <label for="mat-auto-quiz" style="font-size: 12.5px; color: #166534; font-weight: 700; cursor: pointer;">
@@ -25905,6 +25940,96 @@ class IntranetApp {
     overlay.style.display = "flex";
   }
 
+  handleMaterialFilesSelected(event) {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+
+    if (!this._tempAttachments) this._tempAttachments = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const name = file.name;
+      const sizeKB = (file.size / 1024).toFixed(0);
+      const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
+      const sizeStr = file.size > 1024 * 1024 ? `${sizeMB} MB` : `${sizeKB} KB`;
+
+      let icon = '📄';
+      let type = 'doc';
+      const ext = name.split('.').pop().toLowerCase();
+
+      if (ext === 'pdf') { icon = '📕'; type = 'pdf'; }
+      else if (ext === 'ppt' || ext === 'pptx') { icon = '📊'; type = 'ppt'; }
+      else if (ext === 'mp4' || ext === 'avi' || ext === 'mov' || ext === 'webm') { icon = '🎬'; type = 'video'; }
+      else if (ext === 'doc' || ext === 'docx') { icon = '📝'; type = 'doc'; }
+      else if (ext === 'ino' || ext === 'py' || ext === 'cpp' || ext === 'zip' || ext === 'rar') { icon = '💻'; type = 'code'; }
+      else if (ext === 'png' || ext === 'jpg' || ext === 'jpeg') { icon = '🖼️'; type = 'image'; }
+
+      this._tempAttachments.push({
+        type: type,
+        name: name,
+        size: sizeStr,
+        icon: icon,
+        url: ''
+      });
+    }
+
+    this.renderAttachmentsPreview();
+  }
+
+  addVideoLinkAttachment() {
+    const input = document.getElementById("mat-video-url");
+    if (!input || !input.value.trim()) return;
+
+    const url = input.value.trim();
+    if (!this._tempAttachments) this._tempAttachments = [];
+
+    this._tempAttachments.push({
+      type: 'video',
+      name: `Video Explicativo de la Clase (Enlace)`,
+      size: 'Video Online',
+      icon: '🎬',
+      url: url
+    });
+
+    input.value = '';
+    this.renderAttachmentsPreview();
+    this.showToast("✓ Enlace de video agregado a los materiales", "success");
+  }
+
+  removeTempAttachment(index) {
+    if (this._tempAttachments && this._tempAttachments[index]) {
+      this._tempAttachments.splice(index, 1);
+      this.renderAttachmentsPreview();
+    }
+  }
+
+  renderAttachmentsPreview() {
+    const listEl = document.getElementById("mat-attachments-preview-list");
+    if (!listEl) return;
+
+    if (!this._tempAttachments || this._tempAttachments.length === 0) {
+      listEl.innerHTML = `<div style="font-size: 12px; color: #94a3b8; font-style: italic;" id="no-files-msg">No hay archivos adjuntos aún. Haga clic en "+ Subir Archivo" o agregue un enlace de video abajo.</div>`;
+      return;
+    }
+
+    listEl.innerHTML = this._tempAttachments.map((att, idx) => `
+      <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px; min-width: 0;">
+          <span style="font-size: 18px;">${att.icon || '📄'}</span>
+          <div style="min-width: 0;">
+            <div style="font-size: 12.5px; font-weight: 700; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              ${att.name}
+            </div>
+            <div style="font-size: 10.5px; color: #64748b;">
+              ${att.size} ${att.url ? `• ${att.url}` : ''}
+            </div>
+          </div>
+        </div>
+        <button type="button" onclick="window.app.removeTempAttachment(${idx})" style="background: none; border: none; color: #dc2626; font-size: 16px; cursor: pointer;" title="Quitar archivo">&times;</button>
+      </div>
+    `).join('');
+  }
+
   saveWeeklyMaterial(event, courseId) {
     if (event && event.preventDefault) event.preventDefault();
 
@@ -25914,11 +26039,17 @@ class IntranetApp {
     const sessionDate = document.getElementById("mat-date").value.trim();
     const summary = document.getElementById("mat-summary").value.trim();
     const conceptsRaw = document.getElementById("mat-concepts").value.trim();
-    const autoQuiz = document.getElementById("mat-auto-quiz").checked;
 
     const keyConcepts = conceptsRaw
       ? conceptsRaw.split(/[,\n]+/).map(c => c.trim()).filter(c => c.length > 0)
       : ["Fundamentos teóricos", "Aplicación práctica", "Resolución de ejercicios"];
+
+    const attachments = (this._tempAttachments && this._tempAttachments.length > 0)
+      ? this._tempAttachments
+      : [
+          { type: "pdf", name: `Guia_Teorica_Semana_${weekNum}.pdf`, size: "2.4 MB", icon: "📕" },
+          { type: "ppt", name: `Diapositivas_Clase_Semana_${weekNum}.pptx`, size: "5.8 MB", icon: "📊" }
+        ];
 
     const newMaterial = {
       id: `MAT-SEM-${Date.now()}`,
@@ -25934,10 +26065,7 @@ class IntranetApp {
       sessionDate: sessionDate,
       summary: summary,
       keyConcepts: keyConcepts,
-      attachments: [
-        { type: "pdf", name: `Guia_Teorica_Semana_${weekNum}.pdf`, size: "2.4 MB" },
-        { type: "code", name: `Codigo_Fuente_Semana_${weekNum}.ino`, size: "35 KB" }
-      ],
+      attachments: attachments,
       evaluation: {
         totalQuestions: 10,
         passingScore: 14,
@@ -25950,9 +26078,42 @@ class IntranetApp {
     this.store.state.weeklyMaterials.push(newMaterial);
     if (typeof this.store.saveState === "function") this.store.saveState();
 
+    this._tempAttachments = [];
     this.closeModal();
-    this.showToast(`✓ Semana ${weekNum} publicada con éxito en el Aula Virtual`, "success");
+    this.showToast(`✓ Semana ${weekNum} con ${attachments.length} materiales publicada con éxito en el Aula Virtual`, "success");
     this.render();
+  }
+
+  downloadMaterialAttachment(fileName, materialId, attIdx) {
+    const state = this.store.state;
+    const materials = (state && state.weeklyMaterials) || [];
+    const mat = materials.find(m => m.id === materialId);
+    const att = (mat && mat.attachments && mat.attachments[attIdx]) || { name: fileName };
+
+    if (att.url && (att.url.startsWith('http://') || att.url.startsWith('https://'))) {
+      window.open(att.url, '_blank');
+      this.showToast(`Abriendo recurso online: ${att.name}`, "info");
+      return;
+    }
+
+    // Descarga simulada de archivo oficial
+    this.showToast(`📥 Descargando archivo: ${fileName}...`, "success");
+    try {
+      const dummyContent = `I.E.P. "El Educador" - Material Oficial 2026\nDocumento: ${fileName}\nTema: ${mat ? mat.title : 'Material Pedagógico'}\nFecha: ${new Date().toLocaleDateString('es-PE')}`;
+      const blob = new Blob([dummyContent], { type: 'text/plain;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch(e) {
+      console.log('Download triggered:', fileName);
+    }
+  }
+
+  downloadMaterialttachment(fileName, materialId, attIdx) {
+    this.downloadMaterialAttachment(fileName, materialId, attIdx);
   }
 
   openEditMaterialModal(materialId) {
