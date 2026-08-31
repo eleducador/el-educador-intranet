@@ -24668,194 +24668,70 @@ const Components = {
 
   // =========================================================================
 
-  // PNTÍALLA DE BLOQUEO DE INTRÍAN ET POR PENSIÓN PENDIEN TE
-
+  // PANTALLA DE BLOQUEO DE INTRANET POR PENSIÓN PENDIENTE
   // =========================================================================
-
   renderLockedAccessScreen(state, user) {
-
-    const debtmount = user.pendióngDebtmount || 480.00;
-
-    const concept = user.pendióngConcept || "Pensión Escolar - Agosto 2026";
-
-
+    const debtAmount = user.pendingDebtAmount || user.pendióngDebtmount || 480.00;
+    const concept = user.pendingConcept || user.pendióngConcept || "Pensión Escolar - Agosto 2026";
 
     return `
-
-      <div class="fade-in" style="max-width: 780px; margin: 0 auto; padding: var(--space-4);">
-
-        <div class="card" style="border: 2px solid var(--color-red-500); box-shadow: 0 10px 25px rgba(220, 38, 38, 0.15); border-radius: 12px; overflow: hidden;">
-
+      <div class="fade-in" style="max-width: 720px; margin: 20px auto; padding: var(--space-4);">
+        <div class="card" style="border: 2px solid #ef4444; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.12); border-radius: 14px; overflow: hidden; background: #ffffff;">
           
-
           <!-- Encabezado de Alerta Institucional -->
-
-          <div style="background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%); color: white; padding: 24px; text-align: center;">
-
-            <img src="logo.png" onerror="this.src='assets/logo.png'" alt="Escudo I.E.P. El Educador" style="width: 80px; height: 80px; object-fit: contain; margin-bottom: 8px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));" />
-
+          <div style="background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%); color: white; padding: 28px 24px; text-align: center;">
+            <img src="logo.png" onerror="this.src='assets/logo.png'" alt="Escudo I.E.P. El Educador" style="width: 80px; height: 80px; object-fit: contain; margin-bottom: 10px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));" />
             <div style="font-size: 12px; font-weight: 800; letter-spacing: 0.1em; color: var(--color-yellow-300); text-transform: uppercase;">
-
-              I.E.P. "EL EDUCADOR" • 21 AÑOS DEJNDO HUELLS (S.J.L.)
-
+              I.E.P. "EL EDUCADOR" • 21 AÑOS DEJANDO HUELLAS (S.J.L.)
             </div>
-
-            <h2 style="font-size: 22px; font-weight: 900; margin: 6px 0 4px; color: white;">
-
-              ACCESO A LA INTRÍAN ET RESTRINGIDO
-
+            <h2 style="font-size: 22px; font-weight: 900; margin: 8px 0 4px; color: #ffffff;">
+              ACCESO A LA INTRANET RESTRINGIDO
             </h2>
-
             <p style="font-size: 13px; color: #fecaca; margin: 0;">
-
-              Validación de Pensión Escolar Requerida para el Alumno(a) y Apoderado(a)
-
+              Validación de Pensión Escolar Requerida
             </p>
-
           </div>
 
-
-
-          <div style="padding: 24px;">
-
-            <div style="background: #fff5f5; border-left: 4px solid var(--color-red-500); padding: 14px 18px; border-radius: 6px; margin-bottom: 20px;">
-
-              <div style="font-weight: 800; color: #991b1b; font-size: 14px; margin-bottom: 4px;">
-
-                ⚠️ N otificación de Coordinación y Tesorera
-
+          <div style="padding: 28px 24px;">
+            <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;">
+              <div style="font-weight: 800; color: #991b1b; font-size: 14.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                ⚠️ Notificación de Coordinación y Tesorería
               </div>
-
-              <p style="font-size: 13px; color: #7f1d1d; margin: 0; line-height: 1.5;">
-
-                Estimado(a) <strong>${user.name}</strong>, el acceso a las notas bimestrales, horario de clases, control de cuadernos QR y aula virtual se encuentra temporaúlmente bloqueado debido a una cuota pendiente de pago.
-
+              <p style="font-size: 13.5px; color: #7f1d1d; margin: 0; line-height: 1.6;">
+                Estimado(a) <strong>${user.name}</strong>, el acceso a las notas bimestrales, horario de clases, control de cuadernos QR y aula virtual se encuentra temporalmente restringido debido a una cuota pendiente de pago.
               </p>
-
             </div>
 
-
-
-            <!-- Resumende Cuenta Pendiente -->
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; background: var(--bg-surface-subtle); padding: 16px; border-radius: 8px; margin-bottom: 20px;">
-
+            <!-- Resumen de Cuenta Pendiente -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; background: #f8fafc; border: 1px solid #e2e8f0; padding: 18px; border-radius: 10px; margin-bottom: 24px;">
               <div>
-
-                <span style="font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase;">Concepto Pendiente</span>
-
-                <div style="font-size: 14px; font-weight: 800; color: var(--color-navy-900);">${concept}</div>
-
+                <span style="font-size: 11px; color: #64748b; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 4px;">Concepto Pendiente</span>
+                <div style="font-size: 14px; font-weight: 800; color: #0f172a;">${concept}</div>
               </div>
-
               <div>
-
-                <span style="font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase;">Monto a Cancelar</span>
-
-                <div style="font-size: 22px; font-weight: 900; color: var(--color-red-600);">S/ ${debtmount.toFixed(2)}</div>
-
+                <span style="font-size: 11px; color: #64748b; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 4px;">Monto a Regularizar</span>
+                <div style="font-size: 22px; font-weight: 900; color: #dc2626;">S/ ${debtAmount.toFixed(2)}</div>
               </div>
-
               <div>
-
-                <span style="font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase;">Estado Actual</span>
-
-                <div><span class="status-badge status-failed" style="font-weight: bold;"><span class='status-dot-red'></span> Bloqueado por Mora</span></div>
-
+                <span style="font-size: 11px; color: #64748b; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 4px;">Estado Actual</span>
+                <div><span class="status-badge status-failed" style="font-weight: bold; background: #fee2e2; color: #991b1b; border: 1px solid #f87171;"><span class='status-dot-red'></span> Bloqueado por Mora</span></div>
               </div>
-
             </div>
 
-
-
-            <!-- Métodos de Pago y Desbloqueo Inmediato -->
-
-            <h3 style="font-size: 15px; font-weight: 800; color: var(--color-navy-900); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-
-              ⚡ Realizar Pago y Desbloquear Intranet enTiempo Real:
-
-            </h3>
-
-
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 20px;">
-
-              
-
-              <!-- Opción 1: Tarjeta Débito / Crédito -->
-
-              <div class="card" style="border: 2px solid var(--border-subtle); cursor: pointer; padding: 14px; text-align: center; transition: all 0.2s;" onclick="window.app.openPayModal('PEN-08', ${debtmount}, '${concept}')">
-
-                <div style="font-size: 24px; margin-bottom: 4px;"></div>
-
-                <strong style="font-size: 13px; color: var(--color-navy-900);">Tarjeta Débito / Crédito</strong>
-
-                <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Visa, Mastercard, Débito</p>
-
-                <span class="status-badge status-approved" style="background: #22c55e; color: #0b132b; font-weight: 800; margin-top: 6px;">Desbloqueo Inmediato</span>
-
+            <!-- Indicación Institucional -->
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 16px 20px; text-align: center;">
+              <div style="font-weight: 800; color: #166534; font-size: 13.5px; margin-bottom: 4px;">
+                🏛️ Para regularizar su estado o solicitar prórroga:
               </div>
-
-
-
-              <!-- Opción 2: Yape / Plin -->
-
-              <div class="card" style="border: 2px solid var(--border-subtle); cursor: pointer; padding: 14px; text-align: center; transition: all 0.2s;" onclick="window.app.openYapePayModal('PEN-08', ${debtmount})">
-
-                <div style="font-size: 24px; margin-bottom: 4px;"></div>
-
-                <strong style="font-size: 13px; color: #6d28d9;">Yape / PlinInstitucional</strong>
-
-                <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">987-654-321 (I.E.P. El Educador)</p>
-
-                <span class="status-badge status-approved" style="background: #22c55e; color: #0b132b; font-weight: 800; margin-top: 6px;">Validación Automtica</span>
-
-              </div>
-
-
-
-              <!-- Opción 3: Transferencia BCP / BBVA -->
-
-              <div class="card" style="border: 2px solid var(--border-subtle); cursor: pointer; padding: 14px; text-align: center; transition: all 0.2s;" onclick="window.app.openBankTransferModal('PEN-08', ${debtmount})">
-
-                <div style="font-size: 24px; margin-bottom: 4px;">🏦</div>
-
-                <strong style="font-size: 13px; color: var(--color-navy-900);">Depósito Bancario / Agente</strong>
-
-                <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">BCP / BBVA / Banco N ación</p>
-
-                <span class="status-badge status-approved" style="background: #f59e0b; color: #0b132b; font-weight: 800; margin-top: 6px;">Ingresar Voucher</span>
-
-              </div>
-
-            </div>
-
-
-
-            <!-- Botón de Pago Rpido Principal -->
-
-            <button class="btn btn-red" onclick="window.app.openPayModal('PEN-08', ${debtmount}, '${concept}')" style="width: 100%; padding: 14px; font-size: 15px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);">
-
-              <span>Pagar S/ ${debtmount.toFixed(2)} y Desbloquear Intranet Ahora</span>
-
-            </button>
-
-
-
-            <div style="text-align: center; margin-top: 14px; font-size: 11px; color: var(--text-muted);">
-
-              Al confirmar el pago, la base de datos central emitirá su recibo digital y se habilitará el acceso entodos sus dispositivos al instante.
-
+              <p style="font-size: 12.5px; color: #15803d; margin: 0; line-height: 1.5;">
+                Por favor, acérquese a la oficina de <strong>Coordinación / Tesorería</strong> de la institución educativa o comuníquese con la dirección para habilitar su acceso.
+              </p>
             </div>
 
           </div>
-
         </div>
-
       </div>
-
     `;
-
   },
 
 
