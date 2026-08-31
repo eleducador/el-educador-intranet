@@ -3610,6 +3610,80 @@ if (typeof window !== "undefined" && window.initialData && window.initialData.sc
 
 class IntranetStore {
 
+  getPaymentConfig() {
+    if (!this.state.paymentConfig) {
+      this.state.paymentConfig = {
+        pensionStandard: 480.00,
+        pensionInicial: 420.00,
+        pensionPrimaria: 450.00,
+        pensionSecundaria: 480.00,
+        dueDay: 5,
+        bankAccounts: [
+          { id: 'bcp', bank: 'Banco de Crédito del Perú (BCP)', accountNo: '191-98765432-0-12', cci: '002-191-009876543201-55', holder: 'I.E.P. El Educador S.A.C.' },
+          { id: 'bbva', bank: 'BBVA Perú', accountNo: '0011-0234-0100987654', cci: '011-234-000100987654-88', holder: 'I.E.P. El Educador S.A.C.' },
+          { id: 'bn', bank: 'Banco de la Nación', accountNo: '04-018-987654', cci: '018-000-004018987654-22', holder: 'I.E.P. El Educador' }
+        ],
+        digitalWallets: [
+          { id: 'yape', type: 'Yape', number: '987-654-321', holder: 'Prof. Alex Lino (Coordinación I.E.P. El Educador)' },
+          { id: 'plin', type: 'Plin', number: '987-654-321', holder: 'I.E.P. El Educador' }
+        ]
+      };
+    }
+    return this.state.paymentConfig;
+  }
+
+  updatePaymentConfig(config) {
+    if (!config || typeof config !== 'object') return false;
+    this.state.paymentConfig = {
+      ...this.getPaymentConfig(),
+      ...config
+    };
+    this.saveState();
+    this.notify();
+    return true;
+  }
+
+  createOfficialCircular(circularData) {
+    if (!circularData) return null;
+    if (!this.state.announcements) this.state.announcements = [];
+    
+    const count = (this.state.announcements.length + 1).toString().padStart(3, '0');
+    const newDoc = {
+      id: `DOC-CIRC-2026-${Date.now().toString(36).toUpperCase()}`,
+      code: circularData.code || `CIRCULAR N° ${count}-2026-DIR-IEP-EE`,
+      title: circularData.title || circularData.subject || "Circular Institucional Oficial",
+      subject: circularData.subject || circularData.title || "Comunicado Oficial",
+      type: circularData.type || "Circular",
+      target: circularData.target || circularData.targetAudience || "Padres de Familia",
+      targetAudience: circularData.target || circularData.targetAudience || "Padres de Familia",
+      date: circularData.date || new Date().toLocaleDateString("es-PE"),
+      content: circularData.content || circularData.body || "",
+      body: circularData.body || circularData.content || "",
+      sender: circularData.sender || circularData.signedBy || "Dirección & Coordinación General",
+      signedBy: circularData.signedBy || circularData.sender || "Prof. Alex Lino - Coordinación General",
+      signerTitle: circularData.signerTitle || "Coordinador General & Documentación",
+      priority: circularData.priority || "Normal",
+      requiresSignature: !!circularData.requiresSignature,
+      isOfficialDocument: true,
+      createdDate: new Date().toLocaleDateString("es-PE")
+    };
+
+    this.state.announcements.unshift(newDoc);
+    this.saveState();
+    this.notify();
+    return newDoc;
+  }
+
+  deleteOfficialCircular(circularId) {
+    if (!circularId) return false;
+    if (!this.state.announcements) return false;
+    this.state.announcements = this.state.announcements.filter(a => a.id !== circularId && a.code !== circularId);
+    this.saveState();
+    this.notify();
+    return true;
+  }
+
+
   generateUniqueId(prefix = 'ID') {
     const ts = Date.now().toString(36);
     const rand = Math.random().toString(36).substring(2, 7);
@@ -5150,6 +5224,7 @@ class IntranetStore {
       this.state.boletaData = serverData.boletaData;
     }
     if (serverData.academicConfig) this.state.academicConfig = serverData.academicConfig;
+    if (serverData.paymentConfig) this.state.paymentConfig = serverData.paymentConfig;
     if (serverTeachers.length > 0) {
       this.state.teachersList = serverTeachers;
     } else {
@@ -24614,357 +24689,421 @@ const Components = {
 
   // Comunicados
 
-  rendernnouncements(state) {
+    rendernnouncements(state) {
+    return this.renderAnnouncements(state);
+  },
 
-    const isdmión = state.currentRole === 'admin' || state.currentRole === 'director';
+  renderAnnouncements(state) {
+    const role = (state.currentRole || "").toLowerCase();
+    const isAdmin = role === "admin" || role === "director";
+    const circulars = (state.announcements && Array.isArray(state.announcements)) ? state.announcements : [];
 
     return `
-
       <div class="fade-in">
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <h2 class="card-title" style="font-size: var(--font-size-xl);">Muro de Circulares e Informes</h2>
-
-            ${isdmión ? `<button class="btn btn-red btn-sm" onclick="window.app.openNewnnouncementModal()">+ Publicar</button>` : ''}
-
-          </div>
-
-          <div class="announcement-list">
-
-            ${state.announcements.map(a => `
-
-              <div class="card" style="border-left: 6px solid ${a.priority === 'high' ? 'var(--color-yellow-500)' : 'var(--color-navy-700)'};">
-
-                <span class="announcement-tag tag-urgent">${a.tagLabel}</span>
-
-                <h3>${a.title}</h3>
-
-                <p style="font-size:13px; color:var(--text-secondary); margin-top:4px;">${a.content}</p>
-
-                <div style="margin-top: 8px;">
-
-                  <button class="btn btn-outline btn-sm" onclick="window.app.showOfficialReportModal()">Ver Documento Completo</button>
-
-                </div>
-
+        <div class="card" style="margin-bottom: var(--space-6);">
+          <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <h2 class="card-title" style="font-size: var(--font-size-xl);">Módulo Oficial de Informes & Circulares Institucionales</h2>
+                <span class="status-badge status-approved">Año Lectivo 2026</span>
               </div>
-
-            `).join('')}
-
-          </div>
-
-        </div>
-
-      </div>
-
-    `;
-
-  },
-
-
-
-  // =========================================================================
-
-  // PANTALLA DE BLOQUEO DE INTRANET POR PENSIÓN PENDIENTE
-  // =========================================================================
-  renderLockedAccessScreen(state, user) {
-    const debtAmount = user.pendingDebtAmount || user.pendióngDebtmount || 480.00;
-    const concept = user.pendingConcept || user.pendióngConcept || "Pensión Escolar - Agosto 2026";
-
-    return `
-      <div class="fade-in" style="max-width: 720px; margin: 20px auto; padding: var(--space-4);">
-        <div class="card" style="border: 2px solid #ef4444; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.12); border-radius: 14px; overflow: hidden; background: #ffffff;">
-          
-          <!-- Encabezado de Alerta Institucional -->
-          <div style="background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%); color: white; padding: 28px 24px; text-align: center;">
-            <img src="logo.png" onerror="this.src='assets/logo.png'" alt="Escudo I.E.P. El Educador" style="width: 80px; height: 80px; object-fit: contain; margin-bottom: 10px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));" />
-            <div style="font-size: 12px; font-weight: 800; letter-spacing: 0.1em; color: var(--color-yellow-300); text-transform: uppercase;">
-              I.E.P. "EL EDUCADOR" • 21 AÑOS DEJANDO HUELLAS (S.J.L.)
-            </div>
-            <h2 style="font-size: 22px; font-weight: 900; margin: 8px 0 4px; color: #ffffff;">
-              ACCESO A LA INTRANET RESTRINGIDO
-            </h2>
-            <p style="font-size: 13px; color: #fecaca; margin: 0;">
-              Validación de Pensión Escolar Requerida
-            </p>
-          </div>
-
-          <div style="padding: 28px 24px;">
-            <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;">
-              <div style="font-weight: 800; color: #991b1b; font-size: 14.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-                ⚠️ Notificación de Coordinación y Tesorería
-              </div>
-              <p style="font-size: 13.5px; color: #7f1d1d; margin: 0; line-height: 1.6;">
-                Estimado(a) <strong>${user.name}</strong>, el acceso a las notas bimestrales, horario de clases, control de cuadernos QR y aula virtual se encuentra temporalmente restringido debido a una cuota pendiente de pago.
+              <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
+                I.E.P. "El Educador" • UGEL 05 • San Juan de Lurigancho
               </p>
             </div>
+            ${isAdmin ? `
+              <button class="btn btn-gold btn-sm" onclick="window.app.openCreateCircularModal()" style="font-weight: 900; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
+                + Redactar Nueva Circular / Informe Oficial
+              </button>
+            ` : ''}
+          </div>
 
-            <!-- Resumen de Cuenta Pendiente -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; background: #f8fafc; border: 1px solid #e2e8f0; padding: 18px; border-radius: 10px; margin-bottom: 24px;">
-              <div>
-                <span style="font-size: 11px; color: #64748b; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 4px;">Concepto Pendiente</span>
-                <div style="font-size: 14px; font-weight: 800; color: #0f172a;">${concept}</div>
+          <div style="padding: var(--space-4);">
+            ${circulars.length === 0 ? `
+              <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+                <div style="font-size: 36px; margin-bottom: 8px;">📄</div>
+                <h4 style="font-size: 15px; font-weight: 800; color: #0b132b;">No hay circulares registradas</h4>
+                <p style="font-size: 12px; margin-top: 4px;">Las nuevas directivas y comunicados emitidos por Dirección aparecerán aquí.</p>
               </div>
-              <div>
-                <span style="font-size: 11px; color: #64748b; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 4px;">Monto a Regularizar</span>
-                <div style="font-size: 22px; font-weight: 900; color: #dc2626;">S/ ${debtAmount.toFixed(2)}</div>
-              </div>
-              <div>
-                <span style="font-size: 11px; color: #64748b; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 4px;">Estado Actual</span>
-                <div><span class="status-badge status-failed" style="font-weight: bold; background: #fee2e2; color: #991b1b; border: 1px solid #f87171;"><span class='status-dot-red'></span> Bloqueado por Mora</span></div>
-              </div>
-            </div>
+            ` : `
+              <div style="display: flex; flex-direction: column; gap: 16px;">
+                ${circulars.map(c => `
+                  <div class="card" style="border-left: 5px solid #1e3a8a; padding: 18px; background: #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-radius: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+                      <div>
+                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
+                          <span class="status-badge" style="background: #1e3a8a; color: white; font-weight: 800; font-size: 11px;">
+                            ${c.code || 'CIRCULAR OFICIAL'}
+                          </span>
+                          <span class="status-badge" style="background: #eff6ff; color: #1e40af; font-weight: bold; font-size: 11px; border: 1px solid #bfdbfe;">
+                            📌 ${c.target || c.targetAudience || 'Comunidad Educativa'}
+                          </span>
+                          <span style="font-size: 11.5px; color: #64748b;">🗓️ ${c.date || c.createdDate}</span>
+                        </div>
+                        <h3 style="font-size: 16px; font-weight: 900; color: #0b132b; margin: 4px 0 2px;">
+                          ${c.title || c.subject}
+                        </h3>
+                        <span style="font-size: 12px; color: #475569;">Emitido por: <strong>${c.sender || c.signedBy || 'Dirección General'}</strong></span>
+                      </div>
 
-            <!-- Indicación Institucional -->
-            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 16px 20px; text-align: center;">
-              <div style="font-weight: 800; color: #166534; font-size: 13.5px; margin-bottom: 4px;">
-                🏛️ Para regularizar su estado o solicitar prórroga:
-              </div>
-              <p style="font-size: 12.5px; color: #15803d; margin: 0; line-height: 1.5;">
-                Por favor, acérquese a la oficina de <strong>Coordinación / Tesorería</strong> de la institución educativa o comuníquese con la dirección para habilitar su acceso.
-              </p>
-            </div>
+                      <div style="display: flex; gap: 8px; align-items: center;">
+                        <button class="btn btn-navy btn-sm" onclick="window.app.printOfficialCircular('${c.id}')" style="font-weight: 800; font-size: 11.5px;">
+                          🖨️ Imprimir / Guardar Formato A4
+                        </button>
+                        ${isAdmin ? `
+                          <button class="btn btn-outline btn-sm" onclick="window.app.confirmDeleteCircular('${c.id}')" style="color: #dc2626; padding: 4px 8px;" title="Eliminar Circular">
+                            🗑️
+                          </button>
+                        ` : ''}
+                      </div>
+                    </div>
 
+                    <!-- Contenido Oficial -->
+                    <div style="font-size: 13.5px; color: #334155; line-height: 1.6; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; white-space: pre-line;">
+                      ${c.content || c.body}
+                    </div>
+
+                    <!-- Pie de Firma Institucional -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 11.5px; color: #64748b; border-top: 1px dashed #cbd5e1; padding-top: 8px;">
+                      <span>I.E.P. "El Educador" • "21 años dejando huellas"</span>
+                      <span style="font-weight: bold; color: #1e3a8a;">Sello & Firma Digital Registrada ✓</span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            `}
           </div>
         </div>
       </div>
     `;
-  },
-
-
+  }
+,
 
   // Pagos y Panel de Tesorera
 
-  renderPayments(state) {
-
-    const isCoordiónation = state.currentRole === "admin" || state.currentRole === "director";
+    renderPayments(state) {
+    const role = (state.currentRole || "").toLowerCase();
+    const isAdmin = role === "admin" || role === "director";
+    const paymentConfig = (window.appStore && typeof window.appStore.getPaymentConfig === 'function')
+      ? window.appStore.getPaymentConfig()
+      : {
+          pensionStandard: 480.00,
+          pensionInicial: 420.00,
+          pensionPrimaria: 450.00,
+          pensionSecundaria: 480.00,
+          dueDay: 5,
+          bankAccounts: [
+            { id: 'bcp', bank: 'Banco de Crédito del Perú (BCP)', accountNo: '191-98765432-0-12', cci: '002-191-009876543201-55', holder: 'I.E.P. El Educador S.A.C.' },
+            { id: 'bbva', bank: 'BBVA Perú', accountNo: '0011-0234-0100987654', cci: '011-234-000100987654-88', holder: 'I.E.P. El Educador S.A.C.' },
+            { id: 'bn', bank: 'Banco de la Nación', accountNo: '04-018-987654', cci: '018-000-004018987654-22', holder: 'I.E.P. El Educador' }
+          ],
+          digitalWallets: [
+            { id: 'yape', type: 'Yape', number: '987-654-321', holder: 'Prof. Alex Lino (Coordinación I.E.P. El Educador)' },
+            { id: 'plin', type: 'Plin', number: '987-654-321', holder: 'I.E.P. El Educador' }
+          ]
+        };
 
     const families = (window.appStore && typeof window.appStore.getFamiliesFinancial === "function")
-
       ? window.appStore.getFamiliesFinancial()
+      : (state.familiesFinancial || []);
 
-      : (state.familiesFinancial || initialData.familiesFinancial || []);
-
-
+    const activeTab = state.financeAdminTab || 'families';
 
     return `
-
       <div class="fade-in">
-
         <div class="card" style="margin-bottom: var(--space-6);">
-
-          <div class="card-header">
-
+          <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
             <div>
-
               <div style="display: flex; align-items: center; gap: 8px;">
-
-                <h2 class="card-title" style="font-size: var(--font-size-xl);">Control de Pensiones & Validación Automtica de Intranet</h2>
-
-                <span class="status-badge status-approved"><span class='status-dot-green'></span> Sistema de Pago Online Activo</span>
-
+                <h2 class="card-title" style="font-size: var(--font-size-xl);">Control de Pensiones & Recaudación Institucional</h2>
+                <span class="status-badge status-approved"><span class='status-dot-green'></span> Sistema Conectado a Firebase</span>
               </div>
-
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
-
                 I.E.P. "El Educador" • "21 años dejando huellas" (S.J.L. • UGEL 05)
-
               </p>
-
             </div>
-
-            ${isCoordiónation ? `
-
-              <button class="btn btn-gold btn-sm" onclick="window.app.openManualPaymentModal()">
-
-                + Registrar Pago en Caja (Efectivo/Banco)
-
-              </button>
-
+            ${isAdmin ? `
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button class="btn ${activeTab === 'families' ? 'btn-navy' : 'btn-outline'} btn-sm" onclick="window.app.setFinanceAdminTab('families')" style="font-weight: 800;">
+                  👥 Estado de Familias (${families.length})
+                </button>
+                <button class="btn ${activeTab === 'settings' ? 'btn-gold' : 'btn-outline'} btn-sm" onclick="window.app.setFinanceAdminTab('settings')" style="font-weight: 800;">
+                  ⚙️ Configurar Precios & Cuentas Bancarias
+                </button>
+              </div>
             ` : ''}
-
           </div>
 
+          ${isAdmin && activeTab === 'settings' ? `
+            <!-- =====================================================================
+                 PESTAÑA ADMINISTRADOR: CONFIGURACIÓN DE PRECIOS, CUENTAS Y YAPE/PLIN
+                 ===================================================================== -->
+            <div style="padding: var(--space-4);">
+              <form id="payment-config-form" onsubmit="window.app.handleSavePaymentConfig(event)">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-6); margin-bottom: 24px;">
+                  
+                  <!-- 1. Precios de Pensiones -->
+                  <div class="card" style="border-top: 4px solid var(--color-yellow-500); background: #fffdf5; padding: 18px;">
+                    <h3 style="font-size: 15px; font-weight: 900; color: #0b132b; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                      💵 Precio Oficial de Pensiones 2026
+                    </h3>
+                    
+                    <div class="form-group" style="margin-bottom: 12px;">
+                      <label class="form-label" style="font-size: 12px; font-weight: bold;">Pensión Estándar Mensual (S/):</label>
+                      <input type="number" step="0.50" name="pensionStandard" class="form-control" value="${paymentConfig.pensionStandard || 480.00}" required style="font-weight: 800; font-size: 14px;" />
+                    </div>
 
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+                      <div class="form-group">
+                        <label class="form-label" style="font-size: 11px; font-weight: bold;">Inicial (S/):</label>
+                        <input type="number" step="0.50" name="pensionInicial" class="form-control" value="${paymentConfig.pensionInicial || 420.00}" style="font-size: 13px;" />
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label" style="font-size: 11px; font-weight: bold;">Primaria (S/):</label>
+                        <input type="number" step="0.50" name="pensionPrimaria" class="form-control" value="${paymentConfig.pensionPrimaria || 450.00}" style="font-size: 13px;" />
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label" style="font-size: 11px; font-weight: bold;">Secundaria (S/):</label>
+                        <input type="number" step="0.50" name="pensionSecundaria" class="form-control" value="${paymentConfig.pensionSecundaria || 480.00}" style="font-size: 13px;" />
+                      </div>
+                    </div>
 
-          <!-- Métricas de Validación -->
+                    <div class="form-group">
+                      <label class="form-label" style="font-size: 12px; font-weight: bold;">Día Límite de Vencimiento de cada Mes:</label>
+                      <input type="number" min="1" max="31" name="dueDay" class="form-control" value="${paymentConfig.dueDay || 5}" required style="font-size: 13px;" />
+                      <span style="font-size: 10.5px; color: var(--text-muted);">Ejemplo: Día 05 o 10 de cada mes</span>
+                    </div>
+                  </div>
 
-          <div style="margin-bottom: var(--space-6);">
+                  <!-- 2. Billeteras Digitales (Yape y Plin) -->
+                  <div class="card" style="border-top: 4px solid #6d28d9; background: #faf5ff; padding: 18px;">
+                    <h3 style="font-size: 15px; font-weight: 900; color: #581c87; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                      📱 Billeteras Digitales (Yape & Plin)
+                    </h3>
 
-            <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-navy-700); background: var(--bg-surface-subtle);">
+                    <div class="form-group" style="margin-bottom: 12px;">
+                      <label class="form-label" style="font-size: 12px; font-weight: bold;">Número de Yape Institucional:</label>
+                      <input type="text" name="yapeNumber" class="form-control" value="${(paymentConfig.digitalWallets && paymentConfig.digitalWallets.find(w => w.type === 'Yape')?.number) || '987-654-321'}" required style="font-weight: 800; font-size: 14px;" />
+                    </div>
 
-              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Validación Automtica</span>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                      <label class="form-label" style="font-size: 12px; font-weight: bold;">Titular de Cuenta Yape:</label>
+                      <input type="text" name="yapeHolder" class="form-control" value="${(paymentConfig.digitalWallets && paymentConfig.digitalWallets.find(w => w.type === 'Yape')?.holder) || 'Prof. Alex Lino (I.E.P. El Educador)'}" required style="font-size: 13px;" />
+                    </div>
 
-              <div style="font-size: 18px; font-weight: 800; color: var(--color-navy-900); margin-top: 2px;">Habilitada ⚡</div>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                      <label class="form-label" style="font-size: 12px; font-weight: bold;">Número de Plin Institucional:</label>
+                      <input type="text" name="plinNumber" class="form-control" value="${(paymentConfig.digitalWallets && paymentConfig.digitalWallets.find(w => w.type === 'Plin')?.number) || '987-654-321'}" style="font-size: 13px;" />
+                    </div>
 
-              <span style="font-size: 10px; color: var(--text-muted);">Desbloqueo inmediato conpago</span>
+                    <div class="form-group">
+                      <label class="form-label" style="font-size: 12px; font-weight: bold;">Titular de Cuenta Plin:</label>
+                      <input type="text" name="plinHolder" class="form-control" value="${(paymentConfig.digitalWallets && paymentConfig.digitalWallets.find(w => w.type === 'Plin')?.holder) || 'I.E.P. El Educador'}" style="font-size: 13px;" />
+                    </div>
+                  </div>
+                </div>
 
+                <!-- 3. Cuentas Bancarias Oficiales -->
+                <div class="card" style="border-top: 4px solid #1e3a8a; background: #f8fafc; padding: 18px; margin-bottom: 20px;">
+                  <h3 style="font-size: 15px; font-weight: 900; color: #1e3a8a; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                    🏦 Cuentas Bancarias del Colegio (BCP, BBVA, Banco de la Nación)
+                  </h3>
+                  
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                    <!-- BCP -->
+                    <div style="background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                      <strong style="color: #0b132b; font-size: 13px;">🔵 Banco de Crédito del Perú (BCP)</strong>
+                      <div class="form-group" style="margin-top: 8px; margin-bottom: 8px;">
+                        <label class="form-label" style="font-size: 11px;">N° de Cuenta Corriente:</label>
+                        <input type="text" name="bcpAccount" class="form-control" value="${paymentConfig.bankAccounts?.[0]?.accountNo || '191-98765432-0-12'}" style="font-size: 12px;" />
+                      </div>
+                      <div class="form-group" style="margin-bottom: 8px;">
+                        <label class="form-label" style="font-size: 11px;">Código Interbancario (CCI):</label>
+                        <input type="text" name="bcpCci" class="form-control" value="${paymentConfig.bankAccounts?.[0]?.cci || '002-191-009876543201-55'}" style="font-size: 12px;" />
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label" style="font-size: 11px;">Titular:</label>
+                        <input type="text" name="bcpHolder" class="form-control" value="${paymentConfig.bankAccounts?.[0]?.holder || 'I.E.P. El Educador S.A.C.'}" style="font-size: 12px;" />
+                      </div>
+                    </div>
+
+                    <!-- BBVA -->
+                    <div style="background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                      <strong style="color: #0b132b; font-size: 13px;">🔷 BBVA Perú</strong>
+                      <div class="form-group" style="margin-top: 8px; margin-bottom: 8px;">
+                        <label class="form-label" style="font-size: 11px;">N° de Cuenta Corriente:</label>
+                        <input type="text" name="bbvaAccount" class="form-control" value="${paymentConfig.bankAccounts?.[1]?.accountNo || '0011-0234-0100987654'}" style="font-size: 12px;" />
+                      </div>
+                      <div class="form-group" style="margin-bottom: 8px;">
+                        <label class="form-label" style="font-size: 11px;">Código Interbancario (CCI):</label>
+                        <input type="text" name="bbvaCci" class="form-control" value="${paymentConfig.bankAccounts?.[1]?.cci || '011-234-000100987654-88'}" style="font-size: 12px;" />
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label" style="font-size: 11px;">Titular:</label>
+                        <input type="text" name="bbvaHolder" class="form-control" value="${paymentConfig.bankAccounts?.[1]?.holder || 'I.E.P. El Educador S.A.C.'}" style="font-size: 12px;" />
+                      </div>
+                    </div>
+
+                    <!-- Banco de la Nación -->
+                    <div style="background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                      <strong style="color: #0b132b; font-size: 13px;">🏛️ Banco de la Nación / Agentes</strong>
+                      <div class="form-group" style="margin-top: 8px; margin-bottom: 8px;">
+                        <label class="form-label" style="font-size: 11px;">N° de Cuenta:</label>
+                        <input type="text" name="bnAccount" class="form-control" value="${paymentConfig.bankAccounts?.[2]?.accountNo || '04-018-987654'}" style="font-size: 12px;" />
+                      </div>
+                      <div class="form-group" style="margin-bottom: 8px;">
+                        <label class="form-label" style="font-size: 11px;">Código Interbancario (CCI):</label>
+                        <input type="text" name="bnCci" class="form-control" value="${paymentConfig.bankAccounts?.[2]?.cci || '018-000-004018987654-22'}" style="font-size: 12px;" />
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label" style="font-size: 11px;">Titular:</label>
+                        <input type="text" name="bnHolder" class="form-control" value="${paymentConfig.bankAccounts?.[2]?.holder || 'I.E.P. El Educador'}" style="font-size: 12px;" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                  <button type="submit" class="btn btn-gold" style="font-weight: 900; padding: 12px 28px; font-size: 14px; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
+                    💾 Guardar y Actualizar Configuración de Pagos en Firebase
+                  </button>
+                </div>
+              </form>
             </div>
-
-          </div>
-
-
-
-          ${isCoordiónation ? `
-
+          ` : isAdmin && activeTab === 'families' ? `
             <!-- Panel Exclusivo para Coordinación y Dirección: Control de Familias y Bloqueos -->
-
-            <div style="margin-bottom: var(--space-6);">
-
-              <div class="card-header" style="margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); paddióng-bottom: 8px;">
-
+            <div style="padding: var(--space-4);">
+              <div class="card-header" style="margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
                 <h3 class="card-title" style="font-size: var(--font-size-base);">
-
                   👥 Estado Financiero por Familia y Bloqueo de Acceso a Intranet
-
                 </h3>
-
                 <span class="status-badge status-approved">${families.length} Familias Monitoreadas</span>
-
               </div>
-
               <div class="table-container">
-
                 <table class="data-table">
-
                   <thead>
-
                     <tr>
-
                       <th>Código</th><th>Apoderado / Familia</th><th>Estudiante</th><th>Grado</th><th>Acceso a Intranet</th><th style="text-align:center;">Acciones de Control</th>
-
                     </tr>
-
                   </thead>
-
                   <tbody>
-
                     ${families.map(f => `
-
                       <tr>
-
                         <td><code>${f.familyId}</code></td>
-
                         <td><strong>${f.guardian}</strong></td>
-
                         <td>${f.studentName}</td>
-
                         <td>${f.grade}</td>
-
                         <td>
-
-                          <span class="status-badge ${f.isccessLocked ? 'status-failed' : 'status-approved'}" style="font-weight: bold;">
-
-                            ${f.isccessLocked ? '<span class="status-dot-red"></span> BLOQUEDO POR MORÍA' : '<span class="status-dot-green"></span> ACCESO HBILITÍADO'}
-
+                          <span class="status-badge ${(f.isAccessLocked || f.isccessLocked) ? 'status-failed' : 'status-approved'}" style="font-weight: bold;">
+                            ${(f.isAccessLocked || f.isccessLocked) ? '<span class="status-dot-red"></span> BLOQUEADO POR MORA' : '<span class="status-dot-green"></span> ACCESO HABILITADO'}
                           </span>
-
                         </td>
-
                         <td style="text-align:center; white-space: nowrap;">
-
-                          <button class="btn btn-sm ${f.isccessLocked ? 'btn-gold' : 'btn-outline'}" onclick="window.app.toggleFamilyLock('${f.familyId}')">
-
-                            ${f.isccessLocked ? '<span class="status-dot-green"></span> Desbloquear / Prórroga' : '<span class="status-dot-red"></span> Bloquear Acceso'}
-
+                          <button class="btn btn-sm ${(f.isAccessLocked || f.isccessLocked) ? 'btn-gold' : 'btn-outline'}" onclick="window.app.toggleFamilyLock('${f.familyId}')">
+                            ${(f.isAccessLocked || f.isccessLocked) ? '<span class="status-dot-green"></span> Desbloquear / Prórroga' : '<span class="status-dot-red"></span> Bloquear Acceso'}
                           </button>
-
-                          <button class="btn btn-red btn-sm" onclick="window.app.confirmDeleteFamily('${f.familyId}')" title="Elimiónar registro de familia y accesos vinculados" style="margin-left: 4px; padding: 4px 8px;">
-
+                          <button class="btn btn-red btn-sm" onclick="window.app.confirmDeleteFamily('${f.familyId}')" title="Eliminar registro de familia" style="margin-left: 4px; padding: 4px 8px;">
                             🗑️
-
                           </button>
-
                         </td>
-
                       </tr>
-
                     `).join('')}
-
                   </tbody>
-
                 </table>
-
               </div>
-
             </div>
-
           ` : `
+            <!-- VISTA DEL APODERADO / ESTUDIANTE: CRONOGRAMA & CANALES BANCARIOS OFICIALES -->
+            <div style="padding: var(--space-4);">
+              <!-- 1. Canales de Pago Autorizados -->
+              <div class="card" style="border-left: 4px solid var(--color-yellow-500); background: #fffdf5; padding: 18px; margin-bottom: 24px;">
+                <h3 style="font-size: 15px; font-weight: 900; color: #0b132b; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                  🏛️ Canales de Pago Oficiales - I.E.P. "El Educador"
+                </h3>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+                  Puede realizar el abono de su pensión escolar mediante las siguientes cuentas autorizadas y reportar su comprobante a Tesorería:
+                </p>
 
-            <!-- Lista de Pagos del Apoderado / Estudiante -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
+                  <!-- Yape / Plin -->
+                  <div style="background: white; border: 1.5px solid #d8b4fe; border-radius: 8px; padding: 12px;">
+                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                      <span style="font-size: 16px;">📱</span>
+                      <strong style="color: #6d28d9; font-size: 13px;">Yape / Plin</strong>
+                    </div>
+                    <div style="font-size: 16px; font-weight: 900; color: #581c87; margin: 2px 0;">
+                      ${(paymentConfig.digitalWallets && paymentConfig.digitalWallets[0]?.number) || '987-654-321'}
+                    </div>
+                    <span style="font-size: 11px; color: #6b7280; display: block;">Titular: ${(paymentConfig.digitalWallets && paymentConfig.digitalWallets[0]?.holder) || 'I.E.P. El Educador'}</span>
+                  </div>
 
-            <div class="card-header" style="margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); paddióng-bottom: 8px;">
+                  <!-- BCP -->
+                  <div style="background: white; border: 1.5px solid #bfdbfe; border-radius: 8px; padding: 12px;">
+                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                      <span style="font-size: 16px;">🔵</span>
+                      <strong style="color: #1e40af; font-size: 13px;">Banco de Crédito (BCP)</strong>
+                    </div>
+                    <div style="font-size: 13.5px; font-weight: 800; color: #1e3a8a; margin: 2px 0;">
+                      Cta: ${paymentConfig.bankAccounts?.[0]?.accountNo || '191-98765432-0-12'}
+                    </div>
+                    <span style="font-size: 10.5px; color: #6b7280; display: block;">CCI: ${paymentConfig.bankAccounts?.[0]?.cci || '002-191-009876543201-55'}</span>
+                    <span style="font-size: 10.5px; color: #6b7280; display: block;">Titular: ${paymentConfig.bankAccounts?.[0]?.holder || 'I.E.P. El Educador S.A.C.'}</span>
+                  </div>
 
-              <h3 class="card-title" style="font-size: var(--font-size-base);">
-
-                Cronograma de Cuotas y Recibos Oficiales
-
-              </h3>
-
-            </div>
-
-
-
-            ${(state.payments || []).map(p => `
-
-              <div class="payment-card ${p.status}">
-
-                <div>
-
-                  <h4 style="margin-bottom: 2px;">${p.concept}</h4>
-
-                  <span style="font-size:12px; color:var(--text-muted);">Vencimiento: ${p.dueDate} ${p.paidDate ? `• Cancelado: ${p.paidDate}` : ''}</span>
-
+                  <!-- BBVA -->
+                  <div style="background: white; border: 1.5px solid #bfdbfe; border-radius: 8px; padding: 12px;">
+                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                      <span style="font-size: 16px;">🔷</span>
+                      <strong style="color: #1e40af; font-size: 13px;">BBVA Perú</strong>
+                    </div>
+                    <div style="font-size: 13.5px; font-weight: 800; color: #1e3a8a; margin: 2px 0;">
+                      Cta: ${paymentConfig.bankAccounts?.[1]?.accountNo || '0011-0234-0100987654'}
+                    </div>
+                    <span style="font-size: 10.5px; color: #6b7280; display: block;">CCI: ${paymentConfig.bankAccounts?.[1]?.cci || '011-234-000100987654-88'}</span>
+                    <span style="font-size: 10.5px; color: #6b7280; display: block;">Titular: ${paymentConfig.bankAccounts?.[1]?.holder || 'I.E.P. El Educador S.A.C.'}</span>
+                  </div>
                 </div>
-
-                <div style="display:flex; align-items:center; gap:var(--space-4); flex-wrap: wrap;">
-
-                  <span class="payment-amount" style="color: ${p.status === 'paid' ? 'var(--color-green-600)' : 'var(--color-red-600)'};">
-
-                    S/ ${p.amount.toFixed(2)}
-
-                  </span>
-
-                  ${p.status === 'paid' ? `
-
-                    <button class="btn btn-outline btn-sm" onclick="window.app.showReceiptModal('${p.id}')">
-
-                      Ver Recibo (${p.receiptNo || 'REC-2026'})
-
-                    </button>
-
-                  ` : `
-
-                    <button class="btn btn-red btn-sm" onclick="window.app.openPayModal('${p.id}', ${p.amount}, '${p.concept}')" style="font-weight: 800;">
-
-                      Pagar y Validar Intranet
-
-                    </button>
-
-                  `}
-
-                </div>
-
               </div>
 
-            `).join('')}
+              <!-- 2. Cronograma de Cuotas -->
+              <div class="card-header" style="margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+                <h3 class="card-title" style="font-size: var(--font-size-base);">
+                  Cronograma de Cuotas y Recibos Oficiales
+                </h3>
+              </div>
 
+              ${(state.payments || []).map(p => `
+                <div class="payment-card ${p.status}">
+                  <div>
+                    <h4 style="margin-bottom: 2px;">${p.concept}</h4>
+                    <span style="font-size:12px; color:var(--text-muted);">Vencimiento: ${p.dueDate} ${p.paidDate ? `• Cancelado: ${p.paidDate}` : ''}</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:var(--space-4); flex-wrap: wrap;">
+                    <span class="payment-amount" style="color: ${p.status === 'paid' ? 'var(--color-green-600)' : 'var(--color-red-600)'};">
+                      S/ ${p.amount.toFixed(2)}
+                    </span>
+                    ${p.status === 'paid' ? `
+                      <button class="btn btn-outline btn-sm" onclick="window.app.showReceiptModal('${p.id}')">
+                        Ver Recibo (${p.receiptNo || 'REC-2026'})
+                      </button>
+                    ` : `
+                      <span class="status-badge status-approved" style="background: #fef3c7; color: #92400e; font-weight: 800;">
+                        Pendiente en Caja / Banco
+                      </span>
+                    `}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
           `}
-
         </div>
-
-        </div>
-
       </div>
-
     `;
-
   }
-
 };
+
+if (typeof window !== 'undefined') window.Components = Components;
+if (typeof global !== 'undefined') global.Components = Components;
 
 
 
@@ -24982,783 +25121,296 @@ const Components = {
 class IntranetApp {
 
   constructor() {
-
     this.store = window.appStore;
-
     this.contentArea = document.getElementById("content-area");
-
     this.sidebar = document.getElementById("sidebar");
-
-    this.loginErrorMessage = null;
-
-    this.html5QrScanner = null;
-
-    this.isCameractive = false;
-
+    this.roleSelector = document.getElementById("role-selector");
+    this.currentModal = null;
   }
-
-
 
   init() {
-
-    this.contentArea = document.getElementById("content-area");
-
-    this.sidebar = document.getElementById("sidebar");
-
-
-
-    // Suscribirse a cambios en el almacén de datos (conprotección contra parpadeo y reinicios de cmara)
-
+    // Suscribirse a cambios en el almacén de datos
     this.store.subscribe(() => {
-
-      // Si la cmara envivo de portera o cuadernos está activa, NO destruir el DOM
-
-      if (this.isDoorCamctive || this.isCameractive || this.isgendaModalCamctive) {
-
-        this.updateLiveFeedCounters();
-
-        this.updateHeaderUserInfo();
-
-        return;
-
-      }
-
-      // Si el usuario está en la vista de escaneo de portera, actualizar componentes de forma suave siónrefrescar
-
-      if (this.store.state.currentView === "asistencia" && (this.store.state.attendancectiveSubTab === "door-scanner" || !this.store.state.attendancectiveSubTab)) {
-
-        this.updateLiveFeedCounters();
-
-        this.updateHeaderUserInfo();
-
-        return;
-
-      }
-
       this.render();
-
       this.updateHeaderUserInfo();
-
     });
 
-
+    // Escuchador para selector de roles
+    if (this.roleSelector) {
+      this.roleSelector.value = this.store.getCurrentRole();
+      this.roleSelector.addEventListener("change", (e) => {
+        this.store.setRole(e.target.value);
+        this.showToast(`Perfil cambiado a: ${this.store.getCurrentUser().roleLabel}`, "info");
+      });
+    }
 
     // Escuchador de navegación de la sidebar
-
     document.querySelectorAll(".nav-item[data-view]").forEach(item => {
-
       item.addEventListener("click", (e) => {
-
         e.preventDefault();
-
         const view = item.getAttribute("data-view");
-
         this.navigate(view);
-
       });
-
     });
-
-
 
     // Toggle Sidebar Móvil
-
     const toggleBtn = document.getElementById("sidebar-toggle");
-
     if (toggleBtn) {
-
       toggleBtn.addEventListener("click", () => {
-
-        this.sidebar.classList.toggle("open");
-
+        if (this.sidebar) this.sidebar.classList.toggle("open");
       });
-
     }
 
-
-
-    // Cerrar sidebar al hacer clic fuera enmóviles
-
+    // Cerrar sidebar al hacer clic fuera en móviles
     document.addEventListener("click", (e) => {
-
       if (window.innerWidth <= 1024 && this.sidebar && this.sidebar.classList.contains("open")) {
-
         if (!this.sidebar.contains(e.target) && !e.target.closest("#sidebar-toggle")) {
-
           this.sidebar.classList.remove("open");
-
         }
-
       }
-
     });
 
-
+    // Configurar buscador global
+    const searchInput = document.getElementById("global-search");
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        if (query.length > 2) {
+          const courses = typeof this.store.getCourses === 'function' ? this.store.getCourses() : [];
+          const matches = courses.filter(c => c.name && c.name.toLowerCase().includes(query));
+          if (matches.length > 0) {
+            console.log("Coincidencias:", matches);
+          }
+        }
+      });
+    }
 
     // Render inicial
-
     this.render();
-
     this.updateHeaderUserInfo();
-
-    this.startRealtimeSync();
-
   }
 
-
-
-  // =========================================================================
-
-  // CONTROLDOR DE LOGINY AUTENTICCIÓN
-
-  // =========================================================================
-
-  handleLogin(e) {
-
-    if (e) e.preventDefault();
-
-    const usernameInput = document.getElementById("login-username");
-
-    const passwordInput = document.getElementById("login-password");
-
-
-
-    if (!usernameInput || !passwordInput) return;
-
-
-
-    const username = usernameInput.value.trim();
-
-    const password = passwordInput.value;
-
-
-
-    const result = this.store.login(username, password);
-
-    if (result.success) {
-
-      this.loginErrorMessage = null;
-
-      this.render();
-
-      this.updateHeaderUserInfo();
-
-      this.showToast(`¡Bienvenido(a), ${result.user.name}!`, "success");
-
-    } else {
-
-      this.loginErrorMessage = result.error;
-
-      this.render();
-
-    }
-
+  setFinanceAdminTab(tab) {
+    this.store.state.financeAdminTab = tab;
+    this.render();
   }
 
-
-
-  quickLogin(roleKey, password) {
-
-    const result = this.store.login(roleKey, password);
-
-    if (result.success) {
-
-      this.loginErrorMessage = null;
-
-      this.render();
-
-      this.updateHeaderUserInfo();
-
-      this.showToast(`¡Acceso concedido como ${result.user.name}!`, "success");
-
-    }
-
-  }
-
-
-
-  handleLogout() {
-
-    this.stopLiveCameraScanner();
-
-    this.store.logout();
-
-    this.loginErrorMessage = null;
-
-    this.showToast("Sesión cerrada correctamente", "info");
-
-  }
-
-
-
-  togglePasswordVisibility() {
-
-    const passwordInput = document.getElementById("login-password");
-
-    const icon = document.getElementById("eye-icon");
-
-    if (!passwordInput) return;
-
-
-
-    if (passwordInput.type === "password") {
-
-      passwordInput.type = "text";
-
-      if (icon) {
-
-        icon.innerHTML = `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>`;
-
-      }
-
-    } else {
-
-      passwordInput.type = "password";
-
-      if (icon) {
-
-        icon.innerHTML = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>`;
-
-      }
-
-    }
-
-  }
-
-
-
-  openForgotPasswordModal() {
-
-    this.showModal(`
-
-      <div class="modal-header">
-
-        <h3>Recuperación de Contraseña</h3>
-
-        <button class="modal-close-btn" onclick="window.app.closeModal()">✕</button>
-
-      </div>
-
-      <div class="modal-body" style="text-align: center; padding: var(--space-6);">
-
-        <h4 style="color: var(--color-navy-900); font-weight: 800; margin-bottom: 8px;">Coordinación y Documentación (Prof. Alex Lino)</h4>
-
-        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
-
-          Para restablecimiento de credenciales, comuníquese con la oficióna de Coordinación:
-
-        </p>
-
-        <div style="background: var(--color-navy-50); padding: 10px; border-radius: 6px; font-weight: bold; color: var(--color-red-600); margin: 12px 0;">
-
-          coordiónacion@eleducador.edu.pe
-
-        </div>
-
-        <p style="font-size: 11px; color: var(--text-muted);">
-
-          * Contraseñas de prueba: <code>admin2026</code>, <code>director2026</code>, <code>docente2026</code>, <code>estudiante2026</code>, <code>padre2026</code>.
-
-        </p>
-
-      </div>
-
-      <div class="modal-footer">
-
-        <button class="btn btn-navy" onclick="window.app.closeModal()">Entendido</button>
-
-      </div>
-
-    `);
-
-  }
-
-
-
-  // =========================================================================
-
-  // CMBIO DE CONTRÍASEÑA DE USURIO (VISIBLE PRÍA ADMINISTRÍADOR)
-
-  // =========================================================================
-
-  openChangePasswordModal() {
-
-    const user = this.store.getCurrentUser();
-
-    this.showModal(`
-
-      <div class="modal-header" style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white;">
-
-        <div>
-
-          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">🔑 Cambiar Mi Contraseña de Acceso</h3>
-
-          <span style="font-size: 11px; opacity: 0.9;">Usuario: <strong>${user.name || user.username}</strong> (${user.role || 'Docente'})</span>
-
-        </div>
-
-        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
-
-      </div>
-
-      <form onsubmit="window.app.confirmChangePassword(event)">
-
-        <div class="modal-body" style="padding: 20px; background: #f8fafc;">
-
-          
-
-          <div class="form-group" style="margin-bottom: 14px;">
-
-            <label class="form-label" style="font-weight: 800; color: #0f172a;">Contraseña Actual *</label>
-
-            <input type="password" name="currentPassword" class="form-control" placeholder="Ingrese su clave actual" required style="font-weight: bold; font-size: 13px;" />
-
-            <span style="font-size: 11px; color: #64748b;">(Clave actual activa en el sistema)</span>
-
-          </div>
-
-
-
-          <div class="form-group" style="margin-bottom: 14px;">
-
-            <label class="form-label" style="font-weight: 800; color: #0f172a;">N ueva Contraseña *</label>
-
-            <input type="password" name="newPassword" id="new-password-field" class="form-control" placeholder="Mínimo 4 caracteres" miónlength="4" required style="font-weight: bold; font-size: 13px;" />
-
-          </div>
-
-
-
-          <div class="form-group" style="margin-bottom: 14px;">
-
-            <label class="form-label" style="font-weight: 800; color: #0f172a;">Confirmar N ueva Contraseña *</label>
-
-            <input type="password" name="confirmPassword" id="confirm-password-field" class="form-control" placeholder="Repita la nueva clave" miónlength="4" required style="font-weight: bold; font-size: 13px;" />
-
-          </div>
-
-
-
-          <div style="padding: 10px 14px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px; font-size: 11.5px; color: #1e40af;">
-
-            ℹ️ <strong>Seguridad Institucional:</strong> Por políticas de soporte, la administración institucional podrá visualizar su nueva clave en el directorio general para evitar pérdidas de acceso.
-
-          </div>
-
-
-
-        </div>
-
-        <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
-
-          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
-
-          <button type="submit" class="btn btn-navy" style="font-weight: 900;">✓ Actualizar Contraseña</button>
-
-        </div>
-
-      </form>
-
-    `);
-
-  }
-
-
-
-  confirmChangePassword(event) {
-
+  handleSavePaymentConfig(event) {
     if (event) event.preventDefault();
-
     const form = event.target;
-
     const formData = new FormData(form);
 
-
-
-    const currentPass = (formData.get("currentPassword") || "").trim();
-
-    const newPass = (formData.get("newPassword") || "").trim();
-
-    const confirmPass = (formData.get("confirmPassword") || "").trim();
-
-
-
-    if (newPass !== confirmPass) {
-
-      alert("Las nuevas contraseñas no coinciden. Por favor verifíquelas.");
-
-      return;
-
-    }
-
-
-
-    const user = this.store.getCurrentUser();
-
-    const res = this.store.changeUserPassword(user.code || user.id || user.username, newPass, currentPass);
-
-
-
-    if (res.success) {
-
-      this.closeModal();
-
-      this.showToast(`✓ Contraseña actualizada exitosamente. N ueva clave: "${newPass}"`, "success");
-
-      this.render();
-
-    } else {
-
-      alert(res.error || "N o se pudo actualizar la contraseña. Verifique su clave actual.");
-
-    }
-
-  }
-
-
-
-  // Matricular Estudiante conpoderado desde el Portal de Administración
-
-  opendmiónddStudentWithParentModal() {
-
-    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
-
-
-
-    this.showModal(`
-
-      <div class="modal-header" style="background: linear-gradient(135deg, #0b132b 0%, #1e3a8a 100%); color: white;">
-
-        <div>
-
-          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">➕ Matricular Estudiante & Crear Cuenta de Apoderado</h3>
-
-          <span style="font-size: 11px; opacity: 0.9;">I.E.P. "El Educador" • Generación Automtica de Cuentas y Accesos</span>
-
-        </div>
-
-        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
-
-      </div>
-
-      <form onsubmit="window.app.confirmdmiónddStudentWithParent(event)">
-
-        <div class="modal-body" style="padding: 20px; background: #f8fafc;">
-
-          
-
-          <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-
-            
-
-            <div class="form-group" style="grid-column: span2;">
-
-              <label class="form-label" style="font-weight: 800; color: #0f172a;">1. N ombre y Apellido Completo del Estudiante *</label>
-
-              <input type="text" name="studentName" class="form-control" placeholder="Ej. Camila Sofía Mendoza Huamn" required style="font-weight: bold; font-size: 13px;" />
-
-            </div>
-
-
-
-            <div class="form-group">
-
-              <label class="form-label" style="font-weight: 800; color: #0f172a;">2. Grado Escolar a Matricular *</label>
-
-              <select name="gradeId" class="form-control" required style="font-weight: bold; font-size: 13px; background: #fffbeb; border-color: #f59e0b;">
-
-                ${catalog.map(g => `
-
-                  <option value="${g.id}">${g.label} • (Tutor: ${g.tutor || 'Asignado'})</option>
-
-                `).join('')}
-
-              </select>
-
-            </div>
-
-
-
-            <div class="form-group">
-
-              <label class="form-label" style="font-weight: 800; color: #0f172a;">3. DNI del Estudiante (Opcional)</label>
-
-              <input type="text" name="dni" class="form-control" placeholder="Ej. 75891234" maxlength="8" style="font-size: 13px;" />
-
-            </div>
-
-
-
-            <div class="form-group">
-
-              <label class="form-label" style="font-weight: 800; color: #0f172a;">4. N ombre Completo del Padre / Apoderado *</label>
-
-              <input type="text" name="guardian" class="form-control" placeholder="Ej. Rosa Huamn Prado" required style="font-weight: bold; font-size: 13px;" />
-
-            </div>
-
-
-
-            <div class="form-group">
-
-              <label class="form-label" style="font-weight: 800; color: #0f172a;">5. Teléfono de Contacto del Apoderado *</label>
-
-              <input type="tel" name="phone" class="form-control" placeholder="Ej. 987-654-321" required style="font-weight: bold; font-size: 13px;" />
-
-            </div>
-
-
-
-          </div>
-
-
-
-          <div style="margin-top: 14px; padding: 12px 14px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px; font-size: 11.5px; color: #1e40af; line-height: 1.4;">
-
-            ✨ <strong>Sióncronización Total de Cuentas:</strong><br>
-
-            • Se creará el usuario <code>Estudiante</code> (clave por defecto: <code>estudiante2026</code>).<br>
-
-            • Se creará el usuario <code>Apoderado</code> (clave por defecto: <code>padre2026</code>) vinculado al estudiante.<br>
-
-            • Ambos aparecern inmediatamente en la tabla de <strong>Gestión de Usuarios</strong> concontraseñas visibles.
-
-          </div>
-
-
-
-        </div>
-
-        <div class="modal-footer" style="padding: 14px 20px; background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
-
-          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
-
-          <button type="submit" class="btn btn-gold" style="font-weight: 900;">✓ Matricular y Crear Cuentas</button>
-
-        </div>
-
-      </form>
-
-    `);
-
-  }
-
-
-
-  confirmdmiónddStudentWithParent(event) {
-
-    if (event) event.preventDefault();
-
-    const form = event.target;
-
-    const formData = new FormData(form);
-
-
-
-    const gradeId = formData.get("gradeId") || "4sec";
-
-    const catalog = this.store.state.gradesCatalog || initialData.gradesCatalog || [];
-
-    const cleanG = gradeId.toLowerCase().replace(/[^a-z0-9]/g, '');
-
-    const gradeObj = catalog.find(g => (g.id || "").toLowerCase().replace(/[^a-z0-9]/g, '') === cleanG) || { label: "4 de Secundaria" };
-
-
-
-    const studentData = {
-
-      studentCode: `EST-2026-${Math.floor(100 + Math.random() * 900)}`,
-
-      studentName: (formData.get("studentName") || "").trim(),
-
-      gradeId: gradeId,
-
-      grade: gradeObj.label,
-
-      guardian: (formData.get("guardian") || "Padre / Apoderado").trim(),
-
-      phone: (formData.get("phone") || "987-654-321").trim(),
-
-      guardianPhone: (formData.get("phone") || "987-654-321").trim(),
-
-      dni: (formData.get("dni") || "").trim() || `7${Math.floor(1000000 + Math.random() * 9000000)}`
-
+    const updatedConfig = {
+      pensionStandard: parseFloat(formData.get("pensionStandard")) || 480.00,
+      pensionInicial: parseFloat(formData.get("pensionInicial")) || 420.00,
+      pensionPrimaria: parseFloat(formData.get("pensionPrimaria")) || 450.00,
+      pensionSecundaria: parseFloat(formData.get("pensionSecundaria")) || 480.00,
+      dueDay: parseInt(formData.get("dueDay")) || 5,
+      digitalWallets: [
+        { id: 'yape', type: 'Yape', number: formData.get("yapeNumber") || '987-654-321', holder: formData.get("yapeHolder") || 'I.E.P. El Educador' },
+        { id: 'plin', type: 'Plin', number: formData.get("plinNumber") || '987-654-321', holder: formData.get("plinHolder") || 'I.E.P. El Educador' }
+      ],
+      bankAccounts: [
+        { id: 'bcp', bank: 'Banco de Crédito del Perú (BCP)', accountNo: formData.get("bcpAccount") || '191-98765432-0-12', cci: formData.get("bcpCci") || '002-191-009876543201-55', holder: formData.get("bcpHolder") || 'I.E.P. El Educador S.A.C.' },
+        { id: 'bbva', bank: 'BBVA Perú', accountNo: formData.get("bbvaAccount") || '0011-0234-0100987654', cci: formData.get("bbvaCci") || '011-234-000100987654-88', holder: formData.get("bbvaHolder") || 'I.E.P. El Educador S.A.C.' },
+        { id: 'bn', bank: 'Banco de la Nación', accountNo: formData.get("bnAccount") || '04-018-987654', cci: formData.get("bnCci") || '018-000-004018987654-22', holder: formData.get("bnHolder") || 'I.E.P. El Educador' }
+      ]
     };
 
-
-
-    if (!studentData.studentName) {
-
-      alert("Por favor ingrese el nombre del estudiante.");
-
-      return;
-
-    }
-
-
-
-    this.store.addStudentToGrade(studentData);
-
-    this.closeModal();
-
-    this.showToast(`✓ Estudiante "${studentData.studentName}" y cuenta de apoderado "${studentData.guardian}" creados con éxito.`, "success");
-
+    this.store.updatePaymentConfig(updatedConfig);
+    this.showToast("✓ Configuración de Precios y Cuentas Bancarias guardada exitosamente en Firebase.", "success");
     this.render();
-
   }
 
+  openCreateCircularModal() {
+    const nextNum = ((this.store.state.announcements || []).length + 1).toString().padStart(3, '0');
+    const modal = document.getElementById("app-modal-overlay");
+    if (!modal) return;
 
-
-  // =========================================================================
-
-  // CONEXIÓN MULTI-DISPOSITIVO & ESCNEO SIMULTN EO (CELULRES Y PCS)
-
-  // =========================================================================
-
-  openMultiDeviceConnectModal() {
-
-    const isHttp = typeof window !== "undefined" && window.location.protocol.startsWith("http");
-
-    const port = (typeof window !== "undefined" && window.location.port) ? `:${window.location.port}` : "";
-
-    const currentHost = (typeof window !== "undefined" && window.location.hostname) ? window.location.hostname : "";
-
-    
-
-    let targetUrl = "http://192.168.1.129:8080";
-
-    if (isHttp) {
-
-      if (currentHost === "localhost" || currentHost === "127.0.0.1") {
-
-        targetUrl = `http://192.168.1.129${port || ':8080'}`;
-
-      } else {
-
-        targetUrl = window.location.origión;
-
-      }
-
-    }
-
-
-
-    const qrpiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(targetUrl)}`;
-
-
-
-    this.showModal(`
-
-      <div class="modal-header" style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: white;">
-
-        <div>
-
-          <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #fde047;">
-
-            Conectar Celular para Escaneo Simultneo
-
-          </h3>
-
-          <span style="font-size: 11px; opacity: 0.9;">Acceso Multi-Dispositivo enTiempo Real (Varios Profesores a la Vez)</span>
-
+    modal.innerHTML = `
+      <div class="modal-card" style="max-width: 680px; width: 95%;">
+        <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #0b132b); color: white; padding: 18px 24px;">
+          <div>
+            <h3 style="font-size: 16px; font-weight: 900; margin: 0; color: white;">📢 Redactar Nueva Circular / Informe Oficial</h3>
+            <span style="font-size: 11.5px; color: var(--color-yellow-300);">I.E.P. "El Educador" • Dirección General</span>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="window.app.closeModal()" style="color: white; border-color: rgba(255,255,255,0.4);">✕</button>
         </div>
 
-        <button class="modal-close-btn" onclick="window.app.closeModal()" style="color:white;">✕</button>
-
-      </div>
-
-      <div class="modal-body" style="text-align: center; padding: 20px; background: #f8fafc;">
-
-        
-
-        <div style="background: white; border: 2px solid #3b82f6; border-radius: 16px; padding: 20px; display: inline-block; box-shadow: 0 8px 24px rgba(59,130,246,0.15); margin-bottom: 16px;">
-
-          <img src="${qrpiUrl}" alt="QR Conexión Móvil" style="width: 200px; height: 200px; display: block; border-radius: 8px; margin: 0 auto;" onerror="this.src='https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(targetUrl)}'" />
-
-          <div style="margin-top: 10px; font-size: 13px; font-weight: 900; color: #1e3a8a;">
-
-            ${targetUrl}
-
+        <form onsubmit="window.app.handlePublishCircular(event)" style="padding: 24px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+            <div class="form-group">
+              <label class="form-label" style="font-size: 12px; font-weight: bold;">Código Oficial del Documento:</label>
+              <input type="text" name="code" class="form-control" value="CIRCULAR N° ${nextNum}-2026-DIR-IEP-EE" required style="font-weight: bold; font-size: 13px;" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-size: 12px; font-weight: bold;">Tipo de Documento:</label>
+              <select name="type" class="form-control" style="font-size: 13px;">
+                <option value="Circular Oficial">Circular Oficial</option>
+                <option value="Informe Pedagógico">Informe Pedagógico</option>
+                <option value="Comunicado Urgente">Comunicado Urgente</option>
+                <option value="Citación General">Citación General</option>
+                <option value="Directiva Institucional">Directiva Institucional</option>
+              </select>
+            </div>
           </div>
 
-        </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+            <div class="form-group">
+              <label class="form-label" style="font-size: 12px; font-weight: bold;">Dirigido a (Destinatarios):</label>
+              <select name="target" class="form-control" style="font-size: 13px;">
+                <option value="Padres de Familia y Apoderados">Padres de Familia y Apoderados</option>
+                <option value="Docentes y Personal Académico">Docentes y Personal Académico</option>
+                <option value="Estudiantes">Estudiantes</option>
+                <option value="Toda la Comunidad Educativa">Toda la Comunidad Educativa</option>
+                <option value="Nivel Secundaria">Nivel Secundaria</option>
+                <option value="Nivel Primaria">Nivel Primaria</option>
+                <option value="Nivel Inicial">Nivel Inicial</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-size: 12px; font-weight: bold;">Fecha de Emisión:</label>
+              <input type="text" name="date" class="form-control" value="${new Date().toLocaleDateString('es-PE')}" style="font-size: 13px;" />
+            </div>
+          </div>
 
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" style="font-size: 12px; font-weight: bold;">Asunto / Título del Documento:</label>
+            <input type="text" name="subject" class="form-control" placeholder="Ej. Cronograma de Evaluaciones del III Bimestre y Escuela de Padres" required style="font-weight: bold; font-size: 13.5px;" />
+          </div>
 
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" style="font-size: 12px; font-weight: bold;">Cuerpo del Comunicado / Disposiciones Oficiales:</label>
+            <textarea name="content" class="form-control" rows="6" placeholder="Estimada comunidad educativa: Mediante la presente se hace de su conocimiento que..." required style="font-size: 13px; line-height: 1.5;"></textarea>
+          </div>
 
-        <div style="text-align: left; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 14px; margin-bottom: 16px;">
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label class="form-label" style="font-size: 12px; font-weight: bold;">Autoridad Firmante:</label>
+            <input type="text" name="signedBy" class="form-control" value="Prof. Alex Lino - Coordinación General & Documentación" style="font-size: 13px;" />
+          </div>
 
-          <h4 style="margin: 0 0 8px 0; font-size: 13px; color: #0f172a; font-weight: 800;">
-
-            ¿Cómo escanear convarios celulares al mismo tiempo siónperder datos?
-
-          </h4>
-
-          <ol style="margin: 0; paddióng-left: 20px; font-size: 12px; color: #475569; line-height: 1.6;">
-
-            <li>Conecta tu celular a la <strong>misma red Wi-Fi</strong> del colegio.</li>
-
-            <li>Apunta la <strong>cmara de tu celular</strong> a este código QR o abre en el navegador: <code>${targetUrl}</code>.</li>
-
-            <li>Inicia sesión contu cuenta de <strong>Docente</strong> o <strong>Auxiliar</strong>.</li>
-
-            <li><strong>Escaneo On-Demand:</strong> La cmara solo se enciende cuando tú presionas el botón para no gastar batera ni escanear por accidente.</li>
-
-            <li><strong>Sióncronización enVivo:</strong> Cuando tú calificas uncuaderno, aparece al instante en la pantalla de los dems profesores y de la dirección.</li>
-
-          </ol>
-
-        </div>
-
-
-
-        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
-
-          <button class="btn btn-outline btn-sm" onclick="navigator.clipboard.writeText('${targetUrl}'); window.app.showToast('Enlace copiado al portapapeles: ${targetUrl}', 'success');" style="font-weight: 700;">
-
-            Copiar Enlace Directo
-
-          </button>
-
-        </div>
-
+          <div style="display: flex; justify-content: flex-end; gap: 10px;">
+            <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
+            <button type="submit" class="btn btn-gold" style="font-weight: 900; padding: 10px 24px;">📢 Publicar e Imprimir Circular</button>
+          </div>
+        </form>
       </div>
+    `;
+    modal.classList.add("open");
+  }
 
-      <div class="modal-footer">
+  handlePublishCircular(event) {
+    if (event) event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
 
-        <button class="btn btn-navy btn-sm" onclick="window.app.closeModal()" style="font-weight: 800;">
+    const circular = this.store.createOfficialCircular({
+      code: formData.get("code"),
+      type: formData.get("type"),
+      target: formData.get("target"),
+      date: formData.get("date"),
+      subject: formData.get("subject"),
+      title: formData.get("subject"),
+      content: formData.get("content"),
+      body: formData.get("content"),
+      signedBy: formData.get("signedBy")
+    });
 
-          Entendido / Cerrar
+    this.closeModal();
+    this.showToast(`✓ Circular ${circular.code} emitida y publicada exitosamente.`, "success");
+    this.render();
+  }
 
-        </button>
+  confirmDeleteCircular(circularId) {
+    if (confirm("¿Está seguro de eliminar esta circular oficial? Se removerá del panel institucional.")) {
+      this.store.deleteOfficialCircular(circularId);
+      this.showToast("Circular eliminada correctamente.", "info");
+      this.render();
+    }
+  }
 
-      </div>
+  printOfficialCircular(circularId) {
+    const circular = (this.store.state.announcements || []).find(a => a.id === circularId || a.code === circularId);
+    if (!circular) return;
 
+    const printWin = window.open('', '_blank', 'width=850,height=1100');
+    if (!printWin) {
+      alert("Por favor habilite las ventanas emergentes para imprimir la circular oficial.");
+      return;
+    }
+
+    printWin.document.write(`
+      <!DOCTYPE html>
+      <html lang="es">
+      <head>
+        <meta charset="UTF-8">
+        <title>${circular.code} - I.E.P. El Educador</title>
+        <style>
+          @page { size: A4; margin: 20mm; }
+          body { font-family: 'Arial', sans-serif; color: #1e293b; line-height: 1.6; margin: 0; padding: 20px; }
+          .header-box { display: flex; align-items: center; justify-content: space-between; border-bottom: 2.5px solid #0b132b; padding-bottom: 14px; margin-bottom: 24px; }
+          .school-info { text-align: right; font-size: 12px; color: #475569; }
+          .doc-code { text-align: center; font-size: 16px; font-weight: bold; color: #0b132b; text-decoration: underline; margin: 24px 0 16px; }
+          .meta-box { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px 16px; font-size: 13.5px; margin-bottom: 24px; }
+          .meta-row { display: flex; margin-bottom: 6px; }
+          .meta-label { width: 140px; font-weight: bold; color: #0b132b; }
+          .content-box { font-size: 14px; text-align: justify; white-space: pre-line; margin-bottom: 60px; line-height: 1.8; }
+          .signature-section { display: flex; justify-content: flex-end; margin-top: 50px; }
+          .sig-box { text-align: center; border-top: 1.5px solid #334155; width: 280px; padding-top: 8px; font-size: 12.5px; }
+          .footer-note { text-align: center; font-size: 11px; color: #64748b; border-top: 1px solid #e2e8f0; margin-top: 50px; padding-top: 10px; }
+        </style>
+      </head>
+      <body>
+        <div class="header-box">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <img src="logo.png" onerror="this.src='assets/logo.png'" style="width: 75px; height: 75px; object-fit: contain;" />
+            <div>
+              <h2 style="margin: 0; font-size: 18px; color: #0b132b;">I.E.P. "EL EDUCADOR"</h2>
+              <span style="font-size: 11.5px; font-weight: bold; color: #f59e0b;">21 AÑOS DEJANDO HUELLAS</span>
+              <div style="font-size: 11px; color: #64748b;">Niveles: Inicial - Primaria - Secundaria • UGEL 05 - S.J.L.</div>
+            </div>
+          </div>
+          <div class="school-info">
+            <strong>DOCUMENTO OFICIAL</strong><br>
+            Lima - San Juan de Lurigancho<br>
+            Año Lectivo 2026
+          </div>
+        </div>
+
+        <div class="doc-code">${circular.code}</div>
+
+        <div class="meta-box">
+          <div class="meta-row"><div class="meta-label">DIRIGIDO A:</div><div>${circular.target || circular.targetAudience}</div></div>
+          <div class="meta-row"><div class="meta-label">FECHA:</div><div>${circular.date || circular.createdDate}</div></div>
+          <div class="meta-row"><div class="meta-label">ASUNTO:</div><div><strong>${circular.title || circular.subject}</strong></div></div>
+        </div>
+
+        <div class="content-box">${circular.content || circular.body}</div>
+
+        <div class="signature-section">
+          <div class="sig-box">
+            <strong>${circular.signedBy || 'Prof. Alex Lino'}</strong><br>
+            <span>${circular.signerTitle || 'Coordinación General & Dirección'}</span><br>
+            <span>I.E.P. "El Educador" - UGEL 05</span>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          I.E.P. "El Educador" • Jr. Los Educadores S/N, San Juan de Lurigancho • UGEL 05 • Teléfono: (01) 987-654-321
+        </div>
+        <script>
+          window.onload = function() { window.print(); };
+        </script>
+      </body>
+      </html>
     `);
-
+    printWin.document.close();
   }
 
-
-
-  startRealtimeSync() {
-
-    if (this.syncInterval) clearInterval(this.syncInterval);
-
-    this.syncInterval = setInterval(() => {
-
-      // Sióncronización multi-dispositivo entiempo real cada 2.5 segundos
-
-      if (!this.store || !this.store.isUserAuthenticated()) return;
-
-      // Pausar re-renderizado si la cmara envivo de portera está activa
-
-      if (this.isDoorCamctive || this.isCameractive || this.isgendaModalCamctive) return;
-
-      this.store.fetchServerState(true);
-
-    }, 2500);
-
+  selectParentChildSchedule(studentCode) {
+    this.store.state.selectedParentChildCode = studentCode;
+    this.render();
   }
-
 
 
   // Actualización reactiva suave del feed de ingresos (siónparpadeo ni recarga de pantalla)
