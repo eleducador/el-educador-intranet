@@ -25232,11 +25232,12 @@ class IntranetApp {
     this.render();
   }
 
-  render() {
+    render() {
     const state = this.store.state;
     const loginRoot = document.getElementById("login-screen-root");
     const appContainer = document.getElementById("app-container");
     const contentArea = document.getElementById("content-area");
+    const sidebarNav = document.getElementById("sidebar-nav") || document.querySelector(".sidebar-nav");
 
     if (!state.isAuthenticated) {
       if (loginRoot) {
@@ -25252,7 +25253,12 @@ class IntranetApp {
 
     this.updateHeaderUserInfo();
 
-    // Check if user is locked
+    // Sincronizar y renderizar barra lateral dinámica según el rol del usuario (Admin, Docente, Auxiliar, Padre, Alumno)
+    if (sidebarNav && window.Components && typeof window.Components.renderSidebarNav === "function") {
+      sidebarNav.innerHTML = window.Components.renderSidebarNav(state.currentRole, state.currentView, state);
+    }
+
+    // Verificar si el usuario se encuentra bloqueado por mora
     const isLocked = this.store.isAccessLockedForCurrentUser();
     const currentUser = this.store.getCurrentUser();
 
@@ -25269,35 +25275,52 @@ class IntranetApp {
         case "dashboard":
           contentArea.innerHTML = window.Components.renderDashboard(state);
           break;
+        case "boleta":
+        case "calificaciones":
+        case "grades":
+          contentArea.innerHTML = window.Components.renderGrades(state);
+          break;
+        case "agenda-virtual":
+        case "agenda":
+          contentArea.innerHTML = window.Components.renderVirtualgenda(state);
+          break;
         case "usuarios-matriculas":
+        case "usuarios":
           contentArea.innerHTML = window.Components.renderUserndEnrollmentManagement(state);
           break;
         case "registro-estudiantes":
+        case "estudiantes":
           contentArea.innerHTML = window.Components.renderStudentRegistry(state);
           break;
         case "horarios":
+        case "horario":
           contentArea.innerHTML = window.Components.renderSchedules(state);
           break;
         case "silabus":
+        case "syllabus":
           contentArea.innerHTML = window.Components.renderSyllabi(state);
           break;
         case "cuadernos-qr":
+        case "cuadernos":
           contentArea.innerHTML = window.Components.renderNotebookQRControl(state);
           break;
-        case "calificaciones":
-          contentArea.innerHTML = window.Components.renderGrades(state);
-          break;
         case "tareas":
+        case "aula-virtual":
           contentArea.innerHTML = window.Components.renderTasks(state);
           break;
         case "asistencia":
           contentArea.innerHTML = window.Components.renderttendance(state);
           break;
         case "comunicados":
+        case "anuncios":
           contentArea.innerHTML = window.Components.renderAnnouncements(state);
           break;
         case "pagos":
+        case "pensiones":
           contentArea.innerHTML = window.Components.renderPayments(state);
+          break;
+        case "database":
+          contentArea.innerHTML = window.Components.renderDatabaseManagement ? window.Components.renderDatabaseManagement(state) : window.Components.renderDashboard(state);
           break;
         default:
           contentArea.innerHTML = window.Components.renderDashboard(state);
