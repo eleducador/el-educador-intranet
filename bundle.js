@@ -11835,42 +11835,32 @@ const Components = {
 
   // Helper para normalizar el ID de grado a partir del texto del grado
 
+    // Helper para normalizar el ID de grado a partir del texto del grado
   getGradeIdFromLabel(label) {
-
-    if (!label) return "5prim";
-
+    if (!label) return "1sec";
     const l = label.toLowerCase();
 
-    if (l.includes("ini 3") || l.includes("3 año") || l.includes("3 ano") || l.includes("ini3")) return "ini3";
+    // 1. Inicial
+    if (/(?:3|3°|3ro|tres)\s*(?:años?|anos?|ini)/i.test(l) || l.includes("ini3") || l.includes("inicial 3")) return "ini3";
+    if (/(?:4|4°|4to|cuatro)\s*(?:años?|anos?|ini)/i.test(l) || l.includes("ini4") || l.includes("inicial 4")) return "ini4";
+    if (/(?:5|5°|5to|cinco)\s*(?:años?|anos?|ini)/i.test(l) || l.includes("ini5") || l.includes("inicial 5")) return "ini5";
 
-    if (l.includes("ini 4") || l.includes("4 año") || l.includes("4 ano") || l.includes("ini4")) return "ini4";
+    // 2. Secundaria (Revisar número contiguo a 'sec' o 'secundaria' para evitar colisión con '1 estudiante')
+    if (/(?:5|5°|5to|quinto)\s*(?:de\s*)?(?:sec|secund)/i.test(l) || l.includes("5sec")) return "5sec";
+    if (/(?:4|4°|4to|cuarto)\s*(?:de\s*)?(?:sec|secund)/i.test(l) || l.includes("4sec")) return "4sec";
+    if (/(?:3|3°|3ro|tercer|tercero)\s*(?:de\s*)?(?:sec|secund)/i.test(l) || l.includes("3sec")) return "3sec";
+    if (/(?:2|2°|2do|segundo)\s*(?:de\s*)?(?:sec|secund)/i.test(l) || l.includes("2sec")) return "2sec";
+    if (/(?:1|1°|1ro|1er|primer|primero)\s*(?:de\s*)?(?:sec|secund)/i.test(l) || l.includes("1sec")) return "1sec";
 
-    if (l.includes("ini 5") || l.includes("5 año") || l.includes("5 ano") || l.includes("ini5")) return "ini5";
+    // 3. Primaria (Revisar número contiguo a 'pri' o 'primaria')
+    if (/(?:6|6°|6to|sexto)\s*(?:de\s*)?(?:pri|prim|primar)/i.test(l) || l.includes("6prim")) return "6prim";
+    if (/(?:5|5°|5to|quinto)\s*(?:de\s*)?(?:pri|prim|primar)/i.test(l) || l.includes("5prim")) return "5prim";
+    if (/(?:4|4°|4to|cuarto)\s*(?:de\s*)?(?:pri|prim|primar)/i.test(l) || l.includes("4prim")) return "4prim";
+    if (/(?:3|3°|3ro|tercer|tercero)\s*(?:de\s*)?(?:pri|prim|primar)/i.test(l) || l.includes("3prim")) return "3prim";
+    if (/(?:2|2°|2do|segundo)\s*(?:de\s*)?(?:pri|prim|primar)/i.test(l) || l.includes("2prim")) return "2prim";
+    if (/(?:1|1°|1ro|1er|primer|primero)\s*(?:de\s*)?(?:pri|prim|primar)/i.test(l) || l.includes("1prim")) return "1prim";
 
-    if (l.includes("1") && (l.includes("pri") || l.includes("prim"))) return "1prim";
-
-    if (l.includes("2") && (l.includes("pri") || l.includes("prim"))) return "2prim";
-
-    if (l.includes("3") && (l.includes("pri") || l.includes("prim"))) return "3prim";
-
-    if (l.includes("4") && (l.includes("pri") || l.includes("prim"))) return "4prim";
-
-    if (l.includes("5") && (l.includes("pri") || l.includes("prim"))) return "5prim";
-
-    if (l.includes("6") && (l.includes("pri") || l.includes("prim"))) return "6prim";
-
-    if (l.includes("1") && (l.includes("sec") || l.includes("secund"))) return "1sec";
-
-    if (l.includes("2") && (l.includes("sec") || l.includes("secund"))) return "2sec";
-
-    if (l.includes("3") && (l.includes("sec") || l.includes("secund"))) return "3sec";
-
-    if (l.includes("4") && (l.includes("sec") || l.includes("secund"))) return "4sec";
-
-    if (l.includes("5") && (l.includes("sec") || l.includes("secund"))) return "5sec";
-
-    return "5prim";
-
+    return "1sec";
   },
 
 
