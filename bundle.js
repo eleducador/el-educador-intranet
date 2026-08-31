@@ -2481,29 +2481,7 @@ const initialData = {
 
 
 
-  announcements: [
-
-    {
-
-      id: "ANN-003-ED",
-
-      title: "INFORME N003 /ED - COORDINCIÓN Y DOCUMENTÍACIÓN (15/08/2026)",
-
-      category: "Coordinación Institucional",
-
-      priority: "high",
-
-      tagLabel: "Oficial",
-
-      date: "15 de Agosto, 2026",
-
-      author: "Prof. Alex Lino (Coordiónador)",
-
-      content: "Recaudación acumulada del mes de agosto: S/ 25,130.00 (Superando la meta de S/ 24,000.00). Regularización de Renta de 4ta Categora y seguimiento de expedientes ante la UGEL 05."
-
-    }
-
-  ],
+  announcements: [],
 
 
 
