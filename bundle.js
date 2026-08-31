@@ -25232,14 +25232,14 @@ class IntranetApp {
     this.render();
   }
 
-    render() {
+      render() {
     const state = this.store.state;
-    const loginRoot = document.getElementById("login-screen-root");
-    const appContainer = document.getElementById("app-container");
-    const contentArea = document.getElementById("content-area");
-    const sidebarNav = document.getElementById("sidebar-nav") || document.querySelector(".sidebar-nav");
+    const loginRoot = document.getElementById("login-screen-root") || document.querySelector("#login-screen-root");
+    const appContainer = document.getElementById("app-container") || document.querySelector(".app-container");
+    const contentArea = document.getElementById("content-area") || document.querySelector(".content-area") || document.querySelector("main");
+    const sidebarNav = document.getElementById("sidebar-nav") || document.querySelector(".sidebar-nav") || document.querySelector("nav");
 
-    if (!state.isAuthenticated) {
+    if (!state || !state.isAuthenticated) {
       if (loginRoot) {
         loginRoot.style.display = "block";
         loginRoot.innerHTML = window.Components ? window.Components.renderLogin(this.loginErrorMessage) : '';
@@ -25248,7 +25248,10 @@ class IntranetApp {
       return;
     }
 
-    if (loginRoot) loginRoot.style.display = "none";
+    if (loginRoot) {
+      loginRoot.style.display = "none";
+      loginRoot.innerHTML = "";
+    }
     if (appContainer) appContainer.style.display = "flex";
 
     this.updateHeaderUserInfo();
