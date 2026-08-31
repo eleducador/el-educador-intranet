@@ -5119,25 +5119,25 @@ class IntranetStore {
     const prevSig = this.getDataSignature(this.state);
 
     const serverTime = (typeof serverData.updatedt === "number") ? serverData.updatedt : Date.now();
-    const serverUsers = serverData.systemUsers || [];
-    const serverEnrollments = serverData.enrollments || [];
-    const serverFamilies = serverData.familiesFinancial || [];
-    const serverAttendance = serverData.attendanceRecords || [];
-    const serverReviews = serverData.notebookReviews || [];
-    const serverIncidents = serverData.behaviorIncidents || [];
-    const serverNotes = serverData.agendaNotes || [];
-    const serverPayments = serverData.payments || [];
-    const serverTeachers = serverData.teachersList || [];
+    const serverUsers = Array.isArray(serverData.systemUsers) ? serverData.systemUsers : [];
+    const serverEnrollments = Array.isArray(serverData.enrollments) ? serverData.enrollments : [];
+    const serverFamilies = Array.isArray(serverData.familiesFinancial) ? serverData.familiesFinancial : [];
+    const serverAttendance = Array.isArray(serverData.attendanceRecords) ? serverData.attendanceRecords : [];
+    const serverReviews = Array.isArray(serverData.notebookReviews) ? serverData.notebookReviews : [];
+    const serverIncidents = Array.isArray(serverData.behaviorIncidents) ? serverData.behaviorIncidents : [];
+    const serverNotes = Array.isArray(serverData.agendaNotes) ? serverData.agendaNotes : [];
+    const serverPayments = Array.isArray(serverData.payments) ? serverData.payments : [];
+    const serverTeachers = Array.isArray(serverData.teachersList) ? serverData.teachersList : [];
 
-    // Fusión inteligente: nunca descartar registros locales válidos que puedan estar pendientes de sincronización
-    this.state.systemUsers = this.mergeCollectionsById(this.state.systemUsers || [], serverUsers, "username");
-    this.state.enrollments = this.mergeCollectionsById(this.state.enrollments || [], serverEnrollments, "studentCode");
-    this.state.familiesFinancial = this.mergeCollectionsById(this.state.familiesFinancial || [], serverFamilies, "familyId");
-    this.state.attendanceRecords = this.mergeCollectionsById(this.state.attendanceRecords || [], serverAttendance, "id");
-    this.state.notebookReviews = this.mergeCollectionsById(this.state.notebookReviews || [], serverReviews, "id");
-    this.state.behaviorIncidents = this.mergeCollectionsById(this.state.behaviorIncidents || [], serverIncidents, "id");
-    this.state.agendaNotes = this.mergeCollectionsById(this.state.agendaNotes || [], serverNotes, "id");
-    this.state.payments = this.mergeCollectionsById(this.state.payments || [], serverPayments, "id");
+    // Firebase Realtime Database es la ÚNICA fuente de verdad autoritativa
+    this.state.systemUsers = serverUsers;
+    this.state.enrollments = serverEnrollments;
+    this.state.familiesFinancial = serverFamilies;
+    this.state.attendanceRecords = serverAttendance;
+    this.state.notebookReviews = serverReviews;
+    this.state.behaviorIncidents = serverIncidents;
+    this.state.agendaNotes = serverNotes;
+    this.state.payments = serverPayments;
 
     if (serverData.monthlyCarteles) this.state.monthlyCarteles = serverData.monthlyCarteles;
     if (serverData.tasks) this.state.tasks = serverData.tasks;
@@ -5147,10 +5147,7 @@ class IntranetStore {
     if (serverData.courses) this.state.courses = serverData.courses;
     if (serverData.schedules) this.state.schedules = serverData.schedules;
     if (serverData.boletaData) {
-      this.state.boletaData = {
-        ...(this.state.boletaData || {}),
-        ...serverData.boletaData
-      };
+      this.state.boletaData = serverData.boletaData;
     }
     if (serverData.academicConfig) this.state.academicConfig = serverData.academicConfig;
     if (serverTeachers.length > 0) {
@@ -5861,67 +5858,10 @@ class IntranetStore {
 
 
   getEnrollments() {
-    let list = (this.state && Array.isArray(this.state.enrollments)) 
-      ? [...this.state.enrollments] 
-      : (initialData && initialData.enrollments ? [...initialData.enrollments] : []);
-    
-    // Integrar automáticamente estudiantes registrados en systemUsers
-    const sysStudents = ((this.state && this.state.systemUsers) || (initialData && initialData.systemUsers) || [])
-      .filter(u => u && (u.role === 'Estudiante' || u.role === 'Alumno'));
-    
-    sysStudents.forEach(st => {
-      const sCode = st.code || st.id;
-      const exists = list.some(e => 
-        (e.studentCode && e.studentCode === sCode) || 
-        (st.dni && e.dni && e.dni === st.dni) || 
-        (st.name && e.studentName && e.studentName.toLowerCase().trim() === st.name.toLowerCase().trim())
-      );
-      if (!exists) {
-        const gradeLabel = st.detail || st.gradeLevel || st.grade || "4 de Secundaria";
-        const gradeId = st.gradeId || this.resolveStudentGradeId(gradeLabel);
-        list.push({
-          id: `MTR-2026-${Math.floor(1000 + Math.random() * 9000)}-${Date.now().toString(36)}`,
-          studentCode: sCode,
-          studentName: st.name,
-          dni: st.dni || "79128301",
-          siagieCode: `2026-${st.dni || sCode}`,
-          birthDate: "15/06/2015",
-          gender: "Masculino",
-          address: "San Juan de Lurigancho",
-          district: "San Juan de Lurigancho",
-          bloodType: "O+",
-          insurance: "EsSalud Escolar",
-          allergies: "Ninguna",
-          medicalCondition: "Apto",
-          emergencyContact: st.guardian || "Apoderado",
-          emergencyPhone: st.phone || "955-112-233",
-          level: (gradeLabel.toLowerCase().includes("prim") ? "Primaria" : "Secundaria"),
-          grade: gradeLabel,
-          gradeId: gradeId,
-          tutor: st.tutor || "Docente Titular",
-          guardian: st.guardian || "Apoderado",
-          guardianDni: "41982301",
-          guardianPhone: st.phone || "955-112-233",
-          guardianEmail: `${st.name.toLowerCase().replace(/\s+/g, '.')}@gmail.com`,
-          enrollmentDate: st.createdDate || new Date().toLocaleDateString("es-PE"),
-          feeStatus: "Pagado",
-          status: "Matriculado (Nómina Oficial)"
-        });
-      }
-    });
-
-    const seen = new Set();
-    const deduped = [];
-    list.forEach(e => {
-      const key = (e.studentCode || e.dni || (e.studentName + '_' + (e.gradeId || e.grade))).toLowerCase().trim();
-      if (!seen.has(key)) {
-        seen.add(key);
-        deduped.push(e);
-      }
-    });
-
-    this.state.enrollments = deduped;
-    return deduped;
+    if (this.state && Array.isArray(this.state.enrollments)) {
+      return this.state.enrollments;
+    }
+    return [];
   }
 
 
@@ -9292,10 +9232,60 @@ class IntranetStore {
 
 
 
-  isccessLockedForCurrentUser() {
+  isAccessLockedForCurrentUser() {
+    const role = (this.state && this.state.currentRole ? this.state.currentRole : "").toLowerCase();
+    if (role !== "padre" && role !== "estudiante" && role !== "alumno") {
+      return false; // Directores, docentes y coordinadores nunca se bloquean
+    }
+
+    const currentUser = (typeof this.getCurrentUser === 'function') ? this.getCurrentUser() : (this.state && this.state.currentUser);
+    if (!currentUser) return false;
+
+    // 1. Bandera directa en el objeto de sesión
+    if (currentUser.isAccessLocked === true || currentUser.isccessLocked === true || currentUser.pensionStatus === "bloqueado_deuda" || currentUser.pensionStatus === "Bloqueado por Mora") {
+      return true;
+    }
+
+    const normName = (str) => (str || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+    const curName = normName(currentUser.name);
+    const curStName = normName(currentUser.studentName);
+    const curCode = (currentUser.code || currentUser.studentCode || "").trim();
+    const curUser = (currentUser.username || "").trim().toLowerCase();
+
+    // 2. Verificar en systemUsers
+    const sysUsers = (this.state && Array.isArray(this.state.systemUsers)) ? this.state.systemUsers : [];
+    const matchedUser = sysUsers.find(u => {
+      if (!u) return false;
+      if (curCode && (u.code === curCode || u.studentCode === curCode)) return true;
+      if (curUser && u.username && u.username.toLowerCase() === curUser) return true;
+      if (curName && normName(u.name) === curName) return true;
+      if (curStName && normName(u.studentName) === curStName) return true;
+      return false;
+    });
+
+    if (matchedUser && (matchedUser.isAccessLocked === true || matchedUser.isccessLocked === true || matchedUser.pensionStatus === "bloqueado_deuda" || matchedUser.pensionStatus === "Bloqueado por Mora")) {
+      return true;
+    }
+
+    // 3. Verificar en familiesFinancial (módulo de tesorería y pensiones)
+    const families = (this.state && Array.isArray(this.state.familiesFinancial)) ? this.state.familiesFinancial : [];
+    const matchedFam = families.find(f => {
+      if (!f) return false;
+      if (curCode && (f.familyId === curCode || f.studentCode === curCode || f.familyId === `FM-${curCode}` || f.familyId === `FAM-${curCode}`)) return true;
+      if (curStName && normName(f.studentName) === curStName) return true;
+      if (curName && (normName(f.studentName) === curName || normName(f.guardian) === curName)) return true;
+      return false;
+    });
+
+    if (matchedFam && (matchedFam.isAccessLocked === true || matchedFam.isccessLocked === true || matchedFam.pensionStatus === "bloqueado_deuda" || matchedFam.pensionStatus === "mora" || matchedFam.pensionStatus === "Bloqueado por Mora")) {
+      return true;
+    }
 
     return false;
+  }
 
+  isccessLockedForCurrentUser() {
+    return this.isAccessLockedForCurrentUser();
   }
 
 
@@ -9586,98 +9576,51 @@ class IntranetStore {
 
 
 
-  toggleFamilyccessLock(familyId) {
-
-    if (!this.state.familiesFinancial) {
-
-      this.state.familiesFinancial = JSON.parse(JSON.stringify(initialData.familiesFinancial || []));
-
-    }
-
+  toggleFamilyAccessLock(familyId) {
+    if (!familyId) return null;
+    if (!this.state.familiesFinancial) this.state.familiesFinancial = [];
     
-
-    // Buscar enfamiliesFinancial
-
-    let fam = this.state.familiesFinancial.find(f => f.familyId === familyId);
-
+    let fam = this.state.familiesFinancial.find(f => f.familyId === familyId || f.studentCode === familyId);
     if (!fam) {
-
       const allFamilies = this.getFamiliesFinancial();
-
-      fam = allFamilies.find(f => f.familyId === familyId);
-
+      fam = allFamilies.find(f => f.familyId === familyId || f.studentCode === familyId);
     }
-
-
 
     if (fam) {
+      const newLockedState = !(fam.isAccessLocked === true || fam.isccessLocked === true);
+      fam.isAccessLocked = newLockedState;
+      fam.isccessLocked = newLockedState;
+      fam.pensionStatus = newLockedState ? "bloqueado_deuda" : "al_dia";
 
-      fam.isccessLocked = !fam.isccessLocked;
+      const normName = (str) => (str || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+      const famStName = normName(fam.studentName);
+      const famGuard = normName(fam.guardian);
+      const famCode = (fam.studentCode || "").trim();
 
-      fam.pensionStatus = fam.isccessLocked ? "bloqueado_deuda" : "al_dia";
-
-
-
-      // Sióncronizar conusuarios del sistema
-
+      // Sincronizar en tiempo real con systemUsers
       if (this.state.systemUsers) {
-
         this.state.systemUsers.forEach(u => {
-
-          if (
-
-            (u.code === familyId || u.id === familyId) ||
-
-            (u.name && fam.guardian && u.name.trim().toLowerCase() === fam.guardian.trim().toLowerCase()) ||
-
-            (u.studentName && fam.studentName && u.studentName.trim().toLowerCase() === fam.studentName.trim().toLowerCase())
-
-          ) {
-
-            u.isccessLocked = fam.isccessLocked;
-
+          if (!u) return;
+          const isMatch = (famCode && (u.code === famCode || u.studentCode === famCode || u.code === `APO-${famCode}` || u.code === `FM-${famCode}`)) ||
+                          (famStName && (normName(u.name) === famStName || normName(u.studentName) === famStName)) ||
+                          (famGuard && (normName(u.name) === famGuard || normName(u.guardian) === famGuard));
+          if (isMatch) {
+            u.isAccessLocked = newLockedState;
+            u.isccessLocked = newLockedState;
+            u.pensionStatus = fam.pensionStatus;
           }
-
         });
-
       }
-
-
-
-      if (familyId === "FM-2026-108" || (fam.guardian && fam.guardian.includes("CarmenMéndez"))) {
-
-        if (this.state.users.padre) {
-
-          this.state.users.padre.isccessLocked = fam.isccessLocked;
-
-          this.state.users.padre.pensionStatus = fam.isccessLocked ? "Bloqueado por Mora" : "Al Día";
-
-        }
-
-        if (this.state.users.estudiante) {
-
-          this.state.users.estudiante.isccessLocked = fam.isccessLocked;
-
-          this.state.users.estudiante.paymentsUpToDate = !fam.isccessLocked;
-
-          this.state.users.estudiante.pensionStatus = fam.isccessLocked ? "Bloqueado por Mora" : "Al Día";
-
-        }
-
-      }
-
-
 
       this.saveState();
-
       this.notify();
-
-      return fam.isccessLocked;
-
+      return newLockedState;
     }
-
     return null;
+  }
 
+  toggleFamilyccessLock(familyId) {
+    return this.toggleFamilyAccessLock(familyId);
   }
 
 
@@ -24729,7 +24672,7 @@ const Components = {
 
   // =========================================================================
 
-  renderLockedccessScreen(state, user) {
+  renderLockedAccessScreen(state, user) {
 
     const debtmount = user.pendióngDebtmount || 480.00;
 
@@ -27386,24 +27329,29 @@ CRETE TÍABLE tb_cuadernos_qr (
 
 
 
-  // Navegación Dinmica siónBloqueos
-
+  // Navegación Dinámica con Bloqueo de Pensiones
   navigate(viewName) {
+    const isLocked = (typeof this.store.isAccessLockedForCurrentUser === 'function') 
+      ? this.store.isAccessLockedForCurrentUser() 
+      : this.store.isccessLockedForCurrentUser();
+    const role = (this.store.state && this.store.state.currentRole ? this.store.state.currentRole : "").toLowerCase();
+
+    if (isLocked && (role === "padre" || role === "estudiante" || role === "alumno")) {
+      if (viewName !== "pagos" && viewName !== "comunicados") {
+        this.showToast("⚠️ Acceso bloqueado por pensión pendiente. Solo tiene habilitado el módulo de Pagos y Comunicados.", "danger");
+        this.store.setView("pagos");
+        this.render();
+        return;
+      }
+    }
 
     if (this.store.getCurrentView() === "cuadernos-qr" && viewName !== "cuadernos-qr") {
-
       this.stopLiveCameraScanner();
-
     }
-
     if (viewName === "asistencia") {
-
       this.store.state.attendancectiveSubTab = "door-scanner";
-
     }
-
     this.store.setView(viewName);
-
     this.render();
 
     if (window.innerWidth <= 1024 && this.sidebar) {
@@ -27564,13 +27512,13 @@ CRETE TÍABLE tb_cuadernos_qr (
 
     // Verificación de Bloqueo por Pensión Pendiente (Mora)
 
-    const isLocked = this.store.isccessLockedForCurrentUser();
+    const isLocked = this.store.isAccessLockedForCurrentUser();
 
     if (isLocked && currentView !== "pagos" && currentView !== "comunicados") {
 
       if (this.contentArea) {
 
-        this.contentArea.innerHTML = Components.renderLockedccessScreen(state, currentUser);
+        this.contentArea.innerHTML = Components.renderLockedAccessScreen(state, currentUser);
 
       }
 
@@ -39890,7 +39838,7 @@ CRETE TÍABLE tb_cuadernos_qr (
 
   toggleFamilyLock(familyId) {
 
-    const isLocked = this.store.toggleFamilyccessLock(familyId);
+    const isLocked = this.store.toggleFamilyAccessLock(familyId);
 
     if (isLocked !== null) {
 
