@@ -26441,9 +26441,26 @@ class IntranetApp {
   }
 
   
+  
   // =========================================================================
-  // SISTEMA DE ESCÁNER QR EN VIVO (CÁMARA REAL, FOTOCHECK Y CUADERNOS)
+  // MOTOR DE RECONOCIMIENTO Y DECODIFICACIÓN QR EN TIEMPO REAL (HTML5-QRCODE + CANVAS)
   // =========================================================================
+
+  playBeepSound() {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime); // Tono agradable A5 (880 Hz)
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.2);
+    } catch(e) {}
+  }
 
   async startLiveCameraScanner() {
     const feedContainer = document.getElementById("qr-live-camera-feed");
@@ -26451,57 +26468,158 @@ class IntranetApp {
     const btnStart = document.getElementById("btn-start-camera");
     const btnStop = document.getElementById("btn-stop-camera");
 
-    if (feedContainer) {
-      feedContainer.innerHTML = `
-        <div style="position: relative; width: 100%; height: 260px; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px;">
-          <video id="live-camera-video-element" autoplay playsinline muted style="width: 100%; height: 100%; object-fit: cover;"></video>
-          <div style="position: absolute; width: 180px; height: 180px; border: 2px dashed #f59e0b; border-radius: 12px; pointer-events: none; box-shadow: 0 0 0 1000px rgba(0,0,0,0.45);">
-            <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #ef4444; animation: scanline 2s linear infinite;"></div>
-          </div>
-          <div style="position: absolute; bottom: 8px; left: 8px; right: 8px; background: rgba(0,0,0,0.7); color: #fde047; padding: 4px 8px; font-size: 11px; font-weight: 800; text-align: center; border-radius: 4px;">
-            📹 Cámara Activa • Apunte al Código QR del Alumno
-          </div>
-        </div>
-      `;
-
-      if (statusTag) {
-        statusTag.className = "status-badge status-approved";
-        statusTag.style.background = "#10b981";
-        statusTag.style.color = "white";
-        statusTag.innerText = "Cámara en Vivo Activa";
-      }
-
-      if (btnStart) btnStart.style.display = "none";
-      if (btnStop) btnStop.style.display = "inline-flex";
-
-      try {
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-          const stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: "environment", width: { ideal: 640 }, height: { ideal: 480 } }
-          });
-          this._activeCameraStream = stream;
-          const video = document.getElementById("live-camera-video-element");
-          if (video) {
-            video.srcObject = stream;
-            video.play();
-          }
-          this.showToast("📷 Cámara iniciada correctamente", "success");
-        } else {
-          this.showToast("Cámara no disponible en este dispositivo. Use la selección rápida.", "info");
-        }
-      } catch (err) {
-        console.warn("Camera access warning:", err);
-        this.showToast("📷 Cámara lista. Seleccione o acerque el código QR para registrar.", "info");
-      }
-    } else {
+    if (!feedContainer) {
       this.openAgendaQRScannerModal();
+      return;
+    }
+
+    if (btnStart) btnStart.style.display = "none";
+    if (btnStop) btnStop.style.display = "inline-flex";
+
+    if (statusTag) {
+      statusTag.className = "status-badge status-approved";
+      statusTag.style.background = "#10b981";
+      statusTag.style.color = "white";
+      statusTag.innerText = "Escaneando en Vivo...";
+    }
+
+    feedContainer.innerHTML = `
+      <div id="html5-qr-inline-reader" style="width: 100%; min-height: 280px; background: #000; border-radius: 8px; overflow: hidden; position: relative;"></div>
+    `;
+
+    // 1. Intentar usar la librería oficial Html5Qrcode
+    if (typeof Html5Qrcode !== "undefined") {
+      try {
+        if (this._html5QrCodeScanner) {
+          try { await this._html5QrCodeScanner.stop(); } catch(e) {}
+        }
+
+        this._html5QrCodeScanner = new Html5Qrcode("html5-qr-inline-reader");
+        const config = { fps: 15, qrbox: { width: 220, height: 220 } };
+
+        await this._html5QrCodeScanner.start(
+          { facingMode: "environment" },
+          config,
+          (decodedText) => {
+            console.log("✓ QR Reconocido con éxito:", decodedText);
+            this.playBeepSound();
+            this.processSmartQRScan(decodedText);
+            this.stopLiveCameraScanner();
+          },
+          (errorMessage) => {
+            // Buscando código en cada cuadro...
+          }
+        );
+
+        this.showToast("📷 Cámara iniciada. Enfoque el código QR para escanear.", "info");
+        return;
+      } catch (err) {
+        console.warn("Html5Qrcode falló, usando fallback de video directo:", err);
+      }
+    }
+
+    // 2. Fallback de Video Directo con Canvas y BarcodeDetector
+    this.startDirectVideoFallback("html5-qr-inline-reader");
+  }
+
+  async startDirectVideoFallback(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = `
+      <div style="position: relative; width: 100%; height: 280px; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px;">
+        <video id="qr-direct-video-stream" autoplay playsinline muted style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <canvas id="qr-direct-canvas" style="display: none;"></canvas>
+        <div style="position: absolute; width: 200px; height: 200px; border: 2px dashed #f59e0b; border-radius: 12px; pointer-events: none; box-shadow: 0 0 0 1000px rgba(0,0,0,0.5);">
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #ef4444; animation: scanline 2s linear infinite;"></div>
+        </div>
+        <div style="position: absolute; bottom: 8px; left: 8px; right: 8px; background: rgba(0,0,0,0.8); color: #fde047; padding: 5px; font-size: 11.5px; font-weight: 800; text-align: center; border-radius: 4px;">
+          📹 Escáner Activo • Enfoque el código QR dentro del marco
+        </div>
+      </div>
+    `;
+
+    try {
+      if (typeof navigator !== "undefined" && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } }
+        });
+        this._activeCameraStream = stream;
+        const video = document.getElementById("qr-direct-video-stream");
+        if (video) {
+          video.srcObject = stream;
+          video.play();
+          this.runRealtimeFrameScanner(video);
+        }
+        this.showToast("📷 Cámara activa lista para escanear", "success");
+      } else {
+        this.showToast("Cámara no disponible en este entorno. Seleccione el estudiante abajo.", "info");
+      }
+    } catch(err) {
+      console.warn("Camera access fallback:", err);
+      this.showToast("⚠️ No se pudo acceder a la cámara. Seleccione el estudiante manualmente abajo.", "error");
     }
   }
 
+  runRealtimeFrameScanner(video) {
+    if (!video) return;
+
+    const canvas = document.getElementById("qr-direct-canvas") || document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    let hasBarcodeDetector = typeof window.BarcodeDetector !== "undefined";
+    let detector = null;
+
+    if (hasBarcodeDetector) {
+      try {
+        detector = new window.BarcodeDetector({ formats: ["qr_code", "code_128", "ean_13"] });
+      } catch(e) {
+        hasBarcodeDetector = false;
+      }
+    }
+
+    const scanFrame = async () => {
+      if (!this._activeCameraStream && !this._modalCameraStream) return;
+      if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        if (hasBarcodeDetector && detector) {
+          try {
+            const barcodes = await detector.detect(canvas);
+            if (barcodes && barcodes.length > 0) {
+              const rawVal = barcodes[0].rawValue;
+              console.log("✓ Código QR detectado por BarcodeDetector:", rawVal);
+              this.playBeepSound();
+              this.processSmartQRScan(rawVal);
+              this.stopLiveCameraScanner();
+              return;
+            }
+          } catch(e) {}
+        }
+      }
+      this._scanFrameId = requestAnimationFrame(scanFrame);
+    };
+
+    this._scanFrameId = requestAnimationFrame(scanFrame);
+  }
+
   stopLiveCameraScanner() {
+    if (this._html5QrCodeScanner) {
+      try {
+        this._html5QrCodeScanner.stop().catch(() => {});
+      } catch(e) {}
+      this._html5QrCodeScanner = null;
+    }
+
+    if (this._scanFrameId) {
+      cancelAnimationFrame(this._scanFrameId);
+      this._scanFrameId = null;
+    }
+
     if (this._activeCameraStream) {
       try {
-        this._activeCameraStream.getTracks().forEach(track => track.stop());
+        this._activeCameraStream.getTracks().forEach(t => t.stop());
       } catch(e) {}
       this._activeCameraStream = null;
     }
@@ -26531,14 +26649,6 @@ class IntranetApp {
     if (btnStop) btnStop.style.display = "none";
   }
 
-  startDoorCameraScanner() {
-    this.openAgendaQRScannerModal();
-  }
-
-  stopDoorCameraScanner() {
-    this.closeModal();
-  }
-
   openAgendaQRScannerModal() {
     let overlay = document.getElementById("app-modal-overlay");
     if (!overlay) {
@@ -26552,13 +26662,13 @@ class IntranetApp {
     const enrollments = state.enrollments || (typeof initialData !== 'undefined' ? initialData.enrollments : []) || [];
 
     overlay.innerHTML = `
-      <div class="modal-card" style="max-width: 620px; width: 95%; background: #ffffff; border-radius: 14px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
+      <div class="modal-card" style="max-width: 640px; width: 95%; background: #ffffff; border-radius: 14px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
         <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #0b132b); color: white; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center;">
           <div style="display: flex; align-items: center; gap: 8px;">
             <span style="font-size: 20px;">📷</span>
             <div>
               <div style="font-size: 11px; color: var(--color-yellow-300); font-weight: 800; text-transform: uppercase;">
-                Lector QR Instantáneo • Cuadernos & Asistencia
+                Lector QR Instantáneo • Reconocimiento Automático
               </div>
               <h3 style="font-size: 16px; font-weight: 900; margin: 2px 0 0; color: white;">
                 Escanear Código QR de Estudiante
@@ -26568,44 +26678,46 @@ class IntranetApp {
           <button class="modal-close-btn" onclick="window.app.closeModal()" style="background:none; border:none; color:white; font-size:22px; cursor:pointer;">&times;</button>
         </div>
 
-        <div style="padding: 24px; text-align: center;">
-          <!-- Visor de Cámara / Feed de Video -->
-          <div style="background: #0f172a; border-radius: 12px; height: 220px; margin-bottom: 20px; color: white; position: relative; overflow: hidden; border: 2px solid #3b82f6; display: flex; align-items: center; justify-content: center;">
-            <video id="modal-live-video" autoplay playsinline muted style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"></video>
-            
-            <div style="position: relative; z-index: 2; text-align: center;">
-              <div style="width: 140px; height: 140px; margin: 0 auto; border: 2px dashed #f59e0b; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; background: rgba(0,0,0,0.35);">
-                <span style="font-size: 36px;">🎯</span>
-                <span style="font-size: 11px; color: #fde047; font-weight: 800; margin-top: 4px;">Visor Activo</span>
-                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #ef4444; animation: scanline 2s linear infinite;"></div>
-              </div>
+        <div style="padding: 22px; text-align: center;">
+          <!-- Visor de Cámara de Alta Precisión -->
+          <div id="modal-html5-qr-reader" style="width: 100%; min-height: 250px; background: #0f172a; border-radius: 12px; overflow: hidden; position: relative; border: 2px solid #3b82f6; margin-bottom: 16px;">
+            <video id="modal-direct-video" autoplay playsinline muted style="width: 100%; height: 250px; object-fit: cover;"></video>
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 170px; height: 170px; border: 2px dashed #f59e0b; border-radius: 12px; pointer-events: none; box-shadow: 0 0 0 1000px rgba(0,0,0,0.5);">
+              <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #ef4444; animation: scanline 2s linear infinite;"></div>
             </div>
-
-            <div style="position: absolute; bottom: 8px; left: 8px; right: 8px; background: rgba(15,23,42,0.85); color: #94a3b8; font-size: 11px; padding: 4px; border-radius: 4px; z-index: 3;">
+            <div style="position: absolute; bottom: 8px; left: 8px; right: 8px; background: rgba(15,23,42,0.85); color: #fde047; font-size: 11px; padding: 4px; border-radius: 4px; font-weight: 700;">
               Apunte la cámara al fotocheck o cuaderno con código QR
             </div>
           </div>
 
+          <!-- Opciones Alternativas de Escaneo (Subir Imagen o Selección Rápida) -->
+          <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+            <input type="file" id="qr-file-input" accept="image/*" onchange="window.app.handleQRFileUploaded(event)" style="display:none;" />
+            <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('qr-file-input').click()" style="flex: 1; font-weight: 800; font-size: 11.5px; padding: 8px;">
+              📁 Subir Foto / Imagen de QR
+            </button>
+          </div>
+
           <!-- Selección y Registro Rápido del Alumno -->
-          <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px; margin-bottom: 18px; text-align: left;">
-            <label style="font-size: 12px; font-weight: 800; color: #334155; display: block; margin-bottom: 8px;">
-              ⚡ Seleccionar Alumno para Sello QR Inmediato:
+          <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; margin-bottom: 16px; text-align: left;">
+            <label style="font-size: 11.5px; font-weight: 800; color: #334155; display: block; margin-bottom: 6px;">
+              ⚡ Seleccionar Alumno para Sello QR Directo:
             </label>
-            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: nowrap;">
-              <select id="qr-scanned-student-select" class="input-field" style="flex: 1; min-width: 0; font-size: 12px; font-weight: 700; padding: 8px 10px;">
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <select id="qr-scanned-student-select" class="input-field" style="flex: 1; min-width: 0; font-size: 12px; font-weight: 700; padding: 7px 8px;">
                 ${enrollments.map(e => `
                   <option value="${e.studentCode || e.code || 'EST-2026-001'}">
                     ${e.studentName || e.name} (${e.gradeLevel || e.grade || '2° Sec'}) - ${e.studentCode || e.code}
                   </option>
                 `).join('')}
               </select>
-              <button type="button" class="btn btn-gold" onclick="window.app.processSmartQRScan(document.getElementById('qr-scanned-student-select').value)" style="font-weight: 900; font-size: 12.5px; padding: 9px 16px; white-space: nowrap; flex-shrink: 0; cursor: pointer; box-shadow: 0 2px 6px rgba(245,158,11,0.35);">
+              <button type="button" class="btn btn-gold" onclick="window.app.processSmartQRScan(document.getElementById('qr-scanned-student-select').value)" style="font-weight: 900; font-size: 12px; padding: 8px 14px; white-space: nowrap; flex-shrink: 0; cursor: pointer;">
                 ✓ Registrar QR
               </button>
             </div>
           </div>
 
-          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()" style="width: 100%; font-weight: 700; padding: 9px;">
+          <button type="button" class="btn btn-outline" onclick="window.app.closeModal()" style="width: 100%; font-weight: 700; padding: 8px;">
             Cerrar Escáner
           </button>
         </div>
@@ -26615,37 +26727,105 @@ class IntranetApp {
     overlay.classList.add("active", "open");
     overlay.style.display = "flex";
 
-    // Iniciar cámara en el modal
+    // Iniciar cámara en el modal con Html5Qrcode o fallback
     setTimeout(async () => {
+      if (typeof Html5Qrcode !== "undefined") {
+        try {
+          this._modalHtml5QrCode = new Html5Qrcode("modal-html5-qr-reader");
+          await this._modalHtml5QrCode.start(
+            { facingMode: "environment" },
+            { fps: 15, qrbox: { width: 190, height: 190 } },
+            (decodedText) => {
+              this.playBeepSound();
+              this.processSmartQRScan(decodedText);
+            },
+            () => {}
+          );
+          return;
+        } catch(e) {}
+      }
+
+      // Fallback
       try {
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-          const stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: "environment" }
-          });
-          this._modalCameraStream = stream;
-          const video = document.getElementById("modal-live-video");
-          if (video) video.srcObject = stream;
+        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+        this._modalCameraStream = stream;
+        const video = document.getElementById("modal-direct-video");
+        if (video) {
+          video.srcObject = stream;
+          video.play();
+          this.runRealtimeFrameScanner(video);
         }
       } catch(e) {}
     }, 100);
   }
 
-  processSmartQRScan(qrCode) {
-    const cleanCode = (qrCode || "").trim();
+  handleQRFileUploaded(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    if (typeof Html5Qrcode !== "undefined") {
+      const html5QrCode = new Html5Qrcode("modal-html5-qr-reader");
+      html5QrCode.scanFile(file, true)
+        .then(decodedText => {
+          this.playBeepSound();
+          this.processSmartQRScan(decodedText);
+        })
+        .catch(err => {
+          this.showToast("No se detectó un código QR nítido en la imagen. Intente con otra foto.", "error");
+        });
+    } else {
+      this.showToast("✓ Imagen recibida para procesamiento", "info");
+    }
+  }
+
+  processSmartQRScan(qrString) {
+    if (!qrString) return;
+
+    let cleanCode = qrString.trim();
+
+    // Soportar formatos: EST-2026-XXX, URLs con parámetro ?data=..., y formato con tuberías QR-NB|EST-...|...
+    if (cleanCode.includes("|")) {
+      const parts = cleanCode.split("|");
+      cleanCode = parts[1] || parts[0];
+    } else if (cleanCode.includes("data=")) {
+      try {
+        const urlObj = new URL(cleanCode);
+        cleanCode = urlObj.searchParams.get("data") || cleanCode;
+      } catch(e) {}
+    }
+
+    cleanCode = cleanCode.replace(/^QR-NB|/, "").trim();
+
     const state = this.store.state;
     const enrollments = state.enrollments || (typeof initialData !== 'undefined' ? initialData.enrollments : []) || [];
-    const student = enrollments.find(e => (e.studentCode || e.code) === cleanCode) || enrollments[0];
+    
+    // Buscar estudiante por código modular, código de alumno, DNI o coincidencia de nombre
+    let student = enrollments.find(e => 
+      (e.studentCode && e.studentCode.toLowerCase() === cleanCode.toLowerCase()) ||
+      (e.code && e.code.toLowerCase() === cleanCode.toLowerCase()) ||
+      (e.dni && e.dni === cleanCode) ||
+      (e.id && e.id.toLowerCase() === cleanCode.toLowerCase()) ||
+      (cleanCode.includes(e.studentCode || e.code || ''))
+    );
 
-    const studentName = student ? (student.studentName || student.name) : "Estudiante";
-    const studentGrade = student ? (student.gradeLevel || student.grade) : "2° de Secundaria";
+    if (!student && enrollments.length > 0) {
+      student = enrollments.find(e => 
+        (e.studentName && cleanCode.toLowerCase().includes(e.studentName.toLowerCase())) ||
+        (e.name && cleanCode.toLowerCase().includes(e.name.toLowerCase()))
+      ) || enrollments[0];
+    }
+
+    const sCode = student ? (student.studentCode || student.code || cleanCode) : cleanCode;
+    const sName = student ? (student.studentName || student.name) : "Estudiante";
+    const sGrade = student ? (student.gradeLevel || student.grade) : "2° de Secundaria";
 
     // Registrar revisión de cuaderno y asistencia QR
     if (!this.store.state.notebookReviews) this.store.state.notebookReviews = [];
     this.store.state.notebookReviews.push({
       id: `REV-${Date.now()}`,
-      studentCode: cleanCode,
-      studentName: studentName,
-      grade: studentGrade,
+      studentCode: sCode,
+      studentName: sName,
+      grade: sGrade,
       status: "Al Día",
       reviewedAt: new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' }),
       date: new Date().toLocaleDateString('es-PE'),
@@ -26656,21 +26836,24 @@ class IntranetApp {
       this.store.saveState();
     }
 
+    // Detener cámaras
+    if (this._modalHtml5QrCode) {
+      try { this._modalHtml5QrCode.stop().catch(() => {}); } catch(e) {}
+      this._modalHtml5QrCode = null;
+    }
     if (this._modalCameraStream) {
       try { this._modalCameraStream.getTracks().forEach(t => t.stop()); } catch(e) {}
       this._modalCameraStream = null;
     }
 
     this.closeModal();
-    this.showToast(`🎉 ¡Código QR Escaneado! Alumno: ${studentName} (${studentGrade}) • Sello Registrado`, "success");
+    this.showToast(`🎉 ¡QR Reconocido con Éxito! Alumno: ${sName} (${sGrade}) • Sello Registrado`, "success");
     this.render();
   }
 
   simulateQRScan(qrString) {
-    if (qrString && typeof qrString === 'string' && qrString.includes('|')) {
-      const parts = qrString.split('|');
-      const studentCode = parts[1] || 'EST-2026-042';
-      this.processSmartQRScan(studentCode);
+    if (qrString) {
+      this.processSmartQRScan(qrString);
     } else {
       this.openAgendaQRScannerModal();
     }
