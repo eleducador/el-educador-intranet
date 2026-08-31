@@ -25813,6 +25813,297 @@ class IntranetApp {
   // MÓDULO DE AULA VIRTUAL Y EVALUACIONES DINÁMICAS INTERACTIVAS
   // =========================================================================
 
+  
+  // =========================================================================
+  // GESTIÓN DE SESIONES SEMANALES, MATERIALES Y ELIMINACIÓN EN AULA VIRTUAL
+  // =========================================================================
+
+  openUploadMaterialModal(courseId) {
+    let overlay = document.getElementById("app-modal-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "app-modal-overlay";
+      overlay.className = "modal-overlay";
+      document.body.appendChild(overlay);
+    }
+
+    const state = this.store.state;
+    const materials = (state && state.weeklyMaterials) || [];
+    const currentCourseMaterials = materials.filter(m => !courseId || m.courseId === courseId);
+    const nextWeekNumber = currentCourseMaterials.length + 1;
+    const todayStr = new Date().toLocaleDateString('es-PE');
+
+    overlay.innerHTML = `
+      <div class="modal-card" style="max-width: 650px; width: 95%; background: #ffffff; border-radius: 14px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
+        <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #0b132b); color: white; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 11px; color: var(--color-yellow-300); font-weight: 800; text-transform: uppercase;">
+              Aula Virtual • Gestión Pedagógica
+            </div>
+            <h3 style="font-size: 17px; font-weight: 900; margin: 4px 0 0; color: white;">
+              ➕ Publicar Nueva Sesión Semanal y Material de Clase
+            </h3>
+          </div>
+          <button class="modal-close-btn" onclick="window.app.closeModal()" style="background:none; border:none; color:white; font-size:22px; cursor:pointer;">&times;</button>
+        </div>
+
+        <form onsubmit="window.app.saveWeeklyMaterial(event, '${courseId || ''}')" style="padding: 24px; max-height: 75vh; overflow-y: auto;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+            <div>
+              <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Número de Semana:</label>
+              <input type="number" id="mat-week-num" value="${nextWeekNumber}" required class="input-field" style="width: 100%; font-weight: bold;" />
+            </div>
+            <div>
+              <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Bimestre:</label>
+              <select id="mat-bimester" class="input-field" style="width: 100%;">
+                <option value="III Bimestre" selected>III Bimestre (En curso)</option>
+                <option value="IV Bimestre">IV Bimestre</option>
+                <option value="II Bimestre">II Bimestre</option>
+                <option value="I Bimestre">I Bimestre</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 14px;">
+            <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Título de la Sesión / Tema Central:</label>
+            <input type="text" id="mat-title" placeholder="Ej: Programación de Servomotores y Control de Giro con Arduino" required class="input-field" style="width: 100%; font-size: 13px;" />
+          </div>
+
+          <div style="margin-bottom: 14px;">
+            <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Fecha de la Sesión de Clase:</label>
+            <input type="text" id="mat-date" value="${todayStr}" required class="input-field" style="width: 100%;" />
+          </div>
+
+          <div style="margin-bottom: 14px;">
+            <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Resumen del Trabajo Realizado en el Aula:</label>
+            <textarea id="mat-summary" rows="3" class="input-field" placeholder="Describa el trabajo práctico, experimentos o teoría desarrollada con los alumnos..." style="width: 100%; font-size: 12.5px;" required></textarea>
+          </div>
+
+          <div style="margin-bottom: 14px;">
+            <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Conceptos Clave Abordados (uno por línea o separados por comas):</label>
+            <textarea id="mat-concepts" rows="2" class="input-field" placeholder="Estructura básica, Pines PWM, Calibración de grados, Condicionales..." style="width: 100%; font-size: 12.5px;"></textarea>
+          </div>
+
+          <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 12px 14px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+            <input type="checkbox" id="mat-auto-quiz" checked style="width: 18px; height: 18px; cursor: pointer;" />
+            <label for="mat-auto-quiz" style="font-size: 12.5px; color: #166534; font-weight: 700; cursor: pointer;">
+              ⚡ Generar y habilitar automáticamente la Evaluación Dinámica Semanal (10 Preguntas con retroalimentación)
+            </label>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 16px;">
+            <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
+            <button type="submit" class="btn btn-navy" style="font-weight: 900; padding: 10px 24px; cursor: pointer;">
+              💾 Publicar Sesión Semanal
+            </button>
+          </div>
+        </form>
+      </div>
+    `;
+
+    overlay.classList.add("active", "open");
+    overlay.style.display = "flex";
+  }
+
+  saveWeeklyMaterial(event, courseId) {
+    if (event && event.preventDefault) event.preventDefault();
+
+    const weekNum = parseInt(document.getElementById("mat-week-num").value) || 1;
+    const bimester = document.getElementById("mat-bimester").value;
+    const title = document.getElementById("mat-title").value.trim();
+    const sessionDate = document.getElementById("mat-date").value.trim();
+    const summary = document.getElementById("mat-summary").value.trim();
+    const conceptsRaw = document.getElementById("mat-concepts").value.trim();
+    const autoQuiz = document.getElementById("mat-auto-quiz").checked;
+
+    const keyConcepts = conceptsRaw
+      ? conceptsRaw.split(/[,\n]+/).map(c => c.trim()).filter(c => c.length > 0)
+      : ["Fundamentos teóricos", "Aplicación práctica", "Resolución de ejercicios"];
+
+    const newMaterial = {
+      id: `MAT-SEM-${Date.now()}`,
+      courseId: courseId || "INF-201",
+      courseName: "Computación e Informática / Robótica",
+      gradeId: "2sec",
+      gradeName: "2° de Secundaria",
+      teacherId: "DOC-2026-003",
+      teacherName: "Prof. Fernando Rojas",
+      weekNumber: weekNum,
+      bimester: bimester,
+      title: title,
+      sessionDate: sessionDate,
+      summary: summary,
+      keyConcepts: keyConcepts,
+      attachments: [
+        { type: "pdf", name: `Guia_Teorica_Semana_${weekNum}.pdf`, size: "2.4 MB" },
+        { type: "code", name: `Codigo_Fuente_Semana_${weekNum}.ino`, size: "35 KB" }
+      ],
+      evaluation: {
+        totalQuestions: 10,
+        passingScore: 14,
+        timeLimitMinutes: 20,
+        questions: []
+      }
+    };
+
+    if (!this.store.state.weeklyMaterials) this.store.state.weeklyMaterials = [];
+    this.store.state.weeklyMaterials.push(newMaterial);
+    if (typeof this.store.saveState === "function") this.store.saveState();
+
+    this.closeModal();
+    this.showToast(`✓ Semana ${weekNum} publicada con éxito en el Aula Virtual`, "success");
+    this.render();
+  }
+
+  openEditMaterialModal(materialId) {
+    let overlay = document.getElementById("app-modal-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "app-modal-overlay";
+      overlay.className = "modal-overlay";
+      document.body.appendChild(overlay);
+    }
+
+    const state = this.store.state;
+    const materials = (state && state.weeklyMaterials) || [];
+    const material = materials.find(m => m.id === materialId) || materials[0];
+
+    if (!material) {
+      this.showToast("No se encontró la sesión a editar", "error");
+      return;
+    }
+
+    overlay.innerHTML = `
+      <div class="modal-card" style="max-width: 650px; width: 95%; background: #ffffff; border-radius: 14px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
+        <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #0b132b); color: white; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 11px; color: var(--color-yellow-300); font-weight: 800; text-transform: uppercase;">
+              Aula Virtual • Edición de Sesión
+            </div>
+            <h3 style="font-size: 17px; font-weight: 900; margin: 4px 0 0; color: white;">
+              ✏️ Editar Sesión: Semana ${material.weekNumber}
+            </h3>
+          </div>
+          <button class="modal-close-btn" onclick="window.app.closeModal()" style="background:none; border:none; color:white; font-size:22px; cursor:pointer;">&times;</button>
+        </div>
+
+        <form onsubmit="window.app.saveEditedMaterial(event, '${material.id}')" style="padding: 24px; max-height: 75vh; overflow-y: auto;">
+          <div style="margin-bottom: 14px;">
+            <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Título de la Sesión:</label>
+            <input type="text" id="edit-mat-title" value="${material.title}" required class="input-field" style="width: 100%; font-size: 13px;" />
+          </div>
+
+          <div style="margin-bottom: 14px;">
+            <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Fecha de la Sesión:</label>
+            <input type="text" id="edit-mat-date" value="${material.sessionDate}" required class="input-field" style="width: 100%;" />
+          </div>
+
+          <div style="margin-bottom: 14px;">
+            <label style="display:block; font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 4px;">Resumen del Trabajo Realizado:</label>
+            <textarea id="edit-mat-summary" rows="4" class="input-field" style="width: 100%; font-size: 12.5px;" required>${material.summary}</textarea>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 16px;">
+            <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar</button>
+            <button type="submit" class="btn btn-navy" style="font-weight: 900; padding: 10px 24px; cursor: pointer;">
+              💾 Guardar Cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    `;
+
+    overlay.classList.add("active", "open");
+    overlay.style.display = "flex";
+  }
+
+  saveEditedMaterial(event, materialId) {
+    if (event && event.preventDefault) event.preventDefault();
+
+    const title = document.getElementById("edit-mat-title").value.trim();
+    const sessionDate = document.getElementById("edit-mat-date").value.trim();
+    const summary = document.getElementById("edit-mat-summary").value.trim();
+
+    const state = this.store.state;
+    const materials = (state && state.weeklyMaterials) || [];
+    const mat = materials.find(m => m.id === materialId);
+
+    if (mat) {
+      mat.title = title;
+      mat.sessionDate = sessionDate;
+      mat.summary = summary;
+      if (typeof this.store.saveState === "function") this.store.saveState();
+      this.showToast("✓ Sesión actualizada correctamente", "success");
+    }
+
+    this.closeModal();
+    this.render();
+  }
+
+  confirmDeleteMaterial(materialId) {
+    let overlay = document.getElementById("app-modal-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "app-modal-overlay";
+      overlay.className = "modal-overlay";
+      document.body.appendChild(overlay);
+    }
+
+    const state = this.store.state;
+    const materials = (state && state.weeklyMaterials) || [];
+    const material = materials.find(m => m.id === materialId) || { title: "Sesión Semanal", weekNumber: 1 };
+
+    overlay.innerHTML = `
+      <div class="modal-card" style="max-width: 480px; width: 90%; background: #ffffff; border-radius: 14px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3); z-index: 99999;">
+        <div class="modal-header" style="background: linear-gradient(135deg, #dc2626, #991b1b); color: white; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="font-size: 16px; font-weight: 900; margin: 0; color: white;">
+            🗑️ Confirmar Eliminación de Sesión
+          </h3>
+          <button class="modal-close-btn" onclick="window.app.closeModal()" style="background:none; border:none; color:white; font-size:22px; cursor:pointer;">&times;</button>
+        </div>
+
+        <div style="padding: 24px; text-align: center;">
+          <div style="font-size: 40px; margin-bottom: 12px;">⚠️</div>
+          <h4 style="font-size: 15px; font-weight: 900; color: #1e293b; margin: 0 0 8px;">
+            ¿Está seguro de eliminar esta sesión de clase?
+          </h4>
+          <p style="font-size: 13px; color: #64748b; margin: 0 0 20px; line-height: 1.5;">
+            Se eliminará permanentemente la <strong>Semana ${material.weekNumber}: ${material.title}</strong> y su evaluación dinámica asociada.
+          </p>
+
+          <div style="display: flex; gap: 10px; justify-content: center;">
+            <button class="btn btn-outline" onclick="window.app.closeModal()" style="font-weight: 700;">
+              Cancelar
+            </button>
+            <button class="btn btn-red" onclick="window.app.deleteWeeklyMaterial('${materialId}')" style="background: #dc2626; color: white; font-weight: 900; padding: 9px 20px; border-radius: 6px; cursor: pointer;">
+              🗑️ Sí, Eliminar Definitivamente
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    overlay.classList.add("active", "open");
+    overlay.style.display = "flex";
+  }
+
+  deleteWeeklyMaterial(materialId) {
+    if (this.store.state.weeklyMaterials) {
+      this.store.state.weeklyMaterials = this.store.state.weeklyMaterials.filter(m => m.id !== materialId);
+    }
+    if (typeof initialData !== 'undefined' && initialData.weeklyMaterials) {
+      initialData.weeklyMaterials = initialData.weeklyMaterials.filter(m => m.id !== materialId);
+    }
+
+    if (typeof this.store.saveState === "function") {
+      this.store.saveState();
+    }
+
+    this.closeModal();
+    this.showToast("✓ Sesión de clase eliminada correctamente del Aula Virtual", "success");
+    this.render();
+  }
+
   startStudentQuiz(materialId) {
     let overlay = document.getElementById("app-modal-overlay");
     if (!overlay) {
