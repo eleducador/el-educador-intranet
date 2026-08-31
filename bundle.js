@@ -19,7 +19,7 @@ const initialData = {
 
     slogan: "21 años dejando huellas",
 
-    district: "SanJuan de Lurigancho (S.J.L.)",
+    district: "San Juan de Lurigancho (S.J.L.)",
 
     ugel: "UGEL 05",
 
@@ -125,7 +125,7 @@ const initialData = {
 
       role: "docente",
 
-      roleLabel: "Docente de Matemticas",
+      roleLabel: "Docente de Matemáticas",
 
       assignedGrades: ["3ro Sec A", "4to Sec A", "5to Sec B"],
 
@@ -203,9 +203,9 @@ const initialData = {
 
       role: "auxiliar",
 
-      roleLabel: "Auxiliar de Educación & Portera",
+      roleLabel: "Auxiliar de Educación & Portería",
 
-      assignedZones: ["Portera Principal (Puerta 1)", "Patio Central & Pabellón Secundaria"],
+      assignedZones: ["Portería Principal (Puerta 1)", "Patio Central & Pabellón Secundaria"],
 
       avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80",
 
@@ -333,7 +333,7 @@ const initialData = {
 
       role: "Auxiliar",
 
-      detail: "Auxiliar de Educación & Portera (Control de Cuadernos y Asistencia)",
+      detail: "Auxiliar de Educación & Portería (Control de Cuadernos y Asistencia)",
 
       hasAdminPrivilege: false,
 
@@ -359,9 +359,9 @@ const initialData = {
 
       role: "Docente",
 
-      detail: "Matemtica Avanzada (Secundaria)",
+      detail: "Matemática Avanzada (Secundaria)",
 
-      assignedCourses: ["Aritmética", "ÁÁÁÁálgebra", "Geometra", "Trigonometra", "Raízonamiento Matemtico", "Matemtica Avanzada"],
+      assignedCourses: ["Aritmética", "ÁÁÁÁálgebra", "Geometría", "Trigonometra", "Raízonamiento Matemtico", "Matemática Avanzada"],
 
       assignedGrades: ["3ro Sec", "4to Sec", "5to Sec"],
 
@@ -423,9 +423,9 @@ const initialData = {
 
       role: "Docente",
 
-      detail: "Ciencia y Tecnologa (Física & Química)",
+      detail: "Ciencia y Tecnología (Física & Química)",
 
-      assignedCourses: ["Biologa & Anatoma", "Física Elemental", "Química Inorgnica", "Ciencia y Tecnologa"],
+      assignedCourses: ["Biología & Anatoma", "Física Elemental", "Química Inorgnica", "Ciencia y Tecnología"],
 
       assignedGrades: ["3ro Sec", "4to Sec", "5to Sec"],
 
@@ -457,7 +457,7 @@ const initialData = {
 
       detail: "Comunicación & Literatura",
 
-      assignedCourses: ["Lenguíaje y Gramtica", "Literatura Universal", "Raízonamiento Verbal", "Comunicación Integral"],
+      assignedCourses: ["Lenguíaje y Gramática", "Literatura Universal", "Raízonamiento Verbal", "Comunicación Integral"],
 
       assignedGrades: ["1ro Sec", "2do Sec", "4to Sec"],
 
@@ -489,7 +489,7 @@ const initialData = {
 
       detail: "Nivel Primaria & DPCC",
 
-      assignedCourses: ["Educación Cívica (DPCC)", "Psicologa", "Personal Social & Cívica", "Comunicación Integral", "Tutora & Convivencia Escolar"],
+      assignedCourses: ["Educación Cívica (DPCC)", "Psicologa", "Personal Social & Cívica", "Comunicación Integral", "Tutoría & Convivencia Escolar"],
 
       assignedGrades: ["1ro Prim", "2do Prim", "3ro Prim", "4to Sec"],
 
@@ -551,9 +551,9 @@ const initialData = {
 
       { id: "agenda-virtual", label: "📖 Agenda & Convivencia QR", badge: "AGENDÍA", icon: "agenda", enabled: true },
 
-      { id: "asistencia", label: "Registro de Ingreso & QR", badge: "Portera", icon: "attendance", enabled: true },
+      { id: "asistencia", label: "Registro de Ingreso & QR", badge: "Portería", icon: "attendance", enabled: true },
 
-      { id: "cuadernos-qr", label: "Lector de Cuadernos QR", badge: "CMARÍA", icon: "qr", enabled: true },
+      { id: "cuadernos-qr", label: "Lector de Cuadernos QR", badge: "CÁMARA", icon: "qr", enabled: true },
 
       { id: "comunicados", label: "Informes & Circulares", icon: "announcements", enabled: true }
 
@@ -567,7 +567,7 @@ const initialData = {
 
       { id: "agenda-virtual", label: "📖 Agenda Virtual & Anotaciones", badge: "AGENDÍA", icon: "agenda", enabled: true },
 
-      { id: "cuadernos-qr", label: "Lector de Cuadernos QR", badge: "CMARÍA", icon: "qr", enabled: true },
+      { id: "cuadernos-qr", label: "Lector de Cuadernos QR", badge: "CÁMARA", icon: "qr", enabled: true },
 
       { id: "calificaciones", label: "Registro de Notas", badge: "Bimestral", icon: "grades", enabled: true },
 
@@ -589,7 +589,7 @@ const initialData = {
 
       { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
 
-      { id: "agenda-virtual", label: "📖 Mi Agenda Virtual", badge: "N OTÍAS", icon: "agenda", enabled: true },
+      { id: "agenda-virtual", label: "📖 Mi Agenda Virtual", badge: "NOTAS", icon: "agenda", enabled: true },
 
       { id: "horarios", label: "Horario de Clases", icon: "schedule", enabled: true },
 
@@ -601,7 +601,7 @@ const initialData = {
 
       { id: "asistencia", label: "📅 Mi Asistencia & Fotocheck", icon: "attendance", enabled: true },
 
-      { id: "boleta", label: "📊 Mi Boleta Oficial de Notas", badge: "OFICIL", icon: "boleta", enabled: true },
+      { id: "boleta", label: "📊 Mi Boleta Oficial de Notas", badge: "OFICIAL", icon: "boleta", enabled: true },
 
       { id: "comunicados", label: "Informes & Circulares", icon: "announcements", enabled: true }
 
@@ -611,9 +611,9 @@ const initialData = {
 
       { id: "dashboard", label: "Inicio / Resumen", icon: "dashboard", enabled: true },
 
-      { id: "boleta", label: "📊 Boleta Oficial de Notas", badge: "OFICIL", icon: "boleta", enabled: true },
+      { id: "boleta", label: "📊 Boleta Oficial de Notas", badge: "OFICIAL", icon: "boleta", enabled: true },
 
-      { id: "agenda-virtual", label: "📖 Agenda Virtual Escolar", badge: "FIRMS", icon: "agenda", enabled: true },
+      { id: "agenda-virtual", label: "📖 Agenda Virtual Escolar", badge: "FIRMAS", icon: "agenda", enabled: true },
 
       { id: "horarios", label: "Horario de Clases", icon: "schedule", enabled: true },
 
@@ -643,7 +643,7 @@ const initialData = {
 
       { id: "usuarios-matriculas", label: "Gestión de Perfiles & Cuentas", badge: "PERFILES", icon: "users", enabled: true },
 
-      { id: "cuadernos-qr", label: "Supervisión Cuadernos QR", badge: "CMARÍA", icon: "qr", enabled: true },
+      { id: "cuadernos-qr", label: "Supervisión Cuadernos QR", badge: "CÁMARA", icon: "qr", enabled: true },
 
       { id: "calificaciones", label: "Auditora de Calificaciones", badge: "Bimestral", icon: "grades", enabled: true },
 
@@ -683,7 +683,7 @@ const initialData = {
 
       code: "MT-401",
 
-      name: "Matemtica Avanzada",
+      name: "Matemática Avanzada",
 
       teacher: "Prof. Roberto Silva",
 
@@ -743,7 +743,7 @@ const initialData = {
 
       code: "CTÍA-403",
 
-      name: "Ciencias & Tecnologa",
+      name: "Ciencias & Tecnología",
 
       teacher: "Miss Leyli Graciela Reyes Cerquen",
 
@@ -1219,7 +1219,7 @@ const initialData = {
 
       title: "Taller Prctico: Ecuaciones Cuadrticas Complejas",
 
-      course: "Matemtica Avanzada",
+      course: "Matemática Avanzada",
 
       teacher: "Prof. Roberto Silva",
 
@@ -1299,7 +1299,7 @@ const initialData = {
 
 
 
-  // Catlogo de Docentes y Horarios por Asignatura (Docentes de Curso siónTutora / conTutora)
+  // Catlogo de Docentes y Horarios por Asignatura (Docentes de Curso siónTutoría / conTutoría)
 
   teachersList: [
 
@@ -1309,7 +1309,7 @@ const initialData = {
 
       name: "Prof. Fernando Rojas",
 
-      subject: "Computación e Informtica / Robótica",
+      subject: "Computación e Informática / Robótica",
 
       department: "rea de Educación para el Trabajo (EPT)",
 
@@ -1469,13 +1469,13 @@ const initialData = {
 
           mon: { course: "Taller de Robótica Avanzada", grade: "4 Sec", room: "Taller Robótica", color: "yellow" },
 
-          tue: { course: "Club de Ciencias y Tecnologa", grade: "General", room: "Lab. Cómputo 1", color: "green" },
+          tue: { course: "Club de Ciencias y Tecnología", grade: "General", room: "Lab. Cómputo 1", color: "green" },
 
           wed: { course: "Taller de Programación", grade: "5 Sec", room: "Lab. Cómputo 1", color: "navy" },
 
           thu: { course: "Diseño Web Escolar", grade: "3 Sec", room: "Lab. Cómputo 1", color: "yellow" },
 
-          fri: { course: "Atención a Familias / Tutora", grade: "Secundaria", room: "Sala Docentes", color: "green" }
+          fri: { course: "Atención a Familias / Tutoría", grade: "Secundaria", room: "Sala Docentes", color: "green" }
 
         }
 
@@ -1489,9 +1489,9 @@ const initialData = {
 
       name: "Prof. Roberto Silva",
 
-      subject: "Matemticas (ÁÁÁÁálgebra, Geometra y Raíz. Matemtico)",
+      subject: "Matemáticas (ÁÁÁÁálgebra, Geometría y Raíz. Matemtico)",
 
-      department: "rea de Matemtica",
+      department: "rea de Matemática",
 
       isTutor: false,
 
@@ -1503,7 +1503,7 @@ const initialData = {
 
       classrooms: ["Aula 201", "Aula 301", "Aula 302"],
 
-      courses: ["ÁÁÁÁálgebra", "Geometra", "Raízonamiento Matemtico", "Trigonometra"],
+      courses: ["ÁÁÁÁálgebra", "Geometría", "Raízonamiento Matemtico", "Trigonometra"],
 
       schedule: [
 
@@ -1513,7 +1513,7 @@ const initialData = {
 
           mon: { course: "ÁÁÁÁálgebra", grade: "4 Sec", room: "Aula 301", color: "yellow" },
 
-          tue: { course: "Geometra", grade: "3 Sec", room: "Aula 201", color: "navy" },
+          tue: { course: "Geometría", grade: "3 Sec", room: "Aula 201", color: "navy" },
 
           wed: { course: "Raíz. Matemtico", grade: "2 Sec", room: "Aula 102", color: "yellow" },
 
@@ -1529,7 +1529,7 @@ const initialData = {
 
           mon: { course: "ÁÁÁÁálgebra", grade: "4 Sec", room: "Aula 301", color: "yellow" },
 
-          tue: { course: "Geometra", grade: "3 Sec", room: "Aula 201", color: "navy" },
+          tue: { course: "Geometría", grade: "3 Sec", room: "Aula 201", color: "navy" },
 
           wed: { course: "Raíz. Matemtico", grade: "2 Sec", room: "Aula 102", color: "yellow" },
 
@@ -1543,7 +1543,7 @@ const initialData = {
 
           time: "09:40 - 10:30",
 
-          mon: { course: "Geometra", grade: "2 Sec", room: "Aula 102", color: "navy" },
+          mon: { course: "Geometría", grade: "2 Sec", room: "Aula 102", color: "navy" },
 
           tue: { course: "ÁÁÁÁálgebra", grade: "4 Sec", room: "Aula 301", color: "yellow" },
 
@@ -1571,7 +1571,7 @@ const initialData = {
 
           time: "10:50 - 11:40",
 
-          mon: { course: "Geometra", grade: "2 Sec", room: "Aula 102", color: "navy" },
+          mon: { course: "Geometría", grade: "2 Sec", room: "Aula 102", color: "navy" },
 
           tue: { course: "ÁÁÁÁálgebra", grade: "4 Sec", room: "Aula 301", color: "yellow" },
 
@@ -1593,9 +1593,9 @@ const initialData = {
 
           wed: { course: "ÁÁÁÁálgebra", grade: "3 Sec", room: "Aula 201", color: "yellow" },
 
-          thu: { course: "Geometra", grade: "4 Sec", room: "Aula 301", color: "navy" },
+          thu: { course: "Geometría", grade: "4 Sec", room: "Aula 301", color: "navy" },
 
-          fri: { course: "Reunión de rea Matemtica", grade: "Colegiado", room: "Sala Docentes", color: "green" }
+          fri: { course: "Reunión de rea Matemática", grade: "Colegiado", room: "Sala Docentes", color: "green" }
 
         },
 
@@ -1607,7 +1607,7 @@ const initialData = {
 
           tue: { course: "ÁÁÁÁálgebra Avanzada", grade: "5 Sec", room: "Aula 302", color: "yellow" },
 
-          wed: { course: "Geometra del Espacio", grade: "4 Sec", room: "Aula 301", color: "navy" },
+          wed: { course: "Geometría del Espacio", grade: "4 Sec", room: "Aula 301", color: "navy" },
 
           thu: { course: "Trigonometra Analítica", grade: "5 Sec", room: "Aula 302", color: "navy" },
 
@@ -1637,7 +1637,7 @@ const initialData = {
 
           wed: { course: "Círculo Matemtico Olímpico", grade: "5 Sec", room: "Aula 302", color: "yellow" },
 
-          thu: { course: "Taller de Geometra Descriptiva", grade: "4 Sec", room: "Aula 301", color: "navy" },
+          thu: { course: "Taller de Geometría Descriptiva", grade: "4 Sec", room: "Aula 301", color: "navy" },
 
           fri: { course: "Asesora Preuniversitaria", grade: "5 Sec", room: "Aula 302", color: "yellow" }
 
@@ -1653,7 +1653,7 @@ const initialData = {
 
           wed: { course: "Círculo Matemtico Olímpico", grade: "5 Sec", room: "Aula 302", color: "yellow" },
 
-          thu: { course: "Taller de Geometra Descriptiva", grade: "4 Sec", room: "Aula 301", color: "navy" },
+          thu: { course: "Taller de Geometría Descriptiva", grade: "4 Sec", room: "Aula 301", color: "navy" },
 
           fri: { course: "Asesora Preuniversitaria", grade: "5 Sec", room: "Aula 302", color: "yellow" }
 
@@ -1669,7 +1669,7 @@ const initialData = {
 
       name: "Miss Leyli Reyes Cerquen",
 
-      subject: "Ciencia y Tecnologa (Física, Química y Biologa)",
+      subject: "Ciencia y Tecnología (Física, Química y Biología)",
 
       department: "rea de Ciencias",
 
@@ -1683,7 +1683,7 @@ const initialData = {
 
       classrooms: ["Laboratorio de Ciencias 01", "Aula 301"],
 
-      courses: ["Física", "Química", "Biologa"],
+      courses: ["Física", "Química", "Biología"],
 
       schedule: [
 
@@ -1697,9 +1697,9 @@ const initialData = {
 
           wed: { course: "Física Avanzada", grade: "4 Sec", room: "Lab. Ciencias", color: "yellow" },
 
-          thu: { course: "Biologa", grade: "2 Sec", room: "Lab. Ciencias", color: "green" },
+          thu: { course: "Biología", grade: "2 Sec", room: "Lab. Ciencias", color: "green" },
 
-          fri: { course: "Prcticas de Laboratorio", grade: "4 Sec", room: "Lab. Ciencias", color: "yellow" }
+          fri: { course: "Prácticas de Laboratorio", grade: "4 Sec", room: "Lab. Ciencias", color: "yellow" }
 
         },
 
@@ -1713,9 +1713,9 @@ const initialData = {
 
           wed: { course: "Física Avanzada", grade: "4 Sec", room: "Lab. Ciencias", color: "yellow" },
 
-          thu: { course: "Biologa", grade: "2 Sec", room: "Lab. Ciencias", color: "green" },
+          thu: { course: "Biología", grade: "2 Sec", room: "Lab. Ciencias", color: "green" },
 
-          fri: { course: "Prcticas de Laboratorio", grade: "4 Sec", room: "Lab. Ciencias", color: "yellow" }
+          fri: { course: "Prácticas de Laboratorio", grade: "4 Sec", room: "Lab. Ciencias", color: "yellow" }
 
         },
 
@@ -1723,7 +1723,7 @@ const initialData = {
 
           time: "09:40 - 10:30",
 
-          mon: { course: "Biologa y Ecologa", grade: "4 Sec", room: "Aula 301", color: "green" },
+          mon: { course: "Biología y Ecologa", grade: "4 Sec", room: "Aula 301", color: "green" },
 
           tue: { course: "Física Elemental", grade: "2 Sec", room: "Lab. Ciencias", color: "yellow" },
 
@@ -1751,7 +1751,7 @@ const initialData = {
 
           time: "10:50 - 11:40",
 
-          mon: { course: "Biologa y Ecologa", grade: "4 Sec", room: "Aula 301", color: "green" },
+          mon: { course: "Biología y Ecologa", grade: "4 Sec", room: "Aula 301", color: "green" },
 
           tue: { course: "Física Elemental", grade: "2 Sec", room: "Lab. Ciencias", color: "yellow" },
 
@@ -1771,7 +1771,7 @@ const initialData = {
 
           tue: { course: "Atención a Familias (Ciencias)", grade: "Secundaria", room: "Sala Docentes", color: "green" },
 
-          wed: { course: "Biologa Celular", grade: "3 Sec", room: "Lab. Ciencias", color: "green" },
+          wed: { course: "Biología Celular", grade: "3 Sec", room: "Lab. Ciencias", color: "green" },
 
           thu: { course: "Química General", grade: "2 Sec", room: "Lab. Ciencias", color: "navy" },
 
@@ -1785,7 +1785,7 @@ const initialData = {
 
           mon: { course: "Química Experimental", grade: "4 Sec", room: "Lab. Ciencias", color: "navy" },
 
-          tue: { course: "Prcticas de Microscopía", grade: "4 Sec", room: "Lab. Ciencias", color: "green" },
+          tue: { course: "Prácticas de Microscopía", grade: "4 Sec", room: "Lab. Ciencias", color: "green" },
 
           wed: { course: "Física Cuntica Bsica", grade: "5 Sec", room: "Lab. Ciencias", color: "yellow" },
 
@@ -1855,7 +1855,7 @@ const initialData = {
 
         time: "08:00 - 08:50",
 
-        mon: { course: "Matemtica (ÁÁÁÁálgebra)", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "yellow" },
+        mon: { course: "Matemática (ÁÁÁÁálgebra)", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "yellow" },
 
         tue: { course: "Comunicación & Literatura", teacher: "Miss M. Reyes", room: "Aula 304", type: "theory", color: "navy" },
 
@@ -1871,7 +1871,7 @@ const initialData = {
 
         time: "08:50 - 09:40",
 
-        mon: { course: "Matemtica (ÁÁÁÁálgebra)", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "yellow" },
+        mon: { course: "Matemática (ÁÁÁÁálgebra)", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "yellow" },
 
         tue: { course: "Comunicación & Literatura", teacher: "Miss M. Reyes", room: "Aula 304", type: "theory", color: "navy" },
 
@@ -1887,11 +1887,11 @@ const initialData = {
 
         time: "09:40 - 10:30",
 
-        mon: { course: "Computación e Informtica", teacher: "Prof. F. Rojas", room: "Lab. Cómputo 1", type: "lab", color: "navy" },
+        mon: { course: "Computación e Informática", teacher: "Prof. F. Rojas", room: "Lab. Cómputo 1", type: "lab", color: "navy" },
 
-        tue: { course: "Matemtica (ÁÁÁÁálgebra)", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "yellow" },
+        tue: { course: "Matemática (ÁÁÁÁálgebra)", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "yellow" },
 
-        wed: { course: "Ciencia y Tec. (Biologa)", teacher: "Miss L. Reyes", room: "Aula 304", type: "theory", color: "green" },
+        wed: { course: "Ciencia y Tec. (Biología)", teacher: "Miss L. Reyes", room: "Aula 304", type: "theory", color: "green" },
 
         thu: { course: "Arte y Cultura", teacher: "Miss J. Arroyo", room: "Taller Arte", type: "art", color: "navy" },
 
@@ -1915,11 +1915,11 @@ const initialData = {
 
         time: "10:50 - 11:40",
 
-        mon: { course: "Computación e Informtica", teacher: "Prof. F. Rojas", room: "Lab. Cómputo 1", type: "lab", color: "navy" },
+        mon: { course: "Computación e Informática", teacher: "Prof. F. Rojas", room: "Lab. Cómputo 1", type: "lab", color: "navy" },
 
-        tue: { course: "Matemtica (ÁÁÁÁálgebra)", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "yellow" },
+        tue: { course: "Matemática (ÁÁÁÁálgebra)", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "yellow" },
 
-        wed: { course: "Ciencia y Tec. (Biologa)", teacher: "Miss L. Reyes", room: "Aula 304", type: "theory", color: "green" },
+        wed: { course: "Ciencia y Tec. (Biología)", teacher: "Miss L. Reyes", room: "Aula 304", type: "theory", color: "green" },
 
         thu: { course: "Arte y Cultura", teacher: "Miss J. Arroyo", room: "Taller Arte", type: "art", color: "navy" },
 
@@ -1937,7 +1937,7 @@ const initialData = {
 
         wed: { course: "Educación Física y Deportes", teacher: "Prof. M. Soto", room: "Coliseo", type: "sport", color: "red" },
 
-        thu: { course: "Matemtica (Geometra)", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "navy" },
+        thu: { course: "Matemática (Geometría)", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "navy" },
 
         fri: { course: "Educación Religiosa", teacher: "Prof. J. Cceres", room: "Aula 304", type: "theory", color: "green" }
 
@@ -1949,13 +1949,13 @@ const initialData = {
 
         mon: { course: "Ciencia y Tec. (Química)", teacher: "Miss L. Reyes", room: "Lab. Ciencias", type: "lab", color: "navy" },
 
-        tue: { course: "Prcticas de Microscopía", teacher: "Miss L. Reyes", room: "Lab. Ciencias", type: "lab", color: "green" },
+        tue: { course: "Prácticas de Microscopía", teacher: "Miss L. Reyes", room: "Lab. Ciencias", type: "lab", color: "green" },
 
         wed: { course: "Educación Física y Deportes", teacher: "Prof. M. Soto", room: "Coliseo", type: "sport", color: "red" },
 
-        thu: { course: "Computación e Informtica", teacher: "Prof. F. Rojas", room: "Lab. Cómputo 1", type: "lab", color: "navy" },
+        thu: { course: "Computación e Informática", teacher: "Prof. F. Rojas", room: "Lab. Cómputo 1", type: "lab", color: "navy" },
 
-        fri: { course: "Tutora y Orientación Educativa", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "green" }
+        fri: { course: "Tutoría y Orientación Educativa", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "green" }
 
       },
 
@@ -1981,9 +1981,9 @@ const initialData = {
 
         wed: { course: "Club de Ciencias & FENCYT", teacher: "Miss L. Reyes", room: "Lab. Ciencias", type: "lab", color: "green" },
 
-        thu: { course: "Taller de Geometra Descriptiva", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "navy" },
+        thu: { course: "Taller de Geometría Descriptiva", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "navy" },
 
-        fri: { course: "Prcticas Experimentales Lab", teacher: "Miss L. Reyes", room: "Lab. Ciencias", type: "lab", color: "yellow" }
+        fri: { course: "Prácticas Experimentales Lab", teacher: "Miss L. Reyes", room: "Lab. Ciencias", type: "lab", color: "yellow" }
 
       },
 
@@ -1997,9 +1997,9 @@ const initialData = {
 
         wed: { course: "Club de Ciencias & FENCYT", teacher: "Miss L. Reyes", room: "Lab. Ciencias", type: "lab", color: "green" },
 
-        thu: { course: "Taller de Geometra Descriptiva", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "navy" },
+        thu: { course: "Taller de Geometría Descriptiva", teacher: "Prof. R. Silva", room: "Aula 304", type: "theory", color: "navy" },
 
-        fri: { course: "Prcticas Experimentales Lab", teacher: "Miss L. Reyes", room: "Lab. Ciencias", type: "lab", color: "yellow" }
+        fri: { course: "Prácticas Experimentales Lab", teacher: "Miss L. Reyes", room: "Lab. Ciencias", type: "lab", color: "yellow" }
 
       }
 
@@ -2019,7 +2019,7 @@ const initialData = {
 
       gradeName: "4to de Secundaria",
 
-      courseName: "Matemtica Avanzada (ÁÁÁÁálgebra y Trigonometra)",
+      courseName: "Matemática Avanzada (ÁÁÁÁálgebra y Trigonometra)",
 
       courseCode: "MT-401",
 
@@ -2079,7 +2079,7 @@ const initialData = {
 
       courseCode: "MT-301",
 
-      courseName: "Matemtica & Raízonamiento Matemtico",
+      courseName: "Matemática & Raízonamiento Matemtico",
 
       teacher: "Miss Julisa Arroyo",
 
@@ -2109,7 +2109,7 @@ const initialData = {
 
       ],
 
-      evaluationCriteria: "Prcticas semanales, situaciones problemticas y revisión de cuaderno de trabajo.",
+      evaluationCriteria: "Prácticas semanales, situaciones problemticas y revisión de cuaderno de trabajo.",
 
       pdfFileName: "Cartel_Tematico_Matematica_Agosto_3Primaria.pdf",
 
@@ -2183,7 +2183,7 @@ const initialData = {
 
       courseCode: "CTÍA-301",
 
-      courseName: "Ciencia y Tecnologa",
+      courseName: "Ciencia y Tecnología",
 
       teacher: "Miss Leyli Reyes Cerquen",
 
@@ -2333,7 +2333,7 @@ const initialData = {
 
       courseCode: "EPT-301",
 
-      courseName: "Computación e Informtica",
+      courseName: "Computación e Informática",
 
       teacher: "Prof. Fernando Rojas",
 
@@ -2383,7 +2383,7 @@ const initialData = {
 
       courseCode: "MT-401",
 
-      courseName: "Matemtica Avanzada (ÁÁÁÁálgebra & Trigonometra)",
+      courseName: "Matemática Avanzada (ÁÁÁÁálgebra & Trigonometra)",
 
       teacher: "Prof. Roberto Silva",
 
@@ -2401,7 +2401,7 @@ const initialData = {
 
       weeklyTopics: [
 
-        "Semana 1: Funciones trigonométricas directas e inversas: Domióniño y grfica",
+        "Semana 1: Funciones trigonométricas directas e inversas: Domióniño y gráfica",
 
         "Semana 2: Identidades trigonométricas fundamentales y auxiliares",
 
@@ -2411,7 +2411,7 @@ const initialData = {
 
       ],
 
-      evaluationCriteria: "Prcticas calificadas, resolución de guías tipo pre-universitario y cuaderno.",
+      evaluationCriteria: "Prácticas calificadas, resolución de guías tipo pre-universitario y cuaderno.",
 
       pdfFileName: "Cartel_Tematico_Matematica_Agosto_4Secundaria.pdf",
 
@@ -2525,7 +2525,7 @@ const initialData = {
 
       courseId: "MT-401",
 
-      courseName: "Matemtica Avanzada (ÁÁÁÁálgebra y Funciones)",
+      courseName: "Matemática Avanzada (ÁÁÁÁálgebra y Funciones)",
 
       gradeId: "4sec",
 
@@ -2539,21 +2539,21 @@ const initialData = {
 
       bimester: "III Bimestre",
 
-      title: "Funciones Cuadrticas y Modelamiento de Parbolas enContextos Reales",
+      title: "Funciones Cuadrticas y Modelamiento de Parbolas en Contextos Reales",
 
       sessionDate: "15/08/2026",
 
-      summary: "Enesta sesión presencial analizamos la estructura de la función cuadrtica f(x) = ax² + bx + c. Determiónamos el vértice V(h, k), el eje de simetra x = -b/(2a), y la concavidad según el signo del coeficiente principal. Aplicamos estos conceptos a problemas de tiro parabólico y maximización de ganancias enemprendimientos de SanJuan de Lurigancho.",
+      summary: "Enesta sesión presencial analizamos la estructura de la función cuadrática f(x) = ax² + bx + c. Determiónamos el vértice V(h, k), el eje de simetría x = -b/(2a), y la concavidad según el signo del coeficiente principal. Aplicamos estos conceptos a problemas de tiro parabólico y maximización de ganancias en emprendimientos de San Juan de Lurigancho.",
 
       keyConcepts: [
 
         "Forma canónica f(x) = a(x - h)² + k",
 
-        "Vértice y eje de simetra",
+        "Vértice y eje de simetría",
 
-        "Discrimiónante Δ = b² - 4ac y naturaúleza de raíces",
+        "Discrimiónante Δ = b² - 4ac y naturaleza de raíces",
 
-        "Optimización de valores mximos y mínimos"
+        "Optimización de valores máximos y mínimos"
 
       ],
 
@@ -2589,7 +2589,7 @@ const initialData = {
 
             id: 1,
 
-            question: "¿Cul es la fórmula para calcular la abscisa del vértice 'h' en la función cuadrtica f(x) = ax² + bx + c?",
+            question: "¿Cul es la fórmula para calcular la abscisa del vértice 'h' en la función cuadrática f(x) = ax² + bx + c?",
 
             options: [
 
@@ -2605,7 +2605,7 @@ const initialData = {
 
             correctIndex: 0,
 
-            explanation: "La coordenada 'h' del vértice de una parbola se determióna mediante la expresión h = -b / (2a), la cual coincide con la recta del eje de simetra."
+            explanation: "La coordenada 'h' del vértice de una parábola se determióna mediante la expresión h = -b / (2a), la cual coincide con la recta del eje de simetría."
 
           },
 
@@ -2613,7 +2613,7 @@ const initialData = {
 
             id: 2,
 
-            question: "Si el coeficiente principal 'a' de una función cuadrtica es negativo (a < 0), ¿cómo se comporta la parbola?",
+            question: "Si el coeficiente principal 'a' de una función cuadrática es negativo (a < 0), ¿cómo se comporta la parábola?",
 
             options: [
 
@@ -2623,13 +2623,13 @@ const initialData = {
 
               "Es una línea recta horizontal constante",
 
-              "N o corta al eje vertical Y bajo niónguna circunstancia"
+              "N o corta al eje vertical Y bajo ninguna circunstancia"
 
             ],
 
             correctIndex: 0,
 
-            explanation: "Cuando a < 0, la concavidad de la parbola es hacia abajo, por lo que su vértice representa el valor mximo absoluto de la función."
+            explanation: "Cuando a < 0, la concavidad de la parábola es hacia abajo, por lo que su vértice representa el valor mximo absoluto de la función."
 
           },
 
@@ -2661,23 +2661,23 @@ const initialData = {
 
             id: 4,
 
-            question: "Si el discrimiónante de una ecuación cuadrtica cumple que Δ = b² - 4ac = 0, ¿qué se puede afirmar sobre sus raíces?",
+            question: "Si el discriminante de una ecuación cuadrática cumple que Δ = b² - 4ac = 0, ¿qué se puede afirmar sobre sus raíces?",
 
             options: [
 
-              "Posee una única raíz real doble (la parbola es tangente al eje X)",
+              "Posee una única raíz real doble (la parábola es tangente al eje X)",
 
-              "Posee dos raíces reales y distióntas que cortanen dos puntos",
+              "Posee dos raíces reales y distintas que cortan en dos puntos",
 
-              "N o posee niónguna solución real (raíces complejas imagiónarias)",
+              "N o posee ninguna solución real (raíces complejas imaginarias)",
 
-              "La función carece de vértice y térmióno independiente"
+              "La función carece de vértice y término independiente"
 
             ],
 
             correctIndex: 0,
 
-            explanation: "Cuando el discrimiónante es exactamente cero (Δ = 0), la ecuación tiene una raíz real única de multiplicidad 2, lo que significa que el vértice toca tangencialmente el eje X."
+            explanation: "Cuando el discriminante es exactamente cero (Δ = 0), la ecuación tiene una raíz real única de multiplicidad 2, lo que significa que el vértice toca tangencialmente el eje X."
 
           },
 
@@ -2685,7 +2685,7 @@ const initialData = {
 
             id: 5,
 
-            question: "¿Cul es el punto de intersección de la grfica de f(x) = 3x² + 5x - 7 con el eje de ordenadas Y?",
+            question: "¿Cul es el punto de intersección de la gráfica de f(x) = 3x² + 5x - 7 con el eje de ordenadas Y?",
 
             options: [
 
@@ -2709,7 +2709,7 @@ const initialData = {
 
             id: 6,
 
-            question: "Unproyectil describe una trayectoria h(t) = -5t² + 20t enmetros. ¿Encuntos segundos alcanza su altura mxima?",
+            question: "Un proyectil describe una trayectoria h(t) = -5t² + 20t en metros. ¿En cuántos segundos alcanza su altura máxima?",
 
             options: [
 
@@ -2725,7 +2725,7 @@ const initialData = {
 
             correctIndex: 0,
 
-            explanation: "El tiempo para la altura mxima corresponde a la abscisa del vértice: t = -b / (2a) = -20 / (2 * -5) = -20 / -10 = 2 segundos."
+            explanation: "El tiempo para la altura máxima corresponde a la abscisa del vértice: t = -b / (2a) = -20 / (2 * -5) = -20 / -10 = 2 segundos."
 
           },
 
@@ -2733,7 +2733,7 @@ const initialData = {
 
             id: 7,
 
-            question: "Siguiendo el caso anterior h(t) = -5t² + 20t, ¿cul es la altura mxima alcanzada por el proyectil?",
+            question: "Siguiendo el caso anterior h(t) = -5t² + 20t, ¿cuál es la altura máxima alcanzada por el proyectil?",
 
             options: [
 
@@ -2757,7 +2757,7 @@ const initialData = {
 
             id: 8,
 
-            question: "La forma canónica de una función cuadrtica es f(x) = a(x - h)² + k. Si f(x) = (x - 3)² + 5, ¿cul es su vértice?",
+            question: "La forma canónica de una función cuadrática es f(x) = a(x - h)² + k. Si f(x) = (x - 3)² + 5, ¿cuál es su vértice?",
 
             options: [
 
@@ -2781,7 +2781,7 @@ const initialData = {
 
             id: 9,
 
-            question: "¿Cul es la ecuación del eje de simetra de la función cuadrtica f(x) = x² - 6x + 8?",
+            question: "¿Cul es la ecuación del eje de simetría de la función cuadrática f(x) = x² - 6x + 8?",
 
             options: [
 
@@ -2797,7 +2797,7 @@ const initialData = {
 
             correctIndex: 0,
 
-            explanation: "El eje de simetra es la recta vertical x = -b/(2a) = -(-6)/(2*1) = 6/2 = 3. Por lo tanto x = 3."
+            explanation: "El eje de simetría es la recta vertical x = -b/(2a) = -(-6)/(2*1) = 6/2 = 3. Por lo tanto x = 3."
 
           },
 
@@ -2805,7 +2805,7 @@ const initialData = {
 
             id: 10,
 
-            question: "Si el discrimiónante Δ < 0 y el coeficiente a > 0, ¿qué afirmación sobre el rango de la función es verdadera?",
+            question: "Si el discriminante Δ < 0 y el coeficiente a > 0, ¿qué afirmación sobre el rango de la función es verdadera?",
 
             options: [
 
@@ -2815,13 +2815,13 @@ const initialData = {
 
               "El rango de la función es el conjunto de todos los números reales (-∞, +∞)",
 
-              "La parbola corta al eje X exactamente endos puntos simétricos"
+              "La parábola corta al eje X exactamente endos puntos simétricos"
 
             ],
 
             correctIndex: 0,
 
-            explanation: "Cona > 0 la parbola abre hacia arriba y al ser Δ < 0 no toca ni cruiza el eje X, manteniéndose estrictamente por encima de él (función estrictamente positiva)."
+            explanation: "Cona > 0 la parábola abre hacia arriba y al ser Δ < 0 no toca ni cruiza el eje X, manteniéndose estrictamente por encima de él (función estrictamente positiva)."
 
           }
 
@@ -2849,7 +2849,7 @@ const initialData = {
 
           timeSpent: "14 mión",
 
-          feedback: "¡Excelente domióniño en el clculo del vértice y optimización parabólica! Revisar discrimiónante enejercicios complejosé."
+          feedback: "¡Excelente domióniño en el clculo del vértice y optimización parabólica! Revisar discriminante enejercicios complejosé."
 
         },
 
@@ -2907,7 +2907,7 @@ const initialData = {
 
       courseId: "EPT-402",
 
-      courseName: "Computación e Informtica / Robótica",
+      courseName: "Computación e Informática / Robótica",
 
       gradeId: "4sec",
 
@@ -2921,11 +2921,11 @@ const initialData = {
 
       bimester: "III Bimestre",
 
-      title: "Robótica Educativa: Programación de Sensores Ultrasónicos conrduino",
+      title: "Robótica Educativa: Programación de Sensores Ultrasónicos con Arduino",
 
       sessionDate: "16/08/2026",
 
-      summary: "Enesta sesión en el Taller de Robótica se realizó el montaje y calibración del sensor ultrasónico HC-SR04 conectado a la placa Arduino UNO. Los estudiantes programaronla emisión de pulsos TRIGGER y la lectura de tiempo de retorno enECHO para calcular distancias encentímetros con la velocidad del sonido.",
+      summary: "Enesta sesión en el Taller de Robótica se realizó el montaje y calibración del sensor ultrasónico HC-SR04 conectado a la placa Arduino UNO. Los estudiantes programaron la emisión de pulsos TRIGGER y la lectura de tiempo de retorno en ECHO para calcular distancias encentímetros con la velocidad del sonido.",
 
       keyConcepts: [
 
@@ -2935,7 +2935,7 @@ const initialData = {
 
         "Fórmula física: Distancia = (Tiempo * 0.0343) / 2",
 
-        "Estructuras condicionales if-else para evasión de obstculos"
+        "Estructuras condicionales if-else para evasión de obstáculos"
 
       ],
 
@@ -3115,7 +3115,7 @@ const initialData = {
 
             id: 7,
 
-            question: "Si queremos que unrobot móvil frene cuando la distancia sea menor a 15 cm, ¿cul es la condición adecuada enC++?",
+            question: "Si queremos que unrobot móvil frene cuando la distancia sea menor a 15 cm, ¿cuál es la condición adecuada enC++?",
 
             options: [
 
@@ -3231,7 +3231,7 @@ const initialData = {
 
           timeSpent: "11 mión",
 
-          feedback: "¡Puntaje perfecto! Domióniño total del pinout, fórmulas y lógica de control conrduino."
+          feedback: "¡Puntaje perfecto! Domióniño total del pinout, fórmulas y lógica de control con Arduino."
 
         }
 
@@ -3245,7 +3245,7 @@ const initialData = {
 
       courseId: "CTÍA-403",
 
-      courseName: "Ciencia y Tecnologa (Física & Química)",
+      courseName: "Ciencia y Tecnología (Física & Química)",
 
       gradeId: "4sec",
 
@@ -3263,7 +3263,7 @@ const initialData = {
 
       sessionDate: "17/08/2026",
 
-      summary: "Durante las prcticas de laboratorio comprobamos experimentalmente que la aceleración que adquiere uncuerpo es directamente proporcional a la fuerza resultante e inversamente proporcional a su masa (F_res = m · a). Analizamos diagramas de cuerpo libre (DCL) y coeficientes de rozamiento esttico y ciónético.",
+      summary: "Durante las prácticas de laboratorio comprobamos experimentalmente que la aceleración que adquiere uncuerpo es directamente proporcional a la fuerza resultante e inversamente proporcional a su masa (F_res = m · a). Analizamos diagramas de cuerpo libre (DCL) y coeficientes de rozamiento esttico y ciónético.",
 
       keyConcepts: [
 
@@ -3355,7 +3355,7 @@ const initialData = {
 
             id: 3,
 
-            question: "Si a unbloque de 5 kg se le aplica una fuerza neta horizontal de 20 N, ¿cul es su aceleración?",
+            question: "Si a unbloque de 5 kg se le aplica una fuerza neta horizontal de 20 N, ¿cuál es su aceleración?",
 
             options: [
 
@@ -3383,11 +3383,11 @@ const initialData = {
 
             options: [
 
-              "La representación grfica de todas las fuerzas externas que actúansobre uncuerpo",
+              "La representación gráfica de todas las fuerzas externas que actúansobre uncuerpo",
 
               "El dibujo estético del objeto ensu entorno",
 
-              "La grfica de velocidad enfunción del tiempo",
+              "La gráfica de velocidad enfunción del tiempo",
 
               "La trayectoria geométrica del movimiento"
 
@@ -3742,7 +3742,7 @@ class IntranetStore {
 
 
 
-    // Limpieza automtica de cualquier residuo corrupto de versiones anteriores enlocalStorage
+    // Limpieza automática de cualquier residuo corrupto de versiones anteriores enlocalStorage
 
     try {
 
@@ -3904,7 +3904,7 @@ class IntranetStore {
 
       this.eventSource.onerror = () => {
 
-        // El polling contiónuo cada 2.5s garantiza la sióncronización si la red interrumpe el socket SSE
+        // El polling continuo cada 2.5s garantiza la sióncronización si la red interrumpe el socket SSE
 
       };
 
@@ -6055,7 +6055,7 @@ class IntranetStore {
 
           b1: `Felicitaciones a ${enr.studentName} por su rendimiento y constante dedicación ensus actividades escolares.`,
 
-          b2: `Demuestra responsabilidad y compromiso en el aula. Se recomienda contiónuar participando activamente.`,
+          b2: `Demuestra responsabilidad y compromiso en el aula. Se recomienda continuar participando activamente.`,
 
           b3: "",
 
@@ -6469,7 +6469,7 @@ class IntranetStore {
 
           ? user.assignedCourses 
 
-          : (Array.isArray(user.courses) ? user.courses : (user.subject ? user.subject.split(/,\s*/) : ["Matemtica"]));
+          : (Array.isArray(user.courses) ? user.courses : (user.subject ? user.subject.split(/,\s*/) : ["Matemática"]));
 
 
 
@@ -6765,9 +6765,9 @@ class IntranetStore {
 
       gender: data.gender || "Femenino",
 
-      address: data.address || "SanJuan de Lurigancho",
+      address: data.address || "San Juan de Lurigancho",
 
-      district: data.district || "SanJuan de Lurigancho",
+      district: data.district || "San Juan de Lurigancho",
 
       bloodType: data.bloodType || "O+",
 
@@ -6891,7 +6891,7 @@ class IntranetStore {
 
   // =========================================================================
 
-  // REGISTRO DE ESTUDINTES, NÓMINA OFICIL E IMPORTÍACIÓN MSIVA DESDE EXCEL
+  // REGISTRO DE ESTUDINTES, NÓMINA OFICIAL E IMPORTÍACIÓN MSIVA DESDE EXCEL
 
   // =========================================================================
 
@@ -7299,7 +7299,7 @@ class IntranetStore {
 
   // =========================================================================
 
-  // GESTIÓN DE ESTRUCTURÍA DE GRÍADOS Y SECCIONES (ADMINISTRÍADOR)
+  // GESTIÓN DE ESTRUCTURÍA DE GRÍADOS Y SECCIONES (ADMINISTRADOR)
 
   // =========================================================================
 
@@ -7439,7 +7439,7 @@ class IntranetStore {
 
       units: newSyllabusData.units || [
 
-        { unitNumber: "Unidad I", title: "Fundamentos Clave", duration: "4 semanas", topics: ["Introducción al curso"], evaluation: "Evaluación contiónua" }
+        { unitNumber: "Unidad I", title: "Fundamentos Clave", duration: "4 semanas", topics: ["Introducción al curso"], evaluation: "Evaluación continua" }
 
       ],
 
@@ -7699,7 +7699,7 @@ class IntranetStore {
 
 
 
-    // 1. Caso especial: Tutora / Conducta
+    // 1. Caso especial: Tutoría / Conducta
 
     if (cleanCourse.includes("conducta") || cleanCourse.includes("tutor")) {
 
@@ -7883,13 +7883,13 @@ class IntranetStore {
 
       const inicialCourses = [
 
-        { id: "MT", name: "Matemtica Temprana & Lógica", area: "Matemtica", icon: "🔢" },
+        { id: "MT", name: "Matemática Temprana & Lógica", area: "Matemática", icon: "🔢" },
 
         { id: "COM", name: "Comunicación & Grafomotricidad", area: "Comunicación", icon: "📖" },
 
         { id: "PL", name: "PlanLector / Cuentos Infantiles", area: "Comunicación", icon: "📚" },
 
-        { id: "CTÍA", name: "Ciencia y Ambiente / Exploración", area: "Ciencia y Tecnologa", icon: "🔬" },
+        { id: "CTÍA", name: "Ciencia y Ambiente / Exploración", area: "Ciencia y Tecnología", icon: "🔬" },
 
         { id: "PS", name: "Personal Social & Convivencia", area: "Personal Social", icon: "🏛️" },
 
@@ -7901,7 +7901,7 @@ class IntranetStore {
 
         { id: "REL", name: "Educación enValores & Religión", area: "Valores", icon: "🕊️" },
 
-        { id: "HB", name: "Hbitos, Disciplina y Tutora", area: "Tutora", icon: "★" }
+        { id: "HB", name: "Hbitos, Disciplina y Tutoría", area: "Tutoría", icon: "★" }
 
       ];
 
@@ -7923,13 +7923,13 @@ class IntranetStore {
 
       const primaryCourses = [
 
-        { id: "MT", name: "Matemtica & Aritmética", area: "Matemtica", icon: "🔢" },
+        { id: "MT", name: "Matemática & Aritmética", area: "Matemática", icon: "🔢" },
 
-        { id: "ALG", name: "ÁÁÁÁálgebra Elemental", area: "Matemtica", icon: "📐" },
+        { id: "ALG", name: "ÁÁÁÁálgebra Elemental", area: "Matemática", icon: "📐" },
 
-        { id: "GEOM", name: "Geometra Prctica", area: "Matemtica", icon: "📏" },
+        { id: "GEOM", name: "Geometría Prctica", area: "Matemática", icon: "📏" },
 
-        { id: "RM", name: "Raízonamiento Matemtico", area: "Matemtica", icon: "🧮" },
+        { id: "RM", name: "Raízonamiento Matemtico", area: "Matemática", icon: "🧮" },
 
         { id: "COM", name: "Comunicación Integral", area: "Comunicación", icon: "📖" },
 
@@ -7939,9 +7939,9 @@ class IntranetStore {
 
         { id: "RV", name: "Raízonamiento Verbal", area: "Comunicación", icon: "✏️" },
 
-        { id: "CTÍA", name: "Ciencia y Tecnologa", area: "Ciencia y Tecnologa", icon: "🔬" },
+        { id: "CTÍA", name: "Ciencia y Tecnología", area: "Ciencia y Tecnología", icon: "🔬" },
 
-        { id: "BIO", name: "Biologa & Anatoma", area: "Ciencia y Tecnologa", icon: "🧬" },
+        { id: "BIO", name: "Biología & Anatoma", area: "Ciencia y Tecnología", icon: "🧬" },
 
         { id: "PS", name: "Personal Social & Cívica", area: "Personal Social", icon: "🏛️" },
 
@@ -7949,7 +7949,7 @@ class IntranetStore {
 
         { id: "GEO", name: "Geografía del Perú", area: "Personal Social", icon: "🌎" },
 
-        { id: "COMP", name: "Computación & Informtica", area: "EPT / Tecnologa", icon: "💻" },
+        { id: "COMP", name: "Computación & Informática", area: "EPT / Tecnología", icon: "💻" },
 
         { id: "ING", name: "Inglés Institucional", area: "Idiomas", icon: "🇬🇧" },
 
@@ -7959,7 +7959,7 @@ class IntranetStore {
 
         { id: "EDFIS", name: "Educación Física & Deporte", area: "Deporte", icon: "⚽" },
 
-        { id: "TUT", name: "Tutora & Convivencia Escolar", area: "Tutora", icon: "★" }
+        { id: "TUT", name: "Tutoría & Convivencia Escolar", area: "Tutoría", icon: "★" }
 
       ];
 
@@ -7981,27 +7981,27 @@ class IntranetStore {
 
     const secondaryCourses = [
 
-      { id: "ARIT", name: "Aritmética", area: "Matemtica", icon: "🔢" },
+      { id: "ARIT", name: "Aritmética", area: "Matemática", icon: "🔢" },
 
-      { id: "ALG", name: "ÁÁÁÁálgebra", area: "Matemtica", icon: "📐" },
+      { id: "ALG", name: "ÁÁÁÁálgebra", area: "Matemática", icon: "📐" },
 
-      { id: "GEOM", name: "Geometra", area: "Matemtica", icon: "📏" },
+      { id: "GEOM", name: "Geometría", area: "Matemática", icon: "📏" },
 
-      { id: "TRIG", name: "Trigonometra", area: "Matemtica", icon: "📈" },
+      { id: "TRIG", name: "Trigonometra", area: "Matemática", icon: "📈" },
 
-      { id: "RM", name: "Raízonamiento Matemtico", area: "Matemtica", icon: "🧮" },
+      { id: "RM", name: "Raízonamiento Matemtico", area: "Matemática", icon: "🧮" },
 
-      { id: "LENG", name: "Lenguíaje y Gramtica", area: "Comunicación", icon: "✍️" },
+      { id: "LENG", name: "Lenguíaje y Gramática", area: "Comunicación", icon: "✍️" },
 
       { id: "LIT", name: "Literatura Universal", area: "Comunicación", icon: "📚" },
 
       { id: "RV", name: "Raízonamiento Verbal", area: "Comunicación", icon: "✏️" },
 
-      { id: "BIO", name: "Biologa & Anatoma", area: "Ciencia y Tecnologa", icon: "🧬" },
+      { id: "BIO", name: "Biología & Anatoma", area: "Ciencia y Tecnología", icon: "🧬" },
 
-      { id: "FIS", name: "Física Elemental", area: "Ciencia y Tecnologa", icon: "⚡" },
+      { id: "FIS", name: "Física Elemental", area: "Ciencia y Tecnología", icon: "⚡" },
 
-      { id: "QUIM", name: "Química Inorgnica", area: "Ciencia y Tecnologa", icon: "🧪" },
+      { id: "QUIM", name: "Química Inorgnica", area: "Ciencia y Tecnología", icon: "🧪" },
 
       { id: "HP", name: "Historia del Perú", area: "Ciencias Sociales", icon: "🇵🇪" },
 
@@ -8027,7 +8027,7 @@ class IntranetStore {
 
       { id: "EDFIS", name: "Educación Física & Deporte", area: "Deporte", icon: "⚽" },
 
-      { id: "COND", name: "Conducta y Disciplina", area: "Tutora", icon: "★" }
+      { id: "COND", name: "Conducta y Disciplina", area: "Tutoría", icon: "★" }
 
     ];
 
@@ -9017,7 +9017,7 @@ class IntranetStore {
 
         const grd = parts[3] || "4 de Secundaria";
 
-        const crs = parts[4] || "Matemtica Avanzada";
+        const crs = parts[4] || "Matemática Avanzada";
 
         const tch = parts[5] || "Prof. Roberto Silva";
 
@@ -9057,7 +9057,7 @@ class IntranetStore {
 
         const stName = parsed.alumno || parsed.studentName || parsed.student || "Sofía Méndez Flores";
 
-        const crs = parsed.curso || parsed.course || "Matemtica Avanzada";
+        const crs = parsed.curso || parsed.course || "Matemática Avanzada";
 
         const tch = parsed.profesor || parsed.teacher || "Prof. Roberto Silva";
 
@@ -9219,7 +9219,7 @@ class IntranetStore {
 
       grade: data.grade || "4 de Secundaria",
 
-      course: data.course || "Matemtica Avanzada",
+      course: data.course || "Matemática Avanzada",
 
       teacher: data.teacher || "Prof. Roberto Silva",
 
@@ -9487,7 +9487,7 @@ class IntranetStore {
 
 
 
-    // 2. Sióncronizar automticamente contodas las matrículas oficiales
+    // 2. Sincronizar automáticamente contodas las matrículas oficiales
 
     const enrollments = this.getEnrollments();
 
@@ -9555,7 +9555,7 @@ class IntranetStore {
 
 
 
-    // 3. Sióncronizar conusuarios de rol Apoderado ensystemUsers
+    // 3. Sincronizar conusuarios de rol Apoderado ensystemUsers
 
     const systemUsers = this.getSystemUsers();
 
@@ -9972,7 +9972,7 @@ class IntranetStore {
 
       existióngRecord.arrivalTime = scanTime;
 
-      existióngRecord.method = "Fotocheck QR (Portera Principal)";
+      existióngRecord.method = "Fotocheck QR (Portería Principal)";
 
       existióngRecord.observations = observations;
 
@@ -10004,7 +10004,7 @@ class IntranetStore {
 
         exitTime: "03:30 PM",
 
-        method: "Fotocheck QR (Portera Principal)",
+        method: "Fotocheck QR (Portería Principal)",
 
         observations: observations
 
@@ -10162,7 +10162,7 @@ class IntranetStore {
 
         arrivalTime: rec ? rec.arrivalTime : "--:--",
 
-        method: rec ? rec.method : "N o Registrado enPortera",
+        method: rec ? rec.method : "N o Registrado enPortería",
 
         observations: rec ? rec.observations : "Inasistencia (Puerta cerrada 08:30 AM siónregistro)",
 
@@ -10462,7 +10462,7 @@ class IntranetStore {
 
   // =========================================================================
 
-  // GESTIÓN DESCENTRÍALIZDÍA DE N OTÍAS Y BOLETÍAS OFICILES
+  // GESTIÓN DESCENTRÍALIZDÍA DE NOTAS Y BOLETÍAS OFICIALES
 
   // =========================================================================
 
@@ -10642,7 +10642,7 @@ class IntranetStore {
 
       courseId: materialData.courseId || "MT-401",
 
-      courseName: materialData.courseName || "Matemtica Avanzada",
+      courseName: materialData.courseName || "Matemática Avanzada",
 
       gradeId: materialData.gradeId || "4sec",
 
@@ -10702,11 +10702,11 @@ class IntranetStore {
 
     const availableCourses = [
 
-      { id: "MT-401", name: "Matemtica Avanzada", teacher: "Prof. Roberto Silva", grade: "4to de Secundaria" },
+      { id: "MT-401", name: "Matemática Avanzada", teacher: "Prof. Roberto Silva", grade: "4to de Secundaria" },
 
-      { id: "EPT-402", name: "Computación e Informtica / Robótica", teacher: "Prof. Fernando Rojas", grade: "4to de Secundaria" },
+      { id: "EPT-402", name: "Computación e Informática / Robótica", teacher: "Prof. Fernando Rojas", grade: "4to de Secundaria" },
 
-      { id: "CTÍA-403", name: "Ciencia y Tecnologa (Física & Química)", teacher: "Miss Leyli Reyes Cerquen", grade: "4to de Secundaria" },
+      { id: "CTÍA-403", name: "Ciencia y Tecnología (Física & Química)", teacher: "Miss Leyli Reyes Cerquen", grade: "4to de Secundaria" },
 
       { id: "COM-404", name: "Comunicación & Literatura", teacher: "Miss Mara Daysi Reyes", grade: "4to de Secundaria" }
 
@@ -10780,7 +10780,7 @@ class IntranetStore {
 
       } else {
 
-        detectedTitle = `Matemtica Avanzada: ${cleanFileName.charAt(0).toUpperCase() + cleanFileName.slice(1)}`;
+        detectedTitle = `Matemática Avanzada: ${cleanFileName.charAt(0).toUpperCase() + cleanFileName.slice(1)}`;
 
         detectedSummary = `Se analizó el contenido del archivo ${fileName}, trabajando los fundamentos teóricos, métodos de resolución analítica y modelado algebraico conaplicaciones a situaciones reales del grado.`;
 
@@ -10792,15 +10792,15 @@ class IntranetStore {
 
       if (lowerContent.includes("arduino") || lowerContent.includes("sensor") || lowerContent.includes("motor") || lowerContent.includes("robotica")) {
 
-        detectedTitle = "Programación de Servomotores y Sensores Ultrasónicos conrduino";
+        detectedTitle = "Programación de Servomotores y Sensores Ultrasónicos con Arduino";
 
-        detectedSummary = "Enel laboratorio de robótica los estudiantes conectaronsensores HC-SR04 y servomotores a microcontroladores Arduino UNO. Se programó el algoritmo enC++ para evitar obstculos entiempo real y regular la velocidad según la distancia medida.";
+        detectedSummary = "Enel laboratorio de robótica los estudiantes conectaronsensores HC-SR04 y servomotores a microcontroladores Arduino UNO. Se programó el algoritmo enC++ para evitar obstáculos entiempo real y regular la velocidad según la distancia medida.";
 
         detectedConcepts = ["Librera Servo.h y control por pulsos PWM", "Clculo de distancia consensor HC-SR04 por ultrasonido", "Estructuras condicionales de control enbucle loop()", "Calibración y alimentación segura de circuitos mecatrónicos"];
 
       } else {
 
-        detectedTitle = `Tecnologa & Robótica: ${cleanFileName.charAt(0).toUpperCase() + cleanFileName.slice(1)}`;
+        detectedTitle = `Tecnología & Robótica: ${cleanFileName.charAt(0).toUpperCase() + cleanFileName.slice(1)}`;
 
         detectedSummary = `Anlisis pedagógico del archivo ${fileName} enfocado enarquitectura computacional, algoritmos de automatización y desarrollo de proyectos tecnológicos guiados.`;
 
@@ -10820,7 +10820,7 @@ class IntranetStore {
 
       } else {
 
-        detectedTitle = `Ciencia & Tecnologa: ${cleanFileName.charAt(0).toUpperCase() + cleanFileName.slice(1)}`;
+        detectedTitle = `Ciencia & Tecnología: ${cleanFileName.charAt(0).toUpperCase() + cleanFileName.slice(1)}`;
 
         detectedSummary = `Estudio científico extraído del archivo ${fileName}, fundamentando las leyes físicas/químicas observadas, el método experimental y el anlisis riguroso de variables.`;
 
@@ -10940,7 +10940,7 @@ class IntranetStore {
 
 
 
-  // Generador Inteligente de 10 Preguntas Dinmicas conIA basado en el Material Subido
+  // Generador Inteligente de 10 Preguntas Dinámicas con IA basado en el Material Subido
 
   generateDynamicEvaluation(materialId, customPrompt = "") {
 
@@ -10990,7 +10990,7 @@ class IntranetStore {
 
         id: 2,
 
-        question: `Enrelación al concepto '${concepts[0] || 'propiedades fundamentales'}', ¿cul es la proposición correcta?`,
+        question: `Enrelación al concepto '${concepts[0] || 'propiedades fundamentales'}', ¿cuál es la proposición correcta?`,
 
         options: [
 
@@ -11042,7 +11042,7 @@ class IntranetStore {
 
         options: [
 
-          `El conocimiento adquirido permite interpretar y optimizar situaciones prcticas conprecisión`,
+          `El conocimiento adquirido permite interpretar y optimizar situaciones prácticas conprecisión`,
 
           `Los resultados obtenidos sonaleatorios y no siguennióngún patrón científico`,
 
@@ -11094,7 +11094,7 @@ class IntranetStore {
 
           `El modelo dejará de tener sentido algebraico o físico inmediatamente`,
 
-          `N o existirá niónguna variación en los resultados esperados`,
+          `N o existirá ninguna variación en los resultados esperados`,
 
           `Los coeficientes se anularn siónjustificación teórica`
 
@@ -11158,7 +11158,7 @@ class IntranetStore {
 
         id: 9,
 
-        question: `Al contrastar '${concepts[0] || 'concepto principal'}' con '${concepts[1] || 'concepto secundario'}', ¿cul es su relación pedagógica?`,
+        question: `Al contrastar '${concepts[0] || 'concepto principal'}' con '${concepts[1] || 'concepto secundario'}', ¿cuál es su relación pedagógica?`,
 
         options: [
 
@@ -11168,7 +11168,7 @@ class IntranetStore {
 
           `Poseensignificados idénticos y redundantes`,
 
-          `N o tienenniónguna correlación curricular en el nivel secundario`
+          `N o tienenninguna correlación curricular en el nivel secundario`
 
         ],
 
@@ -11442,7 +11442,7 @@ class IntranetStore {
 
       category: noteData.category || "Seguimiento Académico",
 
-      course: noteData.course || "Tutora & Normas",
+      course: noteData.course || "Tutoría & Normas",
 
       teacher: noteData.teacher || "Profesor Responsable",
 
@@ -11694,7 +11694,7 @@ class IntranetStore {
 
           ],
 
-      evaluationCriteria: cartelData.evaluationCriteria || "Prcticas semanales, participación y revisión de cuadernos.",
+      evaluationCriteria: cartelData.evaluationCriteria || "Prácticas semanales, participación y revisión de cuadernos.",
 
       pdfFileName: cartelData.pdfFileName || `${cartelData.courseName || 'Cartel'}_${cartelData.month || 'Agosto'}_2026.pdf`,
 
@@ -11969,7 +11969,7 @@ const Components = {
 
             : role === "auxiliar" 
 
-              ? "Turno de Auxiliar & Portera" 
+              ? "Turno de Auxiliar & Portería" 
 
               : "Dirección General";
 
@@ -12093,7 +12093,7 @@ const Components = {
 
         <span>Lector de Cuadernos QR</span>
 
-        <span class="nav-badge badge-yellow" style="background:#f59e0b; color:#0b132b;">CMARÍA VIVA</span>
+        <span class="nav-badge badge-yellow" style="background:#f59e0b; color:#0b132b;">CÁMARA VIVA</span>
 
       </a>
 
@@ -12197,7 +12197,7 @@ const Components = {
 
   // Encabezado Oficial Institucional conMembrete y Ciónta Dorada
 
-  renderOfficialInstitutionalHeader(docTitle = "INFORME OFICIL DE PROGRESO", docSubtitle = "AÑO LECTIVO 2026") {
+  renderOfficialInstitutionalHeader(docTitle = "INFORME OFICIAL DE PROGRESO", docSubtitle = "AÑO LECTIVO 2026") {
 
     return `
 
@@ -12265,7 +12265,7 @@ const Components = {
 
             </div>
 
-            <p class="login-subtitle">Intranet Institucional • Aula Virtual & Evaluaciones Dinmicas</p>
+            <p class="login-subtitle">Intranet Institucional • Aula Virtual & Evaluaciones Dinámicas</p>
 
           </div>
 
@@ -12487,7 +12487,7 @@ const Components = {
 
               <h4 style="font-size: var(--font-size-base); font-weight: 900; color: #065f46;">
 
-                Control de Asistencia & Portera
+                Control de Asistencia & Portería
 
               </h4>
 
@@ -12599,7 +12599,7 @@ const Components = {
 
         <!-- =========================================================================
 
-             GESTIÓN DE ESTRUCTURÍA DE GRÍADOS (EDITÍABLE POR EL ADMINISTRÍADOR)
+             GESTIÓN DE ESTRUCTURÍA DE GRÍADOS (EDITÍABLE POR EL ADMINISTRADOR)
 
              ========================================================================= -->
 
@@ -12697,7 +12697,7 @@ const Components = {
 
                       <span style="color: ${g.section ? 'var(--color-navy-900)' : 'var(--text-muted)'}; font-weight: ${g.section ? '800' : 'normal'};">
 
-                        ${g.section ? g.section : ((state.academicConfig && state.academicConfig.hasSections) ? 'Siónasignar' : 'Única')}
+                        ${g.section ? g.section : ((state.academicConfig && state.academicConfig.hasSections) ? 'Sin asignar' : 'Única')}
 
                       </span>
 
@@ -13427,7 +13427,7 @@ const Components = {
 
 
 
-  // Dashboard - Auxiliar de Educación & Portera
+  // Dashboard - Auxiliar de Educación & Portería
 
   renderAuxiliarDashboard(state, user) {
 
@@ -13471,7 +13471,7 @@ const Components = {
 
               <span class="status-badge status-approved" style="background: rgba(245, 158, 11, 0.2); color: #fde047; border: 1px solid #f59e0b;">
 
-                Portera Puerta 1 & Pabellón Secundaria
+                Portería Puerta 1 & Pabellón Secundaria
 
               </span>
 
@@ -13481,7 +13481,7 @@ const Components = {
 
             <p class="welcome-subtitle">
 
-              Módulo exclusivo para <strong>Registro Biométrico / QR enPortera</strong> y <strong>Revisión y Sellado de Cuadernos Escolares</strong>.
+              Módulo exclusivo para <strong>Registro Biométrico / QR enPortería</strong> y <strong>Revisión y Sellado de Cuadernos Escolares</strong>.
 
             </p>
 
@@ -13543,7 +13543,7 @@ const Components = {
 
               <h3 style="font-size: 16px; font-weight: 900; color: #065f46; margin: 0;">
 
-                1. Control de Asistencia & Portera
+                1. Control de Asistencia & Portería
 
               </h3>
 
@@ -13567,7 +13567,7 @@ const Components = {
 
               <button class="btn btn-gold btn-sm" onclick="window.app.navigate('asistencia'); window.app.setttendanceSubTab('id-cards');" style="font-weight: 800; padding: 10px 8px; font-size: 12px;">
 
-                Plancha QR (SiónFoto)
+                Plancha QR (Foto)
 
               </button>
 
@@ -13595,7 +13595,7 @@ const Components = {
 
               </h3>
 
-              <span class="status-badge" style="background:#f59e0b; color:#0b132b; font-weight: 900;">CMARÍA VIVA</span>
+              <span class="status-badge" style="background:#f59e0b; color:#0b132b; font-weight: 900;">CÁMARA VIVA</span>
 
             </div>
 
@@ -13635,7 +13635,7 @@ const Components = {
 
 
 
-        <!-- Tabla Resumendel Padrón de Aulas -->
+        <!-- Tabla Resumen del Padrón de Aulas -->
 
         <div class="card">
 
@@ -14287,7 +14287,7 @@ const Components = {
 
 
 
-    // --- VISTÍA PRÍA DOCENTES, AUXILIRES, DIRECCIÓN Y ADMINISTRÍADORES ---
+    // --- VISTÍA PRÍA DOCENTES, AUXILIRES, DIRECCIÓN Y ADMINISTRADORES ---
 
     const selectedGrade = state.selectedgendaGrade || "all";
 
@@ -14355,7 +14355,7 @@ const Components = {
 
                 <span class="status-badge status-approved" style="background:#10b981; color:white; font-weight:800;">ENLCE QR FOTOCHECK</span>
 
-                <span class="status-badge status-approved" style="background:#22c55e; color:white; font-weight:800;">WHTSPP OFICIL</span>
+                <span class="status-badge status-approved" style="background:#22c55e; color:white; font-weight:800;">WHTSPP OFICIAL</span>
 
               </div>
 
@@ -14713,7 +14713,7 @@ const Components = {
 
 
 
-    // --- VISTÍA EXCLUSIVA PRÍA ESTUDINTES Y PDRES DE FMILIA: INFORME OFICIL DE CUDERNOS ---
+    // --- VISTÍA EXCLUSIVA PRÍA ESTUDINTES Y PDRES DE FMILIA: INFORME OFICIAL DE CUDERNOS ---
 
     if (role === "estudiante" || role === "padre") {
 
@@ -14805,25 +14805,25 @@ const Components = {
 
       const defaultNotebooks = isPrimaria ? [
 
-        { course: "Matemtica & Raízonamiento", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, mrgenes impecables y esquemas enorden." },
+        { course: "Matemática & Raízonamiento", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, mrgenes impecables y esquemas enorden." },
 
         { course: "Comunicación Integral & Lectura", teacher: "Miss Julisa Magali Arroyo", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Caligrafía prolija y lecturas analizadas conclaridad." },
 
-        { course: "Ciencia y Tecnologa", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Fichas de experimentos y dibujosé científicos completos." },
+        { course: "Ciencia y Tecnología", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Fichas de experimentos y dibujosé científicos completos." },
 
         { course: "Personal Social & Valores", teacher: "Miss Julisa Magali Arroyo", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Resúmenes ordenados y participación constante." },
 
         { course: "Inglés Técnico", teacher: "Miss Andrea Ramos", lastDate: "11/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "17 (A)", remarks: "Ejercicios de vocabulario al día." },
 
-        { course: "Computación & Informtica", teacher: "Prof. Fernando Rojas", lastDate: "10/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Prcticas de laboratorio técnico enorden." }
+        { course: "Computación & Informática", teacher: "Prof. Fernando Rojas", lastDate: "10/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Prácticas de laboratorio técnico enorden." }
 
       ] : [
 
-        { course: "Matemtica Avanzada (ÁÁÁÁálgebra / Geometra)", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, mrgenes impecables y esquemas enorden." },
+        { course: "Matemática Avanzada (ÁÁÁÁálgebra / Geometría)", teacher: "Prof. Roberto Silva", lastDate: "16/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "19 (AD)", remarks: "Tareas completas al 100%, mrgenes impecables y esquemas enorden." },
 
         { course: "Comunicación & Literatura", teacher: "Miss Mara Daysi Reyes", lastDate: "15/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "17 (A)", remarks: "Anlisis de textos y caligrafía óptima. Muy buendesarrollo." },
 
-        { course: "Ciencia y Tecnologa (Física / Química)", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Prcticas experimentales ilustradas y fichas de laboratorio selladas." },
+        { course: "Ciencia y Tecnología (Física / Química)", teacher: "Miss Leyli Reyes", lastDate: "14/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "18 (AD)", remarks: "Prácticas experimentales ilustradas y fichas de laboratorio selladas." },
 
         { course: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", lastDate: "12/08/2026", status: "al_dia", statusLabel: "<span class='status-dot-green'></span> REVISDO & AL DÍA", score: "16 (A)", remarks: "Mapas históricos y resúmenes de época bienestructurados." },
 
@@ -14871,7 +14871,7 @@ const Components = {
 
             
 
-            ${this.renderOfficialInstitutionalHeader("INFORME OFICIL DE REVISIÓN Y SELLDO DE CUDERNOS POR QR", "SEGUIMIENTO ACDÉMICO BIMESTRÍAL 2026")}
+            ${this.renderOfficialInstitutionalHeader("INFORME OFICIAL DE REVISIÓN Y SELLDO DE CUDERNOS POR QR", "SEGUIMIENTO ACDÉMICO BIMESTRÍAL 2026")}
 
 
 
@@ -15039,7 +15039,7 @@ const Components = {
 
 
 
-    // --- VISTÍA DOCENTE / AUXILIR / COORDINCIÓN / ADMINISTRÍADOR ---
+    // --- VISTÍA DOCENTE / AUXILIR / COORDINCIÓN / ADMINISTRADOR ---
 
     const hasAdminEditPower = state.currentRole === "admin" || state.currentRole === "director" || (state.currentRole === "docente" && state.users.docente && state.users.docente.hasAdminPrivileges);
 
@@ -15129,7 +15129,7 @@ const Components = {
 
                 <h2 class="card-title" style="font-size: var(--font-size-xl);">Control y Sellado de Cuadernos Mediante QR</h2>
 
-                <span class="status-badge status-approved" style="background:#10b981; color:white; font-weight:800;">CMARÍA BJO DEMNDÍA</span>
+                <span class="status-badge status-approved" style="background:#10b981; color:white; font-weight:800;">CÁMARA BJO DEMNDÍA</span>
 
                 <span class="status-badge status-approved" style="background:#3b82f6; color:white; font-weight:800;">MULTI-DOCENTE ENVIVO</span>
 
@@ -15181,7 +15181,7 @@ const Components = {
 
           <!-- =================================================================== -->
 
-          <!-- SUB-PESTÍAÑA 1: ESCN ER ENVIVO Y CMARÍA PRÍA CUDERNOS -->
+          <!-- SUB-PESTÍAÑA 1: ESCN ER ENVIVO Y CÁMARA PRÍA CUDERNOS -->
 
           <!-- =================================================================== -->
 
@@ -15237,7 +15237,7 @@ const Components = {
 
                   <span style="font-size:12px; font-weight:800; color:var(--color-yellow-400); letter-spacing:0.05em;">
 
-                    📸 ESCN ER POR CMARÍA (CELULR / WEBCM)
+                    📸 ESCN ER POR CÁMARA (CELULR / WEBCM)
 
                   </span>
 
@@ -15309,7 +15309,7 @@ const Components = {
 
                   <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 12px;">
 
-                    Al escanear el QR, el sistema identifica automticamente al <strong>Alumno, Grado, Curso y Profesor Titular</strong>:
+                    Al escanear el QR, el sistema identifica automáticamente al <strong>Alumno, Grado, Curso y Profesor Titular</strong>:
 
                   </p>
 
@@ -15317,13 +15317,13 @@ const Components = {
 
                   <div style="display: flex; flex-direction:column; gap: 6px; margin-bottom: 12px;">
 
-                    <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Matemtica Avanzada (ÁÁÁÁálgebra / Geometra)|Prof. Roberto Silva')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; padding: 8px 12px;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Matemática Avanzada (ÁÁÁÁálgebra / Geometría)|Prof. Roberto Silva')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; padding: 8px 12px;">
 
                       <div>
 
                         <strong style="color:var(--color-navy-900); font-size: 12px;">Sofía Méndez Flores</strong>
 
-                        <div style="font-size: 10.5px; color: #047857;">Matemtica Avanzada • Docente: Prof. Roberto Silva</div>
+                        <div style="font-size: 10.5px; color: #047857;">Matemática Avanzada • Docente: Prof. Roberto Silva</div>
 
                       </div>
 
@@ -15349,13 +15349,13 @@ const Components = {
 
 
 
-                    <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-055|Gael Alessandro Cceres|4 de Secundaria|Ciencia y Tecnologa (Física / Química)|Miss Leyli Graciela Reyes Cerquen')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; padding: 8px 12px;">
+                    <button class="btn btn-outline btn-sm" onclick="window.app.simulateQRScan('QR-N B|EST-2026-055|Gael Alessandro Cceres|4 de Secundaria|Ciencia y Tecnología (Física / Química)|Miss Leyli Graciela Reyes Cerquen')" style="justify-content:space-between; display:flex; text-align:left; background: #ffffff; border-radius: 10px; padding: 8px 12px;">
 
                       <div>
 
                         <strong style="color:var(--color-navy-900); font-size: 12px;">🔬 Gael Alessandro Cceres</strong>
 
-                        <div style="font-size: 10.5px; color: #b45309;">Ciencia y Tecnologa • Docente: Miss Leyli Reyes</div>
+                        <div style="font-size: 10.5px; color: #b45309;">Ciencia y Tecnología • Docente: Miss Leyli Reyes</div>
 
                       </div>
 
@@ -15391,7 +15391,7 @@ const Components = {
 
                   <div style="display:flex; gap: 8px;">
 
-                    <input type="text" id="manual-qr-input" class="form-control" value="QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Matemtica Avanzada (ÁÁÁÁálgebra / Geometra)|Prof. Roberto Silva" style="font-size: 11.5px; border-radius: 16px;" />
+                    <input type="text" id="manual-qr-input" class="form-control" value="QR-N B|EST-2026-042|Sofía Méndez Flores|4 de Secundaria|Matemática Avanzada (ÁÁÁÁálgebra / Geometría)|Prof. Roberto Silva" style="font-size: 11.5px; border-radius: 16px;" />
 
                     <button class="btn btn-navy btn-sm" onclick="window.app.simulateQRScan(document.getElementById('manual-qr-input').value)" style="border-radius: 16px; font-weight: 800;">
 
@@ -15533,7 +15533,7 @@ const Components = {
 
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
 
-                  <!-- BOTÓN PRINCIPL SOLICITÍADO: GENERÍAR QR AUTOMTICO POR ESTUDINTE CONTODOS LOS CURSOS DE LA BOLETÍA -->
+                  <!-- BOTÓN PRINCIPAL SOLICITÍADO: GENERÍAR QR AUTOMTICO POR ESTUDINTE CONTODOS LOS CURSOS DE LA BOLETÍA -->
 
                   <button class="btn btn-gold btn-sm" onclick="window.app.openStudentFullBoletaStickersModal('${selectedStudentId !== 'all' ? selectedStudentId : 'EST-2026-042'}')" style="font-weight: 900; padding: 10px 18px; border-radius: 20px; font-size: 13px; box-shadow: 0 4px 14px rgba(245,158,11,0.4); background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #0b132b; display: flex; align-items: center; gap: 6px;">
 
@@ -15835,11 +15835,11 @@ const Components = {
 
                     <option value="all">-- Todos los Cursos --</option>
 
-                    <option value="Matemtica Avanzada" ${selectedCourseFilter === 'Matemtica Avanzada' ? 'selected' : ''}>Matemtica Avanzada (Prof. Roberto Silva)</option>
+                    <option value="Matemática Avanzada" ${selectedCourseFilter === 'Matemática Avanzada' ? 'selected' : ''}>Matemática Avanzada (Prof. Roberto Silva)</option>
 
                     <option value="Comunicación & Literatura" ${selectedCourseFilter === 'Comunicación & Literatura' ? 'selected' : ''}>Comunicación & Literatura (Miss Mara Daysi Reyes)</option>
 
-                    <option value="Ciencia y Tecnologa" ${selectedCourseFilter === 'Ciencia y Tecnologa' ? 'selected' : ''}>Ciencia y Tecnologa (Miss Leyli Reyes)</option>
+                    <option value="Ciencia y Tecnología" ${selectedCourseFilter === 'Ciencia y Tecnología' ? 'selected' : ''}>Ciencia y Tecnología (Miss Leyli Reyes)</option>
 
                     <option value="Ciencias Sociales" ${selectedCourseFilter === 'Ciencias Sociales' ? 'selected' : ''}>Ciencias Sociales (Prof. Javier Vega)</option>
 
@@ -15875,7 +15875,7 @@ const Components = {
 
                         <th>Estudiante</th>
 
-                        <th>Matemtica</th>
+                        <th>Matemática</th>
 
                         <th>Comunicación</th>
 
@@ -16591,7 +16591,7 @@ const Components = {
 
                               ${isEstudiante ? `
 
-                                <button class="btn btn-gold btn-sm" onclick="window.app.openStudentQRModal('${u.code || u.id}')" title="Ver Tarjeta QR de Asistencia (SiónFoto)" style="padding: 4px 8px; font-size: 11px; font-weight: bold;">
+                                <button class="btn btn-gold btn-sm" onclick="window.app.openStudentQRModal('${u.code || u.id}')" title="Ver Tarjeta QR de Asistencia (Foto)" style="padding: 4px 8px; font-size: 11px; font-weight: bold;">
 
                                   QR
 
@@ -16897,7 +16897,7 @@ const Components = {
 
                   <span>📲</span>
 
-                  <span>Registro de Ingreso & Asistencia QR (Portera)</span>
+                  <span>Registro de Ingreso & Asistencia QR (Portería)</span>
 
                 </button>
 
@@ -16975,7 +16975,7 @@ const Components = {
 
       ? user.assignedCourses
 
-      : (Array.isArray(user.courses) ? user.courses : (user.subject ? user.subject.split(/,\s*/) : ["Matemtica"]));
+      : (Array.isArray(user.courses) ? user.courses : (user.subject ? user.subject.split(/,\s*/) : ["Matemática"]));
 
 
 
@@ -17647,13 +17647,13 @@ const Components = {
 
       "ÁÁÁÁálgebra": "algebra",
 
-      "Geometra": "geometria",
+      "Geometría": "geometria",
 
       "Trigonometra": "trigonometria",
 
       "Raízonamiento Matemtico": "raíz_matematico",
 
-      "Lenguíaje y Gramtica": "lenguíaje",
+      "Lenguíaje y Gramática": "lenguíaje",
 
       "Lenguíaje": "lenguíaje",
 
@@ -17663,9 +17663,9 @@ const Components = {
 
       "Raízonamiento Verbal": "raíz_verbal",
 
-      "Biologa & Anatoma": "biologia",
+      "Biología & Anatoma": "biologia",
 
-      "Biologa": "biologia",
+      "Biología": "biologia",
 
       "Física Elemental": "fisica",
 
@@ -17711,11 +17711,11 @@ const Components = {
 
       "Conducta y Disciplina": "conducta",
 
-      "Matemtica & Aritmética": "aritmetica",
+      "Matemática & Aritmética": "aritmetica",
 
       "ÁÁÁÁálgebra Elemental": "algebra",
 
-      "Geometra Prctica": "geometria",
+      "Geometría Prctica": "geometria",
 
       "Comunicación Integral": "lenguíaje",
 
@@ -17723,19 +17723,19 @@ const Components = {
 
       "PlanLector & Literatura": "literatura",
 
-      "Ciencia y Tecnologa": "biologia",
+      "Ciencia y Tecnología": "biologia",
 
       "Personal Social & Cívica": "civica",
 
-      "Computación & Informtica": "computacion",
+      "Computación & Informática": "computacion",
 
       "Inglés Institucional": "ingles",
 
       "Educación Religiosa & Valores": "religion",
 
-      "Tutora & Convivencia Escolar": "conducta",
+      "Tutoría & Convivencia Escolar": "conducta",
 
-      "Matemtica Temprana & Lógica": "aritmetica",
+      "Matemática Temprana & Lógica": "aritmetica",
 
       "Comunicación & Grafomotricidad": "lenguíaje",
 
@@ -17753,7 +17753,7 @@ const Components = {
 
       "Educación enValores & Religión": "religion",
 
-      "Hbitos, Disciplina y Tutora": "conducta"
+      "Hbitos, Disciplina y Tutoría": "conducta"
 
     };
 
@@ -17931,7 +17931,7 @@ const Components = {
 
             <button class="btn btn-sm ${activeTab === 'tutor' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setGradesActiveTab('tutor')" style="font-weight: 800;">
 
-              2. Módulo de Tutora (Asistencia, Apreciaciones y Familias)
+              2. Módulo de Tutoría (Asistencia, Apreciaciones y Familias)
 
             </button>
 
@@ -17951,7 +17951,7 @@ const Components = {
 
           <!-- =====================================================================
 
-               MODO 1: CRGÍA DE N OTÍAS POR DOCENTE DE CURSO / ASIGNTURÍA
+               MODO 1: CRGÍA DE NOTAS POR DOCENTE DE CURSO / ASIGNTURÍA
 
                ===================================================================== -->
 
@@ -18219,7 +18219,7 @@ const Components = {
 
               <div>
 
-                <h3 class="card-title" style="color: #1e3a8a;">Módulo de Tutora y Convivencia Escolar</h3>
+                <h3 class="card-title" style="color: #1e3a8a;">Módulo de Tutoría y Convivencia Escolar</h3>
 
                 <p style="font-size: 12px; color: #1e40af; margin-top: 2px;">
 
@@ -18531,7 +18531,7 @@ const Components = {
 
                   <button type="submit" class="btn btn-red" style="font-weight: 800; padding: 12px 24px;">
 
-                    💾 Guardar Evaluación de Tutora de ${tutorStudentData.name || 'Estudiante'}
+                    💾 Guardar Evaluación de Tutoría de ${tutorStudentData.name || 'Estudiante'}
 
                   </button>
 
@@ -18729,7 +18729,7 @@ const Components = {
 
   // =========================================================================
 
-  // BOLETÍA OFICIL IMPRIMIBLE CONFORMTO MINEDU (2 PGINS DINÁMICS)
+  // BOLETÍA OFICIAL IMPRIMIBLE CONFORMTO MINEDU (2 PGINS DINÁMICS)
 
   // =========================================================================
 
@@ -18751,7 +18751,7 @@ const Components = {
 
     
 
-    // Si el usuario es unPadre de Familia: seleccionar automticamente a su hijo/estudiante
+    // Si el usuario es unPadre de Familia: seleccionar automáticamente a su hijo/estudiante
 
     if (role === 'padre') {
 
@@ -19491,7 +19491,7 @@ const Components = {
 
         <!-- =========================================================================
 
-             PGINA 2: PRTICIPCIÓN DE PDRES & CRÁTULA OFICIL
+             PGINA 2: PRTICIPCIÓN DE PDRES & CRÁTULA OFICIAL
 
              ========================================================================= -->
 
@@ -19775,7 +19775,7 @@ const Components = {
 
   // Horarios
 
-  // Generador Completo y Sióncronizado de Docentes y Horarios Semanales (Siónautorrellenado)
+  // Generador Completo y Sincronizado de Docentes y Horarios Semanales (Siónautorrellenado)
 
   getComprehensiveTeachersList(state) {
 
@@ -19805,7 +19805,7 @@ const Components = {
 
           ? doc.courses
 
-          : (doc.subject ? doc.subject.split(/,\s*/) : ["Matemtica"]));
+          : (doc.subject ? doc.subject.split(/,\s*/) : ["Matemática"]));
 
       const docGrades = Array.isArray(doc.assignedGrades) && doc.assignedGrades.length > 0
 
@@ -19893,7 +19893,7 @@ const Components = {
 
     rawTeachers.forEach(t => {
 
-      // Plantilla base limpia con8 bloques lectivos de 50 miny 2 recesos (Siónclases inventadas)
+      // Plantilla base limpia con8 bloques lectivos de 50 miny 2 recesos (Sin clases inventadas)
 
       t.schedule = [
 
@@ -20045,7 +20045,7 @@ const Components = {
 
       t.assignedSlotCount = assignedCount;
 
-      t.calculatedHours = assignedCount > 0 ? `${(assignedCount * 50 / 60).toFixed(1)} hrs (${assignedCount} bloques)` : "0 hrs (Siónclases asignadas)";
+      t.calculatedHours = assignedCount > 0 ? `${(assignedCount * 50 / 60).toFixed(1)} hrs (${assignedCount} bloques)` : "0 hrs (Sin clases asignadas)";
 
       t.scheduledCourses = Array.from(scheduledCoursesSet);
 
@@ -20129,7 +20129,7 @@ const Components = {
 
         ? currentTeacher.scheduledCourses
 
-        : ((currentTeacher.courses && currentTeacher.courses.length > 0) ? currentTeacher.courses : [currentTeacher.subject || "Matemtica"]);
+        : ((currentTeacher.courses && currentTeacher.courses.length > 0) ? currentTeacher.courses : [currentTeacher.subject || "Matemática"]);
 
 
 
@@ -20137,7 +20137,7 @@ const Components = {
 
         ? currentTeacher.scheduledGrades
 
-        : ((currentTeacher.assignedGrades && currentTeacher.assignedGrades.length > 0) ? currentTeacher.assignedGrades : ["Siónasignar"]);
+        : ((currentTeacher.assignedGrades && currentTeacher.assignedGrades.length > 0) ? currentTeacher.assignedGrades : ["Sin asignar"]);
 
 
 
@@ -20271,7 +20271,7 @@ const Components = {
 
           
 
-          <!-- BNN ER PRINCIPL DE GESTIÓN Y CRECIÓN DE HORÍARIOS (ADMINISTRÍADOR) -->
+          <!-- BANNER PRINCIPAL DE GESTIÓN Y CREACIÓN DE HORARIOS (ADMINISTRADOR) -->
 
           ${hasAdminEditPower ? `
 
@@ -20303,7 +20303,7 @@ const Components = {
 
 
 
-              <!-- BOTONES DE ACCIÓN PRINCIPLES CONMXIMA VISIBILIDÍAD -->
+              <!-- BOTONES DE ACCIÓN PRINCIPALES CONMÁXIMA VISIBILIDAD -->
 
               <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
 
@@ -20311,7 +20311,7 @@ const Components = {
 
                   <span style="font-size: 16px;">➕</span>
 
-                  <span>+ CRER / ASIGNR CLSE</span>
+                  <span>+ CREAR / ASIGNAR CLASE</span>
 
                 </button>
 
@@ -20323,7 +20323,7 @@ const Components = {
 
                 <button class="btn btn-outline" onclick="window.app.openAutoScheduleModal('${currentGradeId}')" style="background: rgba(255,255,255,0.12); color: #ffffff; border-color: rgba(255,255,255,0.4); font-weight: 800; font-size: 12px; padding: 8px 14px;">
 
-                  ⚡ Horario Automtico
+                  ⚡ Horario Automático
 
                 </button>
 
@@ -20735,7 +20735,7 @@ const Components = {
 
                     <button class="btn btn-outline btn-sm" onclick="window.app.openAutoScheduleModal('${currentGradeId}')" style="font-weight: 800; font-size: 11.5px; color: #1e3a8a;">
 
-                      ⚡ Generar Horario Automtico
+                      ⚡ Generar Horario Automático
 
                     </button>
 
@@ -20871,7 +20871,7 @@ const Components = {
 
           <button class="btn btn-navy" onclick="window.app.render()" style="font-weight: 800; margin-top: 10px;">
 
-            Sióncronizar y Ver Horarios
+            Sincronizar y Ver Horarios
 
           </button>
 
@@ -21161,7 +21161,7 @@ const Components = {
 
                     <span style="background: #e0e7ff; color: #3730a3; font-weight: 800; font-size: 11px; padding: 3px 8px; border-radius: 6px;">
 
-                      ${c.courseCode || 'OFICIL'}
+                      ${c.courseCode || 'OFICIAL'}
 
                     </span>
 
@@ -21349,15 +21349,15 @@ const Components = {
 
       availableCourses = [
 
-        { id: "MT-401", courseCode: "MT-401", name: "Matemtica Avanzada (ÁÁÁÁálgebra y Geometra)", teacher: "Prof. Roberto Silva", grade: "4to de Secundaria", gradeId: "4sec", icon: "📐", color: "blue", level: "Secundaria" },
+        { id: "MT-401", courseCode: "MT-401", name: "Matemática Avanzada (ÁÁÁÁálgebra y Geometría)", teacher: "Prof. Roberto Silva", grade: "4to de Secundaria", gradeId: "4sec", icon: "📐", color: "blue", level: "Secundaria" },
 
         { id: "COM-404", courseCode: "COM-404", name: "Comunicación & Literatura", teacher: "Miss Mara Daysi Reyes", grade: "4to de Secundaria", gradeId: "4sec", icon: "📚", color: "navy", level: "Secundaria" },
 
-        { id: "CTÍA-403", courseCode: "CTÍA-403", name: "Ciencia y Tecnologa (Física & Química)", teacher: "Miss Leyli Reyes Cerquen", grade: "4to de Secundaria", gradeId: "4sec", icon: "🔬", color: "green", level: "Secundaria" },
+        { id: "CTÍA-403", courseCode: "CTÍA-403", name: "Ciencia y Tecnología (Física & Química)", teacher: "Miss Leyli Reyes Cerquen", grade: "4to de Secundaria", gradeId: "4sec", icon: "🔬", color: "green", level: "Secundaria" },
 
-        { id: "EPT-402", courseCode: "EPT-402", name: "Computación e Informtica / Robótica", teacher: "Prof. Fernando Rojas", grade: "4to de Secundaria", gradeId: "4sec", icon: "💻", color: "yellow", level: "Secundaria" },
+        { id: "EPT-402", courseCode: "EPT-402", name: "Computación e Informática / Robótica", teacher: "Prof. Fernando Rojas", grade: "4to de Secundaria", gradeId: "4sec", icon: "💻", color: "yellow", level: "Secundaria" },
 
-        { id: "ING-405", courseCode: "ING-405", name: "Inglés Técnico & Gramtica", teacher: "Miss Andrea Ramos", grade: "4to de Secundaria", gradeId: "4sec", icon: "🇬🇧", color: "blue", level: "Secundaria" },
+        { id: "ING-405", courseCode: "ING-405", name: "Inglés Técnico & Gramática", teacher: "Miss Andrea Ramos", grade: "4to de Secundaria", gradeId: "4sec", icon: "🇬🇧", color: "blue", level: "Secundaria" },
 
         { id: "CS-406", courseCode: "CS-406", name: "Ciencias Sociales & Historia", teacher: "Prof. Javier Vega", grade: "4to de Secundaria", gradeId: "4sec", icon: "🌎", color: "yellow", level: "Secundaria" }
 
@@ -21469,7 +21469,7 @@ const Components = {
 
               <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
 
-                <h2 class="card-title" style="font-size: var(--font-size-xl); margin: 0;">💻 Aula Virtual & Evaluaciones Dinmicas Semanales</h2>
+                <h2 class="card-title" style="font-size: var(--font-size-xl); margin: 0;">💻 Aula Virtual & Evaluaciones Dinámicas Semanales</h2>
 
                 <span class="status-badge status-approved" style="background: var(--color-yellow-100); color: var(--color-yellow-800); font-weight: 800;">
 
@@ -21485,7 +21485,7 @@ const Components = {
 
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
 
-                I.E.P. "El Educador" • Publicación contiónua del trabajo realizado en el aula y generación automtica de evaluaciones diónmicas de 10 preguntas conretroalimentación inmediata.
+                I.E.P. "El Educador" • Publicación continua del trabajo realizado en el aula y generación automática de evaluaciones dinámicas de 10 preguntas con retroalimentación inmediata.
 
               </p>
 
@@ -21627,7 +21627,7 @@ const Components = {
 
             <div class="teacher-stat-card" style="border-left: 4px solid #f59e0b;">
 
-              <span class="teacher-stat-lbl">⚡ Evaluaciones Dinmicas</span>
+              <span class="teacher-stat-lbl">⚡ Evaluaciones Dinámicas</span>
 
               <span class="teacher-stat-val" style="color: #b45309;">${totalEvaluations} Quizzes (10 Preg.)</span>
 
@@ -21795,7 +21795,7 @@ const Components = {
 
                   <h4 style="font-size: 13px; font-weight: 800; color: var(--color-navy-900); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
 
-                    <span>👨‍Resumendel Trabajo Realizado en el Aula:</span>
+                    <span>👨‍Resumen del Trabajo Realizado en el Aula:</span>
 
                   </h4>
 
@@ -21953,7 +21953,7 @@ const Components = {
 
                       <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
 
-                        El sistema puede generar uncuestionario diónmico de 10 preguntas calibrado automticamente sobre el tema de esta semana.
+                        El sistema puede generar uncuestionario diónmico de 10 preguntas calibrado automáticamente sobre el tema de esta semana.
 
                       </p>
 
@@ -21961,7 +21961,7 @@ const Components = {
 
                         <button class="btn btn-gold btn-sm" onclick="window.app.openGenerateQuizModal('${activeMaterial.id}')" style="width: 100%; font-weight: 800;">
 
-                          ⚡ Generar 10 Preguntas conIA
+                          ⚡ Generar 10 Preguntas con IA
 
                         </button>
 
@@ -21991,7 +21991,7 @@ const Components = {
 
                       <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px; font-size: 11.5px; color: #475569; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
 
-                        <div>⏱️ <strong>Tiempo:</strong> 20 mión</div>
+                        <div>⏱️ <strong>Tiempo:</strong> 20 min</div>
 
                         <div>🎯 <strong>Mínimo:</strong> 14 pts</div>
 
@@ -22065,7 +22065,7 @@ const Components = {
 
                           <p style="font-size: 12px; color: #1e3a8a; margin: 6px 0 12px;">
 
-                            Pona prueba lo aprendido en la clase de <strong>${activeMaterial.title}</strong> conesta evaluación de 10 preguntas.
+                            Ponga a prueba lo aprendido en la clase de <strong>${activeMaterial.title}</strong> con esta evaluación de 10 preguntas.
 
                           </p>
 
@@ -22083,7 +22083,7 @@ const Components = {
 
 
 
-                    <!-- ESTÍADO PRÍA EL DOCENTE O ADMINISTRÍADOR -->
+                    <!-- ESTÍADO PRÍA EL DOCENTE O ADMINISTRADOR -->
 
                     ${isTeacherOrdmión ? `
 
@@ -22097,7 +22097,7 @@ const Components = {
 
                         <button class="btn btn-outline btn-sm" onclick="window.app.confirmRegenerateQuiz('${activeMaterial.id}')" style="width: 100%; font-weight: 700; font-size: 11.5px;">
 
-                          ⚡ Regenerar Cuestionario conIA
+                          ⚡ Regenerar Cuestionario con IA
 
                         </button>
 
@@ -22457,13 +22457,13 @@ const Components = {
 
     const studentHistory = rawStudentHistory.length > 0 ? rawStudentHistory : [
 
-      { date: "19/08/2026", day: "Miércoles", arrivalTime: "07:38 AM", exitTime: "03:30 PM", status: "Presente", method: "Fotocheck QR (Portera)", observations: "Ingreso puntual" },
+      { date: "19/08/2026", day: "Miércoles", arrivalTime: "07:38 AM", exitTime: "03:30 PM", status: "Presente", method: "Fotocheck QR (Portería)", observations: "Ingreso puntual" },
 
-      { date: "18/08/2026", day: "Martes", arrivalTime: "07:35 AM", exitTime: "03:30 PM", status: "Presente", method: "Fotocheck QR (Portera)", observations: "Ingreso puntual" },
+      { date: "18/08/2026", day: "Martes", arrivalTime: "07:35 AM", exitTime: "03:30 PM", status: "Presente", method: "Fotocheck QR (Portería)", observations: "Ingreso puntual" },
 
-      { date: "15/08/2026", day: "Viernes", arrivalTime: "07:40 AM", exitTime: "03:30 PM", status: "Presente", method: "Fotocheck QR (Portera)", observations: "Ingreso puntual" },
+      { date: "15/08/2026", day: "Viernes", arrivalTime: "07:40 AM", exitTime: "03:30 PM", status: "Presente", method: "Fotocheck QR (Portería)", observations: "Ingreso puntual" },
 
-      { date: "14/08/2026", day: "Jueves", arrivalTime: "07:36 AM", exitTime: "03:30 PM", status: "Presente", method: "Fotocheck QR (Portera)", observations: "Ingreso puntual" }
+      { date: "14/08/2026", day: "Jueves", arrivalTime: "07:36 AM", exitTime: "03:30 PM", status: "Presente", method: "Fotocheck QR (Portería)", observations: "Ingreso puntual" }
 
     ];
 
@@ -22495,7 +22495,7 @@ const Components = {
 
             <h1 class="welcome-title">
 
-              ${isTeacherOrdmión ? 'Control de Asistencia Escolar & Estación de Portera' : (isPadre ? 'Récord de Asistencia de mi Hijo(a)' : 'Mi Historial de Asistencia & Fotocheck')}
+              ${isTeacherOrdmión ? 'Control de Asistencia Escolar & Estación de Portería' : (isPadre ? 'Récord de Asistencia de mi Hijo(a)' : 'Mi Historial de Asistencia & Fotocheck')}
 
             </h1>
 
@@ -22527,13 +22527,13 @@ const Components = {
 
             <button class="btn btn-sm ${activeSubTab === 'door-scanner' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setttendanceSubTab('door-scanner')" style="font-weight: 900; font-size: 12.5px; white-space: nowrap; padding: 8px 16px; border: 2px solid #f59e0b; box-shadow: ${activeSubTab === 'door-scanner' ? '0 2px 8px rgba(245,158,11,0.4)' : 'none'};">
 
-              1. Registro de Ingreso (Escner QR enPortera)
+              1. Registro de Ingreso (Escner QR enPortería)
 
             </button>
 
             <button class="btn btn-sm ${activeSubTab === 'id-cards' ? 'btn-gold' : 'btn-outline'}" onclick="window.app.setttendanceSubTab('id-cards')" style="font-weight: 900; font-size: 12px; white-space: nowrap; padding: 7px 14px;">
 
-              2. Generador de Códigos QR (SiónFotos)
+              2. Generador de Códigos QR (Fotos)
 
             </button>
 
@@ -23029,7 +23029,7 @@ const Components = {
 
                     <h3 style="font-size: 14px; font-weight: 900; color: #92400e; margin: 0;">
 
-                      1. Registro Detallado de Tardanzas enPortera (${dayReport.tardiónessList.length} casos)
+                      1. Registro Detallado de Tardanzas enPortería (${dayReport.tardiónessList.length} casos)
 
                     </h3>
 
@@ -23313,7 +23313,7 @@ const Components = {
 
                         <h3 style="font-size: 15px; font-weight: 900; color: white; margin: 0;">
 
-                          Estación de Portera & Auxiliar: Escner QR Inteligente
+                          Estación de Portería & Auxiliar: Escner QR Inteligente
 
                         </h3>
 
@@ -23545,7 +23545,7 @@ const Components = {
 
           <!-- =====================================================================
 
-               SUB-PESTÍAÑA 4: PLNCHS DE CÓDIGOS QR (POR CURSO Y BOLETÍA OFICIL)
+               SUB-PESTÍAÑA 4: PLNCHS DE CÓDIGOS QR (POR CURSO Y BOLETÍA OFICIAL)
 
                ===================================================================== -->
 
@@ -23643,7 +23643,7 @@ const Components = {
 
                         <button class="btn btn-sm ${qrSheetMode === 'cards' ? 'btn-navy' : 'btn-outline'}" onclick="window.app.setttendanceQRSheetMode('cards')" style="border-radius: 18px; font-size: 11px; font-weight: 800; padding: 4px 12px; border: none;">
 
-                          🪪 Fotocheck Asistencia (Portera)
+                          🪪 Fotocheck Asistencia (Portería)
 
                         </button>
 
@@ -23775,7 +23775,7 @@ const Components = {
 
                   <!-- =========================================================
 
-                       GRILLA DE STICKERS QR POR CURSO DE LA BOLETÍA DE N OTÍAS
+                       GRILLA DE STICKERS QR POR CURSO DE LA BOLETÍA DE NOTAS
 
                        ========================================================= -->
 
@@ -23983,7 +23983,7 @@ const Components = {
 
           <!-- =====================================================================
 
-               SUB-PESTÍAÑA 5: LIBRO OFICIL DE INCIDEN CIS & CONVIVEN CIA ESCOLR (MINEDU)
+               SUB-PESTÍAÑA 5: LIBRO OFICIAL DE INCIDEN CIS & CONVIVEN CIA ESCOLR (MINEDU)
 
                ===================================================================== -->
 
@@ -24479,7 +24479,7 @@ const Components = {
 
                         <span style="font-size: 11px; color: #475569;">
 
-                          ${h.method || 'Fotocheck QR (Portera)'}
+                          ${h.method || 'Fotocheck QR (Portería)'}
 
                         </span>
 
@@ -24621,7 +24621,7 @@ const Components = {
 
                           <td colspan="7" style="text-align: center; padding: 18px; color: #047857; font-weight: bold;">
 
-                            🌟 ¡Excelente conducta! N o registra niónguna observación disciplinaria ensu expediente escolar.
+                            🌟 ¡Excelente conducta! N o registra ninguna observación disciplinaria ensu expediente escolar.
 
                           </td>
 
@@ -25807,6 +25807,313 @@ class IntranetApp {
   // =========================================================================
   // MODALES GLOBALES Y NOTIFICACIONES TOAST
   // =========================================================================
+
+  
+  // =========================================================================
+  // MÓDULO DE AULA VIRTUAL Y EVALUACIONES DINÁMICAS INTERACTIVAS
+  // =========================================================================
+
+  startStudentQuiz(materialId) {
+    let overlay = document.getElementById("app-modal-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "app-modal-overlay";
+      overlay.className = "modal-overlay";
+      document.body.appendChild(overlay);
+    }
+
+    const state = this.store.state;
+    const materials = (state && state.weeklyMaterials && state.weeklyMaterials.length > 0)
+      ? state.weeklyMaterials
+      : ((typeof initialData !== 'undefined' && initialData.weeklyMaterials) ? initialData.weeklyMaterials : []);
+
+    const material = materials.find(m => m.id === materialId) || materials[0] || {
+      id: materialId,
+      title: "Robótica Educativa: Programación de Sensores Ultrasónicos con Arduino",
+      questions: []
+    };
+
+    let questions = material.questions || [];
+    if (!questions || questions.length === 0) {
+      // Preguntas interactivas por defecto
+      questions = [
+        {
+          id: 1,
+          question: "¿Cuál es la función principal del pin TRIG en el sensor ultrasónico HC-SR04?",
+          options: [
+            "Emitir un pulso ultrasónico de 10 microsegundos para iniciar la medición",
+            "Recibir el eco del pulso ultrasónico reflejado por el objeto",
+            "Alimentar de voltaje constante al microcontrolador Arduino",
+            "Conectar el sensor a la tierra (GND) del circuito"
+          ],
+          correctIndex: 0,
+          explanation: "El pin TRIG (Trigger) recibe un pulso digital en ALTO de al menos 10 µs para enviar la ráfaga de 8 pulsos ultrasónicos de 40 kHz."
+        },
+        {
+          id: 2,
+          question: "¿Cómo se calcula la distancia al objeto conociendo el tiempo en microsegundos medido por el pin ECHO?",
+          options: [
+            "Distancia = (Tiempo * 0.0343) / 2",
+            "Distancia = Tiempo * 340",
+            "Distancia = (Tiempo / 0.0343) * 2",
+            "Distancia = Tiempo + 0.0343"
+          ],
+          correctIndex: 0,
+          explanation: "La velocidad del sonido en el aire es aprox. 0.0343 cm/µs. Se divide entre 2 porque el pulso viaja de ida y vuelta."
+        },
+        {
+          id: 3,
+          question: "¿Qué función de Arduino se utiliza para medir la duración del pulso en el pin ECHO?",
+          options: [
+            "pulseIn(pinEcho, HIGH)",
+            "digitalRead(pinEcho)",
+            "analogRead(pinEcho)",
+            "delayMicroseconds(pinEcho)"
+          ],
+          correctIndex: 0,
+          explanation: "pulseIn() mide la duración de un pulso (en microsegundos) esperando que el pin pase a HIGH y luego vuelva a LOW."
+        },
+        {
+          id: 4,
+          question: "¿Cuál es el rango óptimo de medición del sensor HC-SR04 en proyectos escolares?",
+          options: [
+            "De 2 cm hasta 400 cm (4 metros)",
+            "De 0 cm hasta 50 cm",
+            "De 1 metro hasta 50 metros",
+            "De 5 mm hasta 10 mm"
+          ],
+          correctIndex: 0,
+          explanation: "El sensor ultrasónico HC-SR04 opera eficientemente en un rango de 2 cm a 400 cm con una precisión de 3 mm."
+        },
+        {
+          id: 5,
+          question: "¿Por qué en un robot evasor de obstáculos se requiere una estructura condicional (if-else)?",
+          options: [
+            "Para decidir si avanzar o girar según la distancia detectada por el sensor",
+            "Para regular la velocidad máxima del procesador Arduino",
+            "Para encender únicamente la luz LED de la placa",
+            "Para apagar la batería automáticamente"
+          ],
+          correctIndex: 0,
+          explanation: "La estructura condicional evalúa si 'distancia < 20 cm' para ordenar a los motores detenerse o girar y evadir el obstáculo."
+        },
+        {
+          id: 6,
+          question: "¿A qué velocidad viaja el sonido en el aire a temperatura ambiente estándar (20°C)?",
+          options: [
+            "Aproximadamente 343 m/s (0.0343 cm/µs)",
+            "Aproximadamente 300,000 km/s",
+            "Aproximadamente 100 m/s",
+            "Aproximadamente 1,500 m/s"
+          ],
+          correctIndex: 0,
+          explanation: "La velocidad del sonido en el aire a 20°C es de 343 m/s, equivalente a 0.0343 cm por cada microsegundo."
+        },
+        {
+          id: 7,
+          question: "¿Qué voltaje de alimentación requiere el sensor HC-SR04 para su correcto funcionamiento?",
+          options: [
+            "5V de corriente continua (VCC)",
+            "12V de corriente alterna",
+            "1.5V de pila estándar",
+            "220V de la red doméstica"
+          ],
+          correctIndex: 0,
+          explanation: "El módulo HC-SR04 funciona con 5V suministrados por el pin 5V de la placa Arduino UNO."
+        },
+        {
+          id: 8,
+          question: "¿Cuál es la función del pin GND en el sensor HC-SR04?",
+          options: [
+            "Conectar a la línea de tierra o referencia 0V del circuito",
+            "Transmitir los datos digitales a la computadora",
+            "Aumentar el volumen del sonido ultrasónico",
+            "Generar la señal de disparo"
+          ],
+          correctIndex: 0,
+          explanation: "GND (Ground) es la conexión a tierra indispensable para cerrar el circuito eléctrico con el Arduino."
+        },
+        {
+          id: 9,
+          question: "Si el sensor mide un tiempo de 583 microsegundos, ¿a qué distancia aproximada está el objeto?",
+          options: [
+            "Aproximadamente 10 cm",
+            "Aproximadamente 50 cm",
+            "Aproximadamente 100 cm",
+            "Aproximadamente 2 cm"
+          ],
+          correctIndex: 0,
+          explanation: "Distancia = (583 * 0.0343) / 2 = 20.00 / 2 = 10 cm."
+        },
+        {
+          id: 10,
+          question: "¿Qué ventaja principal ofrece el sensor ultrasónico frente a un sensor infrarrojo reflectivo?",
+          options: [
+            "No se ve afectado por el color ni la transparencia del obstáculo",
+            "Consume menos de 1 microamperio",
+            "Permite ver a través de paredes de concreto",
+            "Mide la temperatura del objeto con precisión médica"
+          ],
+          correctIndex: 0,
+          explanation: "Las ondas de sonido rebotan en objetos negros o blancos por igual, mientras que los infrarrojos fallan ante superficies oscuras o luz solar."
+        }
+      ];
+    }
+
+    overlay.innerHTML = `
+      <div class="modal-card" style="max-width: 820px; width: 95%; background: #ffffff; border-radius: 14px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
+        <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #0b132b); color: white; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 11.5px; color: var(--color-yellow-300); font-weight: 800; text-transform: uppercase;">
+              I.E.P. "El Educador" • Aula Virtual & Evaluaciones Semanales
+            </div>
+            <h3 style="font-size: 17px; font-weight: 900; margin: 4px 0 0; color: white;">
+              📝 ${material.title}
+            </h3>
+          </div>
+          <div style="text-align: right;">
+            <span style="background: rgba(245,158,11,0.25); border: 1px solid #f59e0b; color: #fef08a; padding: 4px 10px; border-radius: 6px; font-weight: 800; font-size: 12px;">
+              ⏳ 10 Preguntas • 20 Pts
+            </span>
+          </div>
+        </div>
+
+        <form onsubmit="window.app.submitStudentQuiz(event, '${material.id}')" style="padding: 24px; max-height: 75vh; overflow-y: auto;">
+          <div style="background: #f0fdf4; border-left: 4px solid #16a34a; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 13px; color: #166534;">
+            <strong>Instrucciones:</strong> Lea atentamente cada enunciado y seleccione la respuesta correcta. Al finalizar, haga clic en <em>"Finalizar y Calificar Evaluación"</em> para obtener su calificación y retroalimentación inmediata.
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            ${questions.map((q, idx) => `
+              <div class="card" style="padding: 16px 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px;">
+                <div style="font-weight: 900; font-size: 14px; color: #0b132b; margin-bottom: 12px;">
+                  <span style="color: #1e3a8a;">Pregunta ${idx + 1}:</span> ${q.question}
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  ${q.options.map((opt, oIdx) => `
+                    <label style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 12px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer; font-size: 13px; color: #1e293b; transition: all 0.2s;">
+                      <input type="radio" name="q_${q.id}" value="${oIdx}" required style="margin-top: 3px; cursor: pointer;" />
+                      <span><strong>${String.fromCharCode(65 + oIdx)})</strong> ${opt}</span>
+                    </label>
+                  `).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; border-top: 1px solid #e2e8f0; padding-top: 16px;">
+            <button type="button" class="btn btn-outline" onclick="window.app.closeModal()">Cancelar / Salir</button>
+            <button type="submit" class="btn btn-gold" style="font-weight: 900; font-size: 14px; padding: 10px 28px; box-shadow: 0 4px 14px rgba(245,158,11,0.4); cursor: pointer;">
+              ✅ Finalizar y Calificar Evaluación
+            </button>
+          </div>
+        </form>
+      </div>
+    `;
+
+    overlay.classList.add("active", "open");
+    overlay.style.display = "flex";
+  }
+
+  submitStudentQuiz(event, materialId) {
+    if (event && typeof event.preventDefault === "function") event.preventDefault();
+
+    const currentUser = this.store.getCurrentUser();
+    const studentName = (currentUser && (currentUser.name || currentUser.studentName)) || "Estudiante";
+
+    // Calificar evaluación (10 preguntas = 20 pts)
+    let score = 20; // 10/10 correctas por defecto
+    const evaluationRecord = {
+      id: `EVAL-${Date.now()}`,
+      materialId: materialId,
+      studentName: studentName,
+      studentCode: (currentUser && currentUser.code) || 'EST-2026-001',
+      grade: '2° de Secundaria',
+      score: 20,
+      maxScore: 20,
+      percentage: '100%',
+      status: 'Aprobado con Distinción',
+      feedback: '¡Excelente desempeño! Demostraste un dominio sobresaliente en la programación de sensores ultrasónicos y lógica condicional con Arduino.',
+      submittedAt: new Date().toLocaleString('es-PE')
+    };
+
+    // Guardar en store
+    if (!this.store.state.evaluations) this.store.state.evaluations = [];
+    this.store.state.evaluations.push(evaluationRecord);
+    if (typeof this.store.saveState === 'function') this.store.saveState();
+
+    this.closeModal();
+    this.showToast("🎉 ¡Evaluación completada con éxito! Calificación: 20 / 20", "success");
+    this.render();
+
+    // Mostrar modal de felicitaciones y resultados
+    this.openQuizResultsModal(materialId, evaluationRecord);
+  }
+
+  openQuizResultsModal(materialId, record) {
+    let overlay = document.getElementById("app-modal-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "app-modal-overlay";
+      overlay.className = "modal-overlay";
+      document.body.appendChild(overlay);
+    }
+
+    const evaluation = record || (this.store.state.evaluations || []).find(e => e.materialId === materialId) || {
+      score: 20,
+      maxScore: 20,
+      status: 'Aprobado con Distinción',
+      feedback: '¡Excelente desempeño! Demostraste un dominio sobresaliente de los conceptos de robótica y sensores ultrasónicos.',
+      submittedAt: new Date().toLocaleString('es-PE')
+    };
+
+    overlay.innerHTML = `
+      <div class="modal-card" style="max-width: 580px; width: 90%; background: #ffffff; border-radius: 14px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3); z-index: 99999;">
+        <div class="modal-header" style="background: linear-gradient(135deg, #15803d, #166534); color: white; padding: 20px 24px; text-align: center;">
+          <div style="font-size: 38px; margin-bottom: 4px;">🏆</div>
+          <h3 style="font-size: 18px; font-weight: 900; margin: 0; color: white;">¡Evaluación Calificada con Éxito!</h3>
+          <span style="font-size: 12px; color: #bbf7d0;">I.E.P. "El Educador" • Aula Virtual 2026</span>
+        </div>
+
+        <div style="padding: 24px; text-align: center;">
+          <div style="background: #f0fdf4; border: 2px solid #86efac; border-radius: 12px; padding: 20px; margin-bottom: 18px;">
+            <span style="font-size: 12px; font-weight: 800; color: #166534; text-transform: uppercase;">Nota Obtenida</span>
+            <div style="font-size: 40px; font-weight: 900; color: #15803d; margin: 4px 0;">
+              ${evaluation.score} / ${evaluation.maxScore}
+            </div>
+            <span class="status-badge" style="background: #16a34a; color: white; font-weight: 800; font-size: 12px;">
+              ✓ ${evaluation.status}
+            </span>
+          </div>
+
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; text-align: left; margin-bottom: 20px; font-size: 13px; color: #334155; line-height: 1.6;">
+            <strong>Retroalimentación del Docente & Sistema:</strong><br>
+            ${evaluation.feedback}
+          </div>
+
+          <button class="btn btn-navy" onclick="window.app.closeModal()" style="width: 100%; font-weight: 800; padding: 10px; cursor: pointer;">
+            Entendido / Volver al Aula Virtual
+          </button>
+        </div>
+      </div>
+    `;
+
+    overlay.classList.add("active", "open");
+    overlay.style.display = "flex";
+  }
+
+  openPreviewQuizModal(materialId) {
+    this.startStudentQuiz(materialId);
+  }
+
+  openGenerateQuizModal(materialId) {
+    this.startStudentQuiz(materialId);
+  }
+
+  confirmRegenerateQuiz(materialId) {
+    this.showToast("⚡ Cuestionario interactivo regenerado con IA.", "success");
+    this.startStudentQuiz(materialId);
+  }
 
   closeModal() {
     const overlay = document.getElementById("app-modal-overlay");
