@@ -1,0 +1,38 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo / Resplandor -->
+  <circle cx="100" cy="100" r="95" fill="white" stroke="#0b132b" stroke-width="4"/>
+  
+  <!-- Borde exterior dorado -->
+  <circle cx="100" cy="100" r="88" fill="none" stroke="#f59e0b" stroke-width="8"/>
+  
+  <!-- Anillo de texto institucional -->
+  <path id="textPathTop" d="M 30,100 A 70,70 0 0,1 170,100" fill="none" />
+  <path id="textPathBottom" d="M 170,100 A 70,70 0 0,1 30,100" fill="none" />
+  
+  <text font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="13" font-weight="900" fill="#0b132b" letter-spacing="2">
+    <textPath href="#textPathTop" startOffset="50%" text-anchor="middle">
+      COLEGIO PRIVADO
+    </textPath>
+  </text>
+  
+  <!-- Escudo Central -->
+  <ellipse cx="100" cy="100" rx="46" ry="46" fill="#f8fafc" stroke="#dc2626" stroke-width="3" />
+  
+  <!-- Letra 'E' Institucional en Azul Noche / Verde Neón -->
+  <text x="100" y="112" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="52" font-weight="900" fill="#0284c7" text-anchor="middle">
+    E
+  </text>
+  
+  <!-- Subtítulo S.J.L. -->
+  <text x="100" y="132" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="12" font-weight="900" fill="#dc2626" text-anchor="middle" letter-spacing="1">
+    S.J.L.
+  </text>
+
+  <!-- Lema inferior EL EDUCADOR -->
+  <path d="M 40 145 Q 100 170 160 145" fill="#dc2626" />
+  <text font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="12" font-weight="900" fill="#ffffff" letter-spacing="2">
+    <textPath href="#textPathBottom" startOffset="50%" text-anchor="middle">
+      EL EDUCADOR
+    </textPath>
+  </text>
+</svg>

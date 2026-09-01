@@ -1,0 +1,535 @@
+/* ==========================================================================
+   Estilos de Impresión - Boleta Oficial Colegio El Educador (LLENADO TOTAL A4)
+   ========================================================================== */
+
+@page {
+  size: A4 landscape;
+  margin: 4mm 6mm;
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 4mm 6mm;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html, body {
+    width: 100% !important;
+    height: 100% !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    font-size: 8pt !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .sidebar,
+  .top-header,
+  .card-action-link,
+  .btn,
+  .no-print,
+  .toast-container,
+  .modal-header,
+  .modal-footer,
+  select,
+  input,
+  button,
+  .modal-close-btn {
+    display: none !important;
+  }
+
+  /* Cuando el modal está abierto, ocultar completamente el fondo de la intranet */
+  .modal-overlay.active ~ .app-container .main-wrapper,
+  .app-container:has(.modal-overlay.active) .main-wrapper {
+    display: none !important;
+  }
+
+  .modal-overlay.active {
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .modal-overlay.active .modal-container {
+    box-shadow: none !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .modal-overlay.active .modal-body {
+    overflow: visible !important;
+    max-height: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .modal-overlay.active .modal-body > div:not(.qr-sticker-sheet):not(#modal-boleta-stickers-grid) {
+    display: none !important;
+  }
+
+  .main-wrapper {
+    margin-left: 0 !important;
+    padding: 0 !important;
+  }
+
+  .content-area {
+    padding: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+    margin: 0 !important;
+  }
+
+  /* =========================================================================
+     ESTRUCTURA DE PÁGINAS A4 HORIZONTAL (297mm x 210mm) - LLENADO TOTAL
+     ========================================================================= */
+  .official-boleta-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 198mm !important;
+    min-height: 198mm !important;
+    max-height: 198mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+
+  .official-boleta-page-1,
+  .official-boleta-page-2 {
+    background-image: url('../assets/boleta_document_bg.png') !important;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    padding: 3mm 5mm !important;
+    box-sizing: border-box !important;
+  }
+
+  .official-boleta-page-1 {
+    page-break-before: auto !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .official-boleta-page-2 {
+    page-break-before: always !important;
+    break-before: page !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* --- TÍTULO PRINCIPAL (PÁGINA 1) --- */
+  .boleta-main-title {
+    background: #1e3a8a !important;
+    color: #ffffff !important;
+    font-size: 10pt !important;
+    font-weight: 900 !important;
+    padding: 4px 10px !important;
+    margin: 0 0 3px 0 !important;
+    line-height: 1.15 !important;
+    border-radius: 4px !important;
+    text-align: center !important;
+  }
+
+  .boleta-badge-title {
+    background: #2563eb !important;
+    color: #ffffff !important;
+    font-size: 8.2pt !important;
+    font-weight: 800 !important;
+    padding: 2.5px 12px !important;
+    margin: 0 0 3px 0 !important;
+    border-radius: 12px !important;
+    display: inline-block !important;
+  }
+
+  .boleta-page-1-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 14px !important;
+    align-items: start !important;
+    width: 100% !important;
+  }
+
+  /* --- TABLA DE NOTAS (PÁGINA 1 - OCUPA TODO EL ALTO) --- */
+  .boleta-table {
+    width: 100% !important;
+    font-size: 8pt !important;
+    border-collapse: collapse !important;
+    border: 1.2px solid #000000 !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+  }
+
+  .boleta-table th {
+    padding: 2.5px 4px !important;
+    font-size: 7.6pt !important;
+    line-height: 1.15 !important;
+    background: #f1f5f9 !important;
+    border: 1px solid #000000 !important;
+    color: #000000 !important;
+  }
+
+  .boleta-table td {
+    padding: 2.2px 4.5px !important;
+    line-height: 1.22 !important;
+    font-size: 7.9pt !important;
+    border: 1px solid #000000 !important;
+    color: #000000 !important;
+  }
+
+  .boleta-yellow-row,
+  .boleta-yellow-row td {
+    background-color: #fef08a !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+  }
+
+  /* --- APRECIACIÓN DEL DOCENTE (PÁGINA 1) --- */
+  .boleta-appreciation-box {
+    border: 1.2px solid #000000 !important;
+    display: flex !important;
+    height: auto !important;
+    margin: 0 0 4px 0 !important;
+    background: #ffffff !important;
+  }
+
+  .boleta-appreciation-left {
+    flex: 1 !important;
+    border-right: 1.2px solid #000000 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .boleta-appreciation-item {
+    padding: 3.5px 6px !important;
+    font-size: 7.6pt !important;
+    line-height: 1.22 !important;
+    border-bottom: 1px solid #000000 !important;
+    display: flex !important;
+    gap: 4px !important;
+    min-height: 26px !important;
+  }
+
+  .boleta-appreciation-item:last-child {
+    border-bottom: none !important;
+  }
+
+  .boleta-appreciation-tag {
+    font-size: 7.6pt !important;
+    font-weight: 800 !important;
+  }
+
+  .boleta-parent-sig-box {
+    width: 48px !important;
+    font-size: 7.2pt !important;
+    font-weight: 800 !important;
+    writing-mode: vertical-rl !important;
+    transform: rotate(180deg) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    background: #f8fafc !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  /* --- ESCALA DE CALIFICACIÓN (PÁGINA 1) --- */
+  .boleta-scale-legend {
+    font-size: 6.8pt !important;
+    line-height: 1.2 !important;
+    padding: 4px 7px !important;
+    margin-top: 3px !important;
+    border: 1px solid #475569 !important;
+    border-radius: 4px !important;
+    background: #ffffff !important;
+  }
+
+  /* =========================================================================
+     PÁGINA 2: DISTRIBUCIÓN TOTAL EN 2 COLUMNAS DE 198mm DE ALTO
+     ========================================================================= */
+  .boleta-page-2-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+    height: 100% !important;
+    min-height: 198mm !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+
+  .boleta-page-2-left-box {
+    height: 100% !important;
+    min-height: 198mm !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    border: 2px solid #000000 !important;
+    border-radius: 8px !important;
+    padding: 14px 16px !important;
+    box-sizing: border-box !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+  }
+
+  .boleta-cover-container {
+    height: 100% !important;
+    min-height: 198mm !important;
+    max-height: 198mm !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: transparent !important;
+  }
+
+  /* =========================================================================
+     ESTILOS DE IMPRESIÓN PARA HORARIOS ESCOLARES (8 HORAS + RECESO + ALMUERZO)
+     ========================================================================= */
+  .schedule-grid-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 7.5pt !important;
+  }
+
+  .schedule-grid-table th {
+    background-color: #0b132b !important;
+    color: #ffffff !important;
+    padding: 4px 6px !important;
+    font-size: 8pt !important;
+    border: 1px solid #334155 !important;
+    text-align: center !important;
+  }
+
+  .schedule-grid-table td {
+    padding: 3px 4px !important;
+    border: 1px solid #cbd5e1 !important;
+    vertical-align: middle !important;
+  }
+
+  .time-slot-cell {
+    font-size: 7.5pt !important;
+    font-weight: 800 !important;
+    background: #f1f5f9 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    width: 95px !important;
+  }
+
+  .schedule-break-row td {
+    background-color: #fef9c3 !important;
+    color: #854d0e !important;
+    font-weight: 900 !important;
+    font-size: 7.5pt !important;
+    text-align: center !important;
+    padding: 3px !important;
+  }
+
+  .schedule-lunch-row td {
+    background-color: #fee2e2 !important;
+    color: #991b1b !important;
+    font-weight: 900 !important;
+    font-size: 7.5pt !important;
+    text-align: center !important;
+    padding: 3px !important;
+  }
+
+  .schedule-slot-card {
+    padding: 3px 5px !important;
+    border-radius: 4px !important;
+    font-size: 7.5pt !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+  }
+
+  .slot-course-title {
+    font-size: 7.8pt !important;
+    font-weight: 800 !important;
+  }
+
+  .slot-room-badge {
+    font-size: 6.8pt !important;
+    font-weight: 700 !important;
+  }
+}
+
+/* =========================================================================
+   CONTENEDOR EXCLUSIVO PARA IMPRESIÓN LIMPIA DE STICKERS QR (15 POR HOJA A4)
+   ========================================================================= */
+#dedicated-print-container {
+  display: none;
+}
+
+@media print {
+  body.printing-stickers-mode {
+    background: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  body.printing-stickers-mode @page {
+    size: A4 portrait !important;
+    margin: 5mm 5mm !important;
+  }
+
+  body.printing-stickers-mode .app-container,
+  body.printing-stickers-mode .sidebar,
+  body.printing-stickers-mode .main-wrapper,
+  body.printing-stickers-mode .top-header,
+  body.printing-stickers-mode .content-area,
+  body.printing-stickers-mode .modal-overlay,
+  body.printing-stickers-mode .toast-container,
+  body.printing-stickers-mode .card,
+  body.printing-stickers-mode .no-print {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  body.printing-stickers-mode #dedicated-print-container {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    width: 200mm !important;
+    max-width: 200mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    visibility: visible !important;
+  }
+
+  /* OPCIÓN 1: 3 x 5 (15 QR por Hoja A4) */
+  body.printing-stickers-mode #dedicated-print-container,
+  body.printing-stickers-mode.print-layout-3x5 #dedicated-print-container {
+    gap: 2.2mm !important;
+  }
+
+  body.printing-stickers-mode .qr-notebook-sticker,
+  body.printing-stickers-mode.print-layout-3x5 .qr-notebook-sticker {
+    border: 1.2pt solid #0f172a !important;
+    border-left: 4.5pt solid #f59e0b !important;
+    border-radius: 5px !important;
+    padding: 2mm 2.5mm !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 2.2mm !important;
+    background: #ffffff !important;
+    height: 52mm !important;
+    max-height: 52mm !important;
+    min-height: 52mm !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+  }
+
+  body.printing-stickers-mode.print-layout-3x5 .qr-notebook-sticker img,
+  body.printing-stickers-mode.print-layout-3x5 .qr-notebook-sticker svg,
+  body.printing-stickers-mode #dedicated-print-container .qr-notebook-sticker img,
+  body.printing-stickers-mode #dedicated-print-container .qr-notebook-sticker svg {
+    width: 20.5mm !important;
+    height: 20.5mm !important;
+    min-width: 20.5mm !important;
+    display: block !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 3px !important;
+    padding: 1px !important;
+  }
+
+  /* OPCIÓN 2: 3 x 4 (12 QR por Hoja A4) */
+  body.printing-stickers-mode.print-layout-3x4 #dedicated-print-container {
+    gap: 3mm !important;
+  }
+
+  body.printing-stickers-mode.print-layout-3x4 .qr-notebook-sticker {
+    border: 1.5pt solid #0f172a !important;
+    border-left: 5.5pt solid #f59e0b !important;
+    border-radius: 6px !important;
+    padding: 3mm 3.5mm !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 3mm !important;
+    background: #ffffff !important;
+    height: 66mm !important;
+    max-height: 66mm !important;
+    min-height: 66mm !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+  }
+
+  body.printing-stickers-mode.print-layout-3x4 .qr-notebook-sticker img,
+  body.printing-stickers-mode.print-layout-3x4 .qr-notebook-sticker svg {
+    width: 26mm !important;
+    height: 26mm !important;
+    min-width: 26mm !important;
+    display: block !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 4px !important;
+    padding: 2px !important;
+  }
+
+  body.printing-stickers-mode.print-layout-3x4 .qr-notebook-sticker strong {
+    font-size: 9pt !important;
+  }
+
+  body.printing-stickers-mode #dedicated-print-container .qr-notebook-sticker code {
+    font-size: 5.5pt !important;
+    line-height: 1 !important;
+    display: block !important;
+    margin-top: 1.5px !important;
+  }
+
+  body.printing-stickers-mode #dedicated-print-container .qr-notebook-sticker strong {
+    font-size: 7.8pt !important;
+    line-height: 1.15 !important;
+    display: block !important;
+  }
+
+  body.printing-stickers-mode #dedicated-print-container .qr-notebook-sticker div {
+    line-height: 1.15 !important;
+  }
+
+  body.printing-stickers-mode #dedicated-print-container .btn,
+  body.printing-stickers-mode #dedicated-print-container button {
+    display: none !important;
+  }
+}
+
+/* Vista previa en pantalla */
+.printable-report {
+  background-color: #ffffff;
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-md);
+  margin-top: var(--space-4);
+}
