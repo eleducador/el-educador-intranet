@@ -246,10 +246,22 @@ const Components = {
 
           <div class="login-body">
             ${errorMessage ? `
-              <div class="login-alert-error">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                <span>${errorMessage}</span>
-              </div>
+              ${(errorMessage.includes("suspendida") || errorMessage.includes("falta de pago") || errorMessage.includes("regularizar") || errorMessage.includes("⛔")) ? `
+                <div class="login-alert-error" style="background: #fef2f2; border: 2px solid #ef4444; color: #991b1b; padding: 16px 18px; border-radius: 12px; font-size: 13px; line-height: 1.5; text-align: center; margin-bottom: 18px; box-shadow: 0 4px 14px rgba(239,68,68,0.18);">
+                  <div style="font-size: 28px; margin-bottom: 4px;">⛔</div>
+                  <strong style="font-size: 14.5px; display: block; margin-bottom: 6px; color: #b91c1c;">ACCESO A INTRANET SUSPENDIDO</strong>
+                  <span style="font-weight: 600;">${errorMessage}</span>
+                  <div style="margin-top: 10px; font-size: 11.5px; background: rgba(239,68,68,0.08); padding: 8px 12px; border-radius: 6px; color: #7f1d1d; border-top: 1px solid rgba(239,68,68,0.2);">
+                    📞 Tesorería & Administración: <strong>(01) 387-4920 / 987-654-321</strong><br>
+                    📍 Oficina de Coordinación: Puerta Principal (07:30 AM - 03:30 PM)
+                  </div>
+                </div>
+              ` : `
+                <div class="login-alert-error">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                  <span>${errorMessage}</span>
+                </div>
+              `}
             ` : ''}
 
             <form id="login-form" onsubmit="window.app.handleLogin(event)">
@@ -6469,8 +6481,17 @@ const Components = {
   // PANTALLA DE BLOQUEO DE INTRANET POR PENSIÓN PENDIENTE
   // =========================================================================
   renderLockedAccessScreen(state, user) {
-    const debtAmount = user.pendingDebtAmount || 480.00;
-    const concept = user.pendingConcept || "Pensión Escolar - Agosto 2026";
+    const settings = (state.paymentSettings) || (window.appStore && typeof window.appStore.getPaymentSettings === "function" ? window.appStore.getPaymentSettings() : initialData.paymentSettings) || {};
+    const debtAmount = user.pendingDebtAmount || settings.monthlyPensionCost || 480.00;
+    const concept = user.pendingConcept && user.pendingConcept !== "--" ? user.pendingConcept : (settings.pensionConcept || "Pensión Escolar - Agosto 2026");
+    const yapeNum = settings.yapeNumber || "987-654-321";
+    const yapeHolder = settings.yapeHolder || "Prof. Alex Lino (Coordinación / Tesorería)";
+    const bcpAcc = settings.bcpAccount || "191-89347291-0-45";
+    const bcpCci = settings.bcpCci || "002-191-0089347291045";
+    const bbvaAcc = settings.bbvaAccount || "0011-0238-0100049281";
+    const bnAcc = settings.bnAccount || "04-018-492819";
+    const treasuryPhone = settings.treasuryPhone || "(01) 387-4920 / 987-654-321";
+    const officeHours = settings.officeHours || "Lunes a Viernes de 07:30 AM a 03:30 PM (Administración - Puerta 1)";
 
     return `
       <div class="fade-in" style="max-width: 780px; margin: 0 auto; padding: var(--space-4);">
@@ -6483,10 +6504,10 @@ const Components = {
               I.E.P. "EL EDUCADOR" • 21 AÑOS DEJANDO HUELLAS (S.J.L.)
             </div>
             <h2 style="font-size: 22px; font-weight: 900; margin: 6px 0 4px; color: white;">
-              ACCESO A LA INTRANET RESTRINGIDO
+              ⛔ ACCESO A LA INTRANET SUSPENDIDO
             </h2>
             <p style="font-size: 13px; color: #fecaca; margin: 0;">
-              Validación de Pensión Escolar Requerida para el Alumno(a) y Apoderado(a)
+              Cuenta suspendida por falta de pago. Favor de regularizar su situación en el colegio.
             </p>
           </div>
 
@@ -6496,7 +6517,7 @@ const Components = {
                 ⚠️ Notificación de Coordinación y Tesorería
               </div>
               <p style="font-size: 13px; color: #7f1d1d; margin: 0; line-height: 1.5;">
-                Estimado(a) <strong>${user.name}</strong>, el acceso a las notas bimestrales, horario de clases, control de cuadernos QR y aula virtual se encuentra temporalmente bloqueado debido a una cuota pendiente de pago.
+                Estimado(a) apoderado(a) <strong>${user.name}</strong>: La cuenta se encuentra <strong>suspendida temporalmente por cuotas pendientes de pago</strong>. Para reactivar el acceso al registro de notas, boletas, horario y aula virtual, favor de realizar el abono y reportarlo a Tesorería.
               </p>
             </div>
 
@@ -6507,54 +6528,56 @@ const Components = {
                 <div style="font-size: 14px; font-weight: 800; color: var(--color-navy-900);">${concept}</div>
               </div>
               <div>
-                <span style="font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase;">Monto a Cancelar</span>
+                <span style="font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase;">Monto de Pensión</span>
                 <div style="font-size: 22px; font-weight: 900; color: var(--color-red-600);">S/ ${debtAmount.toFixed(2)}</div>
               </div>
               <div>
                 <span style="font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase;">Estado Actual</span>
-                <div><span class="status-badge status-failed" style="font-weight: bold;"><span class='status-dot-red'></span> Bloqueado por Mora</span></div>
+                <div><span class="status-badge status-failed" style="font-weight: bold;"><span class='status-dot-red'></span> Cuenta Suspendida</span></div>
               </div>
             </div>
 
             <!-- Métodos de Pago y Desbloqueo Inmediato -->
             <h3 style="font-size: 15px; font-weight: 800; color: var(--color-navy-900); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-              ⚡ Realizar Pago y Desbloquear Intranet en Tiempo Real:
+              ⚡ Canales Oficiales de Recaudación y Desbloqueo:
             </h3>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 20px;">
               
               <!-- Opción 1: Tarjeta Débito / Crédito -->
               <div class="card" style="border: 2px solid var(--border-subtle); cursor: pointer; padding: 14px; text-align: center; transition: all 0.2s;" onclick="window.app.openPayModal('PEN-08', ${debtAmount}, '${concept}')">
-                <div style="font-size: 24px; margin-bottom: 4px;"></div>
+                <div style="font-size: 24px; margin-bottom: 4px;">💳</div>
                 <strong style="font-size: 13px; color: var(--color-navy-900);">Tarjeta Débito / Crédito</strong>
                 <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Visa, Mastercard, Débito</p>
                 <span class="status-badge status-approved" style="background: #22c55e; color: #0b132b; font-weight: 800; margin-top: 6px;">Desbloqueo Inmediato</span>
               </div>
 
               <!-- Opción 2: Yape / Plin -->
-              <div class="card" style="border: 2px solid var(--border-subtle); cursor: pointer; padding: 14px; text-align: center; transition: all 0.2s;" onclick="window.app.openYapePayModal('PEN-08', ${debtAmount})">
-                <div style="font-size: 24px; margin-bottom: 4px;"></div>
-                <strong style="font-size: 13px; color: #6d28d9;">Yape / Plin Institucional</strong>
-                <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">987-654-321 (I.E.P. El Educador)</p>
-                <span class="status-badge status-approved" style="background: #22c55e; color: #0b132b; font-weight: 800; margin-top: 6px;">Validación Automática</span>
+              <div class="card" style="border: 2px solid #a855f7; background: #faf5ff; cursor: pointer; padding: 14px; text-align: center; transition: all 0.2s;" onclick="window.app.openYapePayModal('PEN-08', ${debtAmount})">
+                <div style="font-size: 24px; margin-bottom: 4px;">📱</div>
+                <strong style="font-size: 13px; color: #6d28d9;">Yape / Plin Oficial</strong>
+                <p style="font-size: 12px; color: #581c87; font-weight: 900; margin-top: 4px;">${yapeNum}</p>
+                <span class="status-badge status-approved" style="background: #22c55e; color: #0b132b; font-weight: 800; margin-top: 6px;">Validación Rápida</span>
               </div>
 
               <!-- Opción 3: Transferencia BCP / BBVA -->
               <div class="card" style="border: 2px solid var(--border-subtle); cursor: pointer; padding: 14px; text-align: center; transition: all 0.2s;" onclick="window.app.openBankTransferModal('PEN-08', ${debtAmount})">
                 <div style="font-size: 24px; margin-bottom: 4px;">🏦</div>
                 <strong style="font-size: 13px; color: var(--color-navy-900);">Depósito Bancario / Agente</strong>
-                <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">BCP / BBVA / Banco Nación</p>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">BCP: ${bcpAcc}</p>
                 <span class="status-badge status-approved" style="background: #f59e0b; color: #0b132b; font-weight: 800; margin-top: 6px;">Ingresar Voucher</span>
               </div>
             </div>
 
             <!-- Botón de Pago Rápido Principal -->
             <button class="btn btn-red" onclick="window.app.openPayModal('PEN-08', ${debtAmount}, '${concept}')" style="width: 100%; padding: 14px; font-size: 15px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);">
-              <span>Pagar S/ ${debtAmount.toFixed(2)} y Desbloquear Intranet Ahora</span>
+              <span>Pagar S/ ${debtAmount.toFixed(2)} y Regularizar Acceso Ahora</span>
             </button>
 
-            <div style="text-align: center; margin-top: 14px; font-size: 11px; color: var(--text-muted);">
-              Al confirmar el pago, la base de datos central emitirá su recibo digital y se habilitará el acceso en todos sus dispositivos al instante.
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-top: 16px; font-size: 12px; color: #334155; line-height: 1.6;">
+              <strong>🏛️ Atención en Colegio & Tesorería:</strong><br>
+              • <strong>Teléfonos:</strong> ${treasuryPhone}<br>
+              • <strong>Horario:</strong> ${officeHours}
             </div>
           </div>
         </div>
@@ -6569,13 +6592,29 @@ const Components = {
       ? window.appStore.getFamiliesFinancial()
       : (state.familiesFinancial || initialData.familiesFinancial || []);
 
+    const settings = (state.paymentSettings) || (window.appStore && typeof window.appStore.getPaymentSettings === "function" ? window.appStore.getPaymentSettings() : initialData.paymentSettings) || {};
+    const pensionCost = (typeof settings.monthlyPensionCost === 'number') ? settings.monthlyPensionCost : 480.00;
+    const pensionConcept = settings.pensionConcept || "Pensión Escolar - Agosto 2026";
+    const dueDateDay = settings.dueDateDay || "05 de cada mes";
+    const bcpAccount = settings.bcpAccount || "191-89347291-0-45";
+    const bcpCci = settings.bcpCci || "002-191-0089347291045";
+    const bbvaAccount = settings.bbvaAccount || "0011-0238-0100049281";
+    const bnAccount = settings.bnAccount || "04-018-492819";
+    const accountHolder = settings.accountHolder || "I.E.P. EL EDUCADOR S.A.C.";
+    const yapeNumber = settings.yapeNumber || "987-654-321";
+    const plinNumber = settings.plinNumber || "987-654-321";
+    const yapeHolder = settings.yapeHolder || "Prof. Alex Lino (Coordinación / Tesorería)";
+    const paymentInstructions = settings.paymentInstructions || "Indicar en el asunto o voucher el DNI/Código y Grado del estudiante.";
+    const treasuryPhone = settings.treasuryPhone || "(01) 387-4920 / 987-654-321";
+    const officeHours = settings.officeHours || "Lunes a Viernes de 07:30 AM a 03:30 PM (Administración - Puerta 1)";
+
     return `
       <div class="fade-in">
         <div class="card" style="margin-bottom: var(--space-6);">
-          <div class="card-header">
+          <div class="card-header" style="flex-wrap: wrap; gap: 10px;">
             <div>
               <div style="display: flex; align-items: center; gap: 8px;">
-                <h2 class="card-title" style="font-size: var(--font-size-xl);">Control de Pensiones & Validación Automática de Intranet</h2>
+                <h2 class="card-title" style="font-size: var(--font-size-xl);">Control de Pensiones & Recaudación Institucional</h2>
                 <span class="status-badge status-approved"><span class='status-dot-green'></span> Sistema de Pago Online Activo</span>
               </div>
               <p style="font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 4px;">
@@ -6583,23 +6622,152 @@ const Components = {
               </p>
             </div>
             ${isCoordination ? `
-              <button class="btn btn-gold btn-sm" onclick="window.app.openManualPaymentModal()">
-                + Registrar Pago en Caja (Efectivo/Banco)
-              </button>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button class="btn btn-navy btn-sm" onclick="window.app.togglePaymentSettingsPanel()" style="font-weight: 800;">
+                  ⚙️ Editar Costo de Pensión & Datos de Pago
+                </button>
+                <button class="btn btn-gold btn-sm" onclick="window.app.openManualPaymentModal()">
+                  + Registrar Pago en Caja
+                </button>
+              </div>
             ` : ''}
           </div>
 
-          <!-- Métricas de Validación -->
-          <div style="margin-bottom: var(--space-6);">
+          <!-- Métricas de Resumen -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6);">
             <div class="card" style="padding: var(--space-4); border-left: 4px solid var(--color-navy-700); background: var(--bg-surface-subtle);">
-              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Validación Automática</span>
-              <div style="font-size: 18px; font-weight: 800; color: var(--color-navy-900); margin-top: 2px;">Habilitada ⚡</div>
-              <span style="font-size: 10px; color: var(--text-muted);">Desbloqueo inmediato con pago</span>
+              <span style="font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Costo Oficial de Pensión</span>
+              <div style="font-size: 22px; font-weight: 900; color: var(--color-navy-900); margin-top: 2px;">S/ ${pensionCost.toFixed(2)}</div>
+              <span style="font-size: 11px; color: var(--color-gold-600); font-weight: 700;">Vence: ${dueDateDay}</span>
+            </div>
+            <div class="card" style="padding: var(--space-4); border-left: 4px solid #a855f7; background: #faf5ff;">
+              <span style="font-size: 11px; font-weight: bold; color: #6b21a8; text-transform: uppercase;">Yape & Plin Institucional</span>
+              <div style="font-size: 20px; font-weight: 900; color: #581c87; margin-top: 2px;">${yapeNumber}</div>
+              <span style="font-size: 10.5px; color: #7e22ce;">${yapeHolder}</span>
+            </div>
+            <div class="card" style="padding: var(--space-4); border-left: 4px solid #10b981; background: #f0fdf4;">
+              <span style="font-size: 11px; font-weight: bold; color: #166534; text-transform: uppercase;">Validación Automática</span>
+              <div style="font-size: 18px; font-weight: 800; color: #047857; margin-top: 2px;">Habilitada ⚡</div>
+              <span style="font-size: 10.5px; color: #15803d;">Desbloqueo inmediato con pago</span>
             </div>
           </div>
 
           ${isCoordination ? `
-            <!-- Panel Exclusivo para Coordinación y Dirección: Control de Familias y Bloqueos -->
+            <!-- =========================================================================
+                 PANEL EDITOR DE CONFIGURACIÓN DE PENSIONES Y DATOS DE PAGO (ADMIN)
+                 ========================================================================= -->
+            <div id="payment-settings-editor-card" class="card" style="margin-bottom: var(--space-6); border: 2px solid #3b82f6; background: #f8fafc; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(59,130,246,0.08);">
+              <div style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); color: white; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 18px;">⚙️</span>
+                  <h3 style="margin: 0; font-size: 15px; font-weight: 800; color: white;">
+                    Editor de Costo de Pensión y Cuentas Bancarias / Billeteras Digitales
+                  </h3>
+                </div>
+                <span class="status-badge" style="background: #22c55e; color: #0b132b; font-weight: 800; font-size: 11px;">
+                  Perfil Administrador
+                </span>
+              </div>
+
+              <div style="padding: 18px;">
+                <form id="payment-settings-form" onsubmit="window.app.savePaymentSettings(event)">
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 16px;">
+                    
+                    <!-- Bloque 1: Monto y Concepto de Pensión -->
+                    <div style="background: white; border: 1px solid #e2e8f0; padding: 14px; border-radius: 8px;">
+                      <h4 style="margin: 0 0 12px; font-size: 13px; font-weight: 800; color: var(--color-navy-900); display: flex; align-items: center; gap: 6px;">
+                        💰 1. Tarifa & Cronograma de Pensión
+                      </h4>
+                      <div class="form-group" style="margin-bottom: 10px;">
+                        <label class="form-label" style="font-size: 12px; font-weight: 700;">Costo de Pensión Mensual (S/):</label>
+                        <input type="number" step="0.50" id="cfg-pension-cost" class="form-control" value="${pensionCost.toFixed(2)}" required style="font-weight: 900; font-size: 15px; color: #1e3a8a;" />
+                      </div>
+                      <div class="form-group" style="margin-bottom: 10px;">
+                        <label class="form-label" style="font-size: 12px; font-weight: 700;">Concepto Oficial de Cobro:</label>
+                        <input type="text" id="cfg-pension-concept" class="form-control" value="${pensionConcept}" required />
+                      </div>
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" style="font-size: 12px; font-weight: 700;">Día Límite / Vencimiento:</label>
+                        <input type="text" id="cfg-pension-duedate" class="form-control" value="${dueDateDay}" placeholder="Ej. 05 de cada mes" />
+                      </div>
+                    </div>
+
+                    <!-- Bloque 2: Billeteras Móviles Yape / Plin -->
+                    <div style="background: white; border: 1px solid #e2e8f0; padding: 14px; border-radius: 8px;">
+                      <h4 style="margin: 0 0 12px; font-size: 13px; font-weight: 800; color: #6d28d9; display: flex; align-items: center; gap: 6px;">
+                        📱 2. Billeteras Digitales (Yape & Plin)
+                      </h4>
+                      <div class="form-group" style="margin-bottom: 10px;">
+                        <label class="form-label" style="font-size: 12px; font-weight: 700;">Número Celular Yape / Plin:</label>
+                        <input type="text" id="cfg-yape-number" class="form-control" value="${yapeNumber}" required style="font-weight: 900; font-size: 14px; color: #581c87;" />
+                      </div>
+                      <div class="form-group" style="margin-bottom: 10px;">
+                        <label class="form-label" style="font-size: 12px; font-weight: 700;">Nombre del Titular Yape/Plin:</label>
+                        <input type="text" id="cfg-yape-holder" class="form-control" value="${yapeHolder}" required />
+                      </div>
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" style="font-size: 12px; font-weight: 700;">Número de Plin Alternativo:</label>
+                        <input type="text" id="cfg-plin-number" class="form-control" value="${plinNumber}" />
+                      </div>
+                    </div>
+
+                    <!-- Bloque 3: Cuentas Bancarias Institucionales -->
+                    <div style="background: white; border: 1px solid #e2e8f0; padding: 14px; border-radius: 8px;">
+                      <h4 style="margin: 0 0 12px; font-size: 13px; font-weight: 800; color: #047857; display: flex; align-items: center; gap: 6px;">
+                        🏦 3. Cuentas Bancarias Oficiales
+                      </h4>
+                      <div class="form-group" style="margin-bottom: 8px;">
+                        <label class="form-label" style="font-size: 11.5px; font-weight: 700;">BCP Cuenta Corriente:</label>
+                        <input type="text" id="cfg-bcp-account" class="form-control" value="${bcpAccount}" style="font-size: 12.5px; font-family: monospace;" />
+                      </div>
+                      <div class="form-group" style="margin-bottom: 8px;">
+                        <label class="form-label" style="font-size: 11.5px; font-weight: 700;">BCP Código Interbancario (CCI):</label>
+                        <input type="text" id="cfg-bcp-cci" class="form-control" value="${bcpCci}" style="font-size: 12px; font-family: monospace;" />
+                      </div>
+                      <div class="form-group" style="margin-bottom: 8px;">
+                        <label class="form-label" style="font-size: 11.5px; font-weight: 700;">BBVA Continental:</label>
+                        <input type="text" id="cfg-bbva-account" class="form-control" value="${bbvaAccount}" style="font-size: 12.5px; font-family: monospace;" />
+                      </div>
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" style="font-size: 11.5px; font-weight: 700;">Banco de la Nación:</label>
+                        <input type="text" id="cfg-bn-account" class="form-control" value="${bnAccount}" style="font-size: 12.5px; font-family: monospace;" />
+                      </div>
+                    </div>
+
+                    <!-- Bloque 4: Razón Social y Atención -->
+                    <div style="background: white; border: 1px solid #e2e8f0; padding: 14px; border-radius: 8px;">
+                      <h4 style="margin: 0 0 12px; font-size: 13px; font-weight: 800; color: #b45309; display: flex; align-items: center; gap: 6px;">
+                        🏛️ 4. Titular y Contacto de Tesorería
+                      </h4>
+                      <div class="form-group" style="margin-bottom: 10px;">
+                        <label class="form-label" style="font-size: 12px; font-weight: 700;">Razón Social / Titular de Cuentas:</label>
+                        <input type="text" id="cfg-account-holder" class="form-control" value="${accountHolder}" required />
+                      </div>
+                      <div class="form-group" style="margin-bottom: 10px;">
+                        <label class="form-label" style="font-size: 12px; font-weight: 700;">Teléfono / WhatsApp de Tesorería:</label>
+                        <input type="text" id="cfg-treasury-phone" class="form-control" value="${treasuryPhone}" />
+                      </div>
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" style="font-size: 12px; font-weight: 700;">Horario de Atención Presencial:</label>
+                        <input type="text" id="cfg-office-hours" class="form-control" value="${officeHours}" />
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div style="display: flex; gap: 10px; justify-content: flex-end; align-items: center; flex-wrap: wrap; border-top: 1px solid #e2e8f0; padding-top: 14px;">
+                    <button type="button" class="btn btn-outline btn-sm" onclick="window.app.resetPaymentSettings()" style="font-weight: 700;">
+                      ↺ Restaurar Valores Predeterminados
+                    </button>
+                    <button type="submit" class="btn btn-navy" style="font-weight: 900; padding: 8px 20px; box-shadow: 0 4px 10px rgba(30,58,138,0.2);">
+                      💾 Guardar Configuración de Pagos & Sincronizar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Panel de Familias y Bloqueo de Acceso -->
             <div style="margin-bottom: var(--space-6);">
               <div class="card-header" style="margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
                 <h3 class="card-title" style="font-size: var(--font-size-base);">
@@ -6616,19 +6784,19 @@ const Components = {
                   </thead>
                   <tbody>
                     ${families.map(f => `
-                      <tr>
+                      <tr style="${f.isAccessLocked ? 'background: #fff5f5;' : ''}">
                         <td><code>${f.familyId}</code></td>
                         <td><strong>${f.guardian}</strong></td>
                         <td>${f.studentName}</td>
                         <td>${f.grade}</td>
                         <td>
                           <span class="status-badge ${f.isAccessLocked ? 'status-failed' : 'status-approved'}" style="font-weight: bold;">
-                            ${f.isAccessLocked ? '<span class="status-dot-red"></span> BLOQUEADO POR MORA' : '<span class="status-dot-green"></span> ACCESO HABILITADO'}
+                            ${f.isAccessLocked ? '<span class="status-dot-red"></span> BLOQUEADO POR MORA (SUSPENDIDO)' : '<span class="status-dot-green"></span> ACCESO HABILITADO'}
                           </span>
                         </td>
                         <td style="text-align:center; white-space: nowrap;">
-                          <button class="btn btn-sm ${f.isAccessLocked ? 'btn-gold' : 'btn-outline'}" onclick="window.app.toggleFamilyLock('${f.familyId}')">
-                            ${f.isAccessLocked ? '<span class="status-dot-green"></span> Desbloquear / Prórroga' : '<span class="status-dot-red"></span> Bloquear Acceso'}
+                          <button class="btn btn-sm ${f.isAccessLocked ? 'btn-gold' : 'btn-red'}" onclick="window.app.toggleFamilyLock('${f.familyId}')" style="font-weight: 800;">
+                            ${f.isAccessLocked ? '<span class="status-dot-green"></span> Desbloquear / Prórroga' : '⛔ Bloquear Acceso'}
                           </button>
                           <button class="btn btn-red btn-sm" onclick="window.app.confirmDeleteFamily('${f.familyId}')" title="Eliminar registro de familia y accesos vinculados" style="margin-left: 4px; padding: 4px 8px;">
                             🗑️
@@ -6641,6 +6809,33 @@ const Components = {
               </div>
             </div>
           ` : `
+            <!-- Información Institucional de Pago para Apoderados / Alumnos -->
+            <div class="card" style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+              <h3 style="font-size: 14.5px; font-weight: 800; color: var(--color-navy-900); margin: 0 0 10px; display: flex; align-items: center; gap: 8px;">
+                💳 Canales Institucionales de Recaudación (I.E.P. "El Educador")
+              </h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; font-size: 12.5px; line-height: 1.6;">
+                <div style="background: white; border: 1px solid #e2e8f0; padding: 10px 14px; border-radius: 6px;">
+                  <strong style="color: #6d28d9;">📱 Yape / Plin Móvil:</strong><br>
+                  <span style="font-size: 15px; font-weight: 900; color: #581c87;">${yapeNumber}</span><br>
+                  <span style="font-size: 11px; color: var(--text-muted);">${yapeHolder}</span>
+                </div>
+                <div style="background: white; border: 1px solid #e2e8f0; padding: 10px 14px; border-radius: 6px;">
+                  <strong style="color: #1e3a8a;">🏦 BCP Cuenta Corriente:</strong><br>
+                  <span style="font-family: monospace; font-weight: bold;">${bcpAccount}</span><br>
+                  <span style="font-size: 11px; color: var(--text-muted);">CCI: ${bcpCci}</span>
+                </div>
+                <div style="background: white; border: 1px solid #e2e8f0; padding: 10px 14px; border-radius: 6px;">
+                  <strong style="color: #047857;">🏛️ BBVA / Banco Nación:</strong><br>
+                  <span>BBVA: <code>${bbvaAccount}</code></span><br>
+                  <span>BN: <code>${bnAccount}</code></span>
+                </div>
+              </div>
+              <div style="margin-top: 10px; font-size: 11.5px; color: #475569;">
+                📌 <em>Nota:</em> ${paymentInstructions} • Consultas al <strong>${treasuryPhone}</strong>.
+              </div>
+            </div>
+
             <!-- Lista de Pagos del Apoderado / Estudiante -->
             <div class="card-header" style="margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
               <h3 class="card-title" style="font-size: var(--font-size-base);">
@@ -6671,7 +6866,6 @@ const Components = {
               </div>
             `).join('')}
           `}
-        </div>
         </div>
       </div>
     `;

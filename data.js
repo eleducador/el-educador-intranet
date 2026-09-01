@@ -1263,6 +1263,24 @@ const initialData = {
   // 7. Agenda Virtual Escolar & Anotaciones Docentes (Vinculada al QR de Asistencia)
   agendaNotes: [],
 
+  // 8. Configuración de Pensiones y Cuentas de Pago Institucionales
+  paymentSettings: {
+    monthlyPensionCost: 480.00,
+    pensionConcept: "Pensión Escolar - Agosto 2026",
+    dueDateDay: "05 de cada mes",
+    bcpAccount: "191-89347291-0-45",
+    bcpCci: "002-191-0089347291045",
+    bbvaAccount: "0011-0238-0100049281",
+    bnAccount: "04-018-492819",
+    accountHolder: "I.E.P. EL EDUCADOR S.A.C.",
+    yapeNumber: "987-654-321",
+    plinNumber: "987-654-321",
+    yapeHolder: "Prof. Alex Lino (Coordinación / Tesorería)",
+    paymentInstructions: "Indicar en el asunto o voucher el DNI/Código y Grado del estudiante.",
+    treasuryPhone: "(01) 387-4920 / 987-654-321",
+    officeHours: "Lunes a Viernes de 07:30 AM a 03:30 PM (Administración - Puerta 1)"
+  },
+
   payments: [],
 
   // =========================================================================

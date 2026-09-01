@@ -7182,7 +7182,85 @@ CREATE TABLE tb_cuadernos_qr (
   // =========================================================================
   // PASARELA DE PAGO ONLINE Y DESBLOQUEO AUTOMÁTICO DE INTRANET
   // =========================================================================
-  openPayModal(paymentId, amount = 480.00, concept = "Pensión Escolar - Agosto 2026") {
+  // =========================================================================
+  // PASARELA DE PAGO ONLINE, CONFIGURACIÓN DE PENSIONES Y CONTROL DE BLOQUEO
+  // =========================================================================
+  togglePaymentSettingsPanel() {
+    const el = document.getElementById("payment-settings-editor-card");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      const input = document.getElementById("cfg-pension-cost");
+      if (input) input.focus();
+    }
+  }
+
+  savePaymentSettings(e) {
+    if (e) e.preventDefault();
+    
+    const costInput = document.getElementById("cfg-pension-cost");
+    const conceptInput = document.getElementById("cfg-pension-concept");
+    const dueDateInput = document.getElementById("cfg-pension-duedate");
+    const yapeNumInput = document.getElementById("cfg-yape-number");
+    const yapeHolderInput = document.getElementById("cfg-yape-holder");
+    const plinNumInput = document.getElementById("cfg-plin-number");
+    const bcpAccInput = document.getElementById("cfg-bcp-account");
+    const bcpCciInput = document.getElementById("cfg-bcp-cci");
+    const bbvaAccInput = document.getElementById("cfg-bbva-account");
+    const bnAccInput = document.getElementById("cfg-bn-account");
+    const accHolderInput = document.getElementById("cfg-account-holder");
+    const phoneInput = document.getElementById("cfg-treasury-phone");
+    const hoursInput = document.getElementById("cfg-office-hours");
+
+    const newSettings = {
+      monthlyPensionCost: costInput ? (parseFloat(costInput.value) || 480.00) : 480.00,
+      pensionConcept: conceptInput ? conceptInput.value.trim() : "Pensión Escolar - Agosto 2026",
+      dueDateDay: dueDateInput ? dueDateInput.value.trim() : "05 de cada mes",
+      yapeNumber: yapeNumInput ? yapeNumInput.value.trim() : "987-654-321",
+      yapeHolder: yapeHolderInput ? yapeHolderInput.value.trim() : "Prof. Alex Lino (Coordinación / Tesorería)",
+      plinNumber: plinNumInput ? plinNumInput.value.trim() : "987-654-321",
+      bcpAccount: bcpAccInput ? bcpAccInput.value.trim() : "191-89347291-0-45",
+      bcpCci: bcpCciInput ? bcpCciInput.value.trim() : "002-191-0089347291045",
+      bbvaAccount: bbvaAccInput ? bbvaAccInput.value.trim() : "0011-0238-0100049281",
+      bnAccount: bnAccInput ? bnAccInput.value.trim() : "04-018-492819",
+      accountHolder: accHolderInput ? accHolderInput.value.trim() : "I.E.P. EL EDUCADOR S.A.C.",
+      treasuryPhone: phoneInput ? phoneInput.value.trim() : "(01) 387-4920 / 987-654-321",
+      officeHours: hoursInput ? hoursInput.value.trim() : "Lunes a Viernes de 07:30 AM a 03:30 PM (Administración - Puerta 1)"
+    };
+
+    this.store.updatePaymentSettings(newSettings);
+    this.showToast("✓ Configuración de costo de pensión y canales de pago actualizada exitosamente.", "success");
+    this.render();
+  }
+
+  resetPaymentSettings() {
+    if (confirm("¿Está seguro de restaurar los valores de pago predeterminados de la institución?")) {
+      const defaults = initialData.paymentSettings || {
+        monthlyPensionCost: 480.00,
+        pensionConcept: "Pensión Escolar - Agosto 2026",
+        dueDateDay: "05 de cada mes",
+        bcpAccount: "191-89347291-0-45",
+        bcpCci: "002-191-0089347291045",
+        bbvaAccount: "0011-0238-0100049281",
+        bnAccount: "04-018-492819",
+        accountHolder: "I.E.P. EL EDUCADOR S.A.C.",
+        yapeNumber: "987-654-321",
+        plinNumber: "987-654-321",
+        yapeHolder: "Prof. Alex Lino (Coordinación / Tesorería)",
+        paymentInstructions: "Indicar en el asunto o voucher el DNI/Código y Grado del estudiante.",
+        treasuryPhone: "(01) 387-4920 / 987-654-321",
+        officeHours: "Lunes a Viernes de 07:30 AM a 03:30 PM (Administración - Puerta 1)"
+      };
+      this.store.updatePaymentSettings(defaults);
+      this.showToast("✓ Valores predeterminados de pensión y cuentas restaurados.", "info");
+      this.render();
+    }
+  }
+
+  openPayModal(paymentId, amount = null, concept = null) {
+    const settings = (this.store && typeof this.store.getPaymentSettings === "function") ? this.store.getPaymentSettings() : {};
+    const finalAmount = (typeof amount === 'number') ? amount : (settings.monthlyPensionCost || 480.00);
+    const finalConcept = concept || settings.pensionConcept || "Pensión Escolar - Agosto 2026";
+
     this.showModal(`
       <div class="modal-header">
         <h3>Pagar con Tarjeta & Desbloquear Intranet</h3>
@@ -7190,13 +7268,13 @@ CREATE TABLE tb_cuadernos_qr (
       </div>
       <div class="modal-body">
         <div style="background: var(--color-navy-50); padding: 12px; border-radius: 8px; margin-bottom: 16px;">
-          <div style="font-size: 13px; font-weight: 800; color: var(--color-navy-900);">${concept}</div>
+          <div style="font-size: 13px; font-weight: 800; color: var(--color-navy-900);">${finalConcept}</div>
           <div style="font-size: 20px; font-weight: 900; color: var(--color-red-600); margin-top: 2px;">
-            Total: S/ ${amount.toFixed(2)}
+            Total: S/ ${finalAmount.toFixed(2)}
           </div>
         </div>
 
-        <form id="card-payment-form" onsubmit="window.app.processCardPayment(event, '${paymentId}', ${amount})">
+        <form id="card-payment-form" onsubmit="window.app.processCardPayment(event, '${paymentId}', ${finalAmount})">
           <div class="form-group">
             <label class="form-label">Número de Tarjeta (Crédito / Débito):</label>
             <input type="text" id="pay-card-number" class="form-control" placeholder="4557 •••• •••• 1234" required value="4557 8921 3456 1234" />
@@ -7219,7 +7297,7 @@ CREATE TABLE tb_cuadernos_qr (
           </div>
 
           <button type="submit" class="btn btn-red" style="width: 100%; padding: 12px; font-weight: 900; font-size: 14px; margin-top: 8px;">
-            Pagar S/ ${amount.toFixed(2)} y Validar Acceso
+            Pagar S/ ${finalAmount.toFixed(2)} y Validar Acceso
           </button>
         </form>
       </div>
@@ -7240,7 +7318,12 @@ CREATE TABLE tb_cuadernos_qr (
     }, 450);
   }
 
-  openYapePayModal(paymentId, amount = 480.00) {
+  openYapePayModal(paymentId, amount = null) {
+    const settings = (this.store && typeof this.store.getPaymentSettings === "function") ? this.store.getPaymentSettings() : {};
+    const finalAmount = (typeof amount === 'number') ? amount : (settings.monthlyPensionCost || 480.00);
+    const yapeNum = settings.yapeNumber || "987-654-321";
+    const yapeHolder = settings.yapeHolder || "Prof. Alex Lino (Coordinación / Tesorería)";
+
     this.showModal(`
       <div class="modal-header">
         <h3>Pagar con Yape / Plin Institucional</h3>
@@ -7249,18 +7332,18 @@ CREATE TABLE tb_cuadernos_qr (
       <div class="modal-body" style="text-align: center;">
         <div style="background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%); color: white; padding: 14px; border-radius: 8px; margin-bottom: 14px;">
           <div style="font-size: 12px; font-weight: bold; opacity: 0.9;">I.E.P. "EL EDUCADOR" - TESORERÍA</div>
-          <div style="font-size: 20px; font-weight: 900; margin: 4px 0;">987-654-321</div>
-          <div style="font-size: 11px;">Titular: Prof. Alex Lino (Coordinación)</div>
+          <div style="font-size: 22px; font-weight: 900; margin: 4px 0;">${yapeNum}</div>
+          <div style="font-size: 11.5px;">Titular: ${yapeHolder}</div>
         </div>
 
         <div style="display: flex; justify-content: center; margin-bottom: 12px;">
           <div style="width: 120px; height: 120px; border: 2px dashed #6d28d9; padding: 4px; border-radius: 8px;">
-            ${Components.generateQRSVG("YAPE-EL-EDUCADOR-987654321-480")}
+            ${Components.generateQRSVG("YAPE-EL-EDUCADOR-" + yapeNum.replace(/\D/g,'') + "-" + Math.round(finalAmount))}
           </div>
         </div>
 
         <div style="background: var(--bg-surface-subtle); padding: 10px; border-radius: 6px; font-size: 12px; margin-bottom: 12px;">
-          Monto a transferir: <strong style="font-size: 15px; color: var(--color-navy-900);">S/ ${amount.toFixed(2)}</strong>
+          Monto a transferir: <strong style="font-size: 15px; color: var(--color-navy-900);">S/ ${finalAmount.toFixed(2)}</strong>
         </div>
 
         <div class="form-group" style="text-align: left;">
@@ -7268,7 +7351,7 @@ CREATE TABLE tb_cuadernos_qr (
           <input type="text" id="yape-code-input" class="form-control" placeholder="Ej: 849201" value="849201" />
         </div>
 
-        <button class="btn btn-red" onclick="window.app.processYapePayment('${paymentId}', ${amount})" style="width: 100%; font-weight: 800;">
+        <button class="btn btn-red" onclick="window.app.processYapePayment('${paymentId}', ${finalAmount})" style="width: 100%; font-weight: 800;">
           ✓ Validar Yape y Desbloquear Intranet
         </button>
       </div>
@@ -7292,7 +7375,15 @@ CREATE TABLE tb_cuadernos_qr (
     }, 450);
   }
 
-  openBankTransferModal(paymentId, amount = 480.00) {
+  openBankTransferModal(paymentId, amount = null) {
+    const settings = (this.store && typeof this.store.getPaymentSettings === "function") ? this.store.getPaymentSettings() : {};
+    const finalAmount = (typeof amount === 'number') ? amount : (settings.monthlyPensionCost || 480.00);
+    const bcpAcc = settings.bcpAccount || "191-89347291-0-45";
+    const bcpCci = settings.bcpCci || "002-191-0089347291045";
+    const bbvaAcc = settings.bbvaAccount || "0011-0238-0100049281";
+    const bnAcc = settings.bnAccount || "04-018-492819";
+    const holder = settings.accountHolder || "I.E.P. EL EDUCADOR S.A.C.";
+
     this.showModal(`
       <div class="modal-header">
         <h3>🏦 Depósito Bancario / Agente BCP</h3>
@@ -7301,9 +7392,14 @@ CREATE TABLE tb_cuadernos_qr (
       <div class="modal-body">
         <div style="background: var(--bg-surface-subtle); padding: 12px; border-radius: 6px; font-size: 12px; line-height: 1.6; margin-bottom: 12px;">
           <strong>Cuentas Recaudadoras I.E.P. "El Educador":</strong><br>
-          • <strong>BCP Cta Cte:</strong> 191-89347291-0-45 (CCI: 002-191-0089347291045)<br>
-          • <strong>BBVA Continental:</strong> 0011-0238-0100049281<br>
-          • <strong>Banco de la Nación:</strong> 04-018-492819
+          • <strong>Titular:</strong> ${holder}<br>
+          • <strong>BCP Cta Cte:</strong> ${bcpAcc} (CCI: ${bcpCci})<br>
+          • <strong>BBVA Continental:</strong> ${bbvaAcc}<br>
+          • <strong>Banco de la Nación:</strong> ${bnAcc}
+        </div>
+
+        <div style="background: #eff6ff; padding: 10px; border-radius: 6px; font-size: 12.5px; margin-bottom: 12px; color: #1e40af;">
+          Monto oficial de cuota: <strong>S/ ${finalAmount.toFixed(2)}</strong>
         </div>
 
         <div class="form-group">
@@ -7311,7 +7407,7 @@ CREATE TABLE tb_cuadernos_qr (
           <input type="text" id="bank-op-input" class="form-control" placeholder="Ej: OP-9482104" value="OP-9482104" />
         </div>
 
-        <button class="btn btn-red" onclick="window.app.processBankPayment('${paymentId}', ${amount})" style="width: 100%; font-weight: 800;">
+        <button class="btn btn-red" onclick="window.app.processBankPayment('${paymentId}', ${finalAmount})" style="width: 100%; font-weight: 800;">
           ✓ Validar Depósito y Desbloquear Intranet
         </button>
       </div>
@@ -7370,7 +7466,13 @@ CREATE TABLE tb_cuadernos_qr (
   toggleFamilyLock(familyId) {
     const isLocked = this.store.toggleFamilyAccessLock(familyId);
     if (isLocked !== null) {
-      this.showToast(isLocked ? "<span class='status-dot-red'></span> Acceso a Intranet BLOQUEADO por mora" : "<span class='status-dot-green'></span> Acceso a Intranet DESBLOQUEADO / Prórroga concedida", isLocked ? "danger" : "success");
+      this.showToast(
+        isLocked
+          ? "⛔ Acceso a Intranet BLOQUEADO por mora. El apoderado no podrá ingresar al sistema."
+          : "✓ Acceso a Intranet HABILITADO / Prórroga concedida.",
+        isLocked ? "danger" : "success"
+      );
+      this.render();
     }
   }
 
@@ -7378,6 +7480,9 @@ CREATE TABLE tb_cuadernos_qr (
     const families = (this.store && typeof this.store.getFamiliesFinancial === "function") 
       ? this.store.getFamiliesFinancial() 
       : (this.store.state.familiesFinancial || []);
+    const settings = (this.store && typeof this.store.getPaymentSettings === "function") ? this.store.getPaymentSettings() : {};
+    const defaultCost = settings.monthlyPensionCost || 480.00;
+    const defaultConcept = settings.pensionConcept || "Pensión Escolar - Agosto 2026";
 
     this.showModal(`
       <div class="modal-header">
@@ -7389,7 +7494,7 @@ CREATE TABLE tb_cuadernos_qr (
           <label class="form-label">Seleccionar Familia / Estudiante:</label>
           <select id="man-family-select" class="form-control">
             ${families.map(f => `
-              <option value="${f.familyId}">${f.guardian} (${f.studentName} - ${f.grade}) - ${f.pendingAmount > 0 ? `Deuda: S/ ${f.pendingAmount.toFixed(2)}` : 'S/ 0.00 (Al Día)'}</option>
+              <option value="${f.familyId}">${f.guardian} (${f.studentName} - ${f.grade}) - ${f.isAccessLocked ? '⛔ Bloqueado por Mora' : 'Al Día'}</option>
             `).join('')}
           </select>
         </div>
@@ -7397,13 +7502,14 @@ CREATE TABLE tb_cuadernos_qr (
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
           <div class="form-group">
             <label class="form-label">Monto Recibido (S/):</label>
-            <input type="number" id="man-amount" class="form-control" value="480.00" />
+            <input type="number" id="man-amount" class="form-control" value="${defaultCost.toFixed(2)}" />
           </div>
           <div class="form-group">
             <label class="form-label">Medio de Pago:</label>
             <select id="man-method" class="form-control">
               <option value="Efectivo (Caja Colegio)">Efectivo (Caja Colegio)</option>
               <option value="Depósito Agente BCP">Depósito Agente BCP</option>
+              <option value="Yape / Plin Móvil">Yape / Plin Móvil</option>
               <option value="POS Tarjeta">POS Tarjeta</option>
             </select>
           </div>
@@ -7411,7 +7517,7 @@ CREATE TABLE tb_cuadernos_qr (
 
         <div class="form-group">
           <label class="form-label">Concepto:</label>
-          <input type="text" id="man-concept" class="form-control" value="Pensión Escolar - Agosto 2026" />
+          <input type="text" id="man-concept" class="form-control" value="${defaultConcept}" />
         </div>
       </div>
       <div class="modal-footer">
@@ -7429,8 +7535,16 @@ CREATE TABLE tb_cuadernos_qr (
     const method = document.getElementById("man-method").value;
 
     const res = this.store.payAndUnlockIntranet("PEN-08", method);
+    
+    // Si la familia estaba bloqueada, desbloquearla
+    const fam = (this.store.state.familiesFinancial || []).find(f => f.familyId === familyId);
+    if (fam && fam.isAccessLocked) {
+      this.store.toggleFamilyAccessLock(familyId);
+    }
+
     this.closeModal();
-    this.showToast(`✓ Pago de S/ ${amount.toFixed(2)} registrado en caja. Familia desbloqueada en tiempo real.`, "success");
+    this.showToast(`✓ Pago de S/ ${amount.toFixed(2)} registrado en caja. Familia regularizada y habilitada.`, "success");
+    this.render();
     setTimeout(() => this.showPaymentSuccessReceiptModal(res), 350);
   }
 

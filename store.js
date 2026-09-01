@@ -620,6 +620,7 @@ class IntranetStore {
         familiesFinancial: Array.isArray(parsed.familiesFinancial) ? parsed.familiesFinancial : (initialData.familiesFinancial || []),
         courses: Array.isArray(parsed.courses) ? parsed.courses : (initialData.courses || []),
         tasks: Array.isArray(parsed.tasks) ? parsed.tasks : (initialData.tasks || []),
+        paymentSettings: parsed.paymentSettings ? { ...initialData.paymentSettings, ...parsed.paymentSettings } : (initialData.paymentSettings || {}),
         payments: Array.isArray(parsed.payments) ? parsed.payments : (initialData.payments || []),
         announcements: Array.isArray(parsed.announcements) ? parsed.announcements : (initialData.announcements || []),
         syllabi: Array.isArray(parsed.syllabi) ? parsed.syllabi : (initialData.syllabi || []),
@@ -699,6 +700,7 @@ class IntranetStore {
       familiesFinancial: initialData.familiesFinancial || [],
       courses: initialData.courses || [],
       tasks: initialData.tasks || [],
+      paymentSettings: { ...initialData.paymentSettings },
       payments: initialData.payments || [],
       announcements: initialData.announcements || [],
       syllabi: initialData.syllabi || [],
@@ -783,6 +785,7 @@ class IntranetStore {
     if (serverData.schedules) this.state.schedules = serverData.schedules;
     if (serverData.boletaData) this.state.boletaData = serverData.boletaData;
     if (serverData.academicConfig) this.state.academicConfig = serverData.academicConfig;
+    if (serverData.paymentSettings) this.state.paymentSettings = serverData.paymentSettings;
     if (serverTeachers.length > 0) {
       this.state.teachersList = serverTeachers;
     } else {
@@ -949,6 +952,17 @@ class IntranetStore {
         else if (systemUser.role === "Auxiliar" || systemUser.role === "auxiliar") assignedRole = "auxiliar";
         else if (systemUser.role === "Docente" || systemUser.role === "Profesor") assignedRole = "docente";
 
+        // Verificar si el usuario o familia está bloqueado por falta de pago
+        if (assignedRole === "padre" || assignedRole === "estudiante") {
+          if (this.checkIfUserIsBlocked({ ...systemUser, role: assignedRole })) {
+            return {
+              success: false,
+              error: "⛔ Cuenta suspendida por falta de pago. Favor de regularizar su situación en la administración del colegio.",
+              isSuspended: true
+            };
+          }
+        }
+
         const activeUser = {
           id: systemUser.id || systemUser.code,
           code: systemUser.code || systemUser.id,
@@ -1008,14 +1022,16 @@ class IntranetStore {
 
     // 2. Fallback secundario para cuentas demo estándar
     const predefinedUsers = {
-      ...initialData.users
+      ...initialData.users,
+      ...(this.state.users || {})
     };
 
-    for (const [roleKey, user] of Object.entries(predefinedUsers)) {
-      const uName = (user.username || "").toLowerCase();
+    for (const [roleKey, userObj] of Object.entries(predefinedUsers)) {
+      const liveUser = (this.state.users && this.state.users[roleKey]) ? { ...userObj, ...this.state.users[roleKey] } : userObj;
+      const uName = (liveUser.username || "").toLowerCase();
       const uCleanName = uName.replace(/[\s\.\-_]+/g, '');
-      const uEmail = (user.email || "").toLowerCase();
-      const uAliases = Array.isArray(user.aliases) ? user.aliases.map(a => (a || "").toLowerCase().replace(/[\s\.\-_]+/g, '')) : [];
+      const uEmail = (liveUser.email || "").toLowerCase();
+      const uAliases = Array.isArray(liveUser.aliases) ? liveUser.aliases.map(a => (a || "").toLowerCase().replace(/[\s\.\-_]+/g, '')) : [];
 
       const matches = 
         uName === term ||
@@ -1024,12 +1040,23 @@ class IntranetStore {
         uAliases.includes(cleanTerm);
 
       if (matches) {
-        const validPassword = user.password || (roleKey === "auxiliar" ? "auxiliar2026" : roleKey === "admin" ? "admin2026" : "docente2026");
-        if (password === validPassword || password === "auxiliar2026" || password === "docente2026" || password === "educador2026" || password === "admin2026") {
+        const validPassword = liveUser.password || (roleKey === "auxiliar" ? "auxiliar2026" : roleKey === "admin" ? "admin2026" : "docente2026");
+        if (password === validPassword || password === "auxiliar2026" || password === "docente2026" || password === "educador2026" || password === "admin2026" || password === "estudiante2026" || password === "padre2026" || password === "director2026") {
+          // Verificar si el usuario demo o familia está bloqueado
+          if (roleKey === "padre" || roleKey === "estudiante") {
+            if (this.checkIfUserIsBlocked({ ...liveUser, role: roleKey })) {
+              return {
+                success: false,
+                error: "⛔ Cuenta suspendida por falta de pago. Favor de regularizar su situación en la administración del colegio.",
+                isSuspended: true
+              };
+            }
+          }
+
           const activeUser = {
-            ...user,
+            ...liveUser,
             role: roleKey,
-            roleLabel: user.roleLabel || user.detail || roleKey
+            roleLabel: liveUser.roleLabel || liveUser.detail || roleKey
           };
           this.state.currentUser = activeUser;
           this.state.isAuthenticated = true;
@@ -3043,13 +3070,103 @@ class IntranetStore {
     return newReview;
   }
 
-  isAccessLockedForCurrentUser() {
+  checkIfUserIsBlocked(user) {
+    if (!user) return false;
+    const role = (user.role || "").toLowerCase();
+    // Administrativos, directores, docentes y auxiliares nunca se bloquean
+    if (role === "admin" || role === "director" || role === "docente" || role === "auxiliar" || user.hasAdminPrivilege || user.hasAdminPrivileges) {
+      return false;
+    }
+
+    // 1. Verificación directa de propiedad isAccessLocked o pensionStatus
+    if (user.isAccessLocked === true || user.pensionStatus === "bloqueado_deuda" || user.pensionStatus === "Bloqueado por Mora") {
+      return true;
+    }
+
+    const username = (user.username || "").toLowerCase().trim();
+    const code = (user.code || user.id || "").toLowerCase().trim();
+    const name = (user.name || "").toLowerCase().trim();
+    const studentName = (user.studentName || "").toLowerCase().trim();
+    const studentCode = (user.studentCode || "").toLowerCase().trim();
+    const guardian = (user.guardian || "").toLowerCase().trim();
+
+    // 2. Verificar contra familiesFinancial
+    const families = this.state.familiesFinancial || [];
+    for (const fam of families) {
+      if (fam && fam.isAccessLocked === true) {
+        const famId = (fam.familyId || "").toLowerCase().trim();
+        const famGuardian = (fam.guardian || "").toLowerCase().trim();
+        const famStudent = (fam.studentName || "").toLowerCase().trim();
+        const famCode = (fam.studentCode || "").toLowerCase().trim();
+
+        if (famId && (famId === code || famId === username)) return true;
+        if (famGuardian && (famGuardian === name || (name && famGuardian.includes(name)) || (name && name.includes(famGuardian)))) return true;
+        if (famStudent && (famStudent === name || famStudent === studentName || (studentName && famStudent.includes(studentName)))) return true;
+        if (famCode && (famCode === code || famCode === studentCode)) return true;
+        if ((username === "padre" || username === "carmen.mendez") && (famId === "fam-2026-108" || famGuardian.includes("carmen"))) return true;
+        if ((username === "estudiante" || username === "sofia.mendez") && (famId === "fam-2026-108" || famStudent.includes("sofia") || famStudent.includes("sofía"))) return true;
+      }
+    }
+
+    // 3. Verificar contra systemUsers
+    const systemUsers = this.state.systemUsers || [];
+    const matchedSysUser = systemUsers.find(u => {
+      const uCode = (u.code || u.id || "").toLowerCase().trim();
+      const uName = (u.name || "").toLowerCase().trim();
+      const uUname = (u.username || "").toLowerCase().trim();
+      return (uCode && (uCode === code || uCode === username)) || (uUname && uUname === username) || (uName && uName === name);
+    });
+    if (matchedSysUser && matchedSysUser.isAccessLocked === true) {
+      return true;
+    }
+
+    // 4. Verificar usuario demo en state.users
+    if (role === "padre" && this.state.users && this.state.users.padre && this.state.users.padre.isAccessLocked === true) {
+      return true;
+    }
+    if (role === "estudiante" && this.state.users && this.state.users.estudiante && this.state.users.estudiante.isAccessLocked === true) {
+      return true;
+    }
+
     return false;
+  }
+
+  isAccessLockedForCurrentUser() {
+    const role = this.state.currentRole;
+    if (role === "admin" || role === "director" || role === "docente" || role === "auxiliar") {
+      return false;
+    }
+    const user = this.getCurrentUser();
+    if (!user) return false;
+    return this.checkIfUserIsBlocked(user);
+  }
+
+  getPaymentSettings() {
+    if (!this.state.paymentSettings) {
+      this.state.paymentSettings = JSON.parse(JSON.stringify(initialData.paymentSettings || {}));
+    }
+    return this.state.paymentSettings;
+  }
+
+  updatePaymentSettings(newSettings) {
+    if (!this.state.paymentSettings) {
+      this.state.paymentSettings = JSON.parse(JSON.stringify(initialData.paymentSettings || {}));
+    }
+    this.state.paymentSettings = {
+      ...this.state.paymentSettings,
+      ...newSettings
+    };
+    this.saveState();
+    this.notify();
+    this.syncToServer();
+    return this.state.paymentSettings;
   }
 
   payAndUnlockIntranet(paymentId, method = "Tarjeta", details = {}) {
     const payment = this.state.payments.find(p => p.id === paymentId) || this.state.payments[0];
-    const amountPaid = payment ? payment.amount : 480.00;
+    const settings = this.getPaymentSettings();
+    const defaultAmount = settings.monthlyPensionCost || 480.00;
+    const amountPaid = payment ? payment.amount : defaultAmount;
     const receiptCode = `REC-2026-AUG-${Math.floor(1000 + Math.random() * 9000)}`;
 
     if (payment) {
@@ -3191,15 +3308,18 @@ class IntranetStore {
   }
 
   toggleFamilyAccessLock(familyId) {
-    if (!this.state.familiesFinancial) {
-      this.state.familiesFinancial = JSON.parse(JSON.stringify(initialData.familiesFinancial || []));
+    if (!this.state.familiesFinancial || this.state.familiesFinancial.length === 0) {
+      this.state.familiesFinancial = this.getFamiliesFinancial();
     }
     
     // Buscar en familiesFinancial
-    let fam = this.state.familiesFinancial.find(f => f.familyId === familyId);
+    let fam = this.state.familiesFinancial.find(f => f.familyId === familyId || f.studentCode === familyId || f.id === familyId);
     if (!fam) {
       const allFamilies = this.getFamiliesFinancial();
-      fam = allFamilies.find(f => f.familyId === familyId);
+      fam = allFamilies.find(f => f.familyId === familyId || f.studentCode === familyId || f.id === familyId);
+    }
+    if (!fam && (familyId === "padre" || familyId === "PADRE-DEMO" || familyId === "FAM-2026-108")) {
+      fam = this.state.familiesFinancial[0];
     }
 
     if (fam) {
@@ -3210,29 +3330,34 @@ class IntranetStore {
       if (this.state.systemUsers) {
         this.state.systemUsers.forEach(u => {
           if (
-            (u.code === familyId || u.id === familyId) ||
+            (u.code === familyId || u.id === familyId || u.code === fam.familyId) ||
+            (u.familyId === familyId || u.familyId === fam.familyId) ||
             (u.name && fam.guardian && u.name.trim().toLowerCase() === fam.guardian.trim().toLowerCase()) ||
-            (u.studentName && fam.studentName && u.studentName.trim().toLowerCase() === fam.studentName.trim().toLowerCase())
+            (u.guardian && fam.guardian && u.guardian.trim().toLowerCase() === fam.guardian.trim().toLowerCase()) ||
+            (u.studentName && fam.studentName && u.studentName.trim().toLowerCase() === fam.studentName.trim().toLowerCase()) ||
+            (u.studentCode && fam.studentCode && u.studentCode === fam.studentCode) ||
+            (u.code && fam.studentCode && u.code === fam.studentCode)
           ) {
             u.isAccessLocked = fam.isAccessLocked;
+            u.pensionStatus = fam.isAccessLocked ? "Bloqueado por Mora" : "Al Día";
           }
         });
       }
 
-      if (familyId === "FAM-2026-108" || (fam.guardian && fam.guardian.includes("Carmen Méndez"))) {
-        if (this.state.users.padre) {
-          this.state.users.padre.isAccessLocked = fam.isAccessLocked;
-          this.state.users.padre.pensionStatus = fam.isAccessLocked ? "Bloqueado por Mora" : "Al Día";
-        }
-        if (this.state.users.estudiante) {
-          this.state.users.estudiante.isAccessLocked = fam.isAccessLocked;
-          this.state.users.estudiante.paymentsUpToDate = !fam.isAccessLocked;
-          this.state.users.estudiante.pensionStatus = fam.isAccessLocked ? "Bloqueado por Mora" : "Al Día";
-        }
+      // Sincronizar usuarios demo de padre y estudiante
+      if (this.state.users && this.state.users.padre) {
+        this.state.users.padre.isAccessLocked = fam.isAccessLocked;
+        this.state.users.padre.pensionStatus = fam.isAccessLocked ? "Bloqueado por Mora" : "Al Día";
+      }
+      if (this.state.users && this.state.users.estudiante) {
+        this.state.users.estudiante.isAccessLocked = fam.isAccessLocked;
+        this.state.users.estudiante.paymentsUpToDate = !fam.isAccessLocked;
+        this.state.users.estudiante.pensionStatus = fam.isAccessLocked ? "Bloqueado por Mora" : "Al Día";
       }
 
       this.saveState();
       this.notify();
+      this.syncToServer();
       return fam.isAccessLocked;
     }
     return null;
