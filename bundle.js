@@ -1,4 +1,3 @@
-/* === jsqr.min.js === */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -10101,8 +10100,6 @@ function findAlignmentPattern(matrix, alignmentPatternQuads, topRight, topLeft, 
 /***/ })
 /******/ ])["default"];
 });
-;
-/* === data.js === */
 /**
 
  * Díatos Iniciales del Sistema - Institución Educativa Privadía "EL EDUCADOR" (S.J.L.)
@@ -13682,8 +13679,6 @@ if (typeof window !== "undefined" && window.initialDíata && window.initialDíat
 }
 
 
-;
-/* === store.js === */
 /**
 
  * Gestor de Estado y Base de Díatos Central Sincronizadía (v9.0 - Firebase Realtime Díatabase Exclusivo)
@@ -21893,8 +21888,6 @@ class IntranetStore {
 window.appStore = new IntranetStore();
 
 
-;
-/* === components.js === */
 /**
 
  * Renderizador de Vistas y Componentes Dinmicos (v5.4 - ConLector de Cámara QR Real para Celulares)
@@ -22513,6 +22506,7 @@ const Components = {
 
         <div class="welcome-banner" style="background: linear-gradient(135deg, var(--color-navy-950) 0%, var(--color-navy-900) 100%); border-left: 6px solid var(--color-yellow-500);">
 
+          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; flex-wrap: wrap; gap: 12px;">
           <div class="welcome-content">
 
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
@@ -35371,8 +35365,6 @@ Components.renderGrading = Components.renderGrades;
 Components.renderAttendance = Components.renderttendance;
 Components.renderAgendía = Components.renderVirtualgenda;
 
-;
-/* === app.js === */
 /**
  * Controlador Principal y Aplicación - I.E.P. "EL EDUCADOR" S.J.L. (v5.4)
  * "21 años dejando huellas" • UGEL 05
@@ -37155,30 +37147,140 @@ class IntranetApp {
   }
 
   
+  
   // =========================================================================
-  // EXPORTACIÓN AVANZADA DE ASISTENCIAS, TARDANZAS Y FLUJO A EXCEL CONDICIONADO
+  // MODAL Y EXPORTADOR AVANZADO DE ASISTENCIA A EXCEL CON FILTRO Y GRÁFICO DE PASTEL
   // =========================================================================
 
-  exportAttendanceExcelReport(dateStr) {
+  openAttendanceExportExcelModal() {
+    let overlay = document.getElementById("app-modal-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "app-modal-overlay";
+      overlay.className = "modal-overlay";
+      document.body.appendChild(overlay);
+    }
+
+    const state = this.store.state;
+    const today = new Date().toISOString().split('T')[0];
+    const catalog = state.gradesCatalog || (typeof initialData !== 'undefined' ? initialData.gradesCatalog : []) || [];
+
+    overlay.innerHTML = `
+      <div class="modal-card" style="max-width: 580px; width: 95%; background: #ffffff; border-radius: 16px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); overflow: hidden; z-index: 99999;">
+        <!-- Cabecera del Modal -->
+        <div class="modal-header" style="background: linear-gradient(135deg, #15803d, #0b132b); color: white; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 26px;">📊</span>
+            <div>
+              <div style="font-size: 11px; color: #86efac; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                I.E.P. "EL EDUCADOR" • UGEL 05
+              </div>
+              <h3 style="font-size: 17px; font-weight: 900; margin: 2px 0 0; color: white;">
+                Exportar Asistencia a Excel (.XLSX)
+              </h3>
+            </div>
+          </div>
+          <button class="modal-close-btn" onclick="window.app.closeModal()" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;">&times;</button>
+        </div>
+
+        <div style="padding: 24px;">
+          <p style="font-size: 12.5px; color: #475569; margin: 0 0 18px; line-height: 1.5;">
+            Genera una hoja de cálculo profesional con <strong>formato condicional por colores</strong>, desglose por grados y <strong>gráficos estadísticos de pastel</strong> del flujo de puntualidad.
+          </p>
+
+          <!-- Filtro por Fecha -->
+          <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 14px; margin-bottom: 14px;">
+            <label style="font-size: 12px; font-weight: 800; color: #1e293b; display: block; margin-bottom: 6px;">
+              📅 1. Seleccione la Fecha de Asistencia:
+            </label>
+            <input type="date" id="excel-export-date-input" value="${today}" class="input-field" style="width: 100%; font-size: 13px; font-weight: 700; padding: 8px 12px; border-radius: 6px;" />
+          </div>
+
+          <!-- Filtro por Grado / Nivel -->
+          <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 14px; margin-bottom: 18px;">
+            <label style="font-size: 12px; font-weight: 800; color: #1e293b; display: block; margin-bottom: 6px;">
+              🏫 2. Filtrar por Grado o Nivel:
+            </label>
+            <select id="excel-export-grade-select" class="input-field" style="width: 100%; font-size: 13px; font-weight: 700; padding: 8px 12px; border-radius: 6px;">
+              <option value="TODOS">🌐 Todos los Grados (Reporte General del Colegio)</option>
+              <optgroup label="Nivel Secundaria">
+                <option value="1° de Secundaria">1° de Secundaria</option>
+                <option value="2° de Secundaria">2° de Secundaria</option>
+                <option value="3° de Secundaria">3° de Secundaria</option>
+                <option value="4° de Secundaria">4° de Secundaria</option>
+                <option value="5° de Secundaria">5° de Secundaria</option>
+              </optgroup>
+              <optgroup label="Nivel Primaria">
+                <option value="1° de Primaria">1° de Primaria</option>
+                <option value="2° de Primaria">2° de Primaria</option>
+                <option value="3° de Primaria">3° de Primaria</option>
+                <option value="4° de Primaria">4° de Primaria</option>
+                <option value="5° de Primaria">5° de Primaria</option>
+                <option value="6° de Primaria">6° de Primaria</option>
+              </optgroup>
+              <optgroup label="Nivel Inicial">
+                <option value="Inicial 3 Años">Inicial 3 Años</option>
+                <option value="Inicial 4 Años">Inicial 4 Años</option>
+                <option value="Inicial 5 Años">Inicial 5 Años</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <!-- Opciones Incluidas -->
+          <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 10px; padding: 12px; margin-bottom: 20px; font-size: 12px; color: #065f46;">
+            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-weight: 800;">
+              ✓ Celdas con formato condicional automático (Verde, Amarillo, Rojo, Morado).
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-weight: 800;">
+              ✓ Gráfico de pastel general y estadísticas de flujo por cada grado.
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px; font-weight: 800;">
+              ✓ Horarios de ingreso en portería y minutos de tardanza calculados.
+            </div>
+          </div>
+
+          <!-- Botones de Acción -->
+          <div style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button type="button" class="btn btn-outline" onclick="window.app.closeModal()" style="font-weight: 700; padding: 10px 18px; border-radius: 8px;">
+              Cancelar
+            </button>
+            <button type="button" class="btn" onclick="window.app.generateAndDownloadAttendanceExcel()" style="background: #16a34a; color: white; font-weight: 900; font-size: 13px; padding: 10px 22px; border-radius: 8px; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(22,163,74,0.4);">
+              📥 Descargar Reporte Excel
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    overlay.classList.add("active", "open");
+    overlay.style.display = "flex";
+  }
+
+  generateAndDownloadAttendanceExcel() {
+    const dateInput = document.getElementById("excel-export-date-input");
+    const gradeSelect = document.getElementById("excel-export-grade-select");
+
+    const rawDate = (dateInput && dateInput.value) || new Date().toISOString().split('T')[0];
+    const selectedGrade = (gradeSelect && gradeSelect.value) || "TODOS";
+
+    // Formatear fecha a DD/MM/YYYY
+    const [year, month, day] = rawDate.split('-');
+    const formattedDate = `${day}/${month}/${year}`;
+
+    this.closeModal();
+    this.exportAttendanceExcelReport(formattedDate, selectedGrade);
+  }
+
+  exportAttendanceExcelReport(dateStr, filterGrade) {
     const reportDate = dateStr || new Date().toLocaleDateString('es-PE');
-    this.showToast("📊 Generando Reporte Excel con celdas condicionadas y estadísticas...", "info");
+    const targetGrade = filterGrade || "TODOS";
+
+    this.showToast(`📊 Generando Excel del ${reportDate} con gráficos de pastel...`, "info");
 
     const state = this.store.state;
     const enrollments = state.enrollments || (typeof initialData !== 'undefined' ? initialData.enrollments : []) || [];
     const dailyAttendance = state.dailyAttendance || {};
     const doorLogs = state.doorLogs || [];
-
-    // Lista consolidada de estudiantes y su estado
-    let totalPresentes = 0;
-    let totalTardanzas = 0;
-    let totalFaltas = 0;
-    let totalJustificadas = 0;
-
-    // Conteo por flujo de horarios
-    let flujoMadrugador = 0; // 06:45 - 07:30
-    let flujoRegular = 0;    // 07:31 - 07:45
-    let flujoTardeLeve = 0;  // 07:46 - 08:00
-    let flujoTardeGrave = 0; // 08:01 - 08:30
 
     const defaultStudents = [
       { code: 'EST-2026-929', dni: '73315523', name: 'Alejandra Jhire Mendoza Yancul', grade: '2° de Secundaria', time: '08:09 AM', delay: '+24 min', status: 'Tardanza', parent: 'Sra. Yancul', phone: '987654321' },
@@ -37196,7 +37298,7 @@ class IntranetApp {
       { code: 'EST-2026-640', dni: '77890123', name: 'Herrera Díaz, Leonardo', grade: '3° de Primaria', time: '--:--', delay: '--', status: 'Inasistencia', parent: 'Sra. Díaz', phone: '996701852' }
     ];
 
-    const studentRows = enrollments.length > 0 ? enrollments.map((e, idx) => {
+    let allStudents = enrollments.length > 0 ? enrollments.map((e, idx) => {
       const code = e.studentCode || e.code || `EST-2026-${100 + idx}`;
       const name = e.studentName || e.name || 'Estudiante';
       const grade = e.gradeLevel || e.grade || '2° de Secundaria';
@@ -37204,7 +37306,6 @@ class IntranetApp {
       const parent = e.guardianName || e.parentName || 'Apoderado Registrado';
       const phone = e.guardianPhone || e.phone || '9' + Math.floor(10000000 + Math.random() * 90000000);
 
-      // Buscar si tiene registro de puerta hoy
       const door = doorLogs.find(d => d.studentCode === code);
       let status = dailyAttendance[code] || (door ? door.status : (defaultStudents[idx] ? defaultStudents[idx].status : (idx % 7 === 0 ? 'Tardanza' : (idx % 11 === 0 ? 'Inasistencia' : 'Puntual'))));
       let time = door ? door.time : (defaultStudents[idx] ? defaultStudents[idx].time : (status === 'Puntual' ? '07:35 AM' : (status === 'Tardanza' ? '08:12 AM' : '--:--')));
@@ -37213,176 +37314,260 @@ class IntranetApp {
       return { code, dni, name, grade, status, time, delay, parent, phone };
     }) : defaultStudents;
 
-    // Calcular estadísticas
-    studentRows.forEach(s => {
+    // Filtrar por grado si fue seleccionado
+    if (targetGrade !== "TODOS") {
+      allStudents = allStudents.filter(s => s.grade && s.grade.toLowerCase().includes(targetGrade.toLowerCase().replace(/°|de /g, '')));
+      if (allStudents.length === 0) allStudents = defaultStudents;
+    }
+
+    // Cálculos estadísticos globales
+    let totalPuntuales = 0;
+    let totalTardanzas = 0;
+    let totalFaltas = 0;
+    let totalJustificadas = 0;
+
+    // Flujo por horario
+    let fMadrugador = 0;
+    let fRegular = 0;
+    let fTardeLeve = 0;
+    let fTardeGrave = 0;
+
+    // Desglose por grado
+    const gradeStats = {};
+
+    allStudents.forEach(s => {
+      const g = s.grade || '2° de Secundaria';
+      if (!gradeStats[g]) {
+        gradeStats[g] = { total: 0, puntuales: 0, tardanzas: 0, faltas: 0, justificadas: 0 };
+      }
+      gradeStats[g].total++;
+
       if (s.status === 'Puntual') {
-        totalPresentes++;
-        if (s.time.includes('07:0') || s.time.includes('07:1') || s.time.includes('07:2')) flujoMadrugador++;
-        else flujoRegular++;
+        totalPuntuales++;
+        gradeStats[g].puntuales++;
+        if (s.time.includes('07:0') || s.time.includes('07:1') || s.time.includes('07:2')) fMadrugador++;
+        else fRegular++;
       } else if (s.status === 'Tardanza') {
         totalTardanzas++;
-        if (s.time.includes('07:4') || s.time.includes('07:5') || s.time.includes('08:00')) flujoTardeLeve++;
-        else flujoTardeGrave++;
+        gradeStats[g].tardanzas++;
+        if (s.time.includes('07:4') || s.time.includes('07:5') || s.time.includes('08:00')) fTardeLeve++;
+        else fTardeGrave++;
       } else if (s.status === 'Justificada') {
         totalJustificadas++;
+        gradeStats[g].justificadas++;
       } else {
         totalFaltas++;
+        gradeStats[g].faltas++;
       }
     });
 
-    const totalEstudiantes = studentRows.length;
-    const porcentajeAsistencia = Math.round(((totalPresentes + totalTardanzas) / totalEstudiantes) * 100);
+    const totalEstudiantes = allStudents.length;
+    const pctPuntuales = Math.round((totalPuntuales / (totalEstudiantes || 1)) * 100);
+    const pctTardanzas = Math.round((totalTardanzas / (totalEstudiantes || 1)) * 100);
+    const pctFaltas = Math.round((totalFaltas / (totalEstudiantes || 1)) * 100);
+    const pctJustificadas = Math.round((totalJustificadas / (totalEstudiantes || 1)) * 100);
+    const porcentajeAsistencia = Math.round(((totalPuntuales + totalTardanzas) / (totalEstudiantes || 1)) * 100);
 
-    // Construcción del archivo Excel con formato enriquecido y estilos condicionales
+    // Gráfico de pastel generado con SVG dentro de la hoja Excel
+    const pieSVG = `
+      <svg width="220" height="220" viewBox="0 0 42 42" style="display:block; margin:auto;">
+        <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="#ffffff" stroke="#e2e8f0" stroke-width="6"></circle>
+        <!-- Puntuales (Verde) -->
+        <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#16a34a" stroke-width="6" stroke-dasharray="${pctPuntuales} ${100 - pctPuntuales}" stroke-dashoffset="25"></circle>
+        <!-- Tardanzas (Amarillo) -->
+        <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#f59e0b" stroke-width="6" stroke-dasharray="${pctTardanzas} ${100 - pctTardanzas}" stroke-dashoffset="${25 - pctPuntuales}"></circle>
+        <!-- Faltas (Rojo) -->
+        <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ef4444" stroke-width="6" stroke-dasharray="${pctFaltas} ${100 - pctFaltas}" stroke-dashoffset="${25 - pctPuntuales - pctTardanzas}"></circle>
+        <!-- Texto Central -->
+        <g class="chart-text">
+          <text x="50%" y="46%" dominant-baseline="middle" text-anchor="middle" font-size="6" font-weight="bold" fill="#0b132b">${porcentajeAsistencia}%</text>
+          <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" font-size="2.6" fill="#64748b">Asistencia</text>
+        </g>
+      </svg>
+    `;
+
+    // Armado completo del Excel HTML enriquecido
     let excelContent = `
       <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
       <head>
         <meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">
         <style>
-          body { font-family: Calibri, Arial, sans-serif; font-size: 11pt; }
-          .header-main { background-color: #0b132b; color: #ffffff; font-size: 16pt; font-weight: bold; text-align: center; height: 40px; }
-          .header-sub { background-color: #1e3a8a; color: #ffffff; font-size: 11pt; font-weight: bold; text-align: center; }
-          .kpi-title { font-weight: bold; font-size: 10pt; color: #475569; text-align: center; }
-          .kpi-value { font-weight: bold; font-size: 16pt; text-align: center; }
-          .kpi-green { background-color: #dcfce7; color: #166534; border: 1px solid #86efac; }
-          .kpi-yellow { background-color: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
-          .kpi-red { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
-          .kpi-purple { background-color: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe; }
-          .th-col { background-color: #1e3a8a; color: #ffffff; font-weight: bold; text-align: center; border: 1px solid #cbd5e1; }
+          body { font-family: Calibri, 'Segoe UI', Arial, sans-serif; font-size: 11pt; }
+          .banner-main { background-color: #0b132b; color: #ffffff; font-size: 16pt; font-weight: bold; text-align: center; height: 38px; }
+          .banner-sub { background-color: #15803d; color: #ffffff; font-size: 12pt; font-weight: bold; text-align: center; height: 26px; }
+          .banner-meta { background-color: #f1f5f9; color: #334155; font-size: 10pt; text-align: center; height: 22px; }
+          
+          .kpi-title { font-weight: bold; font-size: 9.5pt; text-align: center; padding: 6px; }
+          .kpi-val { font-weight: bold; font-size: 16pt; text-align: center; padding: 8px; }
+          
+          .bg-green { background-color: #dcfce7; color: #166534; border: 1px solid #86efac; }
+          .bg-yellow { background-color: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+          .bg-red { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+          .bg-purple { background-color: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe; }
+          
+          .th-navy { background-color: #1e3a8a; color: #ffffff; font-weight: bold; text-align: center; border: 1px solid #cbd5e1; height: 26px; }
+          .th-green { background-color: #15803d; color: #ffffff; font-weight: bold; text-align: center; border: 1px solid #cbd5e1; height: 26px; }
+          
+          /* Celdas Condicionadas por Estado */
+          .cell-puntual { background-color: #dcfce7; color: #15803d; font-weight: bold; text-align: center; border: 1px solid #86efac; }
+          .cell-tardanza { background-color: #fef3c7; color: #b45309; font-weight: bold; text-align: center; border: 1px solid #fde68a; }
+          .cell-falta { background-color: #fee2e2; color: #dc2626; font-weight: bold; text-align: center; border: 1px solid #fca5a5; }
+          .cell-justificada { background-color: #ede9fe; color: #7c3aed; font-weight: bold; text-align: center; border: 1px solid #ddd6fe; }
+          
           .cell-center { text-align: center; vertical-align: middle; border: 1px solid #e2e8f0; }
           .cell-left { text-align: left; vertical-align: middle; border: 1px solid #e2e8f0; }
-          
-          /* Celdas Condicionadas */
-          .status-puntual { background-color: #dcfce7; color: #15803d; font-weight: bold; text-align: center; border: 1px solid #86efac; }
-          .status-tardanza { background-color: #fef3c7; color: #b45309; font-weight: bold; text-align: center; border: 1px solid #fde68a; }
-          .status-falta { background-color: #fee2e2; color: #dc2626; font-weight: bold; text-align: center; border: 1px solid #fca5a5; }
-          .status-justificada { background-color: #ede9fe; color: #7c3aed; font-weight: bold; text-align: center; border: 1px solid #ddd6fe; }
-          
-          .flujo-header { background-color: #334155; color: white; font-weight: bold; text-align: center; }
-          .flujo-row { background-color: #f8fafc; text-align: center; border: 1px solid #cbd5e1; }
         </style>
       </head>
       <body>
         <table border="1" style="border-collapse: collapse; width: 100%;">
-          <!-- ENCABEZADO INSTITUCIONAL -->
+          <!-- CABECERA INSTITUCIONAL -->
           <tr>
-            <td colspan="10" class="header-main">I.E.P. "EL EDUCADOR" • UGEL 05 - SAN JUAN DE LURIGANCHO</td>
+            <td colspan="10" class="banner-main">I.E.P. "EL EDUCADOR" • UGEL 05 - SAN JUAN DE LURIGANCHO</td>
           </tr>
           <tr>
-            <td colspan="10" class="header-sub">REPORTE OFICIAL DE ASISTENCIA, TARDANZAS, FALTAS Y FLUJO HORARIO QR</td>
+            <td colspan="10" class="banner-sub">REPORTE ESTADÍSTICO DE ASISTENCIA, TARDANZAS Y FLUJO DE ENTRADA</td>
           </tr>
           <tr>
-            <td colspan="10" style="text-align: center; font-size: 10pt; color: #64748b; background-color: #f1f5f9;">
-              Fecha del Reporte: <strong>${reportDate}</strong> | Hora de Corte Oficial: <strong>08:15 AM</strong> | Sistema de Control Biométrico & QR
+            <td colspan="10" class="banner-meta">
+              Fecha de Registro: <strong>${reportDate}</strong> | Filtro de Grado: <strong>${targetGrade.toUpperCase()}</strong> | Total Estudiantes: <strong>${totalEstudiantes}</strong> | Corte: <strong>08:15 AM</strong>
             </td>
           </tr>
           <tr><td colspan="10" style="height: 10px;"></td></tr>
 
-          <!-- CUADRO ESTADÍSTICO Y RESUMEN KPI -->
+          <!-- TARJETAS DE INDICADORES KPI -->
           <tr>
-            <td colspan="2" class="kpi-green kpi-title">ASISTENCIA GENERAL</td>
-            <td colspan="2" class="kpi-green kpi-title">TOTAL PUNTUALES</td>
-            <td colspan="2" class="kpi-yellow kpi-title">TARDANZAS EN PUERTA</td>
-            <td colspan="2" class="kpi-red kpi-title">INASISTENCIAS (FALTAS)</td>
-            <td colspan="2" class="kpi-purple kpi-title">FALTAS JUSTIFICADAS</td>
+            <td colspan="2" class="bg-green kpi-title">ASISTENCIA TOTAL</td>
+            <td colspan="2" class="bg-green kpi-title">PUNTUALES</td>
+            <td colspan="2" class="bg-yellow kpi-title">TARDANZAS EN PUERTA</td>
+            <td colspan="2" class="bg-red kpi-title">INASISTENCIAS</td>
+            <td colspan="2" class="bg-purple kpi-title">JUSTIFICADAS</td>
           </tr>
           <tr>
-            <td colspan="2" class="kpi-green kpi-value">${porcentajeAsistencia}%</td>
-            <td colspan="2" class="kpi-green kpi-value">${totalPresentes} Alumnos</td>
-            <td colspan="2" class="kpi-yellow kpi-value">${totalTardanzas} Casos</td>
-            <td colspan="2" class="kpi-red kpi-value">${totalFaltas} Alumnos</td>
-            <td colspan="2" class="kpi-purple kpi-value">${totalJustificadas} Casos</td>
+            <td colspan="2" class="bg-green kpi-val">${porcentajeAsistencia}%</td>
+            <td colspan="2" class="bg-green kpi-val">${totalPuntuales} (${pctPuntuales}%)</td>
+            <td colspan="2" class="bg-yellow kpi-val">${totalTardanzas} (${pctTardanzas}%)</td>
+            <td colspan="2" class="bg-red kpi-val">${totalFaltas} (${pctFaltas}%)</td>
+            <td colspan="2" class="bg-purple kpi-val">${totalJustificadas} (${pctJustificadas}%)</td>
           </tr>
           <tr><td colspan="10" style="height: 14px;"></td></tr>
 
-          <!-- CUADRO DE FLUJO Y HORARIOS DE ENTRADA -->
+          <!-- SECCIÓN: GRÁFICO DE PASTEL Y LEYENDA -->
           <tr>
-            <td colspan="10" class="flujo-header" style="font-size: 12pt; height: 26px;">
-              📈 CUADRO ESTADÍSTICO DE FLUJO DE ESTUDIANTES Y HORARIOS DE ENTRADA
+            <td colspan="10" style="background-color: #0b132b; color: white; font-weight: bold; font-size: 12pt; height: 26px;">
+              📊 GRÁFICO ESTADÍSTICO DE PASTEL: DISTRIBUCIÓN GENERAL DE ASISTENCIA
             </td>
           </tr>
-          <tr style="background-color: #e2e8f4; font-weight: bold;">
-            <td colspan="3" class="cell-center">Intervalo de Horario de Ingreso</td>
-            <td colspan="2" class="cell-center">Clasificación</td>
-            <td colspan="2" class="cell-center">Cantidad de Estudiantes</td>
-            <td colspan="3" class="cell-center">% del Flujo Total</td>
+          <tr>
+            <td colspan="4" style="text-align: center; vertical-align: middle; background-color: #f8fafc; padding: 15px;">
+              ${pieSVG}
+            </td>
+            <td colspan="6" style="vertical-align: middle; background-color: #f8fafc; padding: 15px;">
+              <table style="width: 100%; border-collapse: collapse; font-size: 11pt;">
+                <tr style="background-color: #dcfce7; color: #166534; font-weight: bold;">
+                  <td style="padding: 6px 10px; width: 30px;">🟢</td>
+                  <td style="padding: 6px;">Puntuales (Ingreso antes de las 07:45 AM)</td>
+                  <td style="padding: 6px; text-align: right;">${totalPuntuales} alumnos (${pctPuntuales}%)</td>
+                </tr>
+                <tr style="background-color: #fef3c7; color: #b45309; font-weight: bold;">
+                  <td style="padding: 6px 10px;">🟡</td>
+                  <td style="padding: 6px;">Tardanzas (Ingreso entre 07:46 y 08:30 AM)</td>
+                  <td style="padding: 6px; text-align: right;">${totalTardanzas} alumnos (${pctTardanzas}%)</td>
+                </tr>
+                <tr style="background-color: #fee2e2; color: #991b1b; font-weight: bold;">
+                  <td style="padding: 6px 10px;">🔴</td>
+                  <td style="padding: 6px;">Inasistencias Injustificadas</td>
+                  <td style="padding: 6px; text-align: right;">${totalFaltas} alumnos (${pctFaltas}%)</td>
+                </tr>
+                <tr style="background-color: #ede9fe; color: #6b21a8; font-weight: bold;">
+                  <td style="padding: 6px 10px;">🟣</td>
+                  <td style="padding: 6px;">Faltas Justificadas (Aviso / Médico)</td>
+                  <td style="padding: 6px; text-align: right;">${totalJustificadas} alumnos (${pctJustificadas}%)</td>
+                </tr>
+              </table>
+            </td>
           </tr>
-          <tr class="flujo-row">
-            <td colspan="3" class="cell-left">06:45 AM - 07:30 AM</td>
-            <td colspan="2" style="color: #166534; font-weight: bold;">Madrugador / Puntual Temprano</td>
-            <td colspan="2" class="cell-center"><strong>${flujoMadrugador}</strong> alumnos</td>
-            <td colspan="3" class="cell-center">${Math.round((flujoMadrugador / (totalEstudiantes || 1)) * 100)}%</td>
-          </tr>
-          <tr class="flujo-row">
-            <td colspan="3" class="cell-left">07:31 AM - 07:45 AM</td>
-            <td colspan="2" style="color: #15803d; font-weight: bold;">Puntual Regular (Horario Límite)</td>
-            <td colspan="2" class="cell-center"><strong>${flujoRegular}</strong> alumnos</td>
-            <td colspan="3" class="cell-center">${Math.round((flujoRegular / (totalEstudiantes || 1)) * 100)}%</td>
-          </tr>
-          <tr class="flujo-row">
-            <td colspan="3" class="cell-left">07:46 AM - 08:00 AM</td>
-            <td colspan="2" style="color: #b45309; font-weight: bold;">Tardanza Leve (+1 a +15 min)</td>
-            <td colspan="2" class="cell-center"><strong>${flujoTardeLeve}</strong> alumnos</td>
-            <td colspan="3" class="cell-center">${Math.round((flujoTardeLeve / (totalEstudiantes || 1)) * 100)}%</td>
-          </tr>
-          <tr class="flujo-row">
-            <td colspan="3" class="cell-left">08:01 AM - 08:30 AM</td>
-            <td colspan="2" style="color: #991b1b; font-weight: bold;">Tardanza Grave (+16 a +45 min)</td>
-            <td colspan="2" class="cell-center"><strong>${flujoTardeGrave}</strong> alumnos</td>
-            <td colspan="3" class="cell-center">${Math.round((flujoTardeGrave / (totalEstudiantes || 1)) * 100)}%</td>
-          </tr>
-          <tr class="flujo-row">
-            <td colspan="3" class="cell-left">Sin Marcación / No Asistió</td>
-            <td colspan="2" style="color: #dc2626; font-weight: bold;">Inasistencia Injustificada</td>
-            <td colspan="2" class="cell-center"><strong>${totalFaltas}</strong> alumnos</td>
-            <td colspan="3" class="cell-center">${Math.round((totalFaltas / (totalEstudiantes || 1)) * 100)}%</td>
-          </tr>
-          <tr><td colspan="10" style="height: 16px;"></td></tr>
+          <tr><td colspan="10" style="height: 14px;"></td></tr>
 
-          <!-- TABLA NOMINAL DETALLADA CON CELDAS CONDICIONADAS -->
+          <!-- SECCIÓN: CUADRO ESTADÍSTICO DE FLUJO POR CADA GRADO -->
           <tr>
-            <td colspan="10" style="background-color: #0b132b; color: #ffffff; font-weight: bold; font-size: 12pt; height: 26px;">
-              📋 REGISTRO NOMINAL DETALLADO DE ESTUDIANTES (CELDAS CONDICIONADAS)
+            <td colspan="10" class="th-navy" style="font-size: 12pt;">
+              🏫 CUADRO ESTADÍSTICO DE FLUJO Y ASISTENCIA DESGLOSADO POR CADA GRADO
             </td>
           </tr>
-          <tr>
-            <th class="th-col" style="width: 40px;">N°</th>
-            <th class="th-col" style="width: 110px;">Código Modular</th>
-            <th class="th-col" style="width: 90px;">DNI</th>
-            <th class="th-col" style="width: 250px;">Estudiante (Apellidos y Nombres)</th>
-            <th class="th-col" style="width: 140px;">Grado y Nivel</th>
-            <th class="th-col" style="width: 130px;">Estado de Asistencia</th>
-            <th class="th-col" style="width: 110px;">Hora Entrada QR</th>
-            <th class="th-col" style="width: 90px;">Demora</th>
-            <th class="th-col" style="width: 180px;">Apoderado</th>
-            <th class="th-col" style="width: 110px;">Teléfono</th>
+          <tr style="background-color: #e2e8f0; font-weight: bold;">
+            <td colspan="3" class="cell-left" style="padding: 6px;">Grado / Aula</td>
+            <td class="cell-center" style="width: 70px;">Total</td>
+            <td class="cell-center" style="width: 90px; color: #15803d;">Puntuales</td>
+            <td class="cell-center" style="width: 90px; color: #b45309;">Tardanzas</td>
+            <td class="cell-center" style="width: 90px; color: #dc2626;">Faltas</td>
+            <td class="cell-center" style="width: 90px; color: #7c3aed;">Justificadas</td>
+            <td colspan="2" class="cell-center" style="color: #0b132b;">% Asistencia</td>
           </tr>
     `;
 
-    studentRows.forEach((s, idx) => {
-      let statusClass = "status-puntual";
-      if (s.status === "Tardanza") statusClass = "status-tardanza";
-      else if (s.status === "Inasistencia" || s.status === "Falta") statusClass = "status-falta";
-      else if (s.status === "Justificada") statusClass = "status-justificada";
-
+    Object.keys(gradeStats).forEach((g, idx) => {
+      const gs = gradeStats[g];
+      const gPct = Math.round(((gs.puntuales + gs.tardanzas) / (gs.total || 1)) * 100);
       excelContent += `
-        <tr>
-          <td class="cell-center">${idx + 1}</td>
-          <td class="cell-center" style="mso-number-format:'\\@';">${s.code}</td>
-          <td class="cell-center" style="mso-number-format:'\\@';">${s.dni}</td>
-          <td class="cell-left" style="font-weight: 600;">${s.name}</td>
-          <td class="cell-center">${s.grade}</td>
-          <td class="${statusClass}">${s.status.toUpperCase()}</td>
-          <td class="cell-center" style="font-weight: bold;">${s.time}</td>
-          <td class="cell-center" style="${s.status === 'Tardanza' ? 'color: #b45309; font-weight: bold;' : 'color: #64748b;'}">${s.delay}</td>
-          <td class="cell-left">${s.parent}</td>
-          <td class="cell-center" style="mso-number-format:'\\@';">${s.phone}</td>
+        <tr style="background-color: ${idx % 2 === 0 ? '#ffffff' : '#f8fafc'};">
+          <td colspan="3" class="cell-left" style="font-weight: bold; color: #1e293b; padding: 6px 10px;">${g}</td>
+          <td class="cell-center"><strong>${gs.total}</strong></td>
+          <td class="cell-center" style="background-color: #ecfdf5; color: #15803d; font-weight: bold;">${gs.puntuales}</td>
+          <td class="cell-center" style="background-color: #fffbeb; color: #b45309; font-weight: bold;">${gs.tardanzas}</td>
+          <td class="cell-center" style="background-color: #fef2f2; color: #dc2626; font-weight: bold;">${gs.faltas}</td>
+          <td class="cell-center" style="background-color: #f5f3ff; color: #7c3aed; font-weight: bold;">${gs.justificadas}</td>
+          <td colspan="2" class="cell-center" style="font-weight: 900; color: #0f172a; background-color: #f1f5f9;">${gPct}%</td>
         </tr>
       `;
     });
 
     excelContent += `
-          <tr><td colspan="10" style="height: 20px;"></td></tr>
+          <tr><td colspan="10" style="height: 16px;"></td></tr>
+
+          <!-- TABLA NOMINAL DETALLADA CON CELDAS CONDICIONADAS -->
+          <tr>
+            <td colspan="10" class="th-green" style="font-size: 12pt;">
+              📋 REGISTRO NOMINAL DETALLADO DE ESTUDIANTES (CELDAS CONDICIONADAS)
+            </td>
+          </tr>
+          <tr>
+            <th class="th-navy" style="width: 40px;">N°</th>
+            <th class="th-navy" style="width: 110px;">Código Alumno</th>
+            <th class="th-navy" style="width: 90px;">DNI</th>
+            <th class="th-navy" style="width: 260px;">Estudiante (Apellidos y Nombres)</th>
+            <th class="th-navy" style="width: 140px;">Grado y Nivel</th>
+            <th class="th-navy" style="width: 130px;">Estado Asistencia</th>
+            <th class="th-navy" style="width: 110px;">Hora Entrada QR</th>
+            <th class="th-navy" style="width: 90px;">Demora</th>
+            <th class="th-navy" style="width: 180px;">Apoderado</th>
+            <th class="th-navy" style="width: 110px;">Teléfono</th>
+          </tr>
+    `;
+
+    allStudents.forEach((s, idx) => {
+      let statusClass = "cell-puntual";
+      if (s.status === "Tardanza") statusClass = "cell-tardanza";
+      else if (s.status === "Inasistencia" || s.status === "Falta") statusClass = "cell-falta";
+      else if (s.status === "Justificada") statusClass = "cell-justificada";
+
+      excelContent += `
+        <tr>
+          <td class="cell-center">${idx + 1}</td>
+          <td class="cell-center" style="mso-number-format:'\\@'; font-weight: 600;">${s.code}</td>
+          <td class="cell-center" style="mso-number-format:'\\@';">${s.dni}</td>
+          <td class="cell-left" style="font-weight: 700; color: #0f172a; padding: 6px 10px;">${s.name}</td>
+          <td class="cell-center" style="font-weight: 600;">${s.grade}</td>
+          <td class="${statusClass}">${s.status.toUpperCase()}</td>
+          <td class="cell-center" style="font-weight: bold;">${s.time}</td>
+          <td class="cell-center" style="${s.status === 'Tardanza' ? 'color: #b45309; font-weight: 900;' : 'color: #64748b;'}">${s.delay}</td>
+          <td class="cell-left" style="padding: 6px 10px;">${s.parent}</td>
+          <td class="cell-center" style="mso-number-format:'\\@'; font-weight: 600;">${s.phone}</td>
+        </tr>
+      `;
+    });
+
+    excelContent += `
+          <tr><td colspan="10" style="height: 25px;"></td></tr>
           <tr>
             <td colspan="5" style="text-align: center; border: none; padding-top: 30px;">
               ___________________________________________<br>
@@ -37404,7 +37589,8 @@ class IntranetApp {
       const blob = new Blob([excelContent], { type: 'application/vnd.ms-excel;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
-      const fileName = `Reporte_Asistencia_Tardanzas_Flujo_${reportDate.replace(/[^a-zA-Z0-9]/g, '_')}.xls`;
+      const gradeSuffix = targetGrade !== "TODOS" ? `_${targetGrade.replace(/[^a-zA-Z0-9]/g, '_')}` : '_General';
+      const fileName = `Reporte_Asistencia_${reportDate.replace(/[^a-zA-Z0-9]/g, '_')}${gradeSuffix}.xls`;
       link.href = url;
       link.download = fileName;
       document.body.appendChild(link);
@@ -37417,6 +37603,7 @@ class IntranetApp {
       this.showToast("Error al exportar a Excel", "error");
     }
   }
+
 
   closeModal() {
     const overlay = document.getElementById("app-modal-overlay");
@@ -37466,4 +37653,3 @@ if (typeof document !== "undefined") {
   }
 }
 
-;

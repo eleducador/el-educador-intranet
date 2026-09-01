@@ -1,4 +1,3 @@
-/* === variables.css === */
 :root {
   /* --- Paleta Principal Institucional --- */
   /* Azul Noche (Primary Midnight Blue) */
@@ -111,8 +110,6 @@
   --z-toast: 110;
 }
 
-
-/* === main.css === */
 /* --- Reset & Base --- */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -569,8 +566,6 @@ body {
   }
 }
 
-
-/* === components.css === */
 /* ==========================================================================
    Componentes del Sistema - Colegio El Educador (v5 con Pantalla de Login)
    ========================================================================== */
@@ -2157,8 +2152,6 @@ textaÁrea.form-control:focus {
 .status-dot-yellow { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #f59e0b; margin-right: 4px; vertical-align: middle; }
 .status-dot-red { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #ef4444; margin-right: 4px; vertical-align: middle; }
 
-
-/* === print.css === */
 /* ==========================================================================
    Estilos de Impresión - Boleta Oficial Colegio El Educador (LLENADO TOTAL A4)
    ========================================================================== */
@@ -2694,5 +2687,4 @@ textaÁrea.form-control:focus {
   box-shadow: var(--shadow-md);
   margin-top: var(--space-4);
 }
-
 
